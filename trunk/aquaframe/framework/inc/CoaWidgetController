@@ -1,0 +1,9 @@
+#ifndef __CoaWidgetController__
+#define __CoaWidgetController__
+
+#include "../widgets/coawidgetcontroller.h"
+
+
+#endif 
+
+

@@ -1,0 +1,135 @@
+#!/usr/local/bin/bash
+
+# get the current path
+tar_pwd=`pwd`
+
+if [ -z "$1" ]; then
+  printf "need a package date + Bit (e.g. 32B.200599\n" 1>&2
+  exit
+fi
+pkg_dir="BridgeNA.42.Solaris9.$1.bin"                                                     # packagedir
+pkg_file="${tar_pwd}/${pkg_dir}.tar"
+
+if [ -e "${tar_pwd}/${pkg_dir}" ]; then
+#  if [ ! -d "${tar_pwd}/${pkg_dir}" ]; then
+    printf "can't create directory structure (file \"${tar_pwd}/${pkg_dir}\" already exists).\n" 1>&2
+    exit="1"
+#  fi
+else 
+   pkg_dir_created="1"
+fi
+
+if [ -e "${tar_pwd}/${pkg_dir}/bin" ]; then
+  if [ ! -d "${tar_pwd}/${pkg_dir}/bin" ]; then
+    printf "can't create directory structure (file \"${tar_pwd}/${pkg_dir}/bin\" already exists).\n" 1>&2
+    exit="1"
+  fi
+else 
+  if [ -d "${ODABA_BIN_DIR}" ]; then
+    bin_DIR_linked="1"
+  else
+    printf "${ODABA_BIN_DIR} (got from \$ODABA_BIN_DIR) is not a directory\n" 1>&2
+    exit="1"
+  fi
+fi
+
+if [ -e "${tar_pwd}/${pkg_dir}/lib" ]; then
+  if [ ! -d "${tar_pwd}/${pkg_dir}/lib" ]; then
+    printf "can't create directory structure (file \"${tar_pwd}/${pkg_dir}/lib\" already exists).\n" 1>&2
+    exit="1"
+  fi
+else 
+  if [ -d "${ODABA_LIB_DIR}" ]; then
+    lib_DIR_linked="1"
+  else
+    printf "${ODABA_LIB_DIR} (got from \$ODABA_LIB_DIR) is not a directory\n" 1>&2
+    exit="1"
+  fi
+fi
+
+if [ -e "${tar_pwd}/${pkg_dir}/share" ]; then
+  if [ ! -d "${tar_pwd}/${pkg_dir}/share" ]; then
+    printf "can't create directory structure (file \"${tar_pwd}/${pkg_dir}/share\" already exists).\n" 1>&2
+    exit="1"
+  fi
+else 
+  if [ -d "${ODABA_DATA_DIR}" ]; then
+    data_DIR_linked="1"
+  else
+    printf "${ODABA_DATA_DIR} (got from \$ODABA_DATA_DIR) is not a directory\n" 1>&2
+    exit="1"
+  fi
+fi
+
+if [ "${exit}" ]; then
+  exit
+else
+  if [ "${pkg_dir_created}" ]; then
+    mkdir ${tar_pwd}/${pkg_dir}
+  fi
+  if [ "${bin_DIR_linked}" ]; then 
+    ln -s ${ODABA_BIN_DIR} ${tar_pwd}/${pkg_dir}/bin 
+  fi
+  if [ "${lib_DIR_linked}" ]; then 
+     ln -s ${ODABA_LIB_DIR} ${tar_pwd}/${pkg_dir}/lib
+  fi
+  if [ "${data_DIR_linked}" ]; then 
+     ln -s ${ODABA_DATA_DIR} ${tar_pwd}/${pkg_dir}/share
+  fi
+fi
+
+# create tar-file so it is possible to use "tar r"
+> ${pkg_file}
+
+#add binaries to tar-file
+printf "copy binaries..."
+if [ -n "`ls ${pkg_dir}/bin`" ]; then 
+  tar rf ${pkg_file} ${pkg_dir}/bin/*
+fi
+printf "done\n"
+
+#add libraries to tar-file
+printf "copy libraries..."
+if [ -n "`ls ${pkg_dir}/lib`" ]; then 
+  tar rf ${pkg_file} ${pkg_dir}/lib/*
+fi
+printf "done\n"
+
+#add data to tar-file
+printf "copy data..."
+if [ -n "`ls ${pkg_dir}/share`" ]; then 
+  tar rf ${pkg_file} ${pkg_dir}/share/*
+fi
+printf "done\n"
+
+# clean up some of the created links
+if [ "${bin_DIR_linked}" ]; then
+  rm ${pkg_dir}/bin
+fi
+if [ "${lib_DIR_linked}" ]; then
+  rm ${pkg_dir}/lib
+fi
+if [ "${data_DIR_linked}" ]; then
+  rm ${pkg_dir}/share
+fi
+
+# add configure scripts to tar-file
+printf "copy install script files..."
+
+if [ "${pkg_dir_created}" ]; then
+  rm -R ${pkg_dir}
+  ln -s ${ODABA_SBIN_DIR}/install/bin ${pkg_dir}
+fi
+tar rfh ${pkg_file} ${pkg_dir}/*
+
+printf "done\n"
+
+# cleanup ${packagename} link
+if [ "${pkg_dir_created}" ]; then
+  rm ${pkg_dir}
+fi
+
+cd ${tar_pwd}
+printf "compress archive..."
+gzip ${pkg_file}
+printf "done\n"

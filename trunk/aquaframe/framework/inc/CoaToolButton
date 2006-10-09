@@ -1,0 +1,8 @@
+#ifndef __CoaToolButton__
+#define __CoaToolButton__
+
+#include "../widgets/coatoolbutton.h"
+
+#endif //__CoaToolButton__
+
+

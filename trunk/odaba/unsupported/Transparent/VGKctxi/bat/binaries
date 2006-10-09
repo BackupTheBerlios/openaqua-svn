@@ -1,0 +1,4 @@
+[VgKctxi]
+type     = dynl
+classes  = CTXInterface
+projects = .

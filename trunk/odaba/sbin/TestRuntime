@@ -1,0 +1,13 @@
+# CopyDB ini-file from [to]   (OPA70 Version)
+# ini-file     complete path for the inifile describing the data sources for source and target database
+# from         section in the inifile describing the source database source
+# to           section in the inifile describing the target database source
+# Copy allows copying a complete database or parts of it. It allows also copying sibgle objects or  
+#  object collections from one databse to an onother existing database. 
+#  The subsequent call copies all classification versions from the sample database on the installation path
+#  to a new database.
+echo copy a database
+/opt/odaba/bin/CopyDB /opt/odaba/share/CopyDB.ini from to
+ls /tmp/test.db -la
+read
+rm /tmp/test.db

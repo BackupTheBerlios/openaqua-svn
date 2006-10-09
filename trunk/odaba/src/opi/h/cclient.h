@@ -1,0 +1,1 @@
+  ODABAClient  *odaba_client = NULL;

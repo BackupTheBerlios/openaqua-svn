@@ -1,0 +1,7 @@
+#ifndef __CoaSet__
+#define __CoaSet__
+
+#include <QSet>
+#define CoaSet QSet
+
+#endif //__CoaSet__

@@ -1,0 +1,7 @@
+#ifndef __CoaIODevice__
+#define __CoaIODevice__
+
+#include <QIODevice>
+#define CoaIODevice QIODevice
+
+#endif //__CoaIODevice__

@@ -1,0 +1,149 @@
+.TH "OPI::ODABAClient" 3 "25 Jul 2006" "OPIICE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OPI::ODABAClient \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBActivateGUIMessages\fP ()"
+.br
+.ti -1c
+.RI "bool \fBBackupDB\fP (string cpath, string target, int waitsec)"
+.br
+.ti -1c
+.RI "bool \fBCheckDB\fP (string dictpath, string cpath, \fBCheckOptions\fP *checkopts, string source, int waitsec)"
+.br
+.ti -1c
+.RI "bool \fBClose\fP ()"
+.br
+.ti -1c
+.RI "bool \fBConnect\fP (string servername, int hostport, string cachestring)"
+.br
+.ti -1c
+.RI "bool \fBDictDisplay\fP (string dbpath, string ppath)"
+.br
+.ti -1c
+.RI "void \fBDisconnect\fP ()"
+.br
+.ti -1c
+.RI "bool \fBExist\fP (string cpath)"
+.br
+.ti -1c
+.RI "string \fBGetDataSource\fP (int indx0)"
+.br
+.ti -1c
+.RI "string \fBGetHost\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetPort\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetServerVariable\fP (string varname)"
+.br
+.ti -1c
+.RI "void \fBInitialize\fP (string inipath, string applicationname, string progpath, \fBApplicationTypes\fP applicationtype, bool initservices)"
+.br
+.ti -1c
+.RI "bool \fBIsConnected\fP ()"
+.br
+.ti -1c
+.RI "bool \fBKillClient\fP (int clientid, int waitsec, bool sendmessage)"
+.br
+.ti -1c
+.RI "bool \fBOpen\fP (string inipath, string applicationname, string progpath, \fBApplicationTypes\fP applicationtype)"
+.br
+.ti -1c
+.RI "\fBDBObjectHandle\fP * \fBOpenDataSource\fP (string datasourcename, \fBPIACC\fP accopt)"
+.br
+.ti -1c
+.RI "bool \fBPackDatabase\fP (string cpath, string temppath)"
+.br
+.ti -1c
+.RI "bool \fBRestoreDB\fP (string cpath, string source, int waitsec)"
+.br
+.ti -1c
+.RI "bool \fBSendClientMessage\fP (int clientid, string mtext, string mtitle, string mtype)"
+.br
+.ti -1c
+.RI "bool \fBSetServerVariable\fP (string varname, string varstring)"
+.br
+.ti -1c
+.RI "bool \fBShutDown\fP (string closesystem)"
+.br
+.ti -1c
+.RI "bool \fBStartPause\fP (int waitsec)"
+.br
+.ti -1c
+.RI "bool \fBStatDisplay\fP (string dbpath, string ppath)"
+.br
+.ti -1c
+.RI "void \fBStopPause\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSysInfoDisplay\fP (string dbpath, string ppath)"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void OPI::ODABAClient::ActivateGUIMessages ()\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::BackupDB (string cpath, string target, int waitsec)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::CheckDB (string dictpath, string cpath, \fBCheckOptions\fP * checkopts, string source, int waitsec)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::Close ()\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::Connect (string servername, int hostport, string cachestring)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::DictDisplay (string dbpath, string ppath)\fC [private]\fP"
+.PP
+.SS "void OPI::ODABAClient::Disconnect ()\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::Exist (string cpath)\fC [private]\fP"
+.PP
+.SS "string OPI::ODABAClient::GetDataSource (int indx0)\fC [private]\fP"
+.PP
+.SS "string OPI::ODABAClient::GetHost ()\fC [private]\fP"
+.PP
+.SS "int OPI::ODABAClient::GetPort ()\fC [private]\fP"
+.PP
+.SS "string OPI::ODABAClient::GetServerVariable (string varname)\fC [private]\fP"
+.PP
+.SS "void OPI::ODABAClient::Initialize (string inipath, string applicationname, string progpath, \fBApplicationTypes\fP applicationtype, bool initservices)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::IsConnected ()\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::KillClient (int clientid, int waitsec, bool sendmessage)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::Open (string inipath, string applicationname, string progpath, \fBApplicationTypes\fP applicationtype)\fC [private]\fP"
+.PP
+.SS "\fBDBObjectHandle\fP* OPI::ODABAClient::OpenDataSource (string datasourcename, \fBPIACC\fP accopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::PackDatabase (string cpath, string temppath)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::RestoreDB (string cpath, string source, int waitsec)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::SendClientMessage (int clientid, string mtext, string mtitle, string mtype)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::SetServerVariable (string varname, string varstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::ShutDown (string closesystem)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::StartPause (int waitsec)\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::StatDisplay (string dbpath, string ppath)\fC [private]\fP"
+.PP
+.SS "void OPI::ODABAClient::StopPause ()\fC [private]\fP"
+.PP
+.SS "bool OPI::ODABAClient::SysInfoDisplay (string dbpath, string ppath)\fC [private]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIICE from the source code.

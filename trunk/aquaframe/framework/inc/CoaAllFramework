@@ -1,0 +1,72 @@
+
+#if defined __cplusplus
+
+#include <QtGui>
+#include <QtSql>
+
+#include <iostream>
+#include <cassert>
+#include <CoaIoStream>
+
+
+//this are the wrapper files for redefines of Qt objects
+#include <CoaMap>
+#include <CoaSet>
+#include <CoaVector>
+#include <CoaList>
+#include <CoaIODevice>
+#include <CoaString>
+#include <CoaFile>
+#include <CoaFileDialog>
+
+
+
+//#include <CoaAction>
+//#include <CoaActionGroup>
+#include <CoaApplication>
+#include <CoaAssert>
+#include <CoaBaseThread>
+//#include <CoaCommands>
+#include <CoaDebug>
+#include <CoaObjectDumper>
+#include <CoaDebugThread>
+//#include <CoaDomDocument>
+#include <CoaMainThreadMaker>
+#include <CoaMakros>
+#include <CoaObject>
+#include <CoaPrintDialog>
+#include <CoaPrinter>
+#include <CoaSettings>
+#include <CoaSingletonWatch>
+#include <CoaTextDocument>
+#include <CoaThread>
+#include <CoaToolButton>
+#include <CoaTypedefs>
+#include <CoaWatchdog>
+
+
+//AllWidgets
+#include <CoaCheckBox>
+#include <CoaComboBox>
+#include <CoaDateEdit>
+#include <CoaDockWidget>
+#include <CoaFrame>
+#include <CoaGroupBox>
+#include <CoaLCDNumber>
+//#include <CoaLabel>
+//#include <CoaLineEdit>
+#include <CoaProgressBar>
+#include <CoaPushButton>
+#include <CoaRadioButton>
+#include <CoaStackedWidget>
+#include <CoaTabWidget>
+#include <CoaTableView>
+#include <CoaTextBrowser>
+#include <CoaTextEdit>
+#include <CoaToolBox>
+#include <CoaTreeView>
+#include <CoaWidget>
+
+
+#endif
+

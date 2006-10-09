@@ -1,0 +1,35 @@
+module XENON
+{
+   // Used to report an invalid Contact Id
+   exception Invalid_Contact_ID {};
+
+   // Forward declare the Contact Interface
+   interface Contact;
+
+   interface Contact_Factory
+   {
+      //get data
+      Contact getContact ()  raises (Invalid_Contact_ID);
+
+      //move the cursor
+      void gotoFirstContact();
+      void gotoPrevContact();
+      void gotoNextContact();
+      void gotoLastContact();
+      void gotoContact(in long Contact_ID) raises (Invalid_Contact_ID);
+
+      oneway void shutdown ();
+   };
+
+
+   interface Contact
+   {
+      attribute string e1;
+      attribute string e2;
+      attribute string e3;
+      attribute string e4;
+      attribute string e5;
+   };
+
+
+};

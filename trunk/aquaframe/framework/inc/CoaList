@@ -1,0 +1,7 @@
+#ifndef __CoaList__
+#define __CoaList__
+
+#include <QList>
+#define CoaList QList
+
+#endif //__CoaList__

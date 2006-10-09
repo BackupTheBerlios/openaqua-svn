@@ -1,0 +1,374 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>606</width>
+    <height>645</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Travel</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="CoaPushButton" name="btnFirst" >
+       <property name="text" >
+        <string>First</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="CoaPushButton" name="btnPrev" >
+       <property name="text" >
+        <string>Prev</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="CoaLabel" name="lCurr" >
+       <property name="text" >
+        <string>Curr</string>
+       </property>
+       <property name="dataSetName" >
+          <string>contact</string>
+       </property>
+       <property name="dataSetColName" >
+          <string>lCurr</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="CoaLabel" name="lMax" >
+       <property name="text" >
+        <string>Max</string>
+       </property>
+       <property name="dataSetName" >
+          <string>contact</string>
+       </property>
+       <property name="dataSetColName" >
+          <string>lMax</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="CoaPushButton" name="btnNext" >
+       <property name="text" >
+        <string>Next</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="CoaPushButton" name="btnLast" >
+       <property name="text" >
+        <string>Last</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QWidget" name="layoutWidget" >
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item row="3" column="1" >
+          <widget class="CoaLineEdit" name="le4" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" >
+          <widget class="CoaLabel" name="label_4" >
+           <property name="text" >
+            <string>e3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" >
+          <widget class="CoaLineEdit" name="le5" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" >
+          <widget class="CoaLineEdit" name="le3" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="CoaLineEdit" name="le2" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" >
+          <widget class="CoaLabel" name="label_5" >
+           <property name="text" >
+            <string>e5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="CoaLineEdit" name="le1" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" >
+          <widget class="CoaLabel" name="label_3" >
+           <property name="text" >
+            <string>e4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" >
+          <widget class="CoaLabel" name="label" >
+           <property name="text" >
+            <string>e1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="CoaLabel" name="label_2" >
+           <property name="text" >
+            <string>e2</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="CoaLabel" name="label_7" >
+           <property name="text" >
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="CoaLabel" name="label_6" >
+           <property name="text" >
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="CoaLineEdit" name="le6" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e6</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" >
+          <widget class="CoaLabel" name="label_10" >
+           <property name="text" >
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" >
+          <widget class="CoaLabel" name="label_9" >
+           <property name="text" >
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" >
+          <widget class="CoaLineEdit" name="le10" >
+           <property name="dataSetName" >
+            <string/>
+           </property>
+           <property name="dataSetColName" >
+            <string>e10</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" >
+          <widget class="CoaLabel" name="label_8" >
+           <property name="text" >
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" >
+          <widget class="CoaLineEdit" name="le9" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e9</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" >
+          <widget class="CoaLineEdit" name="le8" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e8</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="CoaLineEdit" name="le7" >
+           <property name="dataSetName" >
+            <string>contact</string>
+           </property>
+           <property name="dataSetColName" >
+            <string>e7</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QTableWidget" name="table1" >
+      <property name="sizePolicy" >
+       <sizepolicy>
+        <hsizetype>3</hsizetype>
+        <vsizetype>3</vsizetype>
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="CoaPushButton" name="btnReqSize" >
+     <property name="text" >
+      <string>Req Size</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="CoaPushButton" name="btnReqTime" >
+     <property name="text" >
+      <string>Req Time</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="CoaPushButton" name="btnReqContent" >
+     <property name="text" >
+      <string>Req Content</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>CoaPushButton</class>
+   <extends></extends>
+   <header>CoaPushButton</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>CoaLabel</class>
+   <extends></extends>
+   <header>CoaLabel</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>CoaLineEdit</class>
+   <extends></extends>
+   <header>CoaLineEdit</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>le1</tabstop>
+  <tabstop>le2</tabstop>
+  <tabstop>le3</tabstop>
+  <tabstop>le4</tabstop>
+  <tabstop>le5</tabstop>
+  <tabstop>le6</tabstop>
+  <tabstop>le7</tabstop>
+  <tabstop>le8</tabstop>
+  <tabstop>le9</tabstop>
+  <tabstop>le10</tabstop>
+  <tabstop>btnFirst</tabstop>
+  <tabstop>btnPrev</tabstop>
+  <tabstop>btnNext</tabstop>
+  <tabstop>btnLast</tabstop>
+  <tabstop>table1</tabstop>
+ </tabstops>
+ <resources>
+  <include location="actioneditor.qrc" />
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,32 @@
+#!/bin/sh
+. "${ODABA_SCRIPT_RC}"
+
+main()
+{
+  if [ "${#}" -gt "1" ]; then
+    projects="${@}"
+  else
+    projects="`find "${ODABA_PROJECTS_DIR}/" -type d -name "bat" |sed 's$^'"${ODABA_PROJECTS_DIR}/"'$$; s|//|/|g; s|/bat$||; /^$/d;'`"
+  fi
+
+  errors_found="false"
+  printf "Errors found:\n"
+  for project in $projects; do
+    project_dir="`ProjectTempDir "${project}"`"
+    if [ -d "${project_dir}" ]; then
+      errors="`find "${project_dir}/" -type f -name '*.err' | sed 's|.*/||; s/.err$//'`"
+    else
+      errors=""
+    fi
+    if [ "${errors}" ]; then
+    	for error in $errors; do
+		printf "  in %s: %s\n" "${project}" "${error}"
+	done
+	errors_found="true";
+    fi
+  done
+  if [ "${errors_found}" = "false" ]; then
+    printf 'no errors found.\n'
+  fi
+}
+main "${@}"

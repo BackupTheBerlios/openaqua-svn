@@ -1,0 +1,4 @@
+compile odcp coe80
+link odcp
+./sbin/cpy odcp
+cp ./bin/coe80 ./bin/klasseditor

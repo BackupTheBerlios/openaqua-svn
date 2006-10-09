@@ -1,0 +1,8 @@
+#!/bin/sh
+#echo calling the php script that should do something with the ICE Server
+#echo read the script before
+
+# make sure the ICE enabled php.ini is used
+
+
+/usr/local/bin/php -q -c /etc/php/cli-php5/php.ini php/odaba.php

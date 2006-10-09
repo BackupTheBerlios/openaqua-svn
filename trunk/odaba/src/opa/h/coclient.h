@@ -1,0 +1,1 @@
+  ObjectReference  *c_client = NULL;

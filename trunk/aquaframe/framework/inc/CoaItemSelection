@@ -1,0 +1,7 @@
+#ifndef __CoaItemSelection__
+#define __CoaItemSelection__
+
+#include "../base/coaitemselection.h"
+
+#endif //__CoaItemSelection__
+

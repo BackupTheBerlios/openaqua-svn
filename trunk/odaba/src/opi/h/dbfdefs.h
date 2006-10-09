@@ -1,0 +1,6 @@
+#define DBF_INT      ((DBField_INT  *)result_field.ProvideNode())
+#define DBF_REAL     ((DBField_REAL *)result_field.ProvideNode())
+#define DBF_DATE     ((DBField_DATE *)result_field.ProvideNode())
+#define DBF_TIME     ((DBField_TIME *)result_field.ProvideNode())
+#define DBF_DATETIME ((DBField_DATETIME *)result_field.ProvideNode())
+#define DBF_CHAR     ((DBField_CHAR *)result_field.ProvideNode())

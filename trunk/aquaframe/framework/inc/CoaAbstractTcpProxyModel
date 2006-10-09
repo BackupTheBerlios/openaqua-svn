@@ -1,0 +1,6 @@
+#ifndef __CoaAbstractTcpProxyModel__
+#define __CoaAbstractTcpProxyModel__
+
+#include "../base/coaabstracttcpproxymodel.h"
+
+#endif //__CoaAbstractTcpProxyModel__

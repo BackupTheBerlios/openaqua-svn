@@ -1,0 +1,7 @@
+#ifndef __CoaSqlTableModel__
+#define __CoaSqlTableModel__
+
+#include "../db/coasqltablemodel.h"
+
+#endif 
+

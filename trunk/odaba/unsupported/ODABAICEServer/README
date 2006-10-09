@@ -1,0 +1,42 @@
+= about =
+ice interface to ODABA
+use the features of odaba in programming languages like
+php, cpp, java, phython, c#
+on remote or local clients 
+using ssl encryption 
+
+read the ICE documentation to understand what to do to access the
+interface - as well as the provided examples in php/
+
+read the ODABA documentation to understand what you have to do to access
+the database (its oodbms). also note the examples for basic knowledge
+
+feel free to contact us and drop a line or two :)
+
+if you dont want to use odaba its still a nice reference on how to use 
+ICE to create interfaces
+
+= install =
+
+make
+sudo make install
+sudo /etc/init.d/opiice start
+
+if anything fails: edit the paths of Makfile (sorry no configure)
+
+= dependencys =
+
+ODABA (run-software.com)
+ICE   (zeroc.com)
+
+= tests =
+
+gentoo-linux amd64
+
+
+= updates =
+
+most (in production all) of the code is generated from our implementation database using
+osi (odaba script interface) therefore if you change code for some
+reason please note us so we can update the generator.
+

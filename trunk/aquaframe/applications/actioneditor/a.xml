@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CoaMenuBarDescription>
+<CoaActionSetDescription version="1.0" >
+   <folderasdasf name="Misc" >
+      <action name="actionApplicationQuit" text="Quit" />
+      <action name="actionApplicationSettings" text="Settings" />
+      <action name="actionApplicationSetShortcuts" text="Shortcuts" />
+      <action name="actionApplicationPrintShortcuts" text="Print Shortcuts" />
+      <action name="actionApplicationAboutApplication" text="About" />
+   </folderasdasf>
+   <folder name="Debug" >
+      <action name="actionDebugSettings" text="Debug Settings" />
+   </folder>
+</CoaActionSetDescription>

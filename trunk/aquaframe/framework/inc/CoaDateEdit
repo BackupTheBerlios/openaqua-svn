@@ -1,0 +1,4 @@
+#ifndef __CoaDateEdit__
+#define __CoaDateEdit__
+#include "../widgets/coadateedit.h"
+#endif //

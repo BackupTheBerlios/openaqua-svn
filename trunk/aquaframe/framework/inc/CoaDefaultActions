@@ -1,0 +1,5 @@
+#ifndef __CoaDefaultActions__
+#define __CoaDefaultActions__
+#include "../factories/coadefaultactions.h"
+#endif
+

@@ -1,0 +1,7 @@
+#ifndef __CoaItemDelegate__
+#define __CoaItemDelegate__
+
+#include "../base/coaitemdelegate.h"
+
+#endif //__CoaItemDelegate__
+

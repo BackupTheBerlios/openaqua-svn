@@ -1,0 +1,7 @@
+#ifndef __CoaTcpSocket__
+#define __CoaTcpSocket__
+
+#include "../base/coatcpsocket.h"
+
+#endif //__CoaTcpSocket__
+

@@ -1,0 +1,7 @@
+#ifndef __CoaMakros__
+#define __CoaMakros__
+
+#include "../base/coamakros.h"
+
+#endif //__CoaMakros__
+

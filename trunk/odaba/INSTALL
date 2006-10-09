@@ -1,0 +1,42 @@
+make
+
+make install
+
+if make does not work for you and you have no time to find out why go download a binary distribution and start over first.
+
+what it is supposed to do?
+
+in the right order 'compile' each of the projects then call 'link' then 'cpy'
+
+whats known to go wrong?
+
+casts and calls - this software was developed with vc - not as portable as we claimed - altrough we did test it on
+gentoo and ubuntu as well as sun
+
+
+odaba 
+
+1. download http://run-software.com/downloads/linux/odaba-~-bin-amd64.tar.bz2
+2. tar xjf odaba-20060717-bin-amd64.tar.bz2
+3. cd odaba && make install
+4. cd /opt/odaba/ && ./sbin/ODABAShell
+    TestRuntime
+
+uninstall
+
+make installs creates 
+/opt/odaba/ 
+/etc/odaba
+/etc/init.d/odabaserver
+~/odaba 
+
+during runtime you possibly create /tmp/odaba and /var/run/odabaserverd.pid
+
+
+some scripts and ini-files (odabaserver) depend ond /data/data/ 
+
+if you delete the mentioned files odaba is uninstalled.
+possibly changed files should not be in /opt* because you are not root. copy the dist directory into a directory where you have control and
+use the odabashell to operate in this directory. if you feel like releasing your changes, (uninstall &&) make install.
+
+

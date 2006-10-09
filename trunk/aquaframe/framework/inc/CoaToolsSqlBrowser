@@ -1,0 +1,8 @@
+#ifndef __CoaToolsSqlBrowser__
+#define __CoaToolsSqlBrowser__
+
+#include "../tools/sqlbrowser/coasqlbrowser.h"
+
+#endif //__CoaToolsSqlBrowser__
+
+

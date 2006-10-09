@@ -1,0 +1,166 @@
+.TH "OPI::DataSourceHandle" 3 "25 Jul 2006" "OPIICE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OPI::DataSourceHandle \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBBeginTransaction\fP (bool extta)"
+.br
+.ti -1c
+.RI "bool \fBClose\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCloseDBObject\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCloseDatabase\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCloseDictionary\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCloseProperty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCloseResourceDB\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCommitTransaction\fP ()"
+.br
+.ti -1c
+.RI "bool \fBConnect\fP (\fBODABAClient\fP *podabaclient)"
+.br
+.ti -1c
+.RI "bool \fBDisconnect\fP ()"
+.br
+.ti -1c
+.RI "bool \fBOpen\fP (\fBODABAClient\fP *podabaclient, \fBPIACC\fP accmod)"
+.br
+.RI "\fIOpen empty data source. \fP"
+.ti -1c
+.RI "bool \fBOpeni02\fP (\fBODABAClient\fP *podabaclient, string inifile, string datasourcename)"
+.br
+.RI "\fIOpening datasource based on ini-file section. \fP"
+.ti -1c
+.RI "bool \fBOpeni1\fP (\fBODABAClient\fP *podabaclient, string datasourcename)"
+.br
+.RI "\fIOpening data source from catalogue. \fP"
+.ti -1c
+.RI "\fBDBObjectHandle\fP * \fBOpenDBObject\fP ()"
+.br
+.ti -1c
+.RI "\fBDatabaseHandle\fP * \fBOpenDatabase\fP ()"
+.br
+.ti -1c
+.RI "DictionaryHandle * \fBOpenDictionary\fP (\fBPIACC\fP accopt)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBOpenProperty\fP (string extname)"
+.br
+.ti -1c
+.RI "\fBDatabaseHandle\fP * \fBOpenResourceDB\fP ()"
+.br
+.ti -1c
+.RI "bool \fBRollBack\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSetDBObject\fP (\fBDBObjectHandle\fP *ohandle, string wobjname)"
+.br
+.ti -1c
+.RI "bool \fBSetDataSource\fP (\fBDataSourceHandle\fP *dbdefptr)"
+.br
+.ti -1c
+.RI "bool \fBSetDatabase\fP (\fBDatabaseHandle\fP *dbhandle, string wbasepath)"
+.br
+.ti -1c
+.RI "bool \fBSetDictionary\fP (DictionaryHandle *dictptr, string wdictpath)"
+.br
+.ti -1c
+.RI "bool \fBSetResourceDB\fP (\fBDatabaseHandle\fP *dbhandle, string wbasepath)"
+.br
+.ti -1c
+.RI "bool \fBSetVariables\fP (string datasourcename)"
+.br
+.ti -1c
+.RI "bool \fBSetup\fP (string inifile, string datasourcename)"
+.br
+.ti -1c
+.RI "bool \fBSetupVariables\fP (string datasourcename)"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "bool OPI::DataSourceHandle::BeginTransaction (bool extta)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Close ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CloseDatabase ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CloseDBObject ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CloseDictionary ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CloseProperty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CloseResourceDB ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::CommitTransaction ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Connect (\fBODABAClient\fP * podabaclient)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Disconnect ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Open (\fBODABAClient\fP * podabaclient, \fBPIACC\fP accmod)\fC [private]\fP"
+.PP
+Open empty data source. 
+.PP
+A data source can be opened when the application has filled the external specifications for the data source. At least the dict_path should be set in the data source before openeing. The data source should be opened only, when all external resources to be accessed are defined in the data source. When the client is not connected the server specifications (server_name and port_number) shuold be set as well. This is not necessary when running a local application. 
+.SS "\fBDatabaseHandle\fP* OPI::DataSourceHandle::OpenDatabase ()\fC [private]\fP"
+.PP
+.SS "\fBDBObjectHandle\fP* OPI::DataSourceHandle::OpenDBObject ()\fC [private]\fP"
+.PP
+.SS "DictionaryHandle* OPI::DataSourceHandle::OpenDictionary (\fBPIACC\fP accopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Openi02 (\fBODABAClient\fP * podabaclient, string inifile, string datasourcename)\fC [private]\fP"
+.PP
+Opening datasource based on ini-file section. 
+.PP
+The function opens the data source based on external resource definitions passsed in the ini-file. The inifile section name containing the resource definitions is passed as datasource_name to the function. The resource definitions in the data source are filled from the corresponding resource definitions in the ini-file. 
+.SS "bool OPI::DataSourceHandle::Openi1 (\fBODABAClient\fP * podabaclient, string datasourcename)\fC [private]\fP"
+.PP
+Opening data source from catalogue. 
+.PP
+The function opens the data source based on external resource definitions passsed stored in the data source catalogue. In this case the external resource defitions are read from the catalogue where an entry with the passed datasource_name must exist. Using the catalogue feature the catalogue data source must be provided in a catalogue [DATA-CATALOGUE] section of the ini-file (local application) or in a corresponding section of the server. The resource definitions in the data source are filled from the corresponding resource definitions in the catalogue entry before opening the data source. 
+.SS "\fBPropertyHandle\fP* OPI::DataSourceHandle::OpenProperty (string extname)\fC [private]\fP"
+.PP
+.SS "\fBDatabaseHandle\fP* OPI::DataSourceHandle::OpenResourceDB ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::RollBack ()\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetDatabase (\fBDatabaseHandle\fP * dbhandle, string wbasepath)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetDataSource (\fBDataSourceHandle\fP * dbdefptr)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetDBObject (\fBDBObjectHandle\fP * ohandle, string wobjname)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetDictionary (DictionaryHandle * dictptr, string wdictpath)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetResourceDB (\fBDatabaseHandle\fP * dbhandle, string wbasepath)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::Setup (string inifile, string datasourcename)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetupVariables (string datasourcename)\fC [private]\fP"
+.PP
+.SS "bool OPI::DataSourceHandle::SetVariables (string datasourcename)\fC [private]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIICE from the source code.

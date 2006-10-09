@@ -1,0 +1,1460 @@
+.TH "OPI::PropertyHandle" 3 "25 Jul 2006" "OPIICE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OPI::PropertyHandle \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBAdd\fP (int setpos0, string sortkey, string identkeyw)"
+.br
+.ti -1c
+.RI "bool \fBAddByKey\fP (string sortkey, string identkeyw)"
+.br
+.ti -1c
+.RI "bool \fBAddInstance\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.RI "\fIAdd instance by property value. \fP"
+.ti -1c
+.RI "bool \fBAddOnPosition\fP (int setpos0w, bool initinst)"
+.br
+.RI "\fICreate instance at position. \fP"
+.ti -1c
+.RI "bool \fBAddGlobal\fP (int setpos0, string sortkey, string identkeyw, bool initinst)"
+.br
+.ti -1c
+.RI "bool \fBAddGlobalByKey\fP (string sortkey, string identkeyw, bool initinst)"
+.br
+.ti -1c
+.RI "bool \fBAddGlobalOnPosition\fP (int setpos0w, bool initinst)"
+.br
+.ti -1c
+.RI "bool \fBAddReference\fP (\fBPropertyHandle\fP *sourcehandle, int setpos0w)"
+.br
+.ti -1c
+.RI "bool \fBAllocDescription\fP ()"
+.br
+.ti -1c
+.RI "bool \fBAllocateArea\fP ()"
+.br
+.ti -1c
+.RI "bool \fBAppendString\fP (string pstring)"
+.br
+.ti -1c
+.RI "bool \fBAutoLocate\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBCancel\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCancelBuffer\fP ()"
+.br
+.ti -1c
+.RI "int \fBChangeBuffer\fP (int buffnum)"
+.br
+.ti -1c
+.RI "bool \fBChangeCache\fP (int buffnum)"
+.br
+.ti -1c
+.RI "\fBPIACC\fP \fBChangeMode\fP (\fBPIACC\fP newmode)"
+.br
+.ti -1c
+.RI "bool \fBCheck\fP (bool iniopt)"
+.br
+.ti -1c
+.RI "bool \fBCheckPosition\fP ()"
+.br
+.ti -1c
+.RI "bool \fBCheckUpdate\fP (bool pcheckupdate)"
+.br
+.ti -1c
+.RI "bool \fBCheckWProtect\fP ()"
+.br
+.ti -1c
+.RI "bool \fBClose\fP ()"
+.br
+.ti -1c
+.RI "int \fBCompare\fP (\fBPropertyHandle\fP *cprophdl)"
+.br
+.RI "\fICompare with other property handle. \fP"
+.ti -1c
+.RI "int \fBCompareDate\fP (long dateval)"
+.br
+.RI "\fICompare with date value. \fP"
+.ti -1c
+.RI "int \fBCompareFloat\fP (float doubleval)"
+.br
+.RI "\fICompare with double value. \fP"
+.ti -1c
+.RI "int \fBCompareInteger\fP (int longval)"
+.br
+.RI "\fICompare with 32-bit integer value. \fP"
+.ti -1c
+.RI "int \fBCompareString\fP (string pstring)"
+.br
+.RI "\fICompare with string value. \fP"
+.ti -1c
+.RI "int \fBCompareTime\fP (long timeval)"
+.br
+.RI "\fICompare with time value. \fP"
+.ti -1c
+.RI "int \fBCompareKey\fP (string identkey1, string identkey2)"
+.br
+.ti -1c
+.RI "int \fBCompareSortKey\fP (string sortkey1, string sortkey2)"
+.br
+.ti -1c
+.RI "bool \fBCompareType\fP (\fBPropertyHandle\fP *prophdl, bool convert)"
+.br
+.ti -1c
+.RI "bool \fBCopy\fP (\fBPropertyHandle\fP *sourcehandle, string newkey, int setpos0, \fBPIREPL\fP replopt, \fBPIREPL\fP copytype)"
+.br
+.ti -1c
+.RI "bool \fBCopyData\fP (\fBPropertyHandle\fP *sourcehandle, \fBPIREPL\fP replopt)"
+.br
+.RI "\fICopy instance data from source instance. \fP"
+.ti -1c
+.RI "bool \fBCopyHandle\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBCopyInstanceArea\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "int \fBCopySet\fP (\fBPropertyHandle\fP *csourcehandle, \fBPIREPL\fP replopt, \fBPIREPL\fP copytype, bool inversecheck)"
+.br
+.ti -1c
+.RI "bool \fBCreateTempExtent\fP (\fBPropertyHandle\fP *prophdlref, string extnamesw)"
+.br
+.ti -1c
+.RI "bool \fBDelete\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBDeleteByKey\fP (string sortkey)"
+.br
+.RI "\fIDelete instance by key. \fP"
+.ti -1c
+.RI "bool \fBDeleteOnPosition\fP (int setpos0w, bool deldep, bool delinst)"
+.br
+.RI "\fIDelete instance by position. \fP"
+.ti -1c
+.RI "bool \fBDeleteIndexEntry\fP (int setpos0)"
+.br
+.ti -1c
+.RI "bool \fBDeleteSet\fP (bool deldep)"
+.br
+.ti -1c
+.RI "bool \fBDisableKeyCheck\fP ()"
+.br
+.ti -1c
+.RI "bool \fBDuplicate\fP (int setpos0, \fBPIREPL\fP replopt)"
+.br
+.ti -1c
+.RI "bool \fBDuplicateKey\fP (string identkey, \fBPIREPL\fP replopt)"
+.br
+.ti -1c
+.RI "bool \fBEnableKeyCheck\fP ()"
+.br
+.ti -1c
+.RI "bool \fBExecute\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBExecuteExpression\fP (\fBDBObjectHandle\fP *resobhandle, \fBDBObjectHandle\fP *obhandle, string expression)"
+.br
+.ti -1c
+.RI "bool \fBExecuteInstanceAction\fP (string actionname, string parmstring)"
+.br
+.ti -1c
+.RI "bool \fBExecutePropertyAction\fP (string actionname, string parmstring)"
+.br
+.ti -1c
+.RI "bool \fBExist\fP ()"
+.br
+.ti -1c
+.RI "string \fBExtractKey\fP (string keyname)"
+.br
+.ti -1c
+.RI "string \fBExtractSortKey\fP (string sortkeyw)"
+.br
+.ti -1c
+.RI "string \fBFirstKey\fP ()"
+.br
+.ti -1c
+.RI "bool \fBGet\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.RI "\fIGet instance by value in the property handle. \fP"
+.ti -1c
+.RI "bool \fBGetAtPosition\fP (int setpos0w)"
+.br
+.RI "\fIGet Instance by index position. \fP"
+.ti -1c
+.RI "bool \fBGetByKey\fP (string sortkey)"
+.br
+.RI "\fIGet instance by key value. \fP"
+.ti -1c
+.RI "string \fBGetActionResult\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetArea\fP (string chkopt)"
+.br
+.RI "\fIProvide area for current property handle. \fP"
+.ti -1c
+.RI "string \fBGetAttribute\fP (int indx0, bool fullpath, bool generic)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBGetBaseProperty\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetCollectionID\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBGetCollectionProperty\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetCount\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetCurrentIndex\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetCurrentSize\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetCurrentType\fP ()"
+.br
+.ti -1c
+.RI "\fBDatabaseHandle\fP * \fBGetDBHandle\fP ()"
+.br
+.ti -1c
+.RI "long \fBGetDate\fP (string proppath)"
+.br
+.ti -1c
+.RI "long \fBGetDateTime\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetDay\fP (string proppath)"
+.br
+.ti -1c
+.RI "DictionaryHandle * \fBGetDictionary\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetDimension\fP ()"
+.br
+.ti -1c
+.RI "float \fBGetDouble\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetExtInstModCount\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetExtentName\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetGUID\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetGenAttrType\fP (string wpropnames)"
+.br
+.ti -1c
+.RI "int \fBGetGenOrderType\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetGlobalID\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetHours\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetID\fP (int setpos0w)"
+.br
+.ti -1c
+.RI "string \fBGetIdentity\fP (string idstring)"
+.br
+.ti -1c
+.RI "string \fBGetIndexName\fP (int indx0)"
+.br
+.ti -1c
+.RI "bool \fBGetInitInstance\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetInstModCount\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetInt\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetIntValue\fP (string proppath)"
+.br
+.ti -1c
+.RI "string \fBGetKey\fP (int setpos0w)"
+.br
+.ti -1c
+.RI "int \fBGetKeyLength\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetLOID\fP (int setpos0w)"
+.br
+.ti -1c
+.RI "int \fBGetLOIDByKey\fP (string sortkey)"
+.br
+.ti -1c
+.RI "int \fBGetMinutes\fP (string proppath)"
+.br
+.ti -1c
+.RI "\fBPIACC\fP \fBGetMode\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetMonth\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetNormalized\fP ()"
+.br
+.ti -1c
+.RI "\fBDBObjectHandle\fP * \fBGetObjectHandle\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetOrigin\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBGetParentProperty\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBGetPropertyHandle\fP (string proppath)"
+.br
+.ti -1c
+.RI "string \fBGetPropertyPath\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetRefModCount\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetReference\fP (int indx0, bool fullpath, bool generic)"
+.br
+.ti -1c
+.RI "bool \fBGetRelative\fP (int setpos0w)"
+.br
+.ti -1c
+.RI "int \fBGetRelativeCount\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetRelativeIndex\fP (bool lastopt)"
+.br
+.ti -1c
+.RI "int \fBGetSeconds\fP (string proppath)"
+.br
+.ti -1c
+.RI "string \fBGetSelectedKey\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetSize\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetSizeOf\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetSortKey\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetSortKeyLength\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetString\fP (string proppath)"
+.br
+.ti -1c
+.RI "int \fBGetStringLength\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetStringValue\fP (string proppath)"
+.br
+.ti -1c
+.RI "string \fBGetSubString\fP (int startpos, int length)"
+.br
+.ti -1c
+.RI "string \fBGetText\fP (string proppath)"
+.br
+.ti -1c
+.RI "long \fBGetTime\fP (string proppath)"
+.br
+.ti -1c
+.RI "string \fBGetType\fP ()"
+.br
+.ti -1c
+.RI "bool \fBGetValid\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetVersion\fP ()"
+.br
+.ti -1c
+.RI "int \fBGetYear\fP (string proppath)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBGroup\fP (\fBPropertyHandle\fP *prophdlref, string groupingrule, bool distinct)"
+.br
+.ti -1c
+.RI "bool \fBHasData\fP ()"
+.br
+.ti -1c
+.RI "bool \fBHasDescription\fP ()"
+.br
+.ti -1c
+.RI "bool \fBHasGenericAttributes\fP ()"
+.br
+.ti -1c
+.RI "bool \fBHasIndex\fP ()"
+.br
+.ti -1c
+.RI "bool \fBInherits\fP (string strnames)"
+.br
+.ti -1c
+.RI "bool \fBInsertString\fP (string pstring, int position)"
+.br
+.ti -1c
+.RI "bool \fBInsertTerminator\fP (string pstring)"
+.br
+.ti -1c
+.RI "bool \fBInstanceInserted\fP ()"
+.br
+.ti -1c
+.RI "string \fBInstanceToString\fP (string stringsep, string fieldsep, string blocksep, string emptystring, bool skiptrans)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBIntersect\fP (\fBPropertyHandle\fP *prophdl1, \fBPropertyHandle\fP *prophdl2, string skopt)"
+.br
+.ti -1c
+.RI "bool \fBIs\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBIsA\fP (string strnames)"
+.br
+.ti -1c
+.RI "bool \fBIsActive\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsAttribute\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsAutoSelection\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsBasedOn\fP (string strnames)"
+.br
+.ti -1c
+.RI "bool \fBIsBasetypeProperty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsBasicType\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsClient\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsCollection\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsCollectionUpdate\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsCopyHandle\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsDirty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsEmpty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsEnumeration\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsGenericAttribute\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsInitInstance\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsMemo\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsModified\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsNewInstance\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsNumeric\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsOldInstance\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsOwner\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsPositioned\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsReadOnly\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsSelected\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsSensitive\fP (string proppath)"
+.br
+.ti -1c
+.RI "bool \fBIsServer\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsShareBaseHandle\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsStructure\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsText\fP (string chkopt)"
+.br
+.ti -1c
+.RI "bool \fBIsTransient\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsTrue\fP (string proppath)"
+.br
+.ti -1c
+.RI "bool \fBIsTyped\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsUserHandle\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsValid\fP (bool topt)"
+.br
+.ti -1c
+.RI "bool \fBIsValidText\fP (string pstring)"
+.br
+.ti -1c
+.RI "bool \fBIsVariableType\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsWeakTyped\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsWrite\fP ()"
+.br
+.ti -1c
+.RI "bool \fBLocate\fP (int obident, bool readopt)"
+.br
+.ti -1c
+.RI "bool \fBLocatePath\fP ()"
+.br
+.ti -1c
+.RI "bool \fBLock\fP ()"
+.br
+.ti -1c
+.RI "bool \fBLockSet\fP ()"
+.br
+.ti -1c
+.RI "void \fBMarkUnused\fP ()"
+.br
+.ti -1c
+.RI "void \fBMarkUsed\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBMinus\fP (\fBPropertyHandle\fP *prophdl1, \fBPropertyHandle\fP *prophdl2, string skopt)"
+.br
+.ti -1c
+.RI "bool \fBModify\fP ()"
+.br
+.ti -1c
+.RI "bool \fBMove\fP (\fBPropertyHandle\fP *sourcehandle, string newkey, \fBPIREPL\fP replopt)"
+.br
+.RI "\fIMove with rename. \fP"
+.ti -1c
+.RI "bool \fBMoveDown\fP ()"
+.br
+.ti -1c
+.RI "bool \fBMoveUp\fP ()"
+.br
+.ti -1c
+.RI "string \fBNextKey\fP (string sortkeyw, int switchlevel)"
+.br
+.ti -1c
+.RI "bool \fBNoWrite\fP ()"
+.br
+.ti -1c
+.RI "bool \fBOpen\fP ()"
+.br
+.RI "\fIOpen an undefined property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenBigInt\fP (int int64val)"
+.br
+.ti -1c
+.RI "bool \fBOpenBoolean\fP (bool logval)"
+.br
+.RI "\fIOpen property handle for a logical value. \fP"
+.ti -1c
+.RI "bool \fBOpenChild\fP (\fBPropertyHandle\fP *prophdl, string proppath)"
+.br
+.RI "\fIOpen subordinated property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenChildReference\fP (\fBPropertyHandle\fP *ppropertyhandle, string proppath)"
+.br
+.RI "\fIOpen subordinated property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenCopy\fP (\fBPropertyHandle\fP *cprophdl)"
+.br
+.RI "\fIOpen non sharing copy for a property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenDate\fP (long dateval)"
+.br
+.RI "\fIOpen property handle for a date value. \fP"
+.ti -1c
+.RI "bool \fBOpenExtent\fP (\fBDBObjectHandle\fP *objecthandle, string extnames, \fBPIACC\fP accopt, bool transientw, string keynamew)"
+.br
+.RI "\fIOpen extent property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenFloat\fP (float dblvalue)"
+.br
+.RI "\fIOpen property handle for a double value. \fP"
+.ti -1c
+.RI "bool \fBOpenInteger\fP (int intval)"
+.br
+.RI "\fIOpen property handle for a 32-bit integer value. \fP"
+.ti -1c
+.RI "bool \fBOpenReference\fP (\fBPropertyHandle\fP *ppropertyhandle)"
+.br
+.RI "\fIOpen a sharing copy for a property handle. \fP"
+.ti -1c
+.RI "bool \fBOpenSizedString\fP (string pstring, int stringlen)"
+.br
+.RI "\fIOpen property handle for a string value. \fP"
+.ti -1c
+.RI "bool \fBOpenString\fP (string pstring, bool convopt)"
+.br
+.RI "\fIOpen property handle for a string value. \fP"
+.ti -1c
+.RI "bool \fBOpenTime\fP (long timeval)"
+.br
+.RI "\fIOPen property handle for a time value. \fP"
+.ti -1c
+.RI "bool \fBOpenTimestamp\fP (long datetimeval)"
+.br
+.RI "\fIOpen property handle for a date/time value. \fP"
+.ti -1c
+.RI "bool \fBOpenHierarchy\fP (\fBPropertyHandle\fP *bottomph, \fBPropertyHandle\fP *topph, bool pathopt, \fBPIACC\fP accmode, bool copyselection)"
+.br
+.ti -1c
+.RI "bool \fBOwnsData\fP ()"
+.br
+.ti -1c
+.RI "bool \fBPosition\fP (int count)"
+.br
+.ti -1c
+.RI "bool \fBPositionTop\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBPower\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBProvGenAttribute\fP ()"
+.br
+.ti -1c
+.RI "bool \fBProvide\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.RI "\fIProvide instance by property. \fP"
+.ti -1c
+.RI "bool \fBProvideAtPosition\fP (int setpos0w)"
+.br
+.RI "\fIProvide instance at position. \fP"
+.ti -1c
+.RI "bool \fBProvideByKey\fP (string sortkey)"
+.br
+.RI "\fIProvide intsance by key value. \fP"
+.ti -1c
+.RI "bool \fBProvideArea\fP ()"
+.br
+.ti -1c
+.RI "string \fBProvideGUID\fP ()"
+.br
+.ti -1c
+.RI "bool \fBProvideGlobal\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBProvideGlobalAtPosition\fP (int setpos0w)"
+.br
+.ti -1c
+.RI "bool \fBProvideGlobalByKey\fP (string sortkey)"
+.br
+.ti -1c
+.RI "\fBOperationHandle\fP * \fBProvideOperation\fP (string expression)"
+.br
+.ti -1c
+.RI "bool \fBRefresh\fP ()"
+.br
+.ti -1c
+.RI "bool \fBReleaseBuffer\fP ()"
+.br
+.ti -1c
+.RI "bool \fBRemoveFromCollection\fP ()"
+.br
+.ti -1c
+.RI "bool \fBRemoveString\fP (string pstring, int position, int len)"
+.br
+.ti -1c
+.RI "bool \fBRemoveTerminator\fP (string pstring)"
+.br
+.ti -1c
+.RI "bool \fBRename\fP (string newkey)"
+.br
+.ti -1c
+.RI "bool \fBRepairIndex\fP (string keynamew, string attrstrw)"
+.br
+.ti -1c
+.RI "bool \fBReplaceString\fP (string oldstr, string newstr)"
+.br
+.ti -1c
+.RI "bool \fBReplaceSysVariables\fP ()"
+.br
+.ti -1c
+.RI "bool \fBReset\fP ()"
+.br
+.ti -1c
+.RI "void \fBResetDirty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBResetTransientProperty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBResetWProtect\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSave\fP (string savopt, bool switchopt)"
+.br
+.ti -1c
+.RI "int \fBSearchText\fP (string pstring, int curpos, bool caseopt)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSelect\fP (\fBPropertyHandle\fP *prophdlref, string expression)"
+.br
+.ti -1c
+.RI "void \fBSetActionResult\fP (string resultstring)"
+.br
+.ti -1c
+.RI "bool \fBSetContextVariables\fP (string contextstring)"
+.br
+.ti -1c
+.RI "void \fBSetDirty\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSetDynLength\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSetGenAttribute\fP (string attrstr, string proppath)"
+.br
+.ti -1c
+.RI "bool \fBSetKey\fP (string identkey)"
+.br
+.ti -1c
+.RI "void \fBSetModified\fP ()"
+.br
+.ti -1c
+.RI "bool \fBSetNormalized\fP (int longval)"
+.br
+.ti -1c
+.RI "bool \fBSetOrder\fP (string keyname, string attrstr)"
+.br
+.ti -1c
+.RI "bool \fBSetSelection\fP (string expression)"
+.br
+.ti -1c
+.RI "bool \fBSetSortKey\fP (string sortkey)"
+.br
+.ti -1c
+.RI "bool \fBSetTransientProperty\fP (\fBPropertyHandle\fP *prophdl)"
+.br
+.ti -1c
+.RI "bool \fBSetType\fP (string strnames)"
+.br
+.ti -1c
+.RI "bool \fBSetUpdate\fP (bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValue\fP (\fBPropertyHandle\fP *cprophdl, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueBigInt\fP (int int64val, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueBoolean\fP (bool logval, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueDate\fP (long dateval, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueFloat\fP (float dblvalue, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueInteger\fP (int longval, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueString\fP (string pstring, bool pcheckupdate, bool convopt)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueTime\fP (long timeval, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBSetValueTimestamp\fP (long datetimeval, bool pcheckupdate)"
+.br
+.ti -1c
+.RI "bool \fBSetVersion\fP (int versionnr)"
+.br
+.ti -1c
+.RI "bool \fBSetWProtect\fP ()"
+.br
+.ti -1c
+.RI "bool \fBToTop\fP ()"
+.br
+.ti -1c
+.RI "\fBPropertyHandle\fP * \fBUnion\fP (\fBPropertyHandle\fP *prophdl1, \fBPropertyHandle\fP *prophdl2, string skopt, bool distinct)"
+.br
+.RI "\fIBinary union. \fP"
+.ti -1c
+.RI "bool \fBUnlock\fP ()"
+.br
+.ti -1c
+.RI "bool \fBUnlockSet\fP ()"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "bool OPI::PropertyHandle::Add (int setpos0, string sortkey, string identkeyw)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AddByKey (string sortkey, string identkeyw)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AddGlobal (int setpos0, string sortkey, string identkeyw, bool initinst)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AddGlobalByKey (string sortkey, string identkeyw, bool initinst)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AddGlobalOnPosition (int setpos0w, bool initinst)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AddInstance (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+Add instance by property value. 
+.PP
+The function checks whether the property handle passes a numerical value or not. When passing a numerical value the function creates an instance at the position according to the number passed in the property handle (-> 'Create instance at position'). Otherwise the value in the property handle is interpreted as string key, which will be converted into key and adds an instance by key value to the collection (-> 'Add instance by key value').. 
+.SS "bool OPI::PropertyHandle::AddOnPosition (int setpos0w, bool initinst)\fC [private]\fP"
+.PP
+Create instance at position. 
+.PP
+This function is used to create an instance at a certain position in an unordered collection. The function creates the instance at the passed position (set_pos_w). When AUTO is passed the instance is created infront of the selected instance. When no instance is selected the new instance is appended to the end of the collection. The instance in the property handle can be initialized before calling the Add function calling \fBGetInitInstance()\fP and setting initial property values. In this case the init_inst option must be set to YES when calling the function (otherwuise the initialized instance will be ignored) and the function operates similar to the 'Add instance at position' function. The instance can be also initialized before adding to the collection using the DBInitialized event in the structure context. When the collection is ordered the position passed will be ignored and the instance will be inserted in the collection according to the key passed within the initialized instance. When the instance is not initialized, the instance is created with the default values defined in the data model (structure definition). 
+.SS "bool OPI::PropertyHandle::AddReference (\fBPropertyHandle\fP * sourcehandle, int setpos0w)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AllocateArea ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AllocDescription ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AppendString (string pstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::AutoLocate (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Cancel ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CancelBuffer ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::ChangeBuffer (int buffnum)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ChangeCache (int buffnum)\fC [private]\fP"
+.PP
+.SS "\fBPIACC\fP OPI::PropertyHandle::ChangeMode (\fBPIACC\fP newmode)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Check (bool iniopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CheckPosition ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CheckUpdate (bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CheckWProtect ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Close ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::Compare (\fBPropertyHandle\fP * cprophdl)\fC [private]\fP"
+.PP
+Compare with other property handle. 
+.PP
+This implementation compares the value in the property handle with the value in the passed property handle. Data conversion is performed when required. 
+.SS "int OPI::PropertyHandle::CompareDate (long dateval)\fC [private]\fP"
+.PP
+Compare with date value. 
+.PP
+This implementation compares the value in the property handle with the passed date value. Data conversion is performed for the passed value when required. Converting date values to string values may result in different string values for the same date value depending on the national setting. Hence, string values should not be compared with date values. In this case it is more appropriate to compare the date values directly ( ph.GetDate() == date_val). 
+.SS "int OPI::PropertyHandle::CompareFloat (float doubleval)\fC [private]\fP"
+.PP
+Compare with double value. 
+.PP
+This implementation compares the value in the property handle with the passed double float value. Data conversion is performed for the passed value when required. 
+.SS "int OPI::PropertyHandle::CompareInteger (int longval)\fC [private]\fP"
+.PP
+Compare with 32-bit integer value. 
+.PP
+This implementation compares the value in the property handle with the passed integer value. Data conversion is performed for the passed value when required. 
+.SS "int OPI::PropertyHandle::CompareKey (string identkey1, string identkey2)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::CompareSortKey (string sortkey1, string sortkey2)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::CompareString (string pstring)\fC [private]\fP"
+.PP
+Compare with string value. 
+.PP
+This implementation compares the value in the property handle with the value in the passed string. Data conversion is performed for the string when required. 
+.SS "int OPI::PropertyHandle::CompareTime (long timeval)\fC [private]\fP"
+.PP
+Compare with time value. 
+.PP
+This implementation compares the value in the property handle with the passed time value. Data conversion is performed for the passed value when required. Converting time values to string values may result in different string values for the same time value depending on the national setting. Hence, string values should not be compared with time values. In this case it is more appropriate to compare the time values directly ( ph.GetTime() == time_val). 
+.SS "bool OPI::PropertyHandle::CompareType (\fBPropertyHandle\fP * prophdl, bool convert)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Copy (\fBPropertyHandle\fP * sourcehandle, string newkey, int setpos0, \fBPIREPL\fP replopt, \fBPIREPL\fP copytype)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CopyData (\fBPropertyHandle\fP * sourcehandle, \fBPIREPL\fP replopt)\fC [private]\fP"
+.PP
+Copy instance data from source instance. 
+.PP
+The implementation copies the data from the source instance into the target instance. All direct properties (attributes and base structures) are copied by name. References and relationships are copied, when not yet existing or when replace opt REPL_local (for references) or REPL_all (for references and relationships) has been defined. When the target is sorted, the sort key is not copied from the source. When the target is not sorted, but an ident-key is defined for the structure, the ident-key remains unchanged. The target instance will not be initialized, i.e. fields not existing in the source instance are not changed. 
+.SS "bool OPI::PropertyHandle::CopyHandle (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CopyInstanceArea (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::CopySet (\fBPropertyHandle\fP * csourcehandle, \fBPIREPL\fP replopt, \fBPIREPL\fP copytype, bool inversecheck)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::CreateTempExtent (\fBPropertyHandle\fP * prophdlref, string extnamesw)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Delete (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::DeleteByKey (string sortkey)\fC [private]\fP"
+.PP
+Delete instance by key. 
+.PP
+The function deletes an instance by key. When no instance with the passed key can be located, the function terminates with error. 
+.SS "bool OPI::PropertyHandle::DeleteIndexEntry (int setpos0)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::DeleteOnPosition (int setpos0w, bool deldep, bool delinst)\fC [private]\fP"
+.PP
+Delete instance by position. 
+.PP
+The function deletes the instance at the position passed to the function (set_pos0_w). When AUTO is passed the current instance is deleted. Dependent instances are usually deleted as well (del_dep=YES). When passing NO, depending instances are not deleted, as long as they are not owned by the current instance. 
+.SS "bool OPI::PropertyHandle::DeleteSet (bool deldep)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::DisableKeyCheck ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Duplicate (int setpos0, \fBPIREPL\fP replopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::DuplicateKey (string identkey, \fBPIREPL\fP replopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::EnableKeyCheck ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Execute ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::ExecuteExpression (\fBDBObjectHandle\fP * resobhandle, \fBDBObjectHandle\fP * obhandle, string expression)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ExecuteInstanceAction (string actionname, string parmstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ExecutePropertyAction (string actionname, string parmstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Exist ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::ExtractKey (string keyname)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::ExtractSortKey (string sortkeyw)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::FirstKey ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Get (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+Get instance by value in the property handle. 
+.PP
+When passing the value for locating an instance in a collection via property hanndle, \fBGet()\fP is called as get by key or index depending on the data type defined in the property handle. When the value property handle passes a structured instance of the same or a specialized type as the instance to be selected, the key value is extracted from the instance passed in the property handle and get by key is used. When passing a text value (STRING, MEMO or CHAR), the text data is considered as string key where key komponents are separated by |. You cannot pass a structured key (Key) my means of property handles. If not the key or instant version is used the 'get by position' version is called. Non-integer numerical values are rounded to the next lower integer number. 
+.SS "string OPI::PropertyHandle::GetActionResult ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetArea (string chkopt)\fC [private]\fP"
+.PP
+Provide area for current property handle. 
+.PP
+The function returns the area for the current property handle. 
+.SS "bool OPI::PropertyHandle::GetAtPosition (int setpos0w)\fC [private]\fP"
+.PP
+Get Instance by index position. 
+.PP
+Reading an instance by position is locating the instance on the given location in the selected index (sort order). Thus, the result will change usually when changing the selected index for the collection. Using index positions for reading is also a weak point when indexes are updated simultaneously, since the index position might change when other users insert or remove entries from the index. To avoid this you may use the \fBLockSet()\fP function, that locks the complete collection. Access by position, however, is a comfortable way browsing through a collection. Access by position cannot be used for LOID or GUID property handles. Passing a number to an LOID handle interpretes the number as local object identity. For a path property \fBGet()\fP by position automatically changes the selection for higher properties in the path when the end of collection is signaled an a level that is not the top level for the path property. Passing AUTO as position the function returns the instance currently selected in the property handle. When no instance is selected the function returns the first instance in the collection. When an instance is selected in the property handle and the current access mode does not correspond to the required access mode, the function will re-read the instance. Thus, the function can be used to update the access mode when the selected instance was write protected. Selections in subordinated property handles are canceled when re-reading the instance. 
+.SS "string OPI::PropertyHandle::GetAttribute (int indx0, bool fullpath, bool generic)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::GetBaseProperty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::GetByKey (string sortkey)\fC [private]\fP"
+.PP
+Get instance by key value. 
+.PP
+When reading an instance by key, this is considered as key in the currently selected index (\fBSetOrder()\fP). When the key cannor be found in the index the function returns an empty instance. It is also possible to locate an instance by key in an unordered collection, when it has been marked as unique (no duplicate instances). In this case the key must be passed according to the structure of the ident key. The key must be passed according to the internal key structure. The key can also be an LOID or a GUID string when the property handle has been opened for reading by local object identities (__LOID) or by global unique identifiers (__GUID). When positioning the instance for a path property the key must consist of all sort keys along the path. 
+.SS "int OPI::PropertyHandle::GetCollectionID ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::GetCollectionProperty ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetCount ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetCurrentIndex ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetCurrentSize ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetCurrentType ()\fC [private]\fP"
+.PP
+.SS "long OPI::PropertyHandle::GetDate (string proppath)\fC [private]\fP"
+.PP
+.SS "long OPI::PropertyHandle::GetDateTime (string proppath)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetDay (string proppath)\fC [private]\fP"
+.PP
+.SS "\fBDatabaseHandle\fP* OPI::PropertyHandle::GetDBHandle ()\fC [private]\fP"
+.PP
+.SS "DictionaryHandle* OPI::PropertyHandle::GetDictionary ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetDimension ()\fC [private]\fP"
+.PP
+.SS "float OPI::PropertyHandle::GetDouble (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetExtentName ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetExtInstModCount ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetGenAttrType (string wpropnames)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetGenOrderType ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetGlobalID ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetGUID ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetHours (string proppath)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetID (int setpos0w)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetIdentity (string idstring)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetIndexName (int indx0)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::GetInitInstance ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetInstModCount ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetInt (string proppath)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetIntValue (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetKey (int setpos0w)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetKeyLength ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetLOID (int setpos0w)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetLOIDByKey (string sortkey)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetMinutes (string proppath)\fC [private]\fP"
+.PP
+.SS "\fBPIACC\fP OPI::PropertyHandle::GetMode ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetMonth (string proppath)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetNormalized ()\fC [private]\fP"
+.PP
+.SS "\fBDBObjectHandle\fP* OPI::PropertyHandle::GetObjectHandle ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetOrigin ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::GetParentProperty ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::GetPropertyHandle (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetPropertyPath ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetReference (int indx0, bool fullpath, bool generic)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetRefModCount ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::GetRelative (int setpos0w)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetRelativeCount ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetRelativeIndex (bool lastopt)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetSeconds (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetSelectedKey ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetSize ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetSizeOf ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetSortKey ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetSortKeyLength ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetString (string proppath)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetStringLength ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetStringValue (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetSubString (int startpos, int length)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetText (string proppath)\fC [private]\fP"
+.PP
+.SS "long OPI::PropertyHandle::GetTime (string proppath)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::GetType ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::GetValid ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetVersion ()\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::GetYear (string proppath)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Group (\fBPropertyHandle\fP * prophdlref, string groupingrule, bool distinct)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::HasData ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::HasDescription ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::HasGenericAttributes ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::HasIndex ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Inherits (string strnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::InsertString (string pstring, int position)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::InsertTerminator (string pstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::InstanceInserted ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::InstanceToString (string stringsep, string fieldsep, string blocksep, string emptystring, bool skiptrans)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Intersect (\fBPropertyHandle\fP * prophdl1, \fBPropertyHandle\fP * prophdl2, string skopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Is (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsA (string strnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsActive ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsAttribute ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsAutoSelection ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsBasedOn (string strnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsBasetypeProperty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsBasicType ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsClient ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsCollection (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsCollectionUpdate ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsCopyHandle ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsDirty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsEmpty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsEnumeration ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsGenericAttribute ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsInitInstance ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsMemo (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsModified ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsNewInstance ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsNumeric ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsOldInstance ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsOwner ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsPositioned (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsReadOnly ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsSelected (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsSensitive (string proppath)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsServer ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsShareBaseHandle (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsStructure ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsText (string chkopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsTransient ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsTrue (string proppath)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsTyped ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsUserHandle ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsValid (bool topt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsValidText (string pstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsVariableType ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsWeakTyped ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::IsWrite ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Locate (int obident, bool readopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::LocatePath ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Lock ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::LockSet ()\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::MarkUnused ()\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::MarkUsed ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Minus (\fBPropertyHandle\fP * prophdl1, \fBPropertyHandle\fP * prophdl2, string skopt)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Modify ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Move (\fBPropertyHandle\fP * sourcehandle, string newkey, \fBPIREPL\fP replopt)\fC [private]\fP"
+.PP
+Move with rename. 
+.PP
+The function allows renaming an instance while moving it to the target collection. When the new key does already exist in the target collection the instance is overwritten depending on the replace option. 
+.SS "bool OPI::PropertyHandle::MoveDown ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::MoveUp ()\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::NextKey (string sortkeyw, int switchlevel)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::NoWrite ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Open ()\fC [private]\fP"
+.PP
+Open an undefined property handle. 
+.PP
+The function opens an undefined and unbound property handle. Before using the property handle definition and instance area must be set. 
+.SS "bool OPI::PropertyHandle::OpenBigInt (int int64val)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::OpenBoolean (bool logval)\fC [private]\fP"
+.PP
+Open property handle for a logical value. 
+.PP
+The function opens an unbound property handle for a logical value (LOGICAL). 
+.SS "bool OPI::PropertyHandle::OpenChild (\fBPropertyHandle\fP * prophdl, string proppath)\fC [private]\fP"
+.PP
+Open subordinated property handle. 
+.PP
+The function openes a subordinated property handle of the instance. Since the property handlels for instance properties are part of the instance the function creates a copy handle with an own cursor. It behaves, however, like a normal subordinated property handle, that depends on the selection in the upper property handle (if there is any). 
+.SS "bool OPI::PropertyHandle::OpenChildReference (\fBPropertyHandle\fP * ppropertyhandle, string proppath)\fC [private]\fP"
+.PP
+Open subordinated property handle. 
+.PP
+The constructor provides a subordinated property handle of the instance. Since property handlels for an instance are part of the instance the function provides a property handle that shares area and cursor with the property handle in the instance. As subordinated property handle it depends on the selection in the upper property handle (if there is any). 
+.SS "bool OPI::PropertyHandle::OpenCopy (\fBPropertyHandle\fP * cprophdl)\fC [private]\fP"
+.PP
+Open non sharing copy for a property handle. 
+.PP
+The function opens a copy of the passed property handle with an own cursor and an own instance area. 
+.SS "bool OPI::PropertyHandle::OpenDate (long dateval)\fC [private]\fP"
+.PP
+Open property handle for a date value. 
+.PP
+The function opens an unbound property handle for a date value (DATE). 
+.SS "bool OPI::PropertyHandle::OpenExtent (\fBDBObjectHandle\fP * objecthandle, string extnames, \fBPIACC\fP accopt, bool transientw, string keynamew)\fC [private]\fP"
+.PP
+Open extent property handle. 
+.PP
+The function opens a property handle for a global collection (extent). The extent name passed may contain symbolic references to system variables (e.g. '%EXT_PREF%Pers') which are resolved according to the current setting of the referenced system variables. A key name can be passed to set the sort order for the property handle. If no key is passed the sort order is set to the default order. You may open a transient extent that stores data only in main storage by passing the transient_w option. 
+.SS "bool OPI::PropertyHandle::OpenFloat (float dblvalue)\fC [private]\fP"
+.PP
+Open property handle for a double value. 
+.PP
+The function opens an unbound property handle for a double value (REAL). 
+.SS "bool OPI::PropertyHandle::OpenHierarchy (\fBPropertyHandle\fP * bottomph, \fBPropertyHandle\fP * topph, bool pathopt, \fBPIACC\fP accmode, bool copyselection)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::OpenInteger (int intval)\fC [private]\fP"
+.PP
+Open property handle for a 32-bit integer value. 
+.PP
+The function opens an unbound property handle for a platform independent 32-bit integer value (int32). 
+.SS "bool OPI::PropertyHandle::OpenReference (\fBPropertyHandle\fP * ppropertyhandle)\fC [private]\fP"
+.PP
+Open a sharing copy for a property handle. 
+.PP
+The function opens a copy of the passed property handle that shares the instance area and cursor with its origin. 
+.SS "bool OPI::PropertyHandle::OpenSizedString (string pstring, int stringlen)\fC [private]\fP"
+.PP
+Open property handle for a string value. 
+.PP
+The function opens an unbound property handle for a string value (STRING). The area is set to the string pointer passed to the function. 
+.SS "bool OPI::PropertyHandle::OpenString (string pstring, bool convopt)\fC [private]\fP"
+.PP
+Open property handle for a string value. 
+.PP
+The function opens an unbound property handle for a string value (STRING). The area is allocated with the size of the string passed to the constructor. The string is copied into the instance area owned by the property handle. To enable dynamical resize featur for the property handle use the \fBSetDynLength()\fP function. 
+.SS "bool OPI::PropertyHandle::OpenTime (long timeval)\fC [private]\fP"
+.PP
+OPen property handle for a time value. 
+.PP
+The function opens an unbound property handle for a time value (TIME). 
+.SS "bool OPI::PropertyHandle::OpenTimestamp (long datetimeval)\fC [private]\fP"
+.PP
+Open property handle for a date/time value. 
+.PP
+The function opens an unbound property handle for a date/time value (DATETIME). 
+.SS "bool OPI::PropertyHandle::OwnsData ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Position (int count)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::PositionTop ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Power (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ProvGenAttribute ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Provide (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+Provide instance by property. 
+.PP
+The function checks whether the property handle passes a numerical value or not. When passing a numerical value the function provides an instance at the position according to the number passed in the property handle (-> 'Provide instance at position'). When the property handle contains text data, the value in the property handle is interpreted as string key, which will be converted into key and provides an instance by key value (-> 'Provide instance by key value'). When the property handle refers to a complex instance of the same type or a base type of the current type in the property handle, the instance key in the passed property handle is used for locating the key. 
+.SS "bool OPI::PropertyHandle::ProvideArea ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ProvideAtPosition (int setpos0w)\fC [private]\fP"
+.PP
+Provide instance at position. 
+.PP
+The function tries to provide an instance at a certain position. When no instance exist at the location passed in set_pos_w, the function creates an instance by position (-> \fBAdd()\fP: 'Create Instance at position'). 
+.SS "bool OPI::PropertyHandle::ProvideByKey (string sortkey)\fC [private]\fP"
+.PP
+Provide intsance by key value. 
+.PP
+The function tries to provide an instance with the passed sort key (or ident-key for unordered collections). When no instance exist with the key passed in sort_key, the function creates an instance by key value (-> \fBAdd()\fP: 'Add Instance by key value'). 
+.SS "bool OPI::PropertyHandle::ProvideGlobal (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ProvideGlobalAtPosition (int setpos0w)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ProvideGlobalByKey (string sortkey)\fC [private]\fP"
+.PP
+.SS "string OPI::PropertyHandle::ProvideGUID ()\fC [private]\fP"
+.PP
+.SS "\fBOperationHandle\fP* OPI::PropertyHandle::ProvideOperation (string expression)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Refresh ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ReleaseBuffer ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::RemoveFromCollection ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::RemoveString (string pstring, int position, int len)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::RemoveTerminator (string pstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Rename (string newkey)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::RepairIndex (string keynamew, string attrstrw)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ReplaceString (string oldstr, string newstr)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ReplaceSysVariables ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Reset ()\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::ResetDirty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ResetTransientProperty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ResetWProtect ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::Save (string savopt, bool switchopt)\fC [private]\fP"
+.PP
+.SS "int OPI::PropertyHandle::SearchText (string pstring, int curpos, bool caseopt)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Select (\fBPropertyHandle\fP * prophdlref, string expression)\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::SetActionResult (string resultstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetContextVariables (string contextstring)\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::SetDirty ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetDynLength ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetGenAttribute (string attrstr, string proppath)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetKey (string identkey)\fC [private]\fP"
+.PP
+.SS "void OPI::PropertyHandle::SetModified ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetNormalized (int longval)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetOrder (string keyname, string attrstr)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetSelection (string expression)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetSortKey (string sortkey)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetTransientProperty (\fBPropertyHandle\fP * prophdl)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetType (string strnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetUpdate (bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValue (\fBPropertyHandle\fP * cprophdl, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueBigInt (int int64val, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueBoolean (bool logval, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueDate (long dateval, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueFloat (float dblvalue, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueInteger (int longval, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueString (string pstring, bool pcheckupdate, bool convopt)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueTime (long timeval, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::SetValueTimestamp (long datetimeval, bool pcheckupdate)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetVersion (int versionnr)\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::SetWProtect ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::ToTop ()\fC [private]\fP"
+.PP
+.SS "\fBPropertyHandle\fP* OPI::PropertyHandle::Union (\fBPropertyHandle\fP * prophdl1, \fBPropertyHandle\fP * prophdl2, string skopt, bool distinct)\fC [private]\fP"
+.PP
+Binary union. 
+.PP
+This implementation builds the union from the two collections passed to the operation. The result is stored in the collection referenced by the calling property handle. When the calling property handle refers to a non empty collection all instances are removed before performing the operation. When the calling property handle is empty the function creates a temporary extend for storing the result. 
+.SS "bool OPI::PropertyHandle::Unlock ()\fC [private]\fP"
+.PP
+.SS "bool OPI::PropertyHandle::UnlockSet ()\fC [private]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIICE from the source code.

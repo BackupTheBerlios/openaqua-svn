@@ -1,0 +1,7 @@
+#ifndef __CoaSqlDatabase__
+#define __CoaSqlDatabase__
+
+#include "../db/coasqldatabase.h"
+
+#endif 
+

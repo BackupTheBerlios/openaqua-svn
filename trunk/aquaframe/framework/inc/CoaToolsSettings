@@ -1,0 +1,7 @@
+#ifndef __CoaToolsSettings__
+#define __CoaToolsSettings__
+
+#include "../tools/settings/coatoolssettings.h"
+
+#endif //__CoaToolsSettings__
+

@@ -1,0 +1,7 @@
+#ifndef __CoaVector__
+#define __CoaVector__
+
+#include <QVector>
+#define CoaVector QVector
+
+#endif //__CoaVector__

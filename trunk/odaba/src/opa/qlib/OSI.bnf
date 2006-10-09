@@ -1,0 +1,706 @@
+// The OSI BNF provides two entry points for importing schema definitions (ODL) and for
+// running script files (OSI).
+
+// ODABA Script Interface (OSI)
+// OSI is an ODL/OQL extension, which provides additional features for script interfaces. 
+// OSI supports defining global expressions and variables. When calling an OSI script 
+// whithout entry point, the global expression with the name 'main' is used as entry point. 
+// Parameters passed to the entry point are passed as string parameters in the sequence as defined
+// when calling the script.
+
+OSI                   := [data_source] [debug_info] osi_element(*)
+debug_info            := _debugprocs '=' location ';'
+
+osi_element           := [block_intro(*)] osi_definition [';']
+osi_definition        := type_dcl | view_dcl | osi_class | expr_def
+
+osi_class             := class_header [ osi_class_def ] 
+osi_class_def         := '{' osi_exports(*) '}'  
+osi_exports           := [ comment_block(*) ] osi_export_dcl
+osi_export_dcl        := attr_dcl | ref_dcl | rel_dcl | expr_def
+
+_debugprocs           := 'debugProcedures'  | __debugprocs
+__debugprocs          :: 'DEBUGPROCEDURES'
+
+// ODL Schema 
+// ODL differs between state and behaviour. Usually, an interface describes behaviour, 
+// while a literal (structure or enumeration) describes a state. Classes may define states
+// and behaviour. Inheritance relationship is restricted to behaviour. Thus, classes and
+// interfaces may inherit behaviour from other interfaces but not from a class. Classes
+// may inherit from other classes by EXTENDS relationships, only.
+
+ODL                   := [data_source] sc_element(*)
+data_source           := dictionary | datasource 
+datasource            := [ comment_block(*) ] _datasource '=' location ';'
+dictionary            := [ comment_block(*) ] _dictionary '=' location ';' [database]
+database              := [ comment_block(*) ] _database '=' location ';'
+location              := string | identifier                           // ODABA extension
+
+sc_element            := [block_intro(*)] [update_option] sc_definition ';'
+sc_definition         := mod_definition | schema_dcl 
+schema_dcl            := schema [identifier] '{' sc_element(*) '}' 
+
+// module_dcl    
+mod_definition        := type_dcl | view_dcl | interface_dcl | class_dcl | const_dcl | module_dcl 
+module_dcl            := _module identifier '{' mod_element(*) '}' 
+mod_element           := [block_intro(*)] [update_option] mod_definition ';'
+
+// type_dcl 
+
+type_dcl              := namespace_dcl | type_def | struct_type | union_type | enum_type 
+type_def              := _typedef type_spec [ declarators ]
+
+// namespace_dcl    
+namespace_dcl         := _namespace identifier '{' ns_element(*) '}' 
+ns_element            := [block_intro(*)] [update_option] type_dcl ';'
+update_option         := _new | update                                 // ODABA extension
+
+// structure
+struct_type           := _struct identifier [struct_def]               // ODABA allows forward declarations and references for structures
+struct_def            := '{' member(*) '}'
+
+// union
+union_type            := _union identifier _switch '(' switch_type_spec ')' '{' case_def(*) '}'
+switch_type_spec      := base_int | char_types | boolean_type | enum_type | scoped_name
+case_def              := case_label(*) element_spec ';'
+case_label            := case_inst | default_def
+case_inst             := _case operand ':'
+default_def           := _default ':'
+element_spec          := type_spec declarator
+
+// enumeration
+enum_type             := _enum identifier [base_class] [enum_def]      // ODABA allows forward declarations for enumerations
+base_class            := '(' scoped_name ')'                           // base class for discriminators, ODABA extension
+enum_def              := '{' enumerator(*) '}'
+enumerator            := identifier [ref_type] [ enum_value ] [enum_def] [',']
+ref_type              := '(' scoped_name ')'                           // type for discriminators, ODABA extension
+enum_value            := assign_op number                              // ODABA extension
+
+// const_dcl 
+
+const_dcl             := _const const_type identifier assigned_value
+const_type            := base_int | char_types | boolean_type | string_type | scoped_name
+
+// except_dcl
+
+except_dcl            := _exception exceptions_def
+exceptions_def        := exception_def | exception_specs
+exception_specs       := '{' sexception_spec(*) '}'
+sexception_spec       := exception_def ';'
+exception_def         := identifier '{' [member(*)] '}'
+
+// class_dcl : in contrast to ODL ODABA supports multiple class inheritance via EXTENDS relationship
+
+class_dcl             := class_header [ class_def ] 
+class_def             := '{' exports(*) '}' 
+class_header          := _class identifier [guid] [extends_spec] [inheritance_spec] [type_property_list]
+type_property_list    := '(' type_property(*) ')'
+type_property         := key_spec | extent_spec | alignment_spec
+alignment_spec        := _alignment '=' number ';'
+
+// interface 
+
+interface_dcl         := interface_header [ interface_spec ] 
+interface_spec        := '{' [exports(*)] '}'
+interface_header      := _interface identifier [ inheritance_spec ]
+
+exports               := [ comment_block(*) ] export_dcl
+export_dcl            := type_dcl | const_dcl | attr_dcl | ref_dcl | rel_dcl | except_dcl | method 
+
+// view_dcl is an ODABA specific extension, which combines ODL and OQL elements
+
+view_dcl              := view_header [ view_def ]
+view_def              := '{' view_member(*) '}' 
+view_member           := attr_dcl | ref_dcl | method
+view_header           := _view identifier from_spec [where_spec] [group_spec] [having_spec] [type_property_list]
+from_spec             := _from operand_list 
+where_spec            := _where condition 
+having_spec           := _having condition 
+order_spec            := _order_by '(' scoped_names ')'
+group_spec            := _group_by '(' categories ')'                   // automatically generates 'value' and 'partition' property in the structure
+
+// inheritance_spec and extends_spec, which include some important ODABA extensions (multiple class inheritance,
+// set based relationships)
+
+inheritance_spec      := ':' base_types
+extends_spec          := extends base_types                            // handled as based_on inheritance in ODABA
+base_types            := base_type [base_type_suc(*)]
+base_type_suc         := ',' base_type
+base_type             := [base_option(*)] extended_type_spec [rel_option(*)] [base_declarator]
+base_option           := _virtual | priv_option 
+base_declarator       := identifier [col_ext_rel(*)] 
+
+// extent_spec, which includes substantial extension for ODABA (multiple extents)
+
+extent_spec           := extent extents_def ';'                        // ODABA requires a semicolon, here
+extents_def           := extent_def | extent_specs
+extent_specs          := '{' sextent_spec(*) '}' 
+sextent_spec          := extent_def ';'
+extent_def            := [_transient] identifier [rel_option(*)] [extent_option(*)]
+extent_option         := order_keys | super_sets | sub_sets
+sub_sets              := subset [subset_options(*)] extent_names 
+subset_options        := distinct | complete
+super_sets            := superset [intersect] extent_names
+extent_names          := extent_name [extent_names_suc(*)]
+extent_names_suc      := ',' extent_name
+
+// key_spec
+
+key_spec              := key keys_def ';'                                 // ODABA requires a semicolon, here, instead of comma
+keys_def              := key_def | key_specs
+key_specs             := '{' skey_spec(*) '}' 
+skey_spec             := key_def ';'
+key_def               := [ident_key] identifier [key_components_ext]
+key_components_ext    := key_components | key_components_odmg 
+key_components_odmg   := '(' key_components ')'
+key_components        := key_component [key_component_suc(*)]
+key_component_suc     := ',' key_component
+key_component         := member_path [component_option(*)]
+component_option      := ignore_case | descending
+
+// attribute(s), which include specific ODABA extensions
+
+attr_dcl              := attribute attr_def ';'
+attr_def              := attr_spec | attr_specs
+attr_specs            := '{' sattr_spec(*) '}'
+sattr_spec            := attr_spec ';'
+attr_spec             := type_ref declarators
+
+// reference(s)
+
+ref_dcl               := reference refs_def ';'
+refs_def              := ref_def | ref_specs
+ref_specs             := '{' sref_spec(*) '}'
+sref_spec             := ref_def ';'
+ref_def               := type_ref [ ref_option(*) ] references 
+ref_option            := guid | weak_typed | update | multiple_key | delete_empty 
+references            := ref_declarator [references_suc(*)] 
+references_suc        := ',' ref_declarator
+ref_declarator        := collection [col_ext_ref(*)]
+
+// relationship(s)
+
+rel_dcl               := relationship rels_def ';'
+rels_def              := rel_def | rel_specs
+rel_specs             := '{' srel_spec(*) '}'
+srel_spec             := rel_def ';'
+rel_def               := type_ref [ rel_option(*) ] relationships
+rel_option            := ref_option | owner | no_create | dependent | secondary | shared
+relationships         := rel_declarator [relationships_suc(*)] 
+relationships_suc     := ',' rel_declarator
+rel_declarator        := collection [col_ext_rel(*)]                   // in ODABA optional, but always sugested
+
+// collections 
+
+collection            := identifier [col_dimension] [assigned_value] 
+col_dimension         := '[' [ number ] ']'                                // ODABA extension
+
+col_ext_rel           := inverse_spec | base_collection | col_ext_ref
+inverse_spec          := inverse inverse_traversal_path
+inverse_traversal_path:= identifier [typed_identifier]
+typed_identifier      := scope_op identifier
+base_collection       := based_on base_path
+base_path             := member_path | '*'
+member_path           := extent_name | property_extension(*)
+extent_name           := identifier | any_type
+property_extension    := '.' identifier
+
+col_ext_ref           := order_keys | attr_ext_decl
+attr_ext_decl         := sources | constraint | version
+constraint            := _constraint '(' operand ')'
+sources               := _source operand_list
+version               := _version number
+order_keys            := ordered_by '(' index_specs ')'                        // ODABA extension
+index_specs           := index_spec [index_spec_suc(*)]
+index_spec_suc        := ',' index_spec
+index_spec            := key_name [index_option(*)]
+key_name              := identifier
+index_option          := unique | not_empty | temporary
+
+// operations
+
+meth_dcl              := [oneway] mtype_ref [ref_symbol(*)] meth_ident parameter_dcls [raises_expr] [context_expr]
+meth_ident            := ['~'] scoped_name [ impl_ident ] [cun_op]
+impl_ident            := '.' identifier
+mtype_ref             := [type_ref_options(*)] simple_type_spec
+
+parameter_dcls        := '(' [params_dcl] ')'
+
+raises_expr           := raises '(' scoped_names ')'                   // not supported
+scoped_names          := scoped_name [scoped_name_suc(*)]
+scoped_name_suc       := ',' scoped_name
+
+context_expr          := context '(' string_literals ')'               // not supported
+string_literals       := string_literal [string_literal_suc(*)]
+string_literal_suc    := ',' string_literal
+string_literal        := string
+
+// members, parameter declarations, parameters, categories, declarators
+
+members               := member(*)
+member                := [_global] type_spec declarators ';'
+
+params_dcl            := param_dcl [param_dcl_suc(*)]
+param_dcl_suc         := ',' param_dcl
+param_dcl             := [param_attribute] simple_type_spec declarator
+param_attribute       := in | out | inout
+
+parm_list             := parameter [parm_ext(*)]
+parm_ext              := ',' parameter
+parameter             := parm_spec | operand | '*'
+parm_spec             := [simple_type_spec] [ref_symbol(*)] identifier [fixed_array_size(*)] assigned_value
+
+categories            := category_list | operand
+category_list         := category_spec [category_ext(*)]
+category_ext          := ',' category_spec
+category_spec         := cat_name [ cat_condition ]
+cat_condition         := ':' operand
+cat_name              := identifier | string | number
+
+declarators           := declarator [declarator_suc(*)]
+declarator_suc        := ',' declarator
+declarator            := [ref_symbol(*)] identifier [fixed_array_size(*)] [assigned_value] [attr_ext_decl(*)]
+ref_symbol            := '*' | '&'
+fixed_array_size      := '[' size_spec ']'
+size_spec             := size [ dimension ]
+size                  := number
+dimension             := ',' number
+assigned_value        := assign_op operand
+
+// type_ref, which includes ODMG 3.0 as subset (common definition) 
+
+type_ref              := [type_ref_options(*)] domain_type             // ODABA extension
+type_ref_options      := priv_option | prop_option
+prop_option           := _static | _collection | _transient | _virtual | not_empty   // ODABA extension
+priv_option           := _private | _public | _protected               // ODABA extension
+domain_type           := simple_type_spec| struct_type | enum_type 
+
+// type_spec 
+
+type_spec             := simple_type_spec | constr_type_spec
+constr_type_spec      := struct_type | union_type | enum_type
+
+simple_type_spec      := base_type_spec | extended_type_spec
+base_type_spec        := floating_pt_type | integer_type | char_len_types | boolean_type | octet_type | date_type | time_type | timestamp_type | bit_type | binary_type | any_type
+extended_type_spec    := array_type | gstring_type | coll_type | interval_type | generic_type | scoped_name
+
+array_type            := array_spec '<' simple_type_spec [array_dim] '>'
+array_spec            := array | sequence
+array_dim             := [','] number
+
+gstring_type          := string_type string_size
+string_size           := '<' number '>'
+
+coll_type             := dict_coll | coll_coll
+coll_coll             := coll_spec '<' simple_type_spec '>'
+coll_spec             := set | list | bag
+dict_coll             := _dictionary '<' simple_type_spec ',' simple_type_spec '>'
+
+interval_type         := interval '<' simple_type_spec '>'
+
+generic_type          := identifier gentype_parm                       // ODABA extension
+gentype_parm          := gentype_parm_new | gentype_parm_old           // ODABA extension
+gentype_parm_new      := '<' simple_type_spec '>'                      // ODABA extension
+gentype_parm_old      := '(' simple_type_spec ')'                      // ODABA extension
+
+// basic types 
+
+char_len_types        := char_types [ len_spec ]
+len_spec              := '(' size ')'                                  // ODABA extension
+char_types            := char_type | string_type | coded_type | wstring_type
+
+integer_type          := [_unsigned] int_types 
+int_types             := base_int | int_spec
+base_int              := short_int | long_int | long_long_int
+long_long_int         := long_int long_int
+int_spec              := int_type [int_size]                           // ODABA extension
+int_size              := '(' size [','] [precision_val] ')'            // ODABA extension
+precision_val         := number                                        // ODABA extension
+
+// base types
+date_type             := 'date'         | __date_type
+__date_type           :: 'DATE'
+time_type             := 'time'         | __time_type
+__time_type           :: 'TIME'
+timestamp_type        := 'Timestamp'    | 'datetime' | __timestamp_type
+__timestamp_type      :: 'DATETIME'
+coded_type            := 'coded'        | __coded_type                 // ODABA extension
+__coded_type          :: 'CODED'        | 'CCHAR'            
+string_type           := 'string'       | __string_type                // ODABA extension
+__string_type         :: 'STRING'       | 'MEMO'
+wstring_type          := 'wstring'      | __wstring_type               // ODABA extension
+__wstring_type        :: 'WSTRING'           
+
+char_type             :: 'char'         | 'CHAR'  | 'int8'
+floating_pt_type      :: 'double'       | 'float' | 'real' | 'REAL'
+boolean_type          :: 'boolean'      | 'bool'  | 'BOOL' | 'logical' | 'LOGICAL'
+any_type              :: 'any' | 'void' | 'VOID'  | 'ANY'                             
+bit_type              :: 'bit'          | 'BIT'                        // ODABA extension
+short_int             :: 'int16'        | 'SHORT' | 'short'  
+long_int              :: 'int32'        | 'LONG'  | 'long'
+int_type              :: 'int'          | 'INT'   | 'DEC'              // ODABA extension
+_unsigned             :: 'unsigned'     | 'UNSIGNED'
+octet_type            :: 'octet'                                       //not supported in ODABA
+binary_type           :: 'binary'       | 'BINARY' | 'BLOB'            // ODABA extension
+
+//   standard key words
+_exception            := 'exception'    | __exception
+__exception           :: 'EXCEPTION'
+_include              := 'include'      | __include
+__include             :: 'INCLUDE'
+_private              := 'private'      | __private
+__private             :: 'PRIVATE'
+_protected            := 'protected'    | __protected
+__protected           :: 'PROTECTED'
+_public               := 'public'       | __public
+__public              :: 'PUBLIC'
+_static               := 'static'       | __static
+__static              :: 'STATIC'       | '__cdecl'
+_virtual              := 'virtual'      | __virtual
+__virtual             :: 'VIRTUAL'
+_transient            := 'transient'    | __transient
+__transient           :: 'TRANSIENT'
+_new                  :: 'new'          | 'NEW'
+_typedef              :: 'typedef'      | 'TYPEDEF'
+_enum                 :: 'enum'         | 'ENUM'
+_struct               :: 'struct'       | 'STRUCT'
+_union                :: 'union'        | 'UNION'
+_switch               :: 'switch'       | 'SWITCH'
+_case                 :: 'case'         | 'CASE'
+_default              :: 'default'      | 'DEFAULT' | 'other' | 'OTHER'
+_interface            := 'interface'    | _interface_
+_interface_           :: 'INTERFACE'
+_view                 := 'view'         | __view
+__view                :: 'VIEW'
+_module               := 'module'       | __module
+__module              :: 'MODULE'
+_namespace            := 'namespace'    | __namespace
+__namespace           :: 'NAMESPACE'
+_const                :: 'const'        | 'CONST'
+_class                := 'class'        | __class
+__class               :: 'CLASS'
+extends               := 'extends'      
+__extends             :: 'EXTENDS'
+in                    := 'in'           | __in
+__in                  :: 'IN'
+out                   := 'out'          | __out
+__out                 :: 'OUT'
+inout                 := 'inout'        | __inout
+__inout               :: 'INOUT'
+oneway                := 'oneway'       | __oneway                     // not supported in ODABA
+__oneway              :: 'ONEWAY'                     
+raises                := 'raises'       | __raises
+__raises              :: 'RAISES'
+
+array                 := 'array'        | __array
+__array               :: 'ARRAY'
+sequence              := 'sequence'     | __sequence
+__sequence            :: 'SEQUENCE'
+set                   := 'set'          | __set
+__set                 :: 'SET'
+list                  := 'list'         | __list
+__list                :: 'LIST'
+bag                   := 'bag'          | __bag
+__bag                 :: 'BAG'
+_dictionary           := 'dictionary'   | __dictionary
+__dictionary          :: 'DICTIONARY'
+attribute             := 'attribute'    | ___attribute
+___attribute          :: 'ATTRIBUTE'
+relationship          := 'relationship' | __relationship
+__relationship        :: 'RELATIONSHIP'
+reference             := 'reference'    | __reference
+__reference           :: 'REFERENCE'
+_collection           := 'collection'   | __collection
+__collection          :: 'COLLECTION'
+inverse               := 'inverse'      | __inverse
+__inverse             :: 'INVERSE'
+extent                := 'extent'       | __extent
+__extent              :: 'EXTENT'
+key                   := 'key' | 'keys' | __key
+__key                 :: 'KEY' | 'KEYS'
+context               := 'context'      | __context
+__context             :: 'CONTEXT'
+
+_select               :: 'Select'       | 'SELECT'
+_from                 :: 'From'         | 'FROM'
+_where                :: 'Where'        | 'WHERE' 
+_having               :: 'Having'       | 'HAVING'
+_join                 :: 'Join'         | 'JOIN'
+_minus                :: 'Minus'        | 'MINUS'
+_intersect            :: 'Intersect'    | 'INTERSECT'
+_group_by             :: 'GroupBy'      | 'GROUP_BY'
+_order_by             :: 'OrderBy'      | 'ORDER_BY'
+_tofile               :: 'ToFile'       | 'TO_FILE'
+_todb                 :: 'ToDatabase'   | 'TO_DATABASE'
+_use                  :: 'Use'          | 'USE'
+
+//    ODABA keyword extensions 
+_database             := 'database'         | __database
+__database            :: 'DATABASE'
+_datasource           := 'datasource'       | __datasource
+__datasource          :: 'DATASOURCE'
+schema                := 'schema'       | __schema
+__schema              :: 'SCHEMA'
+update                := 'update'       | __update
+__update              :: 'UPDATE'
+multiple_key          := 'multiple_key' | __multiple_key
+__multiple_key        :: 'MULTIPLE_KEY'
+no_create             := 'no_create'    | __no_create
+__no_create           :: 'NO_CREATE'
+ordered_by            := 'ordered_by'   | __ordered_by
+__ordered_by          :: 'ORDERED_BY'
+unique                := 'unique'       | __unique
+__unique              :: 'UNIQUE'
+not_empty             := 'not_empty'    | __not_empty
+__not_empty           :: 'NOT_EMPTY'
+temporary             := 'temporary'    | __temporary
+__temporary           :: 'TEMPORARY'
+guid                  := 'guid'         | __guid
+__guid                :: 'GUID'
+weak_typed            := 'weak_typed'   | __weak_typed
+__weak_typed          :: 'WEAK_TYPED'
+owner                 := 'owner'        | __owner
+__owner               :: 'OWNER'
+shared                := 'shared'        | __shared
+__shared              :: 'SHARED'
+dependent             := 'dependent'    | __dependent
+__dependent           :: 'DEPENDENT'
+secondary             := 'secondary'    | __secondary
+__secondary           :: 'SECONDARY'
+based_on              := 'based_on'     | __based_on
+__based_on            :: 'BASED_ON'
+subset                := 'subset'       | __subset
+__subset              :: 'SUBSET'
+superset              := 'superset'     | __superset
+__superset            :: 'SUPERSET'
+ident_key             := 'ident_key'    | __ident_key
+__ident_key           :: 'IDENT_KEY'
+complete              := 'complete'     | __complete
+__complete            :: 'COMPLETE'
+distinct              := 'distinct'     | __distinct
+__distinct            :: 'DISTINCT'
+intersect             := 'intersect'    | __intersect
+__intersect           :: 'INTERSECT'
+ignore_case           := 'ignore_case'  | __ignore_case
+__ignore_case         :: 'IGNORE_CASE'
+descending            := 'descending'   | __descending
+__descending          :: 'DESCENDING'
+interval              := 'interval'     | __interval
+__interval            :: 'INTERVAL'
+_constraint           := 'constraint'   | __constraint
+__constraint          :: 'CONSTRAINT'
+_alignment            := 'alignment'   | __alignment
+__alignment           :: 'ALIGNMENT'
+delete_empty          := 'delete_empty' | __delete_empty
+__delete_empty        :: 'DELETE_EMPTY'
+_source              := 'source' | __source
+__source             :: 'SOURCE'
+_version              := 'version' | __version
+__version             :: 'VERSION'
+
+// OQL specifications ...
+OQLExpression         := [meth_dcl] expr_code [';']
+
+// method definitions
+method                := [block_intro(*)] method_spec
+method_spec           := doc_template | expression | cpp_function | window | control
+
+block_intro           := comment_block | pragma | member | file_reference
+file_reference        := _include string  ';' 
+pragma                := '#' multiple_line 
+
+// document templates  (das geht so einfach nicht !!!)
+
+doc_template          := '<template>' dct_header [dct_variables] [ dct_spec ] '</template>'
+dct_header            := '<header>' meth_dcl '</header>'
+dct_variables         := '<variables>' member(*) '</variables>'
+dct_spec              := fixed_text | extended_text(*)
+fixed_text            := anychar(*)
+extended_text         := [fixed_text] imbedded_expr
+imbedded_expr         := comp_expr | output_expr
+output_expr           := '<:' expr_element(*) ':>'
+comp_expr             := '<%' expr_element(*) '%>'
+expr_element          := member | statement
+
+// expressions: entry points: OQLExpression, expression
+
+expression            := _expression expr_spec
+expr_spec             := expr_dcl | expr_def
+expr_dcl              := meth_dcl ';'
+expr_def              := meth_dcl expr_code [';']
+// expr_code kommt weiter hinten
+var_defs              := _variables [ member(*) ]
+init_code             := _init [ statement(*) ]
+proc_code             := [ _process ] statement(*)
+error_code            := _on_error [ statement(*) ]
+final_code            := _final [ statement(*) ]
+
+
+// OQL SELECT statement
+OQLSelect             := sel_spec from_spec [sel_extensions(*)] [output_spec]
+sel_spec              := _select operand_list
+sel_extensions        := where_spec | having_spec | group_spec | order_spec
+
+output_spec           := to_file | to_database
+to_file               := _tofile operand_list   // ToFile( Path=Console, FieldSeparator=',', StringSeparator='"', LineSeparator=10,, HeadLine=YES )
+to_database           := _todb operand_list     // ToDatabase ( Datasource='Output',  Extent=SelectedPersons )
+
+// simplified C++ function specification (for import/export, only)
+
+cpp_function          := funct_dcl | funct_def
+funct_dcl             := meth_dcl ';'
+funct_def             := meth_dcl function_text [';']
+function_text         := [ ini_code ] function_block
+ini_code              := ':' ini_line(*)
+ini_line              := blockstring | string | comment_block 
+function_block        := '{' [fct_line(*)] '}'
+fct_line              := comment_block | function_block | string | blockstring | _process | _on_error | _final 
+
+// window definition (not yet implemented
+window                := _window identifier [';']
+
+// control definition (not yet implemented
+control               := _control identifier [';']
+
+// general OQL symbols
+
+if_block              := _if condition bstatement [ else_stmt ]  
+else_stmt             := [debug_opt] _else bstatement
+while_block           := _while condition bstatement  
+for_block             := _for '(' basic_stmt basic_stmt stmt_operlist ')' bstatement  
+case_block            := _switch condition  '{' [ case_stmt(*) ] [ other_stmt ] '}'
+case_stmt             := [debug_opt] _case simple_op ':' statement(*)
+other_stmt            := [debug_opt] _default ':' statement(*)
+condition             := '(' doperand ')'                   // condition sollte operand_list sein, mehrere Werte zulassen
+bstatement            := block | statement
+statement             := [debug_opt] istatement
+
+istatement            := basic_stmt | if_block | case_block | while_block | for_block | syntax_op | ';'
+basic_stmt            := stmt_operlist ';' 
+stmt_operlist         := doperand [stoplist_ext(*)] 
+stoplist_ext          := ',' doperand
+doperand              := [debug_opt] operand 
+
+debug_opt             := '#' [ auto_run ]
+auto_run              := ':' identifier
+
+syntax_op             := return_op | error_op | leave_op | continue_op | break_op | exception_op | nv_op | eh_op
+return_op             := _return [operand] ';'
+error_op              := _error  [operand] ';'
+eh_op                 := _exceptions [operand] ';'
+nv_op                 := _null_value [operand] ';'
+nv_handling           := _accept | _ignore | _exception
+exception_op          := _exception [operand] ';'
+leave_op              := _leave_ ';'
+break_op              := _break ';'
+continue_op           := _continue ';'
+
+// acess_path (refers to expr_code, statement)
+
+access_path           := path_element [ path_extension(*) ]
+path_extension        := ext_op path_element 
+ext_op                := '.' | '@' | '->'
+path_element          := path_operand [ operand_list ]
+path_operand          := path_name | coll_operand | expr_code 
+path_name             := pname [ name_index ]
+
+oql_oper              := _select | _from | _where | _having | _group_by | _order_by | _join | _union | _minus | _intersect | _tofile | _todb | _use
+name_index            := '[' operand ']'
+coll_operand          := '[' access_path ']'
+operand_list          := '(' [parm_list] ')' 
+
+operand               := un_operation [ bin_operand ] 
+bin_operand           := bin_op operand 
+un_operation          := [un_oper] simple_op	
+un_oper               := un_op | cast_op
+cast_op               := '(' simple_type_spec ')'
+simple_op             := OQLSelect | access_path | block | sngl_operand | constant | sys_variable	
+sngl_operand          := '(' operand ')'
+sys_variable          := '%' identifier '%'
+
+// names
+pname                 := oql_oper | scoped_name | db_name | any_type
+scoped_name           := identifier [ scoped_name_ext(*) ]
+scoped_name_ext       := scope_op identifier
+db_name               := '#' identifier
+identifier            := name
+
+// block und expr_code müssen hier liegen, damit statement nicht zu früh kommt
+expr_code             := '{' [var_defs] [init_code] proc_code [error_code] [final_code] '}' 
+block                 := '{' [ statement(*) ] '}'			
+
+// OQL keywords
+
+_global               := 'global'     | __global
+__global              :: 'GLOBAL'
+_expression           := 'expression' | _expression_
+_expression_          :: 'EXPRESSION'
+_window               := 'window'     | __window
+__window              :: 'WINDOW'
+_control              := 'control'    | __control
+__control             :: 'CONTROL'
+_variables            := 'variables'  | __variables
+__variables           :: 'VARIABLES'
+_init                 := 'init'       | __init
+__init                :: 'INIT'
+_process              := 'process'    | __process
+__process             :: 'PROCESS'    | 'BEGINSEQ'
+_on_error             := 'on_error'   | __on_error
+__on_error            :: 'ON_ERROR'   | 'RECOVER'
+_final                := 'final'      | __final
+__final               :: 'FINAL'      | 'ENDSEQ'
+
+_if                   :: 'if'         | 'IF'
+_else                 :: 'else'       | 'ELSE'
+_while                :: 'while'      | 'WHILE'
+_for                  :: 'for'        | 'FOR'
+_continue             :: 'continue'   | 'CONTINUE'
+_leave_               :: 'leave'      | 'LEAVE'
+_break                :: 'break'      | 'BREAK'
+_error                :: 'error'      | 'ERROR'
+_return               :: 'return'     | 'RETURN'
+_null_value           :: '#NullValue' | '#NULLVALUE'
+_exceptions           :: '#Exceptions'| '#EXCEPTIONS'
+_ignore               := 'ignore'     | __ignore
+__ignore              :: 'IGNORE'
+_accept               := 'accept'     | __accept
+__accept              :: 'ACCEPT'
+
+scope_op              := '::' 
+cun_op                := '++' | '--' | _not | bin_op 		
+un_op                 := '--' | '++' | '-' | _not 	
+bin_op                := bin_assign_op | '^' | '%' | '+' | '-' | '*' | '/' | _and | _or | _xor | '>' | '<' | '<<' | '>>' | '==' | '<=' | '>=' | '<>' | '!=' | '=' | assign_op
+assign_op             := '=' | '&='  
+bin_assign_op         := '+=' | '-=' | '*=' | '/='
+
+_not                  := _not_kw | '!'  
+_and                  := _and_kw | '&&' 
+_or                   := _or_kw  | '||'
+_not_kw               :: 'not' | 'NOT' 
+_and_kw               :: 'and' | 'AND' 
+_or_kw                :: 'or'  | 'OR'  
+_xor                  :: 'xor' | 'XOR'
+
+// OQL specifications END
+
+// comment line characters
+CC                    := '//'
+comment_block         := '/' '*' comment_next
+comment_next          := comment_end | comment_cont
+comment_cont          := anychar comment_next
+comment_end           := '*' '/'
+
+// bnf references
+
+std_symbols          ::= class(BNFStandardSymbols)
+spec_symbols         ::= class(BNFSpecialSymbols)
+name                 ::= ref(std_name)
+number               ::= ref(std_integer)
+std_float            ::= ref(std_float)
+std_bool             ::= ref(std_bool)
+string               ::= ref(std_string)
+constant             ::= ref(std_constant)
+blockstring          ::= ref(spec_block)
+anychar              ::= ref(std_anychar)
+multiple_line        ::= ref(spec_line)
+nl                   ::= ref(std_nl)

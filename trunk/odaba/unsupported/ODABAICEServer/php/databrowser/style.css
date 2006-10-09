@@ -1,0 +1,14 @@
+#items{
+border: 1px solid black;
+padding: 2em;
+width: 15em;
+height: 30em;
+overflow:scroll;
+float:left;
+}
+#attributes {
+  border: 1px solid blue;
+  padding: 3em;
+ // width: 25em;
+  float:left;
+}

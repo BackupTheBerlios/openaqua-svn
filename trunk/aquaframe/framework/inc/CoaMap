@@ -1,0 +1,7 @@
+#ifndef __CoaMap__
+#define __CoaMap__
+
+#include <QMap>
+#define CoaMap QMap
+
+#endif //__CoaMap__

@@ -1,0 +1,6 @@
+#ifndef __CoaHBoxLayout__
+#define __CoaHBoxLayout__
+
+#include "../base/coahboxlayout.h"
+
+#endif //__CoaHBoxLayout__

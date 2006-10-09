@@ -1,0 +1,83 @@
+<group>
+    <request>
+        <messageHeader header_version="1" sequence_number="0"
+message_length="141" message_type="0xC024
+(messageBodyComplexChargingControl)">
+            <messageBodyComplexChargingControl message_version="1"
+message_sub_type="0x000B (reqRateOnCounterValues)"
+num_attribute_groups="5">
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0008 (counterValues)" attribute_group_size="44">
+                    <counterValues num_counter_sets="1">
+                        <counterValuesCounterSet counter_set_id="12345"
+counter_set_purchase_context_type_id="1"
+counter_set_purchase_context_id="12345"
+counter_set_usage_context_id="4857" purchase_date="2005-08-
+29/10:00:55" num_counters="1">
+                            <counterValuesCounter counter_id="4321"
+counter_type="54321" counter_role="3" ref_counter="0" value="10" />
+                        </counterValuesCounterSet>
+                    </counterValues>
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0002 (subscriberDescription)"
+attribute_group_size="14">
+                    <subscriberDescription tariff_owner="1"
+tariff_number="5657" prepay_indicator="0" wholesale_partner_id="1"
+is_tax_exempt="0" />
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0003 (serviceDescription)"
+attribute_group_size="30">
+                    <serviceDescription
+usage_interval_begin="1970-01-01/00:00:00"
+usage_interval_end="1970-01-01/00:00:00" vas_code_service="DUC"
+vas_code_group="E10101" units="1" />
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0009 (resultConfiguration)"
+attribute_group_size="5">
+                    <resultConfiguration currency_code="EUR"
+accuracy="6" />
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x000A (refTime)" attribute_group_size="4">
+                    <refTime ref_timestamp="2005-10-06/00:00:00" />
+                </attributeGroupHeader>
+            </messageBodyComplexChargingControl>
+        </messageHeader>
+    </request>
+    <response>
+        <messageHeader header_version="1" sequence_number="0"
+message_length="178" message_type="0xC024
+(messageBodyComplexChargingControl)">
+            <messageBodyComplexChargingControl message_version="1"
+message_sub_type="0x000C (resRateOnCounterValues)"
+num_attribute_groups="4">
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x000C (balanceDelta)" attribute_group_size="12">
+                    <balanceDelta customer_amnt_net="1001000"
+customer_amnt_gro="1161160" wholesale_prt_amnt_net="0" />
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x000D (counterDelta)" attribute_group_size="2">
+                    <counterDelta num_counter_set_delta="0" />
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0006 (taxInformation)"
+attribute_group_size="26">
+                    <taxInformation num_taxes="1">
+                        <taxInformationTax tax_value="160160"
+tax_rate="1600" tax_type="VAT" />
+                    </taxInformation>
+                </attributeGroupHeader>
+                <attributeGroupHeader attribute_group_version="1"
+attribute_group_type="0x0004 (tariffAndChargeInformation)"
+attribute_group_size="100">
+                    <tariffAndChargeInformation tariff_info=""
+charge_info="" />
+                </attributeGroupHeader>
+            </messageBodyComplexChargingControl>
+        </messageHeader>
+    </response>
+</group>

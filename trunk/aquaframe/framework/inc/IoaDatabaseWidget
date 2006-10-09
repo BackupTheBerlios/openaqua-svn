@@ -1,0 +1,8 @@
+#ifndef __IoaDatabaseWidget__
+#define __IoaDatabaseWidget__
+
+#include "../db/ioadatabasewidget.h"
+
+
+#endif // __IoaDatabaseWidget__
+

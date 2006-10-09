@@ -1,0 +1,4 @@
+#ifndef __CoaTreeView__
+#define __CoaTreeView__
+#include "../widgets/coatreeview.h"
+#endif //__CoaTreeView__

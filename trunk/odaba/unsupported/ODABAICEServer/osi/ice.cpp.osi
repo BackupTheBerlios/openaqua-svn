@@ -1,0 +1,98 @@
+
+BOOL DB2IfCPP(){
+VARIABLES
+	GLOBAL     FileHandle docFile;
+	STRING     fname  = 'e:/OdabaI.cpp';
+	BOOL       cond = true;
+	SET<ODC_ImpClass> &classes = ODC_ImpClass();
+	SET<ODC_PFuncions> &functions = classes.pfunctions;
+	int        impcount;
+	STRING     retval,retvalcpp,retvalice,parameters,cparameters,pcparameters,tcparameters, member;
+	STRING funct,paramprefix,retname;
+	STRING ptype,pname,pdbtype,precast,retcast,rlevel,frlevel,cppcall,preTC;
+PROCESS
+	if ( docFile.IsOpened() )
+		Message('Warning: File aleady opened - reopened'); 
+	if ( !(cond = !docFile.Open(fname)) )
+		Message('Error  : File '+fname+'could not be opened');
+	classes = ODC_ImpClass();
+	docFile.Out("#include <OdabaI.h>\n");
+	docFile.Out("#include <Ice/Ice.h>\n");
+	docFile.Out("using namespace std;\n");
+//********************  sameforall *****************************/
+	while(classes.Next()){
+		Message(classes.sys_ident);
+		member = "";
+		while(classes.pfunctions.Next()){
+			//Message(" " + classes.pfunctions.sys_ident + " [" + classes.pfunctions.inter_face + "]");
+			if(classes.pfunctions.GetCount() && classes.pfunctions.inter_face){
+				impcount=0;
+				while(classes.pfunctions.implementations.Next()){
+				//Message("  " + classes.pfunctions.implementations.sys_ident + " " + classes.pfunctions.implementations.inter_face);
+				if(classes.pfunctions.implementations.inter_face){
+//******************** /sameforall *****************************/
+					retval    = classes.pfunctions.ddetype;
+					frlevel   = classes.pfunctions.reference_level;
+					retvalice = CE2ICEType(retval);
+					retvalcpp = ICE2CPPType(retvalice);
+					fname     = classes.pfunctions.sys_ident;
+					Message(" " + fname);
+					if(impcount>0){
+						fname += Name2ICE(classes.pfunctions.implementations.sys_ident);
+					}
+					//function definition 
+					funct = "\n/*" + retval + "|" + retvalice + "|" + retvalcpp + "*/\n";
+					funct+= "\n" + retvalcpp + "\n" + classes.sys_ident + "I::" + fname + "(\n";
+					paramprefix = "  ";parameters = "";cparameters = "";pcparameters="";
+					//parameters (to function)
+					while(classes.pfunctions.implementations.parameters.Next()){
+						pdbtype =    classes.pfunctions.implementations.parameters.ddetype;
+						ptype   =    CE2ICEType(pdbtype);
+						pname   =    Name2ICE(classes.pfunctions.implementations.parameters.sys_ident);
+						rlevel  =    classes.pfunctions.implementations.parameters.reference_level;
+						//Interface Parameter
+						parameters+= ICECPPParameter(paramprefix, ptype, pname);
+						//generated call parameter
+						tcparameters = ICECPPCallParameter(paramprefix, pdbtype, ptype, pname, rlevel);
+						//possibly casted items
+						precast = ICECPPCallParameterCast(pdbtype, pname, rlevel);
+						if(precast){
+							// if something needs to get casted create
+							// a different parameter for the generated call
+							pcparameters+=precast;
+
+							tcparameters = ICECPPCallParameter(paramprefix, pdbtype, ptype, "TC"+pname, rlevel);
+						}
+						// create the call parameter 
+						cparameters+=tcparameters;
+						if(paramprefix=="  "){
+							paramprefix = ", "; 
+						}
+					}
+					funct+= parameters;
+					funct+= ICECPPDefaultParameter(paramprefix);
+					// function body join everything together
+					funct+= "){\n";
+					
+					funct+= "\t//casts of parameters\n" + pcparameters + "\n";
+					//funct+= "\tcout << \"" + classes.sys_ident + "I::" + fname + "\" <<endl;//debug\n";
+					cppcall = CPPCall(classes.sys_ident, classes.pfunctions.sys_ident,cparameters);
+					funct+= CPPReturnCall(retval,retvalice,retname,frlevel,cppcall);
+					funct+= "\n}\n";
+					impcount+=impcount+1;					
+					//member+= funct;
+					docFile.Out(funct);
+				}}
+			}
+		}
+		if(member!=""){
+			docFile.Out("\n/************************************/\n");
+			docFile.Out("//" + classes.sys_ident + "I : virtual public Odaba::" + classes.sys_ident + ", public ::" + classes.sys_ident + "\n");
+			docFile.Out(member);
+			docFile.Out("\n/***************************************/\n");
+		}
+   
+	}
+	docFile.Close();
+	FINAL 
+}

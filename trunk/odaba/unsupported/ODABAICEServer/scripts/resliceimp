@@ -1,0 +1,4 @@
+#!/bin/sh
+echo creating ICE bases from SLICE definitions creating empty implementations into src/gen directory
+
+slice2cpp ice/Odaba.ice --impl --output-dir src/gen/

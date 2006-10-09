@@ -1,0 +1,7 @@
+#ifndef __CoaBorderLayout__
+#define __CoaBorderLayout__
+
+#include "../base/coaborderlayout.h"
+
+#endif //__CoaBorderLayout__
+

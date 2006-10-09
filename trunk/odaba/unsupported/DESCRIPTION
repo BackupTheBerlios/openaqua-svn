@@ -1,0 +1,5 @@
+    
+    
+    * OGUI Object Graphical User Interface. Used to create Userinterfaces with data connections and cover the nessesary stores and reads from the programmer
+    * ODCP Interface to Database Generated User Interfaces. Covers the connection between ogui and oadi applications that need access to gui events
+    * OPIICE Uses ICE to export OPI functions to other Applications. The descriptions cover the accessible and exported functions.

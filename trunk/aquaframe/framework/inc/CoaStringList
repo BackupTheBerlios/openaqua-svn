@@ -1,0 +1,7 @@
+#ifndef __CoaStringList__
+#define __CoaStringList__
+
+#include <QStringList>
+#define CoaStringList QStringList
+
+#endif //__CoaStringList__

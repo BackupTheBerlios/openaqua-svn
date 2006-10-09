@@ -1,0 +1,7 @@
+#ifndef __CoaStyle__
+#define __CoaStyle__
+
+#include "../base/coastyle.h"
+
+#endif //
+

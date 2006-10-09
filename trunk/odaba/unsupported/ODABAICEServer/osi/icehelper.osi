@@ -1,0 +1,371 @@
+LOGICAL IsICEProxy(STRING ICEType){
+VARIABLES
+STRING ttype;
+PROCESS
+  ttype = ICEType;
+  return !(  (ttype == "int")
+           ||(ttype == "float")
+           ||(ttype == "long")
+           ||(ttype == "string")
+           ||(ttype == "bool")
+           ||(ttype == "void")
+           ||(ttype == "PIACCESSMODES")
+           ||(ttype == "PIREPLACEMODES")
+           ||(ttype == "PIADEF")
+           ||(ttype == "ResourceTypes")
+           ||(ttype == "ApplicationTypes")
+          );
+}
+
+STRING CE2ICEType(STRING CEType){
+     switch(CEType){
+       case "INT": 
+       		return "int";
+       case "int": 
+       		return "int";
+       case "UINT": 
+       		return "int";
+       case "LOGICAL":
+       		return "bool";
+       case "Instance":
+       		return "bool";
+       case "Key":
+       		return "string";
+       case "CHAR":
+       		return "string";
+       case "STRING":
+       		return "string";
+       case "PIACC":
+       		return "PIACCESSMODES";
+       case "PIREPL":
+       		return "PIREPLACEMODES";
+       case "PIADEF":
+       		return "PIADEFMODES";
+       case "ResourceTypes":
+       		return "ResourceTypes";
+       case "ApplicationTypes":
+       		return "ApplicationTypes";
+       case "":
+       		return "void";
+       case "REAL":
+       		return "float";
+       case "dttm":
+       		return "long";
+       case "dbtm":
+       		return "long";
+       case "dbdt":
+       		return "long";
+       default: 
+       		return CEType;      		
+     }
+}
+
+STRING CE2ICEDefinition(STRING CEType, STRING rlevel, STRING name){
+VARIABLES
+	STRING ttype;
+PROCESS
+	//if(CEType == "CHAR" && rlevel == "RL_direct")
+	//	return "bool";
+	ttype = CE2ICEType(CEType);
+	if (   ttype !="int" 
+	    && ttype != "ResourceTypes" 
+	    && ttype != "ApplicationTypes" 
+	    && ttype == CEType)
+		return CEType + "*";
+	return ttype;
+}
+
+STRING ICE2CPPType(STRING name){
+	// remove *
+	switch ( name ){
+	case "string": return "::std::string";
+	case "int": return "::Ice::Int";
+	case "long": return "::Ice::Long";
+	case "float": return "::Ice::Float";
+	case "bool": return "bool";
+	case "void": return "void";
+	case "PIACCESSMODES": return "::Odaba::PIACCESSMODES";
+	case "PIREPLACEMODES": return "::Odaba::PIREPLACEMODES";
+	case "PIADEFMODES": return "::Odaba::PIADEFMODES";
+	case "ResourceTypes": return "::Odaba::ResourceTypes";
+	case "ApplicationTypes": return "::Odaba::ApplicationTypes";
+	
+	case "": return "void";
+	default: return "::Odaba::" + name + "Prx";
+	}	
+}
+// create a parameter for cpp and hpp (without prefix handling)
+STRING ICE2CPPTypeParameter(STRING name, STRING type){
+VARIABLES
+	STRING ttype;
+PROCESS
+	ttype = ICE2CPPType(type);
+	if(IsICEProxy(type))
+		return "const ::Odaba::" + type + "Prx& " + name;
+	if(type=="string")
+		return "const "+ttype+"& " + name ;
+	return ttype + " " + name;
+}
+
+STRING ICE2CPPReturn(STRING type, STRING name, STRING value){
+	// remove *
+	switch ( name ){
+	case "string": return "return ::std::string(" + value + ");";
+	case "void": return "";
+	case "long": 
+		if(type=="dttm" || type=="dbdt" || type=="dbtm")
+			return "return "+value+".ToUnix();";
+		return "return "+value+";";
+		break;
+	case "": return "";
+	// map to enum!
+//	case "PIACCESSMODES": return "return "+value+";";
+//	case "PIREPLACEMODES": return "return "+value+";";
+//	case "PIADEFMODES": return "return "+value+";";
+//	case "ResourceTypes": return "return "+value+";";
+
+	default: return "return "+value+";";
+	}	
+}
+// cast a cpp call
+STRING ICE2CPPCast(STRING type,STRING name,STRING rlevel){
+	// remove *
+	switch ( type ){
+	case "string": return "(char*) " + name + ".c_str()";
+	case "int": return name;
+	case "bool": return name;
+	case "long": return name;
+	case "float": return name;
+	case "PIACCESSMODES":  return "enumice2cpp(" + name + ")";
+	case "PIREPLACEMODES": return "enumice2cpp(" + name + ")";
+	case "PIADEFMODES":    return "enumice2cpp(" + name + ")";
+	case "ResourceTypes":  return "enumice2cpp(" + name + ")";
+	case "ApplicationTypes":return "enumice2cpp(" + name + ")";
+
+	default: return "(::" + type + CPPRefLevel(rlevel) +  ")" + CPPRevRefLevel(rlevel) + name;
+	}	
+}
+
+STRING Name2ICE(STRING name){
+  // replace _
+  name.ReplaceString("_","");
+  switch(name){
+    case "interface": return "p" + name;
+    case "key": return "p" + name;
+    case "parmlist": return "p" + name;
+    case "instance": return "p"+name;
+    case "date": return "p" + name;
+    case "string": return "p" + name;
+    case "dictionary": return "p" + name;
+    case "odabaclient": return "p" + name;
+    case "propertyhandle": return "p" + name;
+    case "checkupdate": return "p" + name;
+    default:
+     return name;
+  }
+}
+/// create a parameter for definition of cpp method (ice type ice name)
+STRING ICECPPParameter(STRING prefix, STRING type, STRING name){
+VARIABLES
+	STRING parameter;
+PROCESS
+	parameter = "\t\t";
+	parameter+=prefix;
+	// add const+type+ref to name
+	parameter+=" " + ICE2CPPTypeParameter(name, type) ;
+	parameter+="\n";
+	return parameter;
+}
+/// create the ice default parameter (and its name for use in the autocasts)
+STRING ICECPPDefaultParameter(STRING prefix){
+	return "\t\t" + prefix + "const ::Ice::Current& c";
+}
+STRING CPPRefLevel(STRING rlevel){
+VARIABLES
+	STRING parameter;
+PROCESS
+	parameter = "";
+	switch(rlevel){
+	case "RL_reference": parameter+="&"; break;
+	case "RL_3": parameter+="***";break;
+	case "RL_2": parameter+="**";break;
+	case "RL_1": parameter+="*";break;
+	default:
+		break;
+	}
+	return parameter;
+}
+STRING CPPRevRefLevel(STRING rlevel){
+VARIABLES
+	STRING parameter;
+PROCESS
+	parameter = "";
+	switch(rlevel){
+	case "RL_reference": parameter+="*"; break;
+	case "RL_direct": parameter+="*"; break;
+	case "RL_3": parameter+="&&";break;
+	case "RL_2": parameter+="&";break;
+	case "RL_1": parameter+="";break;
+	default:
+		break;
+	}
+	return parameter;
+}
+
+/// create the calling parameter for the interface
+STRING ICECPPCallParameter(STRING prefix, STRING type,STRING itype, STRING name, STRING rlevel){
+VARIABLES
+	STRING parameter;
+PROCESS
+	parameter = "\t\t";
+	parameter+=prefix;
+	if(  type=="Key"
+	   ||type=="CHAR" && rlevel=="RL_direct"){
+	   	// dont do any casts with this items
+	   	itype="int";
+	}
+	parameter+=" " + ICE2CPPCast(itype, name, rlevel) ;
+	parameter+="\t\t//< "+type+"|"+itype+"|"+name+"|"+rlevel+"\n";
+	return parameter;
+}
+
+
+/// perform some action before a parameter gets submitted
+/// add the prefix TC (temp cast)
+STRING ICECPPCallParameterCast(STRING type, STRING name, STRING rlevel){
+VARIABLES
+STRING proxybackcast,iblock,castbase;
+PROCESS
+	if(IsICEProxy(CE2ICEType(type))){
+//		proxybackcast = "\t" + type + "IPtr TCP" + name + " = " + type + "IPtr::dynamicCast(c.adapter->find((*" + name + ").ice_getIdentity()));\n";
+//		proxybackcast+= "\t::" + type + " *TC" + name + " = &(*TCP" + name +");\n";
+        	if(type=="DBObjectHandle"){
+			proxybackcast = "\t::" + type + " *TC" + name + " = " dbocast(" + name + ");\n";
+	    	}else if(type=="DatabaseHandle"){
+			proxybackcast = "\t::" + type + " *TC" + name + " = " dbhcast(" + name + ");\n";
+		}else {
+			proxybackcast = "\t" + type + "IPtr TCP" + name + " = " + type + "IPtr::dynamicCast(c.adapter->find((*" + name + ").ice_getIdentity()));\n";
+			proxybackcast+= "\t::" + type + " *TC" + name + " = &(*TCP" + name +");\n";
+		}
+		return proxybackcast;
+	}
+	switch(type){
+	case "Key": 
+	return "\t::Key TC" + name + " = ::PropertyHandle::StringToKey(" + ICE2CPPCast("string",name,"RL_direct") + ");\n";
+	case "dttm": 
+	return "\tdttm TC" + name + ";\n\tTC" + name + ".FromUnix(" + ICE2CPPCast("long",name,"RL_direct") + ");\n";
+	case "dbdt": 
+	return "\tdbdt TC" + name + ";\n\tTC" + name + ".FromUnix(" + ICE2CPPCast("long",name,"RL_direct") + ");\n";
+	case "dbtm": 
+	return "\tdbtm TC" + name + ";\n\tTC" + name + ".FromUnix(" + ICE2CPPCast("long",name,"RL_direct") + ");\n";
+	case "CHAR":
+		if(rlevel=="RL_direct"){
+			return "\t char TC" + name + " = " + name + "[0];\n";
+		}
+		break;
+	default: return "";
+	}
+return "";
+}
+/// return a proxy for a interface
+STRING CPPProxyCast(STRING type, STRING name){
+  return "return Odaba::" + type + "Prx::uncheckedCast(c.adapter->addWithUUID("+name+"));\n";
+}
+/// create the generated type that is returned from the ::classes use the constructor to join the two worlds
+STRING CPPReturnType(STRING type, STRING rlevel){
+VARIABLES
+	STRING appix;
+	STRING itype;
+PROCESS
+	appix = " ret;\n\tret=";
+	itype = CE2ICEType(type);
+	if(IsICEProxy(itype)){
+		if(rlevel=="RL_direct"){
+			return type + "IPtr ret;\n\t::" + type + " TR = ";
+		}
+		if(rlevel=="RL_reference"){
+			return type + "IPtr " + appix + "new " + type + "I(" ;
+		}		
+		return type + "IPtr " + appix + "new " + type + "I("+ CPPRefLevel(rlevel);
+	}
+	
+	switch(itype){
+	case "void": return "/*void*/";
+	case "string": return "char*" + appix;
+	case "long":
+		if(type == "dttm" || type== "dbdt" || type== "dbtm")
+			return type + appix;
+		return itype + appix;
+		break;
+	case "PIACCESSMODES":    return "::Odaba::PIACCESSMODES" + appix + "enumcpp2ice((PIACC)";
+	case "PIREPLACEMODES":   return "::Odaba::PIREPLACEMODES" + appix + "enumcpp2ice((PIREPL)";
+	case "PIADEF":           return "::Odaba::PIADEF" + appix+ "enumcpp2ice((PIADEF)";
+	case "ResourceTypes":    return "::Odaba::ResourceTypes" + appix + "enumcpp2ice((ResourceTypes)";
+	case "ApplicationTypes": return "::Odaba::ApplicationTypes" + appix + "enumcpp2ice((ResourceTypes)";
+	default: return itype + appix;
+	}
+}
+STRING CPPReturnTypeBack(STRING type, STRING rlevel){
+VARIABLES
+	STRING itype;
+PROCESS
+	itype = CE2ICEType(type);
+	switch(itype){
+	case "PIACCESSMODES":    return ")";
+	case "PIREPLACEMODES":   return ")";
+	case "PIADEF":           return ")";
+	case "ResourceTypes":    return ")";
+	case "ApplicationTypes": return ")";
+	default: return "";
+	}
+}
+// decide if a method is getting exported from the db
+LOGICAL BadInterface(STRING type){
+	return (  type=="ParmList" 
+	         ||type=="DBFieldDef" 
+	         ||type=="RecoveryType"
+	         ||type=="CheckOptions"
+	         ||type=="BNFData"
+	         );
+}
+STRING CPPCall(STRING classname, STRING functname, STRING parameters){
+VARIABLES
+	STRING funct;
+PROCESS
+	funct = "";
+	//call of interface function
+	funct+= "::" +classname + "::" + functname;
+	//with parameters 
+	if(parameters=="") { 
+		funct+="()";
+	} else {
+		funct+= "(\n" + parameters + "\t\t)";
+	}
+	return funct;
+}
+STRING CPPReturnCall(STRING retval, STRING retvalice, STRING retname, STRING rlevel, STRING cppcall){
+VARIABLES
+	STRING funct;
+PROCESS
+	funct = "";
+	retname = CPPReturnType(retval,rlevel);
+	funct+= "\t//return type declaration\n";
+	funct+= "\t" + retname;  // type ret;\n\tret=
+	if(retname){ retname = "ret"; } // use retname later
+	funct+= cppcall;
+	if(IsICEProxy(retvalice) && rlevel!="RL_direct"){ funct+=")"; }
+	funct+= CPPReturnTypeBack(retval,rlevel);
+	funct+= ";\n";
+	//funct+= "\tcout << \"done\" <<endl;//debug\n";
+	funct+= "\t//return the returned result\n";
+	if(IsICEProxy(retvalice)){
+		// cast before return
+		if(rlevel=="RL_direct")
+			funct+= "\tret = new " +  retval + "I(TR);\n";
+		funct+= "\t" + CPPProxyCast(retval,retname) ;  
+	}else{
+		// just return
+		funct+= "\t" + ICE2CPPReturn(retval,retvalice,retname) ;  
+	}
+	return funct;
+}

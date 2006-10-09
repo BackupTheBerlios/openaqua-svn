@@ -1,0 +1,4 @@
+#ifndef __CoaRadioButton__
+#define __CoaRadioButton__
+#include "../widgets/coaradiobutton.h"
+#endif //__CoaRadioButton__

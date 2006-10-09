@@ -1,0 +1,6 @@
+#ifndef __CoaListView__
+#define __CoaListView__
+
+#include "../widgets/coalistview.h"
+
+#endif //__CoaListView__

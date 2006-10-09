@@ -1,0 +1,182 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>CoaToolsChangeShortcuts</class>
+ <widget class="QWidget" name="CoaToolsChangeShortcuts" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>584</width>
+    <height>598</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>MainWindow</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>8</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="CoaLabel" name="label" >
+     <property name="text" >
+      <string>You can change Debug Settings here.
+All changes will be stored in a settings file.   </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="CoaTableView" name="tableView" />
+     </item>
+     <item>
+      <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="CoaGroupBox" name="groupBox_2" >
+         <property name="title" >
+          <string>Main Settings</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>8</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="CoaCheckBox" name="checkEnabled" >
+            <property name="text" >
+             <string>Debug Enabled</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CoaCheckBox" name="checkTime" >
+            <property name="text" >
+             <string>Show Time</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="CoaGroupBox" name="groupBox" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>5</hsizetype>
+           <vsizetype>4</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Defaults for all Files</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>8</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="CoaRadioButton" name="radioOff" >
+            <property name="text" >
+             <string>&amp;Off</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CoaRadioButton" name="radioErr" >
+            <property name="text" >
+             <string>&amp;Errors</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CoaRadioButton" name="radioWrn" >
+            <property name="text" >
+             <string>&amp;Warnings</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CoaRadioButton" name="radioInf" >
+            <property name="text" >
+             <string>&amp;Information</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CoaRadioButton" name="radioDbg" >
+            <property name="text" >
+             <string>&amp;Debug</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+  <widget class="QWidget" name="" />
+  <widget class="QWidget" name="" />
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <tabstops>
+  <tabstop>tableView</tabstop>
+  <tabstop>checkEnabled</tabstop>
+  <tabstop>checkTime</tabstop>
+  <tabstop>radioOff</tabstop>
+  <tabstop>radioErr</tabstop>
+  <tabstop>radioWrn</tabstop>
+  <tabstop>radioInf</tabstop>
+  <tabstop>radioDbg</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../tools.qrc" />
+ </resources>
+ <connections/>
+</ui>

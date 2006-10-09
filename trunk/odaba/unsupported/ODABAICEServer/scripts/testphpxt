@@ -1,0 +1,3 @@
+XTERM="xterm +sb -bg black -fg white "
+
+$XTERM -e ./scripts/testphp &

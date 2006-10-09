@@ -1,0 +1,34 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/widgets/images">
+   <file>checkbox.png</file>
+   <file>combobox.png</file>
+   <file>datetimeedit.png</file>
+   <file>dial.png</file>
+   <file>frame.png</file>
+   <file>groupbox.png</file>
+   <file>hscrollbar.png</file>
+   <file>hslider.png</file>
+   <file>hsplit.png</file>
+   <file>images.qrc</file>
+   <file>label.png</file>
+   <file>lcdnumber.png</file>
+   <file>lineedit.png</file>
+   <file>line.png</file>
+   <file>listbox.png</file>
+   <file>listview.png</file>
+   <file>progress.png</file>
+   <file>pushbutton.png</file>
+   <file>radiobutton.png</file>
+   <file>spacer.png</file>
+   <file>spinbox.png</file>
+   <file>table.png</file>
+   <file>tabwidget.png</file>
+   <file>textedit.png</file>
+   <file>toolbox.png</file>
+   <file>toolbutton.png</file>
+   <file>vscrollbar.png</file>
+   <file>vslider.png</file>
+   <file>vspacer.png</file>
+   <file>widgetstack.png</file>
+</qresource>
+</RCC>

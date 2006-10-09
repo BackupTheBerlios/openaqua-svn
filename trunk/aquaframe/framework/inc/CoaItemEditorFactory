@@ -1,0 +1,7 @@
+#ifndef __CoaItemEditorFactory__
+#define __CoaItemEditorFactory__
+
+#include "../base/coaitemeditorfactory.h"
+
+#endif //__CoaItemEditorFactory__
+

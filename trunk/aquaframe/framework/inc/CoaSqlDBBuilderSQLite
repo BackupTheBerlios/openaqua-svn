@@ -1,0 +1,7 @@
+#ifndef __CoaSqlDBBuilderSQLite__
+#define __CoaSqlDBBuilderSQLite__
+
+#include "../db/coasqldbbuildersqlite.h"
+
+#endif //__CoaSqlDBBuilderSQLite__
+

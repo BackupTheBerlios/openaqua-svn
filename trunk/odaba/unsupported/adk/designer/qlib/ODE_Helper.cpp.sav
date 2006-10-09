@@ -1,0 +1,465 @@
+/********************************* Class Source Code ***************************/
+/**
+\package  {{{{{|{2006/03/12|19:35:58,07}|(REF)
+\class    ODE_Helper
+
+\brief    
+
+
+\date     $Date: 2006/03/12 19:36:52,79 $
+\dbsource adk.dev - ODABA Version 9.0
+*/
+/******************************************************************************/
+#define    OBJ_ID  "ODE_Helper"
+
+#include  <pdesign.h>
+#include  <sBNFData.hpp>
+#include  <sODE_Project.hpp>
+#include  <sPropertyHandle.hpp>
+#include  <igvts.h>
+#include  <spc_ODC_ImpClass.hpp>
+#include  <sODE_Helper.hpp>
+
+
+/******************************************************************************/
+/**
+\brief  Deinitialize - 
+
+
+
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "Deinitialize"
+
+void ODE_Helper :: Deinitialize ( )
+{
+
+  dictionary = DictionaryHandle();
+
+}
+
+/******************************************************************************/
+/**
+\brief  GetAccPathType - 
+
+
+\return lph -
+
+\param  classname -
+\param  bdata -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetAccPathType"
+
+PropertyHandle *ODE_Helper :: GetAccPathType (char *classname, BNFData *bdata, char &lookup_type )
+{
+  PropertyHandle         *mem_ph    = NULL;
+  BNFData                *element   = NULL;
+  BNFData                *pext      = NULL;
+  BNFData                *pname;
+  int32                   indx0     = 0;
+  int32                   ecnt      = 0;
+  PropertyHandle         *lph       = NULL;
+
+BEGINSEQ
+// path_element          := path_operand [ operand_list ]
+// path_operand          := path_name | coll_operand | expr_code
+// path_name             := pname [ name_index ]
+
+  if ( !(lph = projects->GetImplementedClass(classname)) )
+                                                     ERROR
+  // bdata is abn access_path
+  element = bdata->GetElement(indx0++);
+  while ( element )
+  {
+    if ( !(pname = element->GetElement(0)->GetSymbol("path_name")) )
+                                                     ERROR
+    pname = pname->GetElement(0);
+    if ( !(pname = pname->GetSymbol("scoped_name")) )       ERROR
+    if ( !pname->IsSymbol("identifier") )
+    {
+      ecnt = pname->GetElementCount();
+      if ( ecnt > 2 )
+        classname = pname->GetElement(ecnt-2)->GetElement("identifier")->GetStringValue(NULL,NULL);
+      else
+        classname = pname->GetElement(0)->GetStringValue(NULL,NULL);
+      
+      if ( !(lph = projects->GetImplementedClass(classname)) )
+                                                      ERROR
+      pname = pname->GetElement(ecnt-1)->GetElement("identifier");
+    }
+
+    element = NULL;
+    if ( pext = bdata->GetElement(indx0++) )
+      element = pext->GetElement(1);
+    
+    switch ( lookup_type )
+    {
+      case 'C' : lph = projects->GetImplementedClass(pname->GetStringValue(NULL,NULL));
+                 break;
+      case 'I' : if ( !element )  // last element
+                 {
+                   if ( !(lph  = GetMember(lph,pname->GetStringValue(NULL,NULL),'F')) ) 
+                                                     ERROR
+                   break;
+                 }  
+      case 'M' : if ( !(lph  = GetMember(lph,pname->GetStringValue(NULL,NULL),'M')) ) 
+                                                     ERROR
+                 if ( !(lph = projects->GetImplementedClass(lph->GetString("ddetype"))) )
+                                                     ERROR
+                 break;
+    }
+  }
+
+RECOVER
+  lph = NULL;
+ENDSEQ
+  return(lph);
+}
+
+/******************************************************************************/
+/**
+\brief  GetListHandle - 
+
+
+\return lph -
+-------------------------------------------------------------------------------
+\brief i0
+
+
+\param  classname -
+\param  bdata -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetListHandle"
+
+PropertyHandle *ODE_Helper :: GetListHandle (char *classname, BNFData *bdata, char &lookup_type )
+{
+  PropertyHandle    *lph = NULL;
+
+BEGINSEQ
+  switch ( bdata->GetSymbolCode("access_path","sngl_operand","OQLSelect",
+                                "block","constant","sys_variable") )
+  {
+    case  1 : if ( !(lph = GetAccPathType(classname,bdata->GetSymbol("access_path"),lookup_type)) )  
+                                                     ERROR
+              break;
+    case  2 : bdata = bdata->GetElement(1); // '(' operand ')'
+              if ( !(bdata = bdata->GetSymbol("simple_op")) )
+                                                     ERROR
+              if ( !(lph = GetListHandle(classname,bdata,lookup_type)) )
+                                                     ERROR
+              break;
+    default :                                        ERROR
+  }
+
+RECOVER
+  lph = NULL;
+ENDSEQ
+  return(lph);
+}
+
+/******************************************************************************/
+/**
+\brief i01
+
+
+\param  classname -
+\param  accpath -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetListHandle"
+
+PropertyHandle *ODE_Helper :: GetListHandle (char *classname, char *accpath, char &lookup_type )
+{
+  BNFData                *bdata = NULL;
+  PropertyHandle         *lph   = NULL;
+BEGINSEQ
+  if ( !(bdata = dictionary.ParseExpression(accpath,"simple_op")) )
+                                                     ERROR
+  if ( !(lph = GetListHandle(classname,bdata,lookup_type)) )
+                                                     ERROR
+RECOVER
+  lph = NULL;
+ENDSEQ
+  return(lph);
+}
+
+/******************************************************************************/
+/**
+\brief  GetMember
+
+\return mph
+
+\param  class_ph -
+\param  memnames -
+\param  search_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetMember"
+
+PropertyHandle *ODE_Helper :: GetMember (PropertyHandle *class_ph, char *memnames, char search_type )
+{
+  PropertyHandle       *base_ph = NULL;
+  int32                 indx0   = 0;
+  PropertyHandle       *mph     = NULL;
+
+BEGINSEQ
+  pc_ODC_ImpClass    pc_imp(class_ph);
+
+  if ( mph = pc_imp.GetMember(memnames,search_type)) LEAVESEQ
+
+  if ( class_ph->GPH("smcebase")->GetCount() > 0 )
+  {
+    PropertyHandle copy_pc(*class_ph);
+    base_ph = copy_pc.GPH("smcebase");  
+    while ( base_ph->Get(indx0++) )
+      if ( class_ph = projects->GetImplementedClass(base_ph->GetString("ddetype")) )
+        if ( mph = GetMember(class_ph,memnames,search_type) ) 
+                                                     LEAVESEQ
+  }
+ENDSEQ
+  return(mph);
+}
+
+/******************************************************************************/
+/**
+\brief  GetPath - 
+
+
+\return accpath -
+
+\param  codestring -
+\param  textpos -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetPath"
+
+char *__cdecl ODE_Helper :: GetPath (char *codestring, int32 textpos, char &lookup_type )
+{
+  char            *accpath = NULL;
+  int32            pos     = UNDEF;
+  int32            end     = textpos;
+  logical         stop_before_name = NO;
+  char            *spos    = UNDEF;
+BEGINSEQ
+  lookup_type = 'M';
+  if ( codestring[textpos-1] == '(' )
+    lookup_type = 'I';
+    
+  if ( codestring[textpos-1] == '.' || codestring[textpos-1] == '(')
+    end--;
+  else if ( codestring[textpos-1] == '>' )   // ->
+    end -= 2;
+  else if ( codestring[textpos-1] == ':' )
+  {
+    end -= 2;
+    lookup_type = 'C';
+    stop_before_name = YES;
+  }
+  if ( end <= 0 )                                ERROR
+    
+  pos = end;
+  while ( --pos )
+  {
+    if ( !memcmp(codestring+pos-1,"->",2) || codestring[pos] == '.')
+    {
+      if ( stop_before_name )
+      {
+        pos++;
+        break;
+      }
+      if ( codestring[pos] == '>' ) 
+        --pos;
+    }
+    else if ( !memcmp(codestring+pos-1,"::",2) ) // scope operator
+    {
+      --pos;
+      stop_before_name = YES;
+    }
+    else if ( strchr(" -+*/%!^&|=<>(:?;,",codestring[pos]) ) // terminator found
+    {
+      pos++;
+      break;
+    }
+    else if ( codestring[pos] == ')' || codestring[pos] == ']' || codestring[pos] == '}')
+    {
+      if ( !(spos = gvtsfbpb(codestring+pos+1,pos)) ) ERROR
+      pos = spos-codestring;
+    }
+  }
+  if ( pos <= 0 )                                    ERROR
+  
+  accpath = (char *)malloc((end-pos)+1);
+  memcpy(accpath,codestring+pos,end-pos);
+  accpath[end-pos] = 0;
+RECOVER
+  if ( accpath )
+    free(accpath);
+  accpath = NULL;
+ENDSEQ
+  return(accpath);
+
+}
+
+/******************************************************************************/
+/**
+\brief  GetTargetClass - 
+
+
+\return impcls_ph -
+
+\param  classname -
+\param  accpath -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetTargetClass"
+
+PropertyHandle *ODE_Helper :: GetTargetClass (char *classname, char *accpath, char &lookup_type )
+{
+  PropertyHandle         *impcls_ph = NULL;
+BEGINSEQ
+  if ( lookup_type == 'I' )                          ERROR
+  
+  if ( !(impcls_ph = GetListHandle(classname,accpath,lookup_type)) )
+                                                     ERROR
+RECOVER
+  impcls_ph = NULL;
+ENDSEQ
+  return(impcls_ph);
+}
+
+/******************************************************************************/
+/**
+\brief  GetTargetFunction - 
+
+
+\return funct_ph -
+
+\param  classname -
+\param  accpath -
+\param  lookup_type -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "GetTargetFunction"
+
+PropertyHandle *ODE_Helper :: GetTargetFunction (char *classname, char *accpath, char &lookup_type )
+{
+  PropertyHandle         *funct_ph  = NULL;
+BEGINSEQ
+  if ( !accpath || !*accpath || lookup_type != 'I' ) ERROR
+  
+  if ( !(funct_ph = GetListHandle(classname,accpath,lookup_type)) )
+                                                     ERROR
+RECOVER
+  funct_ph = NULL;
+ENDSEQ
+  return(funct_ph);
+}
+
+/******************************************************************************/
+/**
+\brief  Initialize - 
+
+
+\return term -
+-------------------------------------------------------------------------------
+\brief i0
+
+
+\param  dict_handle -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "Initialize"
+
+logical ODE_Helper :: Initialize (DictionaryHandle &dict_handle )
+{
+
+  dictionary = dict_handle;
+  return(NO);
+}
+
+/******************************************************************************/
+/**
+\brief i01
+
+
+\param  ode_project -
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "Initialize"
+
+logical ODE_Helper :: Initialize (ODE_Project *ode_project )
+{
+
+  projects   = ode_project;
+  dictionary = ode_project->get_db_handle().GetDictionary();
+  return(NO);
+}
+
+/******************************************************************************/
+/**
+\brief  ODE_Helper - 
+
+
+
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "ODE_Helper"
+
+                        ODE_Helper :: ODE_Helper ( )
+                     :   dictionary(),
+  projects(NULL)
+{
+
+
+
+}
+
+/******************************************************************************/
+/**
+\brief  ~ODE_Helper - 
+
+
+
+*/
+/******************************************************************************/
+
+#undef     MOD_ID
+#define    MOD_ID  "~ODE_Helper"
+
+                        ODE_Helper :: ~ODE_Helper ( )
+{
+
+
+
+}
+
+

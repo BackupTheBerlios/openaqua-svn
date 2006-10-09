@@ -1,0 +1,4 @@
+#ifndef __CoaCheckBox__
+#define __CoaCheckBox__
+#include "../widgets/coacheckbox.h"
+#endif //__CoaCheckBox__

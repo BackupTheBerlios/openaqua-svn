@@ -1,0 +1,7 @@
+#ifndef __CoaDataSetModel__
+#define __CoaDataSetModel__
+
+#include "../corba/coadatasetmodel.h"
+
+#endif //__CoaDataSetModel__
+

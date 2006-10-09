@@ -1,0 +1,6 @@
+#ifndef __CoaMessageBox__
+#define __CoaMessageBox__
+
+#define CoaMessageBox QMessageBox
+
+#endif //__CoaMessageBox__

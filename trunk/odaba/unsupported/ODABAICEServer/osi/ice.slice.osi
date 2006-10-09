@@ -1,0 +1,93 @@
+BOOL      DB2ICE()
+{
+VARIABLES
+	GLOBAL     FileHandle docFile;
+	STRING     fname  = 'e:/Odaba.ice';
+	STRING     paramprefix;
+	STRING     functSuffix;
+	BOOL       cond = true;
+	SET<ODC_ImpClass> &classes = ODC_ImpClass();
+	SET<ODC_PFuncions> &functions = classes.pfunctions;
+	int        impcount;
+	STRING     retval,parameter,parameters,lparameters,member;
+	STRING     pname, ptype;
+	LOGICAL    badexport;
+PROCESS
+	
+	if ( docFile.IsOpened() )
+		Message('Warning: File aleady opened - reopened'); 
+	if ( !(cond = !docFile.Open(fname)) )
+		Message('Error  : File '+fname+'could not be opened');
+	docFile.Out("module Odaba{\n");
+	docFile.Out("enum PIACCESSMODES    { piaREAD, piaWRITE, piaUPDATE,piaUNDEFINED };\n");
+	docFile.Out("enum PIREPLACEMODES   { piaREPLGUID, piaREPLDIRECT, piaREPLNONE, piaREPLLOCAL, piaREPLALL, piaREPLINSTANCE, piaREPLRELATIONSHIPS, piaREPLNOCREATE};\n");
+	docFile.Out("enum PIADEFMODES      { piaUNKNOWN, piaEXCLUSIVE, piaSHARE }; \n");
+	docFile.Out("enum ResourceTypes    { resAUTOMATIC, resSERVER, resLOCAL, resSERVERINTERN };\n");
+	docFile.Out("enum ApplicationTypes { aptWINDOWS, aptCONSOLE };\n");
+	docFile.Out("class DatabaseHandle;\n");
+	docFile.Out("class DictionaryHandle;\n");
+	docFile.Out("class DataSourceHandle;\n");
+	docFile.Out("class PropertyHandle;\n");
+	docFile.Out("class ODABAClient;\n");
+
+	
+	// ICE for OPA
+//********************  sameforall *****************************/
+	while(classes.Next()){
+		Message(classes.sys_ident);
+		member = "";
+		while(classes.pfunctions.Next()){
+			//Message(" " + classes.pfunctions.sys_ident + " [" + classes.pfunctions.inter_face + "]");
+			if(classes.pfunctions.GetCount() && classes.pfunctions.inter_face){
+				impcount=0;
+				while(classes.pfunctions.implementations.Next()){
+				//Message("  " + classes.pfunctions.implementations.sys_ident + " " + classes.pfunctions.implementations.inter_face);
+				if(classes.pfunctions.implementations.inter_face){
+//******************** /sameforall *****************************/
+					retval = CE2ICEDefinition(classes.pfunctions.ddetype);
+					fname  = classes.pfunctions.sys_ident;
+					paramprefix = "  ";
+					parameters = "";
+					while(classes.pfunctions.implementations.parameters.Next() && !badexport){
+						ptype = CE2ICEDefinition(classes.pfunctions.implementations.parameters.ddetype,classes.pfunctions.implementations.parameters.reference_level,classes.pfunctions.implementations.parameters.sys_ident);
+						pname = Name2ICE(classes.pfunctions.implementations.parameters.sys_ident);
+						parameter = "\t\t";
+						parameter+=paramprefix + ptype ;
+						parameter+=" " + pname ;
+						parameter+="\n";
+					   	parameters+=parameter;
+						if(paramprefix=="  "){
+							paramprefix = ", ";
+						}	
+					}
+					if(impcount>0){
+						fname += Name2ICE(classes.pfunctions.implementations.sys_ident);
+					}
+					member+="\t" + retval + " " + fname + "(\n" + parameters + "\t\t);\n";
+					impcount+=1;
+				}}
+			}
+		}
+		if(member!=""){
+			docFile.Out("class");
+			docFile.Out(" " + classes.sys_ident);
+			// base class
+			if(classes.smcebase.GetCount()>0){
+				while(classes.smcebase.Next()){
+					//,
+					if(classes.smcebase.sys_ident!="ObjectReferenceHandle")
+						docFile.Out(" extends " + classes.smcebase.sys_ident);
+				}
+			}
+			docFile.Out("\n");
+			docFile.Out("{\n" + member);
+			docFile.Out("};\n");
+			member = "";
+		}	
+	}
+	docFile.Out("};//module\n");
+//********************  sameforall *****************************/
+	docFile.Close();
+	FINAL 
+}
+//******************** /sameforall *****************************/

@@ -1,0 +1,8 @@
+#ifndef __CoaTextDocument__
+#define __CoaTextDocument__
+
+#include "../base/coatextdocument.h"
+
+#endif 
+
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/odaba/lib/" && export LD_LIBRARY_PATH 
+TRACE=/tmp/odaba/ && export TRACE
+echo set args  6123 /etc/odaba/odabaserver.ini
+gdb /opt/odaba/bin/Server

@@ -1,0 +1,4 @@
+#ifndef __CoaTableView__
+#define __CoaTableView__
+#include "../widgets/coatableview.h"
+#endif //__CoaTableView__

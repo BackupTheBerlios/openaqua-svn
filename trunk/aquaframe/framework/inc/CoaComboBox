@@ -1,0 +1,4 @@
+#ifndef __CoaComboBox__
+#define __CoaComboBox__
+#include "../widgets/coacombobox.h"
+#endif //__CoaComboBox__

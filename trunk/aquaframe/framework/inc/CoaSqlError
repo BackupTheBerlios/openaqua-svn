@@ -1,0 +1,7 @@
+#ifndef __CoaSqlError__
+#define __CoaSqlError__
+
+#include "../db/coasqlerror.h"
+
+#endif 
+

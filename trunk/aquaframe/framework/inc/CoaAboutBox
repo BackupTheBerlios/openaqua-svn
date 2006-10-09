@@ -1,0 +1,7 @@
+#ifndef __CoaAboutBox__
+#define __CoaAboutBox__
+
+#include "../windows/about/coaaboutbox.h"
+
+#endif //__CoaAboutBox__
+

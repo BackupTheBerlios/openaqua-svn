@@ -1,0 +1,37 @@
+CE_Language             - Sprache wählen (z.B. L auf orangenem Grund)
+CE_Design               - Designer (z.B. Window-Designer, Bild-Designer) öffnen
+CE_Insert               - Objekt/Zeile an bestimmte Stelle (in einer Liste) einfügen
+CE_Append               - Objekt/Zeile am Ende (einer Liste) anhängen
+CE_Associate            - Existierendes Objekt über eine Auswahlliste (in eine Liste) einfügen
+CE_InsertError          - Fehlermeldung im Programm einfügen
+CE_InsertFunction       - Funktion hinzufügen
+
+SD_Type                 - Lerres viereck (Typeviereck)
+SD_Enumeration   	- Werteliste, Typeviereck mit Anstrichen (für die Enumeratoren
+SD_Enumerator   	- einzelner Wert oder Kategorie in der Werteliste (Anstrich, siehe Enumeration)
+
+SD_Extent               - ooo
+
+SD_Module               - Kreis mit Typevierecken
+SD_Namespace            - Kreis mit Typevierecken (aber blasser)
+
+ADK_Constant            - Text, bild, sound, Videeo - Constante (keine Ahnung, wie)
+ADK_Color               - eine Farbe (Vielleicht ein Farbverlauf, siehe auch ADK_ColorGroup)
+
+ADK_Application   	- Teil eines Projektes (Projekt kann mehrere Applikationen haben)
+ADK_Menu          	- Menü (eben wie ein Menü)
+
+ADK_ButtonGroup   	- Gruppe von Knöpfen (button.bmb)
+ADK_Edit          	- Feld für Texteingabe
+ADK_GroupBox      	- eingerahmte elemente (Felder)
+ADK_ListBox      	- Liste mit eingabefeld
+ADK_RadioButtonGroup 	- diese runden Dinger, wo man immer nur eins von mehreren anklicken kann 
+
+ADK_Splitter      	- Splitter Window (aufgeteilte eingabebereiche)
+ADK_StausLine     	- Statuszeile
+ADK_Tab           	- Tab Control (mit diesen Dingern zum Umschalten)
+ADK_Table		- Wie Lisbox mit Eingabefeldern
+
+ADK_SyntaxHighlighter   - Text mit bunten Buchstaben 
+
+

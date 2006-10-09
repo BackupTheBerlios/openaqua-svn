@@ -1,0 +1,5 @@
+TRACE=~/ODABA2/share/ODABA
+export TRACE
+~/ODABA/bin/GenSC ~/ODABA2/share/ODABA/GenSC_CS.ini BEVNAT LoadFromDWHToSXV4File ~/ODABA2/share/ODABA/GenSC
+
+

@@ -1,0 +1,7 @@
+#ifndef __CoaFileDialog__
+#define __CoaFileDialog__
+
+#include <QFileDialog>
+#define CoaFileDialog QFileDialog
+
+#endif //__CoaFileDialog__

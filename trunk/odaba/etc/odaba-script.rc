@@ -1,0 +1,42 @@
+if [ "`printf '%s\n' \"${ODABA_DEBUG}\" | sed 's/[Dd][Ee][Bb][Uu][Gg]/debug/'`" = "debug" ]; then
+  ODABA_DEBUG="debug"
+elif [ "`printf '%s\n' \"${ODABA_DEBUG}\" | sed 's/[Nn][Oo][Dd][Ee][Bb][Uu][Gg]/nodebug/'`" = "nodebug" ]; then
+  ODABA_DEBUG="nodebug"
+else
+  ODABA_DEBUG=""
+fi
+
+# ODABA compiler&linker options
+ODABA_COMPILER_OPTIONS="-w -fpermissive -fhandle-exceptions -xc++ -fPIC -shared"
+ODABA_COMPILER_OPTIONS_DEBUG="${ODABA_COMPILER_OPTIONS} -ggdb3"
+ODABA_INCLUDE_DIRS=""
+ODABA_LINKER_OPTIONS="-L${ODABA_LIB_DIR} -fPIC"
+ODABA_LINKER_OPTIONS_DEBUG="${ODABA_LINKER_OPTIONS}"
+ODABA_LIBS="-lrt -lpthread -ldl "
+
+# ProjectDirTemplates
+ProjectDir()
+{ printf "%s\n" "${ODABA_PROJECTS_DIR}/${1}"; }
+ProjectSiteDir()
+{ printf "%s\n" "${ODABA_SITE_DIR}/${1}"; }
+
+ProjectBatDir()
+{ ProjectDir "${1}/bat"; }
+ProjectSrcDir()
+{ ProjectDir "${1}/qlib"; }
+
+ProjectExeDir()
+{ ProjectSiteDir "${1}/exe"; }
+ProjectLibDir()
+{ ProjectSiteDir "${1}/lib"; }
+ProjectTempDir()
+{ ProjectSiteDir "${1}/temp"; }
+
+# misc
+SCRIPT_NAME="`basename "${0}"`"
+
+o_done="	\033[71G\033[32mdone\033[m"
+o_failed="	\033[71G\033[31m\033[1mfailed\033[m"
+
+_nl="
+"

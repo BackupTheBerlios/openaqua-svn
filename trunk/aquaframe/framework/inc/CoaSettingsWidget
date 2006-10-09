@@ -1,0 +1,8 @@
+#ifndef __CoaSettingsWidget__
+#define __CoaSettingsWidget__
+
+#include "../widgets/coasettingswidget.h"
+
+#endif //__CoaSettingsWidget__
+
+

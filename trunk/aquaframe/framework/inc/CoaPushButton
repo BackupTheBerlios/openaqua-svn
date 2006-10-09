@@ -1,0 +1,4 @@
+#ifndef __CoaPushButton__
+#define __CoaPushButton__
+#include "../widgets/coapushbutton.h"
+#endif //__CoaPushButton__

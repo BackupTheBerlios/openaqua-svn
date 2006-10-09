@@ -1,0 +1,7 @@
+#ifndef __CoaString__
+#define __CoaString__
+
+#include <QString>
+#define CoaString QString
+
+#endif //__CoaString__

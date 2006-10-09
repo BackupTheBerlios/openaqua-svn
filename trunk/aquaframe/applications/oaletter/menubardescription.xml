@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CoaMenuBarDescription>
+
+<CoaMenuBarDescription version="1.0">
+  <menu id="1" name="Application">
+    <entry id="1" type="actionApplicationQuit"/>
+    <separator/>
+    <entry id="3" type="actionApplicationSettings"/>
+    <entry id="5" type="actionApplicationSetShortcuts"/>
+    <entry id="6" type="actionApplicationPrintShortcuts"/>
+    <separator/>
+    <entry id="8" type="actionApplicationSwitchSDIMode"/>
+    <entry id="9" type="actionApplicationSwitchMDIMode"/>
+    <separator/>
+    <entry id="11" type="actionApplicationAboutApplication"/>
+  </menu>
+  
+  
+  <menu id="2" name="File">
+    <entry id="1" type="actionFileNew"/>
+    <separator/>
+    <entry id="3" type="actionFileOpen"/>
+    <separator/>
+    <entry id="5" type="actionFileSave"/>
+    <entry id="6" type="actionFileSaveAs"/>
+    <entry id="7" type="actionFileSaveAll"/>
+    <separator/>
+    <entry id="9" type="actionFileClose"/>
+    <entry id="10" type="actionFileCloseAll"/>
+  </menu>
+  
+  
+  <menu id="3" name="Edit">
+    <entry id="1" type="actionEditUndo"/>
+    <entry id="2" type="actionEditRedo"/>
+    <separator/>
+    <entry id="4" type="actionEditCut"/>
+    <entry id="5" type="actionEditCopy"/>
+    <entry id="6" type="actionEditPaste"/>
+    <separator/>
+    <entry id="8" type="actionEditSelectAll"/>
+  </menu>
+  
+  
+  <menu id="4" name="Help">
+    <entry id="1" type="actionHelpHandbook"/>
+    <entry id="2" type="actionHelpWhatsthis"/>
+    <separator/>
+    <entry id="4" type="actionHelpTipOfTheDay"/>
+    <separator/>
+     <menu id="4" name="Debug Settings">
+       <entry type="actionDebugSettings"/>
+       <separator/>
+       <entry type="actionDebugOnOff"/>
+       <entry type="actionDebugShowTimeOnOff"/>
+       <separator/>
+       <entry type="actionDebugFileDefaultsOff"/>
+       <entry type="actionDebugFileDefaultsErr"/>
+       <entry type="actionDebugFileDefaultsWrn"/>
+       <entry type="actionDebugFileDefaultsInf"/>
+       <entry type="actionDebugFileDefaultsDbg"/>
+     </menu>
+  </menu>
+    
+</CoaMenuBarDescription>

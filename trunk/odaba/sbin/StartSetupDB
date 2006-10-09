@@ -1,0 +1,4 @@
+TRACE=~/ODABA/share/ODABA
+export TRACE
+~/ODABA/bin/SetupDB ~/ODABA2/share/ODABA/SetupDatDB.ini from to
+

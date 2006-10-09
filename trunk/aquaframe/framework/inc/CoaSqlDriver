@@ -1,0 +1,7 @@
+#ifndef __CoaSqlDriver__
+#define __CoaSqlDriver__
+
+#include "../db/coasqldriver.h"
+
+#endif 
+

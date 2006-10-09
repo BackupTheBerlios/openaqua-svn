@@ -1,0 +1,8 @@
+#ifndef __CoaLineEditView__
+#define __CoaLineEditView__
+
+
+#include "../views/coalineeditview.h"
+
+#endif //__CoaLineEditView__
+

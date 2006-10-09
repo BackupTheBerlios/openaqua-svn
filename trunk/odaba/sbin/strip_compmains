@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+
+#print "[$ARGV[0]]\n";
+if($ARGV[0] eq "" ) { 
+  print "please provide a project where bat/compmains.bat exists\n";
+  return -1;
+}
+if($ARGV[0] =~ /opi\/Utilities/){
+  `cd $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/qlib/ && ls -1 |grep -v WinODABAService |sed "s/\.cpp/ Debug/" > $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/classes-exe`;
+  exit;
+}
+print "strip for ($ARGV[0])\n";
+`cd $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/qlib/ && ls _if_* -1 |sed "s/\.cpp/ Debug/" > $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/classes-exe`;
+exit;
+my @lines = split(/\n/,`cat $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/compmains.bat`);
+my @classes;
+
+for(@lines){
+  chop;
+#    print $_."\n";
+  $class = $_;
+  $debug = $_;
+  $class =~s/^.*\.BAT (\b.*)\b \b.* (YES|NO).*/$1/i;
+  $debug =~s/^.*BAT\\(D).*\.BAT.*$/$1/i;
+#  print "($class)";
+  if(!($class =~/^\:/)&&!($class =~/ /)){
+    push(@classes,"$class".($debug =~/D/i ?" debug":"")."\n");
+  }
+}
+open(FILE,">$ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/classes-exe")|| die "error $!\n";
+for(@classes){
+  print FILE $_;
+}
+close (FILE);
+# | sed "s/.*\(.\)S6cpp.*BAT \(.*\) OGUI7.*/\2 \1/" | sed "s/D$/debug/" | sed "s/\\\//" >classes-prj
+

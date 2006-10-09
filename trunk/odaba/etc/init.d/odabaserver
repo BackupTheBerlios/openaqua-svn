@@ -1,0 +1,21 @@
+#!/sbin/runscript
+
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	# Ensure that we run from a readable working dir, and that we do not
+	# lock filesystems when being run from such a location.
+	su odaba -c /opt/odaba/sbin/StartServer 
+	eend $?
+
+}
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+	/opt/odaba/sbin/StopServer
+	eend $?
+}

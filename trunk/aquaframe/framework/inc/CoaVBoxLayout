@@ -1,0 +1,6 @@
+#ifndef __CoaVBoxLayout__
+#define __CoaVBoxLayout__
+
+#include "../base/coavboxlayout.h"
+
+#endif //__CoaVBoxLayout__

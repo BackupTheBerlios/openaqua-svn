@@ -1,0 +1,4 @@
+#ifndef __CoaTreeWidgetItem__
+#define __CoaTreeWidgetItem__
+#include "../widgets/coatreewidgetitem.h"
+#endif //__CoaTreeWidgetItem__

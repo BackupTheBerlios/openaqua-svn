@@ -1,0 +1,11 @@
+#!/bin/bash
+base=/data/develop/cpp/odaba
+if [ -z ${ODABA_SITE_DIR} ]; then
+    echo "please run in ODABAShell"
+    exit
+fi
+rm -r ${ODABA_SITE_DIR}
+rm -r ${ODABA_LIB_DIR}/*
+rm -r ${ODABA_BIN_DIR}/*
+pack.odaba src
+

@@ -1,0 +1,7 @@
+#ifndef __CoaApplicationWindow__
+#define __CoaApplicationWindow__
+
+#include "../windows/coaapplicationwindow.h"
+
+#endif //__CoaApplicationWindow__
+

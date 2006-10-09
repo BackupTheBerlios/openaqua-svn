@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+
+#print "[$ARGV[0]]\n";
+if($ARGV[0] eq "" ) { 
+  print "please provide a project where bat/compall.bat exists\n";
+  return -1;
+}
+my @lines = split(/\n/,`cat $ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/compall.bat`);
+my @classes;
+for(@lines){
+  chop;
+#    print $_."\n";
+  $class = $_;
+  $debug = $_;
+  $class =~s/^.*\.BAT (.*) .* (.*) (YES|NO) (YES|NO)/$1/i;
+  $ifclass="NOINTERFACE";
+  #print "1: $1 2: $2 3: $3 4: $4 5:$5\n";
+  if($3 eq "YES"){ # interface
+    $ifclass = $class;
+  }
+  $debug =~s/^.*BAT\\(D).*\.BAT.*$/$1/i;
+  if(!($class =~/^\:/)&&!($class =~/ /)){
+    push(@classes,"$class".($debug =~/D/i ?" debug":"")."\n");
+    #print "$ifclass\n";
+    if(!($ifclass eq "NOINTERFACE")){
+      push(@ifclasses,"_if_$class".($debug =~/D/i ?" debug":"")."\n");
+    }
+  }
+}
+open(FILE,">$ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/classes-prj")|| die "error $!\n";
+for(@classes){
+  print FILE $_;
+}
+close (FILE);
+
+open(FILE,">$ENV{ODABA_PROJECTS_DIR}/$ARGV[0]/bat/classes-exe")|| die "error $!\n";
+for(@ifclasses){
+  print FILE $_;
+}
+close (FILE);
+# | sed "s/.*\(.\)S6cpp.*BAT \(.*\) OGUI7.*/\2 \1/" | sed "s/D$/debug/" | sed "s/\\\//" >classes-prj
+

@@ -1,0 +1,7 @@
+#ifndef __CoaFile__
+#define __CoaFile__
+
+#include <QFile>
+#define CoaFile QFile
+
+#endif //__CoaFile__

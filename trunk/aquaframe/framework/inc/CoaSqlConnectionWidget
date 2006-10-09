@@ -1,0 +1,8 @@
+#ifndef __CoaSqlConnectionWidget__
+#define __CoaSqlConnectionWidget__
+
+#include "../widgets/coasqlconnectionwidget.h"
+
+#endif //__CoaSqlConnectionWidget__
+
+

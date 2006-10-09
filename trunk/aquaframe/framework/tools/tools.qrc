@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/tools" >
+        <file>settings/coachangeshortcut.ui</file>
+        <file>settings/coachangedebug.ui</file>
+        <file>settings/coatoolssettings.ui</file>
+        <file>sqlbrowser/coasqlbrowser.ui</file>
+        <file>sqleditor/coasqleditor.ui</file>
+        <file>settings/icons/showall.png</file>
+        <file>settings/icons/debug.png</file>
+        <file>settings/icons/shortcuts.png</file>
+    </qresource>
+</RCC>

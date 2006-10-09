@@ -1,0 +1,11 @@
+#include  <ssDSC_Topic.hpp>
+#include  <ssSDB_Attribute.hpp>
+#include  <ssSDB_BaseStruct.hpp>
+#include  <ssSDB_Member.hpp>
+#include  <spTypeInSDB_Member.hpp>
+#include  <ssSDB_Reference.hpp>
+#include  <ssSDB_Relationship.hpp>
+#include  <ssSDB_Structure.hpp>
+#include  <ssSDB_Type.hpp>
+#include  <ssDSC_Concept.hpp>
+#include  <spSDB_ResourceRef.hpp>

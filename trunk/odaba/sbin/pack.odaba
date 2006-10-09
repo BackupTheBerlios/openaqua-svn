@@ -1,0 +1,35 @@
+#!/bin/bash
+base=/data/develop/cpp/odaba
+if [ -z $1 ]; then
+    echo "pack.odaba arch YYMMDD"
+    echo "pack uname -m date +%Y%m%d"
+    echo "pack src"
+    exit
+fi
+if [ -z $2 ]; then
+    date=`date +%Y%m%d`
+else
+    date=$2
+fi
+if [ "$1" == "src" ]; then
+    arch="src";
+else
+    arch="bin-$1";
+fi
+
+f=odaba-$date-$arch.tar.bz2
+cd $base
+cd ..
+
+echo pack $f
+tar hcjf $f odaba --one-file-system 
+echo upload
+cp $f /data/lan/maint/helena/htdocs/downloads/linux
+if [ "$arch" == "src" && `whoami`=="root" ]; then
+    echo ebuild
+    cp /usr/local/overlays/odaba/dev-cpp/odaba/odaba-20060725.ebuild /usr/local/overlays/odaba/dev-cpp/odaba/odaba-$date.ebuild 
+    test -e /usr/portage/distfiles/$f && rm /usr/portage/distfiles/$f
+    rm -r /usr/local/overlays/odaba/dev-cpp/odaba/files/
+    rm /usr/local/overlays/odaba/dev-cpp/odaba/Manifest
+    ebuild  /usr/local/overlays/odaba/dev-cpp/odaba/odaba-$date.ebuild digest
+fi

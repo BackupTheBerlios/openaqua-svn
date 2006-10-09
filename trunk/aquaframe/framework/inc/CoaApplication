@@ -1,0 +1,8 @@
+#ifndef __CoaApplication__
+#define __CoaApplication__
+
+#include "../base/coaapplication.h"
+
+#endif //__CoaApplication__
+
+

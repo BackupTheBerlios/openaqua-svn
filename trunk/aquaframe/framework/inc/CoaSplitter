@@ -1,0 +1,8 @@
+#ifndef __CoaSplitter__
+#define __CoaSplitter__
+
+#include "../widgets/coasplitter.h"
+
+#endif //__CoaSplitter__
+
+

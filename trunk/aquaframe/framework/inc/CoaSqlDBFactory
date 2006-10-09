@@ -1,0 +1,7 @@
+#ifndef __CoaSqlDBFactory__
+#define __CoaSqlDBFactory__
+
+#include "../db/coasqldbfactory.h"
+
+#endif //__CoaSqlDBFactory__
+

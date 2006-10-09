@@ -1,0 +1,7 @@
+#ifndef __CoaTcpServer__
+#define __CoaTcpServer__
+
+#include "../network/coatcpserver.h"
+
+#endif //__CoaTcpServer__
+

@@ -1,0 +1,8 @@
+#ifndef __CoaToolsSqlEditor__
+#define __CoaToolsSqlEditor__
+
+#include "../tools/sqleditor/coasqleditor.h"
+
+#endif //__CoaToolsSqlEditor__
+
+

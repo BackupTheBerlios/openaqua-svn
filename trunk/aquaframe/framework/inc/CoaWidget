@@ -1,0 +1,4 @@
+#ifndef __CoaWidget__
+#define __CoaWidget__
+#include "../widgets/coawidget.h"
+#endif //__CoaWidget__

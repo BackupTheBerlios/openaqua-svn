@@ -1,0 +1,7 @@
+#ifndef __CoaXmlItemModelReference__
+#define __CoaXmlItemModelReference__
+
+#include "../xml/coaxmlitemmodelreference.h"
+
+#endif //__CoaXmlItemModelReference__
+

@@ -1,0 +1,102 @@
+BOOL      DB2IfH()
+{
+VARIABLES
+	GLOBAL     FileHandle docFile;
+	STRING     fname  = 'e:/OdabaI.h';
+	BOOL       cond = true;
+	SET<ODC_ImpClass> &classes = ODC_ImpClass();
+	SET<ODC_PFuncions> &functions = classes.pfunctions;
+	int        impcount;
+	STRING     retval,retvalcpp,parameters,member,typedefs,ptype,pdbtype,pname;
+	STRING funct,paramprefix,baseconstructor;
+PROCESS
+	if ( docFile.IsOpened() )
+		Message('Warning: File aleady opened - reopened'); 
+	if ( !(cond = !docFile.Open(fname)) )
+		Message('Error  : File '+fname+'could not be opened');
+	docFile.Out("#ifndef Odaba_I_H\n");
+	docFile.Out("#define Odaba_I_H\n");
+	docFile.Out("#include <Odaba.h>\n");
+	docFile.Out("#include <codaba2.h>\n");
+	docFile.Out("#include <enumconv.h>\n");
+//********************  sameforall *****************************/
+	while(classes.Next()){
+		Message(classes.sys_ident);
+		member = "";
+		while(classes.pfunctions.Next()){
+			//Message(" " + classes.pfunctions.sys_ident + " [" + classes.pfunctions.inter_face + "]");
+			if(classes.pfunctions.GetCount() && classes.pfunctions.inter_face){
+				impcount=0;
+				while(classes.pfunctions.implementations.Next()){
+				//Message("  " + classes.pfunctions.implementations.sys_ident + " " + classes.pfunctions.implementations.inter_face);
+				if(classes.pfunctions.implementations.inter_face){
+//******************** /sameforall *****************************/
+					retval = CE2ICEType(classes.pfunctions.ddetype);
+					retvalcpp = ICE2CPPType(retval);
+					fname  = classes.pfunctions.sys_ident;
+					if(impcount>0){
+						fname += Name2ICE(classes.pfunctions.implementations.sys_ident);
+					}
+					funct = "\tvirtual " + retvalcpp + " " + fname + "(\n";
+					
+					paramprefix = "  ";
+					parameters = "";
+					paramprefix = "  ";
+					parameters = "";
+					while(classes.pfunctions.implementations.parameters.Next()){
+						pdbtype = classes.pfunctions.implementations.parameters.ddetype;
+						ptype = CE2ICEType(pdbtype);
+						pname = Name2ICE(classes.pfunctions.implementations.parameters.sys_ident);
+						parameters+= ICECPPParameter(paramprefix, ptype, pname);
+						if(paramprefix=="  "){ paramprefix = ", "; }
+					}
+					funct+= parameters;
+					funct+= ICECPPDefaultParameter(paramprefix);
+					funct+= ");\n";
+					impcount+=impcount+1;
+					member+= funct;
+					
+				}}
+			}
+		}
+		if(member!=""){
+			docFile.Out("class");
+			docFile.Out(" " + classes.sys_ident + "I : virtual public Odaba::" + classes.sys_ident);
+			baseconstructor="";
+			//if(classes.smcebase.GetCount()>0){
+			//	while(classes.smcebase.Next()){
+			//		if(classes.smcebase.sys_ident!="ObjectReferenceHandle"){
+			//			docFile.Out("  , virtual public  " + classes.smcebase.sys_ident + "I");
+						//basebase = ODC_ImpClass(classes.smcebase.sys_ident);
+						//recursive?
+						//if(basebase.smcebase.GetCount()>0){
+						//	while(basebase.smcebase.Next()){
+						//		if(basebase.smcebase.sys_ident!="ObjectReferenceHandle"){
+						//			baseconstructor+="\n\t, " + basebase.smcebase.sys_ident + "I(p)";
+						//		}
+						//	}
+						//	
+						//}						
+			//			baseconstructor+= "\n\t, " + classes.smcebase.sys_ident + "I(p)";
+			//		}
+			//	}
+			//}
+			docFile.Out(" , virtual public ::" + classes.sys_ident + "\n");
+			docFile.Out("\n");
+			docFile.Out("{\npublic:\n");
+			typedefs += "\n\t  typedef IceUtil::Handle<" + classes.sys_ident + "I> " + classes.sys_ident + "IPtr;\n";
+			docFile.Out("\t" + classes.sys_ident + "I(::"+classes.sys_ident+" &p):");
+			docFile.Out("\n\t Odaba::" + classes.sys_ident + "()");
+			//docFile.Out(baseconstructor);
+			docFile.Out("\n\t,::" + classes.sys_ident + "(p)");
+			docFile.Out("\n\t{/*default constructor*/}\n");
+			docFile.Out(member);
+			docFile.Out("};\n");
+		}
+	}
+	docFile.Out("//typedefs\n" + typedefs);
+	
+	docFile.Out("#endif\n");
+	docFile.Close();
+	FINAL 
+}

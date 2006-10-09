@@ -1,0 +1,7 @@
+#ifndef __CoaXmlActionDescription__
+#define __CoaXmlActionDescription__
+
+#include "../base/coaxmlactiondescription.h"
+
+
+#endif

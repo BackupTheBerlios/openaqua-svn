@@ -1,0 +1,1 @@
+int16 lck_cnt = 0;

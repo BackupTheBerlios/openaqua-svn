@@ -1,0 +1,5 @@
+#ifndef __CoaDebugThread__
+#define __CoaDebugThread__
+#include "../debug/coadebugthread.h"
+
+#endif //__CoaDebugThread__

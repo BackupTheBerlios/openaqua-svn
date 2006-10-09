@@ -1,0 +1,5 @@
+#ifndef __CoaAbstractItemModel__
+#define __CoaAbstractItemModel__
+#include "../base/coaabstractitemmodel.h"
+#endif
+

@@ -1,0 +1,3 @@
+TRACE=~/ODABA2/share/ODABA
+export TRACE
+/opt/odaba/bin/DBSystemInfo ~/odaba/test.db con1

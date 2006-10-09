@@ -1,0 +1,228 @@
+#!/bin/bash
+base=/data/develop/cpp/odaba/
+projects=${base}projects/
+project=opa
+source=/data/lan/develop/versions/v9/L/
+sourceq=/data/lan/develop/versions/v9/Q/
+
+update(){
+  project=$1
+  dir=$2
+  updatea $project $dir $project
+}
+
+updatea(){
+  project=$1
+  dir=$2
+  sproject=$3
+  echo removing ${project}/${dir}
+  rm -f ${projects}${project}/${dir}/*
+  echo cp ${sproject}/${dir}
+  cp ${source}${sproject}/${dir}/* ${projects}${project}/${dir}
+}
+
+updateclasses(){
+  project=$1
+  updateclassesa ${project} "bat"
+}
+updateclassesa(){
+  project=$1
+  spath=$2
+  echo stripping bats $project $spath
+  cp ${source}${project}/$spath/compall.bat ${projects}${project}/bat/
+  cp ${source}${project}/$spath/compmains.bat ${projects}${project}/bat/
+  ${base}/sbin/strip_compall ${project}
+  ${base}/sbin/strip_compmains ${project}
+  #ls ${projects}${project}/bat/ -la
+  rm ${projects}${project}/bat/compall.bat
+  rm ${projects}${project}/bat/compmains.bat
+}
+
+updateclassesb(){
+  project=$1
+  sproject=$2
+  spath="bat"
+  echo stripping bats $project $sproject
+
+  cp ${source}${sproject}/$spath/compall.bat ${projects}${project}/bat/
+  cp ${source}${sproject}/$spath/compmains.bat ${projects}${project}/bat/
+  ${base}/sbin/strip_compall ${project}
+  ${base}/sbin/strip_compmains ${project}
+  rm ${projects}${project}/bat/compall.bat
+  rm ${projects}${project}/bat/compmains.bat
+  #${base}/sbin/strip_compall ${source}${sproject}/$spath/compall.bat > ${projects}${project}/bat/classes-prj
+  #${base}/sbin/strip_compmains ${source}${sproject}/$spath/compmains.bat > ${projects}${project}/bat/classes-exe 
+}
+
+case "$1" in
+ all)
+  up="/data/develop/cpp/odaba/sbin/update";
+  $up opa;
+  $up oql;
+  $up ops;
+  $up opi;
+  $up sos;
+  $up zlib;
+  $up ogui;
+  $up odcp;
+  $up oadi;
+  $up adk;
+  ;;
+ opa)
+  update opa h
+  update opa hi
+  update opa ha
+  update opa hd
+  update opa qlib
+  updateclasses opa
+  cd ${projects}${project}/h/
+  ln -s _cs_opa.h _cs_OPA.h
+  update opa/oxml h
+  update opa/oxml qlib
+  updateclasses opa/oxml
+  ;;
+ oql)
+  update oql h
+  update oql qlib
+  updateclasses oql
+  ;;
+ opsbat)
+  updateclasses ops
+  updateclassesb FunctionalModel ops/FunctionalModel
+  ;;
+ ops)
+  update ops h
+  update ops qlib
+  updateclasses ops
+  
+  updatea FunctionalModel h ops/FunctionalModel
+  updatea FunctionalModel qlib ops/FunctionalModel
+  
+  updateclassesb FunctionalModel ops/FunctionalModel
+  ;;
+ opi)
+  update opi h
+  update opi qlib
+  updateclasses opi
+
+  update opi/Utilities h
+  update opi/Utilities qlib
+  updateclasses opi/Utilities
+  
+  cat  ${projects}${project}/bat/classes-exe |grep -v WinODABAService>/tmp/update.opi
+  mv /tmp/update.opi  ${projects}${project}/bat/classes-exe  
+
+  cat  ${projects}${project}/bat/classes-prj |grep -v WinODABAService>/tmp/update.opi
+  mv /tmp/update.opi  ${projects}${project}/bat/classes-prj  
+
+  #ODABAServer
+  echo "#ifndef __unix__" > /tmp/ODABAServer.cpp
+  cat ${projects}opi/Utilities/qlib/ODABAServer.cpp >> /tmp/ODABAServer.cpp
+  echo "#endif //ndef __unix__" >> /tmp/ODABAServer.cpp
+  mv /tmp/ODABAServer.cpp ${projects}opi/Utilities/qlib/ODABAServer.cpp
+  
+  ;;
+ sos)
+  updatea sos h sos
+  updatea sos qlib sos
+  updateclasses sos
+  #patches
+
+  #registry
+  echo "#ifndef __unix__" > /tmp/RegistryKey.cpp
+  cat ${projects}sos/qlib/RegistryKey.cpp >> /tmp/RegistryKey.cpp
+  echo "#endif //ndef __unix__" >> /tmp/RegistryKey.cpp
+  mv /tmp/RegistryKey.cpp ${projects}sos/qlib/RegistryKey.cpp
+  #service
+  echo "#ifndef __unix__" > /tmp/OService.cpp
+  cat ${projects}sos/qlib/OService.cpp >> /tmp/OService.cpp
+  echo "#endif //ndef __unix__" >> /tmp/OService.cpp
+  mv /tmp/OService.cpp ${projects}sos/qlib/OService.cpp
+
+  #RegExp
+  #cat ${projects}sos/bat/classes-prj | grep -v RegExp >> /tmp/sosclasses
+  #mv /tmp/sosclasses ${projects}sos/bat/classes-prj
+
+
+  updatea sos/greta qlib sos/greta
+  updatea sos/greta h sos/greta
+  ;;
+zlib)
+  echo "zlib will break: example.c is bad code - please keep a copy elsewhere"
+  echo "enter to begin"
+#  read
+  rm -f ${projects}sos/zlib/qlib/*
+  rm -f ${projects}sos/zlib/h/*
+  cp ${source}sos/zlib/*.h ${projects}sos/zlib/h
+  cp ${source}sos/zlib/*.c ${projects}sos/zlib/qlib/
+  rename ".c" ".cpp" ${projects}sos/zlib/qlib/*
+  ;;
+ ogui)
+  update ogui qlib
+  update ogui h
+  update ogui hi
+  updateclasses ogui
+
+
+  project=ogui
+  echo copy files
+  rm -f ${projects}${project}/qt/hi/*
+  cp ${source}${project}/QT/hi/* ${projects}${project}/qt/hi
+  ;;
+ odcp)
+  project=odcp
+  update ${project} h  
+  rm -f ${projects}${project}/qlib/*
+  cp ${source}${project}/qLib/* ${projects}${project}/qlib
+  updateclasses ${project} 
+  
+  echo coe debug >>  ${projects}${project}/bat/classes-exe
+  echo oe_helper debug >>  ${projects}${project}/bat/classes-exe
+  
+  echo "note: also update oadi"
+  # 
+  ;;
+
+ oadi)
+  project=oadi
+  echo copy files
+  rm -f ${projects}${project}/h/*
+  cp ${source}${project}/H/* ${projects}${project}/h
+  
+  update oadi qlib
+  updateclassesa ${project} "bat"
+  echo "compile odcp too!"
+  # 
+  ;;
+
+ adk)
+  project=adk/adkctxi  
+  update ${project} qlib
+  update ${project} h
+  updateclassesa ${project} "bat"
+
+  project=adk/designer
+  
+  update ${project} qlib
+  update ${project} h
+  updateclassesa ${project} "bat"
+  # 
+  ;;
+ Transparent)
+  source=$sourceq
+  project=Transparent/VGKbase
+  
+  update ${project} qlib
+  update ${project} h
+  updateclassesa ${project} "bat"
+
+  project=Transparent/VGKctxi
+
+  update ${project} qlib
+  update ${project} h
+  updateclassesa ${project} "bat"
+  
+  # 
+  ;;
+esac
+

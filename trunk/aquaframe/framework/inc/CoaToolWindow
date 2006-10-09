@@ -1,0 +1,6 @@
+#ifndef __CoaToolWindow__
+#define __CoaToolWindow__
+
+#include "../windows/coatoolwindow.h"
+
+#endif //__CoaToolWindow__

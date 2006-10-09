@@ -1,0 +1,16 @@
+DATASOURCE='OPI';
+
+// main working
+INCLUDE "l:/adk/osi/icehelper.osi";
+INCLUDE "l:/adk/osi/ice.slice.osi";
+INCLUDE "l:/adk/osi/ice.hpp.osi";
+INCLUDE "l:/adk/osi/ice.cpp.osi";
+
+
+bool main(){
+
+	DB2ICE();
+	DB2IfH();
+	DB2IfCPP();
+
+}

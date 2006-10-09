@@ -1,0 +1,114 @@
+.TH "OPI::DatabaseHandle" 3 "25 Jul 2006" "OPIICE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OPI::DatabaseHandle \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBBaseType\fP (string strnames)"
+.br
+.ti -1c
+.RI "bool \fBCheckExpression\fP (string expression, \fBDBObjectHandle\fP *dbobjhandle, string clsnames)"
+.br
+.ti -1c
+.RI "bool \fBCheckExpressionInClass\fP (\fBDBObjectHandle\fP *resobj, string clsnames, string exprnames, string implnames)"
+.br
+.ti -1c
+.RI "bool \fBCheckExtentDef\fP (string scopedname)"
+.br
+.ti -1c
+.RI "bool \fBCheckValueSet\fP (string scopedname)"
+.br
+.ti -1c
+.RI "bool \fBCopyCodeset\fP (DictionaryHandle *srcedicthandle, string strname, int namespaceid, string newnames, \fBPIREPL\fP dbreplace, bool retainSID, bool retainschemav)"
+.br
+.ti -1c
+.RI "bool \fBCopyExtentDef\fP (DictionaryHandle *srcedicthandle, string extentname, string newnames, string targstruct, bool transaction, bool retainschemav)"
+.br
+.ti -1c
+.RI "bool \fBCopyStructure\fP (DictionaryHandle *srcedicthandle, string strname, int namespaceid, string newnames, string topname, \fBPIREPL\fP dbreplace, bool retainSID, bool retainschemav)"
+.br
+.ti -1c
+.RI "bool \fBCopyType\fP (DictionaryHandle *srcedicthandle, string strnames, string newnames, string topname, \fBPIREPL\fP dbreplace, bool retainSID, bool transaction, bool retainschemav)"
+.br
+.ti -1c
+.RI "bool \fBCreateEnum\fP (string enumname, string basetype)"
+.br
+.ti -1c
+.RI "string \fBCreateTempExtent\fP (string strnames, string extnamesw, string keynamew, string baseextsw, bool weakoptw, bool ownoptw)"
+.br
+.ti -1c
+.RI "bool \fBDeleteEnum\fP (string enumname)"
+.br
+.ti -1c
+.RI "string \fBEnumToString\fP (string enumeration, int enumval, string pstring, int len)"
+.br
+.ti -1c
+.RI "int \fBGetLastSchemaVersion\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetTempName\fP (string extnames)"
+.br
+.ti -1c
+.RI "bool \fBIsBasicType\fP (string typenames)"
+.br
+.ti -1c
+.RI "bool \fBOpenDictionary\fP (\fBODABAClient\fP *podabaclient, string cpath, \fBPIACC\fP accopt, bool wnetopt, int versionnr, \fBResourceTypes\fP localressources, bool sysenv)"
+.br
+.ti -1c
+.RI "int \fBStringToEnum\fP (string enumeration, string enumstring)"
+.br
+.ti -1c
+.RI "bool \fBUpdateVersion\fP ()"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "int OPI::DatabaseHandle::BaseType (string strnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CheckExpression (string expression, \fBDBObjectHandle\fP * dbobjhandle, string clsnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CheckExpressionInClass (\fBDBObjectHandle\fP * resobj, string clsnames, string exprnames, string implnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CheckExtentDef (string scopedname)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CheckValueSet (string scopedname)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CopyCodeset (DictionaryHandle * srcedicthandle, string strname, int namespaceid, string newnames, \fBPIREPL\fP dbreplace, bool retainSID, bool retainschemav)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CopyExtentDef (DictionaryHandle * srcedicthandle, string extentname, string newnames, string targstruct, bool transaction, bool retainschemav)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CopyStructure (DictionaryHandle * srcedicthandle, string strname, int namespaceid, string newnames, string topname, \fBPIREPL\fP dbreplace, bool retainSID, bool retainschemav)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CopyType (DictionaryHandle * srcedicthandle, string strnames, string newnames, string topname, \fBPIREPL\fP dbreplace, bool retainSID, bool transaction, bool retainschemav)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::CreateEnum (string enumname, string basetype)\fC [private]\fP"
+.PP
+.SS "string OPI::DatabaseHandle::CreateTempExtent (string strnames, string extnamesw, string keynamew, string baseextsw, bool weakoptw, bool ownoptw)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::DeleteEnum (string enumname)\fC [private]\fP"
+.PP
+.SS "string OPI::DatabaseHandle::EnumToString (string enumeration, int enumval, string pstring, int len)\fC [private]\fP"
+.PP
+.SS "int OPI::DatabaseHandle::GetLastSchemaVersion ()\fC [private]\fP"
+.PP
+.SS "string OPI::DatabaseHandle::GetTempName (string extnames)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::IsBasicType (string typenames)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::OpenDictionary (\fBODABAClient\fP * podabaclient, string cpath, \fBPIACC\fP accopt, bool wnetopt, int versionnr, \fBResourceTypes\fP localressources, bool sysenv)\fC [private]\fP"
+.PP
+.SS "int OPI::DatabaseHandle::StringToEnum (string enumeration, string enumstring)\fC [private]\fP"
+.PP
+.SS "bool OPI::DatabaseHandle::UpdateVersion ()\fC [private]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIICE from the source code.

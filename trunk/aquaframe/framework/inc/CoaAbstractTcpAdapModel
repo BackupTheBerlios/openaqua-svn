@@ -1,0 +1,6 @@
+#ifndef __CoaAbstractTcpAdapModel__
+#define __CoaAbstractTcpAdapModel__
+
+#include "../base/coaabstracttcpadapmodel.h"
+
+#endif //__CoaAbstractTcpAdapModel__

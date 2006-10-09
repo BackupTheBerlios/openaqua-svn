@@ -1,0 +1,5 @@
+#!/bin/sh
+echo creating ICE bases from SLICE definitions
+
+#/opt/Ice-3.0.1/bin/
+slice2cpp ice/OPI.ice --output-dir src/

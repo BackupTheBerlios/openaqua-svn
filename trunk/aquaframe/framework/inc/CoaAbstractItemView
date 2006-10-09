@@ -1,0 +1,7 @@
+#ifndef __CoaAbstractItemView__
+#define __CoaAbstractItemView__
+
+#include "../views/coaabstractitemview.h"
+
+#endif //__CoaAbstractItemView__
+

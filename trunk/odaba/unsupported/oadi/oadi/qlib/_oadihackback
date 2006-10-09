@@ -1,0 +1,28 @@
+TProjectManager 
+47: ;
+523: GSRT
+OADKFactory
+75: ;
+OBaseComponent
+29: ;
+366: constructor: double commas
+OColorGroup
+86: constructor OBrush **pOBrush now **ppOBrush
+OFieldControl
+95: constructor - semicolon missing
+237: missing newline in rttidef
+    was: #  ifndef GRTTI_BASE1
+#    define HAS_RTTI_OStyleAction
+
+OLayout:
+102: for(i - i undefined assumed int i
+OTabControl
+:Constructor:inicode ADK_Position ADK_VertPos
+OSButtonGroup
+: add include sostyle.hpp
+OSGroupBox
+: add include sostyle.hpp
+OSSplitter
+: add include sostyle.hpp
+TActionHander
+305: GSRT 

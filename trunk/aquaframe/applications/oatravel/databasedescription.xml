@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CoaDatabaseDescription>
+
+<!--
+   null="true" field can have null values - the default
+
+-->
+
+
+<CoaDatabaseDescription version="1.0">
+   <database>
+      <!-- Describes contacts-->
+      <table  name="contact" >
+         <column  name="id"            type="sequence"   null="false" unique="true"/>
+         
+         <!--physical chronologie -->
+         <column  name="inserted_at"   type="timestamp" />
+         <column  name="modified_at"   type="timestamp" />
+         <column  name="obj_version"   type="integer"   />
+
+         <column  name="company"       type="varchar" width="50" />
+         <column  name="department"    type="varchar" width="50" />
+                  
+         <!--values-->
+         <column  name="name_first"    type="varchar" width="25" />
+         <column  name="name_last"     type="varchar" width="25" />
+         <column  name="name_full"     type="varchar" width="25" />
+         <column  name="zip"           type="varchar" width="15" />
+         <column  name="city"          type="varchar" width="55" />
+         <column  name="country"       type="varchar" width="25" />
+         <column  name="state"         type="varchar" width="25" />
+
+         <column  name="phone_main"        type="varchar" width="25" />
+         <column  name="phone_extension"   type="varchar" width="25" />
+         <column  name="phone_assist1"     type="varchar" width="25" />
+         <column  name="phone_assist2"     type="varchar" width="25" />
+         <column  name="phone_home"        type="varchar" width="25" />
+         <column  name="phone_mobil"       type="varchar" width="25" />
+         
+         <column  name="icq"             type="varchar" width="25" />
+
+         <column  name="email_work"       type="varchar" width="25" />
+         <column  name="email_home"       type="varchar" width="25" />
+         <column  name="www"              type="varchar" width="25" />
+                           
+         <primary><column name="id"/>          </primary>
+         <index>  <column name="name_full"/>   </index>
+         <index>  <column name="name_first"/>  </index>
+         <index>  <column name="name_last"/>   </index>
+         <index>  <column name="city"     />   </index>
+         <index>  <column name="zip"      />   </index>
+      </table>
+      
+      
+      <!-- Describes milages-->
+      <table  name="milage" >
+         <!--<column  name="id"            type="sequence"  null="false" primarykey="true"/>-->
+         <column  name="id"            type="integer"   null="false" unique="true"/>
+         
+         <!--physical chronologie -->
+         <column  name="inserted_at"   type="timestamp" null="false"/>
+         <column  name="modified_at"   type="timestamp" null="true"/>
+         <column  name="obj_version"   type="integer"   null="false"/>
+         
+         <!--values-->
+         <column  name="private"       type="bool"      null="false" default="false"/>
+         
+         <column  name="begin"         type="timestamp" null="false"/>
+         <column  name="end"           type="timestamp" null="true"/>
+         
+         <column  name="mileage_begin" type="timestamp" null="false"/>
+         <column  name="mileage_end"   type="timestamp" null="true"/>
+         <column  name="description"   type="text"      null="true"  comment=""/>
+         <primary>
+            <column name="id"/>
+         </primary>
+      </table>
+   </database>
+    
+</CoaDatabaseDescription>

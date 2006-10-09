@@ -1,0 +1,33 @@
+#!/bin/bash
+base=/data/develop/cpp/odaba
+#compile all
+read -n1 -p "recompile? [y/N]" -r comp 
+if [ "$comp" == "y" ]; then
+    cd $base
+    make
+    cd projects/ODABAICEServer/
+    make
+    cd ../..    
+fi
+rm -r ${ODABA_SITE_DIR}
+read -n1 -p "strip? [y/N]" -r strip
+if [ "$strip" == "y" ]; then
+    cd bin
+    pwd && ls
+    ls -1 | xargs strip -x
+    cd ../lib
+    pwd && ls
+    ls -1 | xargs strip -x
+    cd ../projects/ODABAICEServer/
+    rm bin/*.o
+    cd bin
+    pwd && ls
+    ls -1 | xargs strip -x 
+    cd ../../..
+fi
+cd ..
+
+du -hs odaba
+
+pack.odaba "`uname -m`"
+

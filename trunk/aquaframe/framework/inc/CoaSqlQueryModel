@@ -1,0 +1,7 @@
+#ifndef __CoaSqlQueryModel__
+#define __CoaSqlQueryModel__
+
+#include "../db/coasqlquerymodel.h"
+
+#endif 
+

@@ -1,0 +1,5 @@
+#ifndef __CoaActionBuilderDatabase__
+#define __CoaActionBuilderDatabase__
+#include "../builder/coaactionbuilderdatabase.h"
+#endif //
+

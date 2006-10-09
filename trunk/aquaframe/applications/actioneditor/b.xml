@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CoaMenuBarDescription>
+<CoaMenuBarDescription version="1.0" >
+   <amenu name="&amp;Application" >
+      <separator/>
+      <action type="actionApplicationQuit" />
+      <action type="actionApplicationSettings" />
+      <action type="actionApplicationSetShortcuts" />
+      <action type="actionApplicationPrintShortcuts" />
+      <separator/>
+      <action type="actionApplicationSwitchSDIMode" />
+      <action type="actionApplicationSwitchMDIMode" />
+      <separator/>
+      <action type="actionApplicationAboutApplication" />
+   </amenu>
+   <bmenu name="&amp;Application" >
+      <baction type="actionApplicationQuit" >
+         <separator/>
+         <separator/>
+      </baction>
+   </bmenu>
+</CoaMenuBarDescription>

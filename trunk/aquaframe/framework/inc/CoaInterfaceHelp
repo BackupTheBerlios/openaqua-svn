@@ -1,0 +1,7 @@
+#ifndef __CoaInterfaceHelp__
+#define __CoaInterfaceHelp__
+
+#include "../widgets/coainterfacehelp.h"
+
+#endif //__CoaInterfaceHelp__
+

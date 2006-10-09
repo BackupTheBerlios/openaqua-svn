@@ -1,0 +1,4 @@
+#ifndef __CoaBaseThread__
+#define __CoaBaseThread__
+#include "../base/coabasethread.h"
+#endif

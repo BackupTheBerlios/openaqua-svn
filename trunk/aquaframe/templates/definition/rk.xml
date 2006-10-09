@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE openaqua_travel_definition
+   [
+      <!--
+      defines the document structure
+      -->
+      
+      <!ELEMENT openaqua_travel_definition    (tabellist, tabelcontent)>
+      <!ATTLIST openaqua_travel_definition    version CDATA #REQUIRED>      
+      
+      
+      <!--
+      defines the structure of the list of all known sql tables
+      -->
+      <!ELEMENT tabellist          (tabled+)>
+      <!ELEMENT tabled             (column+)>
+      <!ELEMENT column             EMPTY>
+
+      <!ATTLIST tabled             name ID #REQUIRED>      
+            
+      <!ATTLIST column             name CDATA                                        #REQUIRED
+                                   type (BOOL | CHAR | VARCHAR | BLOB | SERIAL | INTEGER | TIMESTAMP | DURATION) #REQUIRED
+                                   len  CDATA                                        #IMPLIED
+                                   default CDATA                                     #IMPLIED
+      >
+
+      <!--
+      defines the structure of the list of all known sql tables contents
+      -->
+
+      
+      <!ELEMENT tabelcontent       (tablec+)>
+      <!ELEMENT tablec             (columnc)>
+      <!ELEMENT columnc            EMPTY>
+   
+      <!ATTLIST tablec             name IDREF #REQUIRED>      
+            
+      <!ATTLIST columnc            name     CDATA                                        #REQUIRED
+                                   value    CDATA                                        #REQUIRED
+      >
+   ]
+>
+
+
+<!--Start of the document-->
+<openaqua_travel_definition version="1.0" >
+
+
+
+<!--
+List of sql tables
+-->
+<tabellist>
+
+   <tabled name="oa_tvl_main"> <!--  -->
+      <column name="version" type="VARCHAR" len="10"/> <!-- -->
+      <column name="created" type="TIMESTAMP"/> <!-- -->
+      <column name="program" type="VARCHAR" len="20"/> <!-- -->
+   </tabled>
+   
+   <tabled name="oa_tvl_project">
+      <column name="id"          type="SERIAL"/>
+      <column name="title"       type="VARCHAR" len="250"/>
+      <column name="description" type="BLOB"/>
+   </tabled>
+
+   <tabled name="oa_tvl_travel">
+      <column name="id"          type="SERIAL"/>
+      <column name="id_project"  type="INTEGER"/>
+      <column name="title"       type="VARCHAR" len="250"/>
+      <column name="description" type="BLOB"/>
+      <column name="begin"       type="TIMESTAMP"/>
+      <column name="end"         type="TIMESTAMP"/>
+   </tabled>
+
+   <tabled name="oa_tvl_task">
+      <column name="id"          type="SERIAL"/>
+      <column name="id_project"  type="INTEGER"/>
+      <column name="title"       type="VARCHAR" len="250"/>
+      <column name="description" type="BLOB"/>
+      <column name="begin"       type="TIMESTAMP"/>
+      <column name="end"         type="TIMESTAMP"/>
+      <column name="break"       type="DURATION"/>
+      <column name="billing"     type="BOOL"/>
+   </tabled>
+
+           
+</tabellist>
+
+
+
+<!--
+(default) content of those sql tables
+-->
+
+
+<tabelcontent>
+   <tablec name="oa_tvl_main">
+      <columnc name="version" value="1"/>
+      <columnc name="created" value="now()"/>
+      <columnc name="program" value="OpenAqua Travel"/>
+   </tablec>
+</tabelcontent>
+
+
+<!--End of the document-->
+</openaqua_travel_definition>

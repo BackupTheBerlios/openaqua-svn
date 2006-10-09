@@ -1,0 +1,8 @@
+#ifndef __IoaDatasetWidget__
+#define __IoaDatasetWidget__
+
+#include "../corba/ioadatasetwidget.h"
+
+
+#endif // __IoaDatasetWidget__
+

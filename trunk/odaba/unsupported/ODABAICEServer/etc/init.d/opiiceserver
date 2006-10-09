@@ -1,0 +1,26 @@
+#!/sbin/runscript
+
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	# Ensure that we run from a readable working dir, and that we do not
+	# lock filesystems when being run from such a location.
+	LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/odaba/lib/" && export LD_LIBRARY_PATH 
+	start-stop-daemon --start --quiet --background --make-pidfile \
+		--pidfile /var/run/${SVCNAME}.pid --exec /opt/odaba/bin/OPIICEServer \
+		--chuid opiice::opiice -- \
+		--foreground  \
+		--Ice.Config=/etc/odaba/opiice/config
+	eend $?
+
+}
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --quiet --pidfile /var/run/${SVCNAME}.pid
+	eend $?
+}

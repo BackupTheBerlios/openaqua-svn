@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# set basic enviroment vars
+PRG_NAME="`basename "${0}"`"
+test "${HOSTNAME+set}" ||
+  HOSTNAME="`uname -n`"
+
+test "${HOSTTYPE+set}" ||
+  HOSTTYPE="`uname -p`"
+
+test "${OSTYPE+set}" ||
+  OSTYPE="`uname -s`-`uname -r`"
+
+# find odaba shell config dir
+if [ "${OSHELL_ETC_DIR+set}" ]; then
+  OSHELL_ETC_DIR="${OSHELL_ETC_DIR}"
+elif [ "${ODABA_CONFIG_DIR+set}" ]; then
+  OSHELL_ETC_DIR="${ODABA_CONFIG_DIR}"
+elif [ "${ODABA_DIR+set}"  ]; then
+  OSHELL_ETC_DIR="${ODABA_DIR}/etc"
+else
+  OSHELL_ETC_DIR=`pwd`"/etc"
+fi
+
+# setting default ODABA_ vars (if not set)
+# ODABA directories
+test "${ODABA_DIR+set}" ||
+  ODABA_DIR="${PWD}"
+test "${ODABA_BIN_DIR+set}" ||
+  ODABA_BIN_DIR="${ODABA_DIR}/bin"
+test "${ODABA_ETC_DIR+set}" ||
+  ODABA_ETC_DIR="${OSHELL_ETC_DIR}"
+test "${ODABA_LIB_DIR+set}" ||
+  ODABA_LIB_DIR="${ODABA_DIR}/lib"
+test "${ODABA_PROJECTS+set}" ||
+  ODABA_PROJECTS_DIR="${ODABA_DIR}/projects"
+test "${ODABA_SBIN_DIR+set}" ||
+  ODABA_SBIN_DIR="${ODABA_DIR}/sbin"
+test "${ODABA_SITE_DIR+set}" ||
+  ODABA_SITE_DIR="${ODABA_DIR}/${OSTYPE}-${HOSTTYPE}"
+test "${ODABA_TMP_DIR+set}" ||
+  ODABA_TMP_DIR="${ODABA_DIR}/tmp"
+test "${ODABA_DATA_DIR+set}" ||
+  ODABA_DATA_DIR="${ODABA_DIR}/share"
+
+# misc
+test "${ODABA_DEBUG+set}" ||
+  ODABA_DEBUG="undefined"
+test "${ODABA_SCRIPT_RC+set}" ||
+  ODABA_SCRIPT_RC="${ODABA_ETC_DIR}/odaba-script.rc"
+test "${ODABA_SHELL+set}" ||
+  ODABA_SHELL="${SHELL}"
+test "${TRACE+set}" ||
+  TRACE="${ODABA_TMP_DIR}"
+
+# load config files
+test -f "${OSHELL_ETC_DIR}/odaba-shell.rc" &&
+  . "${OSHELL_ETC_DIR}/odaba-shell.rc"
+test -f "${OSHELL_ETC_DIR}/${OSTYPE}.rc" &&
+  . "${OSHELL_ETC_DIR}/${OSTYPE}.rc"
+test -f "${OSHELL_ETC_DIR}/${OSTYPE}-${HOSTTYPE}.rc" &&
+  . "${OSHELL_ETC_DIR}/${OSTYPE}-${HOSTTYPE}.rc"
+test -f "${OSHELL_ETC_DIR}/${HOSTNAME}.rc" &&
+  . "${OSHELL_ETC_DIR}/${HOSTNAME}.rc"
+
+# setting PATH & LD_LIBRARY_PATH
+PATH="${ODABA_SBIN_DIR}:${PATH}:${ODABA_BIN_DIR}"
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ODABA_LIB_DIR}"
+
+# export enviroment variables
+# PATH + LD_LIBRARY_PATH
+export PATH LD_LIBRARY_PATH
+# ODABA directories
+export ODABA_DIR ODABA_BIN_DIR ODABA_DATA_DIR ODABA_ETC_DIR ODABA_LIB_DIR ODABA_PROJECTS_DIR ODABA_SBIN_DIR ODABA_SITE_DIR ODABA_TMP_DIR
+# misc
+export ODABA_DEBUG ODABA_SCRIPT_RC ODABA_SHELL TRACE
+
+# change dir, display ODABA development scripts, fork new shell.
+cd "${ODABA_DIR}"
+ls "${ODABA_SBIN_DIR}"
+echo "makemake > Makefile"
+echo "make prj[/class|link|copy|clean]"
+export PS1='\[\033[0;32m\]odabashell: \[\033[0;34m\]\W \$ \[\033[00m\]'
+if [ $# -gt 0 ]; then
+  exec ${ODABA_SHELL} -c "$@"
+fi
+exec ${ODABA_SHELL} -i

@@ -1,0 +1,3 @@
+TRACE=~/ODABA2/share/ODABA
+export TRACE
+~/ODABA/bin/64/Server 6123 ~/ODABA2/share/ODABA/MetaServer64.ini Debug

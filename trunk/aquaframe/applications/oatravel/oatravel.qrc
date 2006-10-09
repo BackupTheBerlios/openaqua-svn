@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/form" >
+        <file>mainwindow.ui</file>
+        <file>menubardescription.xml</file>
+        <file>toolbardescription.xml</file>
+        <file>databasedescription.xml</file>
+    </qresource>
+    <qresource prefix="/icons" />
+</RCC>

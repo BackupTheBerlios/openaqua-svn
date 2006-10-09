@@ -1,0 +1,101 @@
+OINC= \
+  -I./src -I/opt/Ice-3.0.1/include/ -I/usr/include \
+  -I/opt/odaba/projects/opi/h \
+  -I/opt/odaba/projects/opa/hi \
+  -I/opt/odaba/projects/opa/hd \
+  -I/opt/odaba/projects/sos/h 
+  
+OLIB = -L/opt/odaba/lib/ -lsos90 -lopa90  -loxml \
+       -L/opt/Ice-3.0.1/lib64 \
+       -L/usr/lib  -lIce -lIceUtil  -lpthread
+
+SRC     = src/
+SRCICE  = ice/
+BIN     = bin/
+SCRIPT  = scripts/
+INST    = /opt/odaba/bin/
+INIT    = /etc/init.d/
+
+NS   = OPI
+OBJS = ${BIN}${NS}.o ${BIN}${NS}I.o ${BIN}${NS}FactoryI.o ${BIN}enumconv.o ${BIN}basecast.o ${BIN}SessionI.o ${BIN}SessionFactoryI.o ${BIN}SessionReapThread.o
+MAIN = ${BIN}${NS}ICEServer
+CCB  =  -m64 -ftemplate-depth-128 -Wall -D_REENTRANT -fPIC -g 
+CCO  =  -c ${CCB}
+LDO  =  -Wl,-rpath,/usr/lib -Wl,--enable-new-dtags
+CCE  = comperror
+#@echo "errors">comperror
+
+all:   ${OBJS} ${MAIN}
+	@echo success 
+	@echo $ ./scripts/startserver
+	@echo to start the daemon
+	@echo make install to create init-script and configs
+
+clean: 
+	rm ${BIN}*.o
+	rm src/OPI.h
+	rm src/OPI.cpp
+	rm ${MAIN}
+
+install: ${MAIN}
+	@cp ${MAIN} ${INST}
+	@cp etc/init.d/opiiceserver ${INIT}opiiceserver
+	@cp etc/odaba /etc/ -R -L
+	@cp etc/ice /etc/ -R -L
+	@echo TODO: $ useradd opiice
+	@echo edit /etc/ice/profiles.ini to the new paths - use the opiice file 
+	@echo add a user and a group 'opiice'
+	@echo ${INIT}opiiceserver start to run the server
+
+#interface:
+${BIN}enumconv.o: ${SRC}enumconv.cpp ${SRC}enumconv.h
+	@echo -n enumconv ...
+	@c++ ${OINC} ${CCO} ${SRC}enumconv.cpp -o ${BIN}enumconv.o  2>${CCE}
+	@echo done
+
+${BIN}basecast.o: ${SRC}basecast.cpp ${SRC}basecast.h
+	@echo -n basecast ...
+	@c++ ${OINC} ${CCO} ${SRC}basecast.cpp -o ${BIN}basecast.o   2>${CCE}
+	@echo done
+
+${BIN}SessionI.o: ${SRC}SessionI.cpp ${SRC}SessionI.hpp
+	@echo -n SessionI ...
+	@c++ ${OINC} ${CCO} ${SRC}SessionI.cpp -o ${BIN}SessionI.o   2>${CCE}
+	@echo done
+
+${BIN}SessionFactoryI.o: ${SRC}SessionFactoryI.cpp ${SRC}SessionFactoryI.hpp
+	@echo -n SessionFactoryI ...
+	@c++ ${OINC} ${CCO} ${SRC}SessionFactoryI.cpp -o ${BIN}SessionFactoryI.o   2>${CCE}
+	@echo done
+
+${BIN}SessionReapThread.o: ${SRC}SessionReapThread.cpp ${SRC}SessionReapThread.hpp
+	@echo -n SessionReapThread ...
+	@c++ ${OINC} ${CCO} ${SRC}SessionReapThread.cpp -o ${BIN}SessionReapThread.o   2>${CCE}
+	@echo done
+
+${BIN}${NS}FactoryI.o: ${SRC}${NS}FactoryI.cpp ${SRC}${NS}FactoryI.hpp
+	@echo -n ${NS}FactoryI ...
+	@c++ ${OINC} ${CCO} ${SRC}${NS}FactoryI.cpp -o ${BIN}${NS}FactoryI.o  2>${CCE}
+	@echo done
+
+${BIN}${NS}I.o: ${SRC}${NS}I.hpp ${SRC}${NS}I.cpp
+	@echo -n ${NS}I ...
+	@c++ ${OINC} ${CCO} ${SRC}${NS}I.cpp -o ${BIN}${NS}I.o  2>${CCE}
+	@echo done
+
+${BIN}${NS}.o: ${SRC}${NS}.cpp ${SRC}${NS}.h 
+	@echo -n ${NS} ...
+	@c++ ${OINC} ${CCO} ${SRC}${NS}.cpp -o ${BIN}${NS}.o   2>${CCE}
+	@echo done
+
+${SRC}${NS}.h: ${SRCICE}${NS}.ice 
+${SRC}${NS}.cpp: ${SRCICE}${NS}.ice
+	@echo -n reslice ...
+	@./scripts/reslice
+	@echo done
+
+${MAIN}: ${SRC}${NS}ICEServer.cpp ${OBJS}
+	@echo -n ${NS}ICEServer ...
+	c++ ${OINC} ${CCO} ${SRC}${NS}ICEServer.cpp -o ${BIN}${NS}ICEServer.o #2>${CCE}
+	c++ ${LDO} ${OLIB} ${CCB}  ${OBJS} ${BIN}${NS}ICEServer.o -o ${MAIN} # 2>${CCE}
+	@echo done

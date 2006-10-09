@@ -1,0 +1,5 @@
+#ifndef __CoaActionBuilderEdit__
+#define __CoaActionBuilderEdit__
+#include "../builder/coaactionbuilderedit.h"
+#endif //
+

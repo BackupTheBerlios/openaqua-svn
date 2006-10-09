@@ -1,0 +1,8 @@
+#!/bin/sh
+echo start the slice server
+
+#LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/odaba/lib/:/opt/Ice-3.0.1/lib/" && export LD_LIBRARY_PATH 
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/odaba/lib/" && export LD_LIBRARY_PATH 
+TRACE=/tmp/odaba && export TRACE
+TRACE=/tmp/odaba bin/OPIICEServer --Ice.Config=/etc/odaba/opiice/config
+

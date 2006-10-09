@@ -1,0 +1,5 @@
+#ifndef __CoaOdabasConnection__
+#define __CoaOdabasConnection__
+#include "../odabas/coaodabasconnection.h"
+#endif //__CoaOdabasConnection__
+

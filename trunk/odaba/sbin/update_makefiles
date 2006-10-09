@@ -1,0 +1,109 @@
+#!/usr/bin/perl
+
+#print "[$ARGV[0]]\n";
+if($ARGV[0] eq "" ) { 
+  print "please provide a project\n";
+  return -1;
+}
+$project = $ARGV[0];
+my %bin;
+my $base = "/data/develop/odaba";
+@tbinarys   = `cat ${base}/projects/$project/bat/binaries`;
+@prjclasses = `cat ${base}/projects/$project/bat/classes-prj`;
+@execlasses = `cat ${base}/projects/$project/bat/classes-prj`;
+@subdirs    = `cat ${base}/projects/$project/bat/subdirs`;
+@includes   = `cat ${base}/projects/$project/bat/include_dirs`;
+@libs       = `cat ${base}/projects/$project/bat/libs`;
+
+my $binc = 0;
+for(@tbinarys){
+  if($_ =~/.*\[(.*)\].*/){
+    $current = $1;
+    $binc++;
+  }
+  if($_ =~/type.*=(.*)/){
+    $s = $1;$s=~s/ //g;
+    $bin{$current}{type} = $s;
+  }
+  if($_ =~/projects.*=(.*)/){
+    $bin{$current}{projects} = $1;
+  }
+  if($_ =~/classes.*=(.*)/){
+    $s = $1;$s =~s/^ (.*)/$1/;$s=~s/(.*)\n/$1/;
+    $bin{$current}{classes} = $s;
+  }
+}
+if($binc==0){ $bin{$project}{type} = "tlib"; }
+
+
+foreach $binary (keys %bin){
+#  print "[$bin{$binary}{type}]";
+ my @classes;
+ if($bin{$binary}{type} eq "exe"){
+    print "bin_PROGRAMS=$binary\n";
+    $fbin = $binary;$fbin=~s/\./_/g;
+    #print "[".$bin{$binary}{classes}."]";
+    @classes = split(/ /, $bin{$binary}{classes});
+    sources($fbin,@classes);
+  }
+ if($bin{$binary}{type} eq "lib"){
+    $fbin = "lib$binary.a";
+    print "lib_LIBRARIES=$fbin\n";
+    $fbin=~s/\./_/g;
+    for(@prjclasses){$s = $_; $s =~s/(.*) debug/$1/;$s =~s/(.*)\n/$1/;push(@classes,$s);}
+    sources($fbin,@classes);
+  }
+ if($bin{$binary}{type} eq "tlib"){
+    $fbin = "lib$binary.a";
+    print "noinst_LIBRARIES=$fbin\n";
+    $fbin=~s/\./_/g;
+    for(@prjclasses){$s = $_; $s =~s/(.*) debug/$1/;$s =~s/(.*)\n/$1/;push(@classes,$s);}
+    sources($fbin,@classes);
+  }
+  libs($fbin,@libs);
+  print "###############\n";
+}
+includes($fbin,@includes);
+
+sub libs($name,@lines){
+  my($name,@lines) = @_;
+  print "${name}_LDFLAGS = ";
+#  my $c = 0,$l=0;for(@lines){chop;if(!($_ eq "")){ $c++;}}
+  for(@lines){
+    chop;
+    if(!($_ eq "")){ print "\t-l$_ ";}
+#    $l++; if($l<$c) { print " \\";} print "\n";
+    print " \\\n";
+  }
+  print "\t-lrt -lpthread -ldl ";
+  print "\n";
+}
+
+sub includes($name,@lines){
+  my($name,@lines) = @_;
+  print "INCLUDES = ";
+  my $c = 0,$l=0;for(@lines){chop;if(!($_ eq "")){ $c++;}}
+  for(@lines){
+#    chop;
+    if($_ eq "h") { print "\t-I./h/";}else{ if(!($_ eq "")){ print "\t-I${base}/projects$_";}}
+    $l++; if($l<$c) { print " \\";} print "\n";
+  }
+  print "\n";
+}
+
+sub sources($name,@classes){
+  my ($name,@classes) = @_;
+   
+  print "${name}_SOURCES = \\\n";
+  my $c = 0,$l=0;
+  for(@classes){ $max = length($_)>length($max)?$_:$max; $c++}
+  for(@classes){
+    $space = " "x(length($max) - length($_));
+    $space.="\t";
+    print "\tqlib/$_.cpp${space}h/s$_.hpp";
+    $l++; if($l<$c) { print " \\";} print "\n";
+  }
+  print "\n";
+}
+
+

@@ -1,0 +1,20 @@
+ODABA_SHELL="/bin/bash"
+
+if [ -f "${ODABA_ETC_DIR}/${OSTYPE}.bits" ]; then
+  bits="`cat \"${ODABA_ETC_DIR}/${OSTYPE}.bits\"`"
+fi
+
+if [ -z "${bits:+set}" ]; then
+  bits=32
+fi
+
+if [ "${bits}" = "64" ]; then
+  ODABA_BIN_DIR="${ODABA_BIN_DIR}/64"
+  ODABA_LIB_DIR="${ODABA_LIB_DIR}/64"
+fi
+
+ODABA_SITE_DIR="${ODABA_SITE_DIR}${bits}"
+
+if [ -f "${ODABA_ETC_DIR}/solaris.script.rc" ]; then
+  ODABA_SCRIPT_RC="${ODABA_ETC_DIR}/solaris.script.rc"
+fi

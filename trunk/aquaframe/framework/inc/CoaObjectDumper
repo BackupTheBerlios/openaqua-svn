@@ -1,0 +1,7 @@
+#ifndef __CoaObjectDumper__
+#define __CoaObjectDumper__
+
+#include "../debug/coaobjectdumper.h"
+
+#endif // __CoaObjectDumper__
+

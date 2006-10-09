@@ -1,0 +1,7 @@
+#ifndef __CoaDebug__
+#define __CoaDebug__
+
+#include "../debug/coadebug.h"
+
+#endif // __CoaDebug__
+

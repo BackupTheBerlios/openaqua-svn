@@ -1,0 +1,6 @@
+TRACE=/tmp/odaba
+export TRACE
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/odaba/lib/" && export LD_LIBRARY_PATH 
+
+/opt/odaba/bin/ServerD --kill # /etc/odaba/odabaserver.ini
+exit 0

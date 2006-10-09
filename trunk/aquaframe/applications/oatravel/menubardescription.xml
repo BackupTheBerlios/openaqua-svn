@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CoaMenuBarDescription>
+
+
+<CoaMenuBarDescription version="1.0">
+  <menu  name="&amp;Application"> 
+    <action  type="actionApplicationQuit"/>
+    <separator/>
+    <action  type="actionApplicationSettings"/>
+    <action  type="actionApplicationSetShortcuts"/>
+    <action  type="actionApplicationPrintShortcuts"/>
+    <separator/>
+    <action type="actionApplicationSwitchSDIMode"/>
+    <action type="actionApplicationSwitchMDIMode"/>
+    <separator/>
+    <action type="actionApplicationAboutApplication"/>
+  </menu>
+  
+  
+  <menu id="2" name="&amp;File">
+    <action id="1" type="actionFileNew"/>
+    <separator/>
+    <action id="3" type="actionFileOpen"/>
+    <separator/>
+    <action id="5" type="actionFileSave"/>
+    <action id="6" type="actionFileSaveAs"/>
+    <action id="7" type="actionFileSaveAll"/>
+    <separator/>
+    <action id="9" type="actionFileClose"/>
+    <action id="10" type="actionFileCloseAll"/>
+  </menu>
+  
+  
+  <menu id="3" name="&amp;Edit">
+    <action id="1" type="actionEditUndo"/>
+    <action id="2" type="actionEditRedo"/>
+    <separator/>
+    <action id="4" type="actionEditCut"/>
+    <action id="5" type="actionEditCopy"/>
+    <action id="6" type="actionEditPaste"/>
+    <separator/>
+    <action id="8" type="actionEditSelectAll"/>
+  </menu>
+  
+  
+  <menu id="4" name="&amp;Help">
+    <action id="1" type="actionHelpHandbook"/>
+    <action id="2" type="actionHelpWhatsthis"/>
+    <separator/>
+    <action id="4" type="actionHelpTipOfTheDay"/>
+    <separator/>
+     <menu id="4" name="Debug Settings">
+       <action type="actionDebugSettings"/>
+       <separator/>
+       <action type="actionDatabaseSqlBrowser"/>
+       <action type="actionDatabaseSqlEditor"/>
+       <separator/>
+       <action type="actionDebugOnOff"/>
+       <action type="actionDebugShowTimeOnOff"/>
+       <separator/>
+       <action type="actionDebugFileDefaultsOff"/>
+       <action type="actionDebugFileDefaultsErr"/>
+       <action type="actionDebugFileDefaultsWrn"/>
+       <action type="actionDebugFileDefaultsInf"/>
+       <action type="actionDebugFileDefaultsDbg"/>
+     </menu>
+  </menu>
+    
+</CoaMenuBarDescription>

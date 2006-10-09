@@ -1,0 +1,68 @@
+#ifndef __CQT_H__
+#define __CQT_H__
+
+#define QT_DLL
+#define QT_THREAD_SUPPORT
+
+#define QT_NO_CAST_ASCII
+#define QT_NO_ASCII_CAST
+
+#pragma pack()
+
+#define BEGIN_ONCE( param ) \
+  if( !param ) \
+  { \
+    logical& __lock_param= param; \
+    param= YES;
+
+#define END_ONCE \
+    __lock_param= NO; \
+    goto __lock_end; \
+    __lock_end:; \
+  }
+
+#define LEAVE_ONCE( code ) \
+  { __lock_param= NO; \
+  code; \
+  goto __lock_end; }
+
+#define EXCEPT_ONCE( code ) \
+  { __lock_param= NO; \
+  code; \
+  __lock_param= YES; }
+
+
+#define CC (char*)(const char*)
+
+#define SZ2QS(sz) \
+  ( QString::fromLatin1(sz) )
+
+#define QS2SZ(qs) \
+  ( (char*) ((qs).isNull() ? (char*) NULL : (char*) (qs).isEmpty() ? (char*)"" : (char*)(qs).toLatin1().data()) )
+
+#define QS2SZ_P(qs,qba) \
+  ( (char*) ((qs).isNull() ? (char*) NULL : (char*) (qs).isEmpty() ? (char*)"" : (char*)(qba = (qs).toLatin1()).data()) ) 
+
+#define SZB2QS(sz,l) \
+  ( QString::fromLatin1( sz, __FB_get_len( sz, l ) ) )
+
+#define SZB2QC(sz,l) \
+  ( QCString( sz, __FB_get_len( sz, l ) + 1 ) )
+
+#define QC2SZB(qc,l) \
+  ( CC (qc).leftJustify(l) )
+
+#define QS2SZB(qs,l) \
+  ( QS2SZ( (qs).leftJustify(l) ) )
+
+#undef  Q_OBJECT    // wir muessen die virtuellen Funktionen exportieren um ausserhalb der ogui-dll ableiten zu koennen
+#define Q_OBJECT \
+public: \
+    static const QMetaObject staticMetaObject; \
+    virtual OGUI7ImpExp const QMetaObject *metaObject() const; \
+    virtual OGUI7ImpExp void *qt_metacast(const char *); \
+    QT_TR_FUNCTIONS \
+    virtual OGUI7ImpExp int qt_metacall(QMetaObject::Call, int, void **); \
+private:
+
+#endif //  __CQT_H__

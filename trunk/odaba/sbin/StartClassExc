@@ -1,0 +1,3 @@
+TRACE=~/ODABA2/share/ODABA
+export TRACE
+~/ODABA/bin/ClassExcExecute ~/ODABA2/share/ODABA/Data/ces2/2.ces -U PowerUser -P pu -C ~/ODABA2/share/ODABA/Data/ces2/ClassE.ini -R ~/ODABA2/share/ODABA/Data/ces2

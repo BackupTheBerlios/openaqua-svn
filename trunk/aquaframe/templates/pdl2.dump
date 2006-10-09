@@ -1,0 +1,512 @@
+--
+-- PostgreSQL database dump
+--
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2 (OID 221893)
+-- Name: vendors; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE vendors (
+    id serial NOT NULL,
+    vendor character varying(50) NOT NULL,
+    "comment" character varying(255),
+    CONSTRAINT "$1" CHECK ((substr((vendor)::text, 1, 1) <> ' '::text)),
+    CONSTRAINT "$2" CHECK ((rtrim((vendor)::text) <> ''::text))
+);
+
+
+--
+-- TOC entry 3 (OID 221899)
+-- Name: routers; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE routers (
+    id serial NOT NULL,
+    serialno character varying(30),
+    control_ip inet NOT NULL,
+    fqdn character varying(20) NOT NULL,
+    "timestamp" timestamp without time zone DEFAULT 'now' NOT NULL,
+    "comment" character varying(255),
+    snmp text,
+    config text,
+    inuse boolean NOT NULL,
+    ios_id integer NOT NULL,
+    model_id integer NOT NULL,
+    CONSTRAINT "$3" CHECK ((rtrim((fqdn)::text) <> ''::text)),
+    CONSTRAINT "$4" CHECK ((substr((fqdn)::text, 1, 1) <> ' '::text))
+);
+
+
+--
+-- TOC entry 4 (OID 221909)
+-- Name: resources_type; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE resources_type (
+    id serial NOT NULL,
+    "type" character varying(20) NOT NULL,
+    "comment" character varying(255),
+    CONSTRAINT "$1" CHECK ((substr(("type")::text, 1, 1) <> ' '::text)),
+    CONSTRAINT "$2" CHECK ((rtrim(("type")::text) <> ''::text))
+);
+
+
+--
+-- TOC entry 5 (OID 221915)
+-- Name: resources; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE resources (
+    id serial NOT NULL,
+    routers_id integer NOT NULL,
+    type_id integer NOT NULL,
+    "timestamp" timestamp without time zone DEFAULT 'now' NOT NULL,
+    value character varying(50) NOT NULL,
+    "comment" character varying(255),
+    CONSTRAINT "$1" CHECK ((rtrim((value)::text) <> ''::text)),
+    CONSTRAINT "$4" CHECK ((substr((value)::text, 1, 1) <> ' '::text))
+);
+
+
+--
+-- TOC entry 6 (OID 221922)
+-- Name: history; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE history (
+    id serial NOT NULL,
+    who character varying(15) DEFAULT "current_user"() NOT NULL,
+    why character varying(254) NOT NULL,
+    "when" timestamp without time zone DEFAULT 'now' NOT NULL,
+    command text NOT NULL,
+    tables character varying(20) NOT NULL,
+    CONSTRAINT "$1" CHECK ((rtrim((who)::text) <> ''::text)),
+    CONSTRAINT "$2" CHECK ((rtrim((why)::text) <> ''::text)),
+    CONSTRAINT "$3" CHECK ((rtrim(command) <> ''::text)),
+    CONSTRAINT "$4" CHECK ((rtrim((tables)::text) <> ''::text))
+);
+
+
+--
+-- TOC entry 7 (OID 221936)
+-- Name: ios; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE ios (
+    id serial NOT NULL,
+    ios character varying(30) NOT NULL,
+    description character varying(50),
+    CONSTRAINT "$1" CHECK ((rtrim((ios)::text) <> ''::text)),
+    CONSTRAINT "$2" CHECK ((substr((ios)::text, 1, 1) <> ' '::text))
+);
+
+
+--
+-- TOC entry 8 (OID 221942)
+-- Name: models; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE models (
+    id serial NOT NULL,
+    model character varying(15) NOT NULL,
+    description character varying(50),
+    vendor_id integer NOT NULL,
+    CONSTRAINT "$1" CHECK ((rtrim((model)::text) <> ''::text)),
+    CONSTRAINT "$3" CHECK ((substr((model)::text, 1, 1) <> ' '::text))
+);
+
+
+--
+-- TOC entry 9 (OID 221946)
+-- Name: misc; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE misc (
+    id integer NOT NULL,
+    value character varying(15) NOT NULL,
+    description character varying(50) NOT NULL,
+    CONSTRAINT "$1" CHECK ((substr((value)::text, 1, 1) <> ' '::text)),
+    CONSTRAINT "$3" CHECK ((rtrim((value)::text) <> ''::text))
+);
+
+
+--
+-- TOC entry 37 (OID 221949)
+-- Name: lowertrim (character varying); Type: FUNCTION; Schema: public; Owner: pdl
+--
+
+CREATE FUNCTION lowertrim (character varying) RETURNS character varying
+    AS 'select ltrim(rtrim(lower($1)))'
+    LANGUAGE sql IMMUTABLE;
+
+
+--
+-- TOC entry 10 (OID 231451)
+-- Name: new_routers; Type: TABLE; Schema: public; Owner: pdl
+--
+
+CREATE TABLE new_routers (
+    id serial NOT NULL,
+    fqdn character varying(20) NOT NULL,
+    "comment" character varying(255),
+    CONSTRAINT "$1" CHECK ((substr((fqdn)::text, 1, 1) <> ' '::text)),
+    CONSTRAINT "$3" CHECK ((rtrim((fqdn)::text) <> ''::text))
+);
+
+
+--
+-- Data for TOC entry 38 (OID 221893)
+-- Name: vendors; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY vendors (id, vendor, "comment") FROM stdin;
+1	juniper	
+2	cisco	
+3	siemens	
+\.
+
+
+--
+-- Data for TOC entry 39 (OID 221899)
+-- Name: routers; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+
+--
+-- Data for TOC entry 40 (OID 221909)
+-- Name: resources_type; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY resources_type (id, "type", "comment") FROM stdin;
+2	vrf	
+3	Virtual-Template	Virtual Template
+1	Multilink	Multilink
+\.
+
+
+--
+-- Data for TOC entry 41 (OID 221915)
+-- Name: resources; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY resources (id, routers_id, type_id, "timestamp", value, "comment") FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 42 (OID 221922)
+-- Name: history; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY history (id, who, why, "when", command, tables) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 43 (OID 221936)
+-- Name: ios; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY ios (id, ios, description) FROM stdin;
+1	c7200-p-mz.121-15.bin	c7200-p-mz.121-15.bin
+2	c7200-p-mz.122-13.T3.bin	c7200-p-mz.122-13.T3.bin
+3	c7200-p-mz.122-8.T6.bin	c7200-p-mz.122-8.T6.bin
+4	rsp-pv-mz.122-13.T3.bin	rsp-pv-mz.122-13.T3.bin
+\.
+
+
+--
+-- Data for TOC entry 44 (OID 221942)
+-- Name: models; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY models (id, model, description, vendor_id) FROM stdin;
+1	cisco7206VXR		2
+2	cisco7513		2
+\.
+
+
+--
+-- Data for TOC entry 45 (OID 221946)
+-- Name: misc; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY misc (id, value, description) FROM stdin;
+130670	1.2	PDL Database Version
+\.
+
+
+--
+-- Data for TOC entry 46 (OID 231451)
+-- Name: new_routers; Type: TABLE DATA; Schema: public; Owner: pdl
+--
+
+COPY new_routers (id, fqdn, "comment") FROM stdin;
+\.
+
+
+--
+-- TOC entry 23 (OID 222462)
+-- Name: routers_fqdn_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX routers_fqdn_index ON routers USING btree (lowertrim(fqdn));
+
+
+--
+-- TOC entry 30 (OID 222463)
+-- Name: ios_ios_unique_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX ios_ios_unique_index ON ios USING btree (lowertrim(ios));
+
+
+--
+-- TOC entry 20 (OID 222464)
+-- Name: vendors_vendor_unique_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX vendors_vendor_unique_index ON vendors USING btree (lowertrim(vendor));
+
+
+--
+-- TOC entry 27 (OID 222465)
+-- Name: resources_type_type_unique_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX resources_type_type_unique_index ON resources_type USING btree (lowertrim("type"));
+
+
+--
+-- TOC entry 35 (OID 222466)
+-- Name: misc_value_unique_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX misc_value_unique_index ON misc USING btree (lowertrim(value));
+
+
+--
+-- TOC entry 32 (OID 222467)
+-- Name: models_model_unique_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX models_model_unique_index ON models USING btree (lowertrim(model));
+
+
+--
+-- TOC entry 24 (OID 222468)
+-- Name: routers_fqdn_inuse_idx; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE INDEX routers_fqdn_inuse_idx ON routers USING btree (fqdn) WHERE (inuse = true);
+
+
+--
+-- TOC entry 21 (OID 222469)
+-- Name: routers_control_ip_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX routers_control_ip_index ON routers USING btree (control_ip);
+
+
+--
+-- TOC entry 36 (OID 231454)
+-- Name: new_routers_fqdn_index; Type: INDEX; Schema: public; Owner: pdl
+--
+
+CREATE UNIQUE INDEX new_routers_fqdn_index ON new_routers USING btree (lowertrim(fqdn));
+
+
+--
+-- TOC entry 19 (OID 222470)
+-- Name: vendors_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY vendors
+    ADD CONSTRAINT vendors_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 25 (OID 222472)
+-- Name: routers_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY routers
+    ADD CONSTRAINT routers_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 22 (OID 222474)
+-- Name: routers_control_ip_key; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY routers
+    ADD CONSTRAINT routers_control_ip_key UNIQUE (control_ip);
+
+
+--
+-- TOC entry 26 (OID 222476)
+-- Name: resources_type_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY resources_type
+    ADD CONSTRAINT resources_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 28 (OID 222478)
+-- Name: resources_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY resources
+    ADD CONSTRAINT resources_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 29 (OID 222480)
+-- Name: history_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY history
+    ADD CONSTRAINT history_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 31 (OID 222482)
+-- Name: ios_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY ios
+    ADD CONSTRAINT ios_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 33 (OID 222484)
+-- Name: models_pkey; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY models
+    ADD CONSTRAINT models_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 47 (OID 222486)
+-- Name: $1; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY routers
+    ADD CONSTRAINT "$1" FOREIGN KEY (ios_id) REFERENCES ios(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+--
+-- TOC entry 48 (OID 222490)
+-- Name: $2; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY routers
+    ADD CONSTRAINT "$2" FOREIGN KEY (model_id) REFERENCES models(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+--
+-- TOC entry 51 (OID 222494)
+-- Name: $2; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY models
+    ADD CONSTRAINT "$2" FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+--
+-- TOC entry 49 (OID 222498)
+-- Name: $2; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY resources
+    ADD CONSTRAINT "$2" FOREIGN KEY (routers_id) REFERENCES routers(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+--
+-- TOC entry 50 (OID 222502)
+-- Name: $3; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY resources
+    ADD CONSTRAINT "$3" FOREIGN KEY (type_id) REFERENCES resources_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+--
+-- TOC entry 34 (OID 222506)
+-- Name: misc_id_unique; Type: CONSTRAINT; Schema: public; Owner: pdl
+--
+
+ALTER TABLE ONLY misc
+    ADD CONSTRAINT misc_id_unique UNIQUE (id);
+
+
+--
+-- TOC entry 11 (OID 221891)
+-- Name: vendors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('vendors_id_seq', 3, true);
+
+
+--
+-- TOC entry 12 (OID 221897)
+-- Name: routers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('routers_id_seq', 300, true);
+
+
+--
+-- TOC entry 13 (OID 221907)
+-- Name: resources_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('resources_type_id_seq', 3, true);
+
+
+--
+-- TOC entry 14 (OID 221913)
+-- Name: resources_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('resources_id_seq', 67, true);
+
+
+--
+-- TOC entry 15 (OID 221920)
+-- Name: history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('history_id_seq', 2737, true);
+
+
+--
+-- TOC entry 16 (OID 221934)
+-- Name: ios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('ios_id_seq', 5, true);
+
+
+--
+-- TOC entry 17 (OID 221940)
+-- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('models_id_seq', 3, true);
+
+
+--
+-- TOC entry 18 (OID 231449)
+-- Name: new_routers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pdl
+--
+
+SELECT pg_catalog.setval ('new_routers_id_seq', 1, false);
+
+

@@ -1,0 +1,6 @@
+#ifndef __CoaToolsChangeDebugSettings__
+#define __CoaToolsChangeDebugSettings__
+
+#include "../tools/coachangedebug.h"
+
+#endif //__CoaToolsChangeDebugSettings__

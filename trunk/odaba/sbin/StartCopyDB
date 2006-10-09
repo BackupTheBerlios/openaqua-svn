@@ -1,0 +1,4 @@
+TRACE=~/ODABA/share/ODABA
+export TRACE
+~/ODABA/bin/CopyDB ~/ODABA/share/ODABA/CopyBridgeDB.ini from_dat to_dat
+

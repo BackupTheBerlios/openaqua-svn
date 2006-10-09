@@ -1,0 +1,7 @@
+#ifndef __CoaBusinessObject__
+#define __CoaBusinessObject__
+
+#include "../business/coabusinessobject.h"
+
+#endif //__CoaBusinessObject__
+

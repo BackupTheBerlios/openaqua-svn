@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CoaToolBarDescription>
+
+<CoaToolBarDescription version="1.0">
+ 
+
+  <action type="actionApplicationQuit"/>
+  <separator/>
+ 
+  <action type="actionFileNew"/>
+  <action type="actionFileOpen"/>
+  <action type="actionFileSave"/>
+  <separator/>
+ 
+
+  <action type="actionEditCut"/>
+  <action type="actionEditCopy"/>
+  <action type="actionEditPaste"/>
+
+   
+  <separator/>
+  <menu name ="Debug"> 
+       <action type="actionDebugSettings"/>
+       <separator/>
+       <action type="actionDebugOnOff"/>
+       <action type="actionDebugShowTimeOnOff"/>
+       <separator/>
+       <action type="actionDebugFileDefaultsOff"/>
+       <action type="actionDebugFileDefaultsErr"/>
+       <action type="actionDebugFileDefaultsWrn"/>
+       <action type="actionDebugFileDefaultsInf"/>
+       <action type="actionDebugFileDefaultsDbg"/>
+  </menu>   
+  
+  <separator/>
+  <action type="actionHelpWhatsthis"/>
+
+  
+</CoaToolBarDescription>

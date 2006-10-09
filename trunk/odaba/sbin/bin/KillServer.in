@@ -1,0 +1,6 @@
+TRACE=${datadir}/ODABA
+export TRACE
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${libdir}
+export LD_LIBRARY_PATH
+
+${bindir}/Server --kill  ${datadir}/ODABA/MetaServer.ini 

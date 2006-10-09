@@ -1,0 +1,15 @@
+if [ -f "${ODABA_ETC_DIR}/${OSTYPE}.bits" ]; then
+  bits="`cat \"${ODABA_ETC_DIR}/${OSTYPE}.bits\"`"
+fi
+
+if [ -z "${bits:+set}" ]; then
+  bits=32
+fi
+
+if [ -f "${ODABA_ETC_DIR}/${OSTYPE}-${bits}bit.script.rc" ]; then
+  script_rc="${ODABA_ETC_DIR}/${OSTYPE}-${bits}bit.script.rc"
+else
+  script_rc="${ODABA_ETC_DIR}/odaba-script.rc"
+fi
+
+. $script_rc

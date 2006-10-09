@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#make the source, start the server on error display message
+make && ./scripts/startserver || cat comperror

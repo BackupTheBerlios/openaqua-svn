@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/about" >
+        <file>coaaboutbox.ui</file>
+        <file>licence.html</file>
+        <file>about_coa.png</file>
+    </qresource>
+</RCC>

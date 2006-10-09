@@ -1,0 +1,38 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/openaqua/icons">
+   <file>adjustsize.png</file>
+   <file>buddytool.png</file>
+   <file>editbreaklayout.png</file>
+   <file>editcopy.png</file>
+   <file>editcut.png</file>
+   <file>editdelete.png</file>
+   <file>editgrid.png</file>
+   <file>edithlayout.png</file>
+   <file>edithlayoutsplit.png</file>
+   <file>editlower.png</file>
+   <file>editpaste.png</file>
+   <file>editraise.png</file>
+   <file>editvlayout.png</file>
+   <file>editvlayoutsplit.png</file>
+   <file>filenew.png</file>
+   <file>fileopen.png</file>
+   <file>filesave.png</file>
+   <file>minus.png</file>
+   <file>plus.png</file>
+   <file>editredo.png</file>
+   <file>resourceeditortool.png</file>
+   <file>signalslottool.png</file>
+   <file>tabordertool.png</file>
+   <file>textbold.png</file>
+   <file>textitalic.png</file>
+   <file>textunder.png</file>
+   <file>editundo.png</file>
+   <file>widgettool.png</file>
+   <file>gotoPrev.png</file>
+   <file>editFind.png</file>
+   <file>viewZoomIn.png</file>
+   <file>gotoNext.png</file>
+   <file>viewZoomOut.png</file>
+   <file>systemWhatsthis.png</file>
+</qresource>
+</RCC>
