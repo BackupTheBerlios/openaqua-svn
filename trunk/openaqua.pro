@@ -1,2 +1,2 @@
 TEMPLATE=subdirs
-SUBDIRS=odaba aquabase aquaframe odabademo
+SUBDIRS=odaba aquabase aquaframe demo
