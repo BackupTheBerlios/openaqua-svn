@@ -16,6 +16,7 @@ SUBDIRS= zlib \
          toollib \
          ops \
          oxml \
+         linktest/oxml \
          functionalmodel \
          if_structure \
          ctxinterface \
