@@ -8,9 +8,10 @@ SUBDIRS= zlib \
          linktest/greta \
          sos \
          linktest/sos \
+         opa \
+         linktest/opa \
          opi \
          linktest/opi \
-         opa \
          oql \
          toollib \
          ops \
