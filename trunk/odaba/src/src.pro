@@ -3,8 +3,11 @@ TEMPLATE=subdirs
 
 #ohne fehler
 SUBDIRS= zlib \
+         linktest/zlib \
          greta \
+         linktest/greta \
          sos \
+         linktest/sos \
          opi \
          opa \
          oql \
