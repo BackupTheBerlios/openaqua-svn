@@ -1,2 +1,4 @@
 TEMPLATE=subdirs
-SUBDIRS= sos
+SUBDIRS= zlib \
+         greta \
+         sos
