@@ -1,5 +1,5 @@
 TEMPLATE = subdirs 
-SUBDIRS += testclient corbaserver
+#SUBDIRS += testclient corbaserver
 #SUBDIRS += corbaserver corbaclient
 
 #oatravel

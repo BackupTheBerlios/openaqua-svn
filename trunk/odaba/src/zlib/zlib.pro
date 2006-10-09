@@ -30,6 +30,7 @@ SOURCES += qlib/adler32.cpp \
            qlib/inftrees.cpp \
            qlib/trees.cpp \
            qlib/uncompr.cpp \
+           qlib/inflate.cpp \
            qlib/zutil.cpp
 
 NOTUSED = qlib / infback.cpp \
@@ -38,4 +39,3 @@ NOTUSED = qlib / infback.cpp \
            qlib/infutil.cpp \
            qlib/maketree.cpp \
            qlib/minigzip.cpp \
-           qlib/inflate.cpp \

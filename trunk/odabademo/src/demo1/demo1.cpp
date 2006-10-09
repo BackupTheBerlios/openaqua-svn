@@ -26,24 +26,44 @@ using namespace std;
 #include <QApplication>
 #include <QString>
 
+const QString sBEGIN = "TestCase: ";
+const QString sOK    = " Ok ";
+const QString sNOK    = " Not Ok ";
+
+std::ostream& operator<< (std::ostream& out, const QString& string)
+{
+
+   out << string.toUtf8().data();
+   return out;
+}
+
+
+bool printError(OdabaClient& );
 bool ConnectToServer(OdabaClient& );
+bool IsConnected(OdabaClient& );
 bool UnconnectFromServer(OdabaClient& );
+bool GetConnectionID(OdabaClient& );
 
 int main(int argc, char *argv[])
 {
    bool result = true;
-   
+
    //create a simple Qt Application (without event loop in this case)
    QCoreApplication app( argc,  argv );
-   
+
    //create a client
    OdabaClient client;
-   
+
    //do some jobs
    cout << "begin test ..." <<endl;
-   result = ConnectToServer(client);
+   result = GetConnectionID(client ); //show error
+
+   if (result) result = ConnectToServer(client); else printError(client);
+   if (result) result = IsConnected(client); else printError(client);
+   if (result) result = GetConnectionID(client ); else printError(client);
    if (result) result = UnconnectFromServer(client);
-   
+   if (result) result = GetConnectionID(client ); //should show error
+
    if (result == true){
       cout << "end test without errors" <<endl;
       return 0;
@@ -56,20 +76,43 @@ int main(int argc, char *argv[])
 
 bool ConnectToServer(OdabaClient& client)
 {
-   cout << "Connect to localhost:6123: ";
+   cout  << "TestCase: Connect to localhost:6123: ";
    if (client.Connect ("localhost", 6123) == true)
    {
-      cout << "success" <<endl; 
+      cout << "success" <<endl;
       return true;
    } else {
-      cout << "no success" <<endl; 
+      cout << "no success" <<endl;
       return false;
    }
 }
 
+bool IsConnected(OdabaClient& client)
+{
+   cout << "TestCase: Is Connected: ";
+   if (client.IsConnected()) cout << "Ok";
+   else cout << "Not Ok";
+   cout << endl;
+   return client.IsConnected();
+
+}
+
+bool GetConnectionID(OdabaClient& client)
+{
+   cout << "TestCase: GetConnectionID: " << client.GetConnectionID() << endl;
+   return true;
+}
+
 bool UnconnectFromServer(OdabaClient& client)
 {
-   cout << "Unconnect: Successfull" <<endl;
+   cout << "TestCase: Unconnect: Successfull" <<endl;
    client.Disconnect();
    return true;
+}
+
+
+bool printError(OdabaClient& client)
+{
+   OdabaError *error = client.GetDBError ( );
+   cout << "printError: " << error->getTitle() << '(' << error->getDescription()<< ')'<< endl;
 }

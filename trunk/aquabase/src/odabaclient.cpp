@@ -19,9 +19,11 @@
 ***************************************************************************/
 
 #include "odabaclient.h"
+#include "odabadbobjecthandle.h"
 #include <QApplication>
 
-//for the ODABAClient
+
+   //for the ODABAClient
 #include  <csos4mac.h>
 #include  <igvtx.h>
 #include  <igvts.h>
@@ -38,7 +40,14 @@
 
 #define MAKE_LOC_STRING( qstr , cstr )    char cstr[255];  strncpy(cstr, qstr.toLocal8Bit().constData(), 254); cstr[255]='\0';
 
+#include <iostream>
+using namespace std;
 
+/**
+
+
+
+*/
 
 OdabaClient::OdabaClient( QObject *const parent )
       : QObject( parent )
@@ -55,74 +64,94 @@ OdabaClient::~OdabaClient()
 }
 
 
-bool OdabaClient::Open (const QString& inipath )
+bool OdabaClient::Open ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
    MAKE_LOC_STRING( qApp->applicationDirPath() , pp );
    MAKE_LOC_STRING( qApp->applicationName() , an );
 
-   logical r = m_client->Open(ip, an, pp);
+   logical r = m_client->Open( ip, an, pp );
 
    assert( qApp->applicationName() == an );
    assert( qApp->applicationDirPath() == pp );
-   assert(inipath == ip);
-   return (r==0?true:false);
+   assert( inipath == ip );
+   return ( r == 0 ? true : false );
 }
 
 
 
 
-void OdabaClient::Initialize (const QString& inipath )
+void OdabaClient::Initialize ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
    MAKE_LOC_STRING( qApp->applicationDirPath() , pp );
    MAKE_LOC_STRING( qApp->applicationName() , an );
 
-   m_client->Initialize(ip, an, pp);
+   m_client->Initialize( ip, an, pp );
 
    assert( qApp->applicationName() == an );
    assert( qApp->applicationDirPath() == pp );
-   assert(inipath == ip);
+   assert( inipath == ip );
 
 }
 
 
-bool OdabaClient::KillClient (int client_id, int wait_sec, bool send_message)
+bool OdabaClient::KillClient ( int client_id, int wait_sec, bool send_message )
 {
-   logical s = 0;
-   if (send_message == false) s = FALSE;
-   logical r = m_client->KillClient (client_id, wait_sec, s);
-   return (r==0?true:false);
+   logical s = TRUE;
+   if ( send_message == false )
+      s = FALSE;
+   logical r = m_client->KillClient ( client_id, wait_sec, s );
+   return ( r == NO ? true : false );
 }
 
 /**
 
+This function establishs a connection to the server.
+When not connecting the cleint to a server the client runs in local mode.
+When running in local mode all resources are located on th client machine.
+
+When being connected to a server you can access ressources located on the
+server or on the local machine by setting the "local_resources"-parameter
+when constructing dictionary or database handles.
+
+When connecting several times for closing the connection you must disconnect
+as often as you have connected to the server. When the client is connected
+once it cannot be connected to another server until the open connection is closed.
+
+@param server_name is the IP adress or a hostname of a server
+@param host_port is the port number of a server. Default is 6123
+@param cache ????
+@result true - connection established
+
 @warning The hostname and -port could be changed!
 */
 
-bool OdabaClient::Connect (const QString& server_name, unsigned int host_port, const QString& cache )
+bool OdabaClient::Connect ( const QString& server_name, unsigned int host_port, const QString& cache )
 {
-   if (IsConnected ( ) == true) Disconnect();
-
-   #warning  "non const string use should be fixed"
+   if ( IsConnected ( ) == true )
+      Disconnect();
 
    //make char array from servername;
    MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( cache , cn );
 
    //connect
-   if (m_client -> Connect(sn, host_port, cn) != 0){
-      assert(server_name == sn);
-      assert(cache == cn);
+   if ( m_client -> Connect( sn, host_port, cn ) == YES )
+   {
+      assert( server_name == sn );
+      assert( cache == cn );
 
       m_host_name = "";
       m_host_port = 0;
       return false;
-   } else {
-      assert(server_name == sn);
-      assert(cache == cn);
+   }
+   else
+   {
+      assert( server_name == sn );
+      assert( cache == cn );
 
       m_host_name = sn;
       m_host_port = host_port;
@@ -132,19 +161,37 @@ bool OdabaClient::Connect (const QString& server_name, unsigned int host_port, c
 
 bool OdabaClient::IsConnected ( )
 {
-   if (m_client->IsConnected() == 0)
-      return true;
-   else
-      return false;
+   return ( m_client->IsConnected() );
 }
 
 
 
-void OdabaClient::Disconnect ( )
+
+/**
+
+This method close the an existing connection
+
+@warning Please make shure that all resources are closed before disconnecting
+the client. Disconnecting the client before closing all opened handles may
+cause problems and not all changes are stored.
+
+
+@result true - in any cases
+*/
+bool OdabaClient::Disconnect ( )
 {
+   //const bool result = ShutDown();
+   const bool result = true;
    m_client->Disconnect();
+   return result;
 }
 
+
+/**
+
+@result is 0 - what ever happens
+
+*/
 int OdabaClient::GetConnectionID ( )
 {
    return m_client->GetConnectionID ();
@@ -162,43 +209,71 @@ unsigned int OdabaClient::GetPort ( ) const
 }
 
 
-bool OdabaClient::BackupDB (const QString& cpath, const QString& target, const unsigned int wait_sec )
+bool OdabaClient::BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( target , t );
 
 
    //logical BackupDB (char *cpath, char *target, int32 wait_sec=300 );
-   logical r = m_client->BackupDB(c,t,wait_sec);
-   assert(cpath == c);
-   assert(target == t);
+   logical r = m_client->BackupDB( c, t, wait_sec );
+   assert( cpath == c );
+   assert( target == t );
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 
 }
 
-bool OdabaClient::ShutDown (const bool close_system)
+
+/**
+
+Usually the last ODABAClient handle referring to the client will
+shut down the client when being destructed. In some cases, e.g.
+when creating a client with an ini-file and using system services as
+data catalogue or error logs, some system references are still active
+and referring to the main client. To be sure that the main client is closed
+properly you should use the ShutDown() function before destructing the client.
+Make sure that there are no other references to the client in your application anymore.
+
+The function will delete all resources associated with the client and close
+the client. When the client is the default or main client, which has
+been created automatically, the function will close the main client.
+
+@result true = success
+
+*/
+
+bool OdabaClient::ShutDown ( const bool close_system )
 {
-   if (close_system) {
-      m_client->ShutDown (YES);
-   } else {
-      m_client->ShutDown (NO);
+   if ( close_system )
+   {
+      if ( m_client->ShutDown ( YES ) == YES )
+         return false;
+      else
+         return true;
+   }
+   else
+   {
+      if ( m_client->ShutDown ( NO ) == YES )
+         return false;
+      else
+         return true;
    }
 }
 
 
-bool OdabaClient::Exist (const QString& cpath )
+bool OdabaClient::Exist ( const QString& cpath )
 {
    MAKE_LOC_STRING( cpath , c );
-   logical r = m_client->Exist(c);
-   assert(cpath == c);
-   return (r==0?true:false);
+   logical r = m_client->Exist( c );
+   assert( cpath == c );
+   return ( r == 0 ? true : false );
 
 }
 
-bool OdabaClient::StartPause (const int wait_sec )
+bool OdabaClient::StartPause ( const int wait_sec )
 {
-   m_client->StartPause(wait_sec);
+   m_client->StartPause( wait_sec );
 }
 
 
@@ -209,46 +284,46 @@ void OdabaClient::StopPause ( )
 }
 
 
-QString OdabaClient::GetDataSource (int indx0 )
+QString OdabaClient::GetDataSource ( int indx0 )
 {
-   return m_client->GetDataSource (indx0);
+   return m_client->GetDataSource ( indx0 );
 }
 
 
-bool OdabaClient::SetServerVariable (const QString& var_name, const QString& var_string )
+bool OdabaClient::SetServerVariable ( const QString& var_name, const QString& var_string )
 {
    MAKE_LOC_STRING( var_name , n );
    MAKE_LOC_STRING( var_string , s );
 
-   logical r = m_client->StatDisplay(n, s);
-   assert(var_name == n);
-   assert(var_string == s);
+   logical r = m_client->StatDisplay( n, s );
+   assert( var_name == n );
+   assert( var_string == s );
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 }
 
 
-QString OdabaClient::GetServerVariable (const QString& var_name )
+QString OdabaClient::GetServerVariable ( const QString& var_name )
 {
    MAKE_LOC_STRING( var_name , n );
-   QString r = m_client->GetServerVariable(n);
-   assert(var_name == n);
+   QString r = m_client->GetServerVariable( n );
+   assert( var_name == n );
    return r;
 }
 
 
 
 
-bool OdabaClient::StatDisplay (const QString& dbpath, const QString& ppath )
+bool OdabaClient::StatDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
 
-   logical r = m_client->StatDisplay(d, p);
-   assert(dbpath == d);
-   assert(ppath == p);
+   logical r = m_client->StatDisplay( d, p );
+   assert( dbpath == d );
+   assert( ppath == p );
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 
 }
 
@@ -257,60 +332,69 @@ bool OdabaClient::StatDisplay (const QString& dbpath, const QString& ppath )
 
 
 
-bool OdabaClient::SysInfoDisplay (const QString& dbpath, const QString& ppath )
+bool OdabaClient::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
 
-   logical r = m_client->SysInfoDisplay(d, p);
-   assert(dbpath == d);
-   assert(ppath == p);
+   logical r = m_client->SysInfoDisplay( d, p );
+   assert( dbpath == d );
+   assert( ppath == p );
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 
 }
 
-bool OdabaClient::DictDisplay (const QString& dbpath, const QString& ppath )
+bool OdabaClient::DictDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
 
-   logical r = m_client->DictDisplay(d, p);
-   assert(dbpath == d);
-   assert(ppath == p);
+   logical r = m_client->DictDisplay( d, p );
+   assert( dbpath == d );
+   assert( ppath == p );
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 
 }
 
 
-bool OdabaClient::PackDatabase (const QString& cpath, const QString& temp_path)
+bool OdabaClient::PackDatabase ( const QString& cpath, const QString& temp_path )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( temp_path , t );
 
    logical r;
-   if (temp_path == QString()){
-      r = m_client->PackDatabase(c, 0);
-      assert(cpath == c);
+   if ( temp_path == QString() )
+   {
+      r = m_client->PackDatabase( c, 0 );
+      assert( cpath == c );
 
-   } else {
-      r = m_client->PackDatabase(c, t);
-      assert(cpath == c);
-      assert(temp_path == t);
+   }
+   else
+   {
+      r = m_client->PackDatabase( c, t );
+      assert( cpath == c );
+      assert( temp_path == t );
    }
 
-   return (r==0?true:false);
+   return ( r == 0 ? true : false );
 }
-bool OdabaClient::RestoreDB (const QString& cpath, const QString& source, int wait_sec )
+bool OdabaClient::RestoreDB ( const QString& cpath, const QString& source, int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( source , s );
-   logical r = m_client->RestoreDB(c, s, wait_sec);
+   logical r = m_client->RestoreDB( c, s, wait_sec );
 }
 
 
-//QString OdabaClient::GetDBError ( )
-//{
-//   return m_client->GetDBError();
-//}
+
+OdabaDBObjectHandle *OdabaClient::OpenDataSource ( const QString& datasource_name )
+{
+   return new OdabaDBObjectHandle( this );
+}
+
+QPointer<OdabaError>OdabaClient::GetDBError ( )
+{
+   return new OdabaError(this, m_client->GetDBError ());
+}
