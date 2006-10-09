@@ -9,6 +9,7 @@ SUBDIRS= zlib \
          sos \
          linktest/sos \
          opi \
+         linktest/opi \
          opa \
          oql \
          toollib \
