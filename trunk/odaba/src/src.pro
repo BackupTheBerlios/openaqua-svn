@@ -18,6 +18,7 @@ SUBDIRS= zlib \
          oxml \
          linktest/oxml \
          functionalmodel \
+         linktest/functionalmodel \
          if_structure \
          ctxinterface \
          if_dbbase \
