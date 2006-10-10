@@ -28,41 +28,38 @@
 #include <QPointer>
 #include "AquaBase.h"
 
-/**
-
-@class Connection
-
-To run client server applications you must create a ODABA client instance.
- To support several connections to different servers you can create one
- or more clients within your application.
-
-When connecting to different servers you must create one client
-for each server. You can open several clients in an application.
-The first client, however, is considered to be the main client.
-The main client should be the last client closed in an application.
-After closing the main client you can open another main client.
-Since there is no hierarchy defined between clients the system will not check.
-
-
-
-@brief simplyfied interface for odaba access
-
-*/
 
 class ODABAClient;
 namespace AquaBase
 {
    class AB_Error;
+
+   /**
+
+
+   @class AB_Connection
+   @brief Provides Connection to a ODABA Server
+
+   To run client server applications you must create a ODABA client instance.
+   To support several connections to different servers you can create one
+   or more clients within your application.
+
+   When connecting to different servers you must create one client
+   for each server. You can open several clients in an application.
+   The first client, however, is considered to be the main client.
+   The main client should be the last client closed in an application.
+   After closing the main client you can open another main client.
+   Since there is no hierarchy defined between clients the system will not check.
+
+
+   */
+
    class AB_Connection: public QObject
    {
       Q_OBJECT
 
    public:
       AB_Connection( QObject *const parent = 0 );
-      //Connection (char *inipath, char *application_name=NULL, char *progpath=NULL, ApplicationTypes application_type=APT_Console );
-      //Connection ( );
-      //Connection (const Connection &client_refc );
-      //Connection (CClient *cclient_ptr );
       virtual ~AB_Connection();
       bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
       bool Disconnect ( );
@@ -73,7 +70,7 @@ namespace AquaBase
       //OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
 
       //!@brief simple Ping
-      const QString SayHello (const QString&);
+      const QString SayHello ( const QString& );
 
 
    protected:

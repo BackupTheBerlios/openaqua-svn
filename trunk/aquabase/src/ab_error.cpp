@@ -7,8 +7,7 @@ using namespace std;
 AquaBase::AB_Error::AB_Error( QObject *const parent )
       : QObject( parent )
 {
-      m_title = "";
-      m_description = "";
+   reset();
 }
 
 
@@ -16,10 +15,9 @@ AquaBase::AB_Error::AB_Error( QObject *const parent )
 AquaBase::AB_Error::AB_Error( QObject *const parent, Error * const error )
       : QObject( parent )
 {
-   if ( error == 0 ){
-      m_title = "";
-      m_description = "";
-   } else {
+   reset();
+   if ( error != 0 )
+   {
       m_title = error->get_title();
       m_description = error->get_text();
    }
@@ -31,9 +29,16 @@ AquaBase::AB_Error::AB_Error( QObject *const parent, Error * const error )
 
 AquaBase::AB_Error::~AB_Error()
 {
-
 }
 
+void AquaBase::AB_Error::reset()
+{
+   m_title.clear();
+   m_description.clear();
+   m_module.clear();
+   m_object.clear();
+   setThreadId();
+}
 
 
 const QString AquaBase::AB_Error::title() const
@@ -42,17 +47,10 @@ const QString AquaBase::AB_Error::title() const
 }
 
 
-void AquaBase::AB_Error::setTitle(const QString& s)
+void AquaBase::AB_Error::setTitle( const QString& s )
 {
-   m_title=s;
+   m_title = s;
 }
-
-
-void AquaBase::AB_Error::resetTitle()
-{
-   m_title.clear();
-}
-
 
 
 const QString AquaBase::AB_Error::description() const
@@ -61,16 +59,50 @@ const QString AquaBase::AB_Error::description() const
 }
 
 
-void AquaBase::AB_Error::setDescription(const QString& s)
+void AquaBase::AB_Error::setDescription( const QString& s )
 {
-   m_description=s;
+   m_description = s;
 }
 
 
-void AquaBase::AB_Error::resetDescription()
+const QString AquaBase::AB_Error::module() const
 {
-   m_description.clear();
+   return m_module;
+}
+
+
+void AquaBase::AB_Error::setModule(const QString& s)
+{
+   m_module=s;
 }
 
 
 
+const QString AquaBase::AB_Error::object() const
+{
+   return m_object;
+}
+
+
+void AquaBase::AB_Error::setObject(const QString& s)
+{
+   m_object = s;
+}
+
+
+
+const int AquaBase::AB_Error::threadId() const
+{
+   return m_threadId;
+}
+
+
+void AquaBase::AB_Error::setThreadId(const int i)
+{
+   m_threadId = i;
+}
+
+void AquaBase::AB_Error::setThreadId(const QString& s)
+{
+   m_threadId = s.toInt();
+}

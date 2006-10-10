@@ -16,10 +16,12 @@ LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
 
 HEADERS +=  inc/AquaBase.h \
                      inc/ab_connection.h \
-                     inc/ab_error.h
+                     inc/ab_error.h \
+                     inc/ab_dictionary.h
 
 SOURCES +=  src/ab_connection.cpp \
                      src/ab_error.cpp \
+                     src/ab_dictionary.cpp
                      
 
 HEADERSA +=  inc/odabaclient.h \
