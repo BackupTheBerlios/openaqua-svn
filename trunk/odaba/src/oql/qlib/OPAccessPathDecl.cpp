@@ -16,7 +16,7 @@
 #include  <sACObject.hpp>
 #include  <sBNFData.hpp>
 #include  <sDictionary.hpp>
-#include  <sExtentList.hpp>
+#include  <sOqlExtentList.hpp>
 #include  <sOPAccessPath.hpp>
 #include  <sOPParmList.hpp>
 #include  <sOperEnvironment.hpp>

@@ -1,7 +1,7 @@
 /********************************* Class Source Code ***************************/
 /**
 \package  {{{{{|{2006/04/10|23:48:19,31}|(REF)
-\class    ExtentList
+\class    OqlExtentList
 
 
 
@@ -9,10 +9,10 @@
 \dbsource oql.dev - ODABA Version 9.0
 */
 /******************************************************************************/
-#define    OBJ_ID  "ExtentList"
+#define    OBJ_ID  "OqlExtentList"
 
 #include  <poql.h>
-#include  <sExtentList.hpp>
+#include  <sOqlExtentList.hpp>
 
 
 /******************************************************************************/
@@ -27,7 +27,7 @@
 #undef     MOD_ID
 #define    MOD_ID  "Add"
 
-void ExtentList :: Add (PropertyHandle &ph )
+void OqlExtentList :: Add (PropertyHandle &ph )
 {
 
   if ( &ph )
@@ -37,16 +37,16 @@ void ExtentList :: Add (PropertyHandle &ph )
 
 /******************************************************************************/
 /**
-\brief  ExtentList
+\brief  OqlExtentList
 
 
 */
 /******************************************************************************/
 
 #undef     MOD_ID
-#define    MOD_ID  "ExtentList"
+#define    MOD_ID  "OqlExtentList"
 
-                        ExtentList :: ExtentList ( )
+                        OqlExtentList :: OqlExtentList ( )
                      : DLL(PropertyHandle)()
 {
 
@@ -66,7 +66,7 @@ void ExtentList :: Add (PropertyHandle &ph )
 #undef     MOD_ID
 #define    MOD_ID  "Remove"
 
-void ExtentList :: Remove (PropertyHandle &ph )
+void OqlExtentList :: Remove (PropertyHandle &ph )
 {
 
   if ( &ph )
@@ -85,7 +85,7 @@ void ExtentList :: Remove (PropertyHandle &ph )
 #undef     MOD_ID
 #define    MOD_ID  "Reset"
 
-void ExtentList :: Reset ( )
+void OqlExtentList :: Reset ( )
 {
   PropertyHandle       *ph;
   GoTop();
@@ -96,16 +96,16 @@ void ExtentList :: Reset ( )
 
 /******************************************************************************/
 /**
-\brief  ~ExtentList
+\brief  ~OqlExtentList
 
 
 */
 /******************************************************************************/
 
 #undef     MOD_ID
-#define    MOD_ID  "~ExtentList"
+#define    MOD_ID  "~OqlExtentList"
 
-                        ExtentList :: ~ExtentList ( )
+                        OqlExtentList :: ~OqlExtentList ( )
 {
 
 

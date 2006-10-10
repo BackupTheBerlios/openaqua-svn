@@ -26,7 +26,7 @@
 #include  <sDBreakPoint.hpp>
 #include  <sDLInterpreter.hpp>
 #include  <sDictionary.hpp>
-#include  <sExtentList.hpp>
+#include  <sOqlExtentList.hpp>
 #include  <sFieldSource.hpp>
 #include  <sNodeStack.hpp>
 #include  <sOPAccessPath.hpp>
@@ -1635,7 +1635,7 @@ OPDecl *OPBase :: GetExpressionDecl ( )
 #undef     MOD_ID
 #define    MOD_ID  "GetExtentList"
 
-ExtentList *OPBase :: GetExtentList ( )
+OqlExtentList *OPBase :: GetExtentList ( )
 {
 
   return( oper_env->GetExtentList() );

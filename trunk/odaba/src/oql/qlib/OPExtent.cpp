@@ -15,7 +15,7 @@
 #include  <poql.h>
 #include  <sBNFData.hpp>
 #include  <sDictionary.hpp>
-#include  <sExtentList.hpp>
+//#include  <sOqlExtentList.hpp>
 #include  <sOPBase.hpp>
 #include  <sOPExtent.hpp>
 

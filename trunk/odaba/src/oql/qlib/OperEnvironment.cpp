@@ -16,7 +16,7 @@
 #include  <sACObject.hpp>
 #include  <sBNFData.hpp>
 #include  <sDictionary.hpp>
-#include  <sExtentList.hpp>
+#include  <sOqlExtentList.hpp>
 #include  <sNodeStack.hpp>
 #include  <sOPBase.hpp>
 #include  <sOPDecl.hpp>
@@ -323,15 +323,15 @@ OPDecl *OperEnvironment :: GetExpressionDecl ( )
 #undef     MOD_ID
 #define    MOD_ID  "GetExtentList"
 
-ExtentList *OperEnvironment :: GetExtentList ( )
+OqlExtentList *OperEnvironment :: GetExtentList ( )
 {
-  ExtentList            *ext_list = NULL;
+  OqlExtentList            *ext_list = NULL;
   if ( declaration && declaration->get_oper_env() != this )
     ext_list = declaration->get_oper_env()->GetExtentList();
   else
   {
     if ( !extent_list )
-      extent_list = new ExtentList();
+      extent_list = new OqlExtentList();
     ext_list = extent_list;
   }
   return(ext_list);

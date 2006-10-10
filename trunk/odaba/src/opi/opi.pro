@@ -32,7 +32,6 @@ HEADERS += $$PATH_PREFIX/h/cApplicationTypes.h \
            $$PATH_PREFIX/h/OPIHelper.hpp \
            $$PATH_PREFIX/h/OPII.hpp \
            $$PATH_PREFIX/h/OPIICE.hpp \
-           $$PATH_PREFIX/h/pdefault.h \
            $$PATH_PREFIX/h/podaba2.h \
            $$PATH_PREFIX/h/s_if_DatabaseHandle.hpp \
            $$PATH_PREFIX/h/s_if_DBObjectHandle.hpp \

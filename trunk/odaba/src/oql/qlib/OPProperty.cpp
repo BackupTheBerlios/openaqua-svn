@@ -16,7 +16,7 @@
 #include  <sBNFData.hpp>
 #include  <sBNFExpData.hpp>
 #include  <sDictionary.hpp>
-#include  <sExtentList.hpp>
+//#include  <sOqlExtentList.hpp>
 #include  <sOPBase.hpp>
 #include  <snode.hpp>
 #include  <sOPProperty.hpp>

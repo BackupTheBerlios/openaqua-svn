@@ -9,25 +9,25 @@
 \dbsource oql.dev - ODABA Version 9.0
 */
 /******************************************************************************/
-#ifndef   ExtentList_HPP
-#define   ExtentList_HPP
+#ifndef   _OqlExtentList_HPP
+#define   _OqlExtentList_HPP
 
-class     ExtentList;
+class     OqlExtentList;
 
 #ifndef   DLL_PropertyHandle_HPP
 #define   DLL_PropertyHandle_HPP
 #include  <sPropertyHandle.hpp>
 #include  <sDLL.h>
 #endif
-class  ExtentList :public DLL(PropertyHandle)
+class  OqlExtentList :public DLL(PropertyHandle)
 {
 
 public     :
 public     :                                     void Add (PropertyHandle &ph );
-public     :                                                             ExtentList ( );
+public     :                                                             OqlExtentList ( );
 public     :                                     void Remove (PropertyHandle &ph );
 public     :                                     void Reset ( );
-public     :                                                             ~ExtentList ( );
+public     :                                                             ~OqlExtentList ( );
 };
 
-#endif
+#endif //_OqlExtentList_HPP

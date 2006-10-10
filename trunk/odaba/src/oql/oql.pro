@@ -1,7 +1,7 @@
 
 
 isEmpty(PATH_PREFIX) {
-   message "Configure OQL"
+   message ("Configure OQL")
    PATH_PREFIX=.
    TARGET = odaba_oql
    CONFIG += odabalibs
@@ -29,7 +29,7 @@ HEADERS += $$PATH_PREFIX/h/_cs_def_OQL.hpp \
            $$PATH_PREFIX/h/sCLInterpreterBase.hpp \
            $$PATH_PREFIX/h/sDBreakPoint.hpp \
            $$PATH_PREFIX/h/sDLInterpreter.hpp \
-           $$PATH_PREFIX/h/sExtentList.hpp \
+           $$PATH_PREFIX/h/sOqlExtentList.hpp \
            $$PATH_PREFIX/h/sOPAccessPath.hpp \
            $$PATH_PREFIX/h/sOPAccessPathDecl.hpp \
            $$PATH_PREFIX/h/sOPBase.hpp \
@@ -79,7 +79,7 @@ SOURCES +=         $$PATH_PREFIX/qlib/CLICollection.cpp \
         $$PATH_PREFIX/qlib/CLInterpreterBase.cpp \
         $$PATH_PREFIX/qlib/DBreakPoint.cpp \
         $$PATH_PREFIX/qlib/DLInterpreter.cpp \
-        $$PATH_PREFIX/qlib/ExtentList.cpp \
+        $$PATH_PREFIX/qlib/OqlExtentList.cpp \
         $$PATH_PREFIX/qlib/OPAccessPath.cpp \
         $$PATH_PREFIX/qlib/OPAccessPathDecl.cpp \
         $$PATH_PREFIX/qlib/OPBase.cpp \

@@ -18,7 +18,7 @@ class     OperEnvironment;
 class     ACObject;
 class     BNFData;
 class     Dictionary;
-class     ExtentList;
+class     OqlExtentList;
 class     NodeStack;
 class     OPBase;
 class     OPDecl;
@@ -51,7 +51,7 @@ protected  :         OPDecl                                      *declaration;  
 protected  :         OperEnvironment                             *prev_env;                                                  // 
 protected  :         VHN_Types                                    nvh_type;                                                  // 
 protected  :         VHN_Types                                    exh_type;                                                  // 
-protected  :         ExtentList                                  *extent_list;                                               // 
+protected  :         OqlExtentList                                  *extent_list;                                               // 
 
 public     :
                      SchemaResources                             *get_resources() { return(resources); }
@@ -71,7 +71,7 @@ public     :
                      OperEnvironment                             *get_prev_env() { return(prev_env); }
                      VHN_Types                                    get_nvh_type() { return(nvh_type); }
                      VHN_Types                                    get_exh_type() { return(exh_type); }
-                     ExtentList                                  *get_extent_list() { return(extent_list); }
+                     OqlExtentList                                  *get_extent_list() { return(extent_list); }
 public     :                                        PropertyHandle *CO ( );
 public     :                                        int16 CallingParmCount ( );
 public     :                                        logical Copy (OperEnvironment *operenv, logical intern_opt=NO );
@@ -81,7 +81,7 @@ public     :                                        Dictionary *DictHandle ( );
 public     :                                        ExecReturnCodes GetExceptionERC ( );
 public     :                                        char *GetExpression ( );
 public     :                                        OPDecl *GetExpressionDecl ( );
-public     :                                        ExtentList *GetExtentList ( );
+public     :                                        OqlExtentList *GetExtentList ( );
 public     :                                        ExecReturnCodes GetNullValueERC ( );
 public     :                                        DBFieldDef *GetParameterDef (char *varnames );
 public     :                                        node *GetParameterNode (char *varnames );

@@ -14,17 +14,11 @@
 #include  <csos4mac.h>
 
 #define   SOSERR(x)    { SOSError().SetError( x,OBJ_ID,MOD_ID); goto on_error;  }
-
 #define   SOSIERR(x)   { SOSError().SetError( x,NULL,NULL);     goto on_error;  }
-
 #define   SOSPERR      { SOSError().SetError(0,"",MOD_ID);       goto on_error;  }
-
 #define   SOSCERR      { if ( SOSError().CheckError() )          goto on_error;  }
-
 #define   SOSSET(x)    { SOSError().SetError( x,OBJ_ID,MOD_ID);  }
-
 #define   SOSISET(x)   { SOSError().SetError( x,NULL,NULL);       }
-
 #define   SOSRESET     { SOSError().ResetError();      }
 
 #define   SOSEV1(str,len)  { SOSError().SetErrorVariable(1, str, len); }
@@ -42,5 +36,22 @@
 #include  <ifil.h>
 
 #include  <ctxdef.h>
+#include  <csos4mac.h>
+#include  <cactp.h>
+#include  <padcstd.h>
+#include  <compatibility.h> 
+#define   MEMO      mem
+
+#include  <cfctp.h>
+#include  <codaba2.h>
+#include  <podaba2.h>
+//#include  <cutimac.h>
+
+#include  <ipardef.hpp>
+#include  <igvtx.h>
+#include  <igvts.h>
+#include  <igvtu.h>
+#include  <imsm.h>
+#include  <ifil.h>
 
 #endif    // PSOS4_H

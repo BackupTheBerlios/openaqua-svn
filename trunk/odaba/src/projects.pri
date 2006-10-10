@@ -46,6 +46,7 @@ odabalibs {
    INCLUDEPATH *= ../ops/h/
    INCLUDEPATH *= ../functionalmodel/h/
    INCLUDEPATH *= ../oql/h/
+   INCLUDEPATH *= ..
    
 
    
