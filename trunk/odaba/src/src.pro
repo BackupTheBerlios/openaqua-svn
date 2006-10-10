@@ -18,9 +18,11 @@ SUBDIRS= zlib \
          linktest/adkctxi \
          libtool \
          linktest/libtool \
-         libclient \
-         linktest/libclient \
          linktest \
          binaries \
          
 
+
+#the client lib is not supported
+SUBDIRSA=     libclient \
+         linktest/libclient \
