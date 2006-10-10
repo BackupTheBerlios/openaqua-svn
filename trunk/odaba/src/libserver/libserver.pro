@@ -24,3 +24,8 @@ include (../oql/oql.pro)
 message("===  Include OXML")
 PATH_PREFIX=../oxml
 include (../oxml/oxml.pro)
+
+message("===  Include FunctionalModel")
+PATH_PREFIX=../functionalmodel
+include (../functionalmodel/functionalmodel.pro)
+

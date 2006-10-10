@@ -8,27 +8,11 @@ SUBDIRS= zlib \
          linktest/sos \
          libserver \
          linktest/libserver \
+         if_structure \
 
 
 #ohne fehler
 SUBDIRSA= zlib \
-         linktest/zlib \
-         greta \
-         linktest/greta \
-         sos \
-         linktest/sos \
-         opa \
-         linktest/opa \
-         opi \
-         linktest/opi \
-         oql \
-         toollib \
-         ops \
-         oxml \
-         linktest/oxml \
-         functionalmodel \
-         linktest/functionalmodel \
-         if_structure \
          ctxinterface \
          if_dbbase \
          if_systemclass \
