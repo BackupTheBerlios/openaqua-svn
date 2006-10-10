@@ -20,12 +20,11 @@
 
 
 
-#ifndef __Connection_cpp__
-#define __Connection_cpp__
+#ifndef __AB_Dictionary_h__
+#define __AB_Dictionary_h__
 
 #include <QObject>
 #include <QString>
-#include <QPointer>
 #include "AquaBase.h"
 
 /**
@@ -70,4 +69,4 @@ namespace AquaBase
 
    };
 };
-#endif //__Connection_cpp__
+#endif //__AB_Dictionary_h__

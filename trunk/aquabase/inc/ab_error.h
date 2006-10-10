@@ -1,5 +1,5 @@
-#ifndef __Odaba_Error_h__
-#define __Odaba_Error_h__
+#ifndef __AB_Error_h__
+#define __AB_Error_h__
 
 #include "AquaBase.h"
 
@@ -92,5 +92,5 @@ namespace AquaBase
       AB_Error( );
    };
 };
-#endif //__Odaba_Error_h__
+#endif //__AB_Error_h__
 

@@ -20,13 +20,12 @@
 
 
 
-#ifndef __Connection_cpp__
-#define __Connection_cpp__
+#ifndef __AB_Connection_h__
+#define __AB_Connection_h__
 
 #include <QObject>
 #include <QString>
 #include <QPointer>
-#include "AquaBase.h"
 
 
 class ODABAClient;
@@ -118,4 +117,4 @@ namespace AquaBase
 
    };
 };
-#endif //__Connection_cpp__
+#endif //__AB_Connection_h__
