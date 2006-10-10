@@ -11,7 +11,7 @@ INCLUDEPATH += inc \
 ../odaba/src/sos/h \
 ../odaba/src/opi/h
 LIBS *= -L../odaba/lib/
-LIBS += -lodaba_sos -lodaba_opa -lodaba_opi -lodaba_greta -lodaba_oxml -lodaba_oql -lodaba_ops -lodaba_functional_model
+LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
 
 
 HEADERS +=  inc/odabaclient.h \
