@@ -20,20 +20,19 @@
 
 
 
-#ifndef __odabaclient_cpp__
-#define __odabaclient_cpp__
+#ifndef __Connection_cpp__
+#define __Connection_cpp__
 
 #include <QObject>
 #include <QString>
 #include <QPointer>
-#include "odaba_namespace.h"
-#include "odabadbobjecthandle.h"
-#include "odabaerror.h"
-
+#include "AquaBase.h"
+//#include "odabadbobjecthandle.h"
+//#include "odabaerror.h"
 
 /**
 
-@class OdabaClient
+@class Connection
 
 To run client server applications you must create a ODABA client instance.
  To support several connections to different servers you can create one
@@ -52,26 +51,29 @@ Since there is no hierarchy defined between clients the system will not check.
 
 */
 
+class ODABAClient;
+namespace AquaBase {
 
-class OdabaClient: public QObject
+
+class Connection: public QObject
 {
    Q_OBJECT
 
 public:
-   OdabaClient( QObject *const parent = 0 );
-   //ODABAClient (char *inipath, char *application_name=NULL, char *progpath=NULL, ApplicationTypes application_type=APT_Console );
-   //ODABAClient ( );
-   //ODABAClient (const ODABAClient &client_refc );
-   //ODABAClient (CClient *cclient_ptr );
-   virtual ~OdabaClient();
+   Connection( QObject *const parent = 0 );
+   //Connection (char *inipath, char *application_name=NULL, char *progpath=NULL, ApplicationTypes application_type=APT_Console );
+   //Connection ( );
+   //Connection (const Connection &client_refc );
+   //Connection (CClient *cclient_ptr );
+   virtual ~Connection();
    bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
    bool Disconnect ( );
    bool IsConnected ( );
    int GetConnectionID ( );
    bool ShutDown ( const bool close_system = true );
 
-   OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
-   QPointer<OdabaError>GetDBError ( );
+   //OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
+   //QPointer<OdabaError>GetDBError ( );
 
 
 protected:
@@ -112,12 +114,12 @@ private:
 
 private:
    operator bool ( );
-   OdabaClient &operator= ( OdabaClient &client_ref );
+   Connection &operator= ( Connection &client_ref );
    //CClient *GetClientPtr ( ) const;
    //logical Open (CClient *cclient_ptr );
-   //logical Open (const ODABAClient &client_refc );
+   //logical Open (const Connection &client_refc );
 
 };
 
-
-#endif //__odabaclient_cpp__
+};
+#endif //__Connection_cpp__

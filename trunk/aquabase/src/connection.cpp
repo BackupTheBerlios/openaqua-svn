@@ -18,12 +18,12 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.     *
 ***************************************************************************/
 
-#include "odabaclient.h"
-#include "odabadbobjecthandle.h"
+#include "connection.h"
+//#include "odabadbobjecthandle.h"
 #include <QApplication>
 
 
-   //for the ODABAClient
+   //for the Connection
 #include  <csos4mac.h>
 #include  <igvtx.h>
 #include  <igvts.h>
@@ -49,7 +49,7 @@ using namespace std;
 
 */
 
-OdabaClient::OdabaClient( QObject *const parent )
+AquaBase::Connection::Connection( QObject *const parent )
       : QObject( parent )
 {
    m_client = new ODABAClient();
@@ -58,13 +58,13 @@ OdabaClient::OdabaClient( QObject *const parent )
 
 
 
-OdabaClient::~OdabaClient()
+AquaBase::Connection::~Connection()
 {
    delete m_client;
 }
 
 
-bool OdabaClient::Open ( const QString& inipath )
+bool AquaBase::Connection::Open ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
@@ -82,7 +82,7 @@ bool OdabaClient::Open ( const QString& inipath )
 
 
 
-void OdabaClient::Initialize ( const QString& inipath )
+void AquaBase::Connection::Initialize ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
@@ -98,7 +98,7 @@ void OdabaClient::Initialize ( const QString& inipath )
 }
 
 
-bool OdabaClient::KillClient ( int client_id, int wait_sec, bool send_message )
+bool AquaBase::Connection::KillClient ( int client_id, int wait_sec, bool send_message )
 {
    logical s = TRUE;
    if ( send_message == false )
@@ -129,7 +129,7 @@ once it cannot be connected to another server until the open connection is close
 @warning The hostname and -port could be changed!
 */
 
-bool OdabaClient::Connect ( const QString& server_name, unsigned int host_port, const QString& cache )
+bool AquaBase::Connection::Connect ( const QString& server_name, unsigned int host_port, const QString& cache )
 {
    if ( IsConnected ( ) == true )
       Disconnect();
@@ -159,7 +159,7 @@ bool OdabaClient::Connect ( const QString& server_name, unsigned int host_port, 
    }
 }
 
-bool OdabaClient::IsConnected ( )
+bool AquaBase::Connection::IsConnected ( )
 {
    return ( m_client->IsConnected() );
 }
@@ -178,7 +178,7 @@ cause problems and not all changes are stored.
 
 @result true - in any cases
 */
-bool OdabaClient::Disconnect ( )
+bool AquaBase::Connection::Disconnect ( )
 {
    //const bool result = ShutDown();
    const bool result = true;
@@ -192,24 +192,24 @@ bool OdabaClient::Disconnect ( )
 @result is 0 - what ever happens
 
 */
-int OdabaClient::GetConnectionID ( )
+int AquaBase::Connection::GetConnectionID ( )
 {
    return m_client->GetConnectionID ();
 }
 
-const QString OdabaClient::GetHost ( ) const
+const QString AquaBase::Connection::GetHost ( ) const
 {
    return m_host_name;
 }
 
 
-unsigned int OdabaClient::GetPort ( ) const
+unsigned int AquaBase::Connection::GetPort ( ) const
 {
    return m_host_port;
 }
 
 
-bool OdabaClient::BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_sec )
+bool AquaBase::Connection::BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( target , t );
@@ -227,7 +227,7 @@ bool OdabaClient::BackupDB ( const QString& cpath, const QString& target, const 
 
 /**
 
-Usually the last ODABAClient handle referring to the client will
+Usually the last Connection handle referring to the client will
 shut down the client when being destructed. In some cases, e.g.
 when creating a client with an ini-file and using system services as
 data catalogue or error logs, some system references are still active
@@ -243,7 +243,7 @@ been created automatically, the function will close the main client.
 
 */
 
-bool OdabaClient::ShutDown ( const bool close_system )
+bool AquaBase::Connection::ShutDown ( const bool close_system )
 {
    if ( close_system )
    {
@@ -262,7 +262,7 @@ bool OdabaClient::ShutDown ( const bool close_system )
 }
 
 
-bool OdabaClient::Exist ( const QString& cpath )
+bool AquaBase::Connection::Exist ( const QString& cpath )
 {
    MAKE_LOC_STRING( cpath , c );
    logical r = m_client->Exist( c );
@@ -271,26 +271,26 @@ bool OdabaClient::Exist ( const QString& cpath )
 
 }
 
-bool OdabaClient::StartPause ( const int wait_sec )
+bool AquaBase::Connection::StartPause ( const int wait_sec )
 {
    m_client->StartPause( wait_sec );
 }
 
 
 
-void OdabaClient::StopPause ( )
+void AquaBase::Connection::StopPause ( )
 {
    m_client->StopPause();
 }
 
 
-QString OdabaClient::GetDataSource ( int indx0 )
+QString AquaBase::Connection::GetDataSource ( int indx0 )
 {
    return m_client->GetDataSource ( indx0 );
 }
 
 
-bool OdabaClient::SetServerVariable ( const QString& var_name, const QString& var_string )
+bool AquaBase::Connection::SetServerVariable ( const QString& var_name, const QString& var_string )
 {
    MAKE_LOC_STRING( var_name , n );
    MAKE_LOC_STRING( var_string , s );
@@ -303,7 +303,7 @@ bool OdabaClient::SetServerVariable ( const QString& var_name, const QString& va
 }
 
 
-QString OdabaClient::GetServerVariable ( const QString& var_name )
+QString AquaBase::Connection::GetServerVariable ( const QString& var_name )
 {
    MAKE_LOC_STRING( var_name , n );
    QString r = m_client->GetServerVariable( n );
@@ -314,7 +314,7 @@ QString OdabaClient::GetServerVariable ( const QString& var_name )
 
 
 
-bool OdabaClient::StatDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::Connection::StatDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -332,7 +332,7 @@ bool OdabaClient::StatDisplay ( const QString& dbpath, const QString& ppath )
 
 
 
-bool OdabaClient::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::Connection::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -345,7 +345,7 @@ bool OdabaClient::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
 
 }
 
-bool OdabaClient::DictDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::Connection::DictDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -359,7 +359,7 @@ bool OdabaClient::DictDisplay ( const QString& dbpath, const QString& ppath )
 }
 
 
-bool OdabaClient::PackDatabase ( const QString& cpath, const QString& temp_path )
+bool AquaBase::Connection::PackDatabase ( const QString& cpath, const QString& temp_path )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( temp_path , t );
@@ -380,19 +380,24 @@ bool OdabaClient::PackDatabase ( const QString& cpath, const QString& temp_path 
 
    return ( r == 0 ? true : false );
 }
-bool OdabaClient::RestoreDB ( const QString& cpath, const QString& source, int wait_sec )
+
+
+
+bool AquaBase::Connection::RestoreDB ( const QString& cpath, const QString& source, int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( source , s );
    logical r = m_client->RestoreDB( c, s, wait_sec );
 }
 
-OdabaDBObjectHandle *OdabaClient::OpenDataSource ( const QString& datasource_name )
+#if 0
+OdabaDBObjectHandle *AquaBase::Connection::OpenDataSource ( const QString& datasource_name )
 {
    return new OdabaDBObjectHandle( this );
 }
 
-QPointer<OdabaError>OdabaClient::GetDBError ( )
+QPointer<OdabaError>AquaBase::Connection::GetDBError ( )
 {
    return new OdabaError(this, m_client->GetDBError ());
 }
+#endif

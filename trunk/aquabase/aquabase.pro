@@ -5,7 +5,7 @@
 
 TEMPLATE = lib
 DESTDIR = lib
-TARGET = odabaclient
+TARGET = aquabase
 INCLUDEPATH += inc \
 ../odaba/src/opa/h \
 ../odaba/src/sos/h \
@@ -14,9 +14,10 @@ LIBS *= -L../odaba/lib/
 LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
 
 
-HEADERS +=  inc/AquaBase.h 
+HEADERS +=  inc/AquaBase.h \
+                     inc/connection.h
 
-SOURCES +=  src/
+SOURCES +=  src/connection.cpp
 
 HEADERSA +=  inc/odabaclient.h \
             inc/odabadbobjecthandle.h \

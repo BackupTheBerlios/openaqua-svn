@@ -22,7 +22,7 @@
 
 #include <iostream>
 using namespace std;
-#include <odabaclient.h>
+#include <AquaBase.h>
 #include <QApplication>
 #include <QString>
 
@@ -38,11 +38,11 @@ std::ostream& operator<< (std::ostream& out, const QString& string)
 }
 
 
-bool printError(OdabaClient& );
-bool ConnectToServer(OdabaClient& );
-bool IsConnected(OdabaClient& );
-bool UnconnectFromServer(OdabaClient& );
-bool GetConnectionID(OdabaClient& );
+bool printError(AquaBase::Connection& );
+bool ConnectToServer(AquaBase::Connection& );
+bool IsConnected(AquaBase::Connection& );
+bool UnconnectFromServer(AquaBase::Connection& );
+bool GetConnectionID(AquaBase::Connection& );
 
 int main(int argc, char *argv[])
 {
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
    QCoreApplication app( argc,  argv );
 
    //create a client
-   OdabaClient client;
+   AquaBase::Connection client;
 
    //do some jobs
    cout << "begin test ..." <<endl;
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 }
 
 
-bool ConnectToServer(OdabaClient& client)
+bool ConnectToServer(AquaBase::Connection& client)
 {
    cout  << "TestCase: Connect to localhost:6123: ";
    if (client.Connect ("localhost", 6123) == true)
@@ -87,7 +87,7 @@ bool ConnectToServer(OdabaClient& client)
    }
 }
 
-bool IsConnected(OdabaClient& client)
+bool IsConnected(AquaBase::Connection& client)
 {
    cout << "TestCase: Is Connected: ";
    if (client.IsConnected()) cout << "Ok";
@@ -97,13 +97,13 @@ bool IsConnected(OdabaClient& client)
 
 }
 
-bool GetConnectionID(OdabaClient& client)
+bool GetConnectionID(AquaBase::Connection& client)
 {
    cout << "TestCase: GetConnectionID: " << client.GetConnectionID() << endl;
    return true;
 }
 
-bool UnconnectFromServer(OdabaClient& client)
+bool UnconnectFromServer(AquaBase::Connection& client)
 {
    cout << "TestCase: Unconnect: Successfull" <<endl;
    client.Disconnect();
@@ -111,8 +111,9 @@ bool UnconnectFromServer(OdabaClient& client)
 }
 
 
-bool printError(OdabaClient& client)
+bool printError(AquaBase::Connection& client)
 {
-   OdabaError *error = client.GetDBError ( );
-   cout << "printError: " << error->getTitle() << '(' << error->getDescription()<< ')'<< endl;
+   //OdabaError *error = client.GetDBError ( );
+   //cout << "printError: " << error->getTitle() << '(' << error->getDescription()<< ')'<< endl;
+   return true;
 }

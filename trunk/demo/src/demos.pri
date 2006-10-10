@@ -9,43 +9,22 @@ DEPENDPATH *= .
 CONFIG += thread
 
 
+  
 #########################################
-#config libs
-odabalibs {
-   message ("Make a Odaba Lib")
-   TEMPLATE = lib
-   DESTDIR = ../../lib/
-   INCLUDEPATH *= .
-   INCLUDEPATH *=  h   
-   INCLUDEPATH *= ../sos/h/
-   INCLUDEPATH *= ../greta/h/
-   INCLUDEPATH *= ../opi/h/
-   INCLUDEPATH *= ..
-   INCLUDEPATH *= ../opa/h
-   INCLUDEPATH *= ../oxml/h
-   INCLUDEPATH *= ../ops/h/
-   INCLUDEPATH *= ../functionalmodel/h/
-   INCLUDEPATH *= ../oql/h/
-
-   
-   
-
-   
-#########################################
-} else: demos {
+ demos {
    message ("Make a Bin")
    unix:   TEMPLATE = app
    macx:   TEMPLATE = app
    win32:   TEMPLATE = console
    
    INCLUDEPATH = .
-   INCLUDEPATH *= ../../../odabaclient/inc
+   INCLUDEPATH *= ../../../aquabase/inc
    
-   LIBS *= -L../../../odabaclient/lib
+   LIBS *= -L../../../aquabase/lib
    LIBS *= -L../../../odaba/lib/
-   LIBS += -lodabaclient
-   LIBS += -lodaba_sos -lodaba_opa -lodaba_opi -lodaba_greta -lodaba_oxml -lodaba_oql -lodaba_ops -lodaba_functional_model
-   LIBS += -ldl -lrt
+   LIBS += -laquabase
+   LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
+   LIBS += -ldl 
     
       
 #########################################
