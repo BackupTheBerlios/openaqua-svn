@@ -1,8 +1,17 @@
 TEMPLATE=subdirs
 
+SUBDIRS= zlib \
+         linktest/zlib \
+         greta \
+         linktest/greta \
+         sos \
+         linktest/sos \
+         libserver \
+         linktest/libserver \
+
 
 #ohne fehler
-SUBDIRS= zlib \
+SUBDIRSA= zlib \
          linktest/zlib \
          greta \
          linktest/greta \
