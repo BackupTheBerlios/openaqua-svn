@@ -27,8 +27,8 @@ odabalibs {
    INCLUDEPATH *= ../functionalmodel/h/
    INCLUDEPATH *= ../oql/h/
 
-   macx:LIBS *= -L../../lib/
-   macx:LIBS +=  -undefined  define_a_way
+   #macx:LIBS *= -L../../lib/
+   
    
 #########################################
 } else:   collectlibs {
