@@ -1,4 +1,4 @@
-TARGET = odaba_toollib
+TARGET = odaba_tool
 CONFIG += odabalibs
 include (../projects.pri)
 

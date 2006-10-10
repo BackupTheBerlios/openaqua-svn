@@ -16,6 +16,8 @@ SUBDIRS= zlib \
          linktest/ctxinterface \
          adkctxi \
          linktest/adkctxi \
+         libtool \
+         linktest/libtool \
          linktest \
          binaries
 
