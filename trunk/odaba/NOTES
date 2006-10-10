@@ -1,9 +1,0 @@
-[debugging]
-
-if you like to debug and you used the ebuild:
-
-# mkdir /var/tmp/portage/odaba-$setupversion/     
-# mkdir /var/tmp/portage/odaba-$setupversion/work/
-# ln -s /opt/odaba/ /var/tmp/portage/odaba-$setupversion/work/odaba
-
-start gdb and debug

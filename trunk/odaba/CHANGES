@@ -1,8 +1,0 @@
-20060802
-  Changes in OPIICE startup scripts
-  OPIICE php demo
-20060727
-  CDictionary fixed crash when Open with ODABAServer
-20060727
-  CDBHandle fixed
-  -> Unix Clients (oshell and opiiceserver) possible

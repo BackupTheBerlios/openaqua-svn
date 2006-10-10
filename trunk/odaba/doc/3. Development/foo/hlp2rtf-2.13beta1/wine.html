@@ -1,0 +1,106 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.5 [de] (WinNT; I) [Netscape]">
+   <meta name="Author" content="Bernd Herd">
+   <meta name="Description" content="wine ist ein Windows-Emulator für Linux und erlaubt die Ausführung von Windows-Programmen ohne eine Windows-Lizenz.">
+   <meta name="KeyWords" content="linux,wine,suse">
+   <title>WinE - der kostenlose Windows-Ersatz</title>
+</head>
+<body>
+
+<h1>
+WinE - der kostenlose Windows-Ersatz</h1>
+
+<h2>
+Kurzbeschreibung</h2>
+Wine ist ein Emulator f&uuml;r Windows, der unter dem kostenlosen Betriebssystem
+Linux benutzt wird und die Ausf&uuml;hrung von urspr&uuml;nglich f&uuml;r
+Windows entwickelten Anwendungsprogrammen auf Linux-Rechnern gestattet,
+ohne da&szlig; eine bestehende Windows-Lizenz ben&ouml;tigt wird.
+<h2>
+Funktionalit&auml;t</h2>
+WinE stellt die meisten Funktionen des WIN16 und WIN32 APIs zur Verf&uuml;gung.
+Anwendungen k&ouml;nnen ohne erneute &Uuml;bersetzung direkt im Bin&auml;rcode
+ausgef&uuml;hrt werden, also auch wenn kein Quellcode zur Verf&uuml;gung
+steht. Wie unter Linux &uuml;blich wird f&uuml;r Bildschirm, Maus und Tastatur
+die X-Windows Schnittstelle benutzt, d.h. emulierte Windows-Anwendungen
+k&ouml;nnen gleichzeitig mit richtigen Linux-Anwendungen ausgef&uuml;hrt
+werden.
+<p>Als besonderer Leckerbissen k&ouml;nnen aufgrund der X-Windows Technologie
+mehrere X-Windows Terminals (z.B. leistungsschwache Windows 3.1-Maschinen)
+Windows-Software auf einem Linux-Rechner benutzen, ein Leistungsmerkmal
+das sonst nur der sehr teure Windows NT Terminal Server bietet.
+<h2>
+Alpha-Stadium - Dennoch eine Chance f&uuml;r Softwarehersteller</h2>
+Wine befindet sich zur Zeit noch im Alpha-Stadium, d.h. wine gilt noch
+nicht als sonderlich zuverl&auml;ssig. Da wine aber ein "open source" Projekt
+ist und im Quellcode zur Verf&uuml;gung steht, k&ouml;nnen Anwendungsentwickler
+diejenigen Probleme von wine, die mit ihrer Anwendungssoftware kollidieren,
+anhand des Quellcodes beheben und die Patches an das Wine Hauptquartier
+&uuml;bermitteln.
+<p>Wine erlaubt es daher, anstelle der aufwendigen Enwicklung einer "echten"
+Linux-Version, bestehende Software basierend auf dem WIN32-API unter Linux
+auszuf&uuml;hren.
+<p>Wine kann aber auch als Bibliothek benutzt werden um aus einem Windows
+Source code durch neu&uuml;bersetzen unter Linux und binden mit der wine-Bibliothek
+eine "echte" Linux-Anwendung zu erzeugen. Wir hoffen, da&szlig; dies zuk&uuml;nftig
+ein Weg werden k&ouml;nnte, um auf einfachste Weise WIN32-Programme auf
+PowerPC-Linux&nbsp; und Alpha-Linux etc. ausf&uuml;hren zu k&ouml;nnen.
+<h2>
+Herd Software Entwicklung und Wine</h2>
+Wir sind daran interessiert, alle von uns f&uuml;r Windows entwickelten
+Anwendungsprogramme Schritt f&uuml;r Schritt mit Wine auch f&uuml;r Linux
+benutzbar zu machen. Dazu pr&uuml;fen wir die Kompatibilit&auml;t unserer
+Anwendungsprogramme mit wine und dokumentieren diese f&uuml;r Sie.
+<h2>
+Hardware-Anforderungen</h2>
+Wine erfordert einen PC mit i386-Prozessor, steht also <b>nicht</b> f&uuml;r
+Power PC und &auml;hnliche Maschinen zur Verf&uuml;gung. Linux+X-Windows+Wine
+ben&ouml;tigt deutlich mehr Speicher als Windows 95 oder Windows 3.1, daher
+sollte der Rechner mindestens 16 MByte Hauptspeicher aufweisen. Wir benutzen
+Wine mit SuSE Linux 6.0.
+<h2>
+Konfiguration von Wine (Vorschlag)</h2>
+
+<ul>
+<li>
+Laden Sie wine als Quellcodepaket von <a href="http://www.winehq.com">http://www.winehq.com</a>
+herunter.</li>
+
+<li>
+Entpacken Sie wine mit gzip -d Wine-990314_tar.gz und tar -x --file Wine-990314_tar</li>
+
+<li>
+Starten Sie den automatischen Konfigrationsprozess mit "./configure"</li>
+
+<li>
+Starten Sie die &Uuml;bersetzung mit "make dep; make clean; make". Das
+kann eine Stunde dauern.</li>
+
+<li>
+Kopieren Sie die wine.ini als ".winerc" in Ihr $HOME-Verzeichnis und passen
+Sie die Pfade an.</li>
+</ul>
+
+<h2>
+Siehe auch</h2>
+
+<ul>
+<li>
+<a href="index.html">Herd Software Linux Themen</a></li>
+
+<li>
+<a href="../../../../katalog/hlp2rtf.html">Help to RTF - Windows Hilfedateien
+in RTF-Dokumente zum Drucken umwandeln</a></li>
+
+<li>
+<a href="http://www.winehq.com">Das Wine Hauptquartier: http://www.winehq.com</a></li>
+
+<li>
+<a href="http://www.suse.de">SuSE - Linux Distributor</a></li>
+</ul>
+
+</body>
+</html>

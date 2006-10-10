@@ -1,0 +1,144 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.5 [de] (WinNT; I) [Netscape]">
+   <meta name="Author" content="Bernd Herd">
+   <meta name="Description" content="Windows Hilfedateien (kennung .HLP) können mit Help to RTF für Linux ausgedruckt werden.">
+   <meta name="KeyWords" content="linux,Help to RTF,StarOffice">
+   <title>Windows Hilfedateien unter Linux drucken</title>
+</head>
+<body>
+
+<h1>
+Windows Hilfedateien unter Linux drucken</h1>
+
+<h2>
+Motivation</h2>
+Mannigfaltige Informationen stehen als Windows Hilfedateien (*.hlp) oder
+Media Viewer (*.mvb) / Media View Library (*.m13, *.m14) zur Verf&uuml;gung.
+Die Themenbereiche umfassung technische Dokumentationen wie das Windows
+APIs, die spanische Grammatik, medizinische Informationen und vieles mehr.
+<p>Das Datenformat der Windows Bedienungshilfe wurde propiet&auml;r von
+Microsoft eingef&uuml;hrt. Es wurde niemals offiziell dokumentiert, aber
+einige Programmierer haben das Datenformat durch geduldiges Experimentieren
+herausget&uuml;ftelt. Dadurch ist es m&ouml;glich, die Windows-Hilfedateien
+in ein offiziell dokumentiertes Format zu konvertieren, das Sie dann unter
+Linux weiterverarbeiten k&ouml;nnen.
+<h2>
+Help to RTF f&uuml;r Linux</h2>
+Es gibt eine kostenlose Linux-Version von <a href="../../../../katalog/hlp2rtf.html">Help
+to RTF</a> , die zwar nicht so h&uuml;bsch aussieht wie die Windows-Version,
+daf&uuml;r aber ohne die Installation des Windows-Emulators auskommt. Die
+Linux-Version ist eine Kommandozeilenversion. Sie erstellt aus einer HLP-Datei
+eine RTF-Datei, die Sie dann z.B. mit StarOffice ausdrucken k&ouml;nnen.
+<h3>
+Vorgehensweise</h3>
+Wir gehen davon aus, da&szlig; Sie StarOffice bereits installiert haben.
+StarOffice f&uuml;r Linux ist f&uuml;r Privatanwender kostenlos und kann
+kostenlos von <a href="http://www.stardivision.de">http://www.stardivision.de</a>
+heruntergeladen werden. Es ist auch in den Installations-CDs von <a href="http://www.suse.de">Suse
+Linux</a> 6.0 enthalten.
+<ul>
+<li>
+Laden Sie Help to RTF f&uuml;r Linux von <a href="http://www.herdsoft.com/ftp/downloads.html#hlp2rtf">http://www.herdsoft.com/ftp/downloads.html#hlp2rtf</a>
+herunter. Sie ben&ouml;tigen mindestens Version 2.13, da die &auml;ltere
+Version 2.12 nicht mit StarOffice kompatibel war.</li>
+
+<li>
+Packen Sie das Archiv aus:</li>
+
+<br><tt>gzip -d hlp2rtflx-version.tar.gz</tt>
+<br><tt>tar -x --file hlp2rtflx-version.tar</tt>
+<br><tt>cd hlp2rtflx-version</tt>
+<li>
+Erzeugen Sie ein neues leeres Verzeichnis, da Help to RTF m&ouml;glicherweise
+eine gro&szlig;e Anzahl von Bitmap-Dateien im aktuellen Verzeichnis ablegt.</li>
+
+<br><tt>md file1</tt>
+<br><tt>cd file1</tt>
+<li>
+Konvertieren Sie Ihre Hilfedatei</li>
+
+<br><tt>../hlp2rtflx -pb5 /home/.../myfile.hlp</tt>
+<li>
+Laden Sie die erstellte Datei in StarOffice 5.0.</li>
+</ul>
+
+<h3>
+Inhaltsverzeichnis in StarOffice</h3>
+Die F&auml;higkeiten von StarOffice zum Import von RTF-Dateien sind leider
+ein wenig begrenzt. StarOffice ist zwar nicht dazu in der Lage, ein Inhaltsverzeichnis
+automatisch anhand der RTF-Quelle zu erzeugen, aber Sie k&ouml;nnen ein
+Inhaltsverzeichnis von Hand erstellen:
+<ul>
+<li>
+&Ouml;ffnen Sie die von Help to RTF erstelle RTF-Datei.</li>
+
+<li>
+Positionieren Sie den Cursor an die Stelle an der Sie das Inhalteverzeichnis
+w&uuml;nschen</li>
+
+<li>
+W&auml;hlen Sie den Men&uuml;punkt "Einf&uuml;gen Verzeichnisse Inhaltsverzeichnis".
+Es erscheint der Dialog "Inhaltsverzeichnis einf&uuml;gen".</li>
+
+<li>
+Bet&auml;tigen Sie die Schaltfl&auml;che "Gliederung". Es erscheint der
+Dialog "Kapitelnumerierung".</li>
+
+<li>
+W&auml;hlen Sie aus dem Auswahlelement "Absatzvorlage" den Eintrag "Heading
+1".</li>
+
+<li>
+W&auml;hlen Sie aus dem Auswahlelement "Ebene" den Eintrag "2".</li>
+
+<li>
+W&auml;hlen Sie aus dem Auswahlelement "Absatzvorlage" den Eintrag "Heading
+2".</li>
+
+<li>
+Bet&auml;tigen Sie die Schaltfl&auml;che "OK". Es erscheint wieder der
+Dialog "Inhaltsverzeichnis einf&uuml;gen".</li>
+
+<li>
+Bet&auml;tigen Sie die Schaltfl&auml;che "OK".</li>
+</ul>
+
+<h2>
+Alternative: Der Windows-Emulator</h2>
+Mit dem kostenlosen Windows-Emulator <a href="wine.html">wine</a> k&ouml;nnen
+Sie das Programm WINHELP.EXE bzw. WINHLP32.EXE von Microsoft Windows dazu
+verwenden, Hilfedateien wie unter Windows gewohnt anzusehen.
+<p>Au&szlig;erdem k&ouml;nnen Sie unser Programm <a href="../../../../katalog/hlp2rtf.html">Help
+to RTF</a> verwenden, um Hilfedateien in RTF-Dateien zu konvertieren, die
+Sie dann z.B. mit StarOffice ausdrucken k&ouml;nnen.
+<h3>
+Vorteile der Windows-Version</h3>
+Die Windows-Version von <a href="../../../../katalog/hlp2rtf.html">Help
+to RTF</a> ist dazu in der Lage, Grafiken die durch DLL-Dateien angezeigt
+werden im RTF-Ausdruck zu ber&uuml;cksichtigen. Wenn Sie anstelle von wichtigen
+Grafiken nur Anweisungen wie <tt>{ewc DLLNAME,FENSTERKLASSE,AUTHOR-STRING}</tt>
+vorfinden, so kann Ihnen die Windows-Version mit etwas Gl&uuml;ck die dazu
+passende Grafik in die Datei aufnehmen.
+<h2>
+Siehe auch</h2>
+
+<ul>
+<li>
+<a href="index.html">Herd Software Linux Themen</a></li>
+
+<li>
+<a href="../../../../katalog/hlp2rtf.html">Help to RTF - Windows Hilfedateien
+in RTF-Dokumente zum Drucken umwandeln</a></li>
+
+<li>
+<a href="http://www.winehq.com">Das Wine Hauptquartier: http://www.winehq.com</a></li>
+
+<li>
+<a href="http://www.suse.de">SuSE - Linux Distributor</a></li>
+</ul>
+
+</body>
+</html>

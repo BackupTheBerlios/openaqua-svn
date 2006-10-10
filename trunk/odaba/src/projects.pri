@@ -60,19 +60,17 @@ odabalibs {
    DESTDIR = ../../../bin/
    QT -= gui core
 
-   INCLUDEPATH = .
-   INCLUDEPATH *= .
    INCLUDEPATH *=  h   
    INCLUDEPATH *= ../../sos/h/
    INCLUDEPATH *= ../../greta/h/
    INCLUDEPATH *= ../../opi/h/
-   INCLUDEPATH *= ..
    INCLUDEPATH *= ../../opa/h
    INCLUDEPATH *= ../../oxml/h
    INCLUDEPATH *= ../../ops/h/
    INCLUDEPATH *= ../../functionalmodel/h/
    INCLUDEPATH *= ../../oql/h/
-   INCLUDEPATH *= ../../toollib/h/
+   INCLUDEPATH *= ../../libtool/h/
+   INCLUDEPATH *= ..
    
    LIBS *= -L../../../lib/
    
@@ -80,6 +78,7 @@ odabalibs {
                 -lodaba_zlib \
                 -lodaba_sos \
                 -lodaba_server \
+                -lodaba_tool \
                 -ldl
     
       
