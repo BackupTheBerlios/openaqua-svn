@@ -27,8 +27,6 @@
 #include <QString>
 #include <QPointer>
 #include "AquaBase.h"
-//#include "odabadbobjecthandle.h"
-//#include "odabaerror.h"
 
 /**
 
@@ -52,74 +50,75 @@ Since there is no hierarchy defined between clients the system will not check.
 */
 
 class ODABAClient;
-namespace AquaBase {
-
-
-class Connection: public QObject
+namespace AquaBase
 {
-   Q_OBJECT
+   class AB_Error;
+   class AB_Connection: public QObject
+   {
+      Q_OBJECT
 
-public:
-   Connection( QObject *const parent = 0 );
-   //Connection (char *inipath, char *application_name=NULL, char *progpath=NULL, ApplicationTypes application_type=APT_Console );
-   //Connection ( );
-   //Connection (const Connection &client_refc );
-   //Connection (CClient *cclient_ptr );
-   virtual ~Connection();
-   bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
-   bool Disconnect ( );
-   bool IsConnected ( );
-   int GetConnectionID ( );
-   bool ShutDown ( const bool close_system = true );
+   public:
+      AB_Connection( QObject *const parent = 0 );
+      //Connection (char *inipath, char *application_name=NULL, char *progpath=NULL, ApplicationTypes application_type=APT_Console );
+      //Connection ( );
+      //Connection (const Connection &client_refc );
+      //Connection (CClient *cclient_ptr );
+      virtual ~AB_Connection();
+      bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
+      bool Disconnect ( );
+      bool IsConnected ( );
+      int GetConnectionID ( );
+      bool ShutDown ( const bool close_system = true );
+      QPointer<AquaBase::AB_Error>GetDBError ( );
+      //OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
 
-   //OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
-   //QPointer<OdabaError>GetDBError ( );
-
-
-protected:
-
-   bool Open ( const QString& inipath );
-   void Initialize ( const QString& inipath );
-   bool KillClient ( int client_id, int wait_sec = 300, bool send_message = true );
-
-   const QString GetHost ( ) const;
-   unsigned int GetPort ( ) const;
-
-   bool Exist ( const QString& cpath );
-   bool Close ( );
-   bool BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_time = 300 );
-   //bool CheckDB (const QString& dict_path, const QString& cpath, CheckOptions check_opts, char *source, int32 wait_sec=300 );
-   bool PackDatabase ( const QString& cpath, const QString& temp_path = QString() );
-   bool RestoreDB ( const QString& cpath, const QString& source, int wait_sec = 300 );
+      //!@brief simple Ping
+      const QString SayHello (const QString&);
 
 
-   QString GetDataSource ( int indx0 );
-   //QString GetDBError ( );
-   bool StartPause ( const int wait_sec = 300 );
-   void StopPause ( );
+   protected:
+
+      bool Open ( const QString& inipath );
+      void Initialize ( const QString& inipath );
+      bool KillClient ( int client_id, int wait_sec = 300, bool send_message = true );
+
+      const QString GetHost ( ) const;
+      unsigned int GetPort ( ) const;
+
+      bool Exist ( const QString& cpath );
+      bool Close ( );
+      bool BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_time = 300 );
+      //bool CheckDB (const QString& dict_path, const QString& cpath, CheckOptions check_opts, char *source, int32 wait_sec=300 );
+      bool PackDatabase ( const QString& cpath, const QString& temp_path = QString() );
+      bool RestoreDB ( const QString& cpath, const QString& source, int wait_sec = 300 );
 
 
-   bool SetServerVariable ( const QString& var_name, const QString& var_string );
-   QString GetServerVariable ( const QString& var_name );
-
-   bool StatDisplay ( const QString& dbpath, const QString& ppath );
-   bool SysInfoDisplay ( const QString& dbpath, const QString& ppath );
-   bool DictDisplay ( const QString& dbpath, const QString& ppath );
+      QString GetDataSource ( int indx0 );
+      //QString GetDBError ( );
+      bool StartPause ( const int wait_sec = 300 );
+      void StopPause ( );
 
 
-private:
-   ODABAClient *m_client;
-   QString m_host_name;
-   unsigned int m_host_port;
+      bool SetServerVariable ( const QString& var_name, const QString& var_string );
+      QString GetServerVariable ( const QString& var_name );
 
-private:
-   operator bool ( );
-   Connection &operator= ( Connection &client_ref );
-   //CClient *GetClientPtr ( ) const;
-   //logical Open (CClient *cclient_ptr );
-   //logical Open (const Connection &client_refc );
+      bool StatDisplay ( const QString& dbpath, const QString& ppath );
+      bool SysInfoDisplay ( const QString& dbpath, const QString& ppath );
+      bool DictDisplay ( const QString& dbpath, const QString& ppath );
 
-};
 
+   private:
+      ODABAClient *m_client;
+      QString m_host_name;
+      unsigned int m_host_port;
+
+   private:
+      operator bool ( );
+      AB_Connection &operator= ( AB_Connection &client_ref );
+      //CClient *GetClientPtr ( ) const;
+      //logical Open (CClient *cclient_ptr );
+      //logical Open (const Connection &client_refc );
+
+   };
 };
 #endif //__Connection_cpp__

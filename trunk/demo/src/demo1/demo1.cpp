@@ -38,11 +38,12 @@ std::ostream& operator<< (std::ostream& out, const QString& string)
 }
 
 
-bool printError(AquaBase::Connection& );
-bool ConnectToServer(AquaBase::Connection& );
-bool IsConnected(AquaBase::Connection& );
-bool UnconnectFromServer(AquaBase::Connection& );
-bool GetConnectionID(AquaBase::Connection& );
+bool printError(AquaBase::AB_Connection& );
+bool ConnectToServer(AquaBase::AB_Connection& );
+bool IsConnected(AquaBase::AB_Connection& );
+bool UnconnectFromServer(AquaBase::AB_Connection& );
+bool GetConnectionID(AquaBase::AB_Connection& );
+bool SayHello(AquaBase::AB_Connection& );
 
 int main(int argc, char *argv[])
 {
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
    QCoreApplication app( argc,  argv );
 
    //create a client
-   AquaBase::Connection client;
+   AquaBase::AB_Connection client;
 
    //do some jobs
    cout << "begin test ..." <<endl;
@@ -61,6 +62,7 @@ int main(int argc, char *argv[])
    if (result) result = ConnectToServer(client); else printError(client);
    if (result) result = IsConnected(client); else printError(client);
    if (result) result = GetConnectionID(client ); else printError(client);
+   if (result) result = SayHello(client ); else printError(client);
    if (result) result = UnconnectFromServer(client);
    if (result) result = GetConnectionID(client ); //should show error
 
@@ -74,7 +76,7 @@ int main(int argc, char *argv[])
 }
 
 
-bool ConnectToServer(AquaBase::Connection& client)
+bool ConnectToServer(AquaBase::AB_Connection& client)
 {
    cout  << "TestCase: Connect to localhost:6123: ";
    if (client.Connect ("localhost", 6123) == true)
@@ -87,7 +89,7 @@ bool ConnectToServer(AquaBase::Connection& client)
    }
 }
 
-bool IsConnected(AquaBase::Connection& client)
+bool IsConnected(AquaBase::AB_Connection& client)
 {
    cout << "TestCase: Is Connected: ";
    if (client.IsConnected()) cout << "Ok";
@@ -97,13 +99,13 @@ bool IsConnected(AquaBase::Connection& client)
 
 }
 
-bool GetConnectionID(AquaBase::Connection& client)
+bool GetConnectionID(AquaBase::AB_Connection& client)
 {
    cout << "TestCase: GetConnectionID: " << client.GetConnectionID() << endl;
    return true;
 }
 
-bool UnconnectFromServer(AquaBase::Connection& client)
+bool UnconnectFromServer(AquaBase::AB_Connection& client)
 {
    cout << "TestCase: Unconnect: Successfull" <<endl;
    client.Disconnect();
@@ -111,9 +113,16 @@ bool UnconnectFromServer(AquaBase::Connection& client)
 }
 
 
-bool printError(AquaBase::Connection& client)
+
+bool SayHello(AquaBase::AB_Connection& client)
 {
-   //OdabaError *error = client.GetDBError ( );
-   //cout << "printError: " << error->getTitle() << '(' << error->getDescription()<< ')'<< endl;
+   cout << "TestCase: SayHello('hello') -> " << client.SayHello("hallo") <<endl;
+   return true;
+}
+
+bool printError(AquaBase::AB_Connection& client)
+{
+   AquaBase::AB_Error *error = client.GetDBError ( );
+   cout << "printError: " << error->title() << '(' << error->description()<< ')'<< endl;
    return true;
 }

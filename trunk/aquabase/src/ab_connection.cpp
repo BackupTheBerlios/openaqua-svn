@@ -18,7 +18,7 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.     *
 ***************************************************************************/
 
-#include "connection.h"
+#include "ab_connection.h"
 //#include "odabadbobjecthandle.h"
 #include <QApplication>
 
@@ -49,7 +49,7 @@ using namespace std;
 
 */
 
-AquaBase::Connection::Connection( QObject *const parent )
+AquaBase::AB_Connection::AB_Connection( QObject *const parent )
       : QObject( parent )
 {
    m_client = new ODABAClient();
@@ -58,13 +58,13 @@ AquaBase::Connection::Connection( QObject *const parent )
 
 
 
-AquaBase::Connection::~Connection()
+AquaBase::AB_Connection::~AB_Connection()
 {
    delete m_client;
 }
 
 
-bool AquaBase::Connection::Open ( const QString& inipath )
+bool AquaBase::AB_Connection::Open ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
@@ -82,7 +82,7 @@ bool AquaBase::Connection::Open ( const QString& inipath )
 
 
 
-void AquaBase::Connection::Initialize ( const QString& inipath )
+void AquaBase::AB_Connection::Initialize ( const QString& inipath )
 {
    //MAKE_LOC_STRING( server_name , sn );
    MAKE_LOC_STRING( inipath , ip );
@@ -98,7 +98,7 @@ void AquaBase::Connection::Initialize ( const QString& inipath )
 }
 
 
-bool AquaBase::Connection::KillClient ( int client_id, int wait_sec, bool send_message )
+bool AquaBase::AB_Connection::KillClient ( int client_id, int wait_sec, bool send_message )
 {
    logical s = TRUE;
    if ( send_message == false )
@@ -129,7 +129,7 @@ once it cannot be connected to another server until the open connection is close
 @warning The hostname and -port could be changed!
 */
 
-bool AquaBase::Connection::Connect ( const QString& server_name, unsigned int host_port, const QString& cache )
+bool AquaBase::AB_Connection::Connect ( const QString& server_name, unsigned int host_port, const QString& cache )
 {
    if ( IsConnected ( ) == true )
       Disconnect();
@@ -159,7 +159,7 @@ bool AquaBase::Connection::Connect ( const QString& server_name, unsigned int ho
    }
 }
 
-bool AquaBase::Connection::IsConnected ( )
+bool AquaBase::AB_Connection::IsConnected ( )
 {
    return ( m_client->IsConnected() );
 }
@@ -178,7 +178,7 @@ cause problems and not all changes are stored.
 
 @result true - in any cases
 */
-bool AquaBase::Connection::Disconnect ( )
+bool AquaBase::AB_Connection::Disconnect ( )
 {
    //const bool result = ShutDown();
    const bool result = true;
@@ -192,24 +192,24 @@ bool AquaBase::Connection::Disconnect ( )
 @result is 0 - what ever happens
 
 */
-int AquaBase::Connection::GetConnectionID ( )
+int AquaBase::AB_Connection::GetConnectionID ( )
 {
    return m_client->GetConnectionID ();
 }
 
-const QString AquaBase::Connection::GetHost ( ) const
+const QString AquaBase::AB_Connection::GetHost ( ) const
 {
    return m_host_name;
 }
 
 
-unsigned int AquaBase::Connection::GetPort ( ) const
+unsigned int AquaBase::AB_Connection::GetPort ( ) const
 {
    return m_host_port;
 }
 
 
-bool AquaBase::Connection::BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_sec )
+bool AquaBase::AB_Connection::BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( target , t );
@@ -243,7 +243,7 @@ been created automatically, the function will close the main client.
 
 */
 
-bool AquaBase::Connection::ShutDown ( const bool close_system )
+bool AquaBase::AB_Connection::ShutDown ( const bool close_system )
 {
    if ( close_system )
    {
@@ -262,7 +262,7 @@ bool AquaBase::Connection::ShutDown ( const bool close_system )
 }
 
 
-bool AquaBase::Connection::Exist ( const QString& cpath )
+bool AquaBase::AB_Connection::Exist ( const QString& cpath )
 {
    MAKE_LOC_STRING( cpath , c );
    logical r = m_client->Exist( c );
@@ -271,26 +271,26 @@ bool AquaBase::Connection::Exist ( const QString& cpath )
 
 }
 
-bool AquaBase::Connection::StartPause ( const int wait_sec )
+bool AquaBase::AB_Connection::StartPause ( const int wait_sec )
 {
    m_client->StartPause( wait_sec );
 }
 
 
 
-void AquaBase::Connection::StopPause ( )
+void AquaBase::AB_Connection::StopPause ( )
 {
    m_client->StopPause();
 }
 
 
-QString AquaBase::Connection::GetDataSource ( int indx0 )
+QString AquaBase::AB_Connection::GetDataSource ( int indx0 )
 {
    return m_client->GetDataSource ( indx0 );
 }
 
 
-bool AquaBase::Connection::SetServerVariable ( const QString& var_name, const QString& var_string )
+bool AquaBase::AB_Connection::SetServerVariable ( const QString& var_name, const QString& var_string )
 {
    MAKE_LOC_STRING( var_name , n );
    MAKE_LOC_STRING( var_string , s );
@@ -303,7 +303,7 @@ bool AquaBase::Connection::SetServerVariable ( const QString& var_name, const QS
 }
 
 
-QString AquaBase::Connection::GetServerVariable ( const QString& var_name )
+QString AquaBase::AB_Connection::GetServerVariable ( const QString& var_name )
 {
    MAKE_LOC_STRING( var_name , n );
    QString r = m_client->GetServerVariable( n );
@@ -314,7 +314,7 @@ QString AquaBase::Connection::GetServerVariable ( const QString& var_name )
 
 
 
-bool AquaBase::Connection::StatDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::AB_Connection::StatDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -332,7 +332,7 @@ bool AquaBase::Connection::StatDisplay ( const QString& dbpath, const QString& p
 
 
 
-bool AquaBase::Connection::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::AB_Connection::SysInfoDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -345,7 +345,7 @@ bool AquaBase::Connection::SysInfoDisplay ( const QString& dbpath, const QString
 
 }
 
-bool AquaBase::Connection::DictDisplay ( const QString& dbpath, const QString& ppath )
+bool AquaBase::AB_Connection::DictDisplay ( const QString& dbpath, const QString& ppath )
 {
    MAKE_LOC_STRING( dbpath , d );
    MAKE_LOC_STRING( ppath , p );
@@ -359,7 +359,7 @@ bool AquaBase::Connection::DictDisplay ( const QString& dbpath, const QString& p
 }
 
 
-bool AquaBase::Connection::PackDatabase ( const QString& cpath, const QString& temp_path )
+bool AquaBase::AB_Connection::PackDatabase ( const QString& cpath, const QString& temp_path )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( temp_path , t );
@@ -383,21 +383,31 @@ bool AquaBase::Connection::PackDatabase ( const QString& cpath, const QString& t
 
 
 
-bool AquaBase::Connection::RestoreDB ( const QString& cpath, const QString& source, int wait_sec )
+bool AquaBase::AB_Connection::RestoreDB ( const QString& cpath, const QString& source, int wait_sec )
 {
    MAKE_LOC_STRING( cpath , c );
    MAKE_LOC_STRING( source , s );
    logical r = m_client->RestoreDB( c, s, wait_sec );
 }
 
+QPointer<AquaBase::AB_Error>AquaBase::AB_Connection::GetDBError ( )
+{
+   return (new AquaBase::AB_Error(this, m_client->GetDBError ()));
+}
+
+
+/**
+*/
+const QString AquaBase::AB_Connection::SayHello (const QString& s)
+{
+   MAKE_LOC_STRING( s , ss );
+   return (m_client->SayHello(ss, s.size()));
+}
+
 #if 0
-OdabaDBObjectHandle *AquaBase::Connection::OpenDataSource ( const QString& datasource_name )
+OdabaDBObjectHandle *AquaBase::AB_Connection::OpenDataSource ( const QString& datasource_name )
 {
    return new OdabaDBObjectHandle( this );
 }
 
-QPointer<OdabaError>AquaBase::Connection::GetDBError ( )
-{
-   return new OdabaError(this, m_client->GetDBError ());
-}
 #endif
