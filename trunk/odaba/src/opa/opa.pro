@@ -1,13 +1,13 @@
 
-TARGET = odaba_opa
-CONFIG += odabalibs
-include (../projects.pri)
-QMAKE_CXXFLAGS *= -fpermissive
-macx: LIBS += -L../../lib  -lodaba_greta -lodaba_zlib -lodaba_sos
 
 isEmpty(PATH_PREFIX) {
-   message "Set PATH_PREFIX"
+   message "Configure OPA"
    PATH_PREFIX=.
+   TARGET = odaba_opa
+   CONFIG += odabalibs
+   include (../projects.pri)
+   QMAKE_CXXFLAGS *= -fpermissive
+   macx: LIBS += -L../../lib  -lodaba_greta -lodaba_zlib -lodaba_sos
 }
 
 

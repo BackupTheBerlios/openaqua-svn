@@ -5,7 +5,7 @@ message ("Include projects.pri")
 #########################################
 #General Settings
 include(../odaba.pri)
-DEPENDPATH *= . h qlib
+#DEPENDPATH *= . h qlib
 CONFIG += thread warn_off
 
 
@@ -21,7 +21,6 @@ odabalibs {
    INCLUDEPATH *= ../sos/h/
    INCLUDEPATH *= ../greta/h/
    INCLUDEPATH *= ../opi/h/
-   INCLUDEPATH *= ..
    INCLUDEPATH *= ../opa/h
    INCLUDEPATH *= ../oxml/h
    INCLUDEPATH *= ../ops/h/
@@ -31,6 +30,22 @@ odabalibs {
    macx:LIBS *= -L../../lib/
    macx:LIBS +=  -undefined  define_a_way
    
+
+} else:   collectlibs {
+   message ("Make a Collect Lib")
+   TEMPLATE = lib
+   DESTDIR = ../../lib/
+   QT -= gui core
+   QMAKE_CXXFLAGS *= -fpermissive
+
+   INCLUDEPATH *= ../sos/h/
+   INCLUDEPATH *= ../greta/h/
+   INCLUDEPATH *= ../opi/h/
+   INCLUDEPATH *= ../opa/h
+   INCLUDEPATH *= ../oxml/h
+   INCLUDEPATH *= ../ops/h/
+   INCLUDEPATH *= ../functionalmodel/h/
+   INCLUDEPATH *= ../oql/h/
    
 
    
