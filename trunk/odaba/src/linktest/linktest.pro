@@ -2,5 +2,7 @@ TEMPLATE=subdirs
 SUBDIRS= zlib \
          greta \
          sos \
-         oxml \
-         functionalmodel
+         libserver \
+         if_structure \
+         ctxinterface \
+         adkctxi

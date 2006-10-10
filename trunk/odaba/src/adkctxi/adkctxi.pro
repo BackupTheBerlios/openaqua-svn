@@ -1,5 +1,5 @@
 
-TARGET = odaba_adk
+TARGET = odaba_adkctxi
 CONFIG += odabalibs
 include (../projects.pri)
 

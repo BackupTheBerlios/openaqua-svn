@@ -76,13 +76,11 @@ odabalibs {
    
    LIBS *= -L../../../lib/
    
-   LIBS +=      -lodaba_greta -lodaba_opa -lodaba_opi  -lodaba_ops \
-                -lodaba_oql  -lodaba_oxml \
-                -lodaba_zlib -lodaba_sos \
-                -lodaba_toollib -lodaba_functional_model \
+   LIBS +=  -lodaba_greta \
+                -lodaba_zlib \
+                -lodaba_sos \
+                -lodaba_server \
                 -ldl
-   unix:LIBS += 
-   #-lrt
     
       
 #########################################
