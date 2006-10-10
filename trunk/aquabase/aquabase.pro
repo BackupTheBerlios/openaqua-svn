@@ -14,13 +14,17 @@ LIBS *= -L../odaba/lib/
 LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
 
 
-HEADERS +=  inc/odabaclient.h \
+HEADERS +=  inc/AquaBase.h 
+
+SOURCES +=  src/
+
+HEADERSA +=  inc/odabaclient.h \
             inc/odabadbobjecthandle.h \
             inc/odaba_namespace.h \
             inc/odabaerror.h \
             
             
-SOURCES +=  src/odabaclient.cpp \
+SOURCESB +=  src/odabaclient.cpp \
             src/odabadbobjecthandle.cpp \
             src/odabaerror.cpp \
 
