@@ -1,8 +1,7 @@
 
-TARGET = ctxi
+TARGET = odaba_ctxi
 CONFIG += odabalibs
 include (../projects.pri)
-TARGET_EXT = dll
 
 # Input
 SOURCES += qlib/CTXInterface.cpp

@@ -30,7 +30,7 @@ odabalibs {
    macx:LIBS *= -L../../lib/
    macx:LIBS +=  -undefined  define_a_way
    
-
+#########################################
 } else:   collectlibs {
    message ("Make a Collect Lib")
    TEMPLATE = lib

@@ -9,22 +9,16 @@ SUBDIRS= zlib \
          libserver \
          linktest/libserver \
          if_structure \
-
-
-#ohne fehler
-SUBDIRSA= zlib \
-         ctxinterface \
+         linktest/if_structure \
          if_dbbase \
          if_systemclass \
+         ctxinterface \
+         linktest/ctxinterface \
          adkctxi \
+         linktest/adkctxi \
+
+
+SUBDIRSA=                   
          binaries
-
-
-
-
-
-#gar nicht
-#SUBDIRS+=ODABAICEServer 
-
 
 
