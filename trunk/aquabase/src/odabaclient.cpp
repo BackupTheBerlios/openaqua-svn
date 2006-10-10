@@ -387,8 +387,6 @@ bool OdabaClient::RestoreDB ( const QString& cpath, const QString& source, int w
    logical r = m_client->RestoreDB( c, s, wait_sec );
 }
 
-
-
 OdabaDBObjectHandle *OdabaClient::OpenDataSource ( const QString& datasource_name )
 {
    return new OdabaDBObjectHandle( this );
