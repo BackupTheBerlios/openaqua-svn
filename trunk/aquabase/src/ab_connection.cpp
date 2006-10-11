@@ -19,7 +19,7 @@
 ***************************************************************************/
 
 #include "ab_connection.h"
-//#include "odabadbobjecthandle.h"
+#include "ab_error.h"
 #include <QApplication>
 
 
