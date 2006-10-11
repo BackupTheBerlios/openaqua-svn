@@ -27,7 +27,7 @@
 #include <QString>
 #include "ab_connection.h"
 
-class DataSourceHandle ;
+class DataSourceHandle;
 namespace AquaBase
 {
 
@@ -41,6 +41,8 @@ namespace AquaBase
 
       bool Open();
 
+      /**
+      */
       bool BeginTransaction ( );
       bool RollBack ( );
       bool CommitTransaction ( );

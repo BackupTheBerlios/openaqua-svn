@@ -55,6 +55,19 @@ AquaBase::AB_DataSource::~AB_DataSource()
    delete m_client;
 }
 
+/**
+
+Data sources provide simple transaction control. Data
+source transactions cannot be nested, i.e. when a transaction
+is running for the datasource no other transaction
+can be started.
+
+Using nested transactions is possible with the DBObjectHandle.
+
+
+
+*/
+
 bool AquaBase::AB_DataSource::BeginTransaction ( )
 {
    cerr << "begin transaction not supported" <<endl;
