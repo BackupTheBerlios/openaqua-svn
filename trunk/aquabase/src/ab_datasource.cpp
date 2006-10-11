@@ -19,6 +19,7 @@
 ***************************************************************************/
 
 #include "ab_datasource.h"
+#include "ab_error.h"
 
 //for the odaba DataSource
 #include  <csos4mac.h>
@@ -28,8 +29,8 @@
 #include  <cfctp.h>
 #include  <codaba2.h>
 #include  <sDataSourceHandle.hpp>
-
-
+#include  <sDatabaseHandle.hpp>
+#include  <sDictionaryHandle.hpp>
 
 
 
@@ -42,8 +43,8 @@ using namespace std;
 
 */
 
-AquaBase::AB_DataSource::AB_DataSource(AB_Connection& c , QObject *const parent  )
-      : QObject( parent )
+AquaBase::AB_DataSource::AB_DataSource(AB_Connection& c  )
+      : QObject( &c )
       , m_connection(c)
 {
    m_client = new DataSourceHandle();
@@ -55,6 +56,7 @@ AquaBase::AB_DataSource::~AB_DataSource()
    delete m_client;
 }
 
+
 /**
 
 Data sources provide simple transaction control. Data
@@ -64,26 +66,58 @@ can be started.
 
 Using nested transactions is possible with the DBObjectHandle.
 
-
-
+@see RollBack ( )
+@see CommitTransaction ( )
 */
-
 bool AquaBase::AB_DataSource::BeginTransaction ( )
 {
-   cerr << "begin transaction not supported" <<endl;
+   return (!m_client->BeginTransaction());
 }
 
 
+/**
+*/
 bool AquaBase::AB_DataSource::RollBack ( )
 {
-   cerr << "roll back transaction not supported" <<endl;
+   return (!m_client->RollBack());
 }
 
 
+/**
+*/
 bool AquaBase::AB_DataSource::CommitTransaction ( )
 {
-   cerr << "commit transaction not supported" <<endl;
+   return (!m_client->CommitTransaction());
 }
 
+
+bool AquaBase::AB_DataSource::Open(bool readOnly)
+{
+   if (readOnly == true) {
+      return (!m_client->Open(*m_connection.m_client, PI_Read ));
+   } else {
+      return (!m_client->Open(*m_connection.m_client, PI_Write));
+   }
+
+}
+
+
+
+bool AquaBase::AB_DataSource::Close()
+{
+   return (!m_client->Close());
+}
+
+
+/**
+Database handle must be created for accessing data in
+an ODABA database. An ODABA database must be connected
+with a dictionary, which defines the object model
+for the database.
+*/
+//DatabaseHandle &AquaBase::AB_DataSource::OpenDatabase ( )
+//{
+//   return m_client->OpenDatabase();
+//}
 
 

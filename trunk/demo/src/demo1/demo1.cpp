@@ -40,14 +40,15 @@ std::ostream& operator<< (std::ostream& out, const QString& string)
 
 bool printError(AquaBase::AB_Connection& );
 bool ConnectToServer(AquaBase::AB_Connection& );
+bool GetServerName(AquaBase::AB_Connection& );
+bool GetServerPort(AquaBase::AB_Connection& );
 bool IsConnected(AquaBase::AB_Connection& );
 bool UnconnectFromServer(AquaBase::AB_Connection& );
-bool GetConnectionID(AquaBase::AB_Connection& );
 bool SayHello(AquaBase::AB_Connection& );
+bool PlayWithDictionary(AquaBase::AB_Connection& );
 
 int main(int argc, char *argv[])
 {
-   bool result = true;
 
    //create a simple Qt Application (without event loop in this case)
    QCoreApplication app( argc,  argv );
@@ -57,14 +58,14 @@ int main(int argc, char *argv[])
 
    //do some jobs
    cout << "begin test ..." <<endl;
-   result = GetConnectionID(client ); //show error
-
+   bool result = true;
    if (result) result = ConnectToServer(client); else printError(client);
+   if (result) result = GetServerName(client); else printError(client);
+   if (result) result = GetServerPort(client); else printError(client);
    if (result) result = IsConnected(client); else printError(client);
-   if (result) result = GetConnectionID(client ); else printError(client);
    if (result) result = SayHello(client ); else printError(client);
+   if (result) result = PlayWithDictionary(client);
    if (result) result = UnconnectFromServer(client);
-   if (result) result = GetConnectionID(client ); //should show error
 
    if (result == true){
       cout << "end test without errors" <<endl;
@@ -89,6 +90,24 @@ bool ConnectToServer(AquaBase::AB_Connection& client)
    }
 }
 
+bool GetServerName(AquaBase::AB_Connection& client)
+{
+   cout  << "TestCase: GetServerName= "
+   << client.GetHost()
+   << endl;
+   return true;
+}
+
+
+bool GetServerPort(AquaBase::AB_Connection& client)
+{
+   cout  << "TestCase: GetServerPort= "
+   << client.GetPort()
+   << endl;
+   return true;
+}
+
+
 bool IsConnected(AquaBase::AB_Connection& client)
 {
    cout << "TestCase: Is Connected: ";
@@ -99,11 +118,6 @@ bool IsConnected(AquaBase::AB_Connection& client)
 
 }
 
-bool GetConnectionID(AquaBase::AB_Connection& client)
-{
-   cout << "TestCase: GetConnectionID: " << client.GetConnectionID() << endl;
-   return true;
-}
 
 bool UnconnectFromServer(AquaBase::AB_Connection& client)
 {
@@ -124,5 +138,13 @@ bool printError(AquaBase::AB_Connection& client)
 {
    AquaBase::AB_Error *error = client.GetDBError ( );
    cout << "printError: " << error->title() << '(' << error->description()<< ')'<< endl;
+   return true;
+}
+
+
+bool PlayWithDictionary(AquaBase::AB_Connection& client)
+{
+   AquaBase::AB_DataSource s (client);
+   AquaBase::AB_Dictionary d (s);
    return true;
 }

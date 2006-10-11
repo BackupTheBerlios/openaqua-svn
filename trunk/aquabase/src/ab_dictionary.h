@@ -25,7 +25,7 @@
 
 #include <QObject>
 #include <QString>
-#include "AquaBase.h"
+#include "ab_datasource.h"
 
 /**
 
@@ -48,6 +48,7 @@ Since there is no hierarchy defined between clients the system will not check.
 
 */
 
+class DictionaryHandle;
 class Dictionary;
 namespace AquaBase
 {
@@ -57,15 +58,18 @@ namespace AquaBase
       Q_OBJECT
 
    public:
-      AB_Dictionary( QObject *const parent = 0 );
+      AB_Dictionary( AquaBase::AB_DataSource& );
       virtual ~AB_Dictionary();
 
    private:
-      Dictionary *m_client;
+      friend class AB_DataSource;
+      DictionaryHandle &m_clientHandle;
+      AB_Dictionary( ); //not defined
 
    private:
+      Dictionary *m_clientDict;
       operator bool ( );
-      AB_Dictionary &operator= ( AB_Dictionary &);
+      AB_Dictionary &operator= ( AB_Dictionary & );
 
    };
 };

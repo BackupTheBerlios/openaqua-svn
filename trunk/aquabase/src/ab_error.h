@@ -1,8 +1,8 @@
 #ifndef __AB_Error_h__
 #define __AB_Error_h__
 
-#include "AquaBase.h"
-
+//#include "AquaBase.h"
+#include <QObject>
 
 class Error;
 namespace AquaBase

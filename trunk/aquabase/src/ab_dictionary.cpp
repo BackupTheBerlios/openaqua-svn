@@ -41,15 +41,18 @@ using namespace std;
 
 */
 
-AquaBase::AB_Dictionary::AB_Dictionary( QObject *const parent  )
-      : QObject( parent )
+AquaBase::AB_Dictionary::AB_Dictionary( AquaBase::AB_DataSource& parent)
+      : QObject( &parent )
+      , m_clientHandle(parent.m_client->OpenDictionary(PI_Write))
 {
-   m_client = new Dictionary();
+   m_clientDict = m_clientHandle.get_dictionary();
 }
+
+
 
 
 AquaBase::AB_Dictionary::~AB_Dictionary()
 {
-   delete m_client;
+   m_clientHandle.Close();
 }
 

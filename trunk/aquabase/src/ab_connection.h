@@ -26,6 +26,8 @@
 #include <QObject>
 #include <QString>
 #include <QPointer>
+#include <QVariant>
+//#include "ab_datasource.h"
 
 
 class ODABAClient;
@@ -52,68 +54,63 @@ namespace AquaBase
 
 
    */
-
    class AB_Connection: public QObject
    {
       Q_OBJECT
 
    public:
+      //!@brief Constructor
       AB_Connection( QObject *const parent = 0 );
       virtual ~AB_Connection();
-      bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
-      bool Disconnect ( );
-      bool IsConnected ( );
-      int GetConnectionID ( );
-      bool ShutDown ( const bool close_system = true );
-      QPointer<AquaBase::AB_Error>GetDBError ( );
-      //OdabaDBObjectHandle *OpenDataSource ( const QString& datasource_name );
 
-      //!@brief simple Ping
+      //!@brief create an connection
+      bool Connect ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
+
+      //!@brief the very same like Connect (at this moment!)
+      bool Initialize ( const QString& server_name, unsigned int host_port = 6123, const QString& cache = "" );
+
+      //!@brief Close an open connection
+      bool Disconnect ( );
+
+      //!@brief is the client connected to a server
+      bool IsConnected ( );
+
+      //!@brief return the hostname of the connected server
+      const QString GetHost ( ) const;
+
+      //!@brief return the Port number of the connected server
+      unsigned int GetPort ( ) const;
+
+      QPointer<AquaBase::AB_Error>GetDBError ( );
+
+      //!@brief Ping
       const QString SayHello ( const QString& );
 
-
+      //!@brief return a Client Connection object
+      AB_Connection *const createClient();
    protected:
 
       bool Open ( const QString& inipath );
       void Initialize ( const QString& inipath );
-      bool KillClient ( int client_id, int wait_sec = 300, bool send_message = true );
-
-      const QString GetHost ( ) const;
-      unsigned int GetPort ( ) const;
 
       bool Exist ( const QString& cpath );
       bool Close ( );
-      bool BackupDB ( const QString& cpath, const QString& target, const unsigned int wait_time = 300 );
-      //bool CheckDB (const QString& dict_path, const QString& cpath, CheckOptions check_opts, char *source, int32 wait_sec=300 );
-      bool PackDatabase ( const QString& cpath, const QString& temp_path = QString() );
-      bool RestoreDB ( const QString& cpath, const QString& source, int wait_sec = 300 );
 
 
       QString GetDataSource ( int indx0 );
-      //QString GetDBError ( );
-      bool StartPause ( const int wait_sec = 300 );
-      void StopPause ( );
-
 
       bool SetServerVariable ( const QString& var_name, const QString& var_string );
       QString GetServerVariable ( const QString& var_name );
 
-      bool StatDisplay ( const QString& dbpath, const QString& ppath );
-      bool SysInfoDisplay ( const QString& dbpath, const QString& ppath );
-      bool DictDisplay ( const QString& dbpath, const QString& ppath );
-
-
    private:
+      friend class AB_DataSource;
       ODABAClient *m_client;
-      QString m_host_name;
-      unsigned int m_host_port;
+      AB_Connection( ODABAClient * const, QObject *const parent = 0);//for internal use only
+      AB_Connection(const AB_Connection& p); //doesn't exist
+      AB_Connection &operator= ( AB_Connection &client_ref );//doesn't exist
 
    private:
       operator bool ( );
-      AB_Connection &operator= ( AB_Connection &client_ref );
-      //CClient *GetClientPtr ( ) const;
-      //logical Open (CClient *cclient_ptr );
-      //logical Open (const Connection &client_refc );
 
    };
 };

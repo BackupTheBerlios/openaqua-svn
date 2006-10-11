@@ -1,6 +1,6 @@
 /********************************* Class Declaration ***************************/
 /**
-\package  OPI - 
+\package  OPI -
 \class    DataSourceHandle
 
 \brief    Data source
@@ -11,7 +11,7 @@
           levels  are not opened and have to  be opened in the application (e.g.
           when  defining only dictionary  and database the  extent is not opened
           and  no instance is selected), The datasource is defined as section in
-          the INI-file starting with the [datasource name]. 
+          the INI-file starting with the [datasource name].
           A  data  source  can  be  directed  to  a  server.  In  this  case the
           datasource  has  to  be  opened  with  a connected ODABA client or the
           INI-file  must contain  a server  specification. In  the last case the
@@ -47,40 +47,40 @@ class     svel;
 
 class  DataSourceHandle
 {
-public     :         ODABAClient                                  client;                                                    // 
-public     :         DictionaryHandle                             dictionary;                                                // 
-public     :         DatabaseHandle                               reshandle;                                                 // 
-public     :         DatabaseHandle                               dbhandle;                                                  // 
-public     :         DBObjectHandle                               object_handle;                                             // 
-public     :         PropertyHandle                              *extent_pi;                                                 // 
-public     :         char                                         data_source[41];                                           // 
-public     :         char                                         server_name[64];                                           // 
-public     :         int32                                        server_port;                                               // 
-public     :         char                                         connection_name[256];                                      // 
-public     :         char                                         dict_path[256];                                            // 
-public     :         char                                         res_path[256];                                             // 
-public     :         char                                         db_path[256];                                              // 
-public     :         char                                         workspace[256];                                            // 
-public     :         char                                         object_name[41];                                           // 
-public     :         char                                         struct_name[41];                                           // 
-public     :         char                                         extent_name[41];                                           // 
-public     :         char                                         inst_key[256];                                             // 
-public     :         uint16                                       system_version;                                            // 
-public     :         logical                                      online_version;                                            // 
-public     :         char                                         sys_appl;                                                  // 
-public     :         logical                                      collopt;                                                   // 
-protected  :         int16                                        transaction;                                               // 
-public     :         uint16                                       version;                                                   // 
-public     :         uint16                                       schema_version;                                            // 
-public     :         PIACC                                        accmode;                                                   // 
-public     :         logical                                      netopt;                                                    // 
-protected  :         logical                                      client_connected;                                          // 
-protected  :         logical                                      client_created;                                            // 
-protected  :         logical                                      dict_opened;                                               // 
-protected  :         logical                                      res_opened;                                                // 
-protected  :         logical                                      base_opened;                                               // 
-protected  :         logical                                      object_opened;                                             // 
-protected  :         logical                                      extent_opened;                                             // 
+public     :         ODABAClient                                  client;                                                    //
+public     :         DictionaryHandle                             dictionary;                                                //
+public     :         DatabaseHandle                               reshandle;                                                 //
+public     :         DatabaseHandle                               dbhandle;                                                  //
+public     :         DBObjectHandle                               object_handle;                                             //
+public     :         PropertyHandle                              *extent_pi;                                                 //
+public     :         char                                         data_source[41];                                           //
+public     :         char                                         server_name[64];                                           //
+public     :         int32                                        server_port;                                               //
+public     :         char                                         connection_name[256];                                      //
+public     :         char                                         dict_path[256];                                            //
+public     :         char                                         res_path[256];                                             //
+public     :         char                                         db_path[256];                                              //
+public     :         char                                         workspace[256];                                            //
+public     :         char                                         object_name[41];                                           //
+public     :         char                                         struct_name[41];                                           //
+public     :         char                                         extent_name[41];                                           //
+public     :         char                                         inst_key[256];                                             //
+public     :         uint16                                       system_version;                                            //
+public     :         logical                                      online_version;                                            //
+public     :         char                                         sys_appl;                                                  //
+public     :         logical                                      collopt;                                                   //
+protected  :         int16                                        transaction;                                               //
+public     :         uint16                                       version;                                                   //
+public     :         uint16                                       schema_version;                                            //
+public     :         PIACC                                        accmode;                                                   //
+public     :         logical                                      netopt;                                                    //
+protected  :         logical                                      client_connected;                                          //
+protected  :         logical                                      client_created;                                            //
+protected  :         logical                                      dict_opened;                                               //
+protected  :         logical                                      res_opened;                                                //
+protected  :         logical                                      base_opened;                                               //
+protected  :         logical                                      object_opened;                                             //
+protected  :         logical                                      extent_opened;                                             //
 
 public     :
                      int16                                        get_transaction() { return(transaction); }

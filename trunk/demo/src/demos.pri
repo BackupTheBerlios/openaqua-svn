@@ -18,7 +18,7 @@ CONFIG += thread
    win32:   TEMPLATE = console
    
    INCLUDEPATH = .
-   INCLUDEPATH *= ../../../aquabase/inc
+   INCLUDEPATH *= ../../../aquabase/src
    
    LIBS *= -L../../../aquabase/lib
    LIBS *= -L../../../odaba/lib/
