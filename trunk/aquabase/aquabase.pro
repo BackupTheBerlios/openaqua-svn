@@ -14,11 +14,11 @@ LIBS *= -L../odaba/lib/
 LIBS += -lodaba_server  -lodaba_greta  -lodaba_sos  -lodaba_zlib
 
 
-HEADERS +=  inc/AquaBase.h \
-                     inc/ab_connection.h \
-                     inc/ab_error.h \
-                     inc/ab_dictionary.h \
-                     inc/ab_datasource.h
+HEADERS +=  src/AquaBase.h \
+                     src/ab_connection.h \
+                     src/ab_error.h \
+                     src/ab_dictionary.h \
+                     src/ab_datasource.h
 
 SOURCES +=  src/ab_connection.cpp \
                      src/ab_error.cpp \
