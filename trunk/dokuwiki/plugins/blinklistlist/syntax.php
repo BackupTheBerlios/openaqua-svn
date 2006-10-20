@@ -27,12 +27,20 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 {
 
     var $stack = array ();
-    var $headerStyle = '';	//CSS Class name for Header
-    var $contentStyle = '';	//CSS Class name for Details
-    var $insideitem, $insideimage;	//internal use
+
+    var $CssHeaderStyle = '';	//CSS Class name for Header
+    var $CssContentStyle = '';	//CSS Class name for Details
+
     var $rssTitle = '';
     var $rssDescription = '';
     var $rssContent = '';
+    var $rssLink = '';		//may show to other RSS content
+    var $rssDetails = false;
+
+    var $xmlTag;
+    var $xmlInItem;
+    var $xmlInImage;
+    var $xmlInUrl;
 
 
     /**
@@ -155,49 +163,59 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     }
 
 
+    /**
+    @brief: Deals with XML start Tags
+    */
     function startElement ($parser, $name, $attrs)
     {
-	//global $insideitem, $tag, $title, $description, $link, $image, $insideimage;
-	if ($insideitem || $insideimage) {
-	    $tag = $name;
+	if ($xmlInUrl || $xmlInImage || $xmlInItem) {
+	    $xmlTag = $name;
 	}
 	if ($name == "ITEM") {
-	    $insideitem = true;
+	    $xmlInItem = true;
 	}
 	if ($name == "IMAGE") {
-	    $insideimage = true;
+	    $xmlInImage = true;
+	}
+	if ($name == "URL") {
+	    $xmlInUrl = true;
 
 	}
     }
 
+
+
+    /**
+    
+    @brief: Deal with XML End Tags
+    */
     function endElement ($parser, $name)
     {
-	global $insideitem, $tag, $title, $description, $link, $image, $insideimage, $show_detail, $headline_style,
-	    $detail_style, $count, $max;
+	$image = 'welches bilder??';
 
 	if ($name == "URL") {
-	    $news. = '<img src="'.htmlspecialchars (trim ($image)).'"/><br><br>';
-	    $insideimage = false;
-	    $image = "";
+	    $xmlInUrl = false;
+	    $rssContent. = '<img src="'.htmlspecialchars (trim ($image)).'"/><br><br>';
+
 	} else if ($name == "ITEM") {
-	    $count++;
-	    $news. =
-		('<a href="' '" class="'.$headline_style.'" target="_blank"><b>%s</b></a><br>', trim ($link),
-		 trim ($title));
-	    if ($show_detail)
-		$news. = ('<span class="'.$detail_style.'">%s</span><br>', trim ($description));
-	    else {
-		$news. = "<br>";
+	    $xmlInItem = false;
+	    $rssContent. =
+		'<a href="'.trim ($rssLink).'" class="'.$cssHeaderStyle.'" target="_blank"><b> '.trim ($rssTitle).
+		'</b></a><br>';
+
+	    if ($rssDetails) {
+		$rssContent. = '<span class="'.$cssContentStyle.'"> '.trim ($description).' </span><br>';
+	    } else {
+		$rssContent. = "<br>";
 	    }
-	    $title = "";
-	    $description = "";
-	    $link = "";
-	    $insideitem = false;
-	} else if ($count >= $max) {
-	    $title = "";
-	    $description = "";
-	    $link = "";
-	    $insideitem = false;
+
+	    $rssTitle = '';
+	    $rssDescription = '';
+	    $rssLink = '';
+
+	} else if ($name == "IMAGE") {
+	    $xmlInImage = false;
+	    $rssContent. = '<img src="'.htmlspecialchars (trim ($image)).'"/><br><br>';
 	}
     }
 
@@ -214,15 +232,14 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 	if ($insideitem) {
 	    switch ($tag) {
 	    case "TITLE":
-		$title. = $data;
+		$rssTitle. = $data;
 		break;
 	    case "DESCRIPTION":
-		$description. = $data;
+		$rssDescription. = $data;
 		break;
 	    case "LINK":
-		if (!is_string ($link))
-		    $link = "";
-		$link. = $data;
+		if (!is_string ($rssLink))
+		    $rssLink = $data;
 		break;
 	    }
 	}
