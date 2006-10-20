@@ -33,7 +33,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_blinklistcloud extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_blinklist extends DokuWiki_Syntax_Plugin {
 
     var $stack = array();
  
@@ -45,8 +45,8 @@ class syntax_plugin_blinklistcloud extends DokuWiki_Syntax_Plugin {
             'author' => 'Claudia Behrens',
             'email'  => 'info@openaqua.de',
             'date'   => '2006-10-19',
-            'name'   => 'Blinklist Cloud Plugin',
-            'desc'   => 'Add a blinklist cloud on to a wiki page',
+            'name'   => 'Blinklist Plugin',
+            'desc'   => 'Add usefull blinklist stuff to a wiki page',
             'url'    => 'http://wiki.durga-online',
         );
     }
@@ -62,12 +62,12 @@ class syntax_plugin_blinklistcloud extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {
-       $this->Lexer->addEntryPattern('\n {2,}<blinklistcloud', $mode, 'plugin_blinklistcloud');
+       $this->Lexer->addEntryPattern('\n {2,}<blinklist', $mode, 'plugin_blinklist');
     }
  
     function postConnect() {
         // we end the definition list when we encounter a blank line
-        $this->Lexer->addExitPattern('>','plugin_blinklistcloud');
+        $this->Lexer->addExitPattern('>','plugin_blinklist');
     }
  
     /**
@@ -91,7 +91,6 @@ class syntax_plugin_blinklistcloud extends DokuWiki_Syntax_Plugin {
             switch ( $state ) {
               case DOKU_LEXER_ENTER:
                 $renderer->doc .= '<script type="text/javascript" src="http://www.blinklist.com/';
-                //$renderer->doc .= 'HHHHHHHHHHHH<!--';
                 break;
               case DOKU_LEXER_MATCHED:
                 break;

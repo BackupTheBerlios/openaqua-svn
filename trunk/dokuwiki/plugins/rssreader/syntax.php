@@ -21,7 +21,7 @@ include_once("class_rss_parser/class_rss_parser.php");
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
+class syntax_plugin_rssreader extends DokuWiki_Syntax_Plugin
 {
     var $stack = array ();
 
@@ -33,8 +33,8 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
         return array ('author' =>'Claudia Behrens',
                       'email' =>'info@openaqua.de',
                       'date' =>'2006-10-20',
-                      'name' =>'Blinklist List Plugin',
-                      'desc' =>'Shows a blinklist list on to a wiki page', 
+                      'name' =>'RSS Reader for DokuWiki',
+                      'desc' =>'Shows a RSS Newsfeed within a wiki page', 
                       'url' =>'http://wiki.durga-online',
                       );
     }
@@ -58,13 +58,13 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 
     function connectTo ($mode)
     {
-        $this->Lexer->addEntryPattern ('\n {2,}<blinklistlist', $mode, 'plugin_blinklistlist');
+        $this->Lexer->addEntryPattern ('\n {2,}<rssreader', $mode, 'plugin_rssreader');
     }
 
     function postConnect ()
     {
         // we end the definition list when we encounter a blank line
-        $this->Lexer->addExitPattern ('>', 'plugin_blinklistlist');
+        $this->Lexer->addExitPattern ('>', 'plugin_rssreader');
     }
 
 
@@ -141,8 +141,4 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
         }
         return false;
     }
-
-
-
-
 }
