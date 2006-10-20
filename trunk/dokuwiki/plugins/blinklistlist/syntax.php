@@ -7,10 +7,12 @@
  * @author     Claudia.Behrens (at) openaqua.de>
  *
  */
-    if (!defined ('DOKU_INC'))
+    if (!defined ('DOKU_INC')) {
     define ('DOKU_INC', realpath (dirname (__FILE__).'/../../').'/');
-if (!defined ('DOKU_PLUGIN'))
+}
+if (!defined ('DOKU_PLUGIN')) {
     define ('DOKU_PLUGIN', DOKU_INC.'lib/plugins/');
+}
 require_once (DOKU_PLUGIN.'syntax.php');
 
 
@@ -25,10 +27,12 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 {
 
     var $stack = array ();
-    var $headerStyle;		//may have CSS stuff in it
-    var $contentStyle;		//may have CSS stuff in it
+    var $headerStyle = '';	//CSS Class name for Header
+    var $contentStyle = '';	//CSS Class name for Details
     var $insideitem, $insideimage;	//internal use
-    var $news = '';		//collect the RSSNews
+    var $rssTitle = '';
+    var $rssDescription = '';
+    var $rssContent = '';
 
 
     /**
@@ -38,7 +42,7 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     {
 	return array ('author' = >'Claudia Behrens',
 		      'email' = >'info@openaqua.de',
-		      'date' = >'2006-10-19',
+		      'date' = >'2006-10-20',
 		      'name' = >'Blinklist List Plugin',
 		      'desc' = >'Shows a blinklist list on to a wiki page', 'url' = >'http://wiki.durga-online',);
     }
@@ -48,17 +52,24 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     {
 	return 'container';
     }
+
+
     function getSort ()
     {
 	return 10;
-    }				// before preformatted (20)
+    }
+
     /*
        function getAllowedTypes() { return array('container','substition','protected','disabled','formatting'); }
        function getPType() { return 'normal'; }         // normal, so not surrounded by <p> tags
      */
+
+
+
     /**
      * Connect pattern to lexer
      */
+
     function connectTo ($mode)
     {
 	$this->Lexer->addEntryPattern ('\n {2,}<blinklistlist', $mode, 'plugin_blinklistlist');
@@ -69,6 +80,8 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 	// we end the definition list when we encounter a blank line
 	$this->Lexer->addExitPattern ('>', 'plugin_blinklistlist');
     }
+
+
 
     /**
      * Handle the match
@@ -82,6 +95,8 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 	}
     }
 
+
+
     /**
      * Create output
      */
@@ -91,21 +106,15 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 	if ($mode == 'xhtml') {
 	    switch ($state) {
 	    case DOKU_LEXER_ENTER:
-		//$renderer->doc .= '<script type="text/javascript" src="http://www.blinklist.com/';
-		//$renderer->doc .= 'HHHHHHHHHHHH<!--';
-		break;
 	    case DOKU_LEXER_MATCHED:
+	    case DOKU_LEXER_EXIT:
 		break;
 	    case DOKU_LEXER_UNMATCHED:
 		$renderer->doc. = "<p>davor</p>";
 		//collectNews(trim($param), false);
-		collectNews ("http://zvonnews.sourceforge.net/news/rss.php", false);
-		$renderer->doc. = $news;
+		collectNews ("http://zvonnews.sourceforge.net/news/rss.php");
+		$renderer->doc. = $rssContent;
 		$renderer->doc. = "<p>danach</p>";
-		break;
-	    case DOKU_LEXER_EXIT:
-		//$renderer->doc .= '/cloud.js&logo=0"></script>';
-		//$renderer->doc .= '-->';
 		break;
 	    }
 	    return true;
@@ -114,8 +123,11 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     }
 
 
-    //get a RSS feed
-    function render_news ($feedUrl, $showdetail)
+
+    /**
+    
+    */
+    function collectNews ($url)
     {
 	$insideitem = false;
 	$insideimage = false;
@@ -127,13 +139,12 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 	xml_set_character_data_handler ($xml_parser, "characterData");
 
 	//get the content
-	$fp = @fopen ($feed_url, "r");
+	$fp = @fopen ($url, "r");
 	if ($fp) {
 	    while ($data = fread ($fp, 4096))
 		xml_parse ($xml_parser, $data, feof ($fp))
-		    or $news = (sprintf ("XML error: %s at line %d",
-					 xml_error_string (xml_get_error_code ($xml_parser)),
-					 xml_get_current_line_number ($xml_parser)));
+		    $rssContent = 'XML error: '.xml_error_string (xml_get_error_code ($xml_parser))
+		    .' at line '.xml_get_current_line_number ($xml_parser);
 	    fclose ($fp);
 	} else {
 	    $news. = '<span class="'.$detail_style.'">Syndicated content not available</span>';
