@@ -12,19 +12,7 @@ if (!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../'
 if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'syntax.php');
 
-// ---------- [ Settings ] -----------------------------------------
 
-// define the trigger characters
-//   ";" & ":" are the mediawiki settings.
-//   "=" & ":" are the settings for the original plugin by Pavel
-//if (!defined('DL_DT')) define('DL_DT', ';');     // character to indicate a term (dt)
-//if (!defined('DL_DD')) define('DL_DD', ':');     // character to indicate a definition (dd)
-
-// define the html used to generate the definition list
-// - set to false or 0 to use simple list html <dl><dt>term</dt><dd>definition</dd> ... </dl>
-// - set to true or 1 to use wrap the term element in a span permitting more complex styling
-//   <dl><dt><span class='term'>term</span></dt><dd>definition</dd> ... </dl>
-//if (!defined('DL_FANCY')) define('DL_FANCY', true); 
 
 // -----------------------------------------------------------------
  
@@ -35,6 +23,11 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin {
 
     var $stack = array();
+    var $headerStyle; //may have CSS stuff in it
+    var $contentStyle;  //may have CSS stuff in it
+    var $insideitem, $insideimage; //internal use
+    var $news = ''; //collect the RSSNews
+    
  
     /**
      * return some info
@@ -94,7 +87,11 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin {
               case DOKU_LEXER_MATCHED:
                 break;
               case DOKU_LEXER_UNMATCHED:
-                $renderer->doc .= trim($param);
+                $renderer->doc .= "<p>davor</p>";
+                //collectNews(trim($param), false);
+                collectNews("http://zvonnews.sourceforge.net/news/rss.php", false);
+                $renderer->doc .= $news;
+                $renderer->doc .= "<p>danach</p>";
                 break;
               case DOKU_LEXER_EXIT:
                 //$renderer->doc .= '/cloud.js&logo=0"></script>';
@@ -105,4 +102,102 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin {
         }
         return false;
      }
+   
+     
+     //get a RSS feed
+   function render_news($feedUrl, $showdetail) {
+        $insideitem=false;
+        $insideimage=false;
+        
+        
+        //configure the XML parser
+        $xml_parser = xml_parser_create();
+        xml_set_element_handler($xml_parser, "startElement", "endElement");
+        xml_set_character_data_handler($xml_parser, "characterData");
+        
+        //get the content
+        $fp = @fopen($feed_url,"r");
+        if ($fp) {
+                while ($data = fread($fp, 4096))
+                xml_parse($xml_parser, $data, feof($fp))
+                           or $news = (sprintf("XML error: %s at line %d",  
+                                   xml_error_string(xml_get_error_code($xml_parser)),  
+                                   xml_get_current_line_number($xml_parser)));
+                fclose($fp);
+        } else {
+                $news .= '<span class="'. $detail_style .'">Syndicated content not available</span>';
+        }
+        
+        // Free up memory used by the XML parser
+        xml_parser_free($xml_parser);
+   }
+       
+     
+   function startElement($parser, $name, $attrs) {
+        //global $insideitem, $tag, $title, $description, $link, $image, $insideimage;
+        if ($insideitem || $insideimage) {
+                $tag = $name;
+        } 
+        if ($name == "ITEM" ) {
+                $insideitem = true;
+        } 
+        if ($name == "IMAGE") {
+                $insideimage = true;
+                
+        }
+   }
+
+   function endElement($parser, $name) {
+        global $insideitem, $tag, $title, $description, $link, $image, $insideimage, $show_detail, $headline_style, $detail_style, $count, $max;
+
+        if ($name == "URL") {
+                $news .= '<img src="'. htmlspecialchars(trim($image)) .'"/><br><br>';
+                $insideimage=false;
+                $image="";
+        } else if ($name == "ITEM" ) {
+                $count++;
+                $news .= ('<a href="''" class="'. $headline_style .'" target="_blank"><b>%s</b></a><br>',trim($link),trim($title));
+                if ($show_detail) 
+                        $news .=('<span class="'. $detail_style .'">%s</span><br>',trim($description));
+                else {
+                        $news .= "<br>";
+                }
+                $title = "";
+                $description = "";
+                $link = "";
+                $insideitem = false;
+        } else if ($count >= $max) {
+                $title = "";
+                $description = "";
+                $link = "";
+                $insideitem = false;
+        }
+   }
+
+   function characterData($parser, $data) {
+        global $insideitem, $tag, $title, $description, $link, $image, $insideimage;
+        if ($insideimage) {
+                switch ($tag) {
+                        case "URL":
+                        $image .= $data;
+                        break;
+                }
+        } 
+        if ($insideitem ) {
+        switch ($tag) {
+                case "TITLE":
+                $title .= $data;
+                break;
+                case "DESCRIPTION":
+                $description .= $data;
+                break;
+                case "LINK":
+                if (!is_string($link)) $link="";
+                $link .= $data;
+                break;
+        }
+        }
+   }
+
+     
 }
