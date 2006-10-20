@@ -40,6 +40,7 @@ class RSS_parser {
   var $channel_image=Array();
   var $channel_textinput=Array();
   var $item_properties=Array();
+  var $errorText = '';
 
   function get_channel_data() {
     // Return channel properties
@@ -61,13 +62,33 @@ class RSS_parser {
     return $this->item_properties;
   }
 
+  function get_errorText() {
+    // Return item properties
+    return $this->errorText;
+  }
 
   function rss_parse($rss) {
     $base=$rss;
-    $input = fopen($base,"r");
-    if(!$input) {
-      return false;
+
+    //get XML content
+    $xmlResponse = '';
+    {    
+      //get RSS Content
+      $ch = curl_init(); /// initialize a cURL session
+      curl_setopt($ch, CURLOPT_URL, trim($rss));
+      curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+      $xmlResponse = curl_exec ($ch);
+      curl_close ($ch);
+
     }
+    
+    //check result
+    if (!is_string($xmlResponse) || !strlen($xmlResponse)) {
+        $this->errorText .= '<span class="'.$this->CssContentStyle.'">Cannot open RSS URL '. trim($rss) .'</span>';
+        return false;
+    }
+    
+    
     $rdf=new Rdf_parser();
     $rdf->rdf_parser_create( NULL );
     $rdf->rdf_set_user_data( $statements );
@@ -76,21 +97,18 @@ class RSS_parser {
     $rdf->rdf_set_statement_handler( "my_statement_handler" );
     $rdf->rdf_set_warning_handler("my_warning_handler" );
     $rdf->rdf_set_base($base );
-    $done=false;
-    while(!$done) {
-      $buf = fread( $input, 512 );
-      $done = feof($input);
-      if ( ! $rdf->rdf_parse( $buf, strlen($buf), feof($input) ) )
-      {
-        printf(
-    "**** ERROR **** : %s at line %s",
-    print( xml_get_error_code( $rdf->rdf_get_xml_parser() ) ),
-    print( xml_get_current_line_number($rdf->rdf_get_xml_parser() ) ) );
-    return false;
-      }
+      
+    if ( ! $rdf->rdf_parse( $xmlResponse, strlen($xmlResponse), 0 ) )
+    {
+       $this->errorText = 'Error <' 
+                          . xml_get_error_code( $rdf->rdf_get_xml_parser() ) 
+                          . '> at line ' 
+                          . xml_get_current_line_number($rdf->rdf_get_xml_parser() );
+       return false;
+
     }
-    /* close file. */
-    fclose( $input );
+    
+    
     $rdf->rdf_parser_free();
     return true;
   }

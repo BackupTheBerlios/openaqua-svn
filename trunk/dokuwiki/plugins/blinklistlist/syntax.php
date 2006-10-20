@@ -99,21 +99,43 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
                {
                   $renderer->doc .= "<p>davor</p>";
                   $rss=new RSS_parser();
-                  $rss->rss_parse("http://www.blinklist.com/Tukaram/rss.xml");
-                  $ch=$rss->get_channel_data();
+                  if ($rss->rss_parse("http://www.blinklist.com/Tukaram/rss.xml") != true){
+                     $renderer->doc .= "<b>Got Error while loading RSS Feed</b>";
+                     $renderer->doc .= $rss->get_errorText();
+                     break;
+                  }
+
+                  $channelData=$rss->get_channel_data();
                   $ch_im=$rss->get_channel_image_data();
                   $ch_ti=$rss->get_channel_textinput_data();
                   $items=$rss->get_items_data();
-                  foreach($items as $item) {
-                      $renderer->doc .= "----<br/>\n";
-                      foreach($item as $key=>$val) {
-                          $renderer->doc .= "<b>$key:</b> $val\n";
-                      }
+                  
+                  $renderer->doc .= 'title=' .  $channelData["title"]; 
+
+                  //hint Infos ueber RSS bei Wikipedia
+                  foreach ($channelData as $item) {
+                     $renderer->doc .= $item;
                   }
+
+                  foreach ($ch_im as $item) {
+                     $renderer->doc .= $item;
+                  }
+
+                  foreach ($ch_ti as $item) {
+                     $renderer->doc .= $item;
+                  }
+                                                      
+                  
+                  //foreach($items as $item) {
+                  //    $renderer->doc .= "----<br/>\n";
+                  //    foreach($item as $key=>$val) {
+                  //        $renderer->doc .= "<b>$key:</b> $val\n";
+                  //    }
+                  //}
                 
-                $renderer->doc .= "<p>danach</p>";
-                break;
+                  $renderer->doc .= "<p>danach</p>";
                }
+               break;
             }
             return true;
         }
