@@ -113,15 +113,16 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
         if ($mode == 'xhtml') {
             switch ($state) {
             case DOKU_LEXER_ENTER:
-            $renderer->doc .= "<dl>\n";
+            //$renderer->doc .= "<dl>\n";
             break;
             
             case DOKU_LEXER_MATCHED:
+            break;
             case DOKU_LEXER_EXIT:
-            $renderer->doc .= "<dl>\n";
+            //$renderer->doc .= "</dl>\n";
                 break;
             case DOKU_LEXER_UNMATCHED:
-                
+                //$renderer->doc .= '<xml id="autodaten" src="http://www.blinklist.com/Tukaram/rss.xml"></xml>';
                 //collectNews(trim($param), false);
                 $this->collectNews ("http://www.blinklist.com/Tukaram/rss.xml");
                 $renderer->doc .= $this->rssContent;
@@ -161,6 +162,7 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
            return ;
       }
     
+      $this->rssContent .= "<code>" . $xmlResponse . "</code>";
       
       //get a XML parser
       $parser = xml_parser_create ();
@@ -191,6 +193,8 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     */
     function startElement ($parser, $name, $attrs)
     {
+       $myName = upper(name);
+       if ($myName == "channel")
         if ($this->xmlInUrl || $this->xmlInImage || $this->xmlInItem) {
             $this->xmlTag = $name;
         }
@@ -213,12 +217,31 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     @brief: Deal with XML End Tags
     
 
-<dt><span class='term'> foo</span></dt>
-<dd> bar</dd>
+     <channel>
+  <link>http://www.blinklist.com</link>
+  <title></title>
 
-<dt><span class='term'> foofoo</span></dt>
-<dd> barbar</dd>
-</dl>    
+  <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+  <generator>BlinkList feed generator 1.2</generator>
+  <description>Bookmark your link with tagging and retrieve it as the word pop up in your mind. Then share great resources with your friends!</description>
+  <pubDate>Wed, 31 Dec 1969 16:00:00 -0800</pubDate>
+  <ttl>120</ttl>
+  <item>
+
+   <title>wiki:tpl:templates [DokuWiki]</title>
+   <author>Tukaram</author>
+   <description></description>
+   <category>wiki</category>
+   <category>dokuwiki</category>
+   <category>templates</category>
+
+   <private></private>
+   <favourite></favourite>
+   <link>http://wiki.splitbrain.org/wiki%3Atpl%3Atemplates</link>
+   <pubDate>Fri, 20 Oct 2006 03:43:37 -0700</pubDate>
+  </item>
+  
+
     */
     function endElement ($parser, $name)
     {
@@ -228,14 +251,18 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 
         } else if ($name == "ITEM") {
             $this->xmlInItem = false;
-            $this->rssContent .=
-                '<a href="'.trim ($this->rssLink).'" class="'.$this->cssHeaderStyle.'" target="_blank"><b> '.trim ($this->rssTitle).
-                '</b></a><br>';
+            $this->rssContent .= '<dt>';
+             $this->rssContent .=   '<a href="' . trim ($this->rssLink). '">' . trim ($this->rssTitle) . '</a>';
+            //$this->rssContent .=   '<a href="'.trim ($this->rssLink).'" class="'.$this->cssHeaderStyle.'" target="_blank"> '.trim ($this->rssTitle). '</a>';
+            $this->rssContent .= "</dt>\n";
 
             if ($this->rssDetails) {
+               $this->rssContent .= "<dd>\n";
                 $this->rssContent .= '<span class="'.$this->cssContentStyle.'"> '.trim ($this->rssDescription).' </span><br>'. "\n";
+               $this->rssContent .= "</dd>\n";
             } else {
-                $this->rssContent .= "<br>\n";
+               $this->rssContent .= "<dd>\n";
+               $this->rssContent .= "</dd>\n";
             }
 
             $this->rssTitle = '';
