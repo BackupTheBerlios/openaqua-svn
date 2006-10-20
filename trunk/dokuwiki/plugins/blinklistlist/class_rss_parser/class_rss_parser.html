@@ -1,0 +1,329 @@
+<html>
+<head>
+<title>RSS Parser (class_rss_parser.php)</title>
+<link rel="stylesheet" href="main.css" type="text/css">
+</head>
+
+<body>
+<div align="center">
+<table border="0" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td bgcolor="#aaaaee" class="text" align="center"><a href="http://phpxmlclasses.sourceforge.net/">PHP XML Classes</a></td>
+</tr>
+</table>
+<table border="0" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td bgcolor="#aaaaee" class="textblbl" align="center">RSS Parser (class_rss_parser.php)</td>
+</tr>
+</table>
+<br/>
+<table border="0" width="80%">
+<tr>
+  <td bgcolor="#eeeeff" class="text">Description: This class implements a full RSS 1.0 parser, RSS documents
+  can be parsed from local files or URLs, then you can retrieve information about the channel, channel_image,
+  channel_textinput and items in the RSS feed. The rssdump.php example can be modified in 5 secs to display
+  an RSS feed in they way you want.
+  </td>
+</tr>
+</table>
+<br/>
+<table border="0" bgcolor="ddddff" width="80%">
+<tr>
+  <td valign="top" class="text" width="50%"><b>NEWS:</b>
+  <ul>
+    <li> 06-13-2002 First version of this class released.
+  </ul>
+  </td>
+  <td valign="top" width="50%" class="text">
+     This class code as well as documentation are hosted at <a href="http://www.sourceforge.net">SourceForge</a>
+     please visit our <a href="http://www.sourceforge.net/projects/phpxmlclasses/">SourceForge page</a> for releases, documentation, bug-tracking, support
+     forums and mailing lists.
+  </td>
+</tr>
+</table>
+<br/>
+<table border="0" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td class="textbl" bgcolor="aaaaee" width="50%">Resources</td>
+  <td class="textbl" bgcolor="aaaaee" width="50%">Requirements</td>
+</tr>
+</table>
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td valign="top" bgcolor="eeeeff" class="text" width="50%">
+  <ul>
+    <li><a class="textbl" href="http://www.sourceforge.net/projects/phpxmlclasses">Downloads</a>
+    <li><a class="textbl" href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/phpxmlclasses/rss_parser/">Browse CVS</a>
+    <li><a class="textbl" href="http://sourceforge.net/tracker/?atid=470965&group_id=53613&func=browse">Report Bugs</a>
+  </ul>
+  </td>
+  <td valign="top" bgcolor="eeeeff" class="text" width="50%">
+  <ul>
+    <li>PHP 4.0.5+
+  </ul>
+  </td>
+</tr>
+</table>
+<br/>
+
+<table border="0" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td class="textbl" bgcolor="aaaaee" width="50%">Features</td>
+  <td class="textbl" bgcolor="aaaaee" width="50%">To-dos</td>
+</tr>
+</table>
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+<tr>
+  <td valign="top" bgcolor="eeeeff" class="text" width="50%">
+  <ul>
+    <li>All the RSS elements can be obtained.
+    <li>Based on a full RDF parser this class can understand any valid RDF syntax for RSS.
+  </ul>
+  </td>
+  <td valign="top" bgcolor="ddddff" class="text" width="50%">
+  <ul>
+    <li>If you have some to-do in mind let me know it.
+  </ul>
+  </td>
+  
+</tr>
+</table>
+<br/>
+<table border="0" bgcolor="ddddff" width="80%">
+<tr>
+<!--
+  <td valign="top" class="text" width="50%"><b>To-do/future releases:</b>
+  <ul>
+    <li>Class 
+    <li>Class 
+    <li>Class 
+  </ul>
+  </td> -->
+  <td valign="top" width="100%" class="text">
+     Contact: Luis Argerich (<a href="mailto:lrargerich@yahoo.com">lrargerich@yahoo.com</a>)
+  </td>
+</tr>
+</table>
+<br/>
+<table border="0" bgcolor="ddddff" width="80%">
+<tr>
+<!--
+  <td valign="top" class="text" width="50%"><b>To-do/future releases:</b>
+  <ul>
+    <li>Class 
+    <li>Class 
+    <li>Class 
+  </ul>
+  </td> -->
+  <td valign="top" width="100%" class="text">
+    <b>Detailed description and usage:</b>
+<br/><br/>
+See this example:<br/><br/>
+<pre>
+$rss=new RSS_parser();
+$rss->rss_parse("http://www.phpclasses.org/browse.html/latest/latest.xml");
+$ch=$rss->get_channel_data();
+$ch_im=$rss->get_channel_image_data();
+$ch_ti=$rss->get_channel_textinput_data();
+$items=$rss->get_items_data();
+</pre>
+<br/><br/>
+The rssdump example shows how to use the information returned by the methods, the structures returned by the get methods are:
+<ul>
+  <li>$ch: channel data: an asoc array with channel information (if present)
+  <li>$ch_im: channel image data: an asoc array with channel image information (if present)
+  <li>$ch_ti: channel textinput data: an asoc array with channel textinput information (if present)
+  <li>$items: An array of asociative arrays containing items information (if present)
+</ul>
+  
+<br/>
+</div>
+<h3>Documentation</h3>
+<h2>Classes</h2>
+<ul>
+  <li><a href="#class29">RSS_parser</a></li>
+</ul>
+
+<a name="class29"></a>
+<h3>RSS_parser</h3>
+Extends: None<hr>
+Description: A class based on an RDF parser to parse RSS feeds, it can parse any valid RSS feed and return all the informationcontained in the RSS document.<hr>
+<br>
+
+<!-- METHOD SUMMARY -->
+<A NAME="pDomNode_method_summary"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TD>
+</TR>
+
+<!-- A ROW -->
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;Boolean</CODE></FONT></TD>
+          <TD><CODE><B><A HREF="#class29method1">rss_parse</A></B>(string $rss)</CODE>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses an RSS document</TD>
+</TR>
+<!-- A ROW -->
+<!-- A ROW -->
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;Asoc Array</CODE></FONT></TD>
+          <TD><CODE><B><A HREF="#class29method2">get_channel_data</A></B>(string $rss)</CODE>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns information about the channel</TD>
+</TR>
+<!-- A ROW -->
+<!-- A ROW -->
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;Asoc Array</CODE></FONT></TD>
+          <TD><CODE><B><A HREF="#class29method3">get_channel_image_data</A></B>(string $rss)</CODE>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns information about the channel image if present</TD>
+</TR>
+<!-- A ROW -->
+<!-- A ROW -->
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;Asoc Array</CODE></FONT></TD>
+          <TD><CODE><B><A HREF="#class29method4">get_channel_textinput_data</A></B>(string $rss)</CODE>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns information about channel's textinput if present</TD>
+</TR>
+<!-- A ROW -->
+<!-- A ROW -->
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;Array</CODE></FONT></TD>
+          <TD><CODE><B><A HREF="#class29method5">get_items_data</A></B>(string $rss)</CODE>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns information about channel's items</TD>
+</TR>
+<!-- A ROW -->
+</TABLE>
+&nbsp;
+<P>
+<!-- METHOD SUMMARY -->
+
+
+<!-- ============ METHOD DETAIL ========== -->
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+
+
+<!--  method -->
+<A NAME="class29method1"><!-- --></A>
+<H3>rss_parse</H3>
+
+
+
+<PRE>
+Boolean <B>rss_parse</B>(string $rss)</PRE>
+               
+<DL>
+<DD>This parses an RSS document from a URL or a file storing the information in the object's data members. Accesory functions are provided to retrieve the parsed data.<DD>&nbsp;
+<DL>
+<DT><B>Parameters:</B><DD>
+                          $rss - URL or file name for the RSS document to be parsed<br><DT><B>Returns:</B><DD>True if the feed was parsed succesfully, false if there was an error.<DT><B>Throws:</B><DD><CODE>None</CODE>
+</DL>
+</DD>
+</DL>
+<HR>
+<!-- a method -->
+<!--  method -->
+<A NAME="class29method2"><!-- --></A>
+<H3>get_channel_data</H3>
+
+
+
+<PRE>
+Asoc Array <B>get_channel_data</B>(string $rss)</PRE>
+               
+<DL>
+<DD>This returns information about the channel described in the RSS feed, it returns an asociative array with the information present in the feed about the channel. For example link, description, image, textinput.<DD>&nbsp;
+<DL>
+<DT><B>Parameters:</B><DD>
+                          <DT><B>Returns:</B><DD>An asociative array where each key describe a channelproperty if present in the RSS feed.<DT><B>Throws:</B><DD><CODE>None</CODE>
+</DL>
+</DD>
+</DL>
+<HR>
+<!-- a method -->
+<!--  method -->
+<A NAME="class29method3"><!-- --></A>
+<H3>get_channel_image_data</H3>
+
+
+
+<PRE>
+Asoc Array <B>get_channel_image_data</B>(string $rss)</PRE>
+               
+<DL>
+<DD>This returns an asociative array containing information about the channel image. For example link, title and url<DD>&nbsp;
+<DL>
+<DT><B>Parameters:</B><DD>
+                          <DT><B>Returns:</B><DD>An asociative array where each key describes a channel image property.<DT><B>Throws:</B><DD><CODE>None</CODE>
+</DL>
+</DD>
+</DL>
+<HR>
+<!-- a method -->
+<!--  method -->
+<A NAME="class29method4"><!-- --></A>
+<H3>get_channel_textinput_data</H3>
+
+
+
+<PRE>
+Asoc Array <B>get_channel_textinput_data</B>(string $rss)</PRE>
+               
+<DL>
+<DD>Tihs method returns information about the channel's textinput element if present in the RSS feed. It returns an asociative array where each key describes a property of the textinput element, for example: description, link, name, title.<DD>&nbsp;
+<DL>
+<DT><B>Parameters:</B><DD>
+                          <DT><B>Returns:</B><DD>An asociative array where each key describes a channel's texinput property if present.<DT><B>Throws:</B><DD><CODE>None</CODE>
+</DL>
+</DD>
+</DL>
+<HR>
+<!-- a method -->
+<!--  method -->
+<A NAME="class29method5"><!-- --></A>
+<H3>get_items_data</H3>
+
+
+
+<PRE>
+Array <B>get_items_data</B>(string $rss)</PRE>
+               
+<DL>
+<DD>This method returns an array of items. Each member of the array is an asociative array describing an item. For each item properties present in the RSS feed are detailed, for example: title, link, description<DD>&nbsp;
+<DL>
+<DT><B>Parameters:</B><DD>
+                          <DT><B>Returns:</B><DD>An array of asociative arrays. 
+Typical way to parse it:
+foreach($items as $item) {
+   print("An item: <br/>");
+   foreach($item as $key=>$val) {
+     print("$key: $val<br/>");
+  }  
+}<DT><B>Throws:</B><DD><CODE>None</CODE>
+</DL>
+</DD>
+</DL>
+<HR>
+<!-- a method -->
+<!-- ============ METHOD DETAIL ========== -->
+</td>
+</tr>
+</table>
+</body>
+</html>
