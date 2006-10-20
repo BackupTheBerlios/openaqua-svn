@@ -113,11 +113,15 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
         if ($mode == 'xhtml') {
             switch ($state) {
             case DOKU_LEXER_ENTER:
+            $renderer->doc .= "<dl>\n";
+            break;
+            
             case DOKU_LEXER_MATCHED:
             case DOKU_LEXER_EXIT:
+            $renderer->doc .= "<dl>\n";
                 break;
             case DOKU_LEXER_UNMATCHED:
-                $renderer->doc .= "<p>davor</p>";
+                
                 //collectNews(trim($param), false);
                 $this->collectNews ("http://www.blinklist.com/Tukaram/rss.xml");
                 $renderer->doc .= $this->rssContent;
@@ -142,43 +146,43 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 
 
 
-        //get a XML parser
-        $xml_parser = xml_parser_create ();
-        xml_set_element_handler ($xml_parser, "startElement", "endElement");
-        xml_set_character_data_handler ($xml_parser, "characterData");
+      //get RSS Content
+      $ch = curl_init(); /// initialize a cURL session
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+      $xmlResponse = curl_exec ($ch);
+      curl_close ($ch);
 
-        
-        
-        
-        //open URL
-        $fp = fopen ($url, 'r');
-        if (!$fp) {
+
+      //check result
+      if (!is_string($xmlResponse) || !strlen($xmlResponse)) {
            $this->rssContent .= '<span class="'.$this->CssContentStyle.'">Cannot open RSS URL</span>';
-           xml_parser_free ($xml_parser);
+           $this->rssContent .= $xmlResponse;
            return ;
-        }
+      }
+    
+      
+      //get a XML parser
+      $parser = xml_parser_create ();
+      xml_set_object ( $parser, $this );
+      xml_set_element_handler ($parser, "startElement", "endElement");
+      xml_set_character_data_handler ($parser, "characterData");
+
+      
         
-        
-        //get the content
-        while(!feof($fp)) {
-           $data = $data . fgets($file, 4096);
-           if (! xml_parse ($xml_parser, $data, feof ($fp))) {
+      //parse the content
+      if (! xml_parse ($parser,  $xmlResponse, true)) {
+         //and check the result
                     $this->rssContent .= 'XML error: ' 
                                    . xml_error_string (xml_get_error_code ($xml_parser))
                                    . ' at line '
                                    . xml_get_current_line_number ($xml_parser);
-                     fclose ($fp);
-                     xml_parser_free ($xml_parser);                                   
+                     xml_parser_free ($parser);                                   
                      return;
-               }
-           
-       }
-       
-       //Close URL
-       fclose ($fp);
+      }
         
-        // Free up memory used by the XML parser
-        xml_parser_free ($xml_parser);
+       // Free up memory used by the XML parser
+       xml_parser_free ($parser);
     }
 
 
@@ -207,6 +211,14 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
     /**
     
     @brief: Deal with XML End Tags
+    
+
+<dt><span class='term'> foo</span></dt>
+<dd> bar</dd>
+
+<dt><span class='term'> foofoo</span></dt>
+<dd> barbar</dd>
+</dl>    
     */
     function endElement ($parser, $name)
     {
@@ -221,9 +233,9 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
                 '</b></a><br>';
 
             if ($this->rssDetails) {
-                $this->rssContent .= '<span class="'.$this->cssContentStyle.'"> '.trim ($this->rssDescription).' </span><br>';
+                $this->rssContent .= '<span class="'.$this->cssContentStyle.'"> '.trim ($this->rssDescription).' </span><br>'. "\n";
             } else {
-                $this->rssContent .= "<br>";
+                $this->rssContent .= "<br>\n";
             }
 
             $this->rssTitle = '';
@@ -232,7 +244,7 @@ class syntax_plugin_blinklistlist extends DokuWiki_Syntax_Plugin
 
         } else if ($name == "IMAGE") {
             $this->xmlInImage = false;
-            $this->rssContent .= '<img src="'.htmlspecialchars (trim ($this->xmlImage)).'"/><br><br>';
+            $this->rssContent .= '<img src="'.htmlspecialchars (trim ($this->xmlImage)).'"/><br><br> '. "\n";
             $this->xmlImage = '';
         }
     }
