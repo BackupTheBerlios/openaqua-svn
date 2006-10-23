@@ -10,7 +10,6 @@
 if (!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
 if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'syntax.php');
-include_once("class_rss_parser/class_rss_parser.php");
 
 
 
@@ -92,49 +91,58 @@ class syntax_plugin_rssreader extends DokuWiki_Syntax_Plugin
         if ($mode == 'xhtml') {
             switch ($state) {
             case DOKU_LEXER_ENTER:
+$loadfeedcmd = 
+<<< ENDOFSTRING
+<script type="text/javascript" src="../adobespry/xpath.js"></script>
+<script type="text/javascript" src="../adobespry/SpryData.js"></script>
+
+<script type="text/javascript">
+var theFeed = "http://weblogs.macromedia.com/mxna/xml/rss.cfm?query=byMostRecent&amp;languages=1";
+var mydata = new Spry.Data.XMLDataSet("xmlproxy.cfm?xmlfeed="+theFeed,"//item", { useCache:  false, loadInterval: 10000 }); 
+</script>
+<style>
+.pod {
+        font-family: Arial;
+        font-size: 10px;
+        border: 1px solid black;
+        width: 400px;
+        padding: 5px;
+}
+
+.SpryHiddenRegion {
+        visibility: true;
+}
+</style>
+
+
+ENDOFSTRING;
+//var rssFeed = new Spry.Data.XMLDataSet("http://www.blinklist.com/Tukaram/rss.xml","//item", { });
+ 
+                $renderer->doc  .=  "\n\n" . $loadfeedcmd . "\n\n";
+                break;
+            
             case DOKU_LEXER_MATCHED:
             case DOKU_LEXER_EXIT:
                 break;
             case DOKU_LEXER_UNMATCHED:
-               {
-                  $renderer->doc .= "<p>davor</p>";
-                  $rss=new RSS_parser();
-                  if ($rss->rss_parse("http://www.blinklist.com/Tukaram/rss.xml") != true){
-                     $renderer->doc .= "<b>Got Error while loading RSS Feed</b>";
-                     $renderer->doc .= $rss->get_errorText();
-                     break;
-                  }
 
-                  $channelData=$rss->get_channel_data();
-                  $ch_im=$rss->get_channel_image_data();
-                  $ch_ti=$rss->get_channel_textinput_data();
-                  $items=$rss->get_items_data();
-                  
-                  $renderer->doc .= 'title=' .  $channelData["title"]; 
 
-                  //hint Infos ueber RSS bei Wikipedia
-                  foreach ($channelData as $item) {
-                     $renderer->doc .= $item;
-                  }
+$divstring = 
+<<< ENDOFSTRING
+<div spry:region="mydata" class="SpryHiddenRegion">
+        
+        <div class="pod">
 
-                  foreach ($ch_im as $item) {
-                     $renderer->doc .= $item;
-                  }
-
-                  foreach ($ch_ti as $item) {
-                     $renderer->doc .= $item;
-                  }
-                                                      
-                  
-                  //foreach($items as $item) {
-                  //    $renderer->doc .= "----<br/>\n";
-                  //    foreach($item as $key=>$val) {
-                  //        $renderer->doc .= "<b>$key:</b> $val\n";
-                  //    }
-                  //}
-                
-                  $renderer->doc .= "<p>danach</p>";
-               }
+        <span spry:repeat="mydata">
+        <a href="{link}"><span spry:content="{title}"></span></a><br>
+        </span>
+        
+        </div>
+        
+</div>
+ENDOFSTRING;
+                $renderer->doc   .=  $divstring;
+               //Load AdobeSpry
                break;
             }
             return true;
