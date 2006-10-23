@@ -6,27 +6,21 @@
 TEMPLATE = lib
 DESTDIR = lib
 TARGET = aquabase
-
 INCLUDEPATH += inc \
 ../odaba/src/opa/h \
 ../odaba/src/sos/h \
 ../odaba/src/opi/h
-
 LIBS *= -L../odaba/lib/
 LIBS += -lodaba_server -lodaba_greta -lodaba_sos -lodaba_zlib
-
 HEADERS += src/AquaBase.h \
 src/ab_connection.h \
 src/ab_error.h \
 src/ab_dictionary.h \
 src/ab_datasource.h
-
-
 SOURCES += src/ab_connection.cpp \
 src/ab_error.cpp \
 src/ab_dictionary.cpp \
 src/ab_datasource.cpp
-
 CONFIG(debug){
   DEFINES += DEBUG
   MOC_DIR = .moc
