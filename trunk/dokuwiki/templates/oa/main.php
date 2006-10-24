@@ -59,18 +59,28 @@ if (!defined('DOKU_INC')) die();
          <div id="logo"> #define IVC </div>
          <div id="search-box"> <?php tpl_searchform()?>&nbsp; </div>
       </div>
-    </div>
-    <div id="oaTmplHeaderEdit">
-        <?php tpl_button('edit')?>
-        <?php tpl_button('history')?>
-        <?php tpl_button('recent')?>
-       
-    </div>
+      
+    
+      <div id="oaTmplHeaderEdit">
+         <div id="oaTmplHeaderEditLeft">
+           <?php tpl_button('edit')?>
+           <?php tpl_button('history')?>
+           <?php tpl_button('recent')?>
+         </div>
+         <div id="oaTmplHeaderEditRight">
+           <?php tpl_button('subscription')?>
+           <?php tpl_button('admin')?>
+           <?php tpl_button('profile')?>
+           <?php tpl_button('login')?>
+           <?php tpl_button('index')?>
+           <?php tpl_button('top')?>
+         </div>
+      </div>
 </div>
    
    
 <!--Content-->   
-<div id="mainpage">
+<div id="oaTmplMainPage">
    <div id="leftPanel">
       <p>left panel</p>
       <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators  words etc.</p>

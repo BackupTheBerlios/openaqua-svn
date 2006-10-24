@@ -18,36 +18,24 @@ body {
     color: #333333;
     margin: 0;
     padding: 0;   
-   /*
-   */   
 }
-
 p {
    margin: 0 0 0.75em 0;
    line-height: 1.5em;
 }
 
+
+/*
+##################HEADER
+*/
 div#oaTmplHeader {
    clear: both;
    background-color: aqua;
-   /*
-   height: 50px;
-   padding: 1px;
-   */
 }
 
-
-/*
-Header Navigation
-*/
 #oaTmplHeaderTop {
    text-align: right;
    background-color: red;
-   /*
-    position: relative;
-    z-index: 3;
-    text-align: center;
-   */
 }
 #oaTmplHeaderTop a{
     border-right: 1px solid #333333;
@@ -58,34 +46,52 @@ Header Navigation
 }
 
 
-
-
 div#oaTmplHeaderBottom {
    background-color: grey;
-   /*
-   */
 }
 
-/*
-class to hide certain things
-*/
-.hiddenParts{
-   visibility: hidden;
+#oaTmplHeaderEdit {
+   clear: both;
+   border: none;
+   margin-bottom: 3px;
+   text-align: left;
 }
 
-div#oaTmplFooter{
-   text-align: center;
+#oaTmplHeaderEdit div#oaTmplHeaderEditLeft {
+   background-color: green;
    /**
-   " class="lineupLinks">
-*/
+    width: 18em;
+    position: absolute;
+    text-align: center;
+    */
+    float: left;
 }
+#oaTmplHeaderEdit div#oaTmplHeaderEditRight { 
+   background-color: green;
+   /**
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    */
+    float: right;
+}
+
+
+
  
 
 
 
+/*
+##################HEADER
+*/
+#oaTmplMainPage {
+   clear: both;
+}
+
 
 /**
-Footer
+##################FOOTER
 */
 #oaTmplFooter {
    clear: both;
@@ -162,6 +168,9 @@ div#rightPanel{
    */
 }
 
-div#footer{
-   clear: both;
+/*
+class to hide certain things
+*/
+.hiddenParts{
+   visibility: hidden;
 }
