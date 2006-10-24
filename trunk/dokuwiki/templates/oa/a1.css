@@ -11,14 +11,20 @@
 
 /* basic elements */
 body { 
-   text-align: center;
-   min-width: 41em;
+    text-align: center;
+    min-width: 41em;
+    font: 69% "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    background-color: White;
+    color: #333333;
+    margin: 0;
+    padding: 0;   
    /*
-   margin: 0px;
-   padding: 6px;
    */   
 }
-div#wrapper{
+
+p {
+   margin: 0 0 0.75em 0;
+   line-height: 1.5em;
 }
 
 div#oaTmplHeader {
@@ -32,14 +38,27 @@ div#oaTmplHeader {
 
 
 /*
-has site map, index links in it
+Header Navigation
 */
-div#oaTmplHeaderTop {
+#oaTmplHeaderTop {
    text-align: right;
    background-color: red;
    /*
+    position: relative;
+    z-index: 3;
+    text-align: center;
    */
 }
+#oaTmplHeaderTop a{
+    border-right: 1px solid #333333;
+    padding: 0em 0.5em 0em 0.7em;
+}
+#oaTmplHeaderTop a.lastNavItem {
+    border-right: none;
+}
+
+
+
 
 div#oaTmplHeaderBottom {
    background-color: grey;
@@ -47,10 +66,63 @@ div#oaTmplHeaderBottom {
    */
 }
 
-
+/*
+class to hide certain things
+*/
 .hiddenParts{
    visibility: hidden;
 }
+
+div#oaTmplFooter{
+   text-align: center;
+   /**
+   " class="lineupLinks">
+*/
+}
+ 
+
+
+
+
+/**
+Footer
+*/
+#oaTmplFooter {
+   clear: both;
+   border: none;
+   margin-bottom: 3px;
+   text-align: left;
+}
+
+#oaTmplFooter p#oaTmplFooterCopyright {
+    width: 18em;
+    position: absolute;
+    text-align: center;
+}
+
+#oaTmplFooter p#oaTmplFooterNavigation {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+#oaTmplFooter p#oaTmplFooterNavigation a{
+    border-right: 1px solid #333333;
+    padding: 0em 0.5em 0em 0.7em;
+}
+#oaTmplFooter p#oaTmplFooterNavigation a.lastNavItem {
+    border-right: none;
+}
+
+
+
+
+
+
+
+
+
+
 
 #contentArea{
    text-align: left;
@@ -92,11 +164,4 @@ div#rightPanel{
 
 div#footer{
    clear: both;
-   /*
-   background-color: yellow;
-   */
-}
-
-.lineupLinks{
-   text-align: left;
 }

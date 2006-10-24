@@ -40,9 +40,9 @@ if (!defined('DOKU_INC')) die();
 <!--HEADER-->
 <div id="oaTmplHeader">
       <div id="oaTmplHeaderTop">
-            <a>Site Map</a>
-            <a>Accessibility</a>
-            <a>Impressum</a>
+            <a href="" title="Site Map" >Site Map</a>
+            <a href="" title="Accessibility" >Accessibility</a>
+            <a href="" title="Impressum" > Impressum </a>
       </div>
       
       
@@ -89,26 +89,21 @@ if (!defined('DOKU_INC')) die();
 
    
    
-<!--
-The very last part of each page
--->
-   <div id="footer" class="lineupLinks">
-      <menu>
-      <li>(c) 2006, TMO</li>
-      <li>About OpenAqua</li>
-      <li>Contact us</li>
-      <li>Privacy Policy</li>
-      <li>Site map</li>
-      <li>www.openaqua.de</li>
-      </menu>
+
+   <div id="oaTmplFooter">
+      <p id="oaTmplFooterCopyright"> <a href="copyright" title="Copyright"><span>2006</span> &copy; Copyright</a></p>
+      <p id="oaTmplFooterNavigation">
+          <a href="about" title="About OpenAqua"> About OpenAqua  </a>
+          <a href="http://www.trolltech.com/company/contact-info" title="Contact us"> Contact us </a>
+          <a href="/trolltech/privacypolicy" title="Privacy policy"> Privacy Policy </a>
+          <a href="http://www.trolltech.com/sitemap" title="Site map">  Site map  </a>
+          <a href="http://www.trolltech.com" title="Visit www.trolltech.com" class="lastNavItem"> www.trolltech.com </a>
+      </p>   
    </div> 
    
 
 
-
-
-
-<div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+   <div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
 
 </body>
 </html>
