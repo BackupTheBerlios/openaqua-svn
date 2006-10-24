@@ -1,0 +1,13 @@
+<?php
+$tgt = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
+?>
+
+<div class="footerinc">
+<p>(c) T-Mobile, 2006, ...</p>
+<?php
+if ($conf['allowdebug']) {
+    echo '<!-- page made in '.round(delta_time(DOKU_START_TIME), 3).' seconds -->';
+}
+?>
+
+</div>
