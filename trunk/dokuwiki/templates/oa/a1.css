@@ -18,15 +18,38 @@ body {
    padding: 6px;
    */   
 }
+div#wrapper{
+}
 
-
-div#header {
+div#oaTmplHeader {
    clear: both;
+   background-color: aqua;
    /*
    height: 50px;
-   background-color: aqua;
    padding: 1px;
    */
+}
+
+
+/*
+has site map, index links in it
+*/
+div#oaTmplHeaderTop {
+   text-align: right;
+   background-color: red;
+   /*
+   */
+}
+
+div#oaTmplHeaderBottom {
+   background-color: grey;
+   /*
+   */
+}
+
+
+.hiddenParts{
+   visibility: hidden;
 }
 
 #contentArea{
@@ -47,6 +70,16 @@ div#leftPanel{
    */
 }
 
+div#logo{
+   text-align: left;
+   float: left; 
+}
+
+div#search{
+   text-align: left;
+   float: right; 
+}
+
 
 div#rightPanel{
    text-align: left;
@@ -64,3 +97,6 @@ div#footer{
    */
 }
 
+.lineupLinks{
+   text-align: left;
+}
