@@ -23,14 +23,23 @@ if (!defined('DOKU_INC')) die();
  
 <!--##################################################HTML HEADER-->
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>
-    <?php tpl_pagetitle()?>
-    [<?php echo strip_tags($conf['title'])?>]
-  </title>
-  <?php tpl_metaheaders()?>
-  <link rel="shortcut icon" href="<?php echo DOKU_TPL?>images/favicon.ico" />
-  <?php /*old includehook*/ @include(dirname(__FILE__).'/meta.html')?>
+   <?php if (function_exists('re_log_referrers')) re_log_referrers(); ?>
+   <!--
+   <?php @include(dirname(__FILE__).'/user/pref.php'); ?>
+   <?php @include(dirname(__FILE__).'/lang/en/lang.php');
+      if ( $conf['lang'] && $conf['lang'] != 'en' )  @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
+      //@include(dirname(__FILE__).'/context.php');
+      //@include(dirname(__FILE__).'/meta.html')
+      //@include(dirname(__FILE__).'/other.php');
+    ?>
+    -->
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title><?php tpl_pagetitle()?> [<?php echo strip_tags($conf['title'])?>]</title>
+   <?php tpl_metaheaders()?>
+   <link rel="shortcut icon" href="<?php echo DOKU_TPL?>images/favicon.ico" />
+   <?php    if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
+             if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
+   ?>
 </head>
 
 
@@ -42,25 +51,20 @@ if (!defined('DOKU_INC')) die();
       <div id="oaTmplHeaderTop">
             <a href="" title="Site Map" >Site Map</a>
             <a href="" title="Accessibility" >Accessibility</a>
-            <a href="" title="Impressum" > Impressum </a>
+            <a href="" title="Impressum" class="lastNavItem" > Impressum </a>
       </div>
       
       
       <div id="oaTmplHeaderBottom">
          <div id="logo"> #define IVC </div>
-         <div id="search-box">
-             <form name="searchform"  action="http://www.trolltech.com/search"  style="white-space:nowrap" onsubmit="return liveSearchSubmit()">
-                <label for="searchGadget" class="hiddenStructure">Search Site</label>
-                <div class="LSBox">
-                   <input id="searchGadget" tabindex="30001" name="SearchableText" type="text" size="15"  title="Search Site" accesskey="4" class="visibility:visible" />
-                   <input class="searchButton" type="submit" tabindex="30002" value="Search" />
-                   <div class="LSResult" id="LSResult" style="">
-                      <div class="LSShadow" id="LSShadow" />
-                   </div>
-                </div>         
-             </form>
-         </div>
+         <div id="search-box"> <?php tpl_searchform()?>&nbsp; </div>
       </div>
+    </div>
+    <div id="oaTmplHeaderEdit">
+        <?php tpl_button('edit')?>
+        <?php tpl_button('history')?>
+        <?php tpl_button('recent')?>
+       
     </div>
 </div>
    
@@ -81,10 +85,10 @@ if (!defined('DOKU_INC')) die();
    
    <!--Wiki Content-->
    <div id="contentArea">
-      <p>contentArea</p>
-       <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.       Why do we use it? </p>
-   </div> 
-
+    <!-- wikipage start -->
+    <?php tpl_content()?>
+    <!-- wikipage stop -->
+   </div>
 </div>
 
    
@@ -97,9 +101,17 @@ if (!defined('DOKU_INC')) die();
           <a href="http://www.trolltech.com/company/contact-info" title="Contact us"> Contact us </a>
           <a href="/trolltech/privacypolicy" title="Privacy policy"> Privacy Policy </a>
           <a href="http://www.trolltech.com/sitemap" title="Site map">  Site map  </a>
-          <a href="http://www.trolltech.com" title="Visit www.trolltech.com" class="lastNavItem"> www.trolltech.com </a>
+          <a href="http://www.trolltech.com" title="Visit www.trolltech.com" > www.trolltech.com </a>
+          <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a>
       </p>   
    </div> 
+   <p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
+   <!-- 
+   
+   <p><?php if ($monobook['copyright']) { ?><?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($monobook['copyright']); ?><?php } ?></p>
+   -->
+   <p></p>
+   
    
 
 
