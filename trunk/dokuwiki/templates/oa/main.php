@@ -49,9 +49,11 @@ if (!defined('DOKU_INC')) die();
 <!--HEADER-->
 <div id="oaTmplHeader">
       <div id="oaTmplHeaderTop">
-            <a href="" title="Site Map" >Site Map</a>
-            <a href="" title="Accessibility" >Accessibility</a>
-            <a href="" title="Impressum" class="lastNavItem" > Impressum </a>
+            <?php  tpl_actionlink('login');
+                    tpl_actionlink('index');
+                    tpl_pagelink('openaqua:accessibility');
+                    tpl_pagelink('openaqua:impressum');
+            ?>
       </div>
       
       
@@ -68,12 +70,12 @@ if (!defined('DOKU_INC')) die();
            <?php tpl_button('recent')?>
          </div>
          <div id="oaTmplHeaderEditRight">
-           <?php tpl_button('subscription')?>
-           <?php tpl_button('admin')?>
-           <?php tpl_button('profile')?>
-           <?php tpl_button('login')?>
-           <?php tpl_button('index')?>
-           <?php tpl_button('top')?>
+           <?php tpl_button('subscription'); 
+                  tpl_button('admin');
+                  tpl_button('profile');
+                  tpl_button('index');
+                  tpl_button('top');
+           ?>
          </div>
       </div>
 </div>

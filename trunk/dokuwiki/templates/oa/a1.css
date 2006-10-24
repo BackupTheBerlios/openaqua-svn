@@ -30,52 +30,52 @@ p {
 */
 div#oaTmplHeader {
    clear: both;
-   background-color: aqua;
 }
 
 #oaTmplHeaderTop {
    text-align: right;
-   background-color: red;
+   clear: both;
 }
 #oaTmplHeaderTop a{
-    border-right: 1px solid #333333;
-    padding: 0em 0.5em 0em 0.7em;
+   border-right: 1px solid #333333;
+   padding: 0em 0.5em 0em 0.7em;
+   height: 2em;
 }
 #oaTmplHeaderTop a.lastNavItem {
-    border-right: none;
+   border-right: none;
+}
+#oaTmplHeaderTop .button{
+   border: none;
+   background-color: transparent;
+   width: 4em;
+   height: 2em;
+   float: right;
 }
 
 
 div#oaTmplHeaderBottom {
    background-color: grey;
+   clear: both;
 }
 
 #oaTmplHeaderEdit {
    clear: both;
+   margin-bottom: 5em;
+}
+#oaTmplHeaderEdit .button{
+   float: left;
+   height: 1em;
    border: none;
-   margin-bottom: 3px;
-   text-align: left;
+   background-color: transparent;
 }
 
 #oaTmplHeaderEdit div#oaTmplHeaderEditLeft {
-   background-color: green;
-   /**
-    width: 18em;
-    position: absolute;
-    text-align: center;
-    */
-    float: left;
+   float: left;
 }
 #oaTmplHeaderEdit div#oaTmplHeaderEditRight { 
-   background-color: green;
-   /**
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    */
-    float: right;
+   float: right;
+   text-align: right;
 }
-
 
 
  
