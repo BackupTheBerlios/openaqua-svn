@@ -14,13 +14,14 @@
 
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
-$myDomain                   =  trim($_SERVER['HTTP_HOST']);
+$myDomain                   =  DOKU_URL;
 $myNamespacePrefix          = 'openaqua';
 $myDefaultPageContact       = $myNamespacePrefix . ':contact';
 $myDefaultPageAbout         = $myNamespacePrefix . ':about';
 $myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
 $myDefaultPageCopyRight     = $myNamespacePrefix . ':copyright';
 $myLogo                     = 'It is IVC';
+
 
  
 ?>
@@ -31,22 +32,28 @@ $myLogo                     = 'It is IVC';
  
 <!--##################################################HTML HEADER-->
 <head>
-   <?php if (function_exists('re_log_referrers')) re_log_referrers(); ?>
-   <!--
-   <?php @include(dirname(__FILE__).'/user/pref.php'); ?>
-   <?php @include(dirname(__FILE__).'/lang/en/lang.php');
+   <?php 
+      if (function_exists('re_log_referrers')) re_log_referrers();
+      @include(dirname(__FILE__).'/user/pref.php');
+      @include(dirname(__FILE__).'/lang/en/lang.php');
       if ( $conf['lang'] && $conf['lang'] != 'en' )  @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
       //@include(dirname(__FILE__).'/context.php');
       //@include(dirname(__FILE__).'/meta.html')
       //@include(dirname(__FILE__).'/other.php');
-    ?>
-    -->
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title><?php tpl_pagetitle()?> [<?php echo strip_tags($conf['title'])?>]</title>
-   <?php tpl_metaheaders()?>
-   <link rel="shortcut icon" href="<?php echo DOKU_TPL?>images/favicon.ico" />
-   <?php    if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
-             if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
+      
+      /*make page title*/
+      echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
+      
+      //Add meta headers
+      echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+      tpl_metaheaders();
+      
+      //add a page icon
+      echo '<link rel="shortcut icon" href="<' . DOKU_TPL . 'images/favicon.ico" />' . "\n";
+      
+      //add googleanalytics support
+      if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
+      if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
    ?>
 </head>
 
@@ -99,11 +106,12 @@ $myLogo                     = 'It is IVC';
    <div id="oaTmplMainPageRight">
    </div> 
    
-   <div id="oaTmplMainPageContent">
-       <!-- wikipage start -->
-      <?php tpl_content()?>
-       <!-- wikipage stop -->
+   <div  class="dokuwiki">
+   <!-- wikipage start -->
+   <?php tpl_content()?>
+   <!-- wikipage stop -->
    </div>
+   
 </div>
 
    
@@ -116,7 +124,12 @@ $myLogo                     = 'It is IVC';
                                                tpl_pagelink($myDefaultPageContact);
                                                tpl_pagelink($myDefaultPagePrivacyPolice);             
                                                tpl_actionlink('index');
-                                               echo '<a href="http://' . $myDomain . '" title="Visit' . $myDomain . '" >'. $myDomain . ' </a>';
+                                               $url = parse_url ( $myDomain );
+                                               $server = $url['host'];
+                                               if(!empty( $url['port'])) { $server .= ':' . $url['port']; }
+                                               $server .= $url['path'];
+                                               
+                                               echo '<a href="' . $myDomain .  '" title="Visit ' . $myDomain . '" >'. $server . ' </a>';
                                         ?>
                                        <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a>
       </p>   

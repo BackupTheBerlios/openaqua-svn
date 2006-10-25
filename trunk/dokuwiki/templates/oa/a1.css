@@ -9,17 +9,26 @@
 /* Images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
 
 
+
 /* basic elements */
+*    {
+    padding: 0; 
+    margin: 0; 
+}
+
 body { 
     text-align: center;
     min-width: 41em;
     font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    background-color: __background__;
+    color: __text__;
     /*background-color: White;
     color: #333333;
     margin: 0;
     padding: 0;   
     */
 }
+
 p {
    /*
    margin: 0 0 0.75em 0;
@@ -157,15 +166,10 @@ div#oaTmplHeaderBottom div#oaTmplHeaderBottomSearch {
    */
 }
 
-#oaTmplMainPageContent{
-   text-align: left;
-   /*
-   background-color: silver;
-   margin: 0px;
-   padding: 0px 160px 5px 160px;
-   */
-}
 
+.dokuwiki {
+   text-align: left;
+}
 
 
 /*
@@ -174,3 +178,5 @@ class to hide certain things
 .hiddenParts{
    visibility: hidden;
 }
+
+
