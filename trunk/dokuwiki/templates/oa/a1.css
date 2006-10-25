@@ -13,15 +13,18 @@
 body { 
     text-align: center;
     min-width: 41em;
-    font: 69% "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
-    background-color: White;
+    font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    /*background-color: White;
     color: #333333;
     margin: 0;
     padding: 0;   
+    */
 }
 p {
+   /*
    margin: 0 0 0.75em 0;
    line-height: 1.5em;
+   */
 }
 
 
@@ -54,9 +57,14 @@ div#oaTmplHeader {
 
 
 div#oaTmplHeaderBottom {
-   background-color: grey;
-   clear: both;
 }
+div#oaTmplHeaderBottom div#oaTmplHeaderBottomLogo {
+   float: left; 
+}
+div#oaTmplHeaderBottom div#oaTmplHeaderBottomSearch {
+   float: right; 
+}
+
 
 #oaTmplHeaderEdit {
    clear: both;
@@ -75,19 +83,16 @@ div#oaTmplHeaderBottom {
 #oaTmplHeaderEdit div#oaTmplHeaderEditRight { 
    float: right;
    text-align: right;
+   /*
+   background-color: yellow;
+   min-height: 5cm;
+   */
 }
 
 
- 
 
 
 
-/*
-##################HEADER
-*/
-#oaTmplMainPage {
-   clear: both;
-}
 
 
 /**
@@ -97,19 +102,19 @@ div#oaTmplHeaderBottom {
    clear: both;
    border: none;
    margin-bottom: 3px;
-   text-align: left;
+   text-align: center;
 }
 
 #oaTmplFooter p#oaTmplFooterCopyright {
     width: 18em;
     position: absolute;
-    text-align: center;
 }
 
 #oaTmplFooter p#oaTmplFooterNavigation {
+/*
     position: relative;
     z-index: 3;
-    text-align: center;
+    */
 }
 
 #oaTmplFooter p#oaTmplFooterNavigation a{
@@ -123,14 +128,36 @@ div#oaTmplHeaderBottom {
 
 
 
+/**
+##################Content
+*/
 
+#oaTmplMainPage{
+   clear: both;
+}
 
+#oaTmplMainPageLeft{
+   text-align: left;
+   width: 18em;
+   float: left; 
+   background-color: green;
+   /*
+   min-height: 50cm;
+   overflow: auto;
+   min-height: 5cm;
+   */
+}
 
+#oaTmplMainPageRight{
+   text-align: left;
+   width: 18em;
+   float: right; 
+   background-color: red;
+   /*
+   */
+}
 
-
-
-
-#contentArea{
+#oaTmplMainPageContent{
    text-align: left;
    /*
    background-color: silver;
@@ -139,34 +166,7 @@ div#oaTmplHeaderBottom {
    */
 }
 
-div#leftPanel{
-   text-align: left;
-   width: 18em;
-   float: left; 
-   /*
-   background-color: red;
-   */
-}
 
-div#logo{
-   text-align: left;
-   float: left; 
-}
-
-div#search{
-   text-align: left;
-   float: right; 
-}
-
-
-div#rightPanel{
-   text-align: left;
-   width: 18em;
-   float: right; 
-   /*
-   background-color: green;
-   */
-}
 
 /*
 class to hide certain things
