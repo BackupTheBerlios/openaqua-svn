@@ -19,7 +19,8 @@ $myDefaultPageContact       = $myNamespacePrefix . ':contact';
 $myDefaultPageAbout         = $myNamespacePrefix . ':about';
 $myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
 $myDefaultPageCopyRight     = $myNamespacePrefix . ':copyright';
-$myLogo                     = 'It is IVC';
+$myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#666666">define</FONT>
+<FONT COLOR="#333333">IVC</FONT></B>';
 
 
  
@@ -60,7 +61,7 @@ $myLogo                     = 'It is IVC';
 <body>
 
 <div id="oaTmplPageHeader">
-      <div class="horizontalNavigation"  style="text-align: right;">
+      <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="text-align: right;">
          <ul >
             <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
             <li ><?php tpl_actionlink('index'); ?></li>
@@ -74,20 +75,55 @@ $myLogo                     = 'It is IVC';
       
       <div id="oaTmplHeaderLogo">
          <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
-         <div id="oaTmplHeaderLogoSearch">  <?php tpl_searchform()?></div>
       </div>
-      <div id="clearer"> </div>
 </div>
+
+
+<div id="clearer"> </div>
 <div id="wrapper_extra">
    <div id="wrapper">
       
       <!--Page Left-->
       <div id="oaTmplPageLeft">
-         <h1>left</h1>
+          <div id="oaTmplPageLeftNavigation" >
+             <div class="colorBox" style="background-color: #8390a1;">
+             </div>
+             <div style="font-weight:bold; font-size:9pt;"> 
+                Willkommen!
+             </div>
+             <div style="color:#505050; font-size:9pt;">
+                Willkommen auf den Webseiten des Lx-Office Projektes.
+             </div>
+         </div>
+
+
+         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
+            <h1>Navigation</h1>
+            <ul >
+               <li ><a href="">Home</a></li>
+               <li ><a href="">Products</a></li>
+               <li ><a href="">Public Projects</a></li>
+               <li ><a href="">Internal Projects</a></li>
+               <li ><a href="">Support and Service</a></li>
+               <li ><a href="">Partners</a></li>
+               <li ><a href="">Developer Zone</a></li>
+               <li ><a href="">Customers</a></li>
+               <li ><a href="">Company</a></li>               
+               <li ><a href="">Career</a></li>                              
+            </ul>
+         </div>
+         
+                  
+         <div id="oaTmplPageLeftNavigation" >
+            <?php tpl_searchform()?>
+         </div>
       </div>
+         
       
       
       <div id="oaTmplPageContent">
+         <div class="colorBox" style="background-color: #344966;"></div>
+
          <div  class="dokuwiki">
             <!-- wikipage start -->
             <?php tpl_content()?>
@@ -103,7 +139,7 @@ $myLogo                     = 'It is IVC';
       </div>
       
       <div id="oaTmplPageRight">
-         <h1>right</h1>
+            <div class="colorBox" style="background-color: #8390a1;"></div>
       </div>
       
       

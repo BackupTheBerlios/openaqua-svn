@@ -17,10 +17,10 @@ body {
 
 #oaTmplPageLeft  {
    float: left;
-   width: 10%;
-   background-color: green;
+   width: 20%;
    text-align: left;
    /*
+   background-color: green;
    padding-right: 2em;
    */
 }
@@ -28,12 +28,10 @@ body {
    
 #oaTmplPageContent  {
    text-align: left;
-   margin-left: 2em;
-   margin-right: 2em;
-   background-color: red;
    float: left;
-   width: 70%;
+   width: 60%;
    /*
+   background-color: red;
    width: 64%;
    */
 }
@@ -42,9 +40,11 @@ body {
 #oaTmplPageRight
 {
    text-align: left;
-   background-color: yellow;
    float: right;
    width: 10%;
+   /*
+   background-color: yellow;
+   */
 }
 
 
@@ -146,15 +146,100 @@ and 5.5, hence the child selector hack */
    
    
    
+
+
+
+
+
+
+
+
+
+
+
+
+
    
+/*
+##################Navigation Links
+*/
+div#oaTmplPageLeftNavigation {
+   padding-top: 1em;
+   margin-bottom: 1em;
+}
+.verticalNavigation{
+}
+.verticalNavigation h1,h2,h3,h4,h5,h6{
+   display: none;
+}
+.verticalNavigation ul{
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   
+   /*
+   padding: 3px 0;
+   */
+}
+.verticalNavigation ul li{
+   display:block;
+   width:100%;
+   background:#344966;
+   /*
+   margin: 0;
+   border-top: 1px solid #003;
+   display: inline;
+   */
+}
+
+.verticalNavigation ul li a{
+   display: block;
+   color:white;
+   padding-top:4px;
+   padding-bottom:4px;
+   padding-left:10px;
+   text-decoration:none;
+   border-left: 10px solid #8390a1;
+   background:#344966;
+   /*
+   color: #fff;
+   display: block;
+   padding: 2px 2px 2px 0.5em;
+   margin: 0;
+   border-right: 1px solid #69c;
+   border-bottom: 1px solid #369;
+   background-color: #036;
+   display: inline;
+   */
+}
+.verticalNavigation ul li a:hover {
+   display: block;
+   color: white;
+   text-decoration: none;
+   background: #8390a1;
+}
+
+
+.verticalNavigation  a.lastNavItem {
+   border-right: none;
+}
+.verticalNavigation  .button{
+   border: none;
+   /*width: 4em;
+   background-color: transparent;
+   height: 2em;
+   float: right;
+   */
+}
    
 /*
 ##################Navigation Links
 */
 
 .horizontalNavigation {
-   
+
 }
+
 
 .horizontalNavigation h1,h2,h3,h4,h5,h6{
    display: none;
@@ -163,7 +248,9 @@ and 5.5, hence the child selector hack */
 .horizontalNavigation ul{
    padding: 3px 0;
    margin-left: 0;
+   /*
    border-bottom: 1px solid;
+   */
 }
 .horizontalNavigation li{
    list-style: none;
@@ -175,6 +262,8 @@ and 5.5, hence the child selector hack */
    padding: 0em 0.5em 0em 0.7em;
    height: 2em;
 }
+
+
 .horizontalNavigation  a.lastNavItem {
    border-right: none;
 }
@@ -189,23 +278,42 @@ and 5.5, hence the child selector hack */
 
 
 #oaTmplPageHeader {
+   padding-top: 1em;
    padding-bottom: 4em;
-   background-color: blue;
+   background-image: url(images/top_back.gif);
+   background-repeat: repeat-x;
    /*
-   min-height: 5em;
    */
 
+}
+#oaTmplPageHeaderLinks a {
+   text-decoration: none;
+   color: grey;
+   /*
+   */
+}
+
+.colorBox {
+   background-color: blue;
+   min-height: 1em;
 }
 
 div#oaTmplHeaderLogo {
 }
-div#oaTmplHeaderLogo div#oaTmplHeaderLogoLogo {
-   float: left; 
+div#oaTmplHeaderLogoLogo {
+   font-size: 200%;
+   vertical-align: bottom;
+   text-align: left;
+}
+div#oaTmplHeaderLogoLogo a {
+   text-decoration: none;
 }
 div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
+   /*
    float: right; 
+   */
 }
-   
+  
 
 
 div.clearer {
