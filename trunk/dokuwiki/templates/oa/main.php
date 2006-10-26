@@ -25,10 +25,8 @@ $myLogo                     = 'It is IVC';
 
  
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>"
- lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">
  
 <!--##################################################HTML HEADER-->
 <head>
@@ -47,6 +45,7 @@ $myLogo                     = 'It is IVC';
       //Add meta headers
       echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
       tpl_metaheaders();
+      @include(dirname(__FILE__).'/meta.html');
       
       //add a page icon
       echo '<link rel="shortcut icon" href="<' . DOKU_TPL . 'images/favicon.ico" />' . "\n";
@@ -63,37 +62,50 @@ $myLogo                     = 'It is IVC';
 
 <!--HEADER-->
 <div id="oaTmplHeader">
-      <div id="oaTmplHeaderTop">
-            <?php  tpl_actionlink('login');
-                    tpl_actionlink('index');
-                    tpl_pagelink($myDefaultPageAbout);
-            ?>
+      <div class="horizontalNavigation"  style="text-align: right;">
+         <ul >
+            <li ><?php  tpl_pagelink($myDefaultPageAbout); ?> </li>
+            <li ><?php  tpl_actionlink('index'); ?></li>
+            <li ><?php  tpl_actionlink('login'); ?></li>
+         </ul>
       </div>
-      <hr />
       
       
-      <div id="oaTmplHeaderBottom">
-         <div id="oaTmplHeaderBottomLogo"> <?php echo $myLogo ?> </div>
-         <div id="oaTmplHeaderBottomSearch">  <?php tpl_searchform()?></div>
+      <div id="oaTmplHeaderLogo">
+         <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
+         <div id="oaTmplHeaderLogoSearch">  <?php tpl_searchform()?></div>
+      </div>
+      
+      <div class="clearer"></div>
+      
+      <div>
+         <ul class="horizontalNavigation">
+            <li >q </li>
+            <li >w </li>
+            <li >e </li>
+            <li >r</li>
+            <li >t</li>
+            <li >z</li>
+            <li >u</li>
+         </ul>
       </div>
       
     
-      <div id="oaTmplHeaderEdit">
-         <div id="oaTmplHeaderEditLeft">
-           <?php tpl_button('edit')?>
-           <?php tpl_button('history')?>
-           <?php tpl_button('recent')?>
-         </div>
-         <div id="oaTmplHeaderEditRight">
-           <?php tpl_button('subscription'); 
-                  tpl_button('admin');
-                  tpl_button('profile');
-                  tpl_button('index');
-                  tpl_button('top');
-           ?>
-         </div>
+      <div class="horizontalNavigation"  >
+            <ul >
+               <li ><?php tpl_actionlink('edit');   ?> </li>
+               <li ><?php tpl_actionlink('history');   ?> </li>
+               <li ><?php tpl_actionlink('recent');   ?> </li>
+            </ul>
+            <ul >
+               <li ><?php tpl_actionlink('subscription');   ?> </li>
+               <li ><?php tpl_actionlink('admin');  ?> </li>
+               <li ><?php tpl_actionlink('profile');  ?> </li>
+               <li ><?php tpl_actionlink('index');  ?> </li>
+               <li ><?php tpl_actionlink('top');  ?> </li>
+            </ul>
       </div>
-      <hr />
+      <div class="clearer"></div>
       
 </div>
    
@@ -118,21 +130,16 @@ $myLogo                     = 'It is IVC';
    
    <!--Page Footer-->
    <hr />
-   <div id="oaTmplFooter">
-      <p id="oaTmplFooterCopyright">   <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </p>
-      <p id="oaTmplFooterNavigation">  <?php  tpl_pagelink($myDefaultPageAbout);
-                                               tpl_pagelink($myDefaultPageContact);
-                                               tpl_pagelink($myDefaultPagePrivacyPolice);             
-                                               tpl_actionlink('index');
-                                               $url = parse_url ( $myDomain );
-                                               $server = $url['host'];
-                                               if(!empty( $url['port'])) { $server .= ':' . $url['port']; }
-                                               $server .= $url['path'];
-                                               
-                                               echo '<a href="' . $myDomain .  '" title="Visit ' . $myDomain . '" >'. $server . ' </a>';
-                                        ?>
-                                       <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a>
-      </p>   
+   <div class="horizontalNavigation"  >
+      <ul>
+         <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
+         <li> <?php  tpl_pagelink($myDefaultPageAbout);?></li>
+         <li> <?php  tpl_pagelink($myDefaultPageContact);?></li>
+         <li> <?php  tpl_pagelink($myDefaultPagePrivacyPolice);?></li>
+         <li> <?php  tpl_actionlink('index'); ?></li>
+         <li> <?php  $url = parse_url ( $myDomain ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . $myDomain .  '" title="Visit ' . $myDomain . '" >'. $server . ' </a>';?></li>
+         <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
+      </ul>
    </div> 
    
    <p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>

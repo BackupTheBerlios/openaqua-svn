@@ -36,6 +36,10 @@ p {
    */
 }
 
+div.clearer {
+   clear: both;
+}
+
 
 /*
 ##################HEADER
@@ -44,33 +48,49 @@ div#oaTmplHeader {
    clear: both;
 }
 
-#oaTmplHeaderTop {
-   text-align: right;
-   clear: both;
+.horizontalNavigation {
+   
 }
-#oaTmplHeaderTop a{
+
+.horizontalNavigation h1,h2,h3,h4,h5,h6{
+   display: none;
+}
+
+.horizontalNavigation ul{
+   padding: 3px 0;
+   margin-left: 0;
+   border-bottom: 1px solid;
+}
+.horizontalNavigation li{
+   list-style: none;
+   margin: 0;
+   display: inline;
+}
+.horizontalNavigation  a{
    border-right: 1px solid #333333;
    padding: 0em 0.5em 0em 0.7em;
    height: 2em;
 }
-#oaTmplHeaderTop a.lastNavItem {
+.horizontalNavigation  a.lastNavItem {
    border-right: none;
 }
-#oaTmplHeaderTop .button{
+.horizontalNavigation  .button{
    border: none;
+   /*width: 4em;
    background-color: transparent;
-   width: 4em;
    height: 2em;
    float: right;
+   */
 }
 
 
-div#oaTmplHeaderBottom {
+
+div#oaTmplHeaderLogo {
 }
-div#oaTmplHeaderBottom div#oaTmplHeaderBottomLogo {
+div#oaTmplHeaderLogo div#oaTmplHeaderLogoLogo {
    float: left; 
 }
-div#oaTmplHeaderBottom div#oaTmplHeaderBottomSearch {
+div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
    float: right; 
 }
 
