@@ -22,18 +22,6 @@ body {
     font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
     background-color: __background__;
     color: __text__;
-    /*background-color: White;
-    color: #333333;
-    margin: 0;
-    padding: 0;   
-    */
-}
-
-p {
-   /*
-   margin: 0 0 0.75em 0;
-   line-height: 1.5em;
-   */
 }
 
 div.clearer {
@@ -95,16 +83,6 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
 }
 
 
-#oaTmplHeaderEdit {
-   clear: both;
-   margin-bottom: 5em;
-}
-#oaTmplHeaderEdit .button{
-   float: left;
-   height: 1em;
-   border: none;
-   background-color: transparent;
-}
 
 #oaTmplHeaderEdit div#oaTmplHeaderEditLeft {
    float: left;
@@ -121,48 +99,11 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
 
 
 
-
-
-
-/**
-##################FOOTER
-*/
-#oaTmplFooter {
-   clear: both;
-   border: none;
-   margin-bottom: 3px;
-   text-align: center;
-}
-
-#oaTmplFooter p#oaTmplFooterCopyright {
-    width: 18em;
-    position: absolute;
-}
-
-#oaTmplFooter p#oaTmplFooterNavigation {
-/*
-    position: relative;
-    z-index: 3;
-    */
-}
-
-#oaTmplFooter p#oaTmplFooterNavigation a{
-    border-right: 1px solid #333333;
-    padding: 0em 0.5em 0em 0.7em;
-}
-#oaTmplFooter p#oaTmplFooterNavigation a.lastNavItem {
-    border-right: none;
-}
-
-
-
-
 /**
 ##################Content
 */
 
 #oaTmplMainPage{
-   clear: both;
 }
 
 #oaTmplMainPageLeft{
@@ -186,17 +127,6 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
    */
 }
 
-
-.dokuwiki {
-   text-align: left;
+.hiddenParts {
+   display: none;
 }
-
-
-/*
-class to hide certain things
-*/
-.hiddenParts{
-   visibility: hidden;
-}
-
-

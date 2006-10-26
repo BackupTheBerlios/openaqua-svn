@@ -10,6 +10,10 @@
 
 /* -------------- general elements --------------- */
 
+.dokuwiki {
+   text-align: left;
+}
+
 
 /* the document */
 div.dokuwiki div.page {

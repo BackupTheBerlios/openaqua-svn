@@ -67,6 +67,9 @@ $myLogo                     = 'It is IVC';
             <li ><?php  tpl_pagelink($myDefaultPageAbout); ?> </li>
             <li ><?php  tpl_actionlink('index'); ?></li>
             <li ><?php  tpl_actionlink('login'); ?></li>
+            <li ><?php tpl_actionlink('subscription');   ?> </li>
+            <li ><?php tpl_actionlink('admin');  ?> </li>
+            <li ><?php tpl_actionlink('profile');  ?> </li>
          </ul>
       </div>
       
@@ -91,20 +94,6 @@ $myLogo                     = 'It is IVC';
       </div>
       
     
-      <div class="horizontalNavigation"  >
-            <ul >
-               <li ><?php tpl_actionlink('edit');   ?> </li>
-               <li ><?php tpl_actionlink('history');   ?> </li>
-               <li ><?php tpl_actionlink('recent');   ?> </li>
-            </ul>
-            <ul >
-               <li ><?php tpl_actionlink('subscription');   ?> </li>
-               <li ><?php tpl_actionlink('admin');  ?> </li>
-               <li ><?php tpl_actionlink('profile');  ?> </li>
-               <li ><?php tpl_actionlink('index');  ?> </li>
-               <li ><?php tpl_actionlink('top');  ?> </li>
-            </ul>
-      </div>
       <div class="clearer"></div>
       
 </div>
@@ -122,14 +111,18 @@ $myLogo                     = 'It is IVC';
    <!-- wikipage start -->
    <?php tpl_content()?>
    <!-- wikipage stop -->
+   </div >
+   <div class="horizontalNavigation" style="text-align: left;" >
+       <ul >
+          <li ><?php tpl_actionlink('edit');   ?> </li>
+          <li ><?php tpl_actionlink('history');   ?> </li>
+          <li ><?php tpl_actionlink('recent');   ?> </li>
+       </ul>
    </div>
-   
 </div>
 
-   
-   
+  
    <!--Page Footer-->
-   <hr />
    <div class="horizontalNavigation"  >
       <ul>
          <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
