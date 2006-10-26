@@ -14,7 +14,6 @@
 
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
-$myDomain                   =  DOKU_URL;
 $myNamespacePrefix          = 'openaqua';
 $myDefaultPageContact       = $myNamespacePrefix . ':contact';
 $myDefaultPageAbout         = $myNamespacePrefix . ':about';
@@ -131,7 +130,7 @@ $myLogo                     = 'It is IVC';
          <li> <?php  tpl_pagelink($myDefaultPageContact);?></li>
          <li> <?php  tpl_pagelink($myDefaultPagePrivacyPolice);?></li>
          <li> <?php  tpl_actionlink('index'); ?></li>
-         <li> <?php  $url = parse_url ( $myDomain ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . $myDomain .  '" title="Visit ' . $myDomain . '" >'. $server . ' </a>';?></li>
+         <li> <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
       </ul>
    </div> 
