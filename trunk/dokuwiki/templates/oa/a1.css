@@ -1,7 +1,7 @@
 /* basic elements */
 *    {
     padding: 0; 
-    margin: 0; 
+    margin: 1px; 
 }
 
 body { 
@@ -14,14 +14,62 @@ body {
     */
 }
 
+.colorBox {
+   background-color: blue;
+   min-height: 2em;
+}
 
+
+
+
+/*============================HEADER========================*/
+#oaTmplPageHeader {
+   padding-top: 1em;
+   padding-bottom: 2em;
+   background-image: url(images/top_back.gif);
+   background-repeat: repeat-x;
+
+   border-left: 1px solid #8390a1;   
+   border-bottom: 1px solid #8390a1;   
+   /*
+   background-color: red;
+   */
+
+}
+#oaTmplPageHeaderLinks a {
+   text-decoration: none;
+   color: grey;
+   /*
+   */
+}
+
+
+div#oaTmplHeaderLogo {
+}
+div#oaTmplHeaderLogoLogo {
+   font-size: 300%;
+   font: Arial;
+   vertical-align: bottom;
+   text-align: left;
+}
+div#oaTmplHeaderLogoLogo a {
+   text-decoration: none;
+}
+div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
+   /*
+   float: right; 
+   */
+}
+  
+
+
+/*=============================Content===========================*/
 #oaTmplPageLeft  {
    float: left;
-   width: 20%;
-   text-align: left;
+   width: 22%;
    /*
-   background-color: green;
    padding-right: 2em;
+   background-color: yellow;
    */
 }
    
@@ -29,8 +77,9 @@ body {
 #oaTmplPageContent  {
    text-align: left;
    float: left;
-   width: 60%;
+   width: 67%;
    /*
+   background-color: green;
    background-color: red;
    width: 64%;
    */
@@ -44,7 +93,31 @@ body {
    width: 10%;
    /*
    background-color: yellow;
+   background-color: grey;
    */
+}
+
+/*=============================FOOTER===========================*/
+#oaTmplPageFooter  {
+   border-left: 1px solid #8390a1;   
+   border-top: 1px solid #8390a1; 
+   clear: both;
+   text-align: right;
+   /*
+   padding-top: 2em;
+   */
+}
+
+
+
+/* Safari needs this - otherwise the ghost overflow, though painted 
+correctly obscures links and form elements that by rights should be above it.
+An unintended side-effect is that it cause such elements to vanish in IE 5.01
+and 5.5, hence the child selector hack */
+* > #oaTmplPageFooter, * > form, * > #notes, * > .output
+{
+   position: relative;
+   z-index: 1000;
 }
 
 
@@ -70,23 +143,23 @@ body {
    height: 0;
    }
 }
-#wrapper_extra
+#wrapper_extra 
    {
    position: relative;
    }
-* html #wrapper
-   {
+* html #wrapper {
    position: relative;
-   }
-#wrapper
-   {
+}
+#wrapper {
+   text-align: left;
    overflow: hidden; /* This hides the excess padding in non-IE browsers */
    }
+      
 /* we need this for IE 5.01 - otherwise the columns vanish */
 * html #wrapper_extra
    {
    float: left;
-   width: 99%;
+   width: 100%;
    }
 /* we need this for IE 5.01 - otherwise the wrapper does not expand to the
 necessary height (unless fixed, this problem becomes even more acute 
@@ -125,22 +198,6 @@ just in case that many moons ago problem rears its head again */
 /* end easy clearing */
 
 
-#oaTmplPageFooter  {
-   padding-top: 2em;
-   clear: both;
-   text-align: center;
-}
-
-
-/* Safari needs this - otherwise the ghost overflow, though painted 
-correctly obscures links and form elements that by rights should be above it.
-An unintended side-effect is that it cause such elements to vanish in IE 5.01
-and 5.5, hence the child selector hack */
-* > #oaTmplPageFooter, * > form, * > #notes, * > .output
-{
-   position: relative;
-   z-index: 1000;
-}
    
    
    
@@ -166,7 +223,13 @@ and 5.5, hence the child selector hack */
 div#oaTmplPageLeftNavigation {
    padding-top: 1em;
    margin-bottom: 1em;
+   
 }
+.searchBox {
+   border: 1px solid #8390a1;   
+}
+
+
 .verticalNavigation{
 }
 .verticalNavigation h1,h2,h3,h4,h5,h6{
@@ -187,7 +250,7 @@ div#oaTmplPageLeftNavigation {
    background:#344966;
    /*
    margin: 0;
-   border-top: 1px solid #003;
+   
    display: inline;
    */
 }
@@ -200,7 +263,7 @@ div#oaTmplPageLeftNavigation {
    padding-left:10px;
    text-decoration:none;
    border-left: 10px solid #8390a1;
-   background:#344966;
+   background: #344966;
    /*
    color: #fff;
    display: block;
@@ -258,9 +321,11 @@ div#oaTmplPageLeftNavigation {
    display: inline;
 }
 .horizontalNavigation  a{
-   border-right: 1px solid #333333;
+   border-right: 1px solid #344966;
    padding: 0em 0.5em 0em 0.7em;
    height: 2em;
+   text-decoration: none;
+   color: #8390a1;
 }
 
 
@@ -277,43 +342,6 @@ div#oaTmplPageLeftNavigation {
 }
 
 
-#oaTmplPageHeader {
-   padding-top: 1em;
-   padding-bottom: 4em;
-   background-image: url(images/top_back.gif);
-   background-repeat: repeat-x;
-   /*
-   */
-
-}
-#oaTmplPageHeaderLinks a {
-   text-decoration: none;
-   color: grey;
-   /*
-   */
-}
-
-.colorBox {
-   background-color: blue;
-   min-height: 1em;
-}
-
-div#oaTmplHeaderLogo {
-}
-div#oaTmplHeaderLogoLogo {
-   font-size: 200%;
-   vertical-align: bottom;
-   text-align: left;
-}
-div#oaTmplHeaderLogoLogo a {
-   text-decoration: none;
-}
-div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
-   /*
-   float: right; 
-   */
-}
-  
 
 
 div.clearer {

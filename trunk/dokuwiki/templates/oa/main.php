@@ -85,9 +85,10 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       
       <!--Page Left-->
       <div id="oaTmplPageLeft">
-          <div id="oaTmplPageLeftNavigation" >
-             <div class="colorBox" style="background-color: #8390a1;">
+          <div class="colorBox" style="background-color: #8390a1;">
              </div>
+       
+          <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
                 Willkommen!
              </div>
@@ -114,7 +115,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          </div>
          
                   
-         <div id="oaTmplPageLeftNavigation" >
+         <div id="oaTmplPageLeftNavigation" class="searchBox">
             <?php tpl_searchform()?>
          </div>
       </div>
