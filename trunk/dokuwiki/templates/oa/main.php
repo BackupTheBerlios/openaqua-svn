@@ -110,8 +110,7 @@ $myLogo                     = 'It is IVC';
 </div><!-- close div#wrapper_extra -->
 
 <!--PAGE FOOTER-->
-<div id="footer">
-   <div id="oaTmplPageFooter" class="horizontalNavigation"  >
+<div id="oaTmplPageFooter" class="horizontalNavigation"  >
       <ul>
          <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
          <li> <?php  tpl_pagelink($myDefaultPageAbout);?></li>
@@ -121,8 +120,7 @@ $myLogo                     = 'It is IVC';
          <li> <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
       </ul>
-   </div> 
-</div>
+</div> 
 
 
 </body>
