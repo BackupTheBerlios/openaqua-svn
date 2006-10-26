@@ -1,141 +1,157 @@
-/* css Zen Garden Ciclus style */
-/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
-
-
-/* This file based on 'Tranquille' by Dave Shea */
-/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
-/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
-
-/* Images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
-
-
-
-/* basic elements */
-*    {
-    padding: 0; 
-    margin: 0; 
+#oaTmplPageLeft
+        {
+        float: left;
+        width: 19%;
+        }
+#oaTmplPageContent
+        {
+        float: left;
+        width: 60%;
+        }
+#oaTmplPageRight
+        {
+        float: left;
+        width: 19%;
+        }
+/* Start Mac IE5 filter \*/
+#oaTmplPageLeft, #oaTmplPageContent, #oaTmplPageRight
+        {
+        padding-bottom: 32767px !important;
+        margin-bottom: -32767px !important; 
+        }
+@media all and (min-width: 0px) {
+#oaTmplPageLeft, #oaTmplPageContent, #oaTmplPageRight
+        {
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important; 
+        }
+#oaTmplPageLeft:before, #oaTmplPageContent:before, #oaTmplPageRight:before
+        {
+        content: '[DO NOT LEAVE IT IS NOT REAL]';
+        display: block;
+        background: inherit;
+        padding-top: 32767px !important;
+        margin-bottom: -32767px !important;
+        height: 0;
+        }
 }
-
-body { 
-    text-align: center;
-    min-width: 41em;
-    font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
-    background-color: __background__;
-    color: __text__;
+/* End Mac IE5 filter */
+/* IE Win can be a bit out - you might need to adjust  
+bottom value by -1px or as required */
+.verticalalign
+        {
+        position: absolute;
+        bottom: 0;
+        }
+#oaTmplPageLeft .verticalalign
+        {
+        width: 33%;
+        }
+#oaTmplPageContent .verticalalign
+        {
+        width: 34%;
+        }
+#oaTmplPageRight .verticalalign
+        {
+        width: 33%;
+        }
+/* hack for Opera 7+ */
+@media all and (min-width: 0px){
+.verticalalign
+        {
+        width: 100% !important;
+        }
+/* But Opera 9 does it right, so CSS3 hax to the max */
+div[id^="wrapper"] #oaTmplPageLeft .verticalalign
+        {
+        width: 33% !important;
+        }
+div[id^="wrapper"] #oaTmplPageContent .verticalalign
+        {
+        width: 34% !important;
+        }
+div[id^="wrapper"] #oaTmplPageRight .verticalalign
+        {
+        width: 33% !important;
+        }
 }
-
-div.clearer {
-   clear: both;
-}
-
-.hiddenParts {
-   display: none;
-}
-
-
-/*
-##################HEADER
-*/
-div#oaTmplPageHeader {
-   width: 100%;
-   position: fixed;
-   top: 0;
-   left: 0;
-}
-
-
-div#oaTmplPageContent {
-   float: absolute;
-   width: 60%;
-   padding-bottom: 1em;
-}
-
-div#oaTmplPageLeft {
-   float: left;
-   width: 20%;
-   padding-bottom: 1em;
-}
-          
-div#oaTmplPageRight {
-   float: right;
-   width: 20%;
-   padding-bottom: 1em;
-              /*
-              */
-}
-          
-div#oaTmplPageFooter {
-   clear: both;
-   float: left;
-   padding-bottom: 1em;
-   /**/
-}
-          
-          
-
-/*
-##################Navigation Links
-*/
-
-.horizontalNavigation {
-   
-}
-
-.horizontalNavigation h1,h2,h3,h4,h5,h6{
-   display: none;
-}
-
-.horizontalNavigation ul{
-   padding: 3px 0;
-   margin-left: 0;
-   border-bottom: 1px solid;
-}
-.horizontalNavigation li{
-   list-style: none;
-   margin: 0;
-   display: inline;
-}
-.horizontalNavigation  a{
-   border-right: 1px solid #333333;
-   padding: 0em 0.5em 0em 0.7em;
-   height: 2em;
-}
-.horizontalNavigation  a.lastNavItem {
-   border-right: none;
-}
-.horizontalNavigation  .button{
-   border: none;
-   /*width: 4em;
-   background-color: transparent;
-   height: 2em;
-   float: right;
-   */
-}
-
-
-
-div#oaTmplHeaderLogo {
-}
-div#oaTmplHeaderLogo div#oaTmplHeaderLogoLogo {
-   float: left; 
-}
-div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
-   float: right; 
-}
-
-
-
-#oaTmplHeaderEdit div#oaTmplHeaderEditLeft {
-   float: left;
-}
-#oaTmplHeaderEdit div#oaTmplHeaderEditRight { 
-   float: right;
-   text-align: right;
-   /*
-   background-color: yellow;
-   min-height: 5cm;
-   */
-}
-
-
-
+/* hack for IEs of all persuasions before IE7 */
+* html .verticalalign
+        {
+        width: 100% !important;
+        }
+.verticalalign p
+        {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        background: #996666;
+        }
+#wrapper_extra
+        {
+        position: relative;
+        }
+* html #wrapper
+        {
+        position: relative;
+        }
+#wrapper
+        {
+        overflow: hidden; /* This hides the excess padding in non-IE browsers */
+        }
+/* we need this for IE 5.01 - otherwise the columns vanish */
+* html #wrapper_extra
+        {
+        float: left;
+        width: 100%;
+        }
+/* we need this for IE 5.01 - otherwise the wrapper does not expand to the
+necessary height (unless fixed, this problem becomes even more acute 
+weirdness as the method is enhanced */
+#wrapper
+        {
+/* Normally a Holly-style hack height: 1% would suffice but that causes 
+IE 5.01 to completely collapse the wrapper - instead we float it */
+        float: left;
+/* NB. possibly only IE 5.01 needs to get this float value - otherwise 5.5 sometimes 
+(I saw it happen many moons ago) makes the width of wrapper too small 
+the float: none with the comment is ignored by 5.01,
+5.5 and above see it and carry on about their business
+It's probably fine to just remove it, but it's left here 
+just in case that many moons ago problem rears its head again */
+        float/**/: none;
+        }
+/* easy clearing */
+#wrapper:after
+        {
+        content: '[DO NOT LEAVE IT IS NOT REAL]'; 
+        display: block; 
+        height: 0; 
+        clear: both; 
+        visibility: hidden;
+        }
+#wrapper
+        {
+        display: inline-block;
+        }
+/*\*/
+#wrapper
+        {
+        display: block;
+        }
+/* end easy clearing */
+#footer
+        {
+        clear: both;
+        }
+/* Safari needs this - otherwise the ghost overflow, though painted 
+correctly obscures links and form elements that by rights should be above it.
+An unintended side-effect is that it cause such elements to vanish in IE 5.01
+and 5.5, hence the child selector hack */
+* > #footer, * > form, * > #notes, * > .output
+        {
+        position: relative;
+        z-index: 1000;
+        }

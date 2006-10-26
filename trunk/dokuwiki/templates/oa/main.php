@@ -59,34 +59,6 @@ $myLogo                     = 'It is IVC';
 <!--##################################################HTML BODY-->
 <body>
 
-<!--Page Content-->   
-<div id="oaTmplPageContent">
-   <div  class="dokuwiki">
-      <!-- wikipage start -->
-      <?php tpl_content()?>
-      <!-- wikipage stop -->
-   </div >
-   <div class="horizontalNavigation" style="text-align: left;" >
-       <ul >
-          <li ><?php tpl_actionlink('edit');   ?> </li>
-          <li ><?php tpl_actionlink('history');   ?> </li>
-          <li ><?php tpl_actionlink('recent');   ?> </li>
-       </ul>
-   </div>
-</div>
-
-
-
-
-<!--Page Left-->
-<div id="oaTmplPageLeft">
-left
-</div> 
-
-
-
-
-<!--Page HEADER-->
 <div id="oaTmplPageHeader">
       <div class="horizontalNavigation"  style="text-align: right;">
          <ul >
@@ -104,30 +76,43 @@ left
          <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
          <div id="oaTmplHeaderLogoSearch">  <?php tpl_searchform()?></div>
       </div>
+</div>
+<div id="wrapper_extra">
+   <div id="wrapper">
       
-      <div class="clearer"></div>
-      
-      <div>
-         <ul class="horizontalNavigation">
-            <li >q </li>
-            <li >w </li>
-            <li >e </li>
-            <li >r</li>
-            <li >t</li>
-            <li >z</li>
-            <li >u</li>
-         </ul>
+      <!--Page Left-->
+      <div id="oaTmplPageLeft">
+         <h1>left</h1>
       </div>
       
-    
-      <div class="clearer"></div>
       
-</div>
-   
-  
-<!--Page Footer-->
-<div id="oaTmplPageFooter" class="horizontalNavigation"  >
-   <ul>
+      <div id="oaTmplPageContent">
+         <div  class="dokuwiki">
+            <!-- wikipage start -->
+            <?php tpl_content()?>
+            <!-- wikipage stop -->
+         </div >
+         <div class="horizontalNavigation" style="text-align: left;" >
+             <ul >
+                <li ><?php tpl_actionlink('edit');   ?> </li>
+                <li ><?php tpl_actionlink('history');   ?> </li>
+                <li ><?php tpl_actionlink('recent');   ?> </li>
+             </ul>
+         </div>
+      </div>
+      
+      <div id="oaTmplPageRight">
+         <h1>right</h1>
+      </div>
+      
+      
+   </div><!-- close div#wrapper -->
+</div><!-- close div#wrapper_extra -->
+
+<!--PAGE FOOTER-->
+<div id="footer">
+   <div id="oaTmplPageFooter" class="horizontalNavigation"  >
+      <ul>
          <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
          <li> <?php  tpl_pagelink($myDefaultPageAbout);?></li>
          <li> <?php  tpl_pagelink($myDefaultPageContact);?></li>
@@ -136,18 +121,9 @@ left
          <li> <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
       </ul>
-</div> 
+   </div> 
+</div>
 
-<!--Page Right-->
-<div id="oaTmplPageRight">
-right
-</div> 
-
-<!--Clean Up staff for dokuwiki-->
-<div class="clearer" />
-   
-<p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
-<div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
 
 </body>
 </html>
