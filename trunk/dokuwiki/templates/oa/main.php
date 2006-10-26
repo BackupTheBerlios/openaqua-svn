@@ -60,6 +60,28 @@ $myLogo                     = 'It is IVC';
 <!--##################################################HTML BODY-->
 <body>
 
+<!--Content-->   
+<div id="oaTmplMainPage">
+   <div id="oaTmplMainPageLeft">
+   </div> 
+
+   <div id="oaTmplMainPageRight">
+   </div> 
+   
+   <div  class="dokuwiki">
+   <!-- wikipage start -->
+   <?php tpl_content()?>
+   <!-- wikipage stop -->
+   </div >
+   <div class="horizontalNavigation" style="text-align: left;" >
+       <ul >
+          <li ><?php tpl_actionlink('edit');   ?> </li>
+          <li ><?php tpl_actionlink('history');   ?> </li>
+          <li ><?php tpl_actionlink('recent');   ?> </li>
+       </ul>
+   </div>
+</div>
+
 <!--HEADER-->
 <div id="oaTmplHeader">
       <div class="horizontalNavigation"  style="text-align: right;">
@@ -99,27 +121,6 @@ $myLogo                     = 'It is IVC';
 </div>
    
    
-<!--Content-->   
-<div id="oaTmplMainPage">
-   <div id="oaTmplMainPageLeft">
-   </div> 
-
-   <div id="oaTmplMainPageRight">
-   </div> 
-   
-   <div  class="dokuwiki">
-   <!-- wikipage start -->
-   <?php tpl_content()?>
-   <!-- wikipage stop -->
-   </div >
-   <div class="horizontalNavigation" style="text-align: left;" >
-       <ul >
-          <li ><?php tpl_actionlink('edit');   ?> </li>
-          <li ><?php tpl_actionlink('history');   ?> </li>
-          <li ><?php tpl_actionlink('recent');   ?> </li>
-       </ul>
-   </div>
-</div>
 
   
    <!--Page Footer-->

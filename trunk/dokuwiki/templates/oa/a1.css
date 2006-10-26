@@ -33,8 +33,12 @@ div.clearer {
 ##################HEADER
 */
 div#oaTmplHeader {
-   clear: both;
 }
+
+
+/*
+##################Navigation Links
+*/
 
 .horizontalNavigation {
    
