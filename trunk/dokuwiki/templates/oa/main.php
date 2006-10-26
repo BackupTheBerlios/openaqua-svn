@@ -59,18 +59,12 @@ $myLogo                     = 'It is IVC';
 <!--##################################################HTML BODY-->
 <body>
 
-<!--Content-->   
-<div id="oaTmplMainPage">
-   <div id="oaTmplMainPageLeft">
-   </div> 
-
-   <div id="oaTmplMainPageRight">
-   </div> 
-   
+<!--Page Content-->   
+<div id="oaTmplPageContent">
    <div  class="dokuwiki">
-   <!-- wikipage start -->
-   <?php tpl_content()?>
-   <!-- wikipage stop -->
+      <!-- wikipage start -->
+      <?php tpl_content()?>
+      <!-- wikipage stop -->
    </div >
    <div class="horizontalNavigation" style="text-align: left;" >
        <ul >
@@ -81,13 +75,24 @@ $myLogo                     = 'It is IVC';
    </div>
 </div>
 
-<!--HEADER-->
-<div id="oaTmplHeader">
+
+
+
+<!--Page Left-->
+<div id="oaTmplPageLeft">
+left
+</div> 
+
+
+
+
+<!--Page HEADER-->
+<div id="oaTmplPageHeader">
       <div class="horizontalNavigation"  style="text-align: right;">
          <ul >
-            <li ><?php  tpl_pagelink($myDefaultPageAbout); ?> </li>
-            <li ><?php  tpl_actionlink('index'); ?></li>
-            <li ><?php  tpl_actionlink('login'); ?></li>
+            <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
+            <li ><?php tpl_actionlink('index'); ?></li>
+            <li ><?php tpl_actionlink('login'); ?></li>
             <li ><?php tpl_actionlink('subscription');   ?> </li>
             <li ><?php tpl_actionlink('admin');  ?> </li>
             <li ><?php tpl_actionlink('profile');  ?> </li>
@@ -119,12 +124,10 @@ $myLogo                     = 'It is IVC';
       
 </div>
    
-   
-
   
-   <!--Page Footer-->
-   <div class="horizontalNavigation"  >
-      <ul>
+<!--Page Footer-->
+<div id="oaTmplPageFooter" class="horizontalNavigation"  >
+   <ul>
          <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
          <li> <?php  tpl_pagelink($myDefaultPageAbout);?></li>
          <li> <?php  tpl_pagelink($myDefaultPageContact);?></li>
@@ -133,10 +136,18 @@ $myLogo                     = 'It is IVC';
          <li> <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
       </ul>
-   </div> 
+</div> 
+
+<!--Page Right-->
+<div id="oaTmplPageRight">
+right
+</div> 
+
+<!--Clean Up staff for dokuwiki-->
+<div class="clearer" />
    
-   <p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
-   <div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+<p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
+<div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
 
 </body>
 </html>

@@ -28,13 +28,50 @@ div.clearer {
    clear: both;
 }
 
+.hiddenParts {
+   display: none;
+}
+
 
 /*
 ##################HEADER
 */
-div#oaTmplHeader {
+div#oaTmplPageHeader {
+   width: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
 }
 
+
+div#oaTmplPageContent {
+   float: absolute;
+   width: 60%;
+   padding-bottom: 1em;
+}
+
+div#oaTmplPageLeft {
+   float: left;
+   width: 20%;
+   padding-bottom: 1em;
+}
+          
+div#oaTmplPageRight {
+   float: right;
+   width: 20%;
+   padding-bottom: 1em;
+              /*
+              */
+}
+          
+div#oaTmplPageFooter {
+   clear: both;
+   float: left;
+   padding-bottom: 1em;
+   /**/
+}
+          
+          
 
 /*
 ##################Navigation Links
@@ -102,35 +139,3 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
 
 
 
-
-/**
-##################Content
-*/
-
-#oaTmplMainPage{
-}
-
-#oaTmplMainPageLeft{
-   text-align: left;
-   width: 18em;
-   float: left; 
-   background-color: green;
-   /*
-   min-height: 50cm;
-   overflow: auto;
-   min-height: 5cm;
-   */
-}
-
-#oaTmplMainPageRight{
-   text-align: left;
-   width: 18em;
-   float: right; 
-   background-color: red;
-   /*
-   */
-}
-
-.hiddenParts {
-   display: none;
-}
