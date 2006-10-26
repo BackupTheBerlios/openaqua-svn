@@ -76,6 +76,7 @@ $myLogo                     = 'It is IVC';
          <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
          <div id="oaTmplHeaderLogoSearch">  <?php tpl_searchform()?></div>
       </div>
+      <div id="clearer"> </div>
 </div>
 <div id="wrapper_extra">
    <div id="wrapper">
@@ -122,6 +123,14 @@ $myLogo                     = 'It is IVC';
       </ul>
 </div> 
 
+<!--Clean Up staff for dokuwiki-->
+<div class="clearer"> </div>
+   
+<p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
+<div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+</div>
+
+   
 
 </body>
 </html>

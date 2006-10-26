@@ -6,8 +6,8 @@
 
 body { 
     font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
-    /*
     text-align: center;
+    /*
     min-width: 41em;
     background-color: __background__;
     color: __text__;
@@ -17,7 +17,9 @@ body {
 
 #oaTmplPageLeft  {
    float: left;
-   width: 15%;
+   width: 10%;
+   background-color: green;
+   text-align: left;
    /*
    padding-right: 2em;
    */
@@ -25,17 +27,24 @@ body {
    
    
 #oaTmplPageContent  {
-   float: left;
-   width: 64%;
+   text-align: left;
    margin-left: 2em;
    margin-right: 2em;
+   background-color: red;
+   float: left;
+   width: 70%;
+   /*
+   width: 64%;
+   */
 }
 
 
 #oaTmplPageRight
 {
-   float: left;
-   width: 15%;
+   text-align: left;
+   background-color: yellow;
+   float: right;
+   width: 10%;
 }
 
 
@@ -77,7 +86,7 @@ body {
 * html #wrapper_extra
    {
    float: left;
-   width: 100%;
+   width: 99%;
    }
 /* we need this for IE 5.01 - otherwise the wrapper does not expand to the
 necessary height (unless fixed, this problem becomes even more acute 
@@ -120,7 +129,6 @@ just in case that many moons ago problem rears its head again */
    padding-top: 2em;
    clear: both;
    text-align: center;
-      
 }
 
 
@@ -181,7 +189,12 @@ and 5.5, hence the child selector hack */
 
 
 #oaTmplPageHeader {
-   padding-bottom: 2em;
+   padding-bottom: 4em;
+   background-color: blue;
+   /*
+   min-height: 5em;
+   */
+
 }
 
 div#oaTmplHeaderLogo {
