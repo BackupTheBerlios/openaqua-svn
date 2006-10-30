@@ -13,6 +13,7 @@ use Getopt::Long;    # allows long command line parameters
 use File::Basename;  # returns the basename of a full filename (path+file)
 use Cwd;             # offers the getcwd function
 use Mail::IMAPClient;# offers functions to connect to a IMAP Daemon
+use IO::Socket::SSL;
 ##############################################################################
 
 
@@ -65,6 +66,12 @@ sub printHelp() {
 
 sub connectImap {
    #http://www.heise.de/ix/artikel/2005/02/132/
+   my $ssl  = IO::Socket::SSL->new("servername:imaps") or die $@;
+   my $imap = <$ssl>;
+   $imap = Mail::IMAPClient->new(Socket=>$ssl, User=>$user,
+   Password=>$password);
+   $imap->State($imap->Connected());
+   $imap->login() or die 'login failed';
    my $imap = Mail::IMAPClient->new("host", "user", "password") or die "Verbindungsaufbau nicht möglich: $@";
 
 }
