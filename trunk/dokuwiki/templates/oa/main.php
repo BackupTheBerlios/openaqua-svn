@@ -90,7 +90,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
        
           <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
-                Willkommen!
+                <h1 class="toc">Willkommen!</h1>
              </div>
              <div style="color:#505050; font-size:9pt;">
                 Willkommen auf den Webseiten des Lx-Office Projektes.
