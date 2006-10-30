@@ -111,6 +111,20 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
                <li ><a href="">Customers</a></li>
                <li ><a href="">Company</a></li>               
                <li ><a href="">Career</a></li>                              
+               <li >Public Projects</li>
+                  <ul >
+                     <li >Dokuwiki</li>
+                        <ul >
+                           <li ><a href="">Dokuwiki Plugins</a></li>
+                           <li ><a href="">Dokuwiki Plugins</a></li>
+                        </ul>
+                     <li ><a href="">OpenAqua</a></li>
+                        <ul >
+                           <li ><a href="">Odaba</a></li>
+                           <li ><a href="">AquaBase</a></li>
+                        </ul>
+                  </ul>
+               
             </ul>
          </div>
          
