@@ -1,0 +1,66 @@
+/* -------------------------- BEGIN do not change --------------------------- */
+
+ul.dropdown
+{
+    list-style: none;
+    margin:0;
+    padding:0;
+    width:100%;
+    z-index:99;
+}
+
+ul.dropdown * ul
+{
+    list-style: none;
+    margin:0;
+    padding: 0;
+        display:none;
+        position:absolute;
+        z-index:99;
+        width:20em;
+}
+
+ul.dropdown li
+{
+    float:left;
+}
+
+ul.dropdown li * li
+{
+    border:1px solid #fff;
+    float:none;
+
+    position: relative;
+}
+
+ul.dropdown ul * ul
+{
+    left:98%;
+    top:0;
+
+}
+
+ul.dropdown a
+{
+    display:block;
+
+}
+
+ul.dropdown ul * a
+{
+    height:100%;
+}
+
+ul.dropdown li:hover ul ul, ul.dropdown li:hover ul ul ul, ul.dropdown li:hover ul ul ul ul
+{
+    display:none;
+}
+
+ul.dropdown li:hover ul, ul.dropdown ul li:hover ul, ul.dropdown ul ul li:hover ul
+{
+    display:block;
+}
+
+
+/* -------------------------- END do not change --------------------------- */
+
