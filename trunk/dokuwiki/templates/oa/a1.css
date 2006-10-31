@@ -238,6 +238,10 @@ div#oaTmplPageLeftNavigation {
 
 .verticalNavigation{
 }
+
+/*
+No Headers in menu
+*/
 .verticalNavigation h1,
 .verticalNavigation h2,
 .verticalNavigation h3,
@@ -248,31 +252,51 @@ div#oaTmplPageLeftNavigation {
    /*
    */
 }
+
+/*
+basic settings for lists in menu
+*/
 .verticalNavigation ul{
    list-style: none;
    margin: 0;
    padding: 0;
    z-index:99;
    width:100%;
-   
-   /*
-   padding: 3px 0;
-   */
 }
 
+/*
+   basic settings for sub menus (dont show by default
+*/
 .verticalNavigation ul * ul
 {
-    list-style: none;
-    margin:0;
-    padding: 0;
-    display: none;
-    position: absolute;
-    z-index: 99;
-    width: 20em;
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   z-index:99;
+   width: 20em;
+   position: absolute;
+   display: none;
+}
+
+.verticalNavigation  li:hover ul,
+.verticalNavigation  ul li:hover ul, 
+.verticalNavigation  ul ul li:hover ul
+{
+    display:block;
 }
 
 
+.verticalNavigation ul ul * ul
+{
+    left:98%;
+    top:0;
 
+}
+
+
+/*
+   basic settings for menu entries
+*/
 .verticalNavigation ul li{
    background:#344966;
    padding-top:4px;
@@ -287,6 +311,21 @@ div#oaTmplPageLeftNavigation {
    float: left;
 }
 
+.verticalNavigation ul li * li
+{
+   background:#344966;
+   padding-top:4px;
+   padding-bottom:4px;
+   padding-left:5%;
+   width: 90%;
+   border-left: 10px solid #8390a1;
+   background: #344966;
+   color:white;
+   display: block;
+   text-decoration:none;
+   float:none;
+   position: relative;
+}
 
 
 .verticalNavigation ul li a{
