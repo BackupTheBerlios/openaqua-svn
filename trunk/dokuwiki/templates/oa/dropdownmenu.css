@@ -1,6 +1,6 @@
 /* -------------------------- BEGIN do not change --------------------------- */
 
-ul.dropdown
+ul.verticalNavigation
 {
     list-style: none;
     margin:0;
@@ -9,7 +9,7 @@ ul.dropdown
     z-index:99;
 }
 
-ul.dropdown * ul
+ul.verticalNavigation * ul
 {
     list-style: none;
     margin:0;
@@ -20,12 +20,12 @@ ul.dropdown * ul
         width:20em;
 }
 
-ul.dropdown li
+ul.verticalNavigation li
 {
     float:left;
 }
 
-ul.dropdown li * li
+ul.verticalNavigation li * li
 {
     border:1px solid #fff;
     float:none;
@@ -33,30 +33,30 @@ ul.dropdown li * li
     position: relative;
 }
 
-ul.dropdown ul * ul
+ul.verticalNavigation ul * ul
 {
     left:98%;
     top:0;
 
 }
 
-ul.dropdown a
+ul.verticalNavigation a
 {
     display:block;
 
 }
 
-ul.dropdown ul * a
+ul.verticalNavigation ul * a
 {
     height:100%;
 }
 
-ul.dropdown li:hover ul ul, ul.dropdown li:hover ul ul ul, ul.dropdown li:hover ul ul ul ul
+ul.verticalNavigation li:hover ul ul, ul.verticalNavigation li:hover ul ul ul, ul.verticalNavigation li:hover ul ul ul ul
 {
     display:none;
 }
 
-ul.dropdown li:hover ul, ul.dropdown ul li:hover ul, ul.dropdown ul ul li:hover ul
+ul.verticalNavigation li:hover ul, ul.verticalNavigation ul li:hover ul, ul.verticalNavigation ul ul li:hover ul
 {
     display:block;
 }

@@ -130,36 +130,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
             </ul>
          </div>
 
-         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
-            <h1>Navigation</h1>
-            <ul class="dropdown" id="mainmenu">
-               <li >Public Projects
-                  <ul >
-                     <li >Dokuwiki
-                        <ul >
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                        </ul>
-                     </li>
-                     <li ><a href="">OpenAqua</a>
-                        <ul >
-                           <li ><a href="">Odaba</a></li>
-                           <li ><a href="">AquaBase</a></li>
-                           <li> foobar
-                              <ul>
-                                 <li>d</li>
-                                 <li>a</li>
-                                 <li>c</li>
-                                 <li>b</li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                  </ul>
-               </li>
-               
-            </ul>
-         </div>
          
           <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
