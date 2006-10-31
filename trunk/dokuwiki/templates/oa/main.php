@@ -90,7 +90,8 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
        
          <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
             <h1>Navigation</h1>
-            <ul class="dropdown" id="mainmenu">
+            <!--<ul class="dropdown" id="mainmenu">-->
+            <ul >
                <li ><a href="#">Home</a></li>
                <li ><a href="#">Products</a></li>
                <li ><a href="#">Public Projects</a></li>

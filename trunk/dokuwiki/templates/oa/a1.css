@@ -252,10 +252,26 @@ div#oaTmplPageLeftNavigation {
    list-style: none;
    margin: 0;
    padding: 0;
+   z-index:99;
+   width:100%;
+   
    /*
    padding: 3px 0;
    */
 }
+
+.verticalNavigation ul * ul
+{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    display: none;
+    position: absolute;
+    z-index: 99;
+    width: 20em;
+}
+
+
 
 .verticalNavigation ul li{
    background:#344966;
@@ -268,65 +284,29 @@ div#oaTmplPageLeftNavigation {
    color:white;
    display: block;
    text-decoration:none;
-   /*
-   */
+   float: left;
 }
 
-
-
-
-
-.verticalNavigation ul ul li  {
-   padding-left: 15%;
-   width: 80%
-   /*
-   */
-}
-
-.verticalNavigation ul ul ul li  {
-   padding-left: 25%;
-   width: 70%
-   /*
-   */
-}
 
 
 .verticalNavigation ul li a{
-   color:white;
-   display: block;
+   color: white;
    text-decoration:none;
-   /*
-   color: #fff;
-   padding: 2px 2px 2px 0.5em;
-   margin: 0;
-   border-right: 1px solid #69c;
-   border-bottom: 1px solid #369;
-   background-color: #036;
-   display: inline;
-   */
+   display: block;
 }
 
 .verticalNavigation ul li a:hover {
    color: white;
    text-decoration: none;
-   background: #8390a1;
-   /*
    display: block;
-   */
+   background: #8390a1;
 }
 
 
 .verticalNavigation  a.lastNavItem {
    border-right: none;
 }
-.verticalNavigation  .button{
-   border: none;
-   /*width: 4em;
-   background-color: transparent;
-   height: 2em;
-   float: right;
-   */
-}
+
    
 /*
 ##################Navigation Links
