@@ -251,6 +251,8 @@ div.dokuwiki h5 a,
 div.dokuwiki a.nolink {
   color: __text__ !important;
   text-decoration: none !important;
+  background-color: black
+  display: inline;
 }
 
 /* external link */

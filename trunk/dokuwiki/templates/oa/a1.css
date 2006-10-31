@@ -238,8 +238,15 @@ div#oaTmplPageLeftNavigation {
 
 .verticalNavigation{
 }
-.verticalNavigation h1,h2,h3,h4,h5,h6{
+.verticalNavigation h1,
+.verticalNavigation h2,
+.verticalNavigation h3,
+.verticalNavigation h4,
+.verticalNavigation h5,
+.verticalNavigation h6{
    display: none;
+   /*
+   */
 }
 .verticalNavigation ul{
    list-style: none;
@@ -330,8 +337,15 @@ div#oaTmplPageLeftNavigation {
 }
 
 
-.horizontalNavigation h1,h2,h3,h4,h5,h6{
+.horizontalNavigation h1,
+.horizontalNavigation h2,
+.horizontalNavigation h3,
+.horizontalNavigation h4,
+.horizontalNavigation h5,
+.horizontalNavigation h6{
    display: none;
+   /*
+   */
 }
 
 .horizontalNavigation ul{

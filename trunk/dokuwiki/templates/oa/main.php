@@ -21,9 +21,6 @@ $myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
 $myDefaultPageCopyRight     = $myNamespacePrefix . ':copyright';
 $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#666666">define</FONT>
 <FONT COLOR="#333333">IVC</FONT></B>';
-
-
- 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">
@@ -38,6 +35,9 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       //@include(dirname(__FILE__).'/context.php');
       //@include(dirname(__FILE__).'/meta.html')
       //@include(dirname(__FILE__).'/other.php');
+      
+      //load javascript classes
+      echo "\n" . '<script type="text/javascript" src="' . $DOKU_TPL . 'css_dropdown.js"></script>' . "\n";
       
       /*make page title*/
       echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
@@ -58,7 +58,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
 
 <!--##################################################HTML BODY-->
-<body>
+<body onload="enableDropdownMenuForIE();">
 
 <div id="oaTmplPageHeader">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="text-align: right;">
@@ -88,6 +88,39 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
           <div class="colorBox" style="background-color: #8390a1;">
              </div>
        
+         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
+            <h1>Navigation</h1>
+            <ul class="dropdown" id="mainmenu">
+               <li ><a href="#">Home</a></li>
+               <li ><a href="#">Products</a></li>
+               <li ><a href="#">Public Projects</a></li>
+               <li ><a href="#">Internal Projects</a></li>
+               <li ><a href="#">Support and Service</a></li>
+               <li ><a href="#">Partners</a></li>
+               <li ><a href="#">Developer Zone</a></li>
+               <li ><a href="#">Customers</a></li>
+               <li ><a href="#">Company</a></li>               
+               <li ><a href="#">Career</a></li>                              
+               <li >Public Projects
+                  <ul >
+                     <li >Dokuwiki
+                        <ul >
+                           <li ><a href="">Dokuwiki Plugins</a></li>
+                           <li ><a href="">Dokuwiki Plugins</a></li>
+                        </ul>
+                     </li>
+                     <li ><a href="">OpenAqua</a>
+                        <ul >
+                           <li ><a href="">Odaba</a></li>
+                           <li ><a href="">AquaBase</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               
+            </ul>
+         </div>
+
           <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
                 <h1 class="toc">Willkommen!</h1>
@@ -98,36 +131,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          </div>
 
 
-         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
-            <h1>Navigation</h1>
-            <ul >
-               <li ><a href="">Home</a></li>
-               <li ><a href="">Products</a></li>
-               <li ><a href="">Public Projects</a></li>
-               <li ><a href="">Internal Projects</a></li>
-               <li ><a href="">Support and Service</a></li>
-               <li ><a href="">Partners</a></li>
-               <li ><a href="">Developer Zone</a></li>
-               <li ><a href="">Customers</a></li>
-               <li ><a href="">Company</a></li>               
-               <li ><a href="">Career</a></li>                              
-               <li >Public Projects</li>
-                  <ul >
-                     <li >Dokuwiki</li>
-                        <ul >
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                        </ul>
-                     <li ><a href="">OpenAqua</a></li>
-                        <ul >
-                           <li ><a href="">Odaba</a></li>
-                           <li ><a href="">AquaBase</a></li>
-                        </ul>
-                  </ul>
-               
-            </ul>
-         </div>
-         
+                  
                   
          <div id="oaTmplPageLeftNavigation" class="searchBox">
             <?php tpl_searchform()?>
@@ -141,7 +145,11 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
          <div  class="dokuwiki">
             <!-- wikipage start -->
-            <?php tpl_content()?>
+            <?php 
+               tpl_content_core();
+            ?>
+              
+
             <!-- wikipage stop -->
          </div >
          <div class="horizontalNavigation" style="text-align: left;" >
