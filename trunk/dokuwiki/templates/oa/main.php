@@ -36,9 +36,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       //@include(dirname(__FILE__).'/meta.html')
       //@include(dirname(__FILE__).'/other.php');
       
-      //load javascript classes
-      echo "\n" . '<script type="text/javascript" src="' . $DOKU_TPL . 'css_dropdown.js"></script>' . "\n";
-      
       /*make page title*/
       echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
       
