@@ -20,7 +20,7 @@ $myDefaultPageAbout         = $myNamespacePrefix . ':about';
 $myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
 $myDefaultPageCopyRight     = $myNamespacePrefix . ':copyright';
 $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#666666">define</FONT>
-<FONT COLOR="#333333">IVC</FONT></B>';
+<FONT COLOR="#333333">OpenAqua</FONT></B>';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">

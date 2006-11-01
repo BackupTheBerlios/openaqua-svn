@@ -123,8 +123,8 @@ div.dokuwiki div.toc {
    border-left: 1px solid #8390a1;   
    border-top: 1px solid #8390a1; 
    clear: both;
-   text-align: right;
    /*
+   text-align: right;
    padding-top: 2em;
    */
 }
