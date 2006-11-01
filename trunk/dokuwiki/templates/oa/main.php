@@ -56,6 +56,12 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
    ?>
 </head>
 
+<!--
+   .secedit {
+      display:none;
+   }
+   
+   -->
 
 <!--##################################################HTML BODY-->
 <body onload="enableDropdownMenuForIE();">
@@ -79,7 +85,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 </div>
 
 
-<div id="clearer"> </div>
 <div id="wrapper_extra">
    <div id="wrapper">
       
@@ -133,10 +138,10 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          
           <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
-                <h1 class="toc">Willkommen!</h1>
+                <h1 class="toc">Welcome!</h1>
              </div>
              <div style="color:#505050; font-size:9pt;">
-                Willkommen auf den Webseiten des Lx-Office Projektes.
+                Welcome on the OpenAqua documentation wiki.
              </div>
          </div>
 

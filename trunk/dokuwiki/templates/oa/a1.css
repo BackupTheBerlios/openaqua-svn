@@ -29,7 +29,7 @@ body {
    background-image: url(images/top_back.gif);
    background-repeat: repeat-x;
 
-   border-left: 1px solid #8390a1;   
+   border: 1px solid #8390a1;   
    border-bottom: 1px solid #8390a1;   
    /*
    background-color: red;
@@ -62,11 +62,12 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
 }
   
 
-
 /*=============================Content===========================*/
 #oaTmplPageLeft  {
    float: left;
    width: 22%;
+   border-right: 1px solid #8390a1;   
+   
    /*
    padding-right: 2em;
    background-color: yellow;
@@ -89,6 +90,8 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
 #oaTmplPageRight
 
 {
+   border-left: 1px solid #8390a1;   
+
    text-align: left;
    float: right;
    width: 20%;
@@ -120,10 +123,10 @@ div.dokuwiki div.toc {
 
 /*=============================FOOTER===========================*/
 #oaTmplPageFooter  {
-   border-left: 1px solid #8390a1;   
-   border-top: 1px solid #8390a1; 
+   border: 1px solid #8390a1;   
    clear: both;
    /*
+   border-top: 1px solid #8390a1; 
    text-align: right;
    padding-top: 2em;
    */
@@ -166,6 +169,8 @@ and 5.5, hence the child selector hack */
 }
 #wrapper_extra 
    {
+   border-left: 1px solid #8390a1;   
+   border-right: 1px solid #8390a1;   
    position: relative;
    }
 * html #wrapper {
@@ -174,6 +179,7 @@ and 5.5, hence the child selector hack */
 #wrapper {
    text-align: left;
    overflow: hidden; /* This hides the excess padding in non-IE browsers */
+
    }
       
 /* we need this for IE 5.01 - otherwise the columns vanish */
@@ -237,6 +243,7 @@ div#oaTmplPageLeftNavigation {
 
 
 .verticalNavigation{
+   
 }
 
 /*
