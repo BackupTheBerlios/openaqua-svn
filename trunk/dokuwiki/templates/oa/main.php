@@ -51,15 +51,23 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       echo '<link rel="shortcut icon" href="<' . DOKU_TPL . 'images/favicon.ico" />' . "\n";
       
       //add googleanalytics support
+      if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
       if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
       if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
+    
+    
+      //don't show edit buttons if user is not logged in
+      if(! $_SERVER['REMOTE_USER']) {
+         echo '<style type="text/css">';
+         echo '<!--';
+         echo '.secedit {display:none;}';
+         echo '-->';
+         echo '</style>';
+      }
    ?>
 </head>
 
 <!--
-   .secedit {
-      display:none;
-   }
    
    -->
 
@@ -159,20 +167,41 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          <div class="colorBox" style="background-color: #344966;"></div>
 
          <div  class="dokuwiki">
-            <!-- wikipage start -->
-            <?php 
-               tpl_content_core();
-            ?>
-              
+            <!-- start content -->
 
-            <!-- wikipage stop -->
+            <!-- html_msgarea -->
+            <?php html_msgarea()?>
+
+            <!-- breadcrumbs -->
+            <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks">
+            <?php tpl_breadcrumbs(); ?></p></div><?php } ?>
+
+            <!-- search_out -->
+            <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+
+            <!-- content output -->
+            <?php if ($_REQUEST['mbdo'] == 'cite')
+            		   @include(dirname(__FILE__).'/do_cite.php');
+            	   else if ($_REQUEST['mbdo'] == 'detail')
+            		   @include(dirname(__FILE__).'/do_detail.php');
+            	   else if ($_REQUEST['mbdo'] == 'media')
+            		   @include(dirname(__FILE__).'/do_media.php');
+            	   else
+            		   tpl_content();
+            ?>
+            <br/>
+            <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">
+            <?php tpl_youarehere(); ?></p></div><?php } ?>
+            <!-- end content -->
          </div >
          <div class="horizontalNavigation" style="text-align: left;" >
+            <?php if(! $_SERVER['REMOTE_USER']) {    echo '<!--';   } ?>
              <ul >
                 <li ><?php tpl_actionlink('edit');   ?> </li>
                 <li ><?php tpl_actionlink('history');   ?> </li>
                 <li ><?php tpl_actionlink('recent');   ?> </li>
              </ul>
+             <?php if(! $_SERVER['REMOTE_USER']) {    echo '-->';   } ?>
          </div>
       </div>
       
