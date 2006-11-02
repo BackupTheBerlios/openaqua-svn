@@ -5,14 +5,23 @@
 }
 
 body { 
-    font: .8em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    font-size:12px;
     text-align: center;
-    /*
     min-width: 41em;
     background-color: __background__;
     color: __text__;
+    /*
+    font: 8pt/16pt georgia; 
+    font .6em, "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
     */
 }
+
+p { 
+   font: 8pt/16pt Verdana; 
+   margin-top: 0px; 
+   text-align: justify;
+}
+
 
 .colorBox {
    background-color: blue;
@@ -48,7 +57,9 @@ div#oaTmplHeaderLogo {
 }
 div#oaTmplHeaderLogoLogo {
    font-size: 300%;
+   /*
    font: Arial;
+   */
    vertical-align: bottom;
    text-align: left;
 }
@@ -215,7 +226,7 @@ just in case that many moons ago problem rears its head again */
    }
 #wrapper
    {
-   display: inline-block;
+   display: inline;
    }
 /*\*/
 #wrapper
