@@ -71,6 +71,8 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 <!--##################################################HTML BODY-->
 <body>
 
+
+
 <div id="oaTmplPageHeader">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="text-align: right;">
          <ul >
@@ -83,27 +85,43 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          </ul>
       </div>
       
-      
       <div id="oaTmplHeaderLogo">
          <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
       </div>
+
+      <div class="clearer"> </div>
 </div>
 
+
+<div id="oaTmplPageHeaderColorBox">
+      <div class="oaTmplPageLeft">
+          <div class="colorBox" > </div>
+      </div>
+      
+      <div class="oaTmplPageContent">
+         <div class="colorBox" style="background-color: #344966;"></div>
+      </div>
+
+      <div class="oaTmplPageRight">
+         <div class="colorBox"></div>
+      </div>
+      
+      <div class="clearer"> </div>
+</div>
+
+   
 
 <div id="wrapper_extra">
    <div id="wrapper">
       
       <!--Page Left-->
-      <div id="oaTmplPageLeft">
-          <div class="colorBox" style="background-color: #8390a1;">
-             </div>
-       
-         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
+      <div class="oaTmplPageLeft">
+         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">  
             <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
          </div>
          
-          <div id="oaTmplPageLeftNavigation" >
-             <div style="font-weight:bold; font-size:9pt;"> 
+         <div id="oaTmplPageLeftNavigation" >
+            <div style="font-weight:bold; font-size:9pt;"> 
                 <h1 class="toc">Welcome!</h1>
              </div>
              <div style="color:#505050; font-size:9pt;">
@@ -111,9 +129,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
              </div>
          </div>
 
-
-                  
-                  
          <div id="oaTmplPageLeftNavigation" class="searchBox">
             <?php tpl_searchform()?>
          </div>
@@ -121,9 +136,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          
       
       
-      <div id="oaTmplPageContent">
-         <div class="colorBox" style="background-color: #344966;"></div>
-
+      <div class="oaTmplPageContent">
          <div  class="dokuwiki">
             <!-- start content -->
 
@@ -163,13 +176,14 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          </div>
       </div>
       
-      <div id="oaTmplPageRight">
-            <div class="colorBox" style="background-color: #8390a1;"></div>
+      <div class="oaTmplPageRight">
       </div>
       
       
    </div><!-- close div#wrapper -->
 </div><!-- close div#wrapper_extra -->
+
+
 
 <!--PAGE FOOTER-->
 <div id="oaTmplPageFooter" class="horizontalNavigation"  >
