@@ -116,6 +116,15 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       
       <!--Page Left-->
       <div class="oaTmplPageLeft">
+      
+         <!--
+            <?php if ($conf['breadcrumbs']) { ?>
+               <div id="catlinks">
+                  <p class="catlinks"></p>
+               </div>
+            <?php } ?>
+         -->
+      
          <div class="oaTmplPageLeftNavigation" >  
             <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
          </div>
@@ -135,14 +144,21 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
             <!-- start content -->
 
             <!-- html_msgarea -->
-            <?php html_msgarea()?>
+            <?php //html_msgarea()?>
 
             <!-- breadcrumbs -->
-            <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks">
-            <?php tpl_breadcrumbs(); ?></p></div><?php } ?>
+            <!--
+            <?php if ($conf['breadcrumbs']) { ?>
+               <div id="catlinks">
+                  <p class="catlinks"> <?php tpl_breadcrumbs(); ?> </p>
+               </div>
+            <?php } ?>
+            -->
 
             <!-- search_out -->
+            <!--
             <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+            -->
 
             <!-- content output -->
             <?php //most lines are for monobook template
