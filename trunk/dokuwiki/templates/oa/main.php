@@ -69,7 +69,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
    -->
 
 <!--##################################################HTML BODY-->
-<body onload="enableDropdownMenuForIE();">
+<body>
 
 <div id="oaTmplPageHeader">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="text-align: right;">
