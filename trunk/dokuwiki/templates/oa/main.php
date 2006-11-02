@@ -116,24 +116,18 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       
       <!--Page Left-->
       <div class="oaTmplPageLeft">
-         <div id="oaTmplPageLeftNavigation" class="verticalNavigation">  
+         <div class="oaTmplPageLeftNavigation" >  
             <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
          </div>
-         
-         <div id="oaTmplPageLeftNavigation" >
-            <div style="font-weight:bold; font-size:9pt;"> 
-                <h1 class="toc">Welcome!</h1>
-             </div>
-             <div style="color:#505050; font-size:9pt;">
-                Welcome on the OpenAqua documentation wiki.
-             </div>
-         </div>
 
-         <div id="oaTmplPageLeftNavigation" class="searchBox">
+         <h1 class="toc">Welcome!</h1>
+         <p>Welcome on the OpenAqua documentation wiki.</p>
+         
+         <div class="searchBox">
             <?php tpl_searchform()?>
          </div>
+
       </div>
-         
       
       
       <div class="oaTmplPageContent">
@@ -151,14 +145,15 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
             <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
 
             <!-- content output -->
-            <?php if ($_REQUEST['mbdo'] == 'cite')
+            <?php //most lines are for monobook template
+                   if ($_REQUEST['mbdo'] == 'cite')
                            @include(dirname(__FILE__).'/do_cite.php');
                    else if ($_REQUEST['mbdo'] == 'detail')
                            @include(dirname(__FILE__).'/do_detail.php');
                    else if ($_REQUEST['mbdo'] == 'media')
                            @include(dirname(__FILE__).'/do_media.php');
                    else
-                           tpl_content();
+                           tpl_content();//this is the default
             ?>
             <br/>
             <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">

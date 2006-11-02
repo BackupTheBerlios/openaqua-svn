@@ -8,3 +8,25 @@
  * @author Claudia Behrens <Claudia.Behrens@openaqua.de>
  */
 
+.dokuwiki {
+   text-align: left;
+   border-left: 1px solid __border__;
+   padding-left: .5em;
+   
+   border-right: 1px solid __border__;
+   padding-right: .5em;
+   height: 100%;
+
+
+}
+div.dokuwiki div.toc {
+   /*
+   display: none;
+   */
+}
+
+
+div#catlinks p {
+   padding-top: 1em;
+   padding-bottom: 1em;
+}
