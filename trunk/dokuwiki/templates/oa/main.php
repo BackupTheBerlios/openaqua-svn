@@ -104,44 +104,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
        
          <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
             <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page(':wiki:navigation');?>
-            <h1>Navigation</h1>
-            <ul >
-               <li ><a href="#">Home</a></li>
-               <li ><a href="#">Products</a></li>
-               <li ><a href="#">Public Projects</a></li>
-               <li ><a href="#">Internal Projects</a></li>
-               <li ><a href="#">Support and Service</a></li>
-               <li ><a href="#">Partners</a></li>
-               <li ><a href="#">Developer Zone</a></li>
-               <li ><a href="#">Customers</a></li>
-               <li ><a href="#">Company</a></li>               
-               <li ><a href="#">Career</a></li>                              
-               <li >Public Projects
-                  <ul >
-                     <li >Dokuwiki
-                        <ul >
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                           <li ><a href="">Dokuwiki Plugins</a></li>
-                        </ul>
-                     </li>
-                     <li ><a href="">OpenAqua</a>
-                        <ul >
-                           <li ><a href="">Odaba</a></li>
-                           <li ><a href="">AquaBase</a></li>
-                           <li>
-                              <ul>
-                                 <li>d</li>
-                                 <li>a</li>
-                                 <li>c</li>
-                                 <li>b</li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                  </ul>
-               </li>
-               
-            </ul>
          </div>
 
          
