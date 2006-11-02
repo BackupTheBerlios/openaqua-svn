@@ -2,19 +2,21 @@
 * {
    padding: 0; 
    margin: 1px; 
-    
 }
 
 body { 
     padding-top: -2px; 
 
-    font-size:12px;
+    font-size: 12px;
     text-align: center;
     min-width: 41em;
     
     background: url(images/bg_circle.jpg);
     background-repeat: no-repeat;
+    /*
     background-position: 70px 0px;
+    */
+    background-position: top right;
     
     color: __text__;
     background-color: __background__;
@@ -71,16 +73,21 @@ h5 {font-size: 100%; margin-left: 80px; border-bottom: none; font-weight: bold;}
 div#oaTmplPageHeaderColorBox {
    border-top: 1px solid __border__;   
    border-bottom: 1px solid __border__;   
+   width: 96%;
 }
 
 
 /*============================HEADER========================*/
 div#oaTmplPageHeader {
-   
    background-image: url(images/top_back.gif);
    background-repeat: repeat-x;
    padding-top: 1em;
    padding-bottom: 2em;
+}
+
+#oaTmplPageHeaderLinks {
+   margin-right: 4%;
+   text-align: right;
 }
 
 
@@ -93,6 +100,7 @@ div#oaTmplPageHeader {
 
 
 div#oaTmplHeaderLogo {
+      padding-bottom: 1em;
 }
 div#oaTmplHeaderLogoLogo {
    font-size: 300%;
@@ -103,22 +111,22 @@ div#oaTmplHeaderLogoLogo {
 div#oaTmplHeaderLogoLogo a {
    text-decoration: none;
 }
-div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
-}
   
 
 
 /*=============================Content===========================*/
 div.oaTmplPageLeft  {
+   padding-right: .5em;
    float: left;
    width: 20%;
-   padding-right: .5em;
+   /*
+   */
 }
    
    
 div.oaTmplPageContent  {
    float: left;
-   width: 56%;
+   width: 75%;
    /*
    position: relative;
    float: left;

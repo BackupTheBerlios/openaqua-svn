@@ -73,8 +73,8 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
 
 
-<div id="oaTmplPageHeader">
-      <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="text-align: right;">
+<div id="oaTmplPageHeader≤≤≤≤≤">
+      <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="">
          <ul >
             <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
             <li ><?php tpl_actionlink('index'); ?></li>
@@ -102,10 +102,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          <div class="colorBox" style="background-color: #344966;"></div>
       </div>
 
-      <div class="oaTmplPageRight">
-         <div class="colorBox"></div>
-      </div>
-      
       <div class="clearer"> </div>
 </div>
 
@@ -185,9 +181,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
              </ul>
              <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '-->';   }} ?>
          </div>
-      </div>
-      
-      <div class="oaTmplPageRight">
       </div>
       
       
