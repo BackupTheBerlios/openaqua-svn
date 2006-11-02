@@ -9,6 +9,9 @@ body {
     text-align: center;
     min-width: 41em;
     background-color: __background__;
+    background: url(images/bg_circle.jpg);
+    background-repeat: no-repeat;
+    background-position: 70px 0px;
     color: __text__;
     /*
     font: 8pt/16pt georgia; 
