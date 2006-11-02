@@ -1,0 +1,21 @@
+  * [[:start|Start]]
+  * [[general:impressum|Impressum]]
+
+----
+
+  * [[http://wiki.durga-online.de/doku.php?do=index|Site Map]]
+  * [[http://wiki.durga-online.de/doku.php?do=recent|Recent Changes]]
+
+----
+
+  * [[wiki:dokuwiki|Wiki Help]]
+  * aaa
+
+----
+  * [[general:blog]]
+  * [[projects:general]]
+  * [[osx:developers]]
+  * [[database:oodbs:odaba]]
+  * [[database:oodbs:odaba2]]
+  * [[http://ivc.durga-online.de|IVC]]
+  * [[terms]]

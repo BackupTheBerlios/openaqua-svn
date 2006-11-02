@@ -14,6 +14,8 @@
 
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
+if (file_exists(DOKU_PLUGIN.'displaywikipage/code.php')) include_once(DOKU_PLUGIN.'displaywikipage/code.php');
+
 $myNamespacePrefix          = 'openaqua';
 $myDefaultPageContact       = $myNamespacePrefix . ':contact';
 $myDefaultPageAbout         = $myNamespacePrefix . ':about';
@@ -29,10 +31,10 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 <head>
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
-      @include(dirname(__FILE__).'/user/pref.php');
-      @include(dirname(__FILE__).'/lang/en/lang.php');
-      if ( $conf['lang'] && $conf['lang'] != 'en' )  @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
-      //@include(dirname(__FILE__).'/context.php');
+      //@include(dirname(__FILE__).'/user/pref.php');
+      //@include(dirname(__FILE__).'/lang/en/lang.php');
+      //if ( $conf['lang'] && $conf['lang'] != 'en' )  @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
+      @include(dirname(__FILE__).'/context.php');
       //@include(dirname(__FILE__).'/meta.html')
       //@include(dirname(__FILE__).'/other.php');
       
@@ -54,12 +56,14 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
     
     
       //don't show edit buttons if user is not logged in
-      if(! $_SERVER['REMOTE_USER']) {
-         echo '<style type="text/css">';
-         echo '<!--';
-         echo '.secedit {display:none;}';
-         echo '-->';
-         echo '</style>';
+      if ($conf['useacl'] ) {
+         if(! $_SERVER['REMOTE_USER']) {
+            echo '<style type="text/css">';
+            echo '<!--';
+            echo '.secedit {display:none;}';
+            echo '-->';
+            echo '</style>';
+         }
       }
    ?>
 </head>
@@ -99,8 +103,8 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
              </div>
        
          <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
+            <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page(':wiki:navigation');?>
             <h1>Navigation</h1>
-            <!--<ul class="dropdown" id="mainmenu">-->
             <ul >
                <li ><a href="#">Home</a></li>
                <li ><a href="#">Products</a></li>
@@ -178,13 +182,13 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
             <!-- content output -->
             <?php if ($_REQUEST['mbdo'] == 'cite')
-            		   @include(dirname(__FILE__).'/do_cite.php');
-            	   else if ($_REQUEST['mbdo'] == 'detail')
-            		   @include(dirname(__FILE__).'/do_detail.php');
-            	   else if ($_REQUEST['mbdo'] == 'media')
-            		   @include(dirname(__FILE__).'/do_media.php');
-            	   else
-            		   tpl_content();
+                           @include(dirname(__FILE__).'/do_cite.php');
+                   else if ($_REQUEST['mbdo'] == 'detail')
+                           @include(dirname(__FILE__).'/do_detail.php');
+                   else if ($_REQUEST['mbdo'] == 'media')
+                           @include(dirname(__FILE__).'/do_media.php');
+                   else
+                           tpl_content();
             ?>
             <br/>
             <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">
@@ -192,13 +196,13 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
             <!-- end content -->
          </div >
          <div class="horizontalNavigation" style="text-align: left;" >
-            <?php if(! $_SERVER['REMOTE_USER']) {    echo '<!--';   } ?>
+            <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '<!--';   }} ?>
              <ul >
                 <li ><?php tpl_actionlink('edit');   ?> </li>
                 <li ><?php tpl_actionlink('history');   ?> </li>
                 <li ><?php tpl_actionlink('recent');   ?> </li>
              </ul>
-             <?php if(! $_SERVER['REMOTE_USER']) {    echo '-->';   } ?>
+             <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '-->';   }} ?>
          </div>
       </div>
       
