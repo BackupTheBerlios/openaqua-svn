@@ -116,24 +116,6 @@ div#oaTmplHeaderLogo div#oaTmplHeaderLogoSearch {
    */
 }
 
-div.dokuwiki div.toc {
-  margin: 1.2em 0 0 2em;
-  float: right;
-  width: 20%;
-  font-size: 80%;
-  clear: both;
-  position: absolute;
-  right: 0;
-}
-/*
-div.dokuwiki div.toc {
-  margin: 1.2em 0 0 2em;
-  float: right;
-  width: 200px;
-  font-size: 80%;
-  clear: both;
-}
-*/
 
 
 /*=============================FOOTER===========================*/
