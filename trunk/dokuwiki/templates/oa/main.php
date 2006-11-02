@@ -17,6 +17,8 @@ if (!defined('DOKU_INC')) die();
 if (file_exists(DOKU_PLUGIN.'displaywikipage/code.php')) include_once(DOKU_PLUGIN.'displaywikipage/code.php');
 
 $myNamespacePrefix          = 'openaqua';
+$myPAGENAVIGATION           = ':wiki:navigation';
+$myPAGEHEADERNAVIGATION     = ':wiki:headernavigation';
 $myDefaultPageContact       = $myNamespacePrefix . ':contact';
 $myDefaultPageAbout         = $myNamespacePrefix . ':about';
 $myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
@@ -31,12 +33,6 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 <head>
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
-      //@include(dirname(__FILE__).'/user/pref.php');
-      //@include(dirname(__FILE__).'/lang/en/lang.php');
-      //if ( $conf['lang'] && $conf['lang'] != 'en' )  @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
-      @include(dirname(__FILE__).'/context.php');
-      //@include(dirname(__FILE__).'/meta.html')
-      //@include(dirname(__FILE__).'/other.php');
       
       /*make page title*/
       echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
@@ -103,9 +99,8 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
              </div>
        
          <div id="oaTmplPageLeftNavigation" class="verticalNavigation">
-            <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page(':wiki:navigation');?>
+            <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
          </div>
-
          
           <div id="oaTmplPageLeftNavigation" >
              <div style="font-weight:bold; font-size:9pt;"> 
