@@ -73,7 +73,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
 
 
-<div id="oaTmplPageHeade">
+<div id="oaTmplPageHeader">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="">
          <ul >
             <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
