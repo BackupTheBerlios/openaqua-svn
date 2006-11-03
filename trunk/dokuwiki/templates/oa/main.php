@@ -72,8 +72,88 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 <body>
 
 
+<div id="oaBody">
+   <div id="wrapper_extra">
+      <div id="wrapper">
+         <!--Page Left-->
+         <div class="oaTmplPageLeft">
 
-<div id="oaTmplPageHeader">
+            <!--
+               <?php if ($conf['breadcrumbs']) { ?>
+                  <div id="catlinks">
+                     <p class="catlinks"></p>
+                  </div>
+               <?php } ?>
+            -->
+
+            <div class="oaTmplPageLeftNavigation" >  
+               <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
+            </div>
+
+            <h1 class="toc">Welcome!</h1>
+            <p>Welcome on the OpenAqua documentation wiki.</p>
+
+            <div class="searchBox">
+               <?php tpl_searchform()?>
+            </div>
+
+         </div>
+
+
+         <div class="oaTmplPageContent">
+            <div  class="dokuwiki">
+               <!-- start content -->
+
+               <!-- html_msgarea -->
+               <?php //html_msgarea()?>
+
+               <!-- breadcrumbs -->
+               <!--
+               <?php if ($conf['breadcrumbs']) { ?>
+                  <div id="catlinks">
+                     <p class="catlinks"> <?php tpl_breadcrumbs(); ?> </p>
+                  </div>
+               <?php } ?>
+               -->
+
+               <!-- search_out -->
+               <!--
+               <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+               -->
+
+               <!-- content output -->
+               <?php //most lines are for monobook template
+                      if ($_REQUEST['mbdo'] == 'cite')
+                              @include(dirname(__FILE__).'/do_cite.php');
+                      else if ($_REQUEST['mbdo'] == 'detail')
+                              @include(dirname(__FILE__).'/do_detail.php');
+                      else if ($_REQUEST['mbdo'] == 'media')
+                              @include(dirname(__FILE__).'/do_media.php');
+                      else
+                              tpl_content();//this is the default
+               ?>
+               <br/>
+               <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">
+               <?php tpl_youarehere(); ?></p></div><?php } ?>
+               <!-- end content -->
+            </div >
+            <div class="horizontalNavigation" style="text-align: left;" >
+               <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '<!--';   }} ?>
+                <ul >
+                   <li ><?php tpl_actionlink('edit');   ?> </li>
+                   <li ><?php tpl_actionlink('history');   ?> </li>
+                   <li ><?php tpl_actionlink('recent');   ?> </li>
+                </ul>
+                <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '-->';   }} ?>
+            </div>
+         </div>
+      </div><!-- close div#wrapper -->
+   </div><!-- close div#wrapper_extra -->
+
+   <div class="clearer"></div>
+
+
+   <div id="oaTmplPageHeader">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="">
          <ul >
             <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
@@ -90,108 +170,25 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       </div>
 
       <div class="clearer"> </div>
-</div>
-<div class="clearer"></div>
 
 
-<div id="oaTmplPageHeaderColorBox">
-      <div class="oaTmplPageLeft2">
-          <div class="colorBox" > </div>
+      <div id="oaTmplPageHeaderColorBox">
+            <div class="oaTmplPageLeft2">
+                <div class="colorBox" > </div>
+            </div>
+
+            <div class="oaTmplPageContent2">
+               <div class="colorBox" style="background-color: #344966;"></div>
+            </div>
+
+            <div class="clearer"> </div>
       </div>
-      
-      <div class="oaTmplPageContent2">
-         <div class="colorBox" style="background-color: #344966;"></div>
-      </div>
-
-      <div class="clearer"> </div>
-</div>
-
-   
-
-<div id="wrapper_extra">
-   <div id="wrapper">
-      
-      <!--Page Left-->
-      <div class="oaTmplPageLeft">
-      
-         <!--
-            <?php if ($conf['breadcrumbs']) { ?>
-               <div id="catlinks">
-                  <p class="catlinks"></p>
-               </div>
-            <?php } ?>
-         -->
-      
-         <div class="oaTmplPageLeftNavigation" >  
-            <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
-         </div>
-
-         <h1 class="toc">Welcome!</h1>
-         <p>Welcome on the OpenAqua documentation wiki.</p>
-         
-         <div class="searchBox">
-            <?php tpl_searchform()?>
-         </div>
-
-      </div>
-      
-      
-      <div class="oaTmplPageContent">
-         <div  class="dokuwiki">
-            <!-- start content -->
-
-            <!-- html_msgarea -->
-            <?php //html_msgarea()?>
-
-            <!-- breadcrumbs -->
-            <!--
-            <?php if ($conf['breadcrumbs']) { ?>
-               <div id="catlinks">
-                  <p class="catlinks"> <?php tpl_breadcrumbs(); ?> </p>
-               </div>
-            <?php } ?>
-            -->
-
-            <!-- search_out -->
-            <!--
-            <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
-            -->
-
-            <!-- content output -->
-            <?php //most lines are for monobook template
-                   if ($_REQUEST['mbdo'] == 'cite')
-                           @include(dirname(__FILE__).'/do_cite.php');
-                   else if ($_REQUEST['mbdo'] == 'detail')
-                           @include(dirname(__FILE__).'/do_detail.php');
-                   else if ($_REQUEST['mbdo'] == 'media')
-                           @include(dirname(__FILE__).'/do_media.php');
-                   else
-                           tpl_content();//this is the default
-            ?>
-            <br/>
-            <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">
-            <?php tpl_youarehere(); ?></p></div><?php } ?>
-            <!-- end content -->
-         </div >
-         <div class="horizontalNavigation" style="text-align: left;" >
-            <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '<!--';   }} ?>
-             <ul >
-                <li ><?php tpl_actionlink('edit');   ?> </li>
-                <li ><?php tpl_actionlink('history');   ?> </li>
-                <li ><?php tpl_actionlink('recent');   ?> </li>
-             </ul>
-             <?php if ($conf['useacl'] ) {if(! $_SERVER['REMOTE_USER']) {    echo '-->';   }} ?>
-         </div>
-      </div>
-      
-      
-   </div><!-- close div#wrapper -->
-</div><!-- close div#wrapper_extra -->
+   </div>
 
 
 
-<!--PAGE FOOTER-->
-<div id="oaTmplPageFooter" class="horizontalNavigation"  >
+   <!--PAGE FOOTER-->
+   <div id="oaTmplPageFooter" class="horizontalNavigation"  >
       <ul>
          <li> <?php  tpl_pagelink($myDefaultPageCopyRight); ?> </li>
          <li> <?php  tpl_pagelink($myDefaultPageAbout);?></li>
@@ -201,16 +198,15 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
          <li> <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          <li>  <a target="_blank" href="<?php echo DOKU_BASE?>feed.php" title="Recent changes RSS feed" class="lastNavItem">Recent changes RSS feed</a></li>
       </ul>
-</div> 
+      <p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
+      <div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+      </div>
 
-<!--Clean Up staff for dokuwiki-->
-<div class="clearer"> </div>
+   </div> 
+
    
-<p><?php tpl_pageinfo()?> <?php tpl_userinfo()?></p>
-<div class="hiddenParts"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+
+   
 </div>
-
-   
-
 </body>
 </html>

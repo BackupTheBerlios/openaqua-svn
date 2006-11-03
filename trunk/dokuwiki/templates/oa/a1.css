@@ -1,0 +1,354 @@
+/* basic elements */
+* {
+   padding: 0; 
+   margin: 1px; 
+}
+
+body { 
+    padding-top: -2px; 
+
+    font-size: 12px;
+    text-align: center;
+    min-width: 41em;
+    
+    background: url(images/bg_circle.jpg);
+    background-repeat: no-repeat;
+    /*
+    background-position: 70px 0px;
+    */
+    background-position: top right;
+    
+    color: __text__;
+    background-color: __background__;
+}
+
+p { 
+   font: 8pt/16pt Verdana; 
+   text-align: justify;
+   /*
+   margin-top: 0px; 
+   */
+}
+
+#oaBody {
+   width: 700px;
+   margin: 0 auto;
+   text-align: left;
+   position: relative;
+}
+
+
+
+div.dokuwiki p,
+div.dokuwiki blockquote,
+div.dokuwiki table,
+div.dokuwiki pre {
+  margin: 0 0 1.0em 0;
+}
+
+/* general headline setup */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: __text__;
+    background-color: inherit;
+    font-size: 100%;
+    font-weight: normal;
+    margin: 0 0 1em 0;
+    padding: 0.5em 0 0 0;
+    border-bottom: 1px solid __border__;
+    clear: left;
+}
+
+/* special headlines */
+h1 {font-size: 160%; margin-left: 0px; font-weight: bold;}
+h2 {font-size: 150%; margin-left: 20px;}
+h3 {font-size: 140%; margin-left: 40px; border-bottom: none; font-weight: bold;}
+h4 {font-size: 120%; margin-left: 60px; border-bottom: none; font-weight: bold;}
+h5 {font-size: 100%; margin-left: 80px; border-bottom: none; font-weight: bold;}
+
+
+.colorBox {
+   background-color: __border__;
+   height: 2em;
+   /*
+   min-width: 1em;
+   position: relative;
+   */
+}
+
+#wrapper_extra {
+   margin: 0;
+   width: 450px;
+   position: absolute;
+   left: 150px;
+   /*
+   */
+}
+* html #wrapper {
+   margin: 0;
+   /*
+   position: relative;
+   */
+}
+#wrapper {
+   margin: 0;
+   text-align: left;
+   overflow: hidden; /* This hides the excess padding in non-IE browsers */
+}
+
+
+/*============================HEADER========================*/
+div#oaTmplPageHeader {
+   position: absolute;
+   top: 0;
+   left: 0;
+   background-image: url(images/top_back.gif);
+   background-repeat: repeat-x;
+   padding-top: 1em;
+   padding-bottom: 2em;
+}
+
+#oaTmplPageHeaderLinks {
+   margin-right: 4%;
+   text-align: right;
+}
+
+
+#oaTmplPageHeaderLinks a {
+   text-decoration: none;
+   color: grey;
+   /*
+   */
+}
+
+div#oaTmplPageHeaderColorBox {
+   border-top: 1px solid __border__;   
+   border-bottom: 1px solid __border__;   
+   width: 96%;
+}
+
+div#oaTmplHeaderLogo {
+      padding-bottom: 1em;
+}
+div#oaTmplHeaderLogoLogo {
+   font-size: 300%;
+   vertical-align: bottom;
+   text-align: left;
+}
+
+div#oaTmplHeaderLogoLogo a {
+   text-decoration: none;
+}
+  
+
+
+/*=============================Content===========================*/
+div.oaTmplPageLeft2  {
+   position: absolute;
+   top:0;
+   left:0;
+   width: 150px;
+   
+   /*
+   padding-right: .5em;
+   width: 20%;
+   */
+}
+   
+   
+div.oaTmplPageContent2  {
+   /*
+   float: right;
+   width: 75%;
+   position: relative;
+   float: left;
+   position: relative;
+   */
+}
+
+div.oaTmplPageLeft  {
+   /*
+   padding-right: .5em;
+   float: left;
+   width: 20%;
+   */
+}
+   
+   
+div.oaTmplPageContent  {
+   /*
+   float: left;
+   width: 75%;
+   position: relative;
+   float: left;
+   */
+}
+
+
+div.oaTmplPageRight
+{
+   /*
+   float: right;
+   width: 21%;
+   */
+}
+
+
+
+/*=============================FOOTER===========================*/
+#oaTmplPageFooter  {
+   /*
+   clear: both;
+   position: absolute;
+   border-top: 1px solid __border__;
+   text-align: center;
+   bottom: 0;
+   */
+}
+
+
+
+/* Safari needs this - otherwise the ghost overflow, though painted 
+correctly obscures links and form elements that by rights should be above it.
+An unintended side-effect is that it cause such elements to vanish in IE 5.01
+and 5.5, hence the child selector hack */
+* > #oaTmplPageFooter, * > form, * > #notes, * > .output
+{
+   /*
+   position: relative;
+   z-index: 1000;
+   */
+}
+
+
+      
+
+   
+   
+
+   
+/*
+##################Navigation Links
+*/
+div.oaTmplPageLeftNavigation {
+   /*
+   width: 100%
+   min-height: 1em;
+   */
+}
+
+/*
+div.oaTmplPageLeftNavigation h1,
+div.oaTmplPageLeftNavigation h2,
+div.oaTmplPageLeftNavigation h3,
+div.oaTmplPageLeftNavigation h4,
+div.oaTmplPageLeftNavigation h5,
+div.oaTmplPageLeftNavigation h6{
+   display: none;
+}
+*/
+div.oaTmplPageLeftNavigation ul{
+   list-style: none;
+   width:100%;
+   margin: 0;
+   padding-top: 1em;
+   padding-bottom: 1em;
+}
+
+div.oaTmplPageLeftNavigation ul li{
+   background:#344966;
+   border-left: 10px solid #8390a1;
+   background: #344966;
+   margin: 1px;
+   color:white;
+   display: block;
+   text-decoration:none;
+}
+
+
+div.oaTmplPageLeftNavigation ul li a{
+   color: white;
+   display: block;
+   text-decoration:none;
+}
+
+div.oaTmplPageLeftNavigation ul li a:hover {
+   color: white;
+   text-decoration: none;
+   display: block;
+   background: #8390a1;
+   width: 100%
+}
+
+
+div.oaTmplPageLeftNavigation a.lastNavItem {
+   border-right: none;
+}
+
+.searchBox {
+   border: 1px solid #8390a1;   
+}
+
+   
+/*
+##################Navigation Links
+*/
+
+.horizontalNavigation {
+}
+
+
+.horizontalNavigation h1,
+.horizontalNavigation h2,
+.horizontalNavigation h3,
+.horizontalNavigation h4,
+.horizontalNavigation h5,
+.horizontalNavigation h6{
+   display: none;
+   /*
+   */
+}
+
+.horizontalNavigation ul{
+   /*
+   padding: 3px 0;
+   margin-left: 0;
+   border-bottom: 1px solid;
+   */
+}
+.horizontalNavigation li{
+   list-style: none;
+   display: inline;
+   /*
+   margin: 0;
+   */
+}
+.horizontalNavigation  a {
+   border-right: 1px solid __border__;
+   height: 1em;
+   text-decoration: none;
+   color: __border__;
+   padding-right: 0.7em;
+}
+
+
+.horizontalNavigation  a.lastNavItem {
+   border-right: none;
+}
+
+
+
+
+div.clearer {
+   clear: both;
+}
+
+.hiddenParts {
+   display: none;
+}
+
+
+
