@@ -73,7 +73,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
 
 
-<div id="oaTmplPageHeader≤≤≤≤≤">
+<div id="oaTmplPageHeade">
       <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="">
          <ul >
             <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
@@ -91,14 +91,15 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 
       <div class="clearer"> </div>
 </div>
+<div class="clearer"></div>
 
 
 <div id="oaTmplPageHeaderColorBox">
-      <div class="oaTmplPageLeft">
+      <div class="oaTmplPageLeft2">
           <div class="colorBox" > </div>
       </div>
       
-      <div class="oaTmplPageContent">
+      <div class="oaTmplPageContent2">
          <div class="colorBox" style="background-color: #344966;"></div>
       </div>
 
