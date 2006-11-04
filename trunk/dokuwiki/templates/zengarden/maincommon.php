@@ -144,30 +144,17 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
             <?php //html_msgarea()?>
 
             <!-- breadcrumbs -->
-            <!--
             <?php if ($conf['breadcrumbs']) { ?>
                <div id="catlinks">
                   <p class="catlinks"> <?php tpl_breadcrumbs(); ?> </p>
                </div>
             <?php } ?>
-            -->
 
             <!-- search_out -->
-            <!--
             <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
-            -->
 
             <!-- content output -->
-            <?php //most lines are for monobook template
-                   if ($_REQUEST['mbdo'] == 'cite')
-                           @include(dirname(__FILE__).'/do_cite.php');
-                   else if ($_REQUEST['mbdo'] == 'detail')
-                           @include(dirname(__FILE__).'/do_detail.php');
-                   else if ($_REQUEST['mbdo'] == 'media')
-                           @include(dirname(__FILE__).'/do_media.php');
-                   else
-                           tpl_content();//this is the default
-            ?>
+            <?php  tpl_content();?>
             <br/>
             <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks">
             <?php tpl_youarehere(); ?></p></div><?php } ?>

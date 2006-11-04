@@ -1,5 +1,4 @@
 /* basic elements */
-* {
-   border: solid 1px;
+div.toc {
+   display: none;
 }
-
