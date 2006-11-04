@@ -1,79 +1,59 @@
 /**
- * Tableless Layout for default template
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @author moraes <moraes@tipos.com.br>
+ * Main Layout for OpenAqua Template
+ * @author Claudia Behrens at openaqua dot de
  */
 
 /* -------------- top row --------------- */
-div.dokuwiki .header {
-  padding: 3px 0 0 2px;
+
+
+/*
+The master block, contains all other blocks
+*/
+#oaBody {
 }
 
-div.dokuwiki .pagename {
-  float: left;
-  font-size: 200%;
-  font-weight: bolder;
-  color: __background_alt__;
-  text-align: left;
-  vertical-align: middle;
+/*
+Contains the wiki text itself
+*/
+#oaHeader {
+   background-color: blue;
+   /*
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 600px;
+   display: none;
+   */
 }
 
-div.dokuwiki .pagename a {
-  color: __extern__ !important;
-  text-decoration: none !important;
+#oaWrapper {
+   width: 100%;
+}
+#oaContent {
+   background-color: yellow;
+   float: left;
+   
+   /*
+   position: absolute;
+   */
 }
 
-div.dokuwiki .logo {
-  float: right;
-  font-size: 220%;
-  font-weight: bolder;
-  text-align: right;
-  vertical-align: middle;
+
+#oaLeft {
+   background-color: brown;
+   float: left;
+   
 }
-
-div.dokuwiki .logo a {
-  color: __background_alt__ !important;
-  text-decoration: none !important;
-  font-variant: small-caps;
-  letter-spacing: 2pt;
+#oaRight {
+   background-color: green;
+   float: left;
+   
 }
-
-/* ---------------  top and bottom bar ---------------- */
-div.dokuwiki .bar {
-  border-top: 1px solid __border__;
-  border-bottom: 1px solid __border__;
-  background: __background_alt__;
-  padding: 0.1em 0.15em;
-  clear: both;
-}
-
-div.dokuwiki .bar-left {
-  float: left;
-}
-
-div.dokuwiki .bar-right {
-  float: right;
-  text-align: right;
-}
-
-div.dokuwiki #bar__bottom {
-  margin-bottom:3px;
-}
-
-/* ------------- File Metadata ----------------------- */
-
-div.dokuwiki div.meta {
-  clear: both;
-  margin-top: 1em;
-  color: __text_alt__;
-  font-size: 70%;
-}
-
-div.dokuwiki div.meta div.user {
-  float: left;
-}
-
-div.dokuwiki div.meta div.doc {
-  text-align: right;
+#oaFoot {
+   background-color: grey;
+   /*
+   position: absolute;
+   width: 100%;
+   display: none;
+   */
 }
