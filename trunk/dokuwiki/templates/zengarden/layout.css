@@ -1,0 +1,59 @@
+/**
+ * Main Layout for OpenAqua Template
+ * @author Claudia Behrens at openaqua dot de
+ */
+
+/* -------------- top row --------------- */
+
+
+/*
+The master block, contains all other blocks
+*/
+#oaBody {
+}
+
+/*
+Contains the wiki text itself
+*/
+#oaHeader {
+   background-color: blue;
+   /*
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 600px;
+   display: none;
+   */
+}
+
+#oaWrapper {
+   width: 100%;
+}
+#oaContent {
+   background-color: yellow;
+   float: left;
+   
+   /*
+   position: absolute;
+   */
+}
+
+
+#oaLeft {
+   background-color: brown;
+   float: left;
+   
+}
+#oaRight {
+   background-color: green;
+   float: left;
+   
+}
+#oaFoot {
+   background-color: grey;
+   /*
+   position: absolute;
+   width: 100%;
+   display: none;
+   */
+}
