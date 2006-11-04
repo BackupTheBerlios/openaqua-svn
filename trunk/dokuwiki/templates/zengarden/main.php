@@ -33,43 +33,22 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
       tpl_metaheaders();
       @include(dirname(__FILE__).'/meta.html');
-      
-      //add a page icon
-      echo '<link rel="shortcut icon" href="<' . DOKU_TPL . 'images/favicon.ico" />' . "\n";
-      
-      //add googleanalytics support
-      if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
-      if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
-      if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
     
-   	echo '<!-- to correct the unsightly Flash of Unstyled Content. http://www.bluerobot.com/web/css/fouc.asp -->';
-   	echo '<script type="text/javascript"></script>';
-
-   	echo '<style type="text/css" media="all">';
-   	echo '	@import "http://forum.rgsw.org.uk/music/garden/sample.css";';
-   	echo '</style>';
-    
-      //don't show edit buttons if user is not logged in
-      if ($conf['useacl'] ) {
-         if(! $_SERVER['REMOTE_USER']) {
-            echo '<style type="text/css">';
-            echo '<!--';
-            echo '.secedit {display:none;}';
-            echo '-->';
-            echo '</style>';
-         }
-      }
    ?>
+   
+   <!-- to correct the unsightly Flash of Unstyled Content. http://www.bluerobot.com/web/css/fouc.asp -->
+	<script type="text/javascript"></script>
+
+	<style type="text/css" media="all">
+		@import "http://forum.rgsw.org.uk/music/garden/sample.css";
+	</style>
+	
 </head>
 
-<!--
-   
-   -->
 
 <!--##################################################HTML BODY-->
 
    <!--
-
 
    	This xhtml document is marked up to provide the designer with the maximum possible flexibility.
    	There are more classes and extraneous tags than needed, and in a real world situation, it's more
