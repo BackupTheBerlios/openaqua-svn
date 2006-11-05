@@ -1,19 +1,15 @@
 <?php
 /**
- * Box Plugin: Draw highlighting boxes around wiki markup
+ * OA Box Plugin: Maps blocks in html divs
  *
- * Syntax:     <box width% classes|title>
- *   width%    width of the box, must use % unit
+ * Syntax:     <box classes|id>
  *   classes   one or more classes used to style the box, several predefined styles included in style.css
- *   title     (optional) all text after '|' will be rendered above the main code text with a
+ *   id     (optional) all text after '|' will be rendered above the main code text with a
  *             different style.
  *
- * Acknowledgements:
- *  Rounded corners based on snazzy borders by Stu Nicholls (http://www.cssplay.co.uk/boxes/snazzy) 
- *  which is in turn based on nifty corners by Alessandro Fulciniti (http://pro.html.it/esempio/nifty/)
- * 
+ * Basing on  
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Christopher Smith <chris@jalakai.co.uk>  
+ * @author     Christopher Smith <chris@jal_oaboxakai.co.uk>  
  */
 
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
@@ -24,7 +20,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
 
     var $title_mode = false;
 
@@ -33,13 +29,12 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
      */
     function getInfo(){
       return array(
-        'author' => 'Christopher Smith',
-        'email'  => 'chris@jalakai.co.uk',
-        'date'   => '2006-03-11',
-        'name'   => 'Box Plugin',
-        'desc'   => 'Boxes with titles, colour and rounded corners. 
-                     Syntax: <box|title> ... </box> title is optional.',
-        'url'    => 'http://wiki.splitbrain.org/plugin:boxes',
+        'author' => 'Claudia Behrens',
+        'email'  => 'Claudia.Behrens@openaqua.de',
+        'date'   => '2006-11-04',
+        'name'   => 'OA Box Plugin',
+        'desc'   => 'div Boxes',
+        'url'    => '',
       );
     }
 
@@ -62,15 +57,11 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {       
-      $this->Lexer->addEntryPattern('<box>(?=.*?</box.*?>)',$mode,'plugin_box');
-      $this->Lexer->addEntryPattern('<box\s[^\r\n\|]*?>(?=.*?</box.*?>)',$mode,'plugin_box');
-      $this->Lexer->addEntryPattern('<box\|(?=[^\r\n]*?\>.*?</box.*?\>)',$mode,'plugin_box');      
-      $this->Lexer->addEntryPattern('<box\s[^\r\n\|]*?\|(?=[^\r\n]*?>.*?</box.*?>)',$mode,'plugin_box');      
+      $this->Lexer->addEntryPattern('<box\s[^\r\n\|]*?\|(?=[^\r\n]*?>)',$mode,'plugin_oabox');      
     }
 
     function postConnect() {
-      $this->Lexer->addPattern('>', 'plugin_box');
-      $this->Lexer->addExitPattern('</box.*?>', 'plugin_box');
+      $this->Lexer->addExitPattern('</box>', 'plugin_oabox');
     }
 
     /**
@@ -80,7 +71,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
 
         switch ($state) {
             case DOKU_LEXER_ENTER:
-                $data = $this->_boxstyle(trim(substr($match, 4, -1)));
+                $data = $this->_oaboxstyle(trim(substr($match, 4, -1)));
                 if (substr($match, -1) == '|') {
                     $this->title_mode = true;
                     return array('title_open',$data);
@@ -120,7 +111,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
           switch ($instr) {
           case 'title_open' : 
               $this->title_mode = true;
-            $renderer->doc .= "</p>\n".$this->_xhtml_boxopen($data)."<p class='box_title'>";
+            $renderer->doc .= "</p>\n".$this->_xhtml_oaboxopen($data)."<p class='box_title'>";
             break;
 
           case 'box_open' :   
@@ -128,7 +119,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
                 $this->title_mode = false;
                 $renderer->doc .= "</p>\n<div class='box_content'><p>";
             } else {
-                $renderer->doc .= "</p>\n".$this->_xhtml_boxopen($data)."<div class='box_content'><p>";
+                $renderer->doc .= "</p>\n".$this->_xhtml_oaboxopen($data)."<div class='box_content'><p>";
             }
             break;
 
@@ -142,7 +133,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
             if ($data) { 
               $renderer->doc .= "<p class='box_caption'>".$data."</p>\n";    
             }
-            $renderer->doc .= $this->_xhtml_boxclose()."<p>"; 
+            $renderer->doc .= $this->_xhtml_oaboxclose()."<p>"; 
             break;
         }
 
@@ -151,7 +142,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
       return false;
     }
 
-    function _boxstyle($str) {
+    function _oaboxstyle($str) {
       if (!strlen($str)) return array();
 
       $styles = array();
@@ -171,7 +162,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
       return $styles;
     }
 
-    function _xhtml_boxopen($style) {
+    function _xhtml_oaboxopen($style) {
       $class = "class='box" . (isset($style['class']) ? ' '.$style['class'] : '') . "'";
       $style = isset($style['width']) ? " style='width: {$style['width']};'" : '';
 
@@ -182,7 +173,7 @@ class syntax_plugin_box extends DokuWiki_Syntax_Plugin {
       return $html;
     }
 
-    function _xhtml_boxclose() {
+    function _xhtml_oaboxclose() {
 
       $html = "  </div>\n";
       $html .= "  <b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xb1'></b></b>\n";
