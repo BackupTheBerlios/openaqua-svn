@@ -19,6 +19,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
 /**
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
+
  */
 class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
 
@@ -52,136 +53,52 @@ class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
 
         return parent::accepts($mode);
     }
-
-    /**
-     * Connect pattern to lexer
-     */
     function connectTo($mode) {       
-      $this->Lexer->addEntryPattern('<box\s[^\r\n\|]*?\|(?=[^\r\n]*?>)',$mode,'plugin_oabox');      
+      $this->Lexer->addEntryPattern ('<div.*?>', $mode, 'plugin_oabox');
     }
 
     function postConnect() {
-      $this->Lexer->addExitPattern('</box>', 'plugin_oabox');
+      $this->Lexer->addExitPattern('</div.*?>', 'plugin_oabox');
     }
 
-    /**
-     * Handle the match
-     */
+
     function handle($match, $state, $pos, &$handler){
-
         switch ($state) {
-            case DOKU_LEXER_ENTER:
-                $data = $this->_oaboxstyle(trim(substr($match, 4, -1)));
-                if (substr($match, -1) == '|') {
-                    $this->title_mode = true;
-                    return array('title_open',$data);
-                } else {
-                    return array('box_open',$data);
-                }
-
-            case DOKU_LEXER_MATCHED:
-                if ($this->title_mode) {
-                    $this->title_mode = false;
-                    return array('box_open','');
-                } else {
-                    return array('data', $match);
-                }
-
-            case DOKU_LEXER_UNMATCHED:                
-                return array('data', $match);
-
-            case DOKU_LEXER_EXIT:
-                $data = trim(substr($match, 5, -1));
-                $title =  ($data && $data{0} == "|") ? substr($data,1) : '';
-
-                return array('box_close', $title);
-
+            case DOKU_LEXER_ENTER:     return array($state, $match);
+            case DOKU_LEXER_MATCHED:   return array($state, $match);
+            case DOKU_LEXER_UNMATCHED: return array($state, $match);
+            case DOKU_LEXER_EXIT:      return array($state, $match);
         }       
         return false;
     }
 
-    /**
-     * Create output
-     */
-    function render($mode, &$renderer, $indata) {
+    
+    //create output
+    
+    function render ($mode, &$renderer, $data)
+    {
+        list ($state, $param) = $data;
+        if ($mode == 'xhtml') {
+            switch ($state) {
+               case DOKU_LEXER_ENTER:
+                  $renderer->doc .= $param;
+                  break;
+               case DOKU_LEXER_MATCHED:
+                  //$renderer->doc .= "DOKU_LEXER_MATCHED data=$param";
+                  break;
+               case DOKU_LEXER_EXIT:
+                  $renderer->doc .= $param;
+                  break;
 
-      list($instr, $data) = $indata;
-
-      if($mode == 'xhtml'){
-          switch ($instr) {
-          case 'title_open' : 
-              $this->title_mode = true;
-            $renderer->doc .= "</p>\n".$this->_xhtml_oaboxopen($data)."<p class='box_title'>";
-            break;
-
-          case 'box_open' :   
-            if ($this->title_mode) {
-                $this->title_mode = false;
-                $renderer->doc .= "</p>\n<div class='box_content'><p>";
-            } else {
-                $renderer->doc .= "</p>\n".$this->_xhtml_oaboxopen($data)."<div class='box_content'><p>";
+               case DOKU_LEXER_UNMATCHED:
+                  $renderer->doc .= $param;
+                  break;
             }
-            break;
-
-          case 'data' :      
-            $renderer->doc .= $renderer->_xmlEntities($data); 
-            break;
-
-          case 'box_close' : 
-            $renderer->doc .= "</p></div>\n";
-
-            if ($data) { 
-              $renderer->doc .= "<p class='box_caption'>".$data."</p>\n";    
-            }
-            $renderer->doc .= $this->_xhtml_oaboxclose()."<p>"; 
-            break;
+            return true;
         }
-
-        return true;
-      }
-      return false;
+        return false;
     }
-
-    function _oaboxstyle($str) {
-      if (!strlen($str)) return array();
-
-      $styles = array();
-
-      $tokens = preg_split('/\s+/', $str, 9);                      // limit is defensive
-      foreach ($tokens as $token) {
-          if (preg_match('/^\d*\.?\d+(%|px|em|ex|pt|cm|mm|pi|in)$/', $token)) {
-            $styles['width'] = $token;
-            continue;
-          }
-
-          // restrict token (class names) characters to prevent any malicious data
-          if (preg_match('/[^A-Za-z0-9_-]/',$token)) continue;
-          $styles['class'] = (isset($styles['class']) ? $styles['class'].' ' : '').$token;
-      }
-
-      return $styles;
-    }
-
-    function _xhtml_oaboxopen($style) {
-      $class = "class='box" . (isset($style['class']) ? ' '.$style['class'] : '') . "'";
-      $style = isset($style['width']) ? " style='width: {$style['width']};'" : '';
-
-      $html = "<div $class$style>\n";
-      $html .="  <b class='xtop'><b class='xb1'></b><b class='xb2'></b><b class='xb3'></b><b class='xb4'></b></b>\n";
-      $html .="  <div class='xbox'>\n";
-
-      return $html;
-    }
-
-    function _xhtml_oaboxclose() {
-
-      $html = "  </div>\n";
-      $html .= "  <b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xb1'></b></b>\n";
-      $html .= "</div>\n";
-
-      return $html;
-    }
-
+    
 }
 
-//Setup VIM: ex: et ts=4 enc=utf-8 :
+
