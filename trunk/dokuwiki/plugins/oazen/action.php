@@ -10,7 +10,7 @@ if(!defined('DOKU_INC')) die();
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'action.php');
 
-class action_plugin_blog extends DokuWiki_Action_Plugin {
+class action_plugin_oazen extends DokuWiki_Action_Plugin {
 
   /**
    * return some info
@@ -20,9 +20,9 @@ class action_plugin_blog extends DokuWiki_Action_Plugin {
       'author' => 'Esther Brunner',
       'email'  => 'wikidesign@gmail.com',
       'date'   => '2006-09-05',
-      'name'   => 'Blog Plugin',
-      'desc'   => 'Brings blog functionality to DokuWiki',
-      'url'    => 'http://wiki:splitbrain.org/plugin:blog',
+      'name'   => 'oazen Plugin',
+      'desc'   => 'Brings oazen functionality to DokuWiki',
+      'url'    => 'http://wiki:splitbrain.org/plugin:oazen',
     );
   }
 
@@ -30,81 +30,33 @@ class action_plugin_blog extends DokuWiki_Action_Plugin {
    * register the eventhandlers
    */
   function register(&$contr){
-    $contr->register_hook('ACTION_ACT_PREPROCESS',
+    $contr->register_hook('ZenShow',
                           'BEFORE',
                           $this,
                           'handle_act_preprocess',
                            array());
                               
 
-    $contr->register_hook('IO_WIKIPAGE_WRITE',
-                          'AFTER',
-                          $this,
-                          'cdateIndex',
-                          array());
   }
 
-  /**
-   * Update the creation date index the blog plugin uses
-   *
-   * @author  Esther Brunner  <wikidesign@gmail.com>
-   */
-  function cdateIndex(&$event, $param){
-    global $INFO;
-    global $conf;
-    
-    if ($event->data[3]) return false;     // old revision saved
-    if ($INFO['exists']) return false;     // file not new
-    if (!$event->data[0][1]) return false; // file is empty
-    
-    // get needed information
-    $id   = ($event->data[1] ? $event->data[1] : '').$event->data[2];
-    $date = filectime($event->data[0][0]);
-        
-    // load indexes
-    $page_idx  = file($conf['cachedir'].'/page.idx');
-    $cdate_idx = file($conf['cachedir'].'/cdate.idx');
-    
-    // get page id (this is the linenumber in page.idx)
-    $pid = array_search("$id\n", $page_idx);
-    if (!is_int($pid)){
-      $page_idx[] = "$id\n";
-      $pid = count($page_idx)-1;
-      // page was new - write back
-      $fh = fopen($conf['cachedir'].'/page.idx', 'w');
-      if (!$fh) return false;
-      fwrite($fh, join('', $page_idx));
-      fclose($fh);
-    }
-    
-    // check lines and fill creation date in
-    for ($i = 0; $i < $pid; $i++){
-      if (empty($cdate_idx[$i])) $cdate_idx[$i] = "\n";
-    }
-    $cdate_idx[$pid] = "$date\n";    
-    
-    // save creation date index
-    $fh = fopen($conf['cachedir'].'/cdate.idx', 'w');
-    if (!$fh) return false;
-    fwrite($fh, join('', $cdate_idx));
-    fclose($fh);
-    
-    return true;
-  }
   
   /**
    * Checks if 'newentry' was given as action, if so we
    * do handle the event our self and no further checking takes place
    */
   function handle_act_preprocess(&$event, $param){
-    if ($event->data != 'newentry') return; // nothing to do for us
+    //if ($event->data != 'newentry') return; // nothing to do for us
     
     global $ACT;
     global $ID;
+    
+    echo "param=$param";
+    return;
 
     // we can handle it -> prevent others
     $event->stopPropagation();
     $event->preventDefault();
+    
     
     $ns    = $_REQUEST['ns'];
     $title = str_replace(':', '', $_REQUEST['title']);
