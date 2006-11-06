@@ -39,26 +39,20 @@ class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
       );
     }
 
-    function getType(){ return 'protected';}
-    function getAllowedTypes() { return array('container','substition','protected','disabled','formatting','paragraphs'); }
-    function getPType(){ return 'normal';}
+    function getType(){ return 'container';}
+    function getAllowedTypes() { return array('container','substition','protected','disabled','formatting','paragraphs','baseonly'); }
+
+    function getPType(){ return 'block';}
 
     // must return a number lower than returned by native 'code' mode (200)
     function getSort(){ return 195; }
 
-    // override default accepts() method to allow nesting 
-    // - ie, to get the plugin accepts its own entry syntax
-    function accepts($mode) {
-        if ($mode == substr(get_class($this), 7)) return true;
-
-        return parent::accepts($mode);
-    }
     function connectTo($mode) {       
       $this->Lexer->addEntryPattern ('<div.*?>', $mode, 'plugin_oabox');
     }
 
     function postConnect() {
-      $this->Lexer->addExitPattern('</div.*?>', 'plugin_oabox');
+      $this->Lexer->addExitPattern('</div>', 'plugin_oabox');
     }
 
 
@@ -91,6 +85,7 @@ class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
                   break;
 
                case DOKU_LEXER_UNMATCHED:
+                  //$renderer->doc .= $renderer->_xmlEntities($param);
                   $renderer->doc .= $param;
                   break;
             }
