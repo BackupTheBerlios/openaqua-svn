@@ -1,0 +1,32 @@
+Monobook for DokuWiki
+by Terence J. Grant (tjgrant [at] tatewake [dot] com)
+
+See the project page:
+
+http://tatewake.com/wiki/projects:monobook_for_dokuwiki
+
+For all details with regard to installation, updates, etc.
+
+Folder layout:
+  * common is from mediawiki
+  * monobook is from mediawiki
+  * wikipedia is from wikipedia
+  * dokuwiki is for dokuwiki specific things
+  * user is for user configuration
+
+Changes to original files:
+  * common/wikibits.js
+    * toggleToc gets commented out
+    * insertTags gets commented out
+    * showTocToggle gets commented out
+    * line after "Un-trap us from framesets" gets commented out
+  * monobook/main.css
+    * #p-cactions li.selected
+      * font-weight: normal; gets ADDED
+    * a
+      * background: none no-repeat;
+    * everything with the #toc label gets commented out
+    * anything with "#bodyContent a[" gets commented out
+    * also, "#bodyContent .plainlinks a" gets commented out
+Configuration:
+  * 

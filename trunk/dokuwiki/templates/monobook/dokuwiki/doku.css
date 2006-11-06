@@ -1,0 +1,377 @@
+#p-cactions li a.wikilink2 { color: #ba0000; }
+
+/* AJAX Quicksearch */
+#qsearch__in {
+	width: 10.9em;
+	margin: 0;
+	font-size: 95%;
+}
+
+div.dokuwiki div.ajax_qsearch {
+  position: absolute;
+  left: 0px;
+  width: 200px;
+  opacity: 0.9;
+  display: none;
+  font-size: 80%;
+  line-height: 1.2em;
+  border: 1px solid #8cacbb;
+  background-color: #f7f9fa;
+  text-align: left;
+  padding: 4px;
+}
+
+/* Dokuwiki specific styles */
+div.dokuwiki li.open {
+  list-style-image: url(open.gif);
+    /*list-style-type: circle;*/
+}
+
+div.dokuwiki li.closed {
+  list-style-image: url(closed.gif);
+    /*list-style-type: disc;*/
+}
+
+#ca-edit a { font-weight: bold !important; }
+#p-cactions #ca-addsection a {
+	padding-left: .4em;
+	padding-right: .4em;
+}
+/* offsets to distinguish the tab groups */
+li#ca-talk {
+	margin-right: 1.6em;
+}
+li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
+	margin-left: 1.6em;
+}
+
+/* uncomment the following for dokuwiki-green links */
+/*
+a.wikilink1:link    { color: #090; }
+a.wikilink1:visited { color: #090; }
+a.wikilink1:hover   { color: #090; }
+*/
+
+/* missing page red */
+a.wikilink2:link    { color: #ba0000; }
+a.wikilink2:visited { color: #ba0000; }
+a.wikilink2:hover   { color: #ba0000; }
+
+/* --------------------- footnotes -------------------------------- */
+
+div.footnotes{
+  clear:both;
+  border-top: 1px solid #8cacbb;
+  padding-left: 1em;
+  margin-top: 1em;
+}
+
+div.fn{
+  font-size:90%;
+}
+
+a.fn_top{
+  vertical-align:super;
+  font-size:80%;
+}
+
+a.fn_bot{
+  vertical-align:super;
+  font-size:80%;
+  font-weight:bold;
+}
+
+/* insitu-footnotes */
+div.insitu-footnote {
+/*  font-size: 80%; */
+  line-height: 1.2em;
+  border: 1px solid #8cacbb;
+  background: #eef3f8;
+  text-align: left;
+  padding: 4px;
+  max-width: 40%;    /* IE's width is handled in javascript */
+}
+
+/* overcome IE issue with one line code or file boxes which require h. scrolling */
+* html .insitu-footnote pre.code, * html .insitu-footnote pre.file {
+  padding-bottom: 18px;
+}
+
+/* --------- Toolbar -------------------- */
+button.toolbutton{
+  background-color: #ffffff;
+  padding: 0px;
+  margin: 0 1px 0 0;
+  border: 1px solid #8cacbb;
+  cursor: pointer;
+}
+
+div.picker {
+  width: 250px;
+  border: 1px solid #8cacbb;
+  background: #eef3f8;
+  z-index: 3;
+}
+
+button.pickerbutton {
+  padding: 0px;
+  margin: 0 1px 1px 0;
+  border: 0;
+  background-color: transparent;
+  font-size: 80%;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* ---------- Spellchecking ------------- */
+
+a.spell__error {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+div#spell__suggest {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 2;
+
+  background-color: #fff;
+  padding: 2px;
+  border: 1px solid #000;
+  font-size:80%;
+}
+
+div#spell__result {
+  display:none;
+  font-family:monospace;
+  overflow: auto;
+  z-index: 1;
+
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+  border: 1px solid #8cacbb; 
+  color: Black;
+  font-size:14px;
+  padding: 3px;
+  background-color: #f7f9fa;
+}
+
+span.spell__noerr {
+  color: #009933;
+}
+
+span.spell__wait {
+  color: #0066cc;
+}
+
+/* code blocks by indention */
+pre.pre {
+  font-size: 120%;
+  padding: 0.5em;
+  border: 1px dashed #8cacbb;
+  color: Black;
+  background-color: #f7f9fa;
+  overflow: auto;
+}
+
+/* code blocks by code tag */
+pre.code {
+  font-size: 120%;
+  padding: 0.5em;
+  border: 1px dashed #8cacbb;
+  color: Black;
+  background-color: #f7f9fa;
+  overflow: auto;
+}
+
+/* embedded images */
+img.media {
+  margin: 3px;
+}
+
+img.medialeft {
+  border: 0;
+  float: left;
+  margin: 0 1.5em 0 0;
+}
+
+img.mediaright {
+  border: 0;
+  float: right;
+  margin: 0 0 0 1.5em;
+}
+
+img.mediacenter {
+  border: 0;
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+acronym {
+  cursor: help;
+  border-bottom: 1px dotted #000;
+}
+
+/* inline tables */
+table.inline {
+  background-color: #ffffff;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+table.inline th {
+  padding: 3px;
+  border: 1px solid #8cacbb;
+  background-color: #dee7ec;
+}
+
+table.inline td {
+  padding: 3px;
+  border: 1px solid #8cacbb;
+}
+
+.leftalign{
+  text-align: left;
+}
+
+.centeralign{
+  text-align: center;
+}
+
+.rightalign{
+  text-align: right;
+}
+
+blockquote {
+  border-left: 2px solid #8cacbb;
+  padding-left: 3px;
+  margin-left: 0;
+}
+
+div.secedit input.button{
+  border: 0px;
+  text-transform: lowercase;
+  color: Blue;
+  background-color: Transparent;
+  vertical-align: middle;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 10px;
+  cursor: pointer;
+  height: 15px !important;
+  max-height: 15px !important;
+  min-height: 15px !important;
+  float:right;
+  display: inline;
+}
+
+div.secedit2 {
+  text-align: right;
+}
+
+div.secedit2 a {
+  border: 0px;
+  text-transform: lowercase;
+  color: Blue;
+  background-color: Transparent;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+/* div #dokuwiki */
+a.urlextern {
+    background: transparent url(../monobook/external.png) center right no-repeat;
+    padding: 1px 13px 1px 0px;
+    color:#436976;
+    text-decoration:none;
+}
+
+/* ---------- table of contents ------------------- */
+
+div.toc {
+  margin-left: 2em;
+  margin-top: 1.2em;
+  margin-bottom: 0;
+  float:right;
+  width: 200px;
+  font-size: 80%;
+  clear:both;
+}
+
+div.tocheader {
+  padding: 3px;
+  border: 1px solid #8cacbb;
+  background-color: #dee7ec;
+  text-align: left;
+  font-weight:bold;
+  margin-bottom: 2px;
+}
+
+div.toctoggle img {
+  float:right;
+  margin-top:0.3em;
+  margin-right:3px;
+  width:0.8em;
+  height:0.8em;
+}
+
+#toc__inside {
+  border: 1px solid #8cacbb;
+  background-color: #ffffff;
+  text-align: left;
+  padding-top: 0.5em;
+  padding-bottom: 0.7em;
+}
+
+ul.toc {
+  list-style-type: none;
+  list-style-image: none;
+  line-height: 1.2em;
+  margin: 0;
+  padding: 0;
+  padding-left: 1em;
+}
+
+ul.toc li {
+  background: transparent url(tocdot2.gif) 0 0.6em no-repeat;
+  padding-left:0.4em;
+}
+
+ul.toc li.clear {
+  background-image: none;
+  padding-left:0.4em;
+}
+
+a.toc {
+  color: #436976;
+  text-decoration:none;
+}
+
+a.toc:hover {
+  color: #000000;
+  text-decoration:underline; 
+}
+
+/* Headings */
+h1 a, h2 a, h3 a, h4 a, h5 a
+{
+  color: #000000;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover
+{
+  color: #000000;
+  text-decoration: none;
+}
+

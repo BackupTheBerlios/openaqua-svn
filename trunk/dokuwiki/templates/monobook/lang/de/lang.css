@@ -1,0 +1,8 @@
+/* Groﬂbuchstaben in den Navigationsbereichen */
+
+.portlet h5,
+.portlet h6,
+#p-personal ul,
+#p-cactions li a {
+        text-transform: none;
+}
