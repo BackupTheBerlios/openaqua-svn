@@ -45,7 +45,7 @@ class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
     function getPType(){ return 'block';}
 
     // must return a number lower than returned by native 'code' mode (200)
-    function getSort(){ return 195; }
+    function getSort(){ return 150; }
 
     function connectTo($mode) {       
       $this->Lexer->addEntryPattern ('<div.*?>', $mode, 'plugin_oabox');
@@ -81,12 +81,13 @@ class syntax_plugin_oabox extends DokuWiki_Syntax_Plugin {
                   //$renderer->doc .= "DOKU_LEXER_MATCHED data=$param";
                   break;
                case DOKU_LEXER_EXIT:
-                  $renderer->doc .= $param;
+                  //$renderer->doc .= $param;
+                  $renderer->doc .= "</div>\n";
+
                   break;
 
                case DOKU_LEXER_UNMATCHED:
-                  //$renderer->doc .= $renderer->_xmlEntities($param);
-                  $renderer->doc .= $param;
+                  $renderer->doc .= $renderer->_xmlEntities($param);
                   break;
             }
             return true;
