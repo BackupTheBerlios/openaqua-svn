@@ -47,7 +47,7 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
       @import "http://www.csszengarden.com/004/004.css";
       @import "http://www.csszengarden.com/184/184.css";
       @import "http://csszengarden.com/zengarden-sample.css";
-@import "http://www.mhpverwoerd.nl/sites/apprentice/sample.css";
+      @import "http://www.mhpverwoerd.nl/sites/apprentice/sample.css";
       @import "http://www.csszengarden.com/001/001.css";
 
 
@@ -56,7 +56,7 @@ Good Ideas: http://csszengarden.com/?cssfile=http://www.mhpverwoerd.nl/sites/app
    
 -->
 <style type="text/css" media="all">
-      @import "http://csszengarden.com/zengarden-sample.css";
+      @import "http://www.csszengarden.com/184/184.css";
 </style>
 </head>
 

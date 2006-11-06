@@ -31,12 +31,6 @@ class syntax_plugin_oaheader extends DokuWiki_Syntax_Plugin {
                          '==='=>4,
                          '=='=>5);
       
-    var $count = array(  1=>0,
-                         2=>0,
-                         3=>0,
-                         4=>0,
-                         5=>0);
-   
     function getInfo(){
       return array(
         'author' => 'Claudia Behrens',
@@ -53,7 +47,7 @@ class syntax_plugin_oaheader extends DokuWiki_Syntax_Plugin {
     }
     
     function connectTo($mode) {
-        $this->Lexer->addSpecialPattern( '[ \t]*={2,6}\s?\-[^\n]+={2,6}[ \t]*(?=\n)',
+        $this->Lexer->addSpecialPattern( '[ \t]*={2,6}\s?[^\n]+={2,6}[ \t]*(?=\n)',
                                          $mode,
                                          'plugin_oaheader');
     }
@@ -63,34 +57,8 @@ class syntax_plugin_oaheader extends DokuWiki_Syntax_Plugin {
     }
  
     function handle($match, $state, $pos, &$handler){
-        
-        // define the level of the heading
-        $heading = '';
-        preg_match('/(={2,})/', $match, $heading);
-        $level = $this->levels[$heading[0]];
-          
-        // increment the number of the heading
-        $this->headingCount[$level]++; 
-      
-        $headingNumber = '';
-        for ($i=$this->startlevel;$i<=5;$i++) {
-             
-            // reset the number of the subheadings
-            if ($i>$level) {
-                $this->headingCount[$i] = 0;
-            }
-             
-            // build the number of the heading
-            $headingNumber .= ($this->headingCount[$i]!=0) ? $this->headingCount[$i].'.' : '';
-        }
-        
-        // insert the number (without the last '.')...        
-        $match = preg_replace('/(={2,}\s?)\-/', '${1}'.substr($headingNumber,0,-1), $match);
-          
-        // ... and return to original behavior
-        $match .="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        // just return to the default behaviour
         $handler->header($match, $state, $pos);
-                   
         return true;
     }
  
