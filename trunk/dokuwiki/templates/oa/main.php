@@ -75,38 +75,41 @@ Good Ideas: http://csszengarden.com/?cssfile=http://www.mhpverwoerd.nl/sites/app
 
    -->
 
-   <body onload="window.defaultStatus='css Zen Garden: The Beauty in CSS Design';" id="css-zen-garden">
+   <body>
 
    <div id="container">
    
       <div id="intro">
+         
          <!--Logo!!-->
          <div id="pageHeader">
-            pageHeader
+            <div id="oaTmplPageHeaderLinks" class="horizontalNavigation"  style="">
+               <ul >
+                  <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
+                  <li ><?php tpl_actionlink('index'); ?></li>
+                  <li ><?php tpl_actionlink('login'); ?></li>
+                  <li ><?php tpl_actionlink('subscription');   ?> </li>
+                  <li ><?php tpl_actionlink('admin');  ?> </li>
+                  <li ><?php tpl_actionlink('profile');  ?> </li>
+               </ul>
+            </div>
+            <div id="oaTmplHeaderLogo">
+               <div id="oaTmplHeaderLogoLogo"> <?php tpl_link(wl(), $myLogo ,'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?> </div>
+            </div>
+            <div class="clearer"> </div>
          </div>
 
-         <!--subtitle for the website-->
-         <div id="quickSummary">
-            quickSummary
-         </div>
+         <!--subtitle for the website-->         
+         <div id="quickSummary">            quickSummary         </div>
 
          <!--????-->
-         <div id="preamble">
-         </div>
+         <div id="preamble">       </div>
       </div>
       
       
       <div id="supportingText">
-         <!--Hat drei Blöcke
-            explanation
-            participation
-            benefits
-            requirements
-            footer
-            -->
-
+         <!--Hat Bloecke: explanation, participation,  benefits, requirements,   footer    -->
          <?php tpl_content();?>
-
          <div id="footer">
             <?php  tpl_pagelink($myDefaultPageCopyRight); ?>
             <?php  tpl_pagelink($myDefaultPageAbout);?>
@@ -115,7 +118,6 @@ Good Ideas: http://csszengarden.com/?cssfile=http://www.mhpverwoerd.nl/sites/app
             <?php  tpl_actionlink('index'); ?></li>
             <?php  $url = parse_url ( DOKU_URL ); $server = $url['host']; if(!empty( $url['port'])) { $server .= ':' . $url['port']; }; $server .= $url['path']; echo '<a href="' . DOKU_URL .  '" title="Visit ' . DOKU_URL . '" >'. $server . ' </a>';?></li>
          </div>
-         
       </div>
       
       <div id="linkList">
@@ -128,19 +130,6 @@ Good Ideas: http://csszengarden.com/?cssfile=http://www.mhpverwoerd.nl/sites/app
             <div id="lselect">
                <h3 class="select"><span>Navigation</span></h3>
                 <?php if (function_exists('dwp_display_wiki_page')) dwp_display_wiki_page($myPAGENAVIGATION);?>
-            </div>
-
-            <div id="larchives">
-               <h3 class="archives"><span>Wiki</span></h3>
-               <ul >
-                  <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
-                  <li ><?php tpl_actionlink('index'); ?></li>
-                  <li ><?php tpl_actionlink('login'); ?></li>
-                  <li ><?php tpl_actionlink('subscription');   ?> </li>
-                  <li ><?php tpl_actionlink('admin');  ?> </li>
-                  <li ><?php tpl_actionlink('profile');  ?> </li>
-               </ul>
-
             </div>
 
             <div id="lresources">

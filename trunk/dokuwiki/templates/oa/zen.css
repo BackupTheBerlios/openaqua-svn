@@ -13,7 +13,7 @@
 body { 
    font: 8pt/16pt georgia; 
    color: #555753; 
-   background: #fff url(blossoms.jpg) no-repeat bottom right; 
+   background: #fff  url(blossoms.jpg) no-repeat bottom right; 
    margin: 0px; 
    }
 p { 
@@ -55,7 +55,22 @@ a:hover, a:active {
    }
 #pageHeader { 
    margin-bottom: 20px;
-   }
+   background-image: url(images/top_back.gif);
+   background-repeat: repeat-x;
+   padding-top: .5em;
+   padding-bottom: 2em;
+}
+#oaTmplPageHeaderLinks {
+   margin-right: 4%;
+   text-align: right;
+}
+
+
+#oaTmplHeaderLogoLogo {
+   font-size: 200%;
+   vertical-align: bottom;
+   text-align: left;
+}
 
 /* using an image to replace text in an h1. This trick courtesy Douglas Bowman, http://www.stopdesign.com/articles/css/replace-text/ */
 #pageHeader h1 { 
@@ -96,7 +111,7 @@ a:hover, a:active {
    padding: 0px 10px 0px 10px;
    }
 #supportingText {
-   padding-left: 10px; 
+   padding-left: 160px; 
    margin-bottom: 40px;
    }
 
@@ -108,18 +123,25 @@ a:hover, a:active {
    }
 
 #linkList {
-   margin-left: 600px; 
+   padding-left: 10px; 
    position: absolute; 
-   top: 0px; 
-   right: 0px;
-   }
+   top: 150px; 
+   left: 0px;
+   /*
+   */
+}
+
+
 #linkList2 { 
+   /*
    font: 10px verdana, sans-serif; 
    background: transparent url(paper-bg.jpg) top left repeat-y; 
    padding: 10px; 
    margin-top: 150px; 
    width: 130px; 
-   }
+   
+   */
+}
 #linkList h3.select { 
    background: transparent url(h3.gif) no-repeat top left; 
    margin: 10px 0px 5px 0px; 
