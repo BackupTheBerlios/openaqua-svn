@@ -1,5 +1,18 @@
 /* basic elements */
 * {
+   /*
    border: solid 1px;
+   */
 }
 
+.secedit {
+   display: none;
+}
+
+h1 {
+   display: none;
+}
+
+.toc {
+  display: none;
+}
