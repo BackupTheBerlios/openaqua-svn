@@ -3,6 +3,8 @@
 # Subdir relative project main directory: .
 # Target is an application:  
 
+macx: DEFINES += __unix__
+
 TEMPLATE = lib
 DESTDIR = lib
 TARGET = aquabase
