@@ -1,5 +1,4 @@
 #include "coalabelplugin.h"
-#include "coalabelplugin_extrainfo.h"
 #include <CoaLabel>
 
 CoaLabelPlugin::CoaLabelPlugin(QObject *parent)

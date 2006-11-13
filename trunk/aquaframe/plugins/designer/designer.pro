@@ -36,7 +36,6 @@ HEADERS +=     coamainwindow_container.h \
                coatexteditplugin.h \
                coalineeditplugin.h \
                coalabelplugin.h \
-               coalabelplugin_extrainfo.h \
                coaprogressbarplugin.h \
                coalcdnumberplugin.h \
                coatextbrowserplugin.h \
@@ -60,7 +59,6 @@ SOURCES +=     coamainwindow_container.cpp \
                coatexteditplugin.cpp \
                coalineeditplugin.cpp \
                coalabelplugin.cpp \
-               coalabelplugin_extrainfo.cpp \
                coaprogressbarplugin.cpp \
                coalcdnumberplugin.cpp \
                coatextbrowserplugin.cpp \
