@@ -1,0 +1,6 @@
+aquabase         - library for simplified Odaba Access in a common Qt way
+aquaframe        - Qt wrapper library
+demo             - demo programs like odaba demos
+dokuwiki         - plugins and templates for the PHP dokuwiki wiki
+odaba            - Odaba Database stuff
+tools            - some misc and maybe useful tools
