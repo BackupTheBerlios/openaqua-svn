@@ -63,6 +63,36 @@ table {
    background: white;
    font-size: 100%;
    color: black;
+   margin-left: 1.5cm;
+   padding-right: 5cm;
+   margin-top: .5cm;
+   margin-bottom: .5cm;
+
+}
+
+table.inline {
+   background: white;
+   font-size: 100%;
+   color: black;
+   margin-left: 1.5cm;
+   padding-right: 5cm;
+   margin-top: .5cm;
+   margin-bottom: .5cm;
+   border-spacing: 0px;
+   border-collapse: collapse;
+
+}
+
+table.inline th {
+   padding: 3px;
+   border: 1px solid #8cacbb;
+   text-align: left;
+   background-color: white;
+}
+
+table.inline td {
+  padding: 3px;
+  border: 1px solid #8cacbb;
 }
 
 
@@ -1495,3 +1525,67 @@ div#searchTarget ul li:before {
    content: "\00BB \0020";
 }
 
+
+/* plugin: definitionlist */
+ 
+dl, dt, dd {margin: 0; padding: 0}
+ 
+dl {
+  font-size: 90%;
+  padding-top: 1px;
+}
+ 
+html>body dl {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dashed #e0e0e0;
+}
+ 
+dl:after {
+  content: '.';
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+ 
+dt {
+  clear: left;
+  margin-top: 0.5em;
+  margin-left: 1.5cm;
+}
+ 
+dt+dt {
+  margin-top: 0;
+}
+ 
+dd+dt {
+  border-top: 1px dashed #e0e0e0;
+  padding-top: 0.5em;
+}
+ 
+dt span.term {
+  float: left;
+  width: 10em;
+}
+ 
+dd {
+  margin-left: 4.5cm;
+  padding-right: 5cm;
+  /*
+  margin-left: 10.3em;
+  padding-left: 0.8em;
+  */
+  background: url(images/bullet.gif) no-repeat 0 0.4em;
+}
+ 
+dd p {
+  margin: 0;
+  padding: 0;
+}
+ 
+* html dl { height: 1px; }
+ 
+/* reset above style to prevent messing up plugin manager */
+#plugin_manager dd { background-image: none;}
+ 
+/* end plugin: definitionlist */

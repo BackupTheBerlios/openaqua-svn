@@ -2,9 +2,9 @@
 
 /* AJAX Quicksearch */
 #qsearch__in {
-	width: 10.9em;
-	margin: 0;
-	font-size: 95%;
+   width: 10.9em;
+   margin: 0;
+   font-size: 95%;
 }
 
 div.dokuwiki div.ajax_qsearch {
@@ -34,15 +34,15 @@ div.dokuwiki li.closed {
 
 #ca-edit a { font-weight: bold !important; }
 #p-cactions #ca-addsection a {
-	padding-left: .4em;
-	padding-right: .4em;
+   padding-left: .4em;
+   padding-right: .4em;
 }
 /* offsets to distinguish the tab groups */
 li#ca-talk {
-	margin-right: 1.6em;
+   margin-right: 1.6em;
 }
 li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
-	margin-left: 1.6em;
+   margin-left: 1.6em;
 }
 
 /* uncomment the following for dokuwiki-green links */
@@ -209,7 +209,7 @@ img.mediaright {
 
 img.mediacenter {
   border: 0;
-	display: block;
+   display: block;
   margin-left: auto;
   margin-right: auto;
 }
@@ -219,23 +219,6 @@ acronym {
   border-bottom: 1px dotted #000;
 }
 
-/* inline tables */
-table.inline {
-  background-color: #ffffff;
-  border-spacing: 0px;
-  border-collapse: collapse;
-}
-
-table.inline th {
-  padding: 3px;
-  border: 1px solid #8cacbb;
-  background-color: #dee7ec;
-}
-
-table.inline td {
-  padding: 3px;
-  border: 1px solid #8cacbb;
-}
 
 .leftalign{
   text-align: left;
