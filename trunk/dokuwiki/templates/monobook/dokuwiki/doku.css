@@ -375,3 +375,42 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover
   text-decoration: none;
 }
 
+/**
+ * The CSS in here cotrols the appearance of the media manager
+ */
+
+#media__tree img {
+    float:left;
+    padding: 0.5em 0.3em 0 0;
+}
+
+#media__tree ul {
+    list-style-type: none;
+    list-style-image: none;
+}
+
+#media__tree li {
+    clear: left;
+    list-style-type: none;
+    list-style-image: none;
+}
+* html #media__tree li {
+    border: 1px solid #ffffff;
+}
+
+// --- Tree formatting ---
+
+#media__tree img {
+    float:left;
+    padding: 0.5em 0.3em 0 0;
+}
+
+#media__left {
+    width: 30%;
+}
+
+#media__content a.mediafile {
+    margin-right: 1.5em;
+    font-weight: bold;
+}
+

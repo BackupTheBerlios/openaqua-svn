@@ -1,7 +1,7 @@
 <?php
 // 
 // Language constant, for the monobook DokuWiki template  :  nederlands
-// 2006-05-09: Eric Hameleers <alien@slackware.com>
+// Last updated: 2006-10-31: Eric Hameleers <alien@slackware.com>
 // 
 $lang['monobook_article'] = 'Artikel';
 $lang['monobook_discussion'] = 'Discussie';
@@ -18,3 +18,11 @@ $lang['monobook_bar_inotherlanguages'] = 'in andere talen';
 $lang['monobook_bar_search'] = 'Zoeken';
 $lang['monobook_btn_go'] = 'OK';
 $lang['monobook_btn_search'] = 'Zoeken';
+
+//Constants for the tool box
+$lang['monobook_whatlinkshere'] = "Links naar deze pagina";
+$lang['monobook_upload'] = "Upload bestand";
+//$lang['monobook_specialpage'] Speciale pagina's;
+$lang['monobook_print'] = "Printervriendelijke versie";
+$lang['monobook_permanent'] = 'Permalink';
+$lang['monobook_cite'] = "Citeer dit artikel";
