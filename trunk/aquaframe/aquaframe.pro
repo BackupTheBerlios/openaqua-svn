@@ -3,7 +3,7 @@
 # Subdir relative project main directory: .
 # Target is a subdirs project 
 
-
+CONFIG=ordered
 TEMPLATE = subdirs 
 SUBDIRS += framework \
            linktest/testframework \
