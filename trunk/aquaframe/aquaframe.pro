@@ -7,8 +7,8 @@ CONFIG=ordered
 TEMPLATE = subdirs 
 SUBDIRS += framework \
            linktest/testframework \
-           plugins \
            applications
 
+#           plugins \
 #           plugins \
 #           linktest/testplugins \
