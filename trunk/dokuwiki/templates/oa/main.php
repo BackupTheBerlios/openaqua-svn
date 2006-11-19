@@ -64,7 +64,22 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
    	<div id="wrapper" class="clearfix" >
    		<div id="twocols" class="clearfix"> 
    			<div id="maincol" > 
-   			   <?php html_msgarea()?>
+					<!-- start content -->
+					<?php html_msgarea()?>
+				   <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
+               <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+               <?php if ($_REQUEST['mbdo'] == 'cite')
+               		@include(dirname(__FILE__).'/do_cite.php');
+               	else if ($_REQUEST['mbdo'] == 'detail')
+               		@include(dirname(__FILE__).'/do_detail.php');
+               	else if ($_REQUEST['mbdo'] == 'media')
+               		@include(dirname(__FILE__).'/do_media.php');
+               	else
+               		tpl_content();
+               ?>
+               <br/>
+					<?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_youarehere(); ?></p></div><?php } ?>
+					<!-- end content -->
    			</div>
    			<div id="rightcol" > 
    			   right Column 

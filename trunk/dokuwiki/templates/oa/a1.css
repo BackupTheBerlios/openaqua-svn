@@ -5,6 +5,10 @@ html, body{
  text-align:center; 
 } 
  
+ 
+/*
+the content block in the center of a webpage.
+*/
 #pagewidth{ 
  width:800px; 
  text-align:left;  
@@ -12,24 +16,30 @@ html, body{
  margin-right:auto;  
 } 
  
-#header{
- position:relative; 
- height:50px; 
- background-color:#1F6F56; 
- width:100%;
-} 
- 
-#leftcol{
- width:200px; 
- float:left; 
- position:relative; 
- background-color:#1FC6C6; 
-}
- 
+
+/*
+
+contains leftcol + maincol
+*/
 #twocols{
- width:600px; 
- float:right; 
- position:relative; 
+   width:600px; 
+   float:right; 
+   position:relative; 
+}
+
+#leftcol{
+   width:200px; 
+   float:left; 
+   position:relative; 
+   background-color:#1FC6C6; 
+}
+
+#maincol{
+   background-color: #1FC6C6;  
+   float: left; 
+   display:inline; 
+   position: relative; 
+   width:400px; 
 }
  
 #rightcol{
@@ -39,12 +49,13 @@ html, body{
  background-color:#1FC6C6;
 }
  
-#maincol{background-color: #1FC6C6;  
- float: left; 
- display:inline; 
- position: relative; 
- width:500px; 
-}
+
+#header{
+ position:relative; 
+ height:50px; 
+ background-color:#1F6F56; 
+ width:100%;
+} 
  
 #footer{
  height:100px; 
