@@ -8,7 +8,7 @@ html, body{
 the content block in the center of a webpage.
 */
 #pagewidth{ 
- width:100%; 
+ width:80%; 
  min-width: 700px;
  text-align:left;  
  margin-left:auto; 
