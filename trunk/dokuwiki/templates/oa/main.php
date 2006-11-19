@@ -52,7 +52,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 <body>
    <div id="pagewidth" >
       <div id="header" >
-         <div id="headerLinks" >
+         <div id="headerLinks" class="horizontalNavigation">
             <ul >
                <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
                <li ><?php tpl_actionlink('index'); ?></li>
@@ -105,7 +105,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 				<?php writeMBPortlet($monobook['personal'], 'p-personal', $lang['monobook_bar_personnaltools'], 'pt'); ?>
    		</div>
       </div>
-   	<div id="footer" > 
+   	<div id="footer" class="horizontalNavigation"> 
    	   <ul id="footer-list">
              <li id="lastmod"><?php tpl_pageinfo()?></li>
              <li id="usermod"><?php tpl_userinfo()?><br />
