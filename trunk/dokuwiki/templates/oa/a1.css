@@ -10,7 +10,8 @@ html, body{
 the content block in the center of a webpage.
 */
 #pagewidth{ 
- width:800px; 
+ width:100%; 
+ min-width: 700px;
  text-align:left;  
  margin-left:auto; 
  margin-right:auto;  
@@ -22,13 +23,13 @@ the content block in the center of a webpage.
 contains leftcol + maincol
 */
 #twocols{
-   width:600px; 
+   width:80%; 
    float:right; 
    position:relative; 
 }
 
 #leftcol{
-   width:200px; 
+   width:20%; 
    float:left; 
    position:relative; 
    background-color:#1FC6C6; 
@@ -39,11 +40,11 @@ contains leftcol + maincol
    float: left; 
    display:inline; 
    position: relative; 
-   width:400px; 
+   width: 79%; 
 }
  
 #rightcol{
- width:200px; 
+ width:20%; 
  float:right; 
  position:relative; 
  background-color:#1FC6C6;
