@@ -16,11 +16,9 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 <head>
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
+      @include (dirname(__FILE__).'/string_fn.php');
  	   @include(dirname(__FILE__).'/user/pref.php');
-		//@include(dirname(__FILE__).'/lang/en/lang.php');
-		//if ( $conf['lang'] && $conf['lang'] != 'en' ) @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
       @include(dirname(__FILE__).'/context.php');
-			//@include(dirname(__FILE__).'/other.php');
 
       
       /*make page title*/

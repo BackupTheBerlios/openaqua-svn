@@ -6,7 +6,7 @@ html, body{
 } 
  
 #pagewidth{ 
- width:700px; 
+ width:800px; 
  text-align:left;  
  margin-left:auto; 
  margin-right:auto;  
@@ -20,7 +20,7 @@ html, body{
 } 
  
 #leftcol{
- width:100px; 
+ width:200px; 
  float:left; 
  position:relative; 
  background-color:#1FC6C6; 
@@ -33,7 +33,7 @@ html, body{
 }
  
 #rightcol{
- width:100px; 
+ width:200px; 
  float:right; 
  position:relative; 
  background-color:#1FC6C6;
