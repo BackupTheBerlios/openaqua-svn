@@ -5,16 +5,6 @@ if (file_exists(DOKU_PLUGIN.'displaywikipage/code.php')) include_once(DOKU_PLUGI
 if (isset($DOKU_TPL)==FALSE) $DOKU_TPL = DOKU_TPL; if (isset($DOKU_TPLINC)==FALSE) $DOKU_TPLINC = DOKU_TPLINC;
 if (file_exists(DOKU_PLUGIN.'displaywikipage/code.php')) include_once(DOKU_PLUGIN.'displaywikipage/code.php');
 if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'referrers/code.php');
-
-$myNamespacePrefix          = 'openaqua';
-$myPAGENAVIGATION           = ':wiki:navigation';
-$myPAGEHEADERNAVIGATION     = ':wiki:headernavigation';
-$myDefaultPageContact       = $myNamespacePrefix . ':contact';
-$myDefaultPageAbout         = $myNamespacePrefix . ':about';
-$myDefaultPagePrivacyPolice = $myNamespacePrefix . ':privacypolicy';
-$myDefaultPageCopyRight     = $myNamespacePrefix . ':copyright';
-$myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#666666">define</FONT>
-<FONT COLOR="#333333">OpenAqua</FONT></B>';
 ?>
 
 
@@ -25,6 +15,13 @@ $myLogo                     = '<B><FONT COLOR="#ff0000">#</FONT><FONT COLOR="#66
 <head>
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
+		if (function_exists('re_log_referrers')) re_log_referrers();
+		@include(dirname(__FILE__).'/user/pref.php');
+		//@include(dirname(__FILE__).'/lang/en/lang.php');
+		//if ( $conf['lang'] && $conf['lang'] != 'en' ) @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
+      @include(dirname(__FILE__).'/context.php');
+			//@include(dirname(__FILE__).'/other.php');
+
       
       /*make page title*/
       echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
