@@ -51,13 +51,27 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 </head>
 <body>
    <div id="pagewidth" >
-      <div id="header" > 
-         <div class="pagename">
+      <div id="header" >
+         <div id="headerLinks" >
+            <ul >
+               <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
+               <li ><?php tpl_actionlink('index'); ?></li>
+               <li ><?php tpl_actionlink('login'); ?></li>
+               <li ><?php tpl_actionlink('subscription');   ?> </li>
+               <li ><?php tpl_actionlink('admin');  ?> </li>
+               <li ><?php tpl_actionlink('profile');  ?> </li>
+            </ul>
+         </div>
+
+         <div class="headerPagename">
            [[<?php tpl_link(wl($ID,'do=backlink'),tpl_pagetitle($ID,true))?>]]
          </div>
-         <div class="logo">
+
+          
+         <div class="headerLogo">
            <?php tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
          </div>
+         
          <div class="clearfix"> </div>
       </div>
 
@@ -82,11 +96,11 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 					<!-- end content -->
    			</div>
    			<div id="rightcol" > 
-   			   right Column 
+   			   <h2>Edit</h2>
+   				<?php writeMBPortlet($monobook['content_actions'], 'p-cactions', $lang['monobook_bar_views'], 'ca', '1'); ?>
    			</div>
    		</div> 
    		<div id="leftcol" > 
-				<?php writeMBPortlet($monobook['content_actions'], 'p-cactions', $lang['monobook_bar_views'], 'ca', '1'); ?>
 				<?php writeMBPortlet($monobook['navigation'], 'p-x-navigation', $lang['monobook_bar_navigation'], 'n'); ?>
 				<?php writeMBPortlet($monobook['personal'], 'p-personal', $lang['monobook_bar_personnaltools'], 'pt'); ?>
    		</div>

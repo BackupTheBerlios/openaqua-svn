@@ -57,12 +57,26 @@ contains leftcol + maincol
  background-color:#1F6F56; 
  width:100%;
 } 
+
  
+#headerPagename {
+   background-color:red; 
+   display: none;
+}
+
+#headerLinks {
+   background-color:green; 
+}
+#headerLogo {
+   background-color:yellow; 
+   display: none;
+}
 #footer{
- height:100px; 
-  background-color:#1F5960; 
- clear:both;
+   height:100px; 
+   background-color:#1F5960; 
+   clear:both;
 } 
+ 
  
 
  
