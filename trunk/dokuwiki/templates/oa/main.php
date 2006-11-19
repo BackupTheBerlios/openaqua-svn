@@ -1,5 +1,6 @@
 <?php
 // must be run from within DokuWiki
+$monobook;
 if (!defined('DOKU_INC')) die();
 if (file_exists(DOKU_PLUGIN.'displaywikipage/code.php')) include_once(DOKU_PLUGIN.'displaywikipage/code.php');
 if (isset($DOKU_TPL)==FALSE) $DOKU_TPL = DOKU_TPL; if (isset($DOKU_TPLINC)==FALSE) $DOKU_TPLINC = DOKU_TPLINC;
@@ -15,8 +16,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 <head>
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
-		if (function_exists('re_log_referrers')) re_log_referrers();
-		@include(dirname(__FILE__).'/user/pref.php');
+ 	   @include(dirname(__FILE__).'/user/pref.php');
 		//@include(dirname(__FILE__).'/lang/en/lang.php');
 		//if ( $conf['lang'] && $conf['lang'] != 'en' ) @include(dirname(__FILE__).'/lang/'.$conf['lang'].'/lang.php');
       @include(dirname(__FILE__).'/context.php');

@@ -6,11 +6,13 @@
  * License: GPL v2
  */
 
-$pagetype = "article";	/* Normal page */
-$monobook['nsclass'] = 'mediawiki ns-0 ltr';		/* Normal page */
+$pagetype = "article";	// Normal page 
+$monobook['nsclass'] = 'mediawiki ns-0 ltr';		// Normal page 
 
-if (beginsWith($monobook['discussion-location'], ':'))	/* Strip leading colon */
+
+if (beginsWith($monobook['discussion-location'], ':'))	// Strip leading colon 
 	$monobook['discussion-location'] = substr($monobook['discussion-location'], 1);
+
 
 if (beginsWith($ID, "wiki:"))
 {
@@ -18,27 +20,27 @@ if (beginsWith($ID, "wiki:"))
 	{
 		if (!beginsWith($ID, "wiki:user:"))
 		{
-			$pagetype = "special";	/* Special page */
+			$pagetype = "special";	// Special page
 		}
 	}
 }
 
 if ($ACT == "search")
 {
-	$pagetype = "special";	/* Special page */
+	$pagetype = "special";	//Special page
 }
 
 if ($_REQUEST['mbdo'] == 'cite')
 {
-	$pagetype = "special";	/* Special page */
+	$pagetype = "special";	// Special page
 }
 else if ($_REQUEST['mbdo'] == 'detail')
 {
-	$pagetype = "special";	/* Special page */
+	$pagetype = "special";	// Special page
 }
 else if ($_REQUEST['mbdo'] == 'media')
 {
-	$pagetype = "special";	/* Special page */
+	$pagetype = "special";	// Special page
 }
 
 
@@ -61,7 +63,7 @@ if ($pagetype == "article")
 	}
 	else
 	{
-		$monobook['nsclass'] = 'mediawiki ns-1 ltr';	/* Special page */
+		$monobook['nsclass'] = 'mediawiki ns-1 ltr';	// Special page
 
 		$monobook['content_actions']['nstab-main']['wiki'] = ':'.substr($ID,strlen($monobook['discussion-location']));
 		$monobook['content_actions']['nstab-main']['text'] = $lang['monobook_article'];
@@ -79,12 +81,12 @@ if ($pagetype == "article")
 
 	if (beginsWith($ID,"wiki:user:"))
 	{
-		$monobook['nsclass'] = 'mediawiki ns-1 ltr';	/* Special page */
+		$monobook['nsclass'] = 'mediawiki ns-1 ltr';	// Special page
 		$monobook['content_actions']['nstab-main']['text'] = $lang['monobook_userpage'];
 		$monobook['content_actions']['nstab-main']['accesskey'] = 'v';
 	}
 
-	/* Now the edit button... */
+	// Now the edit button... 
 	if ($ACT == "edit")
 		$monobook['content_actions']['edit']['class'] = "selected";
 	$monobook['content_actions']['edit']['href'] = DOKU_BASE.DOKU_SCRIPT."?id=".$ID."&amp;do=edit&amp;rev=".$_REQUEST['rev'];
@@ -111,7 +113,7 @@ if ($pagetype == "article")
 }
 else if ($pagetype == "special")
 {
-	$monobook['nsclass'] = 'mediawiki ns-1 ltr';	/* Special page */
+	$monobook['nsclass'] = 'mediawiki ns-1 ltr';	// Special page
 
 	$monobook['content_actions']['nstab-main']['class'] = "selected";
 	if ($ACT != "search")
@@ -125,7 +127,7 @@ else if ($pagetype == "special")
 	$monobook['content_actions']['nstab-main']['text'] = $lang['monobook_specialpage'];
 	$monobook['content_actions']['nstab-main']['accesskey'] = 'v';
 
-	/* Now the edit button... */
+	// Now the edit button... 
 	if ($ACT == "edit")
 		$monobook['content_actions']['edit']['class'] = "selected";
 	$monobook['content_actions']['edit']['href'] = DOKU_BASE.DOKU_SCRIPT."?id=".$ID."&amp;do=edit&amp;rev=".$_REQUEST['rev'];
@@ -182,7 +184,7 @@ else if ($pagetype == "special")
 	}
 
 
-/* Determine what will be listed on personal tools */
+// Determine what will be listed on personal tools 
 if($conf['useacl'])
 {
 	if ($_SERVER['REMOTE_USER'])
@@ -222,13 +224,13 @@ if($conf['useacl'])
 	}
 }
 
-/*
-Portlet writing function
-by Terence J. Grant
-tjgrant [at] tatewake [dot] com
+//
+//Portlet writing function
+//by Terence J. Grant
+//tjgrant [at] tatewake [dot] com
+//
+//07/28/2006 - This function needs cleaning up...
 
-07/28/2006 - This function needs cleaning up...
-*/
 function writeMBPortlet($arr, $name, $subname, $prefix, $istabs = "")
 {
 	if ($arr)    #write it only if we even have a section for this
