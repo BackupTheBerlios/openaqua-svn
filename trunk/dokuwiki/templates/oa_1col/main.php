@@ -72,12 +72,13 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
       <!--++++++++++++++++++Content++++++++++++++-->
       <div id="page">
          <div id="maincol" > 
-            <!-- start content -->
-            <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
-            <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_youarehere(); ?></p></div><?php } ?>
-            <?php html_msgarea()?>
-            <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
-            <?php if ($_REQUEST['mbdo'] == 'cite')
+            <div id="maincolContent" > 
+               <!-- start content -->
+               <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
+               <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_youarehere(); ?></p></div><?php } ?>
+               <?php html_msgarea()?>
+               <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+               <?php if ($_REQUEST['mbdo'] == 'cite')
                         @include(dirname(__FILE__).'/do_cite.php');
                      else if ($_REQUEST['mbdo'] == 'detail')
                         @include(dirname(__FILE__).'/do_detail.php');
@@ -85,8 +86,27 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
                         @include(dirname(__FILE__).'/do_media.php');
                      else
                         tpl_content();
-            ?>
-            <!-- end content -->
+               ?>
+               <!-- end content -->
+            </div> <!-- id="maincolContent" -->
+            
+            <div id="contentfooterNavigation" class="horizontalNavigation"> 
+                  <!--show either action links-->
+                  <?php 
+                     if ($conf['useacl'] && $_SERVER['REMOTE_USER']) {    
+                           echo '<ul >' .
+                                  '<li >'; tpl_actionlink('edit'); echo '<li >'  .
+                                  '<li >'; tpl_actionlink('history') ; echo '<li >' .
+                                  '<li >'; tpl_actionlink('recent') ; echo '<li >' .
+                                '</ul>';
+                     } else {
+                           echo '<ul >' .
+                                  '<li >' . tpl_pageinfo() .  '<li >'  .
+                                  '<li >' . tpl_userinfo() . '<li >' .
+                                '</ul>';
+                     }
+                  ?>
+            </div>
          </div><!--maincol-->
          <?php writeMBPortlet($monobook['personal'], 'rightcol', '', 'rightcol'); ?>         
       </div>
