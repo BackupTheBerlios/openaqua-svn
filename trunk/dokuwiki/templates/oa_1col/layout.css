@@ -26,11 +26,6 @@ contains leftcol + maincol
    position:relative; 
 }
 
-#leftcol{
-   width:20%; 
-   float:left; 
-   position:relative; 
-}
 
 #maincol{
    float: left; 
@@ -40,9 +35,9 @@ contains leftcol + maincol
 }
  
 #rightcol{
- width:20%; 
- float:right; 
- position:relative; 
+   width:20%; 
+   float:right; 
+   position:relative; 
 }
  
 

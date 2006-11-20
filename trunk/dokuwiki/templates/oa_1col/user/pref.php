@@ -27,10 +27,11 @@
 
 @include(dirname(__FILE__).'/local_pref.php');
 
+/*
 @include (dirname(__FILE__).'/../lang/en/lang.php');
-			if ( $conf['lang'] && $conf['lang'] != 'en' )
-				@include (dirname(__FILE__).'/../lang/'.$conf['lang'].'/lang.php');
-
+         if ( $conf['lang'] && $conf['lang'] != 'en' )
+            @include (dirname(__FILE__).'/../lang/'.$conf['lang'].'/lang.php');
+*/
  
 /* Change Edit to [Edit] */
 $lang['btn_secedit'] = '['.$lang['btn_secedit'].']';
@@ -39,6 +40,9 @@ $lang['btn_secedit'] = '['.$lang['btn_secedit'].']';
 if (!isset($monobook['discussion']))
     $monobook['discussion'] = 1;
 
+if (!isset($monobook['footer']))
+    $monobook['footer']['page']['wiki_page'] = ':wiki:footer';
+    
 if (!isset($monobook['discussion-location']))
     $monobook['discussion-location'] = "talk";
 

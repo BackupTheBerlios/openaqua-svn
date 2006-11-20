@@ -17,7 +17,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
       @include (dirname(__FILE__).'/string_fn.php');
- 	   @include(dirname(__FILE__).'/user/pref.php');
+      @include(dirname(__FILE__).'/user/pref.php');
       @include(dirname(__FILE__).'/context.php');
 
       
@@ -53,14 +53,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
    <div id="pagewidth" >
       <div id="header" >
          <div id="headerLinks" class="horizontalNavigation">
-            <ul >
-               <li ><?php tpl_pagelink($myDefaultPageAbout); ?> </li>
-               <li ><?php tpl_actionlink('index'); ?></li>
-               <li ><?php tpl_actionlink('login'); ?></li>
-               <li ><?php tpl_actionlink('subscription');   ?> </li>
-               <li ><?php tpl_actionlink('admin');  ?> </li>
-               <li ><?php tpl_actionlink('profile');  ?> </li>
-            </ul>
+            <?php writeMBPortlet($monobook['navigation'], 'p-x-navigation', '', 'n'); ?>      
          </div>
 
          <div class="headerPagename">
@@ -72,51 +65,44 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
            <?php tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
          </div>
          
-         <div class="clearfix"> </div>
       </div>
+      <div class="clearfix"> </div>
 
-   	<div id="wrapper" class="clearfix" >
-   		<div id="twocols" class="clearfix"> 
-   			<div id="maincol" > 
-					<!-- start content -->
-					<?php html_msgarea()?>
-				   <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
-               <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
-               <?php if ($_REQUEST['mbdo'] == 'cite')
-               		@include(dirname(__FILE__).'/do_cite.php');
-               	else if ($_REQUEST['mbdo'] == 'detail')
-               		@include(dirname(__FILE__).'/do_detail.php');
-               	else if ($_REQUEST['mbdo'] == 'media')
-               		@include(dirname(__FILE__).'/do_media.php');
-               	else
-               		tpl_content();
-               ?>
-               <br/>
-					<?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_youarehere(); ?></p></div><?php } ?>
-					<!-- end content -->
-   			</div>
-   			<div id="rightcol" > 
-   			   <h2>Edit</h2>
-   				<?php writeMBPortlet($monobook['content_actions'], 'p-cactions', $lang['monobook_bar_views'], 'ca', '1'); ?>
-   			</div>
-   		</div> 
-   		<div id="leftcol" > 
-				<?php writeMBPortlet($monobook['navigation'], 'p-x-navigation', $lang['monobook_bar_navigation'], 'n'); ?>
-				<?php writeMBPortlet($monobook['personal'], 'p-personal', $lang['monobook_bar_personnaltools'], 'pt'); ?>
-   		</div>
-      </div>
-   	<div id="footer" class="horizontalNavigation"> 
-   	   <ul id="footer-list">
-             <li id="lastmod"><?php tpl_pageinfo()?></li>
-             <li id="usermod"><?php tpl_userinfo()?><br />
-             </li>
-         </ul>
-   	</div>
-   </div>
-   <?php flush()?>
+      <div id="maincol" > 
+         <!-- start content -->
+         <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
+         <?php if ($conf['youarehere']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_youarehere(); ?></p></div><?php } ?>
+         <?php html_msgarea()?>
+         <div id="qsearch__out" class="ajax_qsearch JSpopup"></div>
+         <?php if ($_REQUEST['mbdo'] == 'cite')
+                     @include(dirname(__FILE__).'/do_cite.php');
+                  else if ($_REQUEST['mbdo'] == 'detail')
+                     @include(dirname(__FILE__).'/do_detail.php');
+                  else if ($_REQUEST['mbdo'] == 'media')
+                     @include(dirname(__FILE__).'/do_media.php');
+                  else
+                     tpl_content();
+         ?>
+         <div id="contentfooter" class="horizontalNavigation"> 
+             <ul >
+                <li id="lastmod"><?php tpl_pageinfo()?></li>
+                <li id="usermod"><?php tpl_userinfo()?></li>
+             </ul>
+         </div>
+         <!-- end content -->
+         <div id="rightcol" > 
+            <?php writeMBPortlet($monobook['personal'], 'p-personal', '', 'pt'); ?>         
+            <?php writeMBPortlet($monobook['content_actions'], 'p-cactions', '', 'ca', '1'); ?>
+         </div>
+       
+       <!--Footer Beg-->
+       <?php writeMBPortlet($monobook['footer'], 'footer', '', 'n'); ?>      
+       <!--Footer End-->
+   </div><!--pagewidth-->
    
    <!--some cleanup for dokuwiki indexer-->
-   <a href="<?php echo DOKU_BASE.DOKU_SCRIPT;?>?do=recent" accesskey="r" style="visibility:hidden;" rel="nofollow">&nbsp;</a>	<?php tpl_indexerWebBug(); ?>
+   <a href="<?php echo DOKU_BASE.DOKU_SCRIPT;?>?do=recent" accesskey="r" style="visibility:hidden;" rel="nofollow">&nbsp;</a> <?php tpl_indexerWebBug(); ?>
+   <?php flush()?>
    
 </body>
 </html>
