@@ -11,10 +11,12 @@ html, body{
 
 #maincol{
    text-align: left;
+   background-color: red;
 }
  
 #rightcol{
    text-align: left;
+   background-color: yellow;
 }
  
 
@@ -81,33 +83,64 @@ Horizontal Navigation
    /*
    */
 }
+.horizontalNavigation ul {
 
-.horizontalNavigation ul{
+   display: inline;
+   padding: 3px 0;
    /*
    padding: 3px 0;
    margin-left: 0;
    border-bottom: 1px solid;
    */
 }
-.horizontalNavigation li{
-   display: inline;
-   /*
+.horizontalNavigation ul li{
+   display:inline;
    list-style: none;
+   float: left;
+   /*
    margin: 0;
    */
 }
-.horizontalNavigation  a {
+.horizontalNavigation ul li a {
+   /*
    border-right: 1px solid __border__;
    height: 1em;
    text-decoration: none;
    color: __border__;
    padding-right: 0.7em;
+   */
 }
 
 
-.horizontalNavigation  a.lastNavItem {
-   border-right: none;
+
+#footer ul {
+
+   display: inline;
+   padding: 3px 0;
+   /*
+   padding: 3px 0;
+   margin-left: 0;
+   border-bottom: 1px solid;
+   */
 }
+#footer ul li{
+   display:inline;
+   list-style: none;
+   float: left;
+   /*
+   margin: 0;
+   */
+}
+#footer ul li a {
+   /*
+   border-right: 1px solid __border__;
+   height: 1em;
+   text-decoration: none;
+   color: __border__;
+   padding-right: 0.7em;
+   */
+}
+
 
 
  

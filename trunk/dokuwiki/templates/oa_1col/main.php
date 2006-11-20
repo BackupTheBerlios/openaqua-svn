@@ -51,6 +51,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
 </head>
 <body>
    <div id="pagewidth" >
+      <!--++++++++++++++++++Header++++++++++++++-->
       <div id="header" >
          <div id="headerLinks" class="horizontalNavigation">
             <?php //writeMBPortlet($monobook['navigation'], 'p-x-navigation', '', 'n'); ?>      
@@ -59,15 +60,17 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
          <div class="headerPagename">
            [[<?php tpl_link(wl($ID,'do=backlink'),tpl_pagetitle($ID,true))?>]]
          </div>
-
           
          <div class="headerLogo">
            <?php tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
          </div>
          
       </div>
-      <div class="clearfix"> </div>
-
+      
+      
+      
+      <!--++++++++++++++++++Content++++++++++++++-->
+      <div id="page">
          <div id="maincol" > 
             <!-- start content -->
             <?php if ($conf['breadcrumbs']) { ?><div id="catlinks"><p class="catlinks"><?php tpl_breadcrumbs(); ?></p></div><?php } ?>
@@ -83,29 +86,22 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
                      else
                         tpl_content();
             ?>
-            <div id="contentfooter" class="horizontalNavigation"> 
-                <ul >
-                   <li id="lastmod"><?php tpl_pageinfo()?></li>
-                   <li id="usermod"><?php tpl_userinfo()?></li>
-                </ul>
-            </div>
             <!-- end content -->
-         </div>
-         <div id="rightcol" > 
-               <?php writeMBPortlet($monobook['personal'], 'p-personal', '', 'pt'); ?>         
-               <?php writeMBPortlet($monobook['content_actions'], 'p-cactions', '', 'ca', '1'); ?>
-         </div>
-         <div class="clearfix"> </div>
-       
-       <!--Footer Beg-->
-       <?php writeMBPortlet($monobook['footer'], 'footer', '', 'n'); ?>      
-       <!--Footer End-->
-   </div><!--pagewidth-->
-   
-   <!--some cleanup for dokuwiki indexer-->
-   <a href="<?php echo DOKU_BASE.DOKU_SCRIPT;?>?do=recent" accesskey="r" style="visibility:hidden;" rel="nofollow">&nbsp;</a> <?php tpl_indexerWebBug(); ?>
-   <?php flush()?>
-   
+         </div><!--maincol-->
+         <?php writeMBPortlet($monobook['personal'], 'rightcol', '', 'rightcol'); ?>         
+      </div>
+
+      
+      
+      <!--++++++++++++++++++Footer++++++++++++++-->
+      <div class="clearer"> </div>
+      <hr />
+      <?php writeMBPortlet($monobook['footer'], 'footer', '', '', 'horizontalNavigation'); ?>      
+      <!--++++++++++++++++++Cleanup++++++++++++++-->
+      <a href="<?php echo DOKU_BASE.DOKU_SCRIPT;?>?do=recent" accesskey="r" style="visibility:hidden;" rel="nofollow">&nbsp;</a> 
+      <?php tpl_indexerWebBug(); ?>
+      <?php flush()?>
+   </div><!-- id="pagewidth"-->
 </body>
 </html>
 

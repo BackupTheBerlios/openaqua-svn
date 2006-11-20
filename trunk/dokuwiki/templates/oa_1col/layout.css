@@ -27,12 +27,14 @@ the content block in the center of a webpage.
    display:inline; 
    position: relative; 
    width:80%;
+   background-color: red;
 }
  
 #rightcol{
    width:20%; 
    float:right; 
    position:relative; 
+   background-color: yellow;
 }
  
 
@@ -57,9 +59,11 @@ the content block in the center of a webpage.
 
 #footer{
    height:100px; 
-   clear:both;
 } 
- 
+
+.clearer {
+   clear: both;
+} 
  
 
  
