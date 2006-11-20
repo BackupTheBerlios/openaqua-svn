@@ -1,0 +1,12 @@
+mmKanso template for DokuWiki
+=============================
+
+Version 1.1 (2006-11-20)
+------------------------
+- Fixed problem with editing menus
+- Changed default font to Verdana
+- Removed unused CSS files
+
+Version 1.0 (2006-10-06)
+------------------------
+- Initial Version
