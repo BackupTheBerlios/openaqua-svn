@@ -57,16 +57,17 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
             <?php //writeMBPortlet($monobook['navigation'], 'p-x-navigation', '', 'n'); ?>      
          </div>
 
-         <div class="headerPagename">
-           [[<?php tpl_link(wl($ID,'do=backlink'),tpl_pagetitle($ID,true))?>]]
+         <div id="headerPagename">
+           [[<?php //tpl_link(wl($ID,'do=backlink'),tpl_pagetitle($ID,true))?>]]
          </div>
           
-         <div class="headerLogo">
-           <?php tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
+         <div id="headerLogo">
+           <?php //tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
          </div>
          
-      </div>
-      
+         <?php writeMBPortlet($monobook['navigation'], '', '', '', 'nav'); ?>      
+
+      </div><!--header-->      
       
       
       <!--++++++++++++++++++Content++++++++++++++-->

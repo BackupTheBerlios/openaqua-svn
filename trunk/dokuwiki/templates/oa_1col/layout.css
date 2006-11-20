@@ -36,6 +36,8 @@ the content block in the center of a webpage.
    position:relative; 
    text-align: left;
 }
+
+
  
 #contentfooter {
 }
@@ -68,5 +70,9 @@ the content block in the center of a webpage.
    clear: both;
 } 
  
+#navigation{
+}
 
+.navigationMenu{
+}
  
