@@ -71,6 +71,7 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
       
       <!--++++++++++++++++++Content++++++++++++++-->
       <div id="page">
+         <!--main column (is the left column)-->
          <div id="maincol" > 
             <div id="maincolContent" > 
                <!-- start content -->
@@ -91,7 +92,6 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
             </div> <!-- id="maincolContent" -->
             
             <div id="contentfooterNavigation" class="horizontalNavigation"> 
-                  <!--show either action links-->
                   <?php 
                      if ($conf['useacl'] && $_SERVER['REMOTE_USER']) {    
                            echo '<ul >' .
@@ -107,7 +107,8 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
                      }
                   ?>
             </div>
-         </div><!--maincol-->
+         </div>
+         <!--right column-->
          <?php writeMBPortlet($monobook['personal'], 'rightcol', '', 'rightcol'); ?>         
       </div>
 

@@ -10,9 +10,9 @@ the content block in the center of a webpage.
 #pagewidth{ 
  width:700px; 
  min-width: 700px;
- text-align:left;  
  margin-left:auto; 
  margin-right:auto;  
+ text-align: center;
 } 
  
 
@@ -27,16 +27,18 @@ the content block in the center of a webpage.
    display:inline; 
    position: relative; 
    width:80%;
-   background-color: red;
+   text-align: left;
 }
  
 #rightcol{
    width:20%; 
    float:right; 
    position:relative; 
-   background-color: yellow;
+   text-align: left;
 }
  
+#contentfooter {
+}
 
 
  
@@ -47,6 +49,7 @@ the content block in the center of a webpage.
 }
 
 #headerLinks {
+   text-align: right;
    /*
    background-color: yellow;
    */
@@ -58,7 +61,7 @@ the content block in the center of a webpage.
 }
 
 #footer{
-   height:100px; 
+   text-align: right;
 } 
 
 .clearer {
