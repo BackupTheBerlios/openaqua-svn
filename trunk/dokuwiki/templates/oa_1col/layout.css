@@ -8,7 +8,7 @@ html, body{
 the content block in the center of a webpage.
 */
 #pagewidth{ 
- width:80%; 
+ width:700px; 
  min-width: 700px;
  text-align:left;  
  margin-left:auto; 
@@ -16,22 +16,17 @@ the content block in the center of a webpage.
 } 
  
 
-/*
-
-contains leftcol + maincol
-*/
-#twocols{
-   width:80%; 
-   float:right; 
-   position:relative; 
-}
-
+#header{
+ position:relative; 
+ height:50px; 
+ width:100%;
+} 
 
 #maincol{
    float: left; 
    display:inline; 
    position: relative; 
-   width: 79%; 
+   width:80%;
 }
  
 #rightcol{
@@ -41,14 +36,6 @@ contains leftcol + maincol
 }
  
 
-#header{
- position:relative; 
- height:50px; 
- width:100%;
- /*
- background-color: blue;
- */
-} 
 
  
 #headerPagename {

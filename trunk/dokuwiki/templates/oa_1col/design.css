@@ -9,22 +9,24 @@ html, body{
 } 
  
 
-#twocols{
-   text-align: left;
-}
-
-#leftcol{
-   text-align: left;
-   display: none;
-}
-
 #maincol{
+   text-align: left;
 }
  
 #rightcol{
-   display: none;
+   text-align: left;
 }
  
+
+#contentfooter {
+   font: small;
+   color: grey;
+   text-align: right;
+}
+
+.toc {
+   display: none;
+}
 
 #header{
    background-image: url(images/top_back.gif);
@@ -35,7 +37,6 @@ html, body{
    padding-top: 1em;
    padding-bottom: 2em;
    */
-   
 } 
 
  
