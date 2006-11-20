@@ -1,0 +1,83 @@
+html, body{ 
+ margin:0; 
+ padding:0; 
+ text-align:center; 
+} 
+ 
+/*
+the content block in the center of a webpage.
+*/
+#pagewidth{ 
+ width:80%; 
+ min-width: 700px;
+ text-align:left;  
+ margin-left:auto; 
+ margin-right:auto;  
+} 
+ 
+
+/*
+
+contains leftcol + maincol
+*/
+#twocols{
+   width:80%; 
+   float:right; 
+   position:relative; 
+}
+
+#leftcol{
+   width:20%; 
+   float:left; 
+   position:relative; 
+}
+
+#maincol{
+   float: left; 
+   display:inline; 
+   position: relative; 
+   width: 79%; 
+}
+ 
+#rightcol{
+ width:20%; 
+ float:right; 
+ position:relative; 
+}
+ 
+
+#header{
+ position:relative; 
+ height:50px; 
+ width:100%;
+ /*
+ background-color: blue;
+ */
+} 
+
+ 
+#headerPagename {
+   /*
+   background-color: yellow;
+   */
+}
+
+#headerLinks {
+   /*
+   background-color: yellow;
+   */
+}
+#headerLogo {
+   /*
+   background-color: yellow;
+   */
+}
+
+#footer{
+   height:100px; 
+   clear:both;
+} 
+ 
+ 
+
+ 

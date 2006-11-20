@@ -1,0 +1,115 @@
+html, body{ 
+   padding:0;
+   font:small Verdana,Sans-serif;
+} 
+ 
+ 
+#pagewidth{ 
+   text-align: center;
+} 
+ 
+
+#twocols{
+   text-align: left;
+}
+
+#leftcol{
+   text-align: left;
+   display: none;
+}
+
+#maincol{
+}
+ 
+#rightcol{
+   display: none;
+}
+ 
+
+#header{
+   background-image: url(images/top_back.gif);
+   background-repeat: repeat-x;
+   padding-top: 1px;
+   /*
+   border: solid 0px;
+   padding-top: 1em;
+   padding-bottom: 2em;
+   */
+   
+} 
+
+ 
+#headerPagename {
+   display: none;
+   /*
+   */
+}
+
+#headerLinks {
+   text-align: right;
+   /*
+   */
+}
+
+#headerLogo {
+   display: none;
+   /*
+   */
+}
+
+#footer{
+} 
+
+
+/**************************************
+Horizontal Navigation
+- disable any header 
+- order lists in horitontal manner
+**************************************/
+.horizontalNavigation {
+}
+
+
+.horizontalNavigation h1,
+.horizontalNavigation h2,
+.horizontalNavigation h3,
+.horizontalNavigation h4,
+.horizontalNavigation h5,
+.horizontalNavigation h6{
+   display: none;
+   /*
+   */
+}
+
+.horizontalNavigation ul{
+   /*
+   padding: 3px 0;
+   margin-left: 0;
+   border-bottom: 1px solid;
+   */
+}
+.horizontalNavigation li{
+   display: inline;
+   /*
+   list-style: none;
+   margin: 0;
+   */
+}
+.horizontalNavigation  a {
+   border-right: 1px solid __border__;
+   height: 1em;
+   text-decoration: none;
+   color: __border__;
+   padding-right: 0.7em;
+}
+
+
+.horizontalNavigation  a.lastNavItem {
+   border-right: none;
+}
+
+
+ 
+ 
+
+ 
