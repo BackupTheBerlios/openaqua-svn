@@ -29,7 +29,7 @@
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
       @include (dirname(__FILE__).'/string_fn.php');
-      @include(dirname(__FILE__).'/user/pref.php');
+      @include(dirname(__FILE__).'/pref.php');
       @include(dirname(__FILE__).'/context.php');
 
       
@@ -62,39 +62,44 @@
    ?>
 </head>
 
-
    
     
-    
 <!--##################################################HTML BODY-->
-    <body>
-        <div id="header"><?php tpl_link(wl(),'<img src="'.DOKU_TPL.'images/banner.png" alt="'.hsc($conf['title']).'"/>','name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?></div>
-        <div id="menu">
-            <ul>
-                <?php include('menu.php'); ?>
-            </ul>
-        </div>
-      <div id="body">
-            <div id="body_top"></div>
-            <p><?php tpl_youarehere(); ?></p>
-         <?php flush(); ?>
-            <?php tpl_content(); ?>
-            <?php flush(); ?>
-            <div id="body_bottom"></div>
-      </div>
-        <div id="footer">
-            <?php tpl_searchform()?>
-            <ul>
-                <li><?php tpl_actionlink('edit'); ?></li>
-                <li><?php tpl_actionlink('login'); ?></li>
-            </ul>
-            <ul>
-                <li><a href="http://dokuwiki.org/wiki:dokuwiki">DokuWiki</a></li>
-            <?php if ($user) { ?>
-                <li><?php tpl_actionlink('profile')?></li>
-                <li><?php tpl_actionlink('admin'); ?>&nbsp;</li>
-            <?php } ?>
-            </ul>
-        </div>
-    </body>
+<body>
+   <!--Header-->
+   <div id="header">
+      <?php tpl_link(wl(),'<img src="'.DOKU_TPL.'images/banner.png" alt="'.hsc($conf['title']).'"/>','name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
+   </div>
+
+   <!--Menu   -->
+   <?php writeMBPortlet($monobook['navigation'], 'menu', '', ''); ?>
+   
+   <!--Body-->
+   <div id="body">
+      <div id="body_top"></div>
+      <p><?php tpl_youarehere(); ?></p>
+      <?php flush(); ?>
+      <?php tpl_content(); ?>
+      <?php flush(); ?>
+      <div id="body_bottom"></div>
+   </div>
+   
+   <!--Footer-->
+   <div id="footer">
+      <?php tpl_searchform()?>
+      <ul>
+         <li><?php tpl_actionlink('edit'); ?></li>
+         <li><?php tpl_actionlink('login'); ?></li>
+      </ul>
+      <ul>
+         <li><a href="http://dokuwiki.org/wiki:dokuwiki">DokuWiki</a></li>
+         <?php if ($user) { ?>
+            <li><?php tpl_actionlink('profile')?></li>
+            <li><?php tpl_actionlink('admin'); ?>&nbsp;</li>
+         <?php } ?>
+      </ul>
+   </div>
+   
+   
+</body>
 </html>
