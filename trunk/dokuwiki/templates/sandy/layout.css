@@ -35,7 +35,9 @@ html, body {
 #menu .li {
    display: inline;
 }
-
+#menu .secedit2 {
+   display: inline;
+}
 
 /* ================================== BODY ================================== */
 #body_top, #body_bottom {
