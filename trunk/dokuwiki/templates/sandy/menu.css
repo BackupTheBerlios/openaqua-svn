@@ -2,14 +2,16 @@
 position:relative;
 width:750px;
 height:2em;
-background:#b7c6ac;
 border-top:10px solid #b7c6ac;
-padding-bottom:1px;
+padding: 2px 0 2px 0;
+
+background-color: #000;
+color: #fff;
+
 background:#b7c6ac url(drop/line.gif) bottom left repeat-x;
 margin-bottom:5em;
 }
 
-* html #menu {padding-bottom:0;}
 
 #menu ul{
 list-style-type:none;
