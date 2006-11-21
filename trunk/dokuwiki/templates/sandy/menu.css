@@ -58,14 +58,18 @@ top:0;
 
 
 #menu a em.lft, #menu :visited em.lft {
+/*
+
 display:block;
 float:left;
 width:5px;
 height:2em;
 background: transparent url(drop/lefta.gif);
 border-bottom:1px solid #777;
+*/
 }
 #menu a b, #menu :visited b {
+/*
 display:block;
 font-weight:normal;
 float:left;
@@ -74,85 +78,120 @@ height:2em;line-height:1.9em;
 background: transparent url(drop/mida.gif);
 cursor:pointer;
 border-bottom:1px solid #777;
+*/
 }
 #menu a em.rgt, #menu :visited em.rgt {
+/*
 display:block;
 float:left;
 width:5px;
 height:2em;
 background: transparent url(drop/righta.gif);
 border-bottom:1px solid #777;
+*/
 }
 
 #menu ul ul {
-visibility:hidden;
-position:absolute;
-height:2em;
+   visibility:hidden;
+   position:absolute;
+   height:2em;
+   background:#ccc;
+left:220px;
+   /*
 top:2em;
-left:-20px;
 width:749px;
-border-bottom:1px solid #777;
-border-right:1px solid #777;
-background:#ccc;
+border:1px solid #000;
+   */
 }
 
 #menu :hover {
+/*
 white-space:normal;
+*/
 }
 
 #menu a:hover b {
+/*
 color:#000;
 background: transparent url(drop/midb.gif);
 border-bottom-color:#ccc;
+*/
 }
 #menu a:hover em.lft {
+/*
 background: transparent url(drop/leftb.gif);
 border-bottom-color:#ccc;
+*/
 }
 #menu a:hover em.rgt {
+/*
 background: transparent url(drop/rightb.gif);
 border-bottom-color:#ccc;
+*/
 }
 
 #menu li:hover > a b
 {
+/*
 color:#000;
 background: transparent url(drop/midb.gif);
 border-bottom-color:#ccc;
+*/
 }
 #menu li:hover > a em.lft {
+/*
 background: transparent url(drop/leftb.gif);
 border-bottom-color:#ccc;
+*/
 }
 #menu li:hover > a em.rgt {
+/*
 background: transparent url(drop/rightb.gif);
 border-bottom-color:#ccc;
+*/
 }
 #menu ul li:hover ul,
 #menu ul a:hover ul{
-display:block;
-visibility:visible;
-top:2em;
-margin-top:1px;
+   display:block;
+   visibility:visible;
+   top:2em;
+   margin-top:1px;
 }
 
 #menu ul :hover ul li {
-display:block; 
+   background-color: #000;
+   color: #fff;
+   text-align: center;
+   background-image: url(images/menu_background.png);
+   background-repeat: repeat-x;
+   z-index:100;
+   display:block; 
+
+/*
 border-left:1px solid #777; 
-background:#ccc; 
-height:2em;
+background:#000; 
+color: #fff;
+*/
+
 }
+
+/*
+hier wird zumindest teilweise das aussehen definiert.
+*/
 #menu ul :hover ul li a {
-display:block; 
-font-size:0.8em; 
-height:2em; 
-line-height:2.5em; 
-width:auto; 
-float:left; 
-color:#444; 
-padding:0 10px;}
+   display:block; 
+   color:#fff; 
+   background: #000;
+   width:auto; 
+   /*
+   line-height:2em; 
+   height:2em; 
+   float:left; 
+   */
+}
+
 #menu ul :hover ul li a:hover {
-color:#c00;
+   color:#fff;
 }
 #menu h1, h2, h3, h4, h5, h6 {
    display:none;
