@@ -64,6 +64,13 @@ a img {
    background-color: #333;
 }
 
+#menu li.level2 {
+   display:none;
+}
+#menu h1, h2, h3, h4, h5, h6 {
+   display:none;
+}
+
 /* ================================== BODY ================================== */
 #body {
    background-color: #fff;
@@ -138,6 +145,12 @@ ul {
    text-align: right;
 }
 
+#body .secedit  .button{
+   font-size: xx-small;
+   height: 10%;
+   background-color: none;
+}
+
 #body input {
    border: solid 1px #8cacbb;
 }
@@ -152,18 +165,6 @@ ul {
 #body table tr:hover { background-color: #ffffe5; }
 
 
-/* ********** Page Information ************/
-#body_bottom ul li {
-   color: grey;
-   font-size: 50%; 
-   padding-left: .5em;
-}
-
-#body_bottom ul li a{
-   color: grey;
-   font-size: 50%; 
-   padding-left: .5em;
-}
 
 
 /* ================================= FOOTER ================================= */
@@ -191,17 +192,22 @@ ul {
 }
 
 /* ================================= COPYRIGHT =================================== */
+/* ********** Page Information ************/
+ 
 #copyright 
 #copyright div.li,
 #copyright ul,
 #copyright ul li,
 #copyright ul li a,
 #copyright .level1 .li,
-#copyright .secedit2 a{
+#copyright div.secedit2 a,
+#body_bottom ul li,
+#body_bottom ul li a{
    color: grey;
-   font-size: 50%; 
+   font-size: x-small;
    padding-left: .5em;
 }
+
 #copyright .level2 {
    display: none;
 }
