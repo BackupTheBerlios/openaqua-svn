@@ -122,6 +122,10 @@ ul {
    font-family: "Courier New",Courier,monospace;
 }
 
+#body .secedit {
+   text-align: right;
+}
+
 #body input {
    border: solid 1px #8cacbb;
 }
@@ -172,4 +176,20 @@ ul {
 }
 #footer input:hover {
    border: solid 1px #000;
+}
+
+/* ================================= COPYRIGHT =================================== */
+#copyright 
+#copyright div.li,
+#copyright ul,
+#copyright ul li,
+#copyright ul li a,
+#copyright .level1 .li,
+#copyright .secedit2 a{
+   color: grey;
+   font-size: 50%; 
+   padding-left: .5em;
+}
+#copyright .level2 {
+   display: none;
 }

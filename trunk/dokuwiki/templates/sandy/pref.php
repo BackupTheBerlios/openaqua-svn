@@ -14,7 +14,7 @@
 /*
  *  Default configuration file.
  *
- * This file contains all default value for the monobook configuration template for DokuWiki. It loads the local_pref.php (if it exists).
+ * This file contains all default value for the monobook configuration template for DokuWiki. 
  * Then, it fills in all non set configuration variable.
  *
  * Thus : 
@@ -34,7 +34,7 @@
 //          @include (dirname(__FILE__).'/../lang/'.$conf['lang'].'/lang.php');
 
  
-echo "hier";
+
 /* Change Edit to [Edit] */
 $lang['btn_secedit'] = '['.$lang['btn_secedit'].']';
 
@@ -49,14 +49,16 @@ if (!isset($monobook['discussion-location']))
 if (!isset($monobook['sitenotice']))
     $monobook['sitenotice'] = ':wiki:site_notice';
 
-/* Copyright */
-if (!isset($monobook['copyright']))
-    $monobook['copyright'] = ":wiki:copyright";
 
 /* Navigation : link to a wiki page called 'navigation', in the 'wiki' namespace */
 if (!isset($monobook['navigation']))
     $monobook['navigation']['page']['wiki_page'] = ':wiki:navigation';
 
+/* copyright : link to a wiki page called 'copyright', in the 'wiki' namespace */
+if (!isset($monobook['copyright']))
+    $monobook['copyright']['page']['wiki_page'] = ':wiki:copyright';
+    
+    
 /* Toolbox */
 if (!isset($monobook['toolbox'])) {
     $monobook['toolbox']['whatlinkshere']['href'] = DOKU_BASE."doku.php?id=".$ID."&amp;do=backlink";

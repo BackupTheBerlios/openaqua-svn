@@ -114,6 +114,8 @@
          <?php } ?>
       </ul>
    </div>
+   <!--Copyright-->
+   <?php writeMBPortlet($monobook['copyright'], 'copyright', '', ''); ?>
    
    
 </body>

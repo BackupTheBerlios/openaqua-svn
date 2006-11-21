@@ -241,7 +241,6 @@ function writeMBPortlet($arr, $name, $prefix, $portletclass="portlet")
    {
       echo '<div id="'.$name.'" class="' . $portletclass . '">';
       $ULFlag = 1;
-
       foreach($arr as $key => $action)
       {
          #TJG 07/28/2006 Initial rel nofollow support

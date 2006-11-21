@@ -121,3 +121,31 @@ div.level5 { margin: 1em 0 0 5em; }
 #footer p {
    margin: 0;
 }
+
+
+/* ================================= COPYRIGHT =================================== */
+#copyright {
+   text-align: center;
+   padding: 2px 0 2px 0;
+   /*
+   background-color: #000;
+   color: #fff;
+   */
+}
+#copyright ul {
+   margin: 0;
+   padding: 0;
+   display: inline;
+}
+#copyright ul li {
+   display: inline;
+}
+#copyright ul li a {
+   padding: 0 1em 0 1em;
+}
+#copyright .li {
+   display: inline;
+}
+#copyright .secedit2 {
+   display: inline;
+}
