@@ -69,14 +69,16 @@
 <!--##################################################HTML BODY-->
 <body>
    <!--Header-->
+   <div id="headerblock">
    <div id="header">
       <div id="headerLogo">
          <?php //echo $myLogo; ?>
       </div>
    </div>
+   <?php writeMBPortlet($monobook['navigation'], 'menu', '', ''); ?>
+   </div>
 
    <!--Menu   -->
-   <?php writeMBPortlet($monobook['navigation'], 'menu', '', ''); ?>
    
    <!--Body-->
    <div id="body">
