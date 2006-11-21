@@ -41,10 +41,23 @@ html, body {
 
 /* ================================== BODY ================================== */
 #body_top, #body_bottom {
-   height: 1px;
+   height: 20px;
+   margin: 0;
+   padding: 0;
    background-color: #fff;
    color: #000;
 }
+#body_bottom {
+   text-align: right;
+}
+#body_bottom ul li {
+   border-top: 1px dotted;
+   display: inline;
+   list-style: none;
+   text-align: right;
+}
+
+
 #body {
    width: 640px;
    margin: 0 auto 0 auto;

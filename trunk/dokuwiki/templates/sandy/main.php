@@ -81,18 +81,33 @@
       <?php flush(); ?>
       <?php tpl_content(); ?>
       <?php flush(); ?>
-      <div id="body_bottom"></div>
+      <div id="body_bottom">
+                  <?php 
+                     if ($conf['useacl'] && $_SERVER['REMOTE_USER']) {    
+                           echo '<ul >' .
+                                  '<li >'; tpl_actionlink('edit'); echo '</li >'  .
+                                  '<li >'; tpl_actionlink('history') ; echo '</li >' .
+                                  '<li >'; tpl_actionlink('recent') ; echo '</li >' .
+                                '</ul>';
+                     } else {
+                           //shows last edit time and user at a page
+                           echo '<ul ><li>' ; 
+                           tpl_pageinfo(); 
+                           echo  '</li ><li>'; 
+                           tpl_userinfo();
+                           echo '</li ></ul>';
+                     }
+                  ?>
+      </div>
    </div>
    
    <!--Footer-->
    <div id="footer">
       <?php tpl_searchform()?>
       <ul>
-         <li><?php tpl_actionlink('edit'); ?></li>
          <li><?php tpl_actionlink('login'); ?></li>
       </ul>
       <ul>
-         <li><a href="http://dokuwiki.org/wiki:dokuwiki">DokuWiki</a></li>
          <?php if ($user) { ?>
             <li><?php tpl_actionlink('profile')?></li>
             <li><?php tpl_actionlink('admin'); ?>&nbsp;</li>
