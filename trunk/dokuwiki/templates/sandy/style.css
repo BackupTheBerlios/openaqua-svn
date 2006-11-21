@@ -42,6 +42,8 @@ a img {
 }
 
 /* ================================= MENU =================================== */
+/*
+DONT TOUCH THIS:
 #menu {
    background-color: #000;
    color: #fff;
@@ -94,7 +96,7 @@ a img {
    display: inline;
 }
 
-
+*/
 /* ================================== BODY ================================== */
 #body {
    background-color: #fff;
