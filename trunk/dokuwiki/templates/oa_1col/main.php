@@ -96,14 +96,14 @@ if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'ref
                   <?php 
                      if ($conf['useacl'] && $_SERVER['REMOTE_USER']) {    
                            echo '<ul >' .
-                                  '<li >'; tpl_actionlink('edit'); echo '<li >'  .
-                                  '<li >'; tpl_actionlink('history') ; echo '<li >' .
-                                  '<li >'; tpl_actionlink('recent') ; echo '<li >' .
+                                  '<li >'; tpl_actionlink('edit'); echo '</li >'  .
+                                  '<li >'; tpl_actionlink('history') ; echo '</li >' .
+                                  '<li >'; tpl_actionlink('recent') ; echo '</li >' .
                                 '</ul>';
                      } else {
-                           echo '<ul >' .
-                                  '<li >' . tpl_pageinfo() .  '<li >'  .
-                                  '<li >' . tpl_userinfo() . '<li >' .
+                           echo '<ul>' .
+                                  '<li>' ; echo tpl_pageinfo() . '</li >'  .
+                                  '<li>' . tpl_userinfo() . '</li >' .
                                 '</ul>';
                      }
                   ?>
