@@ -16,14 +16,16 @@ Zeilen ohne Space: Original
 
 
 #menu ul{
+   border-left: solid 1px #000;
+   border-right: solid 1px #666;
+   width:auto;
+/*
    margin: 0;
    padding: 0;
    display: inline;
-   border-left: solid 1px #000;
-   border-right: solid 1px #666;
    list-style-type:none;
-   width:730px;
    height:100%;
+*/   
 }
 
 #menu ul li {
@@ -32,42 +34,26 @@ Zeilen ohne Space: Original
    border-right: solid 1px #000;
 }
 
+/*definiert das aussehen der obersten Zeile*/
 #menu li{
 /*
 float:left;
 */
 }
 
-#menu table{
-/*
-position:absolute;
-border-collapse:collapse;
-left:0;
-top:0;
-*/
-}
 
 #menu a, #menu :visited {
    padding: 0 1em 0 1em;
    color: #fff;
    background-color: inherit;
    text-decoration: none;
-   width:104px; 
+   width:400px; 
    overflow:hidden;
+   /*
+   */
 }
 
 
-#menu a em.lft, #menu :visited em.lft {
-/*
-
-display:block;
-float:left;
-width:5px;
-height:2em;
-background: transparent url(drop/lefta.gif);
-border-bottom:1px solid #777;
-*/
-}
 #menu a b, #menu :visited b {
 /*
 display:block;
@@ -92,14 +78,17 @@ border-bottom:1px solid #777;
 }
 
 #menu ul ul {
+   float: left;
    visibility:hidden;
-   position:absolute;
    height:2em;
-   background:#ccc;
-left:220px;
+   width:600px;
+   position:absolute;
+   margin-left:120px;
+   height: 4em;
+   line-height: 2em;
    /*
+   background:#ccc;
 top:2em;
-width:749px;
 border:1px solid #000;
    */
 }
@@ -183,11 +172,11 @@ hier wird zumindest teilweise das aussehen definiert.
    color:#fff; 
    background: #000;
    width:auto; 
-   /*
    line-height:2em; 
    height:2em; 
-   float:left; 
+   /*
    */
+   float:left; 
 }
 
 #menu ul :hover ul li a:hover {

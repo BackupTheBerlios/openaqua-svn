@@ -42,8 +42,6 @@ a img {
 }
 
 /* ================================= MENU =================================== */
-/*
-DONT TOUCH THIS:
 #menu {
    background-color: #000;
    color: #fff;
@@ -95,8 +93,6 @@ DONT TOUCH THIS:
 #menu .secedit2 {
    display: inline;
 }
-
-*/
 /* ================================== BODY ================================== */
 #body {
    background-color: #fff;
