@@ -20,6 +20,8 @@
    //use the referrers plugin (if exists)      
    if (file_exists(DOKU_PLUGIN.'referrers/code.php')) include_once(DOKU_PLUGIN.'referrers/code.php');
    
+   $myLogo = '<p>IVC adf asdfalsdaaaaafd</p><p>IVC adf asdfalsdaaaaafd</p>';
+   
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">
@@ -68,7 +70,9 @@
 <body>
    <!--Header-->
    <div id="header">
-      <?php tpl_link(wl(),'<img src="'.DOKU_TPL.'images/banner.png" alt="'.hsc($conf['title']).'"/>','name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
+      <div id="headerLogo">
+         <?php //echo $myLogo; ?>
+      </div>
    </div>
 
    <!--Menu   -->

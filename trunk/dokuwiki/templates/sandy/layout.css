@@ -13,6 +13,10 @@ html, body {
    text-align: center;
    height: 200px;
 }
+#headerLogo {
+   height: 200px;
+
+}
 
 /* ================================= MENU =================================== */
 #menu {

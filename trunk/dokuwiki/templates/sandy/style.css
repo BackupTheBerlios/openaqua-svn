@@ -29,6 +29,18 @@ a img {
    background-repeat: repeat-y;
 }
 
+#headerLogo {
+   background-image: url(images/banner.png);
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#headerLogo p{
+   color: white;
+   text-transform: capitalize;
+   font-family: serif;
+}
+
 /* ================================= MENU =================================== */
 #menu {
    background-image: url(images/menu_background.png);
