@@ -1,27 +1,3 @@
-/* common styling */
-#menu ul li a, 
-#menu ul li a:visited {
-   display:block; 
-   text-decoration:none; 
-   width:104px; 
-   text-align:center; 
-   border:1px solid #fff; 
-   line-height:20px; 
-   overflow:hidden;
-}
-#menu ul li {float:left; margin-right:1px; position:relative;}
-
-
-/* specific to non IE browsers */
-#menu ul li:hover a {}
-#menu ul li:hover ul {display:block; position:absolute; top:21px; left:0; width:105px;}
-#menu ul li:hover ul li a.hide {}
-#menu ul li:hover ul li:hover a.hide {}
-#menu ul li:hover ul li ul {display: none;}
-#menu ul li:hover ul li a {display:block; background:#ddd; color:#000;}
-#menu ul li:hover ul li a:hover {background:#6fc; color:#000;}
-#menu ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
-#menu ul li:hover ul li:hover ul.left {left:-105px;}
 
 
 /* ================================= MENU =================================== */
@@ -49,6 +25,11 @@
    border-left: solid 1px #666;
    border-right: solid 1px #000;
    display: inline;
+   margin-right:1px; 
+   position:relative;
+   float:left; 
+   /*
+   */   
 }
 #menu ul li a {
    padding: 0 1em 0 1em;
@@ -76,3 +57,33 @@
    display: inline;
 }
 */
+
+/* common styling */
+#menu ul li a, 
+#menu ul li a:visited {
+   display:block; 
+   text-decoration:none; 
+   width:104px; 
+   text-align:center; 
+   border:1px solid #fff; 
+   line-height:20px; 
+   overflow:hidden;
+}
+
+
+/* specific to non IE browsers */
+#menu ul li:hover a {}
+#menu ul li:hover ul {
+   display:inline;
+   position:absolute; 
+   top:21px; 
+   left:0; 
+   width:105px;
+}
+#menu ul li:hover ul li a.hide {}
+#menu ul li:hover ul li:hover a.hide {}
+#menu ul li:hover ul li ul {display: none;}
+#menu ul li:hover ul li a {display:block; background:#ddd; color:#000;}
+#menu ul li:hover ul li a:hover {background:#6fc; color:#000;}
+#menu ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
+#menu ul li:hover ul li:hover ul.left {left:-105px;}
