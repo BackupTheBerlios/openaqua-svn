@@ -57,6 +57,7 @@
             echo '<style type="text/css">';
             echo '<!--';
             echo '.secedit {display:none;}';
+            echo '.secedit2 {display:none;}';
             echo '-->';
             echo '</style>';
          }
