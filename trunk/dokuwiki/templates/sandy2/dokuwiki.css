@@ -1,0 +1,11 @@
+/*Some other dokuwiki specific settings*/
+a.fn_top {
+  vertical-align: super;
+  font-size: 80%;
+}
+
+div.fn {
+   color: grey;
+   font-size: x-small;
+   padding-left: .5em;
+}

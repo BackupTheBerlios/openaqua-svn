@@ -5,7 +5,7 @@
 }
 
 body {
-   background: #e0dfca;
+   background: __background__;
    background-image: url(images/body_background.png);
    background-position: center;
    background-repeat: repeat-y;
@@ -101,8 +101,10 @@ a img {
 
 /* ================================== BODY ================================== */
 #body {
-   background-color: #fff;
-   color: #000;
+   /*
+   background-color: __background_neu__;
+   */
+   color: __text_neu__;
 }
 
 
