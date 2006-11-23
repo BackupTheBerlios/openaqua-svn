@@ -49,6 +49,7 @@ a img {
 /* ================================= MENU =================================== */
 
 #menu {
+   font-family: Verdana, Helvetica, Arial, sans-serif; 
    background-color: #000;
    color: #fff;
    text-align: center;
