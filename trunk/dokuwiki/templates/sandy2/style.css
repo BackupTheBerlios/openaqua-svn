@@ -148,7 +148,7 @@ div.level5 { margin: 1em 0 0 5em; }
    border-bottom: solid 1px #dbdbc5;
 }
 
-#body h1 { font-size: 2em;  }
+#body h1 { font-size: 2em;  margin-top: 1em;}
 #body h2 { font-size: 1.6em;    }
 #body h3 { font-size: 1.3em; }
 #body h4 { font-size: normal; border-bottom: none;}
@@ -228,26 +228,7 @@ ul {
    border: solid 1px #000;
 }
 
-/* ================================= COPYRIGHT =================================== */
-/* ********** Page Information ************/
  
-#copyright 
-#copyright div.li,
-#copyright ul,
-#copyright ul li,
-#copyright ul li a,
-#copyright .level1 .li,
-#copyright div.secedit2 a,
-#body_bottom ul li,
-#body_bottom ul li a{
-   color: grey;
-   font-size: x-small;
-   padding-left: .5em;
-}
-
-#copyright .level2 {
-   display: none;
-}
 
 
 /* ********* TABLES ********* */

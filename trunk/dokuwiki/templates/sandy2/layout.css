@@ -19,7 +19,7 @@ html, body {
 
 
 /* ================================== BODY ================================== */
-#body_top, #body_bottom {
+#body_top, #body_bottom{
    height: 20px;
    margin: 0;
    padding: 0;
@@ -85,24 +85,16 @@ html, body {
 
 
 /* ================================= COPYRIGHT =================================== */
-#copyright {
+#copyright{
+   clear: both;
+   width: 680px;
+   margin: 0em auto 0 auto;
+   padding: 1em 10px 1em 10px;
    text-align: center;
-   padding: 2px 0 2px 0;
 }
-#copyright ul {
-   margin: 0;
-   padding: 0;
-   display: inline;
-}
-#copyright ul li {
-   display: inline;
-}
-#copyright ul li a {
-   padding: 0 1em 0 1em;
-}
-#copyright .li {
-   display: inline;
-}
-#copyright .secedit2 {
+#copyright ul,
+#copyright ul li,
+#copyright .li,
+#copyright div.secedit2 {
    display: inline;
 }

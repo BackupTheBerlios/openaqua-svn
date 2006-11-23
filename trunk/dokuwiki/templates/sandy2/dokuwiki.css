@@ -5,7 +5,27 @@ a.fn_top {
 }
 
 div.fn {
+   background-color: inherit;
    color: grey;
    font-size: x-small;
-   padding-left: .5em;
+   margin-left: 0.5em;
 }
+
+
+/* ================================= Class: Small, grey list================================= */
+.smallGreyListText,
+.smallGreyListText 
+.smallGreyListText 
+.smallGreyListText div.li,
+.smallGreyListText ul,
+.smallGreyListText ul li,
+.smallGreyListText ul li a,
+.smallGreyListText .level1 .li,
+.smallGreyListText div.secedit2 a {
+   background-color: inherit;
+   color: grey;
+   font-size: x-small;
+   margin-left: 0.5em;
+}
+
+

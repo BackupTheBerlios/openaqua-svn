@@ -28,6 +28,7 @@
 
 <!--##################################################HTML HEADER-->
 <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <?php 
       if (function_exists('re_log_referrers')) re_log_referrers();
       @include (dirname(__FILE__).'/string_fn.php');
@@ -38,8 +39,6 @@
       //make page title
       echo '<title>' . strip_tags($conf['title']) . ': '; tpl_pagetitle(); echo "</title>\n";
       
-      //Add meta headers
-      echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
       tpl_metaheaders();
       
       //add a page icon
@@ -84,12 +83,25 @@
    
    <!--Body-->
    <div id="body">
-      <div id="body_top"></div>
-      <p><?php tpl_youarehere(); ?></p>
+      <div id="body_top" class="smallGreyListText">
+         <?php if($conf['breadcrumbs']){?>
+            <div class="breadcrumbs">
+               <?php tpl_breadcrumbs()?>
+            </div>
+         <?php }?>
+         <?php if($conf['youarehere']){?>
+            <div class="breadcrumbs">
+               <?php tpl_youarehere() ?>
+            </div>
+         <?php }?>
+      </div>
+      <!--content itself-->
       <?php flush(); ?>
       <?php tpl_content(); ?>
       <?php flush(); ?>
-      <div id="body_bottom">
+      
+      
+      <div id="body_bottom" class="smallGreyListText clearer">
                   <?php 
                      if ($conf['useacl'] && $_SERVER['REMOTE_USER']) {    
                            echo '<ul >' .
@@ -110,7 +122,8 @@
    </div>
    
    <!--Footer-->
-   <div id="footer">
+   
+   <div id="footer" class="smallGreyListText">
       <?php tpl_searchform()?>
       <ul>
          <li><?php tpl_actionlink('login'); ?></li>
@@ -120,8 +133,8 @@
          <?php } ?>
       </ul>
    </div>
+   <?php writeMBPortlet($monobook['copyright'], 'copyright', '', 'smallGreyListText'); ?>
    <!--Copyright-->
-   <?php writeMBPortlet($monobook['copyright'], 'copyright', '', ''); ?>
    
    
 </body>
