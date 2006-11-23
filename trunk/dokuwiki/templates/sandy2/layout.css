@@ -11,11 +11,10 @@ html, body {
 /* ================================ HEADER ================================== */
 #header {
    text-align: center;
-   height: 200px;
+   height: 100px;
 }
 #headerLogo {
-   height: 200px;
-
+   height: 100px;
 }
 
 

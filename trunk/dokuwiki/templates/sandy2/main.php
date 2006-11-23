@@ -35,8 +35,8 @@
       @include(dirname(__FILE__).'/context.php');
 
       
-      /*make page title*/
-      echo '<title>';  tpl_pagetitle(); echo ' - ' . strip_tags($conf['title']) . "</title>\n";
+      //make page title
+      echo '<title>' . strip_tags($conf['title']) . ': '; tpl_pagetitle(); echo "</title>\n";
       
       //Add meta headers
       echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
@@ -72,12 +72,15 @@
    <!--Header-->
    <div id="header">
       <div id="headerLogo">
-         <?php //echo $myLogo; ?>
+         <a href="<?php echo DOKU_BASE?>" title="Start Page">
+           <img src="<?php echo $DOKU_TPL?>/images/logoOpenaqua.gif" alt="Logo Openaqua"  border="0" />
+         </a>
       </div>
    </div>
+   
+   <!--Menu   -->
    <?php writeMBPortlet($monobook['navigation'], 'menu', '', ''); ?>
 
-   <!--Menu   -->
    
    <!--Body-->
    <div id="body">
@@ -111,8 +114,6 @@
       <?php tpl_searchform()?>
       <ul>
          <li><?php tpl_actionlink('login'); ?></li>
-      </ul>
-      <ul>
          <?php if ($user) { ?>
             <li><?php tpl_actionlink('profile')?></li>
             <li><?php tpl_actionlink('admin'); ?>&nbsp;</li>
