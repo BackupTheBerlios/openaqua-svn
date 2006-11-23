@@ -1,8 +1,9 @@
 /* ================================ GENERAL ================================= */
 * { 
-   font-family: Verdana, Helvetica, Arial, sans-serif; 
-   font-size: small; 
+   font-family: Georgia, "Times New Roman", serif;
+   font-size: normal;    /*   Fix this for IExplorer   */
 }
+
 body {
    background: #e0dfca;
    background-image: url(images/body_background.png);
@@ -21,6 +22,8 @@ a:hover {
 a img {
    border: none;
 }
+
+
 
 /* ================================ HEADER ================================== */
 #header {
@@ -41,7 +44,10 @@ a img {
    font-family: serif;
 }
 
+
+
 /* ================================= MENU =================================== */
+
 #menu {
    background-color: #000;
    color: #fff;
@@ -83,9 +89,6 @@ a img {
 }
 #menu ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
 
-#menu h1, h2, h3, h4, h5, h6 {
-   display:none;
-}
 
 #menu .li {
    display: inline;
@@ -93,48 +96,62 @@ a img {
 #menu .secedit2 {
    display: inline;
 }
+
+
+
 /* ================================== BODY ================================== */
 #body {
    background-color: #fff;
    color: #000;
 }
+
+
+#body h1, #body h2, #body h3, #body h4, #body h5 {
+   clear: left;
+   margin: .5em 0 0 0;
+}
+
+/* DOKUWIKI LEVELS */
+#body h1 { margin-left: 0em; }
+div.level1 { margin: 1em 0 0 0; }
+#body h2 { margin-left: 1em; }
+div.level2 { margin: 1em 0 0 2em; }
+#body h3 { margin-left: 2em; }
+div.level3 { margin: 1em 0 0 3em; }
+#body h4 { margin-left: 3em; }
+div.level4 { margin: 1em 0 0 4em; }
+#body h5 { margin-left: 4em; }
+div.level5 { margin: 1em 0 0 5em; }
+
+
+
 #body h1 a, #body h2 a, #body h3 a, #body h4 a, #body h5 a {
-   font-size: 1em;
+   font-size: normal;
    font-family: inherit;
    color: #8c2121;
    background-color: inherit;
 }
-#body h1 {
-   font-family: Georgia, "Times New Roman", serif;
+
+#body h1,
+#body h2,
+#body h3,
+#body h4,
+#body h5,
+#body h6 {
+   font-family: Verdana, Helvetica, Arial, sans-serif; 
    font-weight: bold;
-   font-size: 2em;
    color: #8c2121;
    background-color: inherit;
    border-bottom: solid 1px #dbdbc5;
 }
-#body h2 {
-   font-family: Georgia, "Times New Roman", serif;
-   font-weight: normal;
-   font-size: 1.3em;
-   color: #8c2121;
-   background-color: inherit;
-   border-bottom: solid 1px #dbdbc5;
-}
-#body h3 {
-   font-family: Georgia, "Times New Roman", serif;
-   font-weight: bold;
-   font-size: 1em;
-   color: #8c2121;
-   background-color: inherit;
-   border-bottom: solid 1px #dbdbc5;
-}
-#body h4, #body h5 {
-   font-family: Georgia, "Times New Roman", serif;
-   font-weight: bold;
-   font-size: 1em;
-   color: #8c2121;
-   background-color: inherit;
-}
+
+#body h1 { font-size: 2em;  }
+#body h2 { font-size: 1.6em;    }
+#body h3 { font-size: 1.3em; }
+#body h4 { font-size: normal; border-bottom: none;}
+#body h5 { font-size: normal; border-bottom: none;}
+#body h6 { font-size: normal; border-bottom: none;}
+
 
 
 ol {
@@ -180,11 +197,6 @@ ul {
    border: solid 1px #000;
 }
 
-/* ********* TABLES ********* */
-#body table { border: solid 1px #999; }
-#body table th { border: solid 1px #999; background-color: #eee; }
-#body table td { border: solid 1px #ccc; background-color: #fff; }
-#body table tr:hover { background-color: #ffffe5; }
 
 
 
@@ -233,3 +245,19 @@ ul {
 #copyright .level2 {
    display: none;
 }
+
+
+/* ********* TABLES ********* */
+#body table {
+   border-collapse: collapse;
+}
+#body table { border: solid 1px #999; }
+#body table th { border: solid 1px #999; background-color: #eee; }
+#body table td { border: solid 1px #ccc; background-color: #fff; }
+#body table tr:hover { background-color: #ffffe5; }
+
+#body table {    font-size: smaller; }
+#body table th { text-align: left; }
+#body table td.rightalign { text-align: right; }
+#body table td.centeralign { text-align: center; }
+#body table td.leftalign { text-align: left; }

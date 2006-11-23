@@ -42,21 +42,6 @@ html, body {
    margin: 0 auto 0 auto;
    padding: 0 30px 0 30px;
 }
-#body h1, #body h2, #body h3, #body h4, #body h5 {
-   clear: left;
-   margin: .5em 0 0 0;
-}
-/* DOKUWIKI LEVELS */
-#body h1 { margin-left: 0em; }
-div.level1 { margin: 1em 0 0 0; }
-#body h2 { margin-left: 1em; }
-div.level2 { margin: 1em 0 0 2em; }
-#body h3 { margin-left: 2em; }
-div.level3 { margin: 1em 0 0 3em; }
-#body h4 { margin-left: 3em; }
-div.level4 { margin: 1em 0 0 4em; }
-#body h5 { margin-left: 4em; }
-div.level5 { margin: 1em 0 0 5em; }
 
 .code {
    padding: 5px;
@@ -70,9 +55,6 @@ div.level5 { margin: 1em 0 0 5em; }
 }
 #body table th { padding: 2px 5px 2px 5px; }
 #body table td { padding: 2px 5px 2px 5px; }
-#body table td.rightalign { text-align: right; }
-#body table td.centeralign { text-align: center; }
-#body table td.leftalign { text-align: left; }
 
 /* ================================= FOOTER ================================= */
 #footer {
