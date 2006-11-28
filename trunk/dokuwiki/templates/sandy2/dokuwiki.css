@@ -29,3 +29,33 @@ div.fn {
 }
 
 
+
+/* =====================edit form =========================*/
+div.dokuwiki div.toolbar,
+div.dokuwiki div#wiki__editbar {
+   background-color: black;
+   margin: 2px 0;
+   text-align: left;
+}
+div.dokuwiki div#size__ctl {
+   float: right;
+   width: 60px;
+   height: 2.7em;
+}
+div.dokuwiki #size__ctl img {
+   cursor: pointer;
+}
+div.dokuwiki div#wiki__editbar div.editButtons {
+   float: left;
+   padding: 0 1.0em 0.7em 0;
+}
+div.dokuwiki div#wiki__editbar div.summary {
+   float: left;
+}
+div.dokuwiki .nowrap {
+   white-space: nowrap;
+}
+div.dokuwiki div#draft__status {
+  float: right;
+  color: __text_alt__;
+}

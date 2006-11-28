@@ -109,38 +109,12 @@ a img {
 }
 
 
-#body h1, #body h2, #body h3, #body h4, #body h5 {
+#body h1, #body h2, #body h3, #body h4, #body h5,
+#body h1 a, #body h2 a, #body h3 a, #body h4 a, #body h5 a {
+
    clear: left;
    margin: .5em 0 0 0;
-}
-
-/* DOKUWIKI LEVELS */
-#body h1 { margin-left: 0em; }
-div.level1 { margin: 1em 0 0 0; }
-#body h2 { margin-left: 1em; }
-div.level2 { margin: 1em 0 0 2em; }
-#body h3 { margin-left: 2em; }
-div.level3 { margin: 1em 0 0 3em; }
-#body h4 { margin-left: 3em; }
-div.level4 { margin: 1em 0 0 4em; }
-#body h5 { margin-left: 4em; }
-div.level5 { margin: 1em 0 0 5em; }
-
-
-
-#body h1 a, #body h2 a, #body h3 a, #body h4 a, #body h5 a {
    font-size: normal;
-   font-family: inherit;
-   color: #8c2121;
-   background-color: inherit;
-}
-
-#body h1,
-#body h2,
-#body h3,
-#body h4,
-#body h5,
-#body h6 {
    font-family: Verdana, Helvetica, Arial, sans-serif; 
    font-weight: bold;
    color: #8c2121;
@@ -148,7 +122,21 @@ div.level5 { margin: 1em 0 0 5em; }
    border-bottom: solid 1px #dbdbc5;
 }
 
-#body h1 { font-size: 2em;  margin-top: 1em;}
+/* DOKUWIKI LEVELS */
+#body h1   { margin-left: 0em; }
+div.level1 { margin: 1em 0 0 0; }
+#body h2   { margin-left: 1em; }
+div.level2 { margin: 1em 0 0 2em; }
+#body h3   { margin-left: 2em; }
+div.level3 { margin: 1em 0 0 3em; }
+#body h4   { margin-left: 3em; }
+div.level4 { margin: 1em 0 0 4em; }
+#body h5   { margin-left: 4em; }
+div.level5 { margin: 1em 0 0 5em; }
+
+
+
+#body h1 { display: none}
 #body h2 { font-size: 1.6em;    }
 #body h3 { font-size: 1.3em; }
 #body h4 { font-size: normal; border-bottom: none;}
