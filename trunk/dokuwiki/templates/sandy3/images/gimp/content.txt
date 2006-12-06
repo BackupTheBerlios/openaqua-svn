@@ -1,8 +1,0 @@
-This directory contains the used images in their original (GIMP) xcf format.
-============================================================================
-banner2.xcf             = > ?
-banner_empty.xcf        = > Background for the Logo
-banner_openaqua.xcf     = > OpenAqua Logo
-banner.xcf              = > Sandy Logo
-body_background.xcf     = > Body Background
-header_background.xcf   = > Header Background
