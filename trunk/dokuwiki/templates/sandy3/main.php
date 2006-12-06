@@ -48,6 +48,8 @@
       if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
       if (file_exists(DOKU_PLUGIN.'googleanalytics/code.php')) include_once(DOKU_PLUGIN.'googleanalytics/code.php');
       if (function_exists('ga_google_analytics_code')) ga_google_analytics_code();
+      
+      echo '<link type="text/css" href="http://rimshotdesign.com/css/defaults/screen.css" media="screen" rel="stylesheet" title="default"/>';
     
     
       //don't show edit buttons if user is not logged in
