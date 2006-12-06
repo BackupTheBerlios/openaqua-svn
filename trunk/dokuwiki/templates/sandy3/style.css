@@ -1,0 +1,235 @@
+/* ================================ GENERAL ================================= */
+* { 
+   font-family: Georgia, "Times New Roman", serif;
+   font-size: normal;    /*   Fix this for IExplorer   */
+}
+
+body {
+   background: __background__;
+   background-image: url(images/body_background.png);
+   background-position: center;
+   background-repeat: repeat-y;
+}
+
+a {
+   color: #436976;
+   background-color: inherit;
+}
+a:hover {
+   color: #000;
+   background-color: inherit;
+}
+a img {
+   border: none;
+}
+
+
+
+/* ================================ HEADER ================================== */
+#header {
+   background-image: url(images/header_background.png);
+   background-position: center;
+   background-repeat: repeat-y;
+}
+
+#headerLogo {
+   background-image: url(images/banner.png);
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#headerLogo p{
+   color: white;
+   text-transform: capitalize;
+   font-family: serif;
+}
+
+
+
+/* ================================= MENU =================================== */
+
+#menu {
+   font-family: Verdana, Helvetica, Arial, sans-serif; 
+   background-color: #000;
+   color: #fff;
+   text-align: center;
+   padding: 2px 0 2px 0;
+   background-image: url(images/menu_background.png);
+   background-repeat: repeat-x;
+   z-index:100;
+}
+#menu ul {
+   margin: 0;
+   padding: 0;
+   display: inline;
+   border-left: solid 1px #000;
+   border-right: solid 1px #666;
+}
+#menu ul li {
+   display: inline;
+   border-left: solid 1px #666;
+   border-right: solid 1px #000;
+}
+#menu ul li a, 
+#menu ul li a:visited {
+   padding: 0 1em 0 1em;
+   color: #fff;
+   background-color: inherit;
+   text-decoration: none;
+   width:104px; 
+   overflow:hidden;
+}
+
+
+#menu ul li a:hover {
+   color: #fff;
+   background-color: #333;
+}
+#menu li.level2 {
+   display:none;
+}
+#menu ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
+
+
+#menu .li {
+   display: inline;
+}
+#menu .secedit2 {
+   display: inline;
+}
+
+
+
+/* ================================== BODY ================================== */
+#body {
+   /*
+   background-color: __background_neu__;
+   */
+   color: __text_neu__;
+}
+
+
+#body h1, #body h2, #body h3, #body h4, #body h5,
+#body h1 a, #body h2 a, #body h3 a, #body h4 a, #body h5 a {
+
+   clear: left;
+   margin: .5em 0 0 0;
+   font-size: normal;
+   font-family: Verdana, Helvetica, Arial, sans-serif; 
+   font-weight: bold;
+   color: #8c2121;
+   background-color: inherit;
+   border-bottom: solid 1px #dbdbc5;
+}
+
+/* DOKUWIKI LEVELS */
+#body h1   { margin-left: 0em; }
+div.level1 { margin: 1em 0 0 0; }
+#body h2   { margin-left: 1em; }
+div.level2 { margin: 1em 0 0 2em; }
+#body h3   { margin-left: 2em; }
+div.level3 { margin: 1em 0 0 3em; }
+#body h4   { margin-left: 3em; }
+div.level4 { margin: 1em 0 0 4em; }
+#body h5   { margin-left: 4em; }
+div.level5 { margin: 1em 0 0 5em; }
+
+
+
+#body h1 { display: none}
+#body h2 { font-size: 1.6em;    }
+#body h3 { font-size: 1.3em; }
+#body h4 { font-size: normal; border-bottom: none;}
+#body h5 { font-size: normal; border-bottom: none;}
+#body h6 { font-size: normal; border-bottom: none;}
+
+
+
+ol {
+   line-height: 1.5em;
+   margin: 0 0 .5em 1.5em;
+   padding: 0;
+}
+ul {
+   line-height: 1.5em;
+   list-style-type: square;
+   margin: 0 0 .5em 1.5em;
+   padding: 0;
+   list-style-image: url(images/bullet.gif);
+}
+
+.code {
+   border-top: solid 1px #acacbb;
+   border-right: solid 1px #acacbb;
+   border-bottom: solid 1px #acacbb;
+   border-left: solid 3px #acacbb;
+   background-color: #f7f9fa;
+   color: inherit;
+}
+.code, .code * {
+   font-size: 1em;
+   font-family: "Courier New",Courier,monospace;
+}
+
+#body .secedit {
+   text-align: right;
+}
+
+#body .secedit  .button{
+   font-size: xx-small;
+   height: 10%;
+   background-color: none;
+}
+
+#body input {
+   border: solid 1px #8cacbb;
+}
+#body input:hover {
+   border: solid 1px #000;
+}
+
+
+
+
+
+/* ================================= FOOTER ================================= */
+#footer {
+   background-color: #dfdec9;
+   color: #000;
+}
+#footer li a {
+   border: solid 1px #8cacbb;
+   background-color: #efebe7;
+   color: #000;
+   text-decoration: none;
+   white-space: nowrap;
+}
+#footer li a:hover {
+   border: solid 1px #000;
+   background-color: #efebe7;
+   color: #000;
+}
+#footer input {
+   border: solid 1px #8cacbb;
+}
+#footer input:hover {
+   border: solid 1px #000;
+}
+
+ 
+
+
+/* ********* TABLES ********* */
+#body table {
+   border-collapse: collapse;
+}
+#body table { border: solid 1px #999; }
+#body table th { border: solid 1px #999; background-color: #eee; }
+#body table td { border: solid 1px #ccc; background-color: #fff; }
+#body table tr:hover { background-color: #ffffe5; }
+
+#body table {    font-size: smaller; }
+#body table th { text-align: left; }
+#body table td.rightalign { text-align: right; }
+#body table td.centeralign { text-align: center; }
+#body table td.leftalign { text-align: left; }

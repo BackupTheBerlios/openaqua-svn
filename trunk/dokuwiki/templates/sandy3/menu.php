@@ -1,0 +1,1 @@
+<li><?php tpl_link(wl("about"),"About"); ?></li><li><?php tpl_link(wl("news"),"News"); ?></li><li><?php tpl_link(wl("download"),"Download"); ?></li><li><?php tpl_link(wl("support"),"Support"); ?></li><li><?php tpl_link(wl("tutorials"),"Tutorials"); ?></li><li><?php tpl_link(wl("faq"),"FAQ"); ?></li>
