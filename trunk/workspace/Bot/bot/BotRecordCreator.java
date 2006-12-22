@@ -3,36 +3,40 @@
  */
 package bot;
 
-import record.CRecord;
+import org.apache.log4j.Logger;
+import record.IEvent;
 
 /**
  * @author tukaram
  *
  */
-public class BotRecordCreator implements IBot {
-	private static int m_recordCounter = 0;
+public class BotRecordCreator extends CBot {
+	private static Logger logger = Logger.getRootLogger();
 
-	/* (non-Javadoc)
-	 * @see bot.IBot#Register()
-	 */
-	public void Register() {
-		// TODO Auto-generated method stub
-
+	public  BotRecordCreator() {
+		logger.debug("BotRecordCreator::BotRecordCreator");
+			
 	}
 
-	/**
-	 * 
-	 *
-	 */
-	public void offerRecord() {
-		CRecord r = new CRecord();
-		r.setValue(m_recordCounter ++);
+	
+	public void registerBot(IBot register) {
+		logger.debug("BotRecordCreator::registerBot");
 	}
+
+	
+	public void unregisterBot(IBot register) {
+		logger.debug("BotRecordCreator::unregisterBot");
+	}
+
 	
 	
-	public void pickupRecord(CRecord record) {
-		// TODO Auto-generated method stub
-		
+	public void inputPort(IEvent event) {
+		logger.debug("BotRecordCreator::inputEvent");
 	}
 
+	
+	public void outputPort(IEvent event) {
+		logger.debug("BotRecordCreator::outputEvent");
+			
+	}
 }

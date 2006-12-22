@@ -3,7 +3,7 @@
  */
 package bot;
 
-import record.CRecord;
+import record.IEvent;
 
 /**
  * @author tukaram
@@ -11,11 +11,9 @@ import record.CRecord;
  */
 public interface IBot {
 
-	
-	/**
-	 * Register the Bot somewhere
-	 */
-	public  void Register();
-	
-	public void pickupRecord(CRecord record);
+	public void registerBot(IBot register);
+	public void unregisterBot(IBot register);
+	public void inputPort(IEvent event);
+	public void outputPort(IEvent event);
 }
+

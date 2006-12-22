@@ -3,7 +3,7 @@
  */
 package bot;
 
-import record.CRecord;
+import record.IEvent;
 import org.apache.log4j.*;
 
 /**
@@ -11,26 +11,34 @@ import org.apache.log4j.*;
  *
  */
 public class CBot implements IBot {
-	  private static Logger logger = Logger.getRootLogger();
+	private static Logger logger = Logger.getRootLogger();
 
-	
-	  public int getValue(){
-		  logger.debug( "getValue" );
-		  return 100;
-	  }
-
-	  public void pickupRecord(CRecord record) {
-		  logger.debug( "pickupRecord" );
-	  };
-
-	public void takeRecord(CRecord record) {
-		System.out.println("Taken record: " + record.getString());
-		
+	public CBot() {
+		logger.debug("CBot::CBot");
 	}
 	
-	public void Register() {
-		// TODO Auto-generated method stub
-
+	
+	public void registerBot(IBot register) {
+		logger.debug("CBot::registerBot");
+			
+	}
+	
+	
+	public void unregisterBot(IBot register) {
+		logger.debug("CBot::unregisterBot");
+			
+	}
+	
+	
+	public void inputPort(IEvent event) {
+		logger.debug("CBot::inputEvent");
+			
+	}
+	
+	
+	public void outputPort(IEvent event) {
+		logger.debug("CBot::outputEvent");
+			
 	}
 
 }
