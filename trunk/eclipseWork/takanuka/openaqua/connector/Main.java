@@ -38,10 +38,13 @@ public class Main {
 	        logger.setLevel( Level.ALL);
 	        
 	        //register the project owned Command Builder
-	        CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder()); 
+	        //CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder()); 
 	        
-	        ClientRecord record = new ClientRecord();
-	        CFactoryCommands.getInstance().getCommand(6000).execute(record);
+	        //ClientRecord record = new ClientRecord();
+	        //CFactoryCommands.getInstance().getCommand(6000).execute(record);
+	        Connector c = new Connector();
+	        c.Init();
+	        c.ExecuteUidMacro();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {

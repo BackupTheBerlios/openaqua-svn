@@ -15,8 +15,8 @@ import java.util.List;
 final public class CFactoryCommands  {
 	private HashMap<Integer, ICommand> m_commandMap = new HashMap<Integer, ICommand>();
 	private static Logger logger = Logger.getRootLogger();
-	private ReentrantReadWriteLock builderLock = new ReentrantReadWriteLock();
-	private ReentrantReadWriteLock commandLock = new ReentrantReadWriteLock();
+	private ReentrantReadWriteLock builderLock = new ReentrantReadWriteLock(true);
+	private ReentrantReadWriteLock commandLock = new ReentrantReadWriteLock(true);
 	private List<CCommandBuilder> builderList = new ArrayList<CCommandBuilder>();
 	private static CFactoryCommands INSTANCE = new CFactoryCommands();
 
@@ -26,7 +26,7 @@ final public class CFactoryCommands  {
 
 	}
 
-	public static CFactoryCommands getInstance() {
+	final public static CFactoryCommands getInstance() {
 		return INSTANCE;
 	}
 

@@ -24,8 +24,7 @@ public class CmdCreateUid implements ICommand {
 		if (record instanceof ClientRecord) {
 			ClientRecord client = (ClientRecord) record;
 			UID id = new UID();
-			logger.debug("UID="+id);
-			String host = "";
+			String host;
 			try {
 				host = InetAddress.getLocalHost().getHostAddress().toString();
 			} catch (UnknownHostException ex) {

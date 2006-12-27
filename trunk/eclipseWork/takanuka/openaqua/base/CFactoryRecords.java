@@ -1,7 +1,7 @@
 package openaqua.base;
 
-import java.util.Map;
-import java.util.concurrent.locks.Lock;
+import java.util.HashMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 /**
@@ -9,10 +9,10 @@ import java.util.concurrent.locks.Lock;
  * @author tukaram
  *
  */
-public class CFactoryRecords {
+final public class CFactoryRecords {
 	private final static CFactoryRecords INSTANCE = new CFactoryRecords();
-	private Map<Integer, IRecord> m_recordMap;
-	private Lock lock;
+	private HashMap<Integer, IRecord> m_recordMap = new HashMap<Integer, IRecord>();
+	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 	
 	/**
 	 * Private constructor. The Factory is a singleton. For getting an instance
@@ -30,7 +30,7 @@ public class CFactoryRecords {
 	 * 
 	 * @return a reference to a singleton instance of this factory
 	 */
-	public CFactoryRecords getInstance() {
+	public static CFactoryRecords getInstance() {
 		return INSTANCE;
 	}
 	
@@ -41,11 +41,11 @@ public class CFactoryRecords {
 	 * @param prototype
 	 */
 	public void addRecordPrototyp(int id, IRecord prototype) {
-		lock.lock();
+		lock.writeLock().lock();
 		try {
 			m_recordMap.put(id, prototype);
 		} finally {
-			lock.unlock();
+			lock.writeLock().unlock();
 		}
 	}
 	
@@ -58,7 +58,14 @@ public class CFactoryRecords {
 	 * @return
 	 */
 	public IRecord getRecord (int id) {
-		return m_recordMap.get(id).clone();
+		IRecord result;
+		lock.readLock().lock();
+		try {
+			result = m_recordMap.get(id).clone();
+		} finally {
+			lock.readLock().unlock();
+		}
+		return result;		
 	}
 }
 
