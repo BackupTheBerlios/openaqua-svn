@@ -12,7 +12,7 @@ import java.util.List;
  * @author tukaram
  *
  */
-public class CFactoryCommands  {
+final public class CFactoryCommands  {
 	private HashMap<Integer, ICommand> m_commandMap = new HashMap<Integer, ICommand>();
 	private static Logger logger = Logger.getRootLogger();
 	private ReentrantReadWriteLock builderLock = new ReentrantReadWriteLock();
