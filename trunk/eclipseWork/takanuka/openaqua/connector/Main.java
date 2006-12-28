@@ -4,7 +4,6 @@
 package openaqua.connector;
 
 
-import openaqua.base.CFactoryCommands;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -36,18 +35,15 @@ public class Main {
 	        //Set Default Debug Level
 	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
-	        
-	        //register the project owned Command Builder
-	        //CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder()); 
-	        
-	        //ClientRecord record = new ClientRecord();
-	        //CFactoryCommands.getInstance().getCommand(6000).execute(record);
+
+	        //setup and execute the Connector object
 	        Connector c = new Connector();
 	        c.Init();
 	        c.ExecuteUidMacro();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {
+			ex.printStackTrace();
 			System.out.println( ex );
 	    }
 
