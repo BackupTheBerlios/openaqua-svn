@@ -1,13 +1,20 @@
 package openaqua.connector;
 
 import openaqua.base.CFactoryCommands;
+import java.util.concurrent.ExecutorService; 
+import java.util.concurrent.Executors; 
 import openaqua.base.CFactoryRecords;
 import openaqua.base.IRecord;
-
 public class Connector {
 	
+	/**
+	 * Executor Service, handles a thread pool for threaded command execution
+	 */
+	
+	ExecutorService executor;
 	public Connector () {
 		super();
+		executor = Executors.newCachedThreadPool();
 	}
 	
 	
