@@ -5,5 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/takanuka"/>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="/otherJars/jars/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/opt/Ice-3.1.1/lib/java5/Ice.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
