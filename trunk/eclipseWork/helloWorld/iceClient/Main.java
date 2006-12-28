@@ -21,30 +21,23 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		try {
-			//Setup a Simple Logger
+			logger.debug("Client: Startup");
 			PatternLayout layout = new PatternLayout( "%-5p\t[%t] %c: %m%n" );
-			
-			//Logger for Console
 	        ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 	        logger.addAppender( consoleAppender );
-	        
-	        //Logger for File
-	        //FileAppender fileAppender = new FileAppender( layout, "MeineLogDatei.log", false );
-	        //logger.addAppender( fileAppender );
-	        
-	        //Set Default Debug Level
-	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
 
 	        int status = 0;
 	        Ice.Communicator ic = null;
 	        try {
+				logger.debug("Client: Init");
 	        	ic = Ice.Util.initialize(args);
 	        	Ice.ObjectPrx base = ic.stringToProxy("SimplePrinter:default -p 10000");
 	        	Demo.PrinterPrx printer = Demo.PrinterPrxHelper.checkedCast(base);
 	        	if (printer == null) {
 	        		throw new Error ("Invalid Proxy");
 	        	}
+				logger.debug("Client: Print");
 	        	printer.printString("Hello World");
 	        } catch (Ice.LocalException e) {
 	        	e.printStackTrace();
@@ -54,6 +47,8 @@ public class Main {
 	        	System.err.println(e.getMessage());
 	        	status = 2;
 	        }
+
+	        logger.debug("Client: Finish");
 	        
 	        if (ic != null) {
 	        	try {
@@ -65,7 +60,7 @@ public class Main {
 	        	}
 	        }
 	        //setup and execute the Connector object
-	        logger.info("Done");
+	        logger.debug("Client: Finished");
 	        System.exit(status);
 	        
 		} catch( Exception ex ) {
