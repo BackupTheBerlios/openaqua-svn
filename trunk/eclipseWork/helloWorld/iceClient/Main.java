@@ -36,7 +36,6 @@ public class Main {
 	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
 
-	        
 	        int status = 0;
 	        Ice.Communicator ic = null;
 	        try {

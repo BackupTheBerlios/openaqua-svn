@@ -10,7 +10,7 @@ public class PrinterI extends _PrinterDisp {
 	}
 
 	public void printString(String s, Current current) {
-		System.out.println(s);
+		System.out.println("Server: " + s);
 		
 	}
 
