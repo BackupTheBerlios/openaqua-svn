@@ -16,6 +16,7 @@ public final class PrinterPrxHolder
     public
     PrinterPrxHolder()
     {
+    	//
     }
 
     public

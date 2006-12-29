@@ -21,6 +21,6 @@ public class CRecord implements IRecord {
 
 
 	public void reset() {
-
+		//default implementation is empty
 	}
 }

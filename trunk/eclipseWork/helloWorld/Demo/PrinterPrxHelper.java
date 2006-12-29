@@ -107,6 +107,7 @@ public final class PrinterPrxHelper extends Ice.ObjectPrxHelperBase implements P
 	    }
 	    catch(Ice.FacetNotExistException ex)
 	    {
+	    	//
 	    }
 	}
 	return __d;
@@ -130,6 +131,7 @@ public final class PrinterPrxHelper extends Ice.ObjectPrxHelperBase implements P
 	    }
 	    catch(Ice.FacetNotExistException ex)
 	    {
+	    	//
 	    }
 	}
 	return __d;

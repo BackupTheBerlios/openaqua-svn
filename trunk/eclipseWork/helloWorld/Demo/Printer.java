@@ -14,4 +14,5 @@ package Demo;
 public interface Printer extends Ice.Object,
 				 _PrinterOperations, _PrinterOperationsNC
 {
+	//empty
 }

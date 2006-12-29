@@ -11,7 +11,7 @@ public class ClientRecord implements IRecord {
 	 */
 	public ClientRecord() {
 		super();
-		clientId = "";
+		this.clientId = "";
 	}
 	
 	
@@ -22,13 +22,13 @@ public class ClientRecord implements IRecord {
 	@Override
 	public IRecord clone() {
 		ClientRecord r = new ClientRecord();
-		r.setClientId(clientId);
+		r.setClientId(this.clientId);
 		return r;
 	}
 
 	
 	public void reset() {
-		clientId = "";
+		this.clientId = "";
 	}
 
 

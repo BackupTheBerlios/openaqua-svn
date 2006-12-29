@@ -119,10 +119,10 @@ final public class CFactoryCommands  {
 	final public ICommand createCommand(Integer id) {
 
 		ICommand result = null;
-		builderLock.readLock().lock();
+		this.builderLock.readLock().lock();
 
 		try {
-			Iterator it  = builderList.iterator();
+			Iterator it  = this.builderList.iterator();
 			while(it.hasNext()) {
 				Object o = it.next();
 				if (o instanceof CCommandBuilder){
@@ -133,7 +133,7 @@ final public class CFactoryCommands  {
 			}
 
 		} finally {
-			builderLock.readLock().unlock();
+			this.builderLock.readLock().unlock();
 		}
 		return result;
 	}
@@ -145,11 +145,11 @@ final public class CFactoryCommands  {
 	 * @param c
 	 */
 	final public void addCommand(Integer id, ICommand c) {
-		commandLock.writeLock().lock();
+		this.commandLock.writeLock().lock();
 		try {
-			m_commandMap.put(id, c);
+			this.m_commandMap.put(id, c);
 		} finally {
-			commandLock.writeLock().unlock();
+			this.commandLock.writeLock().unlock();
 		}
 	}
 }
