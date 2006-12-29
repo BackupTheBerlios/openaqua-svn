@@ -4,7 +4,8 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/otherJars"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/takanuka"/>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="/otherJars/jars/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="/otherJars/jars/Ice.jar"/>
+	<classpathentry kind="var" path="opt_classpath/log4j-1.2.14.jar"/>
+	<classpathentry kind="var" path="opt_classpath/Ice.jar"/>
+	<classpathentry kind="var" path="opt_classpath/db4o-6.0-java5.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
