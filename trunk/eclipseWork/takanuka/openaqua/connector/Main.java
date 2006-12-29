@@ -37,9 +37,9 @@ public class Main {
 	        logger.setLevel( Level.ALL);
 
 	        //setup and execute the Connector object
-	        Connector c = new Connector();
-	        c.Init();
-	        c.ExecuteUidMacro();
+	        Connector connector = new Connector();
+	        connector.Init();
+	        connector.ExecuteUidMacro();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {
