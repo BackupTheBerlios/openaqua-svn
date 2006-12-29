@@ -21,11 +21,11 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		try {
-			logger.debug("Client: Startup");
 			PatternLayout layout = new PatternLayout( "%-5p\t[%t] %c: %m%n" );
 	        ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 	        logger.addAppender( consoleAppender );
 	        logger.setLevel( Level.ALL);
+			logger.debug("Client: Startup");
 
 	        int status = 0;
 	        Ice.Communicator ic = null;
