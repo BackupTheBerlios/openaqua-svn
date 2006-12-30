@@ -9,15 +9,30 @@ import openaqua.base.ICommand;
 import openaqua.base.IRecord;
 
 /**
+ * Cmd which counts the usage of this command.<br>
  * 
+ * Class is thread save and reentrant. 
  * 
  * @author tukaram
- *
  */
 public class CmdUsageCounter implements ICommand{
-	static int usage = 0;
+
+	/**
+	 * Counts how ofte this command is used
+	 */
+	int usage = 0;
+	
+	/**
+	 * Lock for thread saveness
+	 */
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
+	/*
+	 * Counts how often the command(!) is used.
+	 * 
+	 * @see openaqua.base.ICommand#execute(openaqua.base.IRecord)
+	 * @returns true
+	 */
 	public boolean execute(IRecord record) {
 		lock.writeLock().lock();
 		try {
@@ -34,7 +49,7 @@ public class CmdUsageCounter implements ICommand{
 	 * 
 	 * @return amount
 	 */
-	public int returnCounter() {
+	public int getUsage() {
 		return usage;
 	}
 
@@ -43,7 +58,7 @@ public class CmdUsageCounter implements ICommand{
 	 * Set the counter to 0
 	 *
 	 */
-	public void resetCounter() {
+	public void resetUsage() {
 		lock.writeLock().lock();
 		try {
 			usage = 0;
