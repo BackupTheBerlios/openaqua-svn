@@ -22,7 +22,7 @@ public interface IRecord {
 	 */
 	public void reset();
 	
-	public int hashCode();
+	//public int hashCode();
 
 	/**
 	 * Compares two objects and compares all internal values.<br>

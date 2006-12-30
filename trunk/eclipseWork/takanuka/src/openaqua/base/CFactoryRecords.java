@@ -24,7 +24,7 @@ final public class CFactoryRecords {
 	 *
 	 */
 	private CFactoryRecords() {
-		//empty
+		super();
 	}
 	
 	
@@ -43,6 +43,11 @@ final public class CFactoryRecords {
 	 * @param prototype
 	 */
 	public void addRecordPrototyp(int id, IRecord prototype) {
+		//check for null pointer
+		if (prototype == null) {
+			throw new java.lang.NullPointerException("CFactoryRecords.addRecordPrototyp() called with null value");
+		}
+
 		lock.writeLock().lock();
 		try {
 			m_recordMap.put(id, prototype);

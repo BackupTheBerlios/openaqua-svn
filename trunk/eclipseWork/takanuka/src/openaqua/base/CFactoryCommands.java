@@ -2,10 +2,10 @@ package openaqua.base;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import org.apache.log4j.Logger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.List;
+
 
 /**
  * @TODO Is the setup with a seperated function "createCommand" and a implicit call in getCommand fine?
@@ -32,6 +32,11 @@ final public class CFactoryCommands  {
 
 
 	final public void registerBuilder(final CCommandBuilder builder) {
+		//check for null pointer
+		if (builder == null) {
+			throw new java.lang.NullPointerException("CFactoryCommands.registerBuilder() called with null value");
+		}
+
 		builderLock.writeLock().lock();
 		try {
 			builderList.add(builder);			
@@ -41,6 +46,11 @@ final public class CFactoryCommands  {
 	}
 
 	final public void unregisterBuilder(final CCommandBuilder builder) {
+		//check for null pointer
+		if (builder == null) {
+			throw new java.lang.NullPointerException("CFactoryCommands.registerBuilder() called with null value");
+		}
+
 		builderLock.writeLock().lock();
 		try {
 			builderList.remove(builder);			

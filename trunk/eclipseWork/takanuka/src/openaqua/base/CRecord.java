@@ -5,7 +5,7 @@ package openaqua.base;
 
 /**
  * @author tukaram
- *
+ * TODO  class needs a hashCode() implemenation 
  */
 public class CRecord implements IRecord {
 	public CRecord(){
@@ -28,6 +28,8 @@ public class CRecord implements IRecord {
 	public boolean equals(java.lang.Object object) {
 		if (this == object) return true;
 		if (!(object instanceof CRecord)) return false;
+		//in real world you would need the comparing (or unsing of equals again)
+		//of internal variables
 		return true;
 	}
 }
