@@ -8,7 +8,7 @@ package openaqua.base;
  *
  */
 public class CRecord implements IRecord {
-	CRecord(){
+	public CRecord(){
 		super();
 	}
 
@@ -22,5 +22,12 @@ public class CRecord implements IRecord {
 
 	public void reset() {
 		//default implementation is empty
+	}
+	
+	
+	public boolean equals(java.lang.Object object) {
+		if (this == object) return true;
+		if (!(object instanceof CRecord)) return false;
+		return true;
 	}
 }
