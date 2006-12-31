@@ -8,7 +8,7 @@ public class AllTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for iceClient");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(MainTest.class);
+		//suite.addTestSuite(MainTest.class);
 		//$JUnit-END$
 		return suite;
 	}
