@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  */
 final public class CFactoryRecords {
-	private final static CFactoryRecords INSTANCE = new CFactoryRecords();
+	final private static CFactoryRecords INSTANCE = new CFactoryRecords();
 	private HashMap<Integer, IRecord> m_recordMap = new HashMap<Integer, IRecord>();
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 	
@@ -32,7 +32,7 @@ final public class CFactoryRecords {
 	 * 
 	 * @return a reference to a singleton instance of this factory
 	 */
-	public static CFactoryRecords getInstance() {
+	final public static CFactoryRecords getInstance() {
 		return INSTANCE;
 	}
 	

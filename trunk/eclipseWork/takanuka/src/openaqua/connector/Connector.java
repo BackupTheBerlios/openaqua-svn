@@ -6,15 +6,29 @@ import java.util.concurrent.Executors;
 import openaqua.base.CFactoryRecords;
 import openaqua.base.IRecord;
 public class Connector {
-	
+	/**
+	 * class is a singleton
+	 */
+	final private static Connector INSTANCE = new Connector();
+
 	/**
 	 * Executor Service, handles a thread pool for threaded command execution
 	 */
-	
 	ExecutorService executor;
+
 	public Connector () {
 		super();
 		executor = Executors.newCachedThreadPool();
+		Init();
+	}
+
+	
+	/** 
+	 * 
+	 * @return a reference to a singleton instance of this factory
+	 */
+	final public static Connector getInstance() {
+		return INSTANCE;
 	}
 	
 	

@@ -18,7 +18,7 @@ final public class CFactoryCommands  {
 	private ReentrantReadWriteLock builderLock = new ReentrantReadWriteLock(true);
 	private ReentrantReadWriteLock commandLock = new ReentrantReadWriteLock(true);
 	private List<CCommandBuilder> builderList = new ArrayList<CCommandBuilder>();
-	private static CFactoryCommands INSTANCE = new CFactoryCommands();
+	final private static CFactoryCommands INSTANCE = new CFactoryCommands();
 
 	private CFactoryCommands(){
 		//add a default builder

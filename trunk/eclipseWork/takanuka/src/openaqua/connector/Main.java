@@ -36,10 +36,8 @@ public class Main {
 	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
 
-	        //setup and execute the Connector object
-	        Connector connector = new Connector();
-	        connector.Init();
-	        connector.ExecuteUidMacro();
+	        //execute the singleton Connector object
+	        Connector.getInstance().ExecuteUidMacro();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {
