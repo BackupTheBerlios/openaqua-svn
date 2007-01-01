@@ -2,37 +2,32 @@
 module openaqua {
 	module connector { 
 		interface uid {
-			const string getUID();
-		}
+			nonmutating string getUID();
+		};
+
+/**
+				//http://developer.apple.com/networking/bonjour/index.html
+				//http://www.zeroc.com//
+
+*/		
+			enum AccessMethods {HTTP,SOAP,TCP,UDP,BONJOUR, CORBA, RMI};
 		
-		interface connection {
-			enum AccessMethods {
-				HTTP,
-				SOAP,
-				TCP,
-				UDP,
-				BONJOUR, //http://developer.apple.com/networking/bonjour/index.html
-				ICE,  //http://www.zeroc.com//
-				CORBA,
-				RMI
-			};
-			
+			sequence<string> VersionSequence; //a list of offered versions
 			struct ServiceDescription {
 				string uniqueName;
 				string description;
 				AccessMethods accessMethod; //like http, soap, ice, tcp...
 				string machine;
-				string port; //might be NULL
-				sequence<string> version; //a list of offered versions
+				string port;
+				VersionSequence versions;
 			};
-			
 			sequence<ServiceDescription> ServiceSequence;
-			
-			
-			boolean login(const string uid);
-			boolean logout();
-			boolean registerOffers();
-			boolean registerLookups();
-		}
+
+		interface Connection {
+			bool login(string uid);
+			bool logout();
+			bool registerOffers(ServiceSequence services);
+			bool registerLookups(ServiceSequence services);
+		};
 	}; 
 }; 
