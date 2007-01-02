@@ -41,10 +41,10 @@ module openaqua {
 		/**
 		*/
 		interface Connection {
-			bool login(string uid);
+			idempotent bool login(string uid);
 			bool logout();
-			bool registerOffers(ServiceSequence services);
-			bool registerLookups(ServiceSequence services);
+			idempotent bool registerOffers(ServiceSequence services);
+			idempotent bool registerLookups(ServiceSequence services);
 		};
 	}; 
 }; 
