@@ -6,8 +6,8 @@
 	<classpathentry kind="src" path="testLogic"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/takanuka"/>
-	<classpathentry kind="var" path="opt_classpath/log4j-1.2.14.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/users/dbnu04c/user1/data/behrens/Ice-3.1/lib/java5/Ice.jar"/>
+	<classpathentry kind="lib" path="/otherJars/jars/log4j-1.2.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

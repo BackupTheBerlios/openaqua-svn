@@ -38,6 +38,8 @@ public class Main {
 
 	        //execute the singleton Connector object
 	        Connector.getInstance().ExecuteUidMacro();
+	        TcpConnection c = new TcpConnection();
+	        c.waitForConnection();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {
