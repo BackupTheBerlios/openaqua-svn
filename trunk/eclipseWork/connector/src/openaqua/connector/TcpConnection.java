@@ -14,24 +14,16 @@ import java.io.*;
 public class TcpConnection {
 	int port = 12345;
 	ServerSocket server = null; 
-	
-	TcpConnection(){
+
+	TcpConnection() throws IOException {
 		super();
-		try {
-			server = new ServerSocket(port);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		server = new ServerSocket(port);
 	}
-	
-	protected void closeConnection() {
-		return;
-	}
-	
+
+
 	protected void handleConnection(Socket socket) {
-		if (socket == null) throw new NullPointerException();
-		
+		if (socket == null) throw new NullPointerException("Got null reference as socket");
+
 		try {
 			BufferedReader in = new BufferedReader( new InputStreamReader(socket.getInputStream()));
 			OutputStream out = socket.getOutputStream();
