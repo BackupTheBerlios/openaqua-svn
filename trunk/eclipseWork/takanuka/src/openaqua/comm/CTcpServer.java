@@ -9,6 +9,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.io.*; 
 
+import openaqua.base.CFactoryCommands;
+import openaqua.base.CRunnableCommand;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -19,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 final public class CTcpServer extends Thread {
 	final Integer port;
-	final ATcpCommand command;
+	final Integer command;
 	final ExecutorService executor = Executors.newCachedThreadPool(); 
 	final ServerSocket serverSocket; 
 	final private static Logger logger = Logger.getRootLogger();
@@ -38,7 +41,7 @@ final public class CTcpServer extends Thread {
 	 * @param port the port number a server is listening
 	 * @throws IOException
 	 */
-	public CTcpServer(final ATcpCommand command, final int port)  throws IOException {
+	public CTcpServer(final int command, final int port)  throws IOException {
 		super();
 		this.command = command;
 		this.port = port;
@@ -52,7 +55,7 @@ final public class CTcpServer extends Thread {
 	 * @param backlog max number of possible waiting connections
 	 * @throws IOException
 	 */
-	public CTcpServer(final ATcpCommand command, final int port, final int backlog)  throws IOException {
+	public CTcpServer(final int command, final int port, final int backlog)  throws IOException {
 		super();
 		this.command = command;
 		this.port = port;
@@ -76,10 +79,10 @@ final public class CTcpServer extends Thread {
 				conn.setSocket(serverSocket.accept());
 				
 				//make up a runnable execution context
-				Runnable r1 = new Runnable() {public void run() {command.execute(conn);}};
-				
+				CRunnableCommand cmd = new CRunnableCommand(CFactoryCommands.getInstance().getCommand(command), conn);
+
 				//execute it in background
-				executor.execute(r1);
+				executor.execute(cmd);
 			}
 		} catch ( ThreadDeath td ) {
 			try { 

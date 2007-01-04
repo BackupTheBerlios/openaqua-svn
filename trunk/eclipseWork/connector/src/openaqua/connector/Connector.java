@@ -34,7 +34,7 @@ public class Connector extends Thread{
         ICommand i = CFactoryCommands.getInstance().getCommand(5001);
         if (i instanceof ATcpCommand) {
         	try {
-        		server = new CTcpServer(new CmdTcpConnection(), 12345);
+        		server = new CTcpServer(5001, 12345);
         	} catch (IOException e) {
         		logger.error("Got IOException while creating CTcpServer: " + e.getLocalizedMessage());
         		e.printStackTrace();
