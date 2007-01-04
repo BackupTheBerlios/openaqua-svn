@@ -23,17 +23,21 @@ public class Connector extends Thread{
 
 	public Connector () {
 		super();
+		//register project specific command builder
         CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder());
-        //CFactoryContexts.getInstance().addRecordPrototyp(1, new CTcpConnectionContext());
+        
+        //register project specific Context object prototypes
         CFactoryContexts.getInstance().addRecordPrototyp(2, new ClientRecord());
-        setupTcpServer();
+        
+        //setup the TcpServer Thread
+        setupEchoTcpServer();
 	}
 	
 	/**
 	 * Setup the TcpServer Thread
 	 *
 	 */
-	private void setupTcpServer() {
+	private void setupEchoTcpServer() {
         ICommand i = CFactoryCommands.getInstance().getCommand(5001);
         if (i instanceof ATcpCommand) {
         	try {
@@ -50,11 +54,14 @@ public class Connector extends Thread{
 	}
 	
 	
+	/**
+	 * start all subthreads
+	 */
 	public void start() {
 		serverEcho.start();
 	}
 
 	public void run () {
-		;//nothing to do. But let the sub threads do their job
+		;//nothing to do. But the sub threads do the job
 	}
 }
