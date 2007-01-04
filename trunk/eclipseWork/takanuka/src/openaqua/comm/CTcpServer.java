@@ -17,18 +17,18 @@ import org.apache.log4j.Logger;
  * The class expects a port number and a ICommand the deal with new 
  * 
  */
-//TODO how to inform other parts if an error happend
-
 final public class CTcpServer extends Thread {
-	Integer port = new Integer(0);
+	final Integer port;
 	final ATcpCommand command;
-	ExecutorService executor = Executors.newCachedThreadPool(); 
-	ServerSocket serverSocket = null; 
-	private static Logger logger = Logger.getRootLogger();
+	final ExecutorService executor = Executors.newCachedThreadPool(); 
+	final ServerSocket serverSocket; 
+	final private static Logger logger = Logger.getRootLogger();
 
 	//no default constructor
 	private CTcpServer()  {
 		command = null;
+		port = null;
+		serverSocket = null;
 	}
 	
 	
@@ -44,7 +44,6 @@ final public class CTcpServer extends Thread {
 		this.port = port;
 		serverSocket = new ServerSocket(port);
 		logger.debug("TCP Server created to listen on port " + this.port.toString());
-		//new Thread( this ).start(); 
 	}
 
 	/**
@@ -59,7 +58,6 @@ final public class CTcpServer extends Thread {
 		this.port = port;
 		serverSocket = new ServerSocket(port, backlog);
 		logger.debug("TCP Server created to listen on port " + this.port.toString());
-	    //new Thread( this ).start(); 
 	}
 	
 	
@@ -73,15 +71,14 @@ final public class CTcpServer extends Thread {
 
 		try {
 			while(!isInterrupted()) {
-				CTcpConnectionContext conn = new CTcpConnectionContext();
+				//get a Connect Context
+				final CTcpConnectionContext conn = new CTcpConnectionContext();
 				conn.setSocket(serverSocket.accept());
-				Runnable r1 = new Runnable() { 
-					public void run() {
-						//TODO Add command execution
-						//command.execute(conn);
-						
-					} 
-				}; 		
+				
+				//make up a runnable execution context
+				Runnable r1 = new Runnable() {public void run() {command.execute(conn);}};
+				
+				//execute it in background
 				executor.execute(r1);
 			}
 		} catch ( ThreadDeath td ) {
@@ -96,9 +93,11 @@ final public class CTcpServer extends Thread {
 			logger.error("Error while waiting for connections: : "+e.getLocalizedMessage());
 			e.printStackTrace();
 			return;
+			
+		} catch (Exception e) {
+			logger.error("Got unknown exception: : "+e.getLocalizedMessage());
+			e.printStackTrace();
+			return;
 		}
-		
 	}
-	
-	
 }

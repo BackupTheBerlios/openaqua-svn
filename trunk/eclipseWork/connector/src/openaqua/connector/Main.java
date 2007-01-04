@@ -3,9 +3,6 @@
  */
 package openaqua.connector;
 
-
-import openaqua.comm.CTcpServer;
-
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -37,15 +34,7 @@ public class Main {
 	        //Set Default Debug Level
 	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
-
-	        Connector con = new Connector();
-	        con.run();
-	        //execute the singleton Connector object
-	        //Connector.getInstance().Init();
-	        //Connector.getInstance().run();
-	        
-	        //CTcpServer server = new CTcpServer(CConnectorCommandBuilder, 12345, 1);
-	        
+	        new Connector().run();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {
