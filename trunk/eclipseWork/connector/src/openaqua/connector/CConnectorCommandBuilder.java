@@ -5,9 +5,9 @@ package openaqua.connector;
 
 
 import openaqua.base.CCommandBuilder;
-import openaqua.base.CFactoryCommands;
 import openaqua.base.CMacro;
 import openaqua.base.ICommand;
+import openaqua.comm.CmdTcpConnectionEchoClient;
 
 /**
  * @author tukaram
@@ -24,11 +24,11 @@ public class CConnectorCommandBuilder extends CCommandBuilder {
 	public ICommand createCommand(int id) {
 
 		if (id == 5000) return new CmdCreateUid();
-		if (id == 5001) return new CmdTcpConnection();
+		if (id == 5001) return new CmdTcpConnectionEchoClient();
 		if (id == 6000) {
 			CMacro m = new CMacro();
-			m.addCommand(CFactoryCommands.getInstance().getCommand(5000));
-			m.addCommand(CFactoryCommands.getInstance().getCommand(1));
+			m.addCommand(5000);
+			m.addCommand(1);
 			return m;
 		}
 		

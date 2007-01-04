@@ -33,7 +33,7 @@ public abstract class ATcpCommand implements ICommand {
 	 * @throws NullPointerException - if context is null
 	 * @throws IllegalArgumentException - if context is not a CTcpConnectionContext
 	 */
-	public boolean execute(IContext context) {
+	final public boolean execute(IContext context) {
 		if (context == null) throw new NullPointerException("got null pointer reference as CTcpConnectionContext");
 		if (context instanceof CTcpConnectionContext) {
 			return execute((CTcpConnectionContext)context);

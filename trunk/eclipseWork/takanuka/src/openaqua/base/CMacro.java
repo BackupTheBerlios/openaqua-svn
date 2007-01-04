@@ -11,19 +11,22 @@ import java.util.*;
  *
  */
 public class CMacro implements IMacro {
-	private List<ICommand> m_commands;
+	private List<Integer> m_commands;
 	final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
 	public CMacro () {
 		super();		
-		m_commands = new LinkedList<ICommand>();
+		m_commands = new LinkedList<Integer>();
 	}
 
 	
-	public void addCommand(ICommand cmd) {
+	public void addCommand(Integer id) {
 		lock.writeLock().lock();
 		try {
-			m_commands.add(cmd);
+			if (CFactoryCommands.getInstance().getCommand(id) == null){
+				throw new IllegalArgumentException("Command Id not bound to a command");
+			}
+			m_commands.add(id);
 		} finally {
 			lock.writeLock().unlock();
 		}
@@ -46,13 +49,14 @@ public class CMacro implements IMacro {
 	 */
 	public boolean execute(final IContext context) {
 		lock.readLock().lock(); //no write access to the cmd list while execution
-		boolean result = true;
 
+		boolean result = true;
 		try {
-			ListIterator<ICommand> it = m_commands.listIterator();
+			ListIterator<Integer> it = m_commands.listIterator();
 			while(it.hasNext()) {
-				if (it.next().execute(context) != true) {
-					result = false;;
+				Integer id = it.next();
+				if (CFactoryCommands.getInstance().getCommand(id).execute(context) != true) {
+					result = false;
 				}
 			}
 		} finally {

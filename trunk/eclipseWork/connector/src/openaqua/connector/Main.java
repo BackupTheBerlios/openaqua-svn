@@ -21,20 +21,14 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			//Setup a Simple Logger
-			PatternLayout layout = new PatternLayout( "%-5p\t[%t] %c: %m%n" );
-			
-			//Logger for Console
+			PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1} -> %m%n" );
 	        ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 	        logger.addAppender( consoleAppender );
-	        
-	        //Logger for File
-	        //FileAppender fileAppender = new FileAppender( layout, "MeineLogDatei.log", false );
-	        //logger.addAppender( fileAppender );
-	        
-	        //Set Default Debug Level
-	        // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
 	        logger.setLevel( Level.ALL);
-	        new Connector().run();
+
+	        //execute the main object
+	        Connector c = new Connector();
+	        c.start();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {

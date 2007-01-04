@@ -29,12 +29,12 @@ public class Main {
 		        
 		        //Try a simple Macro Execution
 		        CMacro m = new CMacro();
-		        m.addCommand(new CmdGenerator());
-		        m.addCommand(new CmdDumpRecord());
+		        //m.addCommand(new CmdGenerator());
+		        //m.addCommand(new CmdDumpRecord());
 
-		        CMacro n = new CMacro();
-		        n.addCommand(new CmdDumpRecord());
-		        m.addCommand(n);
+		        //CMacro n = new CMacro();
+		        //n.addCommand(new CmdDumpRecord());
+		        //m.addCommand(n);
 		        
 		        m.execute(new CRecord());
 		        

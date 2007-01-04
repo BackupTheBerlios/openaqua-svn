@@ -14,10 +14,6 @@ import openaqua.comm.ATcpCommand;
 import openaqua.comm.CTcpConnectionContext;
 import openaqua.comm.CTcpServer;
 public class Connector extends Thread{
-	/**
-	 * class is a singleton
-	 */
-//	final private static Connector INSTANCE = new Connector();
 	final private CTcpServer server;
 	private static Logger logger = Logger.getRootLogger();
 
@@ -35,6 +31,7 @@ public class Connector extends Thread{
         if (i instanceof ATcpCommand) {
         	try {
         		server = new CTcpServer(5001, 12345);
+        		server.start();
         	} catch (IOException e) {
         		logger.error("Got IOException while creating CTcpServer: " + e.getLocalizedMessage());
         		e.printStackTrace();
@@ -46,16 +43,7 @@ public class Connector extends Thread{
 		}
 	}
 
-	
-	/** 
-	 * 
-	 * @return a reference to a singleton instance of this factory
-	 */
-//	final public static Connector getInstance() {
-	//		return INSTANCE;
-	//	}
-	
 	public void run () {
-		server.run();
+		;//nothing to do. But let the sub threads do their job
 	}
 }
