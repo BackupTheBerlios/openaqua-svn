@@ -12,7 +12,7 @@ import openaqua.base.IEvent;
  * @author behrenan
  *
  */
-public class Connection implements IEvent {
+public class CConnection implements IEvent {
 	final Socket socket;
 	final private static Logger logger = Logger.getRootLogger();
 	
@@ -20,12 +20,12 @@ public class Connection implements IEvent {
 	/**
 	 * 
 	 */
-	private Connection() {
+	private CConnection() {
 		super();
 		socket = null;
 	}
 
-	public Connection(Socket socket) {
+	public CConnection(Socket socket) {
 		super();
 		this.socket = socket;
 	}
@@ -62,8 +62,8 @@ public class Connection implements IEvent {
 	 */
 	public boolean equals(java.lang.Object object) {
 		if (this == object) return true;
-		if (!(object instanceof Connection)) return false;
-		Connection o = (Connection) object;
+		if (!(object instanceof CConnection)) return false;
+		CConnection o = (CConnection) object;
 		if (o.socket.equals(this.socket) != true) return false; 
 		return true;
 	}
