@@ -25,18 +25,41 @@ public class CConnection implements IEvent {
 		socket = null;
 	}
 
+	
+	/**
+	 * 
+	 * @param socket - reference to a socket. 
+	 */
 	public CConnection(Socket socket) {
 		super();
 		this.socket = socket;
 	}
+
 	
+	
+	/**
+	 * @return return a new CConnection Record with an invalid socket!!!!
+	 */
 	public IEvent clone() {
-		return this;
+		return new CConnection(null);
+	}
+	
+	
+	/**
+	 * 
+	 * @return the socket itself
+	 */
+	public final Socket getSocket() {
+		return socket;
 	}
 
+	
+	
 	/**
 	 * Resets all internal data to an "empty" default state. That state might be different than
-	 * the state which a record has after creation by a prototype factory
+	 * the state which a record has after creation by a prototype factory<br>
+	 * 
+	 * Specially: A call close(!) the socket
 	 *
 	 */
 	public void reset()  {
@@ -52,11 +75,6 @@ public class CConnection implements IEvent {
 	/**
 	 * Compares two objects and compares all internal values.<br>
 	 * 
-	 * The method must be overidden. Otherwise the default behaviour happes which
-	 * simply compares the object reference.
-	 * 
-	 * @see {@link http://www.javaworld.com/javaqa/2002-06/01-qa-0621-hashtable.html} for
-	 * detailed description about overriding.
 	 * @param object the object which has to be compared
 	 * @return true = the object are equal
 	 */

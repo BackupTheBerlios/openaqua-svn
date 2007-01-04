@@ -63,9 +63,9 @@ public class CTcpServer extends Thread {
 
 		try {
 			while(!isInterrupted()) {
-				Socket socket = serverSocket.accept();
+				CConnection conn = new CConnection(serverSocket.accept());
 				//TODO add command?
-				CTcpServerConnectionFactory.getInstance().execConnection(0, socket);
+				//CTcpServerConnectionFactory.getInstance().execConnection(0, socket);
 			}
 		} catch ( ThreadDeath td ) {
 			try { 
