@@ -30,7 +30,6 @@ public class CTcpConnectionContext implements IContext {
 	 * @return return a new CConnection Record with an invalid socket!!!!
 	 */
 	public IContext clone() {
-		
 		return new CTcpConnectionContext();
 	}
 	
