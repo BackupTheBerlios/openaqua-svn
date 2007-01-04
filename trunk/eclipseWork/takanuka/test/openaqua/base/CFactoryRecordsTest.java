@@ -16,7 +16,7 @@ public class CFactoryRecordsTest extends TestCase {
 	public void testGetRecord() {
 		CRecord rec = new CRecord();
 		CFactoryRecords.getInstance().addRecordPrototyp(0, rec);
-		IEvent irec = CFactoryRecords.getInstance().getRecord(0);
+		IContext irec = CFactoryRecords.getInstance().getRecord(0);
 		assertTrue(irec != null);
 		assertTrue(irec instanceof CRecord);
 		assertEquals(rec, irec);

@@ -1,12 +1,12 @@
 package openaqua.defaultCommands;
 
 import openaqua.base.ICommand;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
 public class CmdDoNothing implements ICommand {
 
 
-	public boolean execute(IEvent event) {
+	public boolean execute(IContext context) {
 		return true;
 	}
 

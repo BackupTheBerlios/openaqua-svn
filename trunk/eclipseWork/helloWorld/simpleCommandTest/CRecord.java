@@ -1,15 +1,15 @@
 package simpleCommandTest;
 
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
-public class CRecord implements IEvent {
+public class CRecord implements IContext {
 	private String m_str;
 	
 	String getString() {
 		return m_str;
 	}
 	
-	public IEvent clone() {
+	public IContext clone() {
 		CRecord clone = new CRecord();
 		clone.setString(getString());
 		return clone;		

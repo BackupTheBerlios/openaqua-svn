@@ -6,13 +6,13 @@ package openaqua.comm;
 import java.io.IOException;
 import java.net.Socket;
 import org.apache.log4j.Logger;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
 /**
  * @author behrenan
  *
  */
-public class CConnection implements IEvent {
+public class CConnection implements IContext {
 	final Socket socket;
 	final private static Logger logger = Logger.getRootLogger();
 	
@@ -40,7 +40,7 @@ public class CConnection implements IEvent {
 	/**
 	 * @return return a new CConnection Record with an invalid socket!!!!
 	 */
-	public IEvent clone() {
+	public IContext clone() {
 		return new CConnection(null);
 	}
 	

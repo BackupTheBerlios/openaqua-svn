@@ -3,7 +3,7 @@ package openaqua.base;
 
 final public class CCommandExecutor implements Runnable  {
 	private ICommand command;
-	private IEvent event;
+	private IContext context;
 
 	public CCommandExecutor() {
 		super();
@@ -11,13 +11,13 @@ final public class CCommandExecutor implements Runnable  {
 	
 	
 	public void run() {
-		command.execute(event);
+		command.execute(context);
 	}
 
 
-	public void setCommand(ICommand command, IEvent event) {
+	public void setCommand(ICommand command, IContext context) {
 		this.command = command;
-		this.event = event;
+		this.context = context;
 	}
 
 

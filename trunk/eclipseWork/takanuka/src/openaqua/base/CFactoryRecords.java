@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 final public class CFactoryRecords {
 	final private static CFactoryRecords INSTANCE = new CFactoryRecords();
-	private HashMap<Integer, IEvent> m_recordMap = new HashMap<Integer, IEvent>();
+	private HashMap<Integer, IContext> m_recordMap = new HashMap<Integer, IContext>();
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 	
 	/**
@@ -42,7 +42,7 @@ final public class CFactoryRecords {
 	 * @param id
 	 * @param prototype
 	 */
-	public void addRecordPrototyp(int id, IEvent prototype) {
+	public void addRecordPrototyp(int id, IContext prototype) {
 		//check for null pointer
 		if (prototype == null) {
 			throw new java.lang.NullPointerException("CFactoryRecords.addRecordPrototyp() called with null value");
@@ -64,8 +64,8 @@ final public class CFactoryRecords {
 	 * @param id
 	 * @return
 	 */
-	public IEvent getRecord (int id) {
-		IEvent result;
+	public IContext getRecord (int id) {
+		IContext result;
 		lock.readLock().lock();
 		try {
 			result = m_recordMap.get(id).clone();

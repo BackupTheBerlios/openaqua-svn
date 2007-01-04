@@ -6,7 +6,7 @@ package openaqua.defaultCommands;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import openaqua.base.ICommand;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
 /**
  * Cmd which counts the usage of this command.<br>
@@ -33,7 +33,7 @@ public class CmdUsageCounter implements ICommand{
 	 * @see openaqua.base.ICommand#execute(openaqua.base.IRecord)
 	 * @returns true
 	 */
-	public boolean execute(IEvent event) {
+	public boolean execute(IContext context) {
 		lock.writeLock().lock();
 		try {
 			usage++;

@@ -3,7 +3,7 @@ package openaqua.defaultCommands;
 
 import org.apache.log4j.Logger;
 import openaqua.base.ICommand;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
 
 
@@ -15,9 +15,9 @@ public class CmdDumpRecord implements ICommand {
 	 * 
 	 * @return true - whatever happens
 	 */
-	public boolean execute(IEvent event) {
-		if (event != null) {
-			logger.info(event.toString());
+	public boolean execute(IContext context) {
+		if (context != null) {
+			logger.info(context.toString());
 		} else {
 			logger.info("IRecord is null");
 		}

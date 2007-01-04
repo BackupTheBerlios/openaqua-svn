@@ -8,5 +8,5 @@ package openaqua.base;
  *
  */
 public interface ICommand {
-	public boolean execute(final IEvent event);
+	public boolean execute(final IContext context);
 }

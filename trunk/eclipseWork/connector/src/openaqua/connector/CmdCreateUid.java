@@ -4,21 +4,21 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.server.UID;
 import openaqua.base.ICommand;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 
 public class CmdCreateUid implements ICommand {
 
 
 	/**
 	 * Create a global unique ID and store it in a ClientRecord
-	 * @param event
+	 * @param context
 	 * @return
 	 */
-	public boolean execute (final IEvent event) {
+	public boolean execute (final IContext context) {
 		boolean result = false;
 		
-		if (event instanceof ClientRecord) {
-			ClientRecord client = (ClientRecord) event;
+		if (context instanceof ClientRecord) {
+			ClientRecord client = (ClientRecord) context;
 			UID id = new UID();
 			String host;
 			try {

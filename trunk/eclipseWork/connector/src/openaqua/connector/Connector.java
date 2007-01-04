@@ -4,7 +4,7 @@ import openaqua.base.CFactoryCommands;
 import java.util.concurrent.ExecutorService; 
 import java.util.concurrent.Executors; 
 import openaqua.base.CFactoryRecords;
-import openaqua.base.IEvent;
+import openaqua.base.IContext;
 public class Connector {
 	/**
 	 * class is a singleton
@@ -47,7 +47,7 @@ public class Connector {
 	}
 	
 	public boolean ExecuteUidMacro() {
-		IEvent r = CFactoryRecords.getInstance().getRecord(1);
+		IContext r = CFactoryRecords.getInstance().getRecord(1);
 		boolean result = CFactoryCommands.getInstance().getCommand(6000).execute(r);
 		return result;
 	}
