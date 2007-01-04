@@ -42,16 +42,16 @@ public class CMacro implements IMacro {
 	
 	/**
 	 * @return If one command goes wrong the result will be false, otherwise true
-	 * @param record
+	 * @param event
 	 */
-	public boolean execute(final IRecord record) {
+	public boolean execute(final IEvent event) {
 		lock.readLock().lock(); //no write access to the cmd list while execution
 		boolean result = true;
 
 		try {
 			ListIterator<ICommand> it = m_commands.listIterator();
 			while(it.hasNext()) {
-				if (it.next().execute(record) != true) {
+				if (it.next().execute(event) != true) {
 					result = false;;
 				}
 			}

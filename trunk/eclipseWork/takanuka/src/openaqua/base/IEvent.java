@@ -7,13 +7,13 @@ package openaqua.base;
  * @author tukaram
  *
  */
-public interface IRecord {
+public interface IEvent {
 
 	/**
 	 * Makes a deep copy of a record
 	 * @return
 	 */
-	public IRecord clone();
+	public IEvent clone();
 
 	/**
 	 * Resets all internal data to an "empty" default state. That state might be different than

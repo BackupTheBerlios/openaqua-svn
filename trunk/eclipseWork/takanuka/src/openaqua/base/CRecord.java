@@ -7,7 +7,7 @@ package openaqua.base;
  * @author tukaram
  * TODO  class needs a hashCode() implemenation 
  */
-public class CRecord implements IRecord {
+public class CRecord implements IEvent {
 	public CRecord(){
 		super();
 	}
@@ -15,7 +15,7 @@ public class CRecord implements IRecord {
 	/**
 	 * Should create a clone of a record
 	 */
-	public IRecord clone() {
+	public IEvent clone() {
 		return new CRecord();
 	}
 

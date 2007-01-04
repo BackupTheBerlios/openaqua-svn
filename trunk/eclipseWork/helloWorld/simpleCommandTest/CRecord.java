@@ -1,15 +1,15 @@
 package simpleCommandTest;
 
-import openaqua.base.IRecord;
+import openaqua.base.IEvent;
 
-public class CRecord implements IRecord {
+public class CRecord implements IEvent {
 	private String m_str;
 	
 	String getString() {
 		return m_str;
 	}
 	
-	public IRecord clone() {
+	public IEvent clone() {
 		CRecord clone = new CRecord();
 		clone.setString(getString());
 		return clone;		

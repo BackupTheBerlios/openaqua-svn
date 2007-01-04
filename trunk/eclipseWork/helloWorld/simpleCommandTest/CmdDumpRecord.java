@@ -1,13 +1,13 @@
 package simpleCommandTest;
 
 import openaqua.base.ICommand;
-import openaqua.base.IRecord;
+import openaqua.base.IEvent;
 
 public class CmdDumpRecord implements ICommand {
-	public boolean execute(IRecord record) {
+	public boolean execute(IEvent event) {
 		boolean result = false;
-		if (record instanceof CRecord) {
-			CRecord r = (CRecord) record;
+		if (event instanceof CRecord) {
+			CRecord r = (CRecord) event;
 
 			System.out.println("CRecord:\t" + r.getString());
 			

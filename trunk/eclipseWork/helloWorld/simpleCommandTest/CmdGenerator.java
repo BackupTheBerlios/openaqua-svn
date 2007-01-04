@@ -1,14 +1,14 @@
 package simpleCommandTest;
 
 import openaqua.base.ICommand;
-import openaqua.base.IRecord;
+import openaqua.base.IEvent;
 
 public class CmdGenerator implements ICommand {
 
-	public boolean execute(IRecord record) {
+	public boolean execute(IEvent event) {
 		boolean result = false;
-		if (record instanceof CRecord) {
-			CRecord r = (CRecord) record;
+		if (event instanceof CRecord) {
+			CRecord r = (CRecord) event;
 			r.setString("hallo");
 			result = true;
 		}

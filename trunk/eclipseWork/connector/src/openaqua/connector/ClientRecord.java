@@ -1,8 +1,8 @@
 package openaqua.connector;
-import openaqua.base.IRecord;
+import openaqua.base.IEvent;
 
 
-public class ClientRecord implements IRecord {
+public class ClientRecord implements IEvent {
 	private String clientId; 
 	
 	/**
@@ -20,7 +20,7 @@ public class ClientRecord implements IRecord {
 	 * Makes a deep copy of a Record 
 	 */
 	@Override
-	public IRecord clone() {
+	public IEvent clone() {
 		ClientRecord r = new ClientRecord();
 		r.setClientId(this.clientId);
 		return r;
