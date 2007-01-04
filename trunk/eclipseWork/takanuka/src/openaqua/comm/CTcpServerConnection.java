@@ -9,7 +9,7 @@ import java.net.Socket;
  * @author behrenan
  *
  */
-public class CTcpServerConnection extends Thread implements ITcpServerConnection  {
+public class CTcpServerConnection  {
 	final private Socket socket;
 	
 	

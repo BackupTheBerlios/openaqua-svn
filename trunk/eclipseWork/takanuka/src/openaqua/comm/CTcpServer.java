@@ -5,51 +5,61 @@ package openaqua.comm;
 
 
 import java.net.*; 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.io.*; 
 
 import org.apache.log4j.Logger;
 
 /**
- * @author behrenan
+ * The CTcpServer handles TCP/IP connections on a given port.
+ * 
+ * The class expects a port number and a ICommand the deal with new 
  * 
  */
 //TODO how to inform other parts if an error happend
 
-public class CTcpServer extends Thread {
+final public class CTcpServer extends Thread {
 	Integer port = new Integer(0);
-	
+	final ATcpCommand command;
+	ExecutorService executor = Executors.newCachedThreadPool(); 
 	ServerSocket serverSocket = null; 
 	private static Logger logger = Logger.getRootLogger();
 
 	//no default constructor
-	private CTcpServer()  {}
+	private CTcpServer()  {
+		command = null;
+	}
 	
 	
 	/**
 	 * 
+	 * @param command the command which deals with incoming connections 
 	 * @param port the port number a server is listening
 	 * @throws IOException
 	 */
-	public CTcpServer(final int port)  throws IOException {
+	public CTcpServer(final ATcpCommand command, final int port)  throws IOException {
 		super();
+		this.command = command;
 		this.port = port;
 		serverSocket = new ServerSocket(port);
-		logger.debug("TCP Server created to listen on port " + this.port.toString());	
-		this.start();
+		logger.debug("TCP Server created to listen on port " + this.port.toString());
+		//new Thread( this ).start(); 
 	}
 
 	/**
-	 * 
+	 * @param command the command which deals with incoming connections 
 	 * @param port the port number a server is listening
 	 * @param backlog max number of possible waiting connections
 	 * @throws IOException
 	 */
-	public CTcpServer(final int port, final int backlog)  throws IOException {
+	public CTcpServer(final ATcpCommand command, final int port, final int backlog)  throws IOException {
 		super();
+		this.command = command;
 		this.port = port;
 		serverSocket = new ServerSocket(port, backlog);
-		logger.debug("TCP Server created to listen on port " + this.port.toString());	
-		this.start();
+		logger.debug("TCP Server created to listen on port " + this.port.toString());
+	    //new Thread( this ).start(); 
 	}
 	
 	
@@ -63,9 +73,16 @@ public class CTcpServer extends Thread {
 
 		try {
 			while(!isInterrupted()) {
-				CConnection conn = new CConnection(serverSocket.accept());
-				//TODO add command?
-				//CTcpServerConnectionFactory.getInstance().execConnection(0, socket);
+				CTcpConnectionContext conn = new CTcpConnectionContext();
+				conn.setSocket(serverSocket.accept());
+				Runnable r1 = new Runnable() { 
+					public void run() {
+						//TODO Add command execution
+						//command.execute(conn);
+						
+					} 
+				}; 		
+				executor.execute(r1);
 			}
 		} catch ( ThreadDeath td ) {
 			try { 

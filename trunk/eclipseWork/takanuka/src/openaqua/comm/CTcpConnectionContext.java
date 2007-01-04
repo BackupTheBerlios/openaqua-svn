@@ -12,27 +12,16 @@ import openaqua.base.IContext;
  * @author behrenan
  *
  */
-public class CConnection implements IContext {
-	final Socket socket;
+public class CTcpConnectionContext implements IContext {
+	Socket socket = null;
 	final private static Logger logger = Logger.getRootLogger();
 	
 
 	/**
 	 * 
 	 */
-	private CConnection() {
+	public CTcpConnectionContext() {
 		super();
-		socket = null;
-	}
-
-	
-	/**
-	 * 
-	 * @param socket - reference to a socket. 
-	 */
-	public CConnection(Socket socket) {
-		super();
-		this.socket = socket;
 	}
 
 	
@@ -41,7 +30,8 @@ public class CConnection implements IContext {
 	 * @return return a new CConnection Record with an invalid socket!!!!
 	 */
 	public IContext clone() {
-		return new CConnection(null);
+		
+		return new CTcpConnectionContext();
 	}
 	
 	
@@ -53,7 +43,24 @@ public class CConnection implements IContext {
 		return socket;
 	}
 
+	/**
+	 * 
+	 * @return the socket itself
+	 */
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+		
+	}
+
 	
+	/**
+	 * @return int with hashcode for this object
+	 */
+	public int hashCode() {
+		int hashcode = "CTcpConnectionContext".toString().hashCode();
+		hashcode = hashcode * socket.hashCode();
+		return hashcode;
+	}
 	
 	/**
 	 * Resets all internal data to an "empty" default state. That state might be different than
@@ -80,8 +87,8 @@ public class CConnection implements IContext {
 	 */
 	public boolean equals(java.lang.Object object) {
 		if (this == object) return true;
-		if (!(object instanceof CConnection)) return false;
-		CConnection o = (CConnection) object;
+		if (!(object instanceof CTcpConnectionContext)) return false;
+		CTcpConnectionContext o = (CTcpConnectionContext) object;
 		if (o.socket.equals(this.socket) != true) return false; 
 		return true;
 	}

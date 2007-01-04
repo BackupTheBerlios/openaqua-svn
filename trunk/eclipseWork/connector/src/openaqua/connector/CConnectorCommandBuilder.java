@@ -24,6 +24,7 @@ public class CConnectorCommandBuilder extends CCommandBuilder {
 	public ICommand createCommand(int id) {
 
 		if (id == 5000) return new CmdCreateUid();
+		if (id == 5001) return new CmdTcpConnection();
 		if (id == 6000) {
 			CMacro m = new CMacro();
 			m.addCommand(CFactoryCommands.getInstance().getCommand(5000));

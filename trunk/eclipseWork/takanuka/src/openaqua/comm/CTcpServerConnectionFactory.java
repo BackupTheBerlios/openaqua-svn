@@ -33,7 +33,7 @@ public class CTcpServerConnectionFactory {
 	 */
 	public void execConnection(final int type, final Socket sock){
 		CTcpServerConnection c = new CTcpServerConnection (sock);
-		c.start();
+		//c.start();
 	}
 	
 
