@@ -11,22 +11,29 @@ import org.apache.log4j.Logger;
 
 import openaqua.base.CFactoryContexts;
 import openaqua.comm.ATcpCommand;
-import openaqua.comm.CTcpConnectionContext;
 import openaqua.comm.CTcpServer;
 public class Connector extends Thread{
-	final private CTcpServer serverEcho;
+	private CTcpServer serverEcho;
 	private static Logger logger = Logger.getRootLogger();
 
 	/**
 	 * Executor Service, handles a thread pool for threaded command execution
 	 */
-	ExecutorService executor;
+	ExecutorService executor = Executors.newCachedThreadPool();
 
 	public Connector () {
 		super();
-		executor = Executors.newCachedThreadPool();
         CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder());
-        CFactoryContexts.getInstance().addRecordPrototyp(1, new CTcpConnectionContext());
+        //CFactoryContexts.getInstance().addRecordPrototyp(1, new CTcpConnectionContext());
+        CFactoryContexts.getInstance().addRecordPrototyp(2, new ClientRecord());
+        setupTcpServer();
+	}
+	
+	/**
+	 * Setup the TcpServer Thread
+	 *
+	 */
+	private void setupTcpServer() {
         ICommand i = CFactoryCommands.getInstance().getCommand(5001);
         if (i instanceof ATcpCommand) {
         	try {

@@ -29,9 +29,9 @@ final public class CTcpServer extends Thread {
 	 * no default constructor
 	 */
 	private CTcpServer()  {
-		commandId = null;
-		port = null;
-		serverSocket = null;
+		this.commandId = null;
+		this.port = null;
+		this.serverSocket = null;
 	}
 	
 	
@@ -45,26 +45,11 @@ final public class CTcpServer extends Thread {
 		super();
 		this.commandId = commandId;
 		this.port = port;
-		serverSocket = new ServerSocket(port);
+		this.serverSocket = new ServerSocket(port);
 		setName(name);
 		logger.debug("TCP Server created to listen on port " + this.port.toString());
 	}
 
-	/**
-	 * @param commandId the command which deals with incoming connections 
-	 * @param port the port number a server is listening
-	 * @param backlog max number of possible waiting connections
-	 * @throws IOException
-	 */
-	public CTcpServer(final String name, final int commandId, final int port, final int backlog)  throws IOException {
-		super();
-		this.commandId = commandId;
-		this.port = port;
-		serverSocket = new ServerSocket(port, backlog);
-		setName(name);
-		logger.debug("TCP Server created to listen on port " + this.port.toString());
-	}
-	
 	
 	/**
 	 * 
