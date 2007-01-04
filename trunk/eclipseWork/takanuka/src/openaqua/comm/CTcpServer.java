@@ -22,14 +22,16 @@ import org.apache.log4j.Logger;
  */
 final public class CTcpServer extends Thread {
 	final Integer port;
-	final Integer command;
+	final Integer commandId;
 	final ExecutorService executor = Executors.newCachedThreadPool(); 
 	final ServerSocket serverSocket; 
 	final private static Logger logger = Logger.getRootLogger();
 
-	//no default constructor
+	/**
+	 * no default constructor
+	 */
 	private CTcpServer()  {
-		command = null;
+		commandId = null;
 		port = null;
 		serverSocket = null;
 	}
@@ -37,13 +39,13 @@ final public class CTcpServer extends Thread {
 	
 	/**
 	 * 
-	 * @param command the command which deals with incoming connections 
+	 * @param commandId the command which deals with incoming connections 
 	 * @param port the port number a server is listening
 	 * @throws IOException
 	 */
-	public CTcpServer(final String name, final int command, final int port)  throws IOException {
+	public CTcpServer(final String name, final int commandId, final int port)  throws IOException {
 		super();
-		this.command = command;
+		this.commandId = commandId;
 		this.port = port;
 		serverSocket = new ServerSocket(port);
 		setName(name);
@@ -51,14 +53,14 @@ final public class CTcpServer extends Thread {
 	}
 
 	/**
-	 * @param command the command which deals with incoming connections 
+	 * @param commandId the command which deals with incoming connections 
 	 * @param port the port number a server is listening
 	 * @param backlog max number of possible waiting connections
 	 * @throws IOException
 	 */
-	public CTcpServer(final String name, final int command, final int port, final int backlog)  throws IOException {
+	public CTcpServer(final String name, final int commandId, final int port, final int backlog)  throws IOException {
 		super();
-		this.command = command;
+		this.commandId = commandId;
 		this.port = port;
 		serverSocket = new ServerSocket(port, backlog);
 		setName(name);
@@ -81,7 +83,7 @@ final public class CTcpServer extends Thread {
 				conn.setSocket(serverSocket.accept());
 				
 				//make up a runnable execution context
-				CRunnableCommand cmd = new CRunnableCommand(command, conn);
+				CRunnableCommand cmd = new CRunnableCommand(commandId, conn);
 
 				//execute it in background
 				executor.execute(cmd);
