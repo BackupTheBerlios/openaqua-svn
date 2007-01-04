@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 
-import openaqua.base.CFactoryRecords;
+import openaqua.base.CFactoryContexts;
 import openaqua.comm.ATcpCommand;
 import openaqua.comm.CTcpConnectionContext;
 import openaqua.comm.CTcpServer;
@@ -26,7 +26,7 @@ public class Connector extends Thread{
 		super();
 		executor = Executors.newCachedThreadPool();
         CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder());
-        CFactoryRecords.getInstance().addRecordPrototyp(1, new CTcpConnectionContext());
+        CFactoryContexts.getInstance().addRecordPrototyp(1, new CTcpConnectionContext());
         ICommand i = CFactoryCommands.getInstance().getCommand(5001);
         if (i instanceof ATcpCommand) {
         	try {

@@ -7,16 +7,16 @@ public class CFactoryRecordsTest extends TestCase {
 
 
 	public void testIsSingleton() {
-		CFactoryRecords a = CFactoryRecords.getInstance();
-		CFactoryRecords b = CFactoryRecords.getInstance();
+		CFactoryContexts a = CFactoryContexts.getInstance();
+		CFactoryContexts b = CFactoryContexts.getInstance();
 		assertTrue(a == b);    	
 		assertTrue(a != null);
 	}
 
 	public void testGetRecord() {
 		CRecord rec = new CRecord();
-		CFactoryRecords.getInstance().addRecordPrototyp(0, rec);
-		IContext irec = CFactoryRecords.getInstance().getRecord(0);
+		CFactoryContexts.getInstance().addRecordPrototyp(0, rec);
+		IContext irec = CFactoryContexts.getInstance().getRecord(0);
 		assertTrue(irec != null);
 		assertTrue(irec instanceof CRecord);
 		assertEquals(rec, irec);
@@ -24,7 +24,7 @@ public class CFactoryRecordsTest extends TestCase {
 	
 	public void testAddRecordPrototyp() {
 		try {
-			CFactoryRecords.getInstance().addRecordPrototyp(0, null);
+			CFactoryContexts.getInstance().addRecordPrototyp(0, null);
 			fail("Should throw NullPointerException");
 		} catch( NullPointerException e) {
 			// its ok

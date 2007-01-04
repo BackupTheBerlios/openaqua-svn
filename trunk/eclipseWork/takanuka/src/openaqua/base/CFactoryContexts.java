@@ -11,8 +11,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author tukaram
  *
  */
-final public class CFactoryRecords {
-	final private static CFactoryRecords INSTANCE = new CFactoryRecords();
+final public class CFactoryContexts {
+	final private static CFactoryContexts INSTANCE = new CFactoryContexts();
 	private HashMap<Integer, IContext> m_recordMap = new HashMap<Integer, IContext>();
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 	
@@ -23,7 +23,7 @@ final public class CFactoryRecords {
 	 * @see getInstance();
 	 *
 	 */
-	private CFactoryRecords() {
+	private CFactoryContexts() {
 		super();
 	}
 	
@@ -32,7 +32,7 @@ final public class CFactoryRecords {
 	 * 
 	 * @return a reference to a singleton instance of this factory
 	 */
-	final public static CFactoryRecords getInstance() {
+	final public static CFactoryContexts getInstance() {
 		return INSTANCE;
 	}
 	
