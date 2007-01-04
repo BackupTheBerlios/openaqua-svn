@@ -27,8 +27,7 @@ public class Main {
 	        logger.setLevel( Level.ALL);
 
 	        //execute the main object
-	        Connector c = new Connector();
-	        c.start();
+	        new Connector().start();
 	        logger.info("Done");
 	        
 		} catch( Exception ex ) {

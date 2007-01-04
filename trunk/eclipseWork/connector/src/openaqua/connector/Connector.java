@@ -14,7 +14,7 @@ import openaqua.comm.ATcpCommand;
 import openaqua.comm.CTcpConnectionContext;
 import openaqua.comm.CTcpServer;
 public class Connector extends Thread{
-	final private CTcpServer server;
+	final private CTcpServer serverEcho;
 	private static Logger logger = Logger.getRootLogger();
 
 	/**
@@ -30,8 +30,7 @@ public class Connector extends Thread{
         ICommand i = CFactoryCommands.getInstance().getCommand(5001);
         if (i instanceof ATcpCommand) {
         	try {
-        		server = new CTcpServer(5001, 12345);
-        		server.start();
+        		serverEcho = new CTcpServer("EchoServer", 5001, 12345);
         	} catch (IOException e) {
         		logger.error("Got IOException while creating CTcpServer: " + e.getLocalizedMessage());
         		e.printStackTrace();
@@ -41,6 +40,11 @@ public class Connector extends Thread{
 		} else {
 			throw new IllegalArgumentException("Command 5001 is not a ATcpCommand");
 		}
+	}
+	
+	
+	public void start() {
+		serverEcho.start();
 	}
 
 	public void run () {
