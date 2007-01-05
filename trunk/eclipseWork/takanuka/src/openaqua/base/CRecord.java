@@ -5,7 +5,6 @@ package openaqua.base;
 
 /**
  * @author tukaram
- * TODO  class needs a hashCode() implemenation 
  */
 public class CRecord implements IContext {
 	public CRecord(){
@@ -18,10 +17,14 @@ public class CRecord implements IContext {
 	public IContext clone() {
 		return new CRecord();
 	}
+	
+	public int hashCode() {
+		return "openaqua.base.CRecord".hashCode();
+	}
 
 
 	public void reset() {
-		//default implementation is empty
+		;//default implementation is empty
 	}
 	
 	

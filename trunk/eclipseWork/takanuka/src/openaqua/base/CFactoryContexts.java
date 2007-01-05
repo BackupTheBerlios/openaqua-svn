@@ -5,10 +5,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 /**
- * TODO Add a Record Reset
- * TODO Add Doc
- * TODO Add Unit Test 
- * @author tukaram
  *
  */
 final public class CFactoryContexts {
@@ -55,6 +51,39 @@ final public class CFactoryContexts {
 			lock.writeLock().unlock();
 		}
 	}
+
+	
+	
+	/**
+	 * removes the record prototype for a given ID
+	 * @param id the record id
+	 */
+	public void removeRecordPrototyp(int id) {
+		lock.writeLock().lock();
+		try {
+			if (m_recordMap.containsKey(id)){
+				m_recordMap.remove(id);
+			}
+		} finally {
+			lock.writeLock().unlock();
+		}
+	}
+
+	
+
+	/**
+	 * Remove all record prototyps
+	 */
+	public void clearPrototyps() {
+		lock.writeLock().lock();
+		try {
+			m_recordMap.clear();
+		} finally {
+			lock.writeLock().unlock();
+		}
+	}
+	
+	
 	
 	
 	/**

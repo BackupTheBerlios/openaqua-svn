@@ -17,33 +17,27 @@ public class ClientRecordTest {
 	
 	@Test
 	public final void testClientRecord() {
-		//fail("Not yet implemented"); // TODO
 		assertEquals(1, 1);
 	}
 
 	@Test
 	public final void testClone() {
-		//fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testReset() {
-		//fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testGetClientId() {
-		//fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testSetClientId() {
-		//fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testToString() {
-		//fail("Not yet implemented"); // TODO
 	}
 
 }

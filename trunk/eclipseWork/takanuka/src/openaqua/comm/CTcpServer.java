@@ -19,7 +19,6 @@ import org.apache.log4j.Logger;
  * 
  */
 final public class CTcpServer extends Thread {
-	//TODO not threadsafe!
 	final Integer port;
 	final Integer commandId;
 	final ExecutorService executor = Executors.newCachedThreadPool(); 
