@@ -6,7 +6,7 @@ package openaqua.base;
 
 /**
  * @author behrenan
- *
+ * @model
  */
 final public class CRunnableCommand implements Runnable {
 	final IContext context;
