@@ -5,16 +5,21 @@ package openaqua.comm;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.apache.log4j.Logger;
 import openaqua.base.IContext;
 
 /**
  * @author behrenan
+ * Class is threadsafe and reentrant (What about the Logger?)
  *
  */
 public class CTcpConnectionContext implements IContext {
 	Socket socket = null;
 	final private static Logger logger = Logger.getRootLogger();
+	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+
 	
 
 	/**
@@ -31,6 +36,7 @@ public class CTcpConnectionContext implements IContext {
 	 */
 	public IContext clone() {
 		return new CTcpConnectionContext();
+		
 	}
 	
 	
@@ -47,8 +53,12 @@ public class CTcpConnectionContext implements IContext {
 	 * @return the socket itself
 	 */
 	public void setSocket(Socket socket) {
-		this.socket = socket;
-		
+		lock.writeLock().lock();
+		try {
+			this.socket = socket;
+		} finally {
+			lock.writeLock().unlock();
+		}
 	}
 
 	
@@ -69,14 +79,22 @@ public class CTcpConnectionContext implements IContext {
 	 *
 	 */
 	public void reset()  {
+		lock.writeLock().lock();
 		try {
-			socket.close();
-		} catch (IOException e) {
-			logger.error("Error while closing TcpServerSocket: "+e.getLocalizedMessage());
-			e.printStackTrace();
+			try {
+				socket.close();
+			} catch (IOException e) {
+				logger.error("Error while closing TcpServerSocket: "+e.getLocalizedMessage());
+				e.printStackTrace();
+			}
+		} finally {
+			lock.writeLock().unlock();
 		}
-		
 	}
+	
+
+	
+	
 	
 	/**
 	 * Compares two objects and compares all internal values.<br>

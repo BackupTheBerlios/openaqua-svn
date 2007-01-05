@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
  * 
  * The class expects a port number and a ICommand the deal with new 
  * 
+ * Class is not threadsafe! 
  */
 final public class CTcpServer extends Thread {
 	final Integer port;

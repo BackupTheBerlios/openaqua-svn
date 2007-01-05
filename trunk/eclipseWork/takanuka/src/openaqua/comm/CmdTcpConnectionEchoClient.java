@@ -15,6 +15,8 @@ import openaqua.comm.CTcpConnectionContext;
 /**
  * A simple command. Expects a CTcpConnectionContext and 
  * returns all incoming strings back to the sender
+ * 
+ * Class is threadsafe and reentrant (What about the Logger?)
  *
  */
 public class CmdTcpConnectionEchoClient extends ATcpCommand {

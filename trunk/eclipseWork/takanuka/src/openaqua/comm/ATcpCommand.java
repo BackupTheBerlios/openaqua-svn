@@ -10,6 +10,8 @@ import openaqua.base.IContext;
 /**
  * 
  * Default implementation for a TcpCommand in a TcpServer environment
+ * 
+ * Class is threadsafe and reentrant
  *
  */
 public abstract class ATcpCommand implements ICommand {
