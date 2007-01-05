@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Data"
+    nsURI="http:///Data.ecore" nsPrefix="Data">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Author:behrenan.&#xA;Created:1/5/07 10:57 AM.&#xA;Title:.&#xA;Comment:.&#xA;"/>
+  </eAnnotations>
+  <eSubpackages name="icetest" nsURI="http:///Data/icetest.ecore" nsPrefix="Data.icetest">
+    <eClassifiers xsi:type="ecore:EClass" name="CService" eSuperTypes="#//icetest/IService">
+      <eOperations name="CService" ordered="false" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocolType" ordered="false"
+          lowerBound="1" eType="#//icetest/EProtocolType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceName" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EProtocolType">
+      <eLiterals name="ICEP"/>
+      <eLiterals name="TCP" value="1"/>
+      <eLiterals name="HTTP" value="2"/>
+      <eLiterals name="UDP" value="3"/>
+      <eLiterals name="BONJOUR" value="4"/>
+      <eLiterals name="SOAP" value="5"/>
+      <eLiterals name="CORBA" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IService" abstract="true" interface="true">
+      <eOperations name="getDescription" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eOperations name="getHost" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eOperations name="getPort" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eOperations name="getServiceName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eOperations name="getServiceType" ordered="false" lowerBound="1" eType="#//icetest/EProtocolType"/>
+      <eOperations name="setDescription" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="setHost" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="host" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="setPort" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="port" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eOperations name="setProtocolType" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="protocolType" ordered="false" lowerBound="1" eType="#//icetest/EProtocolType"/>
+      </eOperations>
+      <eOperations name="setServiceName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="serviceName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CServer">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hostId" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CClient">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hostId" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CServiceList">
+      <eOperations name="offerService" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="server" ordered="false" lowerBound="1" eType="#//icetest/CServer"/>
+        <eParameters name="service" ordered="false" lowerBound="1" eType="#//icetest/CService"/>
+      </eOperations>
+      <eOperations name="removeServer" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="server" ordered="false" lowerBound="1" eType="#//icetest/CServer"/>
+      </eOperations>
+      <eOperations name="getServer4Service" ordered="false" lowerBound="1" eType="#//icetest/CServer"/>
+      <eOperations name="removeService" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="server" ordered="false" lowerBound="1" eType="#//icetest/CServer"/>
+        <eParameters name="service" ordered="false" lowerBound="1" eType="#//icetest/CService"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mapService2Server" ordered="false"
+          lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mapServer2Service" ordered="false"
+          lowerBound="1"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="UMLStandardProfile" nsURI="http:///Data/UMLStandardProfile.ecore"
+      nsPrefix="Data.UMLStandardProfile">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="UML Standard Profile contains several popular stereotypes, tag definitions and constraints described in UML 1.4 and UML 2.0 Specifications."/>
+    </eAnnotations>
+  </eSubpackages>
+</ecore:EPackage>

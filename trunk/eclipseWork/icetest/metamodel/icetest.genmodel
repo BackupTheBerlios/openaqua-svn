@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/icetest/src"
+    modelPluginID="icetest" modelName="Icetest" importerID="org.eclipse.uml2.uml.ecore.importer">
+  <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.uml2.uml.ecore.importer">
+    <details key="DUPLICATE_FEATURES" value="DISCARD"/>
+    <details key="DUPLICATE_FEATURE_INHERITANCE" value="DISCARD"/>
+    <details key="REDEFINING_PROPERTIES" value="REPORT"/>
+    <details key="DUPLICATE_OPERATIONS" value="DISCARD"/>
+    <details key="DERIVED_FEATURES" value="PROCESS"/>
+    <details key="SUBSETTING_PROPERTIES" value="REPORT"/>
+    <details key="ECORE_TAGGED_VALUES" value="PROCESS"/>
+    <details key="REDEFINING_OPERATIONS" value="REPORT"/>
+    <details key="ANNOTATION_DETAILS" value="PROCESS"/>
+    <details key="SUPER_CLASS_ORDER" value="PROCESS"/>
+    <details key="UNION_PROPERTIES" value="REPORT"/>
+    <details key="DUPLICATE_OPERATION_INHERITANCE" value="DISCARD"/>
+  </genAnnotations>
+  <foreignModel>file:/users/dxccwl/user7/behrenan/workspace/eclipseWork/icetest/doc/icetest.uml2</foreignModel>
+  <genPackages prefix="Data" disposableProviderFactory="true" ecorePackage="Data.ecore#/">
+    <nestedGenPackages prefix="Icetest" disposableProviderFactory="true" ecorePackage="Data.ecore#//icetest">
+      <genEnums ecoreEnum="Data.ecore#//icetest/EProtocolType">
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/ICEP"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/TCP"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/HTTP"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/UDP"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/BONJOUR"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/SOAP"/>
+        <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/CORBA"/>
+      </genEnums>
+      <genClasses ecoreClass="Data.ecore#//icetest/CService">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CService/protocolType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CService/serviceName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CService/description"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CService/host"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CService/port"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/CService/CService"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Data.ecore#//icetest/IService">
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/getDescription"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/getHost"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/getPort"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/getServiceName"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/getServiceType"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/setDescription">
+          <genParameters ecoreParameter="Data.ecore#//icetest/IService/setDescription/description"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/setHost">
+          <genParameters ecoreParameter="Data.ecore#//icetest/IService/setHost/host"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/setPort">
+          <genParameters ecoreParameter="Data.ecore#//icetest/IService/setPort/port"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/setProtocolType">
+          <genParameters ecoreParameter="Data.ecore#//icetest/IService/setProtocolType/protocolType"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/IService/setServiceName">
+          <genParameters ecoreParameter="Data.ecore#//icetest/IService/setServiceName/serviceName"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="Data.ecore#//icetest/CServer">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CServer/hostId"/>
+      </genClasses>
+      <genClasses ecoreClass="Data.ecore#//icetest/CClient">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Data.ecore#//icetest/CClient/hostId"/>
+      </genClasses>
+      <genClasses ecoreClass="Data.ecore#//icetest/CServiceList">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Data.ecore#//icetest/CServiceList/mapService2Server"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Data.ecore#//icetest/CServiceList/mapServer2Service"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/CServiceList/offerService">
+          <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/offerService/server"/>
+          <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/offerService/service"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/CServiceList/removeServer">
+          <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/removeServer/server"/>
+        </genOperations>
+        <genOperations ecoreOperation="Data.ecore#//icetest/CServiceList/getServer4Service"/>
+        <genOperations ecoreOperation="Data.ecore#//icetest/CServiceList/removeService">
+          <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/removeService/server"/>
+          <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/removeService/service"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="UMLStandardProfile" disposableProviderFactory="true"
+        ecorePackage="Data.ecore#//UMLStandardProfile"/>
+  </genPackages>
+</genmodel:GenModel>

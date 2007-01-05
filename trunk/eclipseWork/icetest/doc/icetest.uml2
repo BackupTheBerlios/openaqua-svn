@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MagicDrawProfile_0="http:///MagicDrawProfile_0_m0T94JzCEduw4MuIcC__LQ.profile.uml2" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xsi:schemaLocation="http:///MagicDrawProfile_0_m0T94JzCEduw4MuIcC__LQ.profile.uml2 UML_Standard_Profile.MagicDraw_Profile.profile.uml2#_naVcOZzCEduw4MuIcC__LQ" xmi:id="_nacKOJzCEduw4MuIcC__LQ" name="Data" appliedProfile="_nacw05zCEduw4MuIcC__LQ _nacw1pzCEduw4MuIcC__LQ _nacw2ZzCEduw4MuIcC__LQ _nahpUZzCEduw4MuIcC__LQ">
+  <ownedComment xmi:id="_nacw0JzCEduw4MuIcC__LQ" body="Author:behrenan.&#xA;Created:1/5/07 10:57 AM.&#xA;Title:.&#xA;Comment:.&#xA;" annotatedElement="_nacKOJzCEduw4MuIcC__LQ"/>
+  <packageImport xmi:id="_nacw0ZzCEduw4MuIcC__LQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_EfRZoK86EdieaYgxtVWN8Q"/>
+  </packageImport>
+  <packageImport xmi:id="_nacw0pzCEduw4MuIcC__LQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_LIBRARIES/JavaPrimitiveTypes.library.uml2#_RjmyoK86EdieaYgxtVWN8Q"/>
+  </packageImport>
+  <packageImport xmi:type="uml:ProfileApplication" xmi:id="_nacw05zCEduw4MuIcC__LQ">
+    <eAnnotations xmi:id="_nacw1JzCEduw4MuIcC__LQ" source="attributes">
+      <details xmi:id="_nacw1ZzCEduw4MuIcC__LQ" key="version" value="0"/>
+    </eAnnotations>
+    <importedPackage xmi:type="uml:Profile" href="UML_Standard_Profile.MagicDraw_Profile.profile.uml2#_naVcNZzCEduw4MuIcC__LQ"/>
+    <importedProfile href="UML_Standard_Profile.MagicDraw_Profile.profile.uml2#_naVcNZzCEduw4MuIcC__LQ"/>
+  </packageImport>
+  <packageImport xmi:type="uml:ProfileApplication" xmi:id="_nacw1pzCEduw4MuIcC__LQ">
+    <eAnnotations xmi:id="_nacw15zCEduw4MuIcC__LQ" source="attributes">
+      <details xmi:id="_nacw2JzCEduw4MuIcC__LQ" key="version" value="0"/>
+    </eAnnotations>
+    <importedPackage xmi:type="uml:Profile" href="UML_Standard_Profile.Validation_Profile.profile.uml2#_nY8VE5zCEduw4MuIcC__LQ"/>
+    <importedProfile href="UML_Standard_Profile.Validation_Profile.profile.uml2#_nY8VE5zCEduw4MuIcC__LQ"/>
+  </packageImport>
+  <packageImport xmi:type="uml:ProfileApplication" xmi:id="_nacw2ZzCEduw4MuIcC__LQ">
+    <eAnnotations xmi:id="_nacw2pzCEduw4MuIcC__LQ" source="attributes">
+      <details xmi:id="_nahpUJzCEduw4MuIcC__LQ" key="version" value="0"/>
+    </eAnnotations>
+    <importedPackage xmi:type="uml:Profile" href="UML_Standard_Profile.UML_Standard_Profile.profile.uml2#_nYm9wJzCEduw4MuIcC__LQ"/>
+    <importedProfile href="UML_Standard_Profile.UML_Standard_Profile.profile.uml2#_nYm9wJzCEduw4MuIcC__LQ"/>
+  </packageImport>
+  <packageImport xmi:type="uml:ProfileApplication" xmi:id="_nahpUZzCEduw4MuIcC__LQ">
+    <eAnnotations xmi:id="_nahpUpzCEduw4MuIcC__LQ" source="attributes">
+      <details xmi:id="_nahpU5zCEduw4MuIcC__LQ" key="version" value="0"/>
+    </eAnnotations>
+    <importedPackage xmi:type="uml:Profile" href="UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml2#_naaUoZzCEduw4MuIcC__LQ"/>
+    <importedProfile href="UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml2#_naaUoZzCEduw4MuIcC__LQ"/>
+  </packageImport>
+  <ownedMember xmi:type="uml:Package" xmi:id="_nahpVJzCEduw4MuIcC__LQ" name="icetest">
+    <ownedMember xmi:type="uml:Class" xmi:id="_nahpVZzCEduw4MuIcC__LQ" name="CService" clientDependency="_nahpVpzCEduw4MuIcC__LQ">
+      <implementation xmi:id="_nahpVpzCEduw4MuIcC__LQ" client="_nahpVZzCEduw4MuIcC__LQ" supplier="_naiQfZzCEduw4MuIcC__LQ" contract="_naiQfZzCEduw4MuIcC__LQ"/>
+      <ownedAttribute xmi:id="_nahpV5zCEduw4MuIcC__LQ" name="protocolType" visibility="private" type="_nahpXZzCEduw4MuIcC__LQ"/>
+      <ownedAttribute xmi:id="_nahpWJzCEduw4MuIcC__LQ" name="serviceName" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_nahpWZzCEduw4MuIcC__LQ" name="description" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_nahpWpzCEduw4MuIcC__LQ" name="host" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_nahpW5zCEduw4MuIcC__LQ" name="port" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8K86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_nahpXJzCEduw4MuIcC__LQ" name="CService"/>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Enumeration" xmi:id="_nahpXZzCEduw4MuIcC__LQ" name="EProtocolType">
+      <ownedLiteral xmi:id="_naiQYJzCEduw4MuIcC__LQ" name="ICEP"/>
+      <ownedLiteral xmi:id="_naiQYZzCEduw4MuIcC__LQ" name="TCP"/>
+      <ownedLiteral xmi:id="_naiQYpzCEduw4MuIcC__LQ" name="HTTP"/>
+      <ownedLiteral xmi:id="_naiQY5zCEduw4MuIcC__LQ" name="UDP"/>
+      <ownedLiteral xmi:id="_naiQZJzCEduw4MuIcC__LQ" name="BONJOUR"/>
+      <ownedLiteral xmi:id="_naiQZZzCEduw4MuIcC__LQ" name="SOAP"/>
+      <ownedLiteral xmi:id="_naiQZpzCEduw4MuIcC__LQ" name="CORBA"/>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_naiQZ5zCEduw4MuIcC__LQ" name="CServer">
+      <ownedAttribute xmi:id="_naiQaJzCEduw4MuIcC__LQ" name="hostId" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_naiQaZzCEduw4MuIcC__LQ" name="CClient">
+      <ownedAttribute xmi:id="_naiQapzCEduw4MuIcC__LQ" name="hostId" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedAttribute>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_naiQa5zCEduw4MuIcC__LQ" name="CServiceList">
+      <ownedAttribute xmi:id="_naiQbJzCEduw4MuIcC__LQ" name="mapService2Server" visibility="private"/>
+      <ownedAttribute xmi:id="_naiQbZzCEduw4MuIcC__LQ" name="mapServer2Service" visibility="private"/>
+      <ownedOperation xmi:id="_naiQbpzCEduw4MuIcC__LQ" name="offerService">
+        <returnResult xmi:id="_naiQb5zCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQcJzCEduw4MuIcC__LQ" name="server" type="_naiQZ5zCEduw4MuIcC__LQ"/>
+        <ownedParameter xmi:id="_naiQcZzCEduw4MuIcC__LQ" name="service" type="_nahpVZzCEduw4MuIcC__LQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQcpzCEduw4MuIcC__LQ" name="removeServer">
+        <returnResult xmi:id="_naiQc5zCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQdJzCEduw4MuIcC__LQ" name="server" type="_naiQZ5zCEduw4MuIcC__LQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQdZzCEduw4MuIcC__LQ" name="getServer4Service" type="_naiQZ5zCEduw4MuIcC__LQ">
+        <eAnnotations xmi:id="_naiQdpzCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQd5zCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQeJzCEduw4MuIcC__LQ" type="_naiQZ5zCEduw4MuIcC__LQ" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQeZzCEduw4MuIcC__LQ" name="removeService">
+        <returnResult xmi:id="_naiQepzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQe5zCEduw4MuIcC__LQ" name="server" type="_naiQZ5zCEduw4MuIcC__LQ"/>
+        <ownedParameter xmi:id="_naiQfJzCEduw4MuIcC__LQ" name="service" type="_nahpVZzCEduw4MuIcC__LQ"/>
+      </ownedOperation>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Interface" xmi:id="_naiQfZzCEduw4MuIcC__LQ" name="IService">
+      <ownedOperation xmi:id="_naiQfpzCEduw4MuIcC__LQ" name="getDescription">
+        <eAnnotations xmi:id="_naiQf5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQgJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQgZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQgpzCEduw4MuIcC__LQ" name="getHost">
+        <eAnnotations xmi:id="_naiQg5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQhJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQhZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQhpzCEduw4MuIcC__LQ" name="getPort">
+        <eAnnotations xmi:id="_naiQh5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQiJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQiZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8K86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8K86EdieaYgxtVWN8Q"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQipzCEduw4MuIcC__LQ" name="getServiceName" concurrency="concurrent">
+        <eAnnotations xmi:id="_naiQi5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQjJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQjZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQjpzCEduw4MuIcC__LQ" name="getServiceType" concurrency="concurrent" type="_nahpXZzCEduw4MuIcC__LQ">
+        <eAnnotations xmi:id="_naiQj5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__getter" xmi:id="_naiQkJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQkZzCEduw4MuIcC__LQ" type="_nahpXZzCEduw4MuIcC__LQ" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQkpzCEduw4MuIcC__LQ" name="setDescription">
+        <eAnnotations xmi:id="_naiQk5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__setter" xmi:id="_naiQlJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQlZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQlpzCEduw4MuIcC__LQ" name="description">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQl5zCEduw4MuIcC__LQ" name="setHost">
+        <eAnnotations xmi:id="_naiQmJzCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__setter" xmi:id="_naiQmZzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQmpzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQm5zCEduw4MuIcC__LQ" name="host">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQnJzCEduw4MuIcC__LQ" name="setPort">
+        <eAnnotations xmi:id="_naiQnZzCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__setter" xmi:id="_naiQnpzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQn5zCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQoJzCEduw4MuIcC__LQ" name="port">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8K86EdieaYgxtVWN8Q"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQoZzCEduw4MuIcC__LQ" name="setProtocolType">
+        <eAnnotations xmi:id="_naiQopzCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__setter" xmi:id="_naiQo5zCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQpJzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQpZzCEduw4MuIcC__LQ" name="protocolType" type="_nahpXZzCEduw4MuIcC__LQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_naiQppzCEduw4MuIcC__LQ" name="setServiceName">
+        <eAnnotations xmi:id="_naiQp5zCEduw4MuIcC__LQ" source="appliedStereotypes">
+          <contents xmi:type="MagicDrawProfile_0:MagicDrawProfile__setter" xmi:id="_naiQqJzCEduw4MuIcC__LQ"/>
+        </eAnnotations>
+        <returnResult xmi:id="_naiQqZzCEduw4MuIcC__LQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </returnResult>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        <ownedParameter xmi:id="_naiQqpzCEduw4MuIcC__LQ" name="serviceName">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_IXlH8a86EdieaYgxtVWN8Q"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedMember>
+  </ownedMember>
+  <ownedMember xmi:type="uml:Package" xmi:id="_naiQq5zCEduw4MuIcC__LQ" name="UML Standard Profile">
+    <ownedComment xmi:id="_naiQrJzCEduw4MuIcC__LQ" body="UML Standard Profile contains several popular stereotypes, tag definitions and constraints described in UML 1.4 and UML 2.0 Specifications." annotatedElement="_naiQq5zCEduw4MuIcC__LQ"/>
+  </ownedMember>
+</uml:Model>
