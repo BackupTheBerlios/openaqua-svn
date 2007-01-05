@@ -8,17 +8,24 @@
   </eAnnotations>
   <eSubpackages name="icetest" nsURI="http:///Data/icetest.ecore" nsPrefix="Data.icetest">
     <eClassifiers xsi:type="ecore:EClass" name="CService" eSuperTypes="#//icetest/IService">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="CService descripes a Service :-)&#xA;&#xA;A Service might be a http webserver. The host could be www.openaqua.de, the port 80 the protocolType either TCP, HTTP or SOAP.&#xA;&#xA;Services will be used by Servers to describer the offered services. Clients might search for an service and will get a list with relevant Servers. I client might also look what kind of services a server offers."/>
+      </eAnnotations>
       <eOperations name="CService" ordered="false" lowerBound="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocolType" ordered="false"
-          lowerBound="1" eType="#//icetest/EProtocolType"/>
+          lowerBound="1" eType="#//icetest/EProtocolType" defaultValueLiteral="TCP"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceName" ordered="false"
-          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="openaqua.echo"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false"
-          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="A simple TCP Echo Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" ordered="false"
-          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="localhost"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" ordered="false"
-          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="12345"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="EProtocolType">
       <eLiterals name="ICEP"/>
@@ -77,11 +84,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="mapServer2Service" ordered="false"
           lowerBound="1"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CServiceEcho" eSuperTypes="#//icetest/CService"/>
   </eSubpackages>
   <eSubpackages name="UMLStandardProfile" nsURI="http:///Data/UMLStandardProfile.ecore"
       nsPrefix="Data.UMLStandardProfile">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="UML Standard Profile contains several popular stereotypes, tag definitions and constraints described in UML 1.4 and UML 2.0 Specifications."/>
     </eAnnotations>
+  </eSubpackages>
+  <eSubpackages name="diagrams" nsURI="http:///Data/diagrams.ecore" nsPrefix="Data.diagrams">
+    <eClassifiers xsi:type="ecore:EClass" name="EchoServer" eSuperTypes="#//icetest/CServer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" upperBound="-1"
+          eType="#//icetest/CServiceEcho"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

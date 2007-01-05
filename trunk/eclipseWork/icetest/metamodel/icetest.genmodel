@@ -19,7 +19,8 @@
   </genAnnotations>
   <foreignModel>file:/users/dxccwl/user7/behrenan/workspace/eclipseWork/icetest/doc/icetest.uml2</foreignModel>
   <genPackages prefix="Data" disposableProviderFactory="true" ecorePackage="Data.ecore#/">
-    <nestedGenPackages prefix="Icetest" disposableProviderFactory="true" ecorePackage="Data.ecore#//icetest">
+    <nestedGenPackages prefix="Icetest" basePackage="Data" disposableProviderFactory="true"
+        ecorePackage="Data.ecore#//icetest">
       <genEnums ecoreEnum="Data.ecore#//icetest/EProtocolType">
         <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/ICEP"/>
         <genEnumLiterals ecoreEnumLiteral="Data.ecore#//icetest/EProtocolType/TCP"/>
@@ -83,8 +84,15 @@
           <genParameters ecoreParameter="Data.ecore#//icetest/CServiceList/removeService/service"/>
         </genOperations>
       </genClasses>
+      <genClasses ecoreClass="Data.ecore#//icetest/CServiceEcho"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="UMLStandardProfile" disposableProviderFactory="true"
+    <nestedGenPackages prefix="UMLStandardProfile" basePackage="Data" disposableProviderFactory="true"
         ecorePackage="Data.ecore#//UMLStandardProfile"/>
+    <nestedGenPackages prefix="Diagrams" disposableProviderFactory="true" ecorePackage="Data.ecore#//diagrams">
+      <genClasses ecoreClass="Data.ecore#//diagrams/EchoServer">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Data.ecore#//diagrams/EchoServer/_"/>
+      </genClasses>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>
