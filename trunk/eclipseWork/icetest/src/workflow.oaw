@@ -15,5 +15,31 @@
 		<toolAdapterClassname value="${toolAdapterClassname}"/>
 		<moduleFile value="${moduleFile}"/>
 	</component>
+	
+	<cartridge	file="org/openarchitectureware/workflow/oawclassic/classicinit.oaw">
+		<metaEnvironmentSlot value="metaEnvironmentSlot"/>
+	</cartridge>	
+	
 
+	<component id="dirCleaner"	class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directories value="${srcGenPath}"/>
+	</component>
+
+
+	<component id="generator" class="org.openarchitectureware.xpand2.Generator">
+		<metaModel class="org.openarchitectureware.type.impl.java.JavaMetaModel">
+			<typeStrategy class="org.openarchitectureware.type.impl.oawclassic.OAWClassicStrategy" convertPropertiesToLowerCase="false"/>
+		</metaModel>
+		<expand value="Root::Root FOREACH metaEnvironmentSlot.getElements('Model')"/>
+		<genPath value="${srcGenPath}/"/>
+		<srcPath value="${srcGenPath}/"/>
+		<beautifier class="org.openarchitectureware.xpand2.output.JavaBeautifier"/>
+		<beautifier class="org.openarchitectureware.xpand2.output.XmlBeautifier"/>
+		<fileEncoding value="ISO-8859-1"/>
+	</component>
+	
+	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicfinish.oaw">
+		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot" />
+		<dumpfile value="${dumpfile}" />
+	</cartridge>	
 </workflow>
