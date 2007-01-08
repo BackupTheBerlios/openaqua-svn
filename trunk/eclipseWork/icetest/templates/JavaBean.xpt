@@ -1,0 +1,10 @@
+«IMPORT org::openarchitectureware::meta::uml::classifier»
+«DEFINE BeanClass FOR Class»
+«FILE NameS+".java"»
+
+
+public class «Name» {
+} 
+
+
+«ENDFILE»

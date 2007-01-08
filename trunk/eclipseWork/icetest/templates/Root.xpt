@@ -1,9 +1,22 @@
 «IMPORT org::openarchitectureware::core::meta::core»
 «IMPORT org::openarchitectureware::meta::uml::classifier»
+«IMPORT openaqua::broker::entities»
+«IMPORT openaqua::metamodel»
+
+
 «DEFINE Root FOR Model»
-«EXPAND Root FOREACH OwnedElement»
+	«EXPAND Root FOREACH OwnedElement»
 «ENDDEFINE»
+
+
 «DEFINE Root FOR Package»
-«EXPAND Root FOREACH OwnedElement»
+	«EXPAND Root FOREACH OwnedElement»
 «ENDDEFINE»
-«DEFINE Root FOR Object»«ENDDEFINE»
+
+
+«DEFINE Root FOR Object»
+«ENDDEFINE»
+
+«DEFINE Root FOR Entity»
+	«EXPAND java::JavaBean::BeanClass»
+«ENDDEFINE»
