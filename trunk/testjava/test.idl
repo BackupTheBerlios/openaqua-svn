@@ -1,5 +1,0 @@
-module connector {
-	interface GetUid {
-		string getUid();
-	};
-};
