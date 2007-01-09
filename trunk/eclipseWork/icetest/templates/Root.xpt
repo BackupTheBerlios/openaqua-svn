@@ -16,6 +16,7 @@
 «DEFINE Root FOR Object»
 «ENDDEFINE»
 
+
 «DEFINE Root FOR Entity»
 	«EXPAND java::JavaBean::BeanClass»
 «ENDDEFINE»
