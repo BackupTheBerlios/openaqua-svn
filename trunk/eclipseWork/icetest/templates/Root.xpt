@@ -1,6 +1,5 @@
 «IMPORT org::openarchitectureware::core::meta::core»
 «IMPORT org::openarchitectureware::meta::uml::classifier»
-«IMPORT openaqua::broker::entities»
 «IMPORT openaqua::metamodel»
 
 
