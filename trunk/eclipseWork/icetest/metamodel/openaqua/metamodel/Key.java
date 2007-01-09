@@ -4,7 +4,6 @@
 package openaqua.metamodel;
 
 import org.openarchitectureware.meta.uml.classifier.Attribute;
-
 /**
  * @author behrenan
  *

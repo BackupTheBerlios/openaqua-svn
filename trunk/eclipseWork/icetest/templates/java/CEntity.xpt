@@ -4,16 +4,22 @@
 
 «DEFINE CEntityClass FOR Class»
 «FILE NameS+".java"»
+/**
+* Dont modify this file directly. It is created by openarchitectureware 
+* So use the MDA tool to generate changes
+*/
 
 
 /**
+* @author
 */
 public class «Name» {
 
 	/**
 	* Contructor
 	*/
-	public «Name» {
+	public «Name»() {
+		//constructor is empty
 	}
 	
 	
