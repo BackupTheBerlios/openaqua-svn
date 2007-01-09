@@ -18,6 +18,6 @@
 
 
 «DEFINE Root FOR Class»
-	«EXPAND java::JavaBean::BeanClass»
+	«EXPAND java::CEntity::CEntityClass»
 «ENDDEFINE»
 

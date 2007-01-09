@@ -2,7 +2,6 @@
 <workflow>
 	<property file="workflow.properties"/>
 	
-	<!--
 	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicstart.oaw">
 		<metaEnvironmentSlot value="metaEnvironmentSlot"/>
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot"/>
@@ -22,10 +21,12 @@
 	</cartridge>	
 	
 
+	<!--
 	Bug: Loescht auch Verzeichnis wenn im SVN
 	<component id="dirCleaner"	class="org.openarchitectureware.workflow.common.DirectoryCleaner">
 		<directories value="${srcGenPath}"/>
 	</component>
+	-->
 
 
 	<component id="generator" class="org.openarchitectureware.xpand2.Generator">
@@ -44,5 +45,4 @@
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot" />
 		<dumpfile value="${dumpfile}" />
 	</cartridge>	
-	-->
 </workflow>

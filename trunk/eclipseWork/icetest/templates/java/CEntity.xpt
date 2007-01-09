@@ -2,11 +2,21 @@
 
 
 
-«DEFINE BeanClass FOR Class»
+«DEFINE CEntityClass FOR Class»
 «FILE NameS+".java"»
 
 
+/**
+*/
 public class «Name» {
+
+	/**
+	* Contructor
+	*/
+	public «Name» {
+	}
+	
+	
 } 
 
 
