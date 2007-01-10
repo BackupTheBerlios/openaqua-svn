@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: icetest Plug-in
-Bundle-SymbolicName: icetest
-Bundle-Version: 0.1.0
-Export-Package: openaqua.metamodel
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
