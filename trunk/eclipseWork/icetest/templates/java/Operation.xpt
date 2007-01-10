@@ -1,0 +1,8 @@
+«IMPORT org::openarchitectureware::meta::uml::classifier»
+«EXTENSION  java::NamingConventions»
+
+
+«DEFINE OperationDefinition FOR Operation»
+	public foo(){}//????
+«ENDDEFINE»
+

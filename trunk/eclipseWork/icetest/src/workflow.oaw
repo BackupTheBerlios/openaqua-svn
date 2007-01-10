@@ -37,7 +37,7 @@
 		<beautifier class="org.openarchitectureware.xpand2.output.XmlBeautifier"/>
 		<fileEncoding value="ISO-8859-1"/>
 	</component>
-	
+
 	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicfinish.oaw">
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot" />
 		<dumpfile value="${dumpfile}" />

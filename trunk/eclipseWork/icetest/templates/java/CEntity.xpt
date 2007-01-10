@@ -17,23 +17,38 @@ package «packageName()»;
 
 
 /**
+* «this.Documentation»
+*
 * @author be
 */
+
 public class «Name» «IF hasSuperClass» extends «SuperClass.fqn()» «ENDIF» implements java.io.Serializable {
 
-	«EXPAND Attribute::PropertyDeclaration FOREACH Attribute»
+	«EXPAND Attribute::PropertyDeclaration FOREACH Attribute-»
+	
 	private static final long serialVersionUID = 0L;
-//aaaaaaaaaaaaaaaaaaaaaa
+
 	/**
 	* Contructor
 	*/
+	
 	public «Name»() {
 		//constructor is empty
+		«PROTECT CSTART "/*" CEND "*/" ID this.Id»
+		here goes some content
+		«ENDPROTECT»
+		
+		«REM»
+		«PROTECT CSTART "/*" CEND "*/" ID ElementsUniqueID»
+		here goes some content
+		«ENDPROTECT»
+		«ENDREM»
 	} // «Name»()
 	
 	«EXPAND Attribute::Getter FOREACH Attribute»
-	
 	«EXPAND Attribute::Setter FOREACH Attribute»	
+	«EXPAND Operation::OperationDefinition FOREACH Operation-»
+
 	
 }// «Name»
 
