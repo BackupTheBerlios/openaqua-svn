@@ -4,4 +4,4 @@ demo             - demo programs like odaba demos
 dokuwiki         - plugins and templates for the PHP dokuwiki wiki
 odaba            - Odaba Database stuff
 tools            - some misc and maybe useful tools
-eclipseWork      - a couple of test projects to work with java and MDA tools
+eclipseWork      - a couple of test projects to work with Java and MDA tools
