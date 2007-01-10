@@ -21,11 +21,8 @@
 	</cartridge>	
 	
 
-	<!--
-	Bug: Loescht auch .svn Verzeichnis wenn im SVN
-	-->
 	<component id="dirCleaner"	class="org.openarchitectureware.workflow.common.DirectoryCleaner">
-		<directories value="${srcGenPath}"/>
+		<directories value="${srcGenPath}/openaqua"/>
 	</component>
 
 
