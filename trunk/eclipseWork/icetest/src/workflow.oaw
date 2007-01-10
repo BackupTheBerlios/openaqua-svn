@@ -26,6 +26,7 @@
 	</component>
 
 
+	<!--
 	<component id="generator" class="org.openarchitectureware.xpand2.Generator">
 		<metaModel class="org.openarchitectureware.type.impl.java.JavaMetaModel">
 			<typeStrategy class="org.openarchitectureware.type.impl.oawclassic.OAWClassicStrategy" convertPropertiesToLowerCase="false"/>
@@ -37,6 +38,26 @@
 		<beautifier class="org.openarchitectureware.xpand2.output.XmlBeautifier"/>
 		<fileEncoding value="ISO-8859-1"/>
 	</component>
+	-->
+	
+	<cartridge file="de/itemis/oaw/javabasics/cartridge.oaw">
+		<!--
+		cartdige
+		<checkExpression value="me.getElements('ModelElement')"/>
+		<expandExpression value="de::itemis::oaw::javabasics::xpt::JavaBean::BeanClass FOREACH me.getElements('Class')"/>
+		<outputPath value="${srcGenPath}"/>
+		-->
+		<!--
+		own
+		<checkExpression value="metaEnvironmentSlot.getElements('ModelElement')"/>
+		<expandExpression value="Root::Root FOREACH metaEnvironmentSlot.getElements('Model')"/>
+		<outputPath value="${srcGenPath}"/>
+		-->
+		<checkExpression value="metaEnvironmentSlot.getElements('ModelElement')"/>
+		<expandExpression value="de::itemis::oaw::javabasics::xpt::JavaBean::BeanClass FOREACH metaEnvironmentSlot.getElements('Class')"/>
+		<outputPath value="${srcGenPath}"/>
+	</cartridge>
+	
 
 	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicfinish.oaw">
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot" />

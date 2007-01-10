@@ -21,6 +21,7 @@
 «ENDREM»
 
 «IMPORT org::openarchitectureware::meta::uml::classifier»
+
 «EXTENSION de::itemis::oaw::javabasics::ext::NameConventions»
 «EXTENSION de::itemis::oaw::javabasics::ext::UtilFunctions»
 
@@ -31,10 +32,15 @@
 */
 package «packageName()»;
 
+
+/**
+* «this.Documentation»<br>
+*/
 public class «Name» «IF hasSuperClass»extends «SuperClass.fqn()» «ENDIF» implements java.io.Serializable {
 	«serialVersionUID()»;
 	«EXPAND Properties»
 	«EXPAND References»	
+	«EXPAND Operation»
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -49,3 +55,14 @@ public class «Name» «IF hasSuperClass»extends «SuperClass.fqn()» «ENDIF» impleme
 	«EXPAND Association::ReferenceVariables»
 	«EXPAND Association::AccessorMethods»
 «ENDDEFINE»
+
+
+«DEFINE Operation FOR Class»
+	«EXPAND OperationDefinition FOREACH Operation»
+«ENDDEFINE»
+
+«DEFINE OperationDefinition FOR Operation»
+	«EXPAND Operation::DefaultImplementation(this.Id)»
+
+«ENDDEFINE»
+

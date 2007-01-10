@@ -47,9 +47,7 @@
 /**
  * <<Documentation>>
  */
-«EXPAND FullSignature»
-   «EXPAND ThrowsClause»
-«IF isAbstract»;
+«EXPAND FullSignature»   «EXPAND ThrowsClause» «IF isAbstract»;
 «ELSE»«EXPAND BodyWithProtectedRegion(ClassId)»
 «ENDIF»   
 «ENDDEFINE»
@@ -58,16 +56,14 @@
    Pass in the Id of the defining class because call of Class.Id will return identical
    values for concrete classes when the Operation is defined in a superclass
 «ENDREM»
-«DEFINE BodyWithProtectedRegion(String ClassId) FOR Operation»
+«DEFINE BodyWithProtectedRegion(String ClassId) FOR Operation-»
 {
-«PROTECT CSTART "//" CEND "" ID ClassId+"_"+Id+"_Impl"»
    //TODO implement method «this»
    «IF hasReturnType»
    «ReturnType.defaultReturnStatement()»
    «ELSE»
    throw new java.lang.UnsupportedOperationException("«EXPAND FullSignature» Not implemented!");   
    «ENDIF»
-«ENDPROTECT»
 }
 «ENDDEFINE»
 
