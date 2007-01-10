@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workflow>
-	<property file="workflow.properties"/>
-	<component id="test" class="oaw4.demo.workflow.SimpleComponent">
-		<message value="${message}"/>
-	</component>
-	<component id="output" class="oaw4.demo.workflow.MessageOutputComponent" />
-</workflow>
