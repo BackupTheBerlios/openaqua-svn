@@ -17,8 +17,8 @@ package «packageName()»;
 
 
 /**
-* «this.Documentation»
-*
+* «this.Documentation»<br>
+* Original UML Path: «this.getLocation»<br>
 * @author be
 */
 
@@ -34,15 +34,6 @@ public class «Name» «IF hasSuperClass» extends «SuperClass.fqn()» «ENDIF» implem
 	
 	public «Name»() {
 		//constructor is empty
-		«PROTECT CSTART "/*" CEND "*/" ID this.Id»
-		here goes some content
-		«ENDPROTECT»
-		
-		«REM»
-		«PROTECT CSTART "/*" CEND "*/" ID ElementsUniqueID»
-		here goes some content
-		«ENDPROTECT»
-		«ENDREM»
 	} // «Name»()
 	
 	«EXPAND Attribute::Getter FOREACH Attribute»

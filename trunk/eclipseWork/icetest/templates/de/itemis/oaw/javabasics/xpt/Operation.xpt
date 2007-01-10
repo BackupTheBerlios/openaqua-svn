@@ -1,0 +1,73 @@
+«REM»
+   Copyright 2006 by    
+   
+       itemis GmbH & Co. KG
+       Heinrichstr. 51
+       D-44536 Luenen
+       Germany
+       http://www.itemis.de
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+«ENDREM»
+
+«IMPORT org::openarchitectureware::meta::uml::classifier»
+«EXTENSION de::itemis::oaw::javabasics::ext::NameConventions»
+«EXTENSION de::itemis::oaw::javabasics::ext::UtilFunctions»
+
+«DEFINE Signature FOR Operation»
+«Name» («FOREACH Parameter AS curParam SEPARATOR ", "»«curParam.Type.fqn()» «curParam.asParameter()»«ENDFOREACH»)
+«ENDDEFINE»
+
+«DEFINE FullSignature FOR Operation»
+«Visibility» «IF isAbstract»abstract«ENDIF» «ReturnType.fqn()» «EXPAND Signature» 
+«ENDDEFINE»
+
+«DEFINE ThrowsClause FOR Operation»
+«IF hasExceptions»throws «FOREACH Exception AS curExc SEPARATOR ", "»«curExc.fqn()»«ENDFOREACH»«ENDIF»
+«ENDDEFINE»
+
+«DEFINE AbstractDeclaration FOR Operation»
+/**
+ * <<Documentation>>
+ */
+«Visibility» abstract «ReturnType.fqn()» «EXPAND Signature» «EXPAND ThrowsClause»;
+«ENDDEFINE»
+
+«DEFINE DefaultImplementation(String ClassId) FOR Operation»
+/**
+ * <<Documentation>>
+ */
+«EXPAND FullSignature»
+   «EXPAND ThrowsClause»
+«IF isAbstract»;
+«ELSE»«EXPAND BodyWithProtectedRegion(ClassId)»
+«ENDIF»   
+«ENDDEFINE»
+
+«REM» 
+   Pass in the Id of the defining class because call of Class.Id will return identical
+   values for concrete classes when the Operation is defined in a superclass
+«ENDREM»
+«DEFINE BodyWithProtectedRegion(String ClassId) FOR Operation»
+{
+«PROTECT CSTART "//" CEND "" ID ClassId+"_"+Id+"_Impl"»
+   //TODO implement method «this»
+   «IF hasReturnType»
+   «ReturnType.defaultReturnStatement()»
+   «ELSE»
+   throw new java.lang.UnsupportedOperationException("«EXPAND FullSignature» Not implemented!");   
+   «ENDIF»
+«ENDPROTECT»
+}
+«ENDDEFINE»
+

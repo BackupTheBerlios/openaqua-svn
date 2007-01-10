@@ -13,3 +13,12 @@ String packagePath (Class cls) 				: packageName(cls).replaceAll("\\.", "/");
 
 //get a full qualified name for a class
 String fqn (Class cls) 						: packageName(cls).length>0 ? packageName(cls)+"."+cls.NameS : cls.NameS;
+
+//gets a complete method name for a operation
+//String completeOperationName (Operation op)	: operationSignature(op);
+
+
+/*****************************************/
+//Stuff for Operations
+//get a operation signature
+String operationSignature (Operation op) : JAVA openaqua.extens.OperationUtil.operationSignature(org.openarchitectureware.meta.uml.classifier.Operation);

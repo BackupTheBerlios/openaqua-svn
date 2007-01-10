@@ -1,0 +1,33 @@
+/*
+   Copyright 2006 by    
+   
+       itemis GmbH & Co. KG
+       Heinrichstr. 51
+       D-44536 Luenen
+       Germany
+       http://www.itemis.de
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+import org::openarchitectureware::meta::uml::classifier;
+
+context Class ERROR this.NameS+": Class must be in a package" : hasPackage;
+
+context AssociationEnd ERROR "Navigable flag must be set" : hasNavigable;
+
+context AssociationEnd ERROR Class.NameS+"->"+Opposite.Class.NameS+": Navigable association ends must have a role name" :
+	isNavigable ? !(RoleName=="") : true;
+	
+context AssociationEnd WARNING Class.NameS+"->"+Opposite.Class.NameS+": Not navigable association ends should have no role name":
+	isNavigable ? true : isUnnamed;
+	 
