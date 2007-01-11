@@ -29,13 +29,11 @@ import org.openarchitectureware.meta.uml.classifier.Class;
 import org.openarchitectureware.meta.uml.classifier.PrimitiveType;
 
 public class ExtendFunctions {
-	private static Map defaultReturns;
-	private static final String[] TYPE_PACKAGES = {
-		"java.lang", "java.util"
-	};
+	private static Map<String, String> defaultReturns;
+	private static final String[] TYPE_PACKAGES = {"java.lang", "java.util"};
 	
 	static {
-		defaultReturns = new HashMap();
+		defaultReturns = new HashMap<String, String>();
 		defaultReturns.put("int", "-1");
 		defaultReturns.put("long", "-1");
 		defaultReturns.put("short", "-1");
