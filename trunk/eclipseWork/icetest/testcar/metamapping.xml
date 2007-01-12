@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MetaMap SYSTEM "http://www.openarchitectureware.org/dtds/metamap.dtd">
+<MetaMap>
+		<Mapping>
+			<Map>Entity</Map>
+			<To>openaqua.metamodel.Entity</To>
+		</Mapping>
+		<Mapping>
+			<Map>Key</Map>
+			<To>openaqua.metamodel.Key</To>
+		</Mapping>
+		<Mapping>
+			<Map>Runner</Map>
+			<To>openaqua.metamodel.Runner</To>
+		</Mapping>
+</MetaMap>

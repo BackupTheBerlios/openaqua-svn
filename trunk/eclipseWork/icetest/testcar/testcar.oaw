@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<workflow>
+    <property file="./testcar.properties"/>
+
+	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicstart.oaw">
+		<metaEnvironmentSlot value="metaEnvironmentSlot"/>
+		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot"/>
+	</cartridge>
+
+
+	<component class="org.openarchitectureware.core.frontends.xmi.workflow.XMIInstantiator">
+		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot"/>
+		<modelFile value="${model.file}"/>
+		<xmlMapFile value="${toolMappingFile}"/>
+		<metaMapFile value="${metaMapFile}"/>
+		<toolAdapterClassname value="${toolAdapterClassname}"/>
+		<moduleFile value="${moduleFile}"/>
+	</component>
+
+
+	<component id="generator" class="org.openarchitectureware.xpand2.Generator" skipOnErrors="true">
+		<fileEncoding value="ISO-8859-1"/>
+		<expand value="${expandExpression}"/>
+		<outlet path="${outlet.src.dir}"/>
+	   	<outlet name="SRC_ONCE" path="${outlet.src.once.dir}" overwrite="false"/>
+   		<beautifier class="org.openarchitectureware.xpand2.output.JavaBeautifier"/>
+	</component>
+
+
+<!--
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${model.file}"/>
+		<outputSlot value="model"/>
+	</component>
+
+    <component id="dirCleaner"
+		class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directories value="${outlet.src.dir}, ${outlet.res.dir}"/>
+	</component>
+
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
+		<metaModel class="oaw.type.emf.EmfMetaModel"
+			metaModelPackage="org.eclipse.emf.ecore.EcorePackage"/>
+		<metaModel class="oaw.uml2.UML2MetaModel"/>
+		<fileEncoding value="ISO-8859-1"/>
+		<expand value="${expandExpression}"/>
+		<outlet path="${outlet.src.dir}"/>
+	   	<outlet name="SRC_ONCE" path="${outlet.src.once.dir}" overwrite="false"/>
+   		<beautifier class="org.openarchitectureware.xpand2.output.JavaBeautifier"/>
+	</component>
+	
+	-->
+</workflow>
+
