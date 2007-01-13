@@ -2,6 +2,7 @@
 <project name="takanuka" basedir=".." default="prepare">
 	<description>Takanuka lib</description>
 	<property file="ant/build.properties" />
+	<property file="ant/classpath.properties" />
 	
 	
 	<fileset id="source" dir="${src.java}">
@@ -13,6 +14,10 @@
 		<include name="**/*Test.java"/>
 	</fileset>
 	
+	
+	<path id="ExternalLibs">
+		<pathelement location="${path2log4j}"/>
+	</path>
 	<!-- ================================= 
           target: prepare              
          ================================= -->
@@ -31,8 +36,21 @@
         <javac srcdir="${src.java}" destdir="${target.java}">
         	<classpath>
         		<pathelement location="${src.java}"/>
+        		<path refid="ExternalLibs" />
         	</classpath>
         </javac>
+    </target>
+
+	<!-- ================================= 
+          target: javadoc              
+         ================================= -->
+    <target name="javadoc" depends="prepare" description="--> generate javadoc">
+    	<javadoc destdir="${target.javadoc}">
+    		<fileset refid="source" />
+        	<classpath>
+        		<path refid="ExternalLibs" />
+        	</classpath>
+    	</javadoc>
     </target>
 	
 </project>
