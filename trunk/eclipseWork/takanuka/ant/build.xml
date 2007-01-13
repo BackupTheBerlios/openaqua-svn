@@ -29,6 +29,8 @@
     </target>
 
 	
+	
+	
 	<!-- ================================= 
           target: compile              
          ================================= -->
@@ -41,6 +43,10 @@
         </javac>
     </target>
 
+	
+	
+	
+	
 	<!-- ================================= 
           target: javadoc              
          ================================= -->
@@ -52,5 +58,15 @@
         	</classpath>
     	</javadoc>
     </target>
+
 	
+	
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" description="--> remove all generated files">
+    	<delete dir="${target}"/>
+    </target>
+
 </project>
