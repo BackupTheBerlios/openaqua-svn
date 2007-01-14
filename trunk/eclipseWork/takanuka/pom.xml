@@ -1,0 +1,31 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.openaqua.de</groupId>
+  <artifactId>takanuka</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1</version>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <repositories>
+                <repository>
+                        <id>fornax.repository</id>
+                        <name>Fornax Repository</name>
+                        <url>http://www.fornax-platform.org/m2/repository</url>
+                </repository>
+  </repositories>
+  <pluginRepositories>
+                <pluginRepository>
+                        <id>fornax.plugin.repository</id>
+                        <name>Fornax Plugin Repository</name>
+                        <url>http://www.fornax-platform.org/m2/repository</url>
+                </pluginRepository>
+  </pluginRepositories>
+  
+</project>
