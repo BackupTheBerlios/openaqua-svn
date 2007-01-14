@@ -68,5 +68,28 @@
     <target name="clean" description="--> remove all generated files">
     	<delete dir="${target}"/>
     </target>
+	
+	
+	<!-- ================================= 
+          target: modultest              
+         ================================= -->
+    <target name="modultest" depends="compile" description="--> run a unit test">
+    	<delete dir="${target.testreports}"/>
+        <mkdir dir="${target.testreports}"/>
+    	<junit printsummary="yes">
+        	<classpath>
+        		<pathelement location="${target.java}"/>
+        		<pathelement location="${target.junit}"/>
+        		<path refid="ExternalLibs" />
+        	</classpath>
+    		
+    		<batchtest todir="${target.testreports}">
+    			<fileset refid="junit" />
+    		</batchtest>
+    		
+    		<formatter type="plain"/>
+    	</junit>
+        
+    </target>
 
 </project>
