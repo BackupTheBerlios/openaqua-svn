@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.openaqua</groupId>
+  <artifactId>openaquaParent</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <description></description>
+  <url>http://dev.openaqua.de</url>
+
+  <organization>
+    <name>OpenAqua</name>
+    <url>http://www.openaqua.de</url>
+  </organization>
+
+  <packaging>pom</packaging>
+
+  <modules>
+     <module>de.openaqua.takanuka</module>
+     <module>de.openaqua.connector</module>
+   </modules>
+
+</project>
