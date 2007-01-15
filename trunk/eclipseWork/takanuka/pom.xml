@@ -3,7 +3,7 @@
   <groupId>de.openaqua.de</groupId>
   <artifactId>takanuka</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>0.1-SNAPSHOT</version>
   <description></description>
   <url>http://dev.openaqua.de</url>
 
@@ -13,7 +13,8 @@
     	<name>OpenAqua</name>
     	<url>http://www.openaqua.de</url>
 	</organization>
-  
+	
+	  
     <properties>
       <src>src</src>
       <target>target</target>
@@ -30,7 +31,9 @@
       <subversion.url>svn://localhost/e2etrace</subversion.url>
     </properties>
 
-<!--
+
+
+
     <build>
       <sourceDirectory>${src.java}</sourceDirectory>
       <testSourceDirectory>${src.junit}</testSourceDirectory>
@@ -43,9 +46,17 @@
         </testResource>
       </testResources>
     </build>
--->
 
-    <!-- Einbindung externer Bibliotheken -->
+<!--
+
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
 
     <dependencies>
       <dependency>
@@ -55,13 +66,5 @@
         <scope>build</scope>
       </dependency>
     </dependencies>
-
-<!--
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>3.8.1</version>
-        <scope>test</scope>
-      </dependency>
 -->
 </project>
