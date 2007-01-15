@@ -1,10 +1,10 @@
-package openaqua.connector;
-import openaqua.base.IContext;
+package de.openaqua.connector;
+import de.openaqua.base.IContext;
 
 
 public class ClientRecord implements IContext {
-	private String clientId; 
-	
+	private String clientId;
+
 	/**
 	 * Default Constructor
 	 *
@@ -13,11 +13,11 @@ public class ClientRecord implements IContext {
 		super();
 		this.clientId = "";
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Makes a deep copy of a Record 
+	 * Makes a deep copy of a Record
 	 */
 	@Override
 	public IContext clone() {
@@ -26,7 +26,7 @@ public class ClientRecord implements IContext {
 		return r;
 	}
 
-	
+
 	public void reset() {
 		this.clientId = "";
 	}
@@ -48,7 +48,7 @@ public class ClientRecord implements IContext {
 	public synchronized final void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
-	
+
 	public String toString() {
 		return "ClientRecord(clientId='" + clientId + "')";
 	}

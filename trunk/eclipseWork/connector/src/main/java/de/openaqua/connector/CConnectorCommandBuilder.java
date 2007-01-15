@@ -1,13 +1,13 @@
 /**
- * 
+ *
  */
-package openaqua.connector;
+package de.openaqua.connector;
 
 
-import openaqua.base.CCommandBuilder;
-import openaqua.base.CMacro;
-import openaqua.base.ICommand;
-import openaqua.comm.CmdTcpConnectionEchoClient;
+import de.openaqua.base.CCommandBuilder;
+import de.openaqua.base.CMacro;
+import de.openaqua.base.ICommand;
+import de.openaqua.comm.CmdTcpConnectionEchoClient;
 
 /**
  * @author tukaram
@@ -16,7 +16,7 @@ import openaqua.comm.CmdTcpConnectionEchoClient;
 public class CConnectorCommandBuilder extends CCommandBuilder {
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * 5000 - CmdCreateUid()
 	 * @see openaqua.base.CFactoryCommands#createCommand(java.lang.Integer)
 	 */
@@ -31,7 +31,7 @@ public class CConnectorCommandBuilder extends CCommandBuilder {
 			m.addCommand(1);
 			return m;
 		}
-		
+
 		return null;
 	}
 }

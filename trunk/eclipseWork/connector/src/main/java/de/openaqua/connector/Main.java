@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package openaqua.connector;
+package de.openaqua.connector;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -14,7 +14,7 @@ import org.apache.log4j.PatternLayout;
  */
 public class Main {
 	private static Logger logger = Logger.getRootLogger();
-	
+
 	/**
 	 * @param args
 	 */
@@ -29,7 +29,7 @@ public class Main {
 	        //execute the main object
 	        new Connector().start();
 	        logger.info("Done");
-	        
+
 		} catch( Exception ex ) {
 			ex.printStackTrace();
 			System.out.println( ex );

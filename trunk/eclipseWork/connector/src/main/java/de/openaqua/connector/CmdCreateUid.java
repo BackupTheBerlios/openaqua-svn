@@ -1,10 +1,10 @@
-package openaqua.connector;
+package de.openaqua.connector;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.server.UID;
-import openaqua.base.ICommand;
-import openaqua.base.IContext;
+import de.openaqua.base.ICommand;
+import de.openaqua.base.IContext;
 
 public class CmdCreateUid implements ICommand {
 
@@ -16,7 +16,7 @@ public class CmdCreateUid implements ICommand {
 	 */
 	public boolean execute (final IContext context) {
 		boolean result = false;
-		
+
 		if (context instanceof ClientRecord) {
 			ClientRecord client = (ClientRecord) context;
 			UID id = new UID();
@@ -29,10 +29,10 @@ public class CmdCreateUid implements ICommand {
 			client.setClientId(id + "@" + host);
 			result = true;
 		}
-		
-		
+
+
 		return result;
 	}
-	
+
 
 }

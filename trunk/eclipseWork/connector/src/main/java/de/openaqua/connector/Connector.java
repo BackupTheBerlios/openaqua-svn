@@ -1,14 +1,14 @@
-package openaqua.connector;
+package de.openaqua.connector;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService; 
-import java.util.concurrent.Executors; 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
-import openaqua.base.CFactoryContexts;
-import openaqua.base.CFactoryCommands;
-import openaqua.base.ICommand;
-import openaqua.comm.ATcpCommand;
-import openaqua.comm.CTcpServer;
+import de.openaqua.base.CFactoryContexts;
+import de.openaqua.base.CFactoryCommands;
+import de.openaqua.base.ICommand;
+import de.openaqua.comm.ATcpCommand;
+import de.openaqua.comm.CTcpServer;
 
 
 final public class Connector extends Thread{
@@ -28,14 +28,14 @@ final public class Connector extends Thread{
 		super();
 		//register project specific command builder
         CFactoryCommands.getInstance().registerBuilder(new CConnectorCommandBuilder());
-        
+
         //register project specific Context object prototypes
         CFactoryContexts.getInstance().addRecordPrototyp(2, new ClientRecord());
-        
+
         //setup the TcpServer Thread
         setupEchoTcpServer();
 	}
-	
+
 	/**
 	 * Setup the TcpServer Thread
 	 *
@@ -54,13 +54,13 @@ final public class Connector extends Thread{
         		e.printStackTrace();
     			throw new IllegalArgumentException("Command 5001 is not a ATcpCommand");
         	}
-        	
+
 		} else {
 			throw new IllegalArgumentException("Command 5001 is not a ATcpCommand");
 		}
 	}
-	
-	
+
+
 	/**
 	 * start all subthreads
 	 */
@@ -68,7 +68,7 @@ final public class Connector extends Thread{
 		serverEcho.start();
 	}
 
-	
+
 	/**
 	 * The thread execution method
 	 */
