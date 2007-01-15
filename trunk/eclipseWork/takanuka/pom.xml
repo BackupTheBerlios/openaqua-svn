@@ -14,7 +14,6 @@
     	<url>http://www.openaqua.de</url>
 	</organization>
   
- 
     <properties>
       <src>src</src>
       <target>target</target>
@@ -47,13 +46,8 @@
 -->
 
     <!-- Einbindung externer Bibliotheken -->
+
     <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>3.8.1</version>
-        <scope>test</scope>
-      </dependency>
       <dependency>
 		<groupId>log4j</groupId>
 		<artifactId>log4j</artifactId>
@@ -62,4 +56,12 @@
       </dependency>
     </dependencies>
 
+<!--
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+-->
 </project>
