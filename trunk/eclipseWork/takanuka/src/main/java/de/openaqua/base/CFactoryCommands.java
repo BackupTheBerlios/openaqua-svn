@@ -124,7 +124,7 @@ final public class CFactoryCommands  {
 	 * be used for project specific commands.
 	 *
 	 * @param id
-	 * @return
+	 * @return the Command for the given ID
 	 */
 	final public ICommand createCommand(Integer id) {
 

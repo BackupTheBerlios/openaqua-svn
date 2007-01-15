@@ -8,7 +8,7 @@ public interface IContext {
 
 	/**
 	 * Makes a deep copy of a record
-	 * @return
+	 * @return something?
 	 */
 	public IContext clone();
 

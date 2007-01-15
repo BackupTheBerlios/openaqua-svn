@@ -23,7 +23,7 @@ public abstract class ATcpCommand implements ICommand {
 	 * If this method will be overriden thread safity must be guaranteed
 	 *
 	 * @param context a Context with an Tcp Socket in it
-	 * @return
+	 * @return the execution result
 	 */
 	public abstract boolean execute(CTcpConnectionContext context);
 

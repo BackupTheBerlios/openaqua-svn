@@ -16,7 +16,7 @@ final public class CFactoryContexts {
 	 * Private constructor. The Factory is a singleton. For getting an instance
 	 * use the {@code getInstance() } methods
 	 *
-	 * @see getInstance();
+	 * @see #getInstance();
 	 *
 	 */
 	private CFactoryContexts() {
@@ -91,7 +91,7 @@ final public class CFactoryContexts {
 	 * given Id the method returns a null reference.
 	 *
 	 * @param id
-	 * @return
+	 * @return the context record for the given id
 	 */
 	public IContext getRecord (int id) {
 		IContext result;

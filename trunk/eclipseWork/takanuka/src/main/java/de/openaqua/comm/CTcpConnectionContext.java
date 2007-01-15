@@ -1,6 +1,3 @@
-/**
- *
- */
 package de.openaqua.comm;
 
 import java.io.IOException;
@@ -50,7 +47,6 @@ public class CTcpConnectionContext implements IContext {
 
 	/**
 	 *
-	 * @return the socket itself
 	 */
 	public void setSocket(Socket socket) {
 		lock.writeLock().lock();
