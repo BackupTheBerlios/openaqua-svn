@@ -1,7 +1,7 @@
 <?xml version="1.0"?><project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openaqua.de</groupId>
-  <artifactId>takanuka</artifactId>
+  <artifactId>connector</artifactId>
   <version>0.1-SNAPSHOT</version>
   <description></description>
   <url>http://dev.openaqua.de</url>
