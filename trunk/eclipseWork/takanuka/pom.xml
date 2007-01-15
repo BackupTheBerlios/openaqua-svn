@@ -1,70 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0"?><project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openaqua.de</groupId>
   <artifactId>takanuka</artifactId>
-  <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
   <description></description>
   <url>http://dev.openaqua.de</url>
 
+  <organization>
+    <name>OpenAqua</name>
+    <url>http://www.openaqua.de</url>
+  </organization>
+
+  <build>
+    <sourceDirectory>${src.java}</sourceDirectory>
+    <testSourceDirectory>${src.junit}</testSourceDirectory>
+    <outputDirectory>${target.java}</outputDirectory>
+    <testOutputDirectory>${target.junit}</testOutputDirectory>
+    <testResources>
+      <testResource>
+        <directory>${src.testdata}</directory>
+      </testResource>
+    </testResources>
+    <directory>${target}</directory>
+  </build>
 
 
-  	<organization>
-    	<name>OpenAqua</name>
-    	<url>http://www.openaqua.de</url>
-	</organization>
-	
-	  
-    <properties>
-      <src>src</src>
-      <target>target</target>
-      <doc>doc</doc>
-      <src.java>${src}/java</src.java>
-      <src.junit>${src}/junit</src.junit>
-      <src.testdata>${src}/testdata</src.testdata>
-      <target.java>${target}/java</target.java>
-      <target.junit>${target}/junit</target.junit>
-      <target.javadoc>${target}/site/apidocs</target.javadoc>
-      <target.jar>${target}/jar</target.jar>
-      <target.install>${target}/site/download</target.install>
-      <target.testreports>${target}/testreports</target.testreports>
-      <subversion.url>svn://localhost/e2etrace</subversion.url>
-    </properties>
-
-
-
-
-    <build>
-      <sourceDirectory>${src.java}</sourceDirectory>
-      <testSourceDirectory>${src.junit}</testSourceDirectory>
-      <directory>${target}</directory>
-      <outputDirectory>${target.java}</outputDirectory>
-      <testOutputDirectory>${target.junit}</testOutputDirectory>
-      <testResources>
-        <testResource>
-          <directory>${src.testdata}</directory>
-        </testResource>
-      </testResources>
-    </build>
-
-<!--
-
-    <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>3.8.1</version>
-        <scope>test</scope>
-      </dependency>
-    </dependencies>
-
-    <dependencies>
-      <dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.14</version>
-        <scope>build</scope>
-      </dependency>
-    </dependencies>
--->
 </project>
