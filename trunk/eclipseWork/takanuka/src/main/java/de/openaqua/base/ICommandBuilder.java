@@ -1,8 +1,8 @@
-package openaqua.base;
+package de.openaqua.base;
 
 
 /**
- * 
+ *
  * @author tukaram
  *
  */

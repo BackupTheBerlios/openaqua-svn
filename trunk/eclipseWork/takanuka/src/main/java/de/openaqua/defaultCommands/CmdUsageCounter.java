@@ -1,18 +1,18 @@
 /**
- * 
+ *
  */
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import openaqua.base.ICommand;
-import openaqua.base.IContext;
+import de.openaqua.base.ICommand;
+import de.openaqua.base.IContext;
 
 /**
  * Cmd which counts the usage of this command.<br>
- * 
- * Class is thread save and reentrant. 
- * 
+ *
+ * Class is thread save and reentrant.
+ *
  * @author tukaram
  */
 public class CmdUsageCounter implements ICommand{
@@ -21,7 +21,7 @@ public class CmdUsageCounter implements ICommand{
 	 * Counts how ofte this command is used
 	 */
 	int usage = 0;
-	
+
 	/**
 	 * Lock for thread saveness
 	 */
@@ -29,7 +29,7 @@ public class CmdUsageCounter implements ICommand{
 
 	/*
 	 * Counts how often the command(!) is used.
-	 * 
+	 *
 	 * @see openaqua.base.ICommand#execute(openaqua.base.IRecord)
 	 * @returns true
 	 */
@@ -42,18 +42,18 @@ public class CmdUsageCounter implements ICommand{
 		}
 		return true;
 	}
-	
-	
+
+
 	/**
 	 * Return the collected amount of usages of this command
-	 * 
+	 *
 	 * @return amount
 	 */
 	public int getUsage() {
 		return usage;
 	}
 
-	
+
 	/**
 	 * Set the counter to 0
 	 *

@@ -1,6 +1,6 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
-import openaqua.base.CRecord;
+import de.openaqua.base.CRecord;
 import junit.framework.TestCase;
 
 public class CmdDumpRecordTest extends TestCase {
@@ -17,7 +17,7 @@ public class CmdDumpRecordTest extends TestCase {
     	assertTrue(cmdBefore.execute(null));
     }
 
-    
+
     public void testResultByDefaultRecord() {
     	//
     	CmdDumpRecord cmd = new CmdDumpRecord();

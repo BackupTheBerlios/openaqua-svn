@@ -1,7 +1,4 @@
-/**
- * 
- */
-package openaqua.base;
+package de.openaqua.base;
 
 /**
  * @author tukaram
@@ -17,7 +14,7 @@ public class CRecord implements IContext {
 	public IContext clone() {
 		return new CRecord();
 	}
-	
+
 	public int hashCode() {
 		return "openaqua.base.CRecord".hashCode();
 	}
@@ -26,8 +23,8 @@ public class CRecord implements IContext {
 	public void reset() {
 		;//default implementation is empty
 	}
-	
-	
+
+
 	public boolean equals(java.lang.Object object) {
 		if (this == object) return true;
 		if (!(object instanceof CRecord)) return false;

@@ -1,7 +1,7 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
-import openaqua.base.ICommand;
-import openaqua.base.IContext;
+import de.openaqua.base.ICommand;
+import de.openaqua.base.IContext;
 
 public class CmdDoNothing implements ICommand {
 

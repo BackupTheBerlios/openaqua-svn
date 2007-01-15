@@ -1,4 +1,4 @@
-package openaqua.base;
+package de.openaqua.base;
 
 import junit.framework.TestCase;
 
@@ -9,7 +9,7 @@ public class CFactoryRecordsTest extends TestCase {
 	public void testIsSingleton() {
 		CFactoryContexts a = CFactoryContexts.getInstance();
 		CFactoryContexts b = CFactoryContexts.getInstance();
-		assertTrue(a == b);    	
+		assertTrue(a == b);
 		assertTrue(a != null);
 	}
 
@@ -21,7 +21,7 @@ public class CFactoryRecordsTest extends TestCase {
 		assertTrue(irec instanceof CRecord);
 		assertEquals(rec, irec);
 	}
-	
+
 	public void testAddRecordPrototyp() {
 		try {
 			CFactoryContexts.getInstance().addRecordPrototyp(0, null);
@@ -29,7 +29,7 @@ public class CFactoryRecordsTest extends TestCase {
 		} catch( NullPointerException e) {
 			// its ok
 		}
-		
+
 	}
-	
+
 }

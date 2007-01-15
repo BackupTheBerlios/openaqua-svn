@@ -1,4 +1,4 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

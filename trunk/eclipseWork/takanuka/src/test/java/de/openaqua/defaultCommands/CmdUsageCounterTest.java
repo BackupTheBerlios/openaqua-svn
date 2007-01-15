@@ -1,6 +1,6 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
-import openaqua.base.CRecord;
+import de.openaqua.base.CRecord;
 import junit.framework.TestCase;
 
 public class CmdUsageCounterTest extends TestCase {
@@ -17,7 +17,7 @@ public class CmdUsageCounterTest extends TestCase {
     	assertTrue(cmdBefore.execute(null));
     }
 
-    
+
     public void testResultByDefaultRecord() {
     	//
     	CmdUsageCounter cmd = new CmdUsageCounter();
@@ -49,7 +49,7 @@ public class CmdUsageCounterTest extends TestCase {
     	System.err.print(cmd.getUsage());
     	assertTrue(cmd.getUsage() == 2);
     }
-  
+
     public void testClear() {
     	CmdUsageCounter cmd = new CmdUsageCounter();
     	CRecord rec = new CRecord();
@@ -58,5 +58,5 @@ public class CmdUsageCounterTest extends TestCase {
     	cmd.resetUsage();
     	assertTrue(cmd.getUsage() == 0);
     }
-    
+
 }

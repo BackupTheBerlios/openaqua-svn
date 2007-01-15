@@ -1,7 +1,4 @@
-/**
- * 
- */
-package openaqua.base;
+package de.openaqua.base;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.*;
 
@@ -15,11 +12,11 @@ public class CMacro implements IMacro {
 	final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
 	public CMacro () {
-		super();		
+		super();
 		m_commands = new LinkedList<Integer>();
 	}
 
-	
+
 	public void addCommand(Integer id) {
 		lock.writeLock().lock();
 		try {
@@ -41,8 +38,8 @@ public class CMacro implements IMacro {
 			lock.writeLock().unlock();
 		}
 	}
-	
-	
+
+
 	/**
 	 * @return If one command goes wrong the result will be false, otherwise true
 	 * @param context
@@ -62,7 +59,7 @@ public class CMacro implements IMacro {
 		} finally {
 			lock.readLock().unlock();
 		}
-		
+
 		return result;
 	}
 

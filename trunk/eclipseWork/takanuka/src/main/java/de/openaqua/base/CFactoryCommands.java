@@ -1,4 +1,4 @@
-package openaqua.base;
+package de.openaqua.base;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,7 +39,7 @@ final public class CFactoryCommands  {
 
 		builderLock.writeLock().lock();
 		try {
-			builderList.add(builder);			
+			builderList.add(builder);
 		}finally{
 			builderLock.writeLock().unlock();
 		}
@@ -53,7 +53,7 @@ final public class CFactoryCommands  {
 
 		builderLock.writeLock().lock();
 		try {
-			builderList.remove(builder);			
+			builderList.remove(builder);
 		}finally{
 			builderLock.writeLock().unlock();
 		}
@@ -97,17 +97,17 @@ final public class CFactoryCommands  {
 	}
 
 	/**
-	 * create a command. 
-	 * 
-	 * The method creates a new command instance. The new instance might be 
+	 * create a command.
+	 *
+	 * The method creates a new command instance. The new instance might be
 	 * used a  flyweight object in this factory or as a free usable object.<p>
-	 * 
+	 *
 
 	 * While overwriting this method don't make assumtion about the used environment.
 	 * Just create a commands. The code might look like <p>
-	 * 
+	 *
 	 * <code>
-	 * public ICommand createCommand(Integer id) { <br>		 
+	 * public ICommand createCommand(Integer id) { <br>
 	 * 	if (id == 2000) {return new CommandFoo();}<br>
 	 *  if (id == 2001) {return new CommandBar();}<br>
 	 *  if (id == 2002) {<br>
@@ -117,12 +117,12 @@ final public class CFactoryCommands  {
 	 *  	return m;<br>
 	 * }<br>
 	 * </code><p>
-	 * 
-	 * 
+	 *
+	 *
 	 * This method should be overwritten to create project specific commands
-	 * The range between 0..1024 is reservered for future use and should not 
+	 * The range between 0..1024 is reservered for future use and should not
 	 * be used for project specific commands.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -138,7 +138,7 @@ final public class CFactoryCommands  {
 				if (o instanceof CCommandBuilder){
 					CCommandBuilder builder = (CCommandBuilder) o;
 					result = builder.createCommand(id);
-					if (result != null) break;				
+					if (result != null) break;
 				}
 			}
 
@@ -150,7 +150,7 @@ final public class CFactoryCommands  {
 
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param c
 	 */

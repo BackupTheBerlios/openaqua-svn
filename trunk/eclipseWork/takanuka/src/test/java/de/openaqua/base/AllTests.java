@@ -1,4 +1,4 @@
-package openaqua.base;
+package de.openaqua.base;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

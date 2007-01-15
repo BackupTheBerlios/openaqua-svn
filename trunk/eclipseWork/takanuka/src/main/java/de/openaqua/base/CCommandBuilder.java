@@ -1,8 +1,8 @@
-package openaqua.base;
+package de.openaqua.base;
 
-import openaqua.defaultCommands.CmdDoNothing;
-import openaqua.defaultCommands.CmdDumpRecord;
-import openaqua.defaultCommands.CmdUsageCounter;
+import de.openaqua.defaultCommands.CmdDoNothing;
+import de.openaqua.defaultCommands.CmdDumpRecord;
+import de.openaqua.defaultCommands.CmdUsageCounter;
 
 public class CCommandBuilder implements ICommandBuilder{
 

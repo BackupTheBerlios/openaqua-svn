@@ -1,4 +1,4 @@
-package openaqua.base;
+package de.openaqua.base;
 
 import org.junit.Test;
 import junit.framework.TestCase;
@@ -10,7 +10,7 @@ public class CFactoryCommandsTest extends TestCase {
 	public final void testGetInstance() {
 		CFactoryCommands a = CFactoryCommands.getInstance();
 		CFactoryCommands b = CFactoryCommands.getInstance();
-		assertTrue(a == b);    	
+		assertTrue(a == b);
 		assertTrue(a != null);
 	}
 

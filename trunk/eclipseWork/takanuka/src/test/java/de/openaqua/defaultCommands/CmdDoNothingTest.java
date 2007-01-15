@@ -1,6 +1,6 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
-import openaqua.base.CRecord;
+import de.openaqua.base.CRecord;
 import junit.framework.TestCase;
 
 public class CmdDoNothingTest extends TestCase {
@@ -16,14 +16,14 @@ public class CmdDoNothingTest extends TestCase {
     protected void tearDown() {
         // beenden von Netzwerk- oder Datenbankverbindungen
     }
-    
+
     public void testResultByNullRecord() {
     	//well, this would need a record, but the constructor is private. :(
     	CmdDoNothing cmdBefore = new CmdDoNothing();
     	assertTrue(cmdBefore.execute(null));
     }
 
-    
+
     public void testResultByDefaultRecord() {
     	//well, this would need a record, but the constructor is private. :(
     	CmdDoNothing cmd = new CmdDoNothing();

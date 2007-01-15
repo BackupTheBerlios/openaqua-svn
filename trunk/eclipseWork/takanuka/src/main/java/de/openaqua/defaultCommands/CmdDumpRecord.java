@@ -1,9 +1,9 @@
-package openaqua.defaultCommands;
+package de.openaqua.defaultCommands;
 
 
 import org.apache.log4j.Logger;
-import openaqua.base.ICommand;
-import openaqua.base.IContext;
+import de.openaqua.base.ICommand;
+import de.openaqua.base.IContext;
 
 
 
@@ -12,7 +12,7 @@ public class CmdDumpRecord implements ICommand {
 
 	/**
 	 * takes an IRecord and dumps it to Log4j.info
-	 * 
+	 *
 	 * @return true - whatever happens
 	 */
 	public boolean execute(IContext context) {

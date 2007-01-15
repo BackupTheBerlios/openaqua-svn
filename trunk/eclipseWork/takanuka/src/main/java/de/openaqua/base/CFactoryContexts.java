@@ -1,4 +1,4 @@
-package openaqua.base;
+package de.openaqua.base;
 
 import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -11,30 +11,30 @@ final public class CFactoryContexts {
 	final private static CFactoryContexts INSTANCE = new CFactoryContexts();
 	private HashMap<Integer, IContext> m_recordMap = new HashMap<Integer, IContext>();
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
-	
+
 	/**
 	 * Private constructor. The Factory is a singleton. For getting an instance
 	 * use the {@code getInstance() } methods
-	 * 
+	 *
 	 * @see getInstance();
 	 *
 	 */
 	private CFactoryContexts() {
 		super();
 	}
-	
-	
-	/** 
-	 * 
+
+
+	/**
+	 *
 	 * @return a reference to a singleton instance of this factory
 	 */
 	final public static CFactoryContexts getInstance() {
 		return INSTANCE;
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param prototype
 	 */
@@ -52,8 +52,8 @@ final public class CFactoryContexts {
 		}
 	}
 
-	
-	
+
+
 	/**
 	 * removes the record prototype for a given ID
 	 * @param id the record id
@@ -69,7 +69,7 @@ final public class CFactoryContexts {
 		}
 	}
 
-	
+
 
 	/**
 	 * Remove all record prototyps
@@ -82,14 +82,14 @@ final public class CFactoryContexts {
 			lock.writeLock().unlock();
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Returns a new record. If there isn't a prototype for the
 	 * given Id the method returns a null reference.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -101,7 +101,7 @@ final public class CFactoryContexts {
 		} finally {
 			lock.readLock().unlock();
 		}
-		return result;		
+		return result;
 	}
 }
 
