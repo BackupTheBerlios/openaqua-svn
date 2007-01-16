@@ -2,10 +2,11 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.openaqua.dev</groupId>
-	<artifactId>parent</artifactId>
-	<name>parent</name>
+	<artifactId>de-openaqua-parent</artifactId>
+	<name>OpenAqua Parent module for Maven</name>
 	<version>0.1-SNAPSHOT</version>
 	<description></description>
 	<url>http://dev.openaqua.de</url>
@@ -19,20 +20,25 @@
 	<modules>
 		<module>../de.openaqua.takanuka</module>
 		<module>../de.openaqua.connector</module>
+		<module>../de.openaqua.reference</module>
+<!--
+		<module>../de.openaqua.icetest</module>
+-->
 	</modules>
 
 	<!--handle deps version version-->
 	<dependencyManagement>
 		<dependencies>
+
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
-				<artifactId>de.openaqua.takanuka</artifactId>
+				<artifactId>de-openaqua-takanuka</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
-				<artifactId>de.openaqua.connector</artifactId>
+				<artifactId>de-openaqua-connector</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -48,18 +54,29 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.1</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
+			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.fornax.openarchitectureware</groupId>
+			<artifactId>oaw-uml2</artifactId>
+			<version>4.1.1</version>
+			<type>pom</type>
+		</dependency>
+
 	</dependencies>
 
 
 	<!--Use JDK 1.5-->
 	<build>
+		<finalName>openaqua-openaqua-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -72,6 +89,32 @@
 		</plugins>
 	</build>
 
+
+	<developers>
+		<developer>
+			<id>cbehrens</id>
+			<name>Claudia Behrens</name>
+			<email>claudia.behrens@openaqua.de</email>
+			<organization>OpenAqua</organization>
+			<organizationUrl>http://www.openaqua.de</organizationUrl>
+			<roles>
+				<role>Manager</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>behrensan</id>
+			<name>Andrey Behrens</name>
+			<email>Andrey.behrens@openaqua.de</email>
+			<organization>OpenAqua</organization>
+			<organizationUrl>http://www.openaqua.de</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 
 
 </project>
