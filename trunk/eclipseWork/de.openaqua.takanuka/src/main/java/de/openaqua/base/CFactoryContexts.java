@@ -16,7 +16,7 @@ final public class CFactoryContexts {
 	 * Private constructor. The Factory is a singleton. For getting an instance
 	 * use the {@code getInstance() } methods
 	 *
-	 * @see #getInstance();
+	 * @see #getInstance()
 	 *
 	 */
 	private CFactoryContexts() {
