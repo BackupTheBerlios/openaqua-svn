@@ -1,16 +1,18 @@
 <?xml version="1.0"?>
 <project>
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.openaqua.dev</groupId>
-	<artifactId>takanuka</artifactId>
-	<description></description>
-	<url>http://dev.openaqua.de</url>
-	<packaging>jar</packaging>
-
 	<parent>
 		<groupId>de.openaqua.dev</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.openaqua.dev</groupId>
+	<artifactId>takanuka</artifactId>
+	<name>takanuka</name>
+	<description></description>
+	<url>http://dev.openaqua.de</url>
+	<packaging>jar</packaging>
+
 
 </project>

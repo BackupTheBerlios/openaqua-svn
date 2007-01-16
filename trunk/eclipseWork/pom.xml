@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.openaqua.dev</groupId>
 	<artifactId>parent</artifactId>
+	<name>parent</name>
 	<version>0.1-SNAPSHOT</version>
 	<description></description>
 	<url>http://dev.openaqua.de</url>
@@ -18,19 +19,28 @@
 		<module>de.openaqua.connector</module>
 	</modules>
 
+	<!--handle deps version version-->
 	<dependencyManagement>
 		<dependencies>
-		<!--Openaqua modules deps-->
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
 				<artifactId>takanuka</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>de.openaqua.dev</groupId>
+				<artifactId>connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
 
 
+	<!--Openaqua external modules deps-->
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
