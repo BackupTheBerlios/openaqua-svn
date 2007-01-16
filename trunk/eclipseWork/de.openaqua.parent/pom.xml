@@ -26,13 +26,13 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
-				<artifactId>takanuka</artifactId>
+				<artifactId>de.openaqua.takanuka</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
-				<artifactId>connector</artifactId>
+				<artifactId>de.openaqua.connector</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
