@@ -10,7 +10,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.openaqua.dev</groupId>
-	<artifactId>connector</artifactId>
+	<artifactId>de.openaqua.takanuka.connector</artifactId>
 	<name>connector</name>
 	<description></description>
 	<url>http://dev.openaqua.de</url>
@@ -20,7 +20,7 @@
 		<!--Openaqua modules deps-->
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
-				<artifactId>takanuka</artifactId>
+				<artifactId>de.openaqua.takanuka</artifactId>
 			</dependency>
 	</dependencies>
 

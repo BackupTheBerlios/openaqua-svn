@@ -12,7 +12,7 @@ public class CmdCreateUid implements ICommand {
 	/**
 	 * Create a global unique ID and store it in a ClientRecord
 	 * @param context
-	 * @return
+	 * @return true if execution went fine
 	 */
 	public boolean execute (final IContext context) {
 		boolean result = false;
