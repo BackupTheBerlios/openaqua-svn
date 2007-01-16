@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.openaqua.dev</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<description></description>
+	<url>http://dev.openaqua.de</url>
+	<packaging>pom</packaging>
+
+	<organization>
+		<name>OpenAqua</name>
+		<url>http://www.openaqua.de</url>
+	</organization>
+
+	<modules>
+		<module>de.openaqua.takanuka</module>
+		<module>de.openaqua.connector</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+		<!--Openaqua modules deps-->
+			<dependency>
+				<groupId>de.openaqua.dev</groupId>
+				<artifactId>takanuka</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+	</dependencies>
+
+
+	<!--Use JDK 1.5-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+</project>
