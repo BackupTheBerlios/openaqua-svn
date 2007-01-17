@@ -4,6 +4,12 @@ import de.openaqua.defaultCommands.CmdDoNothing;
 import de.openaqua.defaultCommands.CmdDumpRecord;
 import de.openaqua.defaultCommands.CmdUsageCounter;
 
+
+/**
+ * 
+ * @author behrenan
+ *
+ */
 public class CCommandBuilder implements ICommandBuilder{
 
 	public ICommand createCommand(int id) {
