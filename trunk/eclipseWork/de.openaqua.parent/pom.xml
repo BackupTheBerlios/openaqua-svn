@@ -19,10 +19,10 @@
 
 	<modules>
 		<module>../de.openaqua.takanuka</module>
-		<module>../de.openaqua.connector</module>
-		<module>../de.openaqua.reference</module>
+   	<module>../de.openaqua.connector</module>
+   	<module>../de.openaqua.icetest</module>
 <!--
-		<module>../de.openaqua.icetest</module>
+	<module>../de.openaqua.reference</module>
 -->
 	</modules>
 
@@ -42,10 +42,29 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>de.openaqua.dev</groupId>
+				<artifactId>de-openaqua-icetest</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>
 
+   <repositories>
+   	<repository>
+   		<id>oaw.repository</id>
+   		<name>openArchitectureWare Repository</name>
+   		<url>http://www.openarchitectureware.org/m2</url>
+   	</repository>
+
+      	<repository>
+      		<id>fornax.repository</id>
+      		<name>Fornax Repository</name>
+      		<url>http://www.fornax-platform.org/m2/repository</url>
+      	</repository>
+   </repositories>
 
 
 	<!--Openaqua external modules deps-->
@@ -64,12 +83,13 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.fornax.openarchitectureware</groupId>
-			<artifactId>oaw-uml2</artifactId>
-			<version>4.1.1</version>
-			<type>pom</type>
+
+      <dependency>
+         <groupId>org.openarchitectureware</groupId>
+         <artifactId>oaw-uml2-adapter</artifactId>
+         <version>4.1.1</version>
 		</dependency>
+
 
 	</dependencies>
 
