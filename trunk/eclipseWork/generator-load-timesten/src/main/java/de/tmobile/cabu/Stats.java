@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  */
 final public class Stats {
-	final public static Stats INSTANCE = new Stats(); //yepp, is a singleton
+	final private static Stats INSTANCE = new Stats(); //yepp, is a singleton
 	private ReentrantReadWriteLock lockW = new ReentrantReadWriteLock(true);//the class lock
 	private ReentrantReadWriteLock lockR = new ReentrantReadWriteLock(true);//the class lock
 	private ReentrantReadWriteLock lockG = new ReentrantReadWriteLock(true);//the class lock
@@ -26,9 +26,9 @@ final public class Stats {
 	 */
 	private Stats() {
 		counterWrite = 0;
-		timeWrite = 0L;
+		timeWrite = 1L;
 		counterRead = 0;
-		timeRead = 0L;
+		timeRead = 1L;
 		globalTime = 0L;
 	}
 
@@ -90,11 +90,18 @@ final public class Stats {
 		lockW.readLock().lock();
 		lockR.readLock().lock();
 		try {
-			float r = timeRead / counterRead;
-			float w = timeWrite / counterWrite;
+			//ns to ms
+			float r =0; if (timeRead != 0)  r= timeRead  / counterRead;
+			r = r / 1000000;
+			//float w =0; if (timeWrite != 0) w= timeWrite  / counterWrite;
+
+			//if (timeRead != 0) timeRead  = timeRead / 1000000;
+			//if (timeWrite!= 0) timeWrite = timeWrite / 1000000;
+			
+			
 			System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads");
-			System.out.println("Read : "+timeRead+"ms with "+counterRead+" Requests = "+r+" ms/req");
-			System.out.println("Write: "+timeWrite+"ms with "+counterWrite+" Requests = "+w+" ms/req");
+			System.out.println("Read : "+timeRead  +"ms with "+counterRead+" Requests = "+r+" ms/req");
+			//System.out.println("Write: "+timeWrite +"ms with "+counterWrite+" Requests = "+w+" ms/req");
 			
 		} finally {
 			lockW.readLock().unlock();

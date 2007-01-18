@@ -6,6 +6,8 @@ package de.tmobile.cabu;
 import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
@@ -37,7 +39,7 @@ public class TTConnection {
 		}
 	}
 	
-	public static void reportSQLException(SQLException ex)
+	public void reportSQLException(SQLException ex)
 	{
 		int errCount = 0;
 
@@ -104,20 +106,13 @@ public class TTConnection {
 
 	
 	
-	public void Connect() 
+	public void Connect() throws SQLException 
 	{
-		System.out.println("Connect");
-	
-		try {
-			System.out.println("Open a connection.");
-			isConnected = true;
-			connection = DriverManager.getConnection(url);
-			reportSQLWarning(connection.getWarnings());
-			connection.setAutoCommit (false);
-
-		} catch (SQLException ex) {
-			reportSQLException(ex);
-		}
+		System.out.println("Open a connection.");
+		connection = DriverManager.getConnection(url);
+		reportSQLWarning(connection.getWarnings());
+		connection.setAutoCommit (false);
+		isConnected = true;
 	}
 
 	
@@ -128,6 +123,7 @@ public class TTConnection {
 		try {
 			if (connection != null && connection.isClosed() == false) {
 				// Close the connection
+				CommitTransaction();
 				System.out.println("Close the connection.");
 				connection.close();
 			}
@@ -173,25 +169,58 @@ public class TTConnection {
 		
 	}
 	
-	public void CreateTableStructure() throws SQLException {
+	private void CreateContracts() throws SQLException{
 		if (isConnected == false) return;
 		
 		BeginTransaction();
-		Statement stmt = connection.createStatement();
+		Statement s = connection.createStatement();
 
-		//setup job list
-		stmt.addBatch ("CREATE TABLE Contract (C1 INTEGER)");
-		stmt.addBatch ("INSERT INTO Contract VALUES (1)");
-		stmt.addBatch ("INSERT INTO Contract VALUES (2)");
-		stmt.addBatch ("INSERT INTO Contract VALUES (3)");
-		stmt.addBatch ("INSERT INTO Contract VALUES (4)");
-		stmt.addBatch ("INSERT INTO Contract VALUES (5)");
+		s.execute("DROP TABLE Contract");
+		s.execute("CREATE TABLE Contract (contractID INTEGER)");
+
 		
+		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
+			s.execute("INSERT INTO Contract VALUES (" + i + ")");
+
+		}
 		
 		//execute and commit
-		stmt.executeBatch();
 		CommitTransaction();
+		
+	}
+
+	
+	public void CreateTableStructure() throws SQLException {
+		if (isConnected == false) return;
+		System.out.println("Create Table Structure");
+		CreateContracts();
 	}
 	
+
+	/**
+	 * Reads all bundle instances for a given contract id
+	 *
+	 */
+	public void executeRead (int contractID) {
+		try {
+			
+			BeginTransaction();
+			
+			PreparedStatement pstmt=connection.prepareStatement("SELECT * FROM Contract where contractID=?");
+			pstmt.setInt(1, contractID);
+
+			ResultSet rs = pstmt.executeQuery();
+			while ( rs.next() ) {
+				  //System.out.printf( "Found Contract: %s \n", rs.getInt(1));
+			}
+			
+			reportSQLWarning(pstmt.getWarnings());
+			pstmt.close();
+
+			//RollbackTransaction();
+		} catch (SQLException e) {
+			reportSQLException(e);
+		}
+	}
 
 }

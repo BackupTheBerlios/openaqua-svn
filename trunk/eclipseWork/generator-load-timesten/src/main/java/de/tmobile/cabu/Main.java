@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 
 
+
 /**
  * @author behrenan
  *
@@ -23,6 +24,7 @@ public class Main {
 		try {
 			TTConnection con;
 			con = new TTConnection("com.timesten.jdbc.TimesTenDriver", "jdbc:timesten:direct:RunData_tt51");
+			con.Connect();
 			con.CreateTableStructure();
 			con.Disconnect();
 			return true;
@@ -31,7 +33,7 @@ public class Main {
 			//e1.printStackTrace();
 		} catch (SQLException e) {
 			System.err.println("SQLException: " + e.getMessage());
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -41,9 +43,10 @@ public class Main {
 	
 	/**
 	 * makes the measuring
+	 * @throws ClassNotFoundException 
 	 *
 	 */
-	private static void execution () {		
+	private static void execution () throws ClassNotFoundException {		
         
         //setup threads
         TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
@@ -85,7 +88,7 @@ public class Main {
 	 */
 	public static void main(String[] args) throws InterruptedException {
         System.out.println( "Start Load Test" );
-        long start = System.currentTimeMillis();
+        long runTime = 0;
         
         
         //setup Database
@@ -95,11 +98,18 @@ public class Main {
         } else {
         	
         	//and does the measuring stuff
-        	execution();
+        	try {
+        		long start = System.currentTimeMillis();
+				execution();
+				runTime = System.currentTimeMillis() - start;
+			} catch (ClassNotFoundException e) {
+				System.err.println( "Run was aborted by an exception");
+				e.printStackTrace();
+			}
         }
         
-        //how long took it?
-        long runTime = System.currentTimeMillis() - start;
+        //Stats
+        Stats.getInstance().printResults();
         System.out.println( "Runtime was " +runTime + "ms");
         
         

@@ -3,6 +3,8 @@
  */
 package de.tmobile.cabu;
 
+import java.sql.SQLException;
+
 /**
  * @author behrenan
  *
@@ -11,14 +13,18 @@ public class TTGenerator extends Thread{
 	
 	private int done = 0;
 	private int maxContracts = Configuration.getInstance().getMaxContracts();
+	TTConnection connection = null;
 	
 	
 	
 	/**
 	 * Constructor
+	 * @throws ClassNotFoundException 
 	 */
-	public TTGenerator(ThreadGroup group, String threadName) {
-		super( group, threadName); 
+	public TTGenerator(String threadName) throws ClassNotFoundException {
+		super( threadName); 
+		connection = new TTConnection("com.timesten.jdbc.TimesTenDriver", "jdbc:timesten:direct:RunData_tt51");
+
 	}
 
 	
@@ -27,27 +33,30 @@ public class TTGenerator extends Thread{
 	 *
 	 */
 	public void Init(){
-		//TODO Connect to database
+		try {
+			connection.Connect();
+		} catch (SQLException e) {
+			connection.reportSQLException(e);
+			throw new RuntimeException("Error while Database Connect");
+		}
 		 
 	}
-	
-	/**
-	 * Constructor without threadgroup
-	 */
-	public TTGenerator(String threadName) {
-		super( threadName); 
-		System.out.println( "Start new TTGenerator Thread" );
+
+
+
+
+	private void executeRead() {
+		long start = System.nanoTime();
+		connection.executeRead(done++);
+		long diff = System.nanoTime();
+		Stats.getInstance().addReadResults(1, diff - start);
+		yield();
 	}
 
-
-
-
-	private void execute() {
+	private void executeWrite() {
+		
 		done++;
-		//System.out.println( "Runde: " + done + "from thread "+getName());
-	    //for ( int i = 0; i < 20; i++ )  System.out.println( new java.util.Date() );  
 	}
-
 
 	
 	/**
@@ -57,15 +66,14 @@ public class TTGenerator extends Thread{
 	public void run () {
 		try {
 			while (done < maxContracts) {
-				execute();
-				//yield();
-				sleep(100);
+				executeRead();
 			}
-		//} catch (InterruptedException e) {
 		} catch (Exception e) {
 			System.out.println( "Murks");
 			e.printStackTrace();
 			return;
 		}
+		connection.Disconnect();
+		
 	}
 }

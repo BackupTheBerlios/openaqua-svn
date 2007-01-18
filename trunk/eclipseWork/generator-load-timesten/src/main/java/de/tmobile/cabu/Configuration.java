@@ -18,8 +18,8 @@ final public class Configuration {
 	
 	private Configuration() {
 		super();
-		maxConnections = 5;
-		maxContracts = 10;
+		maxConnections = 100;
+		maxContracts = 200;
 		
 	}
 	
