@@ -87,26 +87,50 @@ final public class Stats {
 	 * Prints the results
 	 */
 	public void printResults() {
-		lockW.readLock().lock();
-		lockR.readLock().lock();
-		try {
-			//ns to ms
-			float r =0; if (timeRead != 0)  r= timeRead  / counterRead;
-			r = r / 1000000;
-			//float w =0; if (timeWrite != 0) w= timeWrite  / counterWrite;
+   	int  acounterWrite;
+   	long atimeWrite;
+   	int  acounterRead;
+   	long atimeRead;
 
-			//if (timeRead != 0) timeRead  = timeRead / 1000000;
-			//if (timeWrite!= 0) timeWrite = timeWrite / 1000000;
-			
-			
-			System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads");
-			System.out.println("Read : "+timeRead  +"ms with "+counterRead+" Requests = "+r+" ms/req");
-			//System.out.println("Write: "+timeWrite +"ms with "+counterWrite+" Requests = "+w+" ms/req");
-			
+		lockW.writeLock().lock();
+		lockR.writeLock().lock();
+
+		try {
+      	acounterWrite = counterWrite;
+      	atimeWrite = timeWrite;
+      	acounterRead = counterRead;
+      	atimeRead = timeRead;
+
+			counterWrite = 0;
+			timeWrite = 0L;
+			counterRead = 0;
+			timeRead = 0L;
+		   
 		} finally {
-			lockW.readLock().unlock();
-			lockR.readLock().unlock();
+			lockW.writeLock().unlock();
+			lockR.writeLock().unlock();
 		}
+		
+
+		System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads...");
+		
+		//print read Stats
+		{
+		   if (counterRead == 0) counterRead = 1;
+		   float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
+		   float reqPmsec = counterRead / (atimeRead / 1000000 );
+   		System.out.println("Read : " + counterRead + "Record with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
+		}
+		/*
+		//print write Stats
+		{
+		   if (counterRead == ) counterRead = 1;
+		   float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
+		   float reqPmsec = counterRead / (atimeRead / 1000000 );
+   		System.out.println("Read : " + counterRead + "Record with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
+		}*/
+
+
 		return;
 	}
 

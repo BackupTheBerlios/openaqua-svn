@@ -65,9 +65,12 @@ public class TTGenerator extends Thread{
 	 */
 	public void run () {
 		try {
-			while (done < maxContracts) {
-				executeRead();
-			}
+		   for (int i = 0; i < Configuration.getInstance().getReqLoops(); i++){
+   			while (done < maxContracts) {
+   				executeRead();
+   			}
+		      
+		   }
 		} catch (Exception e) {
 			System.out.println( "Murks");
 			e.printStackTrace();

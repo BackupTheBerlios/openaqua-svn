@@ -14,12 +14,14 @@ final public class Configuration {
 	final public static Configuration INSTANCE = new Configuration();
 	private int maxConnections;
 	private int maxContracts;
+	private int reqLoops;
 	
 	
 	private Configuration() {
 		super();
 		maxConnections = 100;
 		maxContracts = 200;
+		reqLoops     = 100;
 		
 	}
 	
@@ -28,6 +30,10 @@ final public class Configuration {
 	 */
 	final public static Configuration getInstance() {
 		return INSTANCE;
+	}
+
+	public int getReqLoops() {
+		return reqLoops;
 	}
 
 	public int getMaxContracts() {

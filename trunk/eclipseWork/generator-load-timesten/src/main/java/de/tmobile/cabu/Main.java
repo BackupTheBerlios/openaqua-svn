@@ -4,6 +4,7 @@
 package de.tmobile.cabu;
 
 import java.sql.SQLException;
+import java.util.Timer;
 
 
 
@@ -98,13 +99,18 @@ public class Main {
         } else {
         	
         	//and does the measuring stuff
+        	Timer timer = null;
         	try {
+       	   timer = new Timer();
+        	   timer.schedule(new MinuteTimer(), 60000, 60000);
         		long start = System.currentTimeMillis();
 				execution();
 				runTime = System.currentTimeMillis() - start;
 			} catch (ClassNotFoundException e) {
 				System.err.println( "Run was aborted by an exception");
 				e.printStackTrace();
+			} finally {
+            timer.cancel();
 			}
         }
         
