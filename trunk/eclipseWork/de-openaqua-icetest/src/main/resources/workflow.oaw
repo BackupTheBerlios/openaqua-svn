@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="windows-1252"?>
+<!--NEW ++++++++++++++++++++++++++++++++-->
+
+
 <workflow>
     <property file="./workflow.properties"/>
 
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<!--Read the model file-->
+	<!--Warn: Needs a metamodel file!!-->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${icetest.modelFile}"/>
+		<outputSlot value="model"/>
+	</component>
+
+	<!--Clean the output directory-->
+	<component id="dirCleaner"
+		class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directories value="${outlet.src.dir}, ${outlet.res.dir}"/>
+	</component>
+
+
+	<!--generate source files-->
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
+		<metaModel class="oaw.type.emf.EmfMetaModel" metaModelPackage="org.eclipse.emf.ecore.EcorePackage"/>
+		<metaModel class="oaw.uml2.UML2MetaModel"/>
+		<metaModel class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="${javabasic.profile.file}" />
+		</metaModel>
+		<!--
+		-->
+		<fileEncoding value="ISO-8859-1"/>
+		<expand value="${expandExpression}"/>
+		<outlet path="${outlet.src.dir}"/>
+	   	<outlet name="SRC_ONCE" path="${outlet.src.once.dir}" overwrite="false"/>
+   		<beautifier class="org.openarchitectureware.xpand2.output.JavaBeautifier"/>
+	</component>
+
+
+<!--
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
 	<component class="oaw.emf.XmiReader">
@@ -27,4 +64,5 @@
 	   	<outlet name="SRC_ONCE" path="${outlet.src.once.dir}" overwrite="false"/>
    		<beautifier class="org.openarchitectureware.xpand2.output.JavaBeautifier"/>
 	</component>
+	-->
 </workflow>

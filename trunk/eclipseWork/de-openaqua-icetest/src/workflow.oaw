@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--OLD ======================================rkflow from openaqua-->
 <workflow>
 	<property file="./src/workflow.properties"/>
-	
+
+<!--	
 	<cartridge file="org/openarchitectureware/workflow/oawclassic/classicstart.oaw">
 		<metaEnvironmentSlot value="metaEnvironmentSlot"/>
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot"/>
@@ -24,7 +26,7 @@
 	<component id="dirCleaner"	class="org.openarchitectureware.workflow.common.DirectoryCleaner">
 		<directories value="${srcGenPath}/openaqua"/>
 	</component>
-
+-->
 
 	<!--
 	<component id="generator" class="org.openarchitectureware.xpand2.Generator">
@@ -40,19 +42,16 @@
 	</component>
 	-->
 	
-	<cartridge file="de/itemis/oaw/javabasics/cartridge.oaw">
 		<!--
+	<cartridge file="de/itemis/oaw/javabasics/cartridge.oaw">
 		cartdige
 		<checkExpression value="me.getElements('ModelElement')"/>
 		<expandExpression value="de::itemis::oaw::javabasics::xpt::JavaBean::BeanClass FOREACH me.getElements('Class')"/>
 		<outputPath value="${srcGenPath}"/>
-		-->
-		<!--
 		own
 		<checkExpression value="metaEnvironmentSlot.getElements('ModelElement')"/>
 		<expandExpression value="Root::Root FOREACH metaEnvironmentSlot.getElements('Model')"/>
 		<outputPath value="${srcGenPath}"/>
-		-->
 		<checkExpression value="metaEnvironmentSlot.getElements('ModelElement')"/>
 		<expandExpression value="de::itemis::oaw::javabasics::xpt::JavaBean::BeanClass FOREACH metaEnvironmentSlot.getElements('Class')"/>
 		<outputPath value="${srcGenPath}"/>
@@ -63,4 +62,5 @@
 		<instantiatorEnvironmentSlot value="instantiatorEnvironmentSlot" />
 		<dumpfile value="${dumpfile}" />
 	</cartridge>	
+		-->
 </workflow>
