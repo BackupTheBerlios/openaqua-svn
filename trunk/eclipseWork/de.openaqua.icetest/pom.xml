@@ -17,14 +17,14 @@
 	<packaging>jar</packaging>
 
 
-
-				<dependencies>
-					<dependency>
-						<groupId>org.fornax.cartridges</groupId>
-						<artifactId>fornax-cartridges-uml2-javabasic-parent</artifactId>
-						<version>1.2.0</version>
-					</dependency>
-				</dependencies>
-
+	<dependencies>
+		<dependency>
+			<groupId>org.fornax.cartridges</groupId>
+			<artifactId>fornax-cartridges-uml2-javabasic-generator</artifactId>
+			<version>[1.2,)</version>
+		</dependency>
+	</dependencies>
+<!--
+-->
 
 </project>

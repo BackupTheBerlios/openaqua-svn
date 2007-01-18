@@ -52,19 +52,31 @@
 		</dependencies>
 	</dependencyManagement>
 
-   <repositories>
-   	<repository>
+	<!--Where to get external Libs-->
+	<repositories>
+		<repository>
    		<id>oaw.repository</id>
    		<name>openArchitectureWare Repository</name>
    		<url>http://www.openarchitectureware.org/m2</url>
    	</repository>
 
-      	<repository>
-      		<id>fornax.repository</id>
-      		<name>Fornax Repository</name>
-      		<url>http://www.fornax-platform.org/m2/repository</url>
-      	</repository>
+      <repository>
+      	<id>fornax.repository</id>
+      	<name>Fornax Repository</name>
+      	<url>http://www.fornax-platform.org/m2/repository</url>
+      </repository>
+
+
    </repositories>
+
+	<!--Where to get Plugins-->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>fornax.plugin.repository</id>
+			<name>Fornax Plugin Repository</name>
+			<url>http://www.fornax-platform.org/m2/repository</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 
 	<!--Openaqua external modules deps-->
@@ -72,14 +84,14 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.1</version>
+			<version>[4.0,5.0)</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
+			<version>[1.2,2.0)</version>
 			<scope>compile</scope>
 		</dependency>
 
