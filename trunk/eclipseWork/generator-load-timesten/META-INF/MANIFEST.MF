@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: maven 2
+Extension-Name: Load Generator
+Specification-Title: Load Generator
+Specification-Vendor: T-Mobile
+Specification-Version: 1.0
+Implementation-Title: Struts Framework
+Implementation-Vendor: T-Mobile
+Implementation-Vendor-Id: T-Mobile
+Implementation-Version: 1.0
