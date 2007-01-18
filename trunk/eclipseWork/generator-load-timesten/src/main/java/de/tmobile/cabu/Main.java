@@ -11,6 +11,15 @@ package de.tmobile.cabu;
  */
 public class Main {
 
+	private static void setupDatabase(){
+		//TODO Connect
+		//TODO Create Tables
+		//TODO unconnect
+		
+	}
+	
+	
+	
 	/**
 	 * @param args
 	 * @throws InterruptedException 
@@ -19,11 +28,15 @@ public class Main {
         System.out.println( "Start Load Test" );
         long start = System.currentTimeMillis();
         
-        //TODO Setup database??
+        //setup Database
+        setupDatabase();
+        
+        
         //setup threads
         TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
         for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
         	threadArray[i] = new TTGenerator( "" + i );
+        	threadArray[i].Init();
         }
         
 

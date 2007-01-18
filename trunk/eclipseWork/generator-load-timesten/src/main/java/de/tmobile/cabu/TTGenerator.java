@@ -12,6 +12,8 @@ public class TTGenerator extends Thread{
 	private int done = 0;
 	private int maxContracts = Configuration.getInstance().getMaxContracts();
 	
+	
+	
 	/**
 	 * Constructor
 	 */
@@ -19,6 +21,16 @@ public class TTGenerator extends Thread{
 		super( group, threadName); 
 	}
 
+	
+	/**
+	 * Init this thread
+	 *
+	 */
+	public void Init(){
+		//TODO Connect to database
+		 
+	}
+	
 	/**
 	 * Constructor without threadgroup
 	 */

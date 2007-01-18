@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
+Main-Class: de.tmobile.Main.main
 Created-By: maven 2
 Extension-Name: Load Generator
 Specification-Title: Load Generator
