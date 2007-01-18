@@ -1,6 +1,0 @@
-import org::openarchitectureware::meta::uml::classifier;
-
-extension java::NamingConventions;
-
-String fqn (AssociationEnd ae) 		: !ae.isMultiple ? ae.Class.fqn() : "java.util.Collection<"+ae.Class.fqn()+">";
-String iterator (AssociationEnd ae) : "java.util.Iterator<"+ae.Class.fqn()+">";
