@@ -17,10 +17,4 @@
 		</dependency>
   	</dependencies>
   	
-  	<properties>
-  		<name>maven.jar.mainclass</name>
-        <value>de.tmobile.Main</value>
-  	</properties>
-  	
-  
 </project>
