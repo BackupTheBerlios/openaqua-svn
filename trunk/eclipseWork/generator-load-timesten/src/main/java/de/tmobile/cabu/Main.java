@@ -13,21 +13,37 @@ import java.sql.SQLException;
  */
 public class Main {
 
+	
+	/**
+	 * setup a database structure
+	 * @return true if fine
+	 */
 	private static boolean setupDatabase(){
-		TTConnection  con= new TTConnection("com.timesten.jdbc.TimesTenDriver", "jdbc:timesten:direct:RunData_tt51");
+
 		try {
+			TTConnection con;
+			con = new TTConnection("com.timesten.jdbc.TimesTenDriver", "jdbc:timesten:direct:RunData_tt51");
 			con.CreateTableStructure();
+			con.Disconnect();
+			return true;
+		} catch (ClassNotFoundException e1) {
+			System.err.println("Java ClassNotFound: " + e1.getMessage());
+			//e1.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+			System.err.println("SQLException: " + e.getMessage());
+			//e.printStackTrace();
 		}
-		con.Disconnect();
-		return true;
+		return false;
 	}
-	
-	
-	private static void execution () {
 		
+	
+	
+	
+	/**
+	 * makes the measuring
+	 *
+	 */
+	private static void execution () {		
         
         //setup threads
         TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
@@ -55,13 +71,7 @@ public class Main {
         }
         long diff = System.nanoTime()-Stats.getInstance().getGlobalTime();
         
-        //nothing more to do. Systems waits upuntil all threads are finished
-
-        //wait for finishing
-        //Stats.getInstance().setGlobalTime(System.nanoTime());
-        //while(ttGroup.activeCount()==0);
-		//long diff = System.nanoTime()-Stats.getInstance().getGlobalTime();
-        
+        //print stat infos
         double ms = diff/1000000; //yepp, durch 10000. Oder???
         double msP = ms/Configuration.getInstance().getMaxConnections();
         System.out.println( "Finished Load Test in " + ms +" ms = " + msP + " ms/Connection ");
@@ -76,12 +86,19 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
         System.out.println( "Start Load Test" );
         long start = System.currentTimeMillis();
+        
+        
         //setup Database
         if (setupDatabase() != true) {
         	System.err.println("Finish after Error");
+        	
         } else {
+        	
+        	//and does the measuring stuff
         	execution();
         }
+        
+        //how long took it?
         long runTime = System.currentTimeMillis() - start;
         System.out.println( "Runtime was " +runTime + "ms");
         

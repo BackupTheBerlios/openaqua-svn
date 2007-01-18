@@ -4,7 +4,7 @@
   <groupId>de.tmobile.cabu</groupId>
   <artifactId>generator-load-timesten</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>generator-load-timesten</name>
   
   
@@ -45,7 +45,6 @@
       </plugin>
     </plugins>
   </build>
-  ...
-  
+   
     	
 </project>

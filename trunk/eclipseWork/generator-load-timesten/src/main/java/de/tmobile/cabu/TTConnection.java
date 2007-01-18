@@ -26,17 +26,14 @@ public class TTConnection {
 
 
 
-	public void loadDriver()
+	public void loadDriver() throws ClassNotFoundException
 	{
 		if (!isDriverLoaded) {
-			System.out.println("TTJdbcExamples.loadDriver()");
-			try {
-				// Load TimesTen JDBC driver using Class.forName()
-				Class.forName(driver);
-				isDriverLoaded = true;
-			} catch (ClassNotFoundException ex) {
-				ex.printStackTrace();
-			}
+			System.out.println("loadDriver(): " + driver);
+			// Load TimesTen JDBC driver using Class.forName()
+			
+			Class.forName(driver);
+			isDriverLoaded = true;
 		}
 	}
 	
@@ -107,13 +104,10 @@ public class TTConnection {
 
 	
 	
-	public void Connect()
+	public void Connect() 
 	{
 		System.out.println("Connect");
-
-		// Load TimesTen JDBC driver if necessary
-		loadDriver();
-
+	
 		try {
 			System.out.println("Open a connection.");
 			isConnected = true;
@@ -144,7 +138,7 @@ public class TTConnection {
 	}
 	
 
-	public TTConnection(String driver, String url)
+	public TTConnection(String driver, String url) throws ClassNotFoundException
 	{
 		this.isDriverLoaded = false;
 		this.driver = driver;
