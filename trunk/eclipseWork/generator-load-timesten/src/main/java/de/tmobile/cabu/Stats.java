@@ -15,9 +15,7 @@ final public class Stats {
 	private ReentrantReadWriteLock lockR = new ReentrantReadWriteLock(true);//the class lock
 	private ReentrantReadWriteLock lockG = new ReentrantReadWriteLock(true);//the class lock
 	private int  counterWrite;
-	private long timeWrite;
 	private int  counterRead;
-	private long timeRead;
 	private long globalTime;
 
 
@@ -26,9 +24,7 @@ final public class Stats {
 	 */
 	private Stats() {
 		counterWrite = 0;
-		timeWrite = 1L;
 		counterRead = 0;
-		timeRead = 1L;
 		globalTime = 0L;
 	}
 
@@ -40,11 +36,10 @@ final public class Stats {
 	}
 
 
-	public void addReadResults(int pCounter, long pTime) {
+	public void addReadResults(int pCounter) {
 		lockR.writeLock().lock();
 		try {
 			this.counterRead += pCounter;
-			this.timeRead += pTime;
 		} finally {
 			lockR.writeLock().unlock();
 		}
@@ -52,11 +47,10 @@ final public class Stats {
 	}
 
 
-	public void addWriteResults(int pCounter, long pTime) {
+	public void addWriteResults(int pCounter) {
 		lockW.writeLock().lock();
 		try {
 			this.counterWrite += pCounter;
-			this.timeWrite += pTime;
 		} finally {
 			lockW.writeLock().unlock();
 		}
@@ -72,9 +66,7 @@ final public class Stats {
 		lockR.writeLock().lock();
 		try {
 			counterWrite = 0;
-			timeWrite = 0L;
 			counterRead = 0;
-			timeRead = 0L;
 		} finally {
 			lockW.writeLock().unlock();
 			lockR.writeLock().unlock();
@@ -86,25 +78,21 @@ final public class Stats {
 	/*
 	 * Prints the results
 	 */
-	public void printResults() {
+	public void printResults(int msec) {
 		int  acounterWrite;
-		long atimeWrite;
 		int  acounterRead;
-		long atimeRead;
 
 		lockW.writeLock().lock();
 		lockR.writeLock().lock();
 
 		try {
 			acounterWrite = counterWrite;
-			atimeWrite = timeWrite;
 			acounterRead = counterRead;
-			atimeRead = timeRead;
+			if (acounterRead == 0) acounterRead  = 1;
+			if (acounterWrite == 0) acounterWrite  = 1;
 
 			counterWrite = 0;
-			timeWrite = 0L;
 			counterRead = 0;
-			timeRead = 0L;
 
 		} finally {
 			lockW.writeLock().unlock();
@@ -112,23 +100,16 @@ final public class Stats {
 		}
 
 
-		//System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads...");
-
 		//print read Stats
 		{
-			if (counterRead == 0) counterRead = 1;
-			float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
-			float reqPmsec = counterRead / (atimeRead / 1000000 );
-			System.out.println("Read : " + acounterRead + " Reads with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
+			float s  = msec * 1000 / acounterRead;
+			System.out.printf("%s in %s msec:\t%s\t%s\n", "read ", msec, acounterRead, s);
 		}
-		/*
 		//print write Stats
 		{
-		   if (counterRead == ) counterRead = 1;
-		   float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
-		   float reqPmsec = counterRead / (atimeRead / 1000000 );
-   		System.out.println("Read : " + counterRead + "Record with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
-		}*/
+			float s  = msec * 1000 / acounterWrite;
+			System.out.printf("%s in %s msec:\t%s\t%s\n", "write", msec, acounterWrite, s);
+		}
 
 
 		return;

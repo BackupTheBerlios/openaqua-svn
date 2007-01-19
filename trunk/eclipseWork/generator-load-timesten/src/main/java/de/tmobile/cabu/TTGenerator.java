@@ -50,16 +50,17 @@ public class TTGenerator extends Thread{
 	private void executeRead() {
 		//System.out.println("Execution in Thread: "+ getName());
 		int contractID = 1 + Math.abs(random.nextInt()) % 49;
-		long start = System.nanoTime();
 		connection.executeRead(contractID);
-		long diff = System.nanoTime();
-		Stats.getInstance().addReadResults(1, diff - start);
+		Stats.getInstance().addReadResults(1);
 		yield();
 	}
 
 	private void executeWrite() {
-
-		done++;
+		//System.out.println("Execution in Thread: "+ getName());
+		int contractID = 1 + Math.abs(random.nextInt()) % 49;
+		connection.executeRead(contractID);
+		Stats.getInstance().addWriteResults(1);
+		yield();
 	}
 
 
@@ -74,6 +75,7 @@ public class TTGenerator extends Thread{
 				done = 0;
 				while (done < maxContracts) {
 					executeRead();
+					executeWrite();
 					loop++;
 					done++;
 				}
@@ -85,7 +87,7 @@ public class TTGenerator extends Thread{
 			return;
 		}
 		connection.Disconnect();
-		System.out.println("Execution in Thread: "+ getName() + " with "+loop+" loops");
+		//System.out.println("Execution in Thread: "+ getName() + " with "+loop+" loops");
 
 	}
 }

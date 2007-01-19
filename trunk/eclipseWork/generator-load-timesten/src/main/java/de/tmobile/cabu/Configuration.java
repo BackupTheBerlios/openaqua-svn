@@ -17,15 +17,17 @@ final public class Configuration {
 	private int reqLoops;
 	private String myDNS; 
 	private String myDriver;
+	private int statMilliSeconds;
 
 
 	private Configuration() {
 		super();
-		maxConnections = 100;
+		maxConnections = 10;
 		maxContracts = 200;
 		reqLoops     = 10;
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
+		statMilliSeconds = 6000;
 
 	}
 
@@ -34,6 +36,10 @@ final public class Configuration {
 	 */
 	final public static Configuration getInstance() {
 		return INSTANCE;
+	}
+	
+	public int getStatsAllMilliseconds() {
+		return statMilliSeconds;
 	}
 	
 	public String getDriver() {
