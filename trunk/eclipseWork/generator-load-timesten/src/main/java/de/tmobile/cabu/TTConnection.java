@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package de.tmobile.cabu;
 
@@ -101,7 +101,7 @@ public class TTConnection {
 
 
 
-	public void Connect() throws SQLException 
+	public void Connect() throws SQLException
 	{
 		//System.out.println("Open a connection.");
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
@@ -166,7 +166,7 @@ public class TTConnection {
 		if (isConnected == false) return;
 
 		Statement s = connection.createStatement();
-		
+
 		//drop an recreate the table
 		BeginTransaction();
 		try {	s.execute("DROP INDEX ContractIdx");
@@ -175,7 +175,7 @@ public class TTConnection {
 		try {	s.execute("DROP TABLE Contract");
 		} catch (SQLException e){
 		}
-		
+		CommitTransaction();
 
 		s.execute("CREATE TABLE Contract (contractID INTEGER)");
 		CommitTransaction();
