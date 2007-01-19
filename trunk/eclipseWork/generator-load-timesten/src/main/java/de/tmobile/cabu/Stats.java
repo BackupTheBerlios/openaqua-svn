@@ -39,7 +39,7 @@ final public class Stats {
 		return INSTANCE;
 	}
 
-	
+
 	public void addReadResults(int pCounter, long pTime) {
 		lockR.writeLock().lock();
 		try {
@@ -51,7 +51,7 @@ final public class Stats {
 		return;
 	}
 
-	
+
 	public void addWriteResults(int pCounter, long pTime) {
 		lockW.writeLock().lock();
 		try {
@@ -63,7 +63,7 @@ final public class Stats {
 		return;
 	}
 
-	
+
 	/*
 	 * resets all stored values
 	 */
@@ -81,45 +81,45 @@ final public class Stats {
 		}
 		return;
 	}
-	
-	
+
+
 	/*
 	 * Prints the results
 	 */
 	public void printResults() {
-   	int  acounterWrite;
-   	long atimeWrite;
-   	int  acounterRead;
-   	long atimeRead;
+		int  acounterWrite;
+		long atimeWrite;
+		int  acounterRead;
+		long atimeRead;
 
 		lockW.writeLock().lock();
 		lockR.writeLock().lock();
 
 		try {
-      	acounterWrite = counterWrite;
-      	atimeWrite = timeWrite;
-      	acounterRead = counterRead;
-      	atimeRead = timeRead;
+			acounterWrite = counterWrite;
+			atimeWrite = timeWrite;
+			acounterRead = counterRead;
+			atimeRead = timeRead;
 
 			counterWrite = 0;
 			timeWrite = 0L;
 			counterRead = 0;
 			timeRead = 0L;
-		   
+
 		} finally {
 			lockW.writeLock().unlock();
 			lockR.writeLock().unlock();
 		}
-		
 
-		System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads...");
-		
+
+		//System.out.println("Stats from load test with " + Configuration.getInstance().getMaxConnections() + " threads...");
+
 		//print read Stats
 		{
-		   if (counterRead == 0) counterRead = 1;
-		   float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
-		   float reqPmsec = counterRead / (atimeRead / 1000000 );
-   		System.out.println("Read : " + counterRead + "Record with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
+			if (counterRead == 0) counterRead = 1;
+			float reqPsec = counterRead / (atimeRead / 1000000 / 1000);
+			float reqPmsec = counterRead / (atimeRead / 1000000 );
+			System.out.println("Read : " + acounterRead + " Reads with " + reqPsec + "rec/sec =" + reqPmsec + "req/ms");
 		}
 		/*
 		//print write Stats

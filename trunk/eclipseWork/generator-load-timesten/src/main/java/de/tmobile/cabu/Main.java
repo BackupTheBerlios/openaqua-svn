@@ -24,7 +24,7 @@ public class Main {
 
 		try {
 			TTConnection con;
-			con = new TTConnection("com.timesten.jdbc.TimesTenDriver", "jdbc:timesten:direct:RunData_tt51");
+			con = new TTConnection();
 			con.Connect();
 			con.CreateTableStructure();
 			con.Disconnect();
@@ -88,7 +88,7 @@ public class Main {
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
-        System.out.println( "Start Load Test" );
+        System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
         long runTime = 0;
         
         
@@ -102,7 +102,7 @@ public class Main {
         	Timer timer = null;
         	try {
        	   timer = new Timer();
-        	   timer.schedule(new MinuteTimer(), 60000, 60000);
+        	   timer.schedule(new MinuteTimer(), 6000, 6000);
         		long start = System.currentTimeMillis();
 				execution();
 				runTime = System.currentTimeMillis() - start;

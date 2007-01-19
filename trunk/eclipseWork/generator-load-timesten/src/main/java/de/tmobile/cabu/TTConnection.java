@@ -19,8 +19,6 @@ import java.sql.Statement;
 public class TTConnection {
 	boolean hasReceivedSignal = false;
 	private boolean isDriverLoaded;
-	private String driver;
-	private String url;
 	boolean shouldWait = false;
 	Object stopMonitor = new Object();
 	private boolean isConnected = false;
@@ -31,10 +29,7 @@ public class TTConnection {
 	public void loadDriver() throws ClassNotFoundException
 	{
 		if (!isDriverLoaded) {
-			System.out.println("loadDriver(): " + driver);
-			// Load TimesTen JDBC driver using Class.forName()
-			
-			Class.forName(driver);
+			Class.forName(Configuration.getInstance().getDriver());
 			isDriverLoaded = true;
 		}
 	}
@@ -108,8 +103,8 @@ public class TTConnection {
 	
 	public void Connect() throws SQLException 
 	{
-		System.out.println("Open a connection.");
-		connection = DriverManager.getConnection(url);
+		//System.out.println("Open a connection.");
+		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
 		connection.setAutoCommit (false);
 		isConnected = true;
@@ -124,7 +119,7 @@ public class TTConnection {
 			if (connection != null && connection.isClosed() == false) {
 				// Close the connection
 				CommitTransaction();
-				System.out.println("Close the connection.");
+				//System.out.println("Close the connection.");
 				connection.close();
 			}
 			isConnected = false;
@@ -134,11 +129,9 @@ public class TTConnection {
 	}
 	
 
-	public TTConnection(String driver, String url) throws ClassNotFoundException
+	public TTConnection() throws ClassNotFoundException
 	{
 		this.isDriverLoaded = false;
-		this.driver = driver;
-		this.url = url;
 		loadDriver();
 	}
 
@@ -172,27 +165,25 @@ public class TTConnection {
 	private void CreateContracts() throws SQLException{
 		if (isConnected == false) return;
 		
-		BeginTransaction();
-		Statement s = connection.createStatement();
+		Statement test = connection.createStatement();
 
-		s.execute("DROP TABLE Contract");
-		s.execute("CREATE TABLE Contract (contractID INTEGER)");
-
-		
-		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-			s.execute("INSERT INTO Contract VALUES (" + i + ")");
-
+		if (test.execute("select * from Contract;") == false) {
+			Statement s = connection.createStatement();
+			BeginTransaction();
+			s.execute("CREATE TABLE Contract (contractID INTEGER)");
+			for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
+				s.execute("INSERT INTO Contract VALUES (" + i + ")");
+			}
+			CommitTransaction();
+			
 		}
-		
-		//execute and commit
-		CommitTransaction();
 		
 	}
 
 	
 	public void CreateTableStructure() throws SQLException {
 		if (isConnected == false) return;
-		System.out.println("Create Table Structure");
+		System.out.println("Maybe create tables ... ");
 		CreateContracts();
 	}
 	
