@@ -33,7 +33,7 @@ public class TTConnection {
 			isDriverLoaded = true;
 		}
 	}
-	
+
 	public void reportSQLException(SQLException ex)
 	{
 		int errCount = 0;
@@ -99,8 +99,8 @@ public class TTConnection {
 		}
 	}
 
-	
-	
+
+
 	public void Connect() throws SQLException 
 	{
 		//System.out.println("Open a connection.");
@@ -110,9 +110,9 @@ public class TTConnection {
 		isConnected = true;
 	}
 
-	
-	
-	
+
+
+
 	public void Disconnect()
 	{
 		try {
@@ -127,7 +127,7 @@ public class TTConnection {
 			reportSQLException(ex);
 		}
 	}
-	
+
 
 	public TTConnection() throws ClassNotFoundException
 	{
@@ -159,34 +159,44 @@ public class TTConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	private void CreateContracts() throws SQLException{
 		if (isConnected == false) return;
-		
-		Statement test = connection.createStatement();
 
-		if (test.execute("select * from Contract;") == false) {
-			Statement s = connection.createStatement();
-			BeginTransaction();
-			s.execute("CREATE TABLE Contract (contractID INTEGER)");
-			for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-				s.execute("INSERT INTO Contract VALUES (" + i + ")");
-			}
-			CommitTransaction();
-			
+		Statement s = connection.createStatement();
+		
+		//drop an recreate the table
+		BeginTransaction();
+		try {	s.execute("DROP INDEX ContractIdx");
+		} catch (SQLException e){
+		}
+		try {	s.execute("DROP TABLE Contract");
+		} catch (SQLException e){
 		}
 		
+
+		s.execute("CREATE TABLE Contract (contractID INTEGER)");
+		CommitTransaction();
+
+		BeginTransaction();
+		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
+			s.execute("INSERT INTO Contract VALUES (" + i + ")");
+			CommitTransaction();
+		}
+		s.execute("CREATE UNIQUE INDEX ContractIdx ON Contract (contractID)");
+
 	}
 
-	
+
+
 	public void CreateTableStructure() throws SQLException {
 		if (isConnected == false) return;
 		System.out.println("Maybe create tables ... ");
 		CreateContracts();
 	}
-	
+
 
 	/**
 	 * Reads all bundle instances for a given contract id
@@ -194,17 +204,17 @@ public class TTConnection {
 	 */
 	public void executeRead (int contractID) {
 		try {
-			
+
 			BeginTransaction();
-			
+
 			PreparedStatement pstmt=connection.prepareStatement("SELECT * FROM Contract where contractID=?");
 			pstmt.setInt(1, contractID);
 
 			ResultSet rs = pstmt.executeQuery();
 			while ( rs.next() ) {
-				  //System.out.printf( "Found Contract: %s \n", rs.getInt(1));
+				//System.out.printf( "Found Contract: %s \n", rs.getInt(1));
 			}
-			
+
 			reportSQLWarning(pstmt.getWarnings());
 			pstmt.close();
 

@@ -22,8 +22,8 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 10;
-		maxContracts = 200;
+		maxConnections = 100;
+		maxContracts = 500000;
 		reqLoops     = 10;
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";

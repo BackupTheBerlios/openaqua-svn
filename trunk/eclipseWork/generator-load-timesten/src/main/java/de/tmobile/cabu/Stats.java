@@ -107,8 +107,8 @@ final public class Stats {
 		}
 		//print write Stats
 		{
-			float s  = msec * 1000 / acounterWrite;
-			System.out.printf("%s in %s msec:\t%s\t%s\n", "write", msec, acounterWrite, s);
+			//float s  = msec * 1000 / acounterWrite;
+			//System.out.printf("%s in %s msec:\t%s\t%s\n", "write", msec, acounterWrite, s);
 		}
 
 
