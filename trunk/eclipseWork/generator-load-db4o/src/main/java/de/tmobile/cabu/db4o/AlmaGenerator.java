@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.cabu.alma;
+package de.tmobile.cabu.db4o;
 
 import java.io.IOException;
 import java.io.InputStream;

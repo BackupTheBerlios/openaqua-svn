@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.cabu.alma;
+package de.tmobile.cabu.db4o;
 
 
 /**
