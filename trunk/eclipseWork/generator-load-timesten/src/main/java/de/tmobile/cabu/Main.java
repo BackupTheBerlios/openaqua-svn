@@ -23,18 +23,19 @@ public class Main {
 	private static boolean setupDatabase(){
 
 		try {
+			System.out.println("Setup faked data environment ... ");
 			TTConnection con;
 			con = new TTConnection();
 			con.Connect();
 			con.CreateTableStructure();
 			con.Disconnect();
+			System.out.println("Setup faked data environment ... done");
 			return true;
 		} catch (ClassNotFoundException e1) {
 			System.err.println("Java ClassNotFound: " + e1.getMessage());
 			//e1.printStackTrace();
 		} catch (SQLException e) {
 			System.err.println("SQLException: " + e.getMessage());
-			e.printStackTrace();
 		}
 		return false;
 	}

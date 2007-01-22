@@ -49,19 +49,12 @@ public class TTGenerator extends Thread{
 
 	private void executeRead() {
 		//System.out.println("Execution in Thread: "+ getName());
-		int contractID = 1 + Math.abs(random.nextInt()) % maxContracts;
+		int contractID = 1 + Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 		connection.executeRead(contractID);
 		Stats.getInstance().addReadResults(1);
 		yield();
 	}
 
-	private void executeWrite() {
-		//System.out.println("Execution in Thread: "+ getName());
-		int contractID = 1 + Math.abs(random.nextInt()) % maxContracts;
-		connection.executeRead(contractID);
-		Stats.getInstance().addWriteResults(1);
-		yield();
-	}
 
 
 	/**

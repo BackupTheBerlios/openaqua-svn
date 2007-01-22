@@ -14,6 +14,8 @@ final public class Configuration {
 	final private static Configuration INSTANCE = new Configuration();
 	private int maxConnections;
 	private int maxContracts;
+	private int maxSubsriptions;
+	private int maxInstances;
 	private int reqLoops;
 	private String myDNS; 
 	private String myDriver;
@@ -23,11 +25,24 @@ final public class Configuration {
 	private Configuration() {
 		super();
 		maxConnections = 100;
-		maxContracts = 500000;
-		reqLoops     = 10;
+		
+		maxContracts = 5000000;
+		maxSubsriptions = maxContracts/5;
+		maxInstances=maxSubsriptions*3;
+
+		reqLoops     = 100;
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
-		statMilliSeconds = 6000;
+		statMilliSeconds = 1000;
+/*		maxConnections = 100;
+		maxContracts = 100000;
+		reqLoops     = 100;
+		myDNS ="jdbc:timesten:direct:PerfTest";
+		myDriver = "com.timesten.jdbc.TimesTenDriver";
+		statMilliSeconds = 1000;
+		maxSubsriptions = 1100000;
+		maxInstances=3300000;
+		*/
 
 	}
 
@@ -54,9 +69,6 @@ final public class Configuration {
 		return reqLoops;
 	}
 
-	public int getMaxContracts() {
-		return maxContracts;
-	}
 	/**
 	 * @return the threadCounter
 	 */
@@ -67,7 +79,50 @@ final public class Configuration {
 	/**
 	 */
 	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;
+		this.maxConnections = maxConnections;	
+
+	}
+
+	/**
+	 * @return the maxInstances
+	 */
+	public int getMaxInstances() {
+		return maxInstances;
+	}
+
+	/**
+	 * @param maxInstances the maxInstances to set
+	 */
+	public void setMaxInstances(int maxInstances) {
+		this.maxInstances = maxInstances;
+	}
+
+	/**
+	 * @return the maxSubsriptions
+	 */
+	public int getMaxSubsriptions() {
+		return maxSubsriptions;
+	}
+
+	/**
+	 * @param maxSubsriptions the maxSubsriptions to set
+	 */
+	public void setMaxSubsriptions(int maxSubsriptions) {
+		this.maxSubsriptions = maxSubsriptions;
+	}
+
+	/**
+	 * @return the maxContracts
+	 */
+	public int getMaxContracts() {
+		return maxContracts;
+	}
+
+	/**
+	 * @param maxContracts the maxContracts to set
+	 */
+	public void setMaxContracts(int maxContracts) {
+		this.maxContracts = maxContracts;
 	}
 
 

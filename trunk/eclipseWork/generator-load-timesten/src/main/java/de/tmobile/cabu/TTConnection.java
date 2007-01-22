@@ -4,6 +4,7 @@
 package de.tmobile.cabu;
 
 import java.sql.Connection;
+import java.util.Random;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,10 +21,13 @@ public class TTConnection {
 	boolean hasReceivedSignal = false;
 	private boolean isDriverLoaded;
 	boolean shouldWait = false;
-	Object stopMonitor = new Object();
 	private boolean isConnected = false;
-	Connection connection = null;
-
+	private Connection connection = null;
+	private PreparedStatement lookupForInstance = null;
+	private PreparedStatement setLockForInstance = null;
+	private Random random = new Random();
+	
+	
 
 
 	public void loadDriver() throws ClassNotFoundException
@@ -107,6 +111,10 @@ public class TTConnection {
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
 		connection.setAutoCommit (false);
+		//lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.subscription_id, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
+		lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s " +
+				"where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
+		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
 		isConnected = true;
 	}
 
@@ -117,9 +125,9 @@ public class TTConnection {
 	{
 		try {
 			if (connection != null && connection.isClosed() == false) {
-				// Close the connection
-				CommitTransaction();
-				//System.out.println("Close the connection.");
+				lookupForInstance.close();
+				setLockForInstance.close();
+				RollbackTransaction();
 				connection.close();
 			}
 			isConnected = false;
@@ -162,39 +170,52 @@ public class TTConnection {
 
 	}
 
-	private void CreateContracts() throws SQLException{
+	
+	public void CreateTableStructure() throws SQLException {
 		if (isConnected == false) return;
 
 		Statement s = connection.createStatement();
 
-		//drop an recreate the table
-		BeginTransaction();
-		try {	s.execute("DROP INDEX ContractIdx");
-		} catch (SQLException e){
-		}
-		try {	s.execute("DROP TABLE Contract");
-		} catch (SQLException e){
-		}
+		System.out.println(" delete old data ... ");
+		s.execute("delete from TA_BUDGET_INSTANCE ;");
+		s.execute("delete from TA_BUDGETSUBSCRIPTION ;");
+		s.execute("delete from TA_BUDGET ;");
+		s.execute("delete from TA_INSTANTIATION_TYPE ;");
+		s.execute("delete from TA_CONTRACTS ;");
 		CommitTransaction();
-
-		s.execute("CREATE TABLE Contract (contractID INTEGER)");
-		CommitTransaction();
-
-		BeginTransaction();
+		
+		System.out.println(" setup TA_CONTRACTS... ");
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-			s.execute("INSERT INTO Contract VALUES (" + i + ")");
-			CommitTransaction();
+			s.execute("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (" + i + ", '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
 		}
-		s.execute("CREATE UNIQUE INDEX ContractIdx ON Contract (contractID)");
+		CommitTransaction();
 
-	}
+		System.out.println(" setup TA_INSTANTIATION_TYPE... ");
+		for (int i = 0; i < 50; i++) {
+			s.execute("insert into TA_INSTANTIATION_TYPE (INST_TYPE_ID, DESCRIPTION) values ("+i+", 'foo');");
+		}
+		CommitTransaction();
+		
+		System.out.println(" setup TA_BUDGET... ");
+		for (int i = 0; i < 200; i++) {
+			s.execute("insert into TA_BUDGET (BUDGET_ID, INST_TYPE_ID, INITIAL_VALUE, UNIT, INSTANTIATION_TYPE) values ("+i+", 1, 1234, 50, 50);");
+		}
+		CommitTransaction();
 
-
-
-	public void CreateTableStructure() throws SQLException {
-		if (isConnected == false) return;
-		System.out.println("Maybe create tables ... ");
-		CreateContracts();
+		System.out.println(" setup TA_BUDGETSUBSCRIPTION... ");
+		for (int i = 0; i < Configuration.getInstance().getMaxSubsriptions(); i++) {
+			int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+			int budgetID =  Math.abs(random.nextInt()) % 200;
+			s.execute("insert into TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID, CONTRACT_ID, BUDGET_ID, VALID_FROM) values ("+i+", "+contractID+", "+budgetID+", '2006-12-12 00:00:01');");
+		}
+		CommitTransaction();
+		
+		System.out.println(" setup TA_BUDGET_INSTANCE... ");
+		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
+			int subID =  Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions();
+			s.execute("insert into TA_BUDGET_INSTANCE (SUBSCRIPTION_ID, BUDGETINSTANCE_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values ("+subID+", "+i+", '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL,  "+i+");");
+		}
+		CommitTransaction();
 	}
 
 
@@ -204,24 +225,22 @@ public class TTConnection {
 	 */
 	public void executeRead (int contractID) {
 		try {
-
-			BeginTransaction();
-
-			PreparedStatement pstmt=connection.prepareStatement("SELECT * FROM Contract where contractID=?");
-			pstmt.setInt(1, contractID);
-
-			ResultSet rs = pstmt.executeQuery();
+			
+			//BeginTransaction();
+			lookupForInstance.setInt(1, contractID);
+			ResultSet rs = lookupForInstance.executeQuery();
 			while ( rs.next() ) {
-				//System.out.printf( "Found Contract: %s \n", rs.getInt(1));
+				setLockForInstance.setInt(1, rs.getInt(1));
+				setLockForInstance.execute();
+				CommitTransaction();
 			}
-
-			reportSQLWarning(pstmt.getWarnings());
-			pstmt.close();
-
-			//RollbackTransaction();
+			
 		} catch (SQLException e) {
-			reportSQLException(e);
+			System.out.println("Lock-Error?: "+e.getMessage());
+			//reportSQLException(e);
+			RollbackTransaction();
 		}
+		return;
 	}
 
 }
