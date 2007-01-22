@@ -1,7 +1,6 @@
 package de.tmobile.cabu.db4o;
 
 
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +8,6 @@ import java.util.Random;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import com.db4o.query.Predicate;
 import com.db4o.query.Query;
 
 /**
@@ -31,17 +29,22 @@ public class TTGenerator extends Thread{
 	 */
 	public TTGenerator(String threadName)  {
 		super( threadName); 
+		System.out.println("Start thread: " + threadName);
 
 	}
 
 	public void setupDatabase() {
+		System.out.println("Create Contract ?");
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-			System.out.println("Create Contract " + i);
+			//System.out.println("Create Contract " + i);
 
 			Contract c = new Contract(i);
 			c.setValue(100);
 			database.set(c);
 		}
+		
+		database.commit();
+		Db4o.configure().objectClass(Contract.class).objectField("contractID").indexed(true);
 		database.commit();
 	}
 
@@ -50,7 +53,7 @@ public class TTGenerator extends Thread{
 		for ( Iterator i = list.iterator(); i.hasNext(); )
 		{
 			Contract c = (Contract) i.next();
-			System.out.println("Contains Contract " + c.getContractID());
+			//System.out.println("Contains Contract " + c.getContractID());
 			
 		}
 	}
@@ -59,12 +62,14 @@ public class TTGenerator extends Thread{
 	 * Init this thread
 	 *
 	 */
-	public void Init(){
-		database =Db4o.openFile("foo.dat");
+	public void Open(){
+		database = Db4o.openFile("foo.dat");
+		System.out.println("File open");
 	}
 
 	public void Close(){
 		database.close();
+		System.out.println("File close");
 	}
 
 

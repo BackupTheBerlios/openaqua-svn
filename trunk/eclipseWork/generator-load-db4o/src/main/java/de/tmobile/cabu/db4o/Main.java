@@ -24,14 +24,15 @@ public class Main {
 		try {
 			System.out.println("Setup faked data environment ... ");
 			TTGenerator main = new TTGenerator("main");
-			main.Init();
+			main.Open();
 			main.setupDatabase();
 			main.ListAllContracts();
 			main.Close();
 			System.out.println("Setup faked data environment ... done");
 			return true;
 		} catch (Exception e) {
-			//System.err.println("SQLException: " + e.getMessage());
+			System.err.println("Exception: " + e.getMessage());
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -50,7 +51,7 @@ public class Main {
 		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
 			threadArray[i] = new TTGenerator( "" + i );
-			threadArray[i].Init();
+			threadArray[i].Open();
 		}
 
 
