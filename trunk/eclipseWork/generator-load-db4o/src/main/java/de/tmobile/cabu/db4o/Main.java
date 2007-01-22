@@ -3,11 +3,6 @@
  */
 package de.tmobile.cabu.db4o;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.UnknownHostException;
 import java.util.Timer;
 
 
@@ -19,28 +14,26 @@ import java.util.Timer;
  */
 public class Main {
 
+
 	/**
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static byte[] loadBuffer(){
-		//read in buffer
-		byte[] rawBuffer = null; 
+	private static boolean setupDatabase(){
+
 		try {
-			File f = new File( "data.raw" ); 
-			rawBuffer = new byte[ (int) f.length() ];
-			if (f.length() < 10 ) {
-				System.err.println("file data.raw seams to be to short");
-				return null;
-			}
-			InputStream in = new FileInputStream( f ); 
-			in.read( rawBuffer );
-			in.close();
+			System.out.println("Setup faked data environment ... ");
+			TTGenerator main = new TTGenerator("main");
+			main.Init();
+			main.setupDatabase();
+			main.ListAllContracts();
+			main.Close();
+			System.out.println("Setup faked data environment ... done");
+			return true;
 		} catch (Exception e) {
-			System.err.println("file data.raw not found");
-			return null;
-		} 
-		return rawBuffer;
+			//System.err.println("SQLException: " + e.getMessage());
+		}
+		return false;
 	}
 
 
@@ -49,23 +42,15 @@ public class Main {
 	/**
 	 * makes the measuring
 	 * @throws ClassNotFoundException 
-	 * @throws IOException 
-	 * @throws UnknownHostException 
 	 *
 	 */
-	private static void execution (byte[] rawBuffer) throws IOException {		
+	private static void execution ()  {		
 
 		//setup threads
-		
-		AlmaGenerator[] threadArray = new AlmaGenerator[Configuration.getInstance().getMaxConnections()];
+		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			try {
-				threadArray[i] = new AlmaGenerator(rawBuffer, "" + i );
-				threadArray[i].Init();
-			} catch (UnknownHostException e) {
-				System.err.println("Error while connection init: " + e.getLocalizedMessage());
-			}
-			
+			threadArray[i] = new TTGenerator( "" + i );
+			threadArray[i].Init();
 		}
 
 
@@ -79,11 +64,11 @@ public class Main {
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
 			try {
 				threadArray[i].join();
+				threadArray[i].Close();
 			} catch (InterruptedException e) {
 				System.err.println("Error while joining a thread");
 				e.printStackTrace();
 			}
-			//System.out.println( "Finished Generator Run with Connection ID " + getName());
 		}
 		long diff = System.nanoTime()-Stats.getInstance().getGlobalTime();
 
@@ -98,19 +83,16 @@ public class Main {
 	/**
 	 * @param args
 	 * @throws InterruptedException 
-	 * @throws IOException 
-	 * @throws UnknownHostException 
 	 */
-	public static void main(String[] args) throws InterruptedException, UnknownHostException, IOException {
+	public static void main(String[] args) {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
-		System.out.println( "Hint: Error messages Broken Pipe means prop that alma did not accept a certain connection");
 		long runTime = 0;
 
-		byte[] rawBuffer = null;
-		rawBuffer = loadBuffer();
+
 		//setup Database
-		if (rawBuffer == null) {
-			System.err.println("Error while loading data.raw file. Test aborted");
+		if (setupDatabase() != true) {
+			System.err.println("Finish after Error");
+
 		} else {
 
 			//and does the measuring stuff
@@ -119,13 +101,10 @@ public class Main {
 				timer = new Timer();
 				int count = Configuration.getInstance().getStatsAllMilliseconds();
 				timer.schedule(new MinuteTimer(count), count, count);
-				System.out.printf("type\t\t\treq\tµsec\n");
+				System.out.printf("type\t\t\treq\tmicSec\n");
 				long start = System.currentTimeMillis();
-				
-				//fire up the worker threads:
-				execution(rawBuffer);
-				
-				//measuring done ...
+
+				execution();
 				runTime = System.currentTimeMillis() - start;
 			} finally {
 				timer.cancel();

@@ -24,12 +24,10 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 3;
-		maxContracts = 500000;
-		reqLoops     = 100000;
+		maxConnections = 100;
+		maxContracts = 50000;
+		reqLoops     = 100;
 		statMilliSeconds = 1000;
-		almaPort = 32504;
-		almaHost = "localhost";
 
 	}
 
