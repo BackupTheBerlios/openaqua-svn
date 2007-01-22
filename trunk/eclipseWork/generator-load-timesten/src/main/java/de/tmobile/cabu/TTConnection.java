@@ -110,7 +110,7 @@ public class TTConnection {
 		//System.out.println("Open a connection.");
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
-		connection.setAutoCommit (false);
+		connection.setAutoCommit (true);
 		//lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.subscription_id, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
 		lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s " +
 				"where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
@@ -127,7 +127,6 @@ public class TTConnection {
 			if (connection != null && connection.isClosed() == false) {
 				lookupForInstance.close();
 				setLockForInstance.close();
-				RollbackTransaction();
 				connection.close();
 			}
 			isConnected = false;
@@ -143,64 +142,34 @@ public class TTConnection {
 		loadDriver();
 	}
 
-	public void BeginTransaction() {
-		if (isConnected == false) return;
-	}
-
-	public void CommitTransaction() {
-		if (isConnected == false) return;
-		try {
-			if (connection != null && connection.isClosed() == false) {
-				connection.commit();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void RollbackTransaction() {
-		if (isConnected == false) return;
-		try {
-			if (connection != null && connection.isClosed() == false) {
-				connection.rollback();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	
 	public void CreateTableStructure() throws SQLException {
 		if (isConnected == false) return;
 
 		Statement s = connection.createStatement();
 
 		System.out.println(" delete old data ... ");
+		connection.setAutoCommit (false);
+		
 		s.execute("delete from TA_BUDGET_INSTANCE ;");
 		s.execute("delete from TA_BUDGETSUBSCRIPTION ;");
 		s.execute("delete from TA_BUDGET ;");
 		s.execute("delete from TA_INSTANTIATION_TYPE ;");
 		s.execute("delete from TA_CONTRACTS ;");
-		CommitTransaction();
 		
 		System.out.println(" setup TA_CONTRACTS... ");
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
 			s.execute("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (" + i + ", '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
 		}
-		CommitTransaction();
 
 		System.out.println(" setup TA_INSTANTIATION_TYPE... ");
 		for (int i = 0; i < 50; i++) {
 			s.execute("insert into TA_INSTANTIATION_TYPE (INST_TYPE_ID, DESCRIPTION) values ("+i+", 'foo');");
 		}
-		CommitTransaction();
 		
 		System.out.println(" setup TA_BUDGET... ");
 		for (int i = 0; i < 200; i++) {
 			s.execute("insert into TA_BUDGET (BUDGET_ID, INST_TYPE_ID, INITIAL_VALUE, UNIT, INSTANTIATION_TYPE) values ("+i+", 1, 1234, 50, 50);");
 		}
-		CommitTransaction();
 
 		System.out.println(" setup TA_BUDGETSUBSCRIPTION... ");
 		for (int i = 0; i < Configuration.getInstance().getMaxSubsriptions(); i++) {
@@ -208,14 +177,14 @@ public class TTConnection {
 			int budgetID =  Math.abs(random.nextInt()) % 200;
 			s.execute("insert into TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID, CONTRACT_ID, BUDGET_ID, VALID_FROM) values ("+i+", "+contractID+", "+budgetID+", '2006-12-12 00:00:01');");
 		}
-		CommitTransaction();
 		
 		System.out.println(" setup TA_BUDGET_INSTANCE... ");
 		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
 			int subID =  Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions();
 			s.execute("insert into TA_BUDGET_INSTANCE (SUBSCRIPTION_ID, BUDGETINSTANCE_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values ("+subID+", "+i+", '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL,  "+i+");");
 		}
-		CommitTransaction();
+		connection.commit();
+		connection.setAutoCommit(true);
 	}
 
 
@@ -232,13 +201,12 @@ public class TTConnection {
 			while ( rs.next() ) {
 				setLockForInstance.setInt(1, rs.getInt(1));
 				setLockForInstance.execute();
-				CommitTransaction();
+				//CommitTransaction();
 			}
 			
 		} catch (SQLException e) {
 			System.out.println("Lock-Error?: "+e.getMessage());
 			//reportSQLException(e);
-			RollbackTransaction();
 		}
 		return;
 	}

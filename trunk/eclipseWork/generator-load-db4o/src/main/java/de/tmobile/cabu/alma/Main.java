@@ -1,9 +1,13 @@
 /**
  * 
  */
-package de.tmobile.cabu;
+package de.tmobile.cabu.alma;
 
-import java.sql.SQLException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.UnknownHostException;
 import java.util.Timer;
 
 
@@ -14,24 +18,29 @@ import java.util.Timer;
  *
  */
 public class Main {
-	static TTConnection mainConnection = null;
-
 
 	/**
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static boolean setupDatabase(){
-
+	private static byte[] loadBuffer(){
+		//read in buffer
+		byte[] rawBuffer = null; 
 		try {
-			System.out.println("Setup faked data environment ... ");
-			mainConnection.CreateTableStructure();
-			System.out.println("Setup faked data environment ... done");
-			return true;
-		} catch (SQLException e) {
-			System.err.println("SQLException: " + e.getMessage());
-		}
-		return false;
+			File f = new File( "data.raw" ); 
+			rawBuffer = new byte[ (int) f.length() ];
+			if (f.length() < 10 ) {
+				System.err.println("file data.raw seams to be to short");
+				return null;
+			}
+			InputStream in = new FileInputStream( f ); 
+			in.read( rawBuffer );
+			in.close();
+		} catch (Exception e) {
+			System.err.println("file data.raw not found");
+			return null;
+		} 
+		return rawBuffer;
 	}
 
 
@@ -40,15 +49,23 @@ public class Main {
 	/**
 	 * makes the measuring
 	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 * @throws UnknownHostException 
 	 *
 	 */
-	private static void execution () throws ClassNotFoundException {		
+	private static void execution (byte[] rawBuffer) throws IOException {		
 
 		//setup threads
-		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
+		
+		AlmaGenerator[] threadArray = new AlmaGenerator[Configuration.getInstance().getMaxConnections()];
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			threadArray[i] = new TTGenerator( "" + i );
-			threadArray[i].Init();
+			try {
+				threadArray[i] = new AlmaGenerator(rawBuffer, "" + i );
+				threadArray[i].Init();
+			} catch (UnknownHostException e) {
+				System.err.println("Error while connection init: " + e.getLocalizedMessage());
+			}
+			
 		}
 
 
@@ -81,27 +98,19 @@ public class Main {
 	/**
 	 * @param args
 	 * @throws InterruptedException 
+	 * @throws IOException 
+	 * @throws UnknownHostException 
 	 */
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, UnknownHostException, IOException {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
+		System.out.println( "Hint: Error messages Broken Pipe means prop that alma did not accept a certain connection");
 		long runTime = 0;
 
-		try {
-			mainConnection = new TTConnection();
-			mainConnection.Connect();
-		} catch (ClassNotFoundException e1) {
-			System.err.println("Java ClassNotFound: " + e1.getMessage());
-			return;
-		} catch (SQLException e) {
-			System.err.println("SQLException: " + e.getMessage());
-			e.printStackTrace();
-		}
-
-
+		byte[] rawBuffer = null;
+		rawBuffer = loadBuffer();
 		//setup Database
-		if (setupDatabase() != true) {
-			System.err.println("Finish after Error");
-
+		if (rawBuffer == null) {
+			System.err.println("Error while loading data.raw file. Test aborted");
 		} else {
 
 			//and does the measuring stuff
@@ -110,14 +119,14 @@ public class Main {
 				timer = new Timer();
 				int count = Configuration.getInstance().getStatsAllMilliseconds();
 				timer.schedule(new MinuteTimer(count), count, count);
-				System.out.printf("type\t\t\treq\tmicSec\n");
+				System.out.printf("type\t\t\treq\tµsec\n");
 				long start = System.currentTimeMillis();
-
-				execution();
+				
+				//fire up the worker threads:
+				execution(rawBuffer);
+				
+				//measuring done ...
 				runTime = System.currentTimeMillis() - start;
-			} catch (ClassNotFoundException e) {
-				System.err.println( "Run was aborted by an exception");
-				e.printStackTrace();
 			} finally {
 				timer.cancel();
 			}
@@ -125,7 +134,6 @@ public class Main {
 
 		//Stats
 		System.out.println( "Runtime was " +runTime + "ms");
-		mainConnection.Disconnect();
 
 
 	}

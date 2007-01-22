@@ -986,7 +986,6 @@ public class TTJdbcExamples
 		Connection con = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		String sql = null;
 		int param = 0;
 		int updateCount [] = null;

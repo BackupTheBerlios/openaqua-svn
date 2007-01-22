@@ -34,15 +34,6 @@ final public class Configuration {
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
 		statMilliSeconds = 1000;
-/*		maxConnections = 100;
-		maxContracts = 100000;
-		reqLoops     = 100;
-		myDNS ="jdbc:timesten:direct:PerfTest";
-		myDriver = "com.timesten.jdbc.TimesTenDriver";
-		statMilliSeconds = 1000;
-		maxSubsriptions = 1100000;
-		maxInstances=3300000;
-		*/
 
 	}
 
