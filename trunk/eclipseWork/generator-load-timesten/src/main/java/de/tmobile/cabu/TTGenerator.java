@@ -14,8 +14,8 @@ public class TTGenerator extends Thread{
 
 	private int done = 0;
 	private int maxContracts = Configuration.getInstance().getMaxContracts();
-	TTConnection connection = null;
-    Random random = new Random();
+	private TTConnection connection = null;
+    private Random random = new Random();
 
 
 

@@ -107,14 +107,13 @@ public class TTConnection {
 
 	public void Connect() throws SQLException
 	{
-		//System.out.println("Open a connection.");
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
 		connection.setAutoCommit (true);
-		//lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.subscription_id, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
-		lookupForInstance = connection.prepareStatement("select i.budgetinstance_id, i.alock, i.value from TA_BUDGET_instance i, TA_BUDGETSUBSCRIPTION s " +
-				"where s.CONTRACT_ID=? and s.subscription_id=i.subscription_id;");
+
+		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? ;");
 		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
+		
 		isConnected = true;
 	}
 
@@ -156,33 +155,60 @@ public class TTConnection {
 		s.execute("delete from TA_INSTANTIATION_TYPE ;");
 		s.execute("delete from TA_CONTRACTS ;");
 		
+		/*
+		
 		System.out.println(" setup TA_CONTRACTS... ");
+		PreparedStatement s1 = connection.prepareStatement("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-			s.execute("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (" + i + ", '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
+			s1.setInt(1, i);
+			s1.execute();
 		}
+		//s.execute("create unique index contract_idx on  TA_CONTRACTS (CONTRACT_ID)");
 
+		
+		
+		
 		System.out.println(" setup TA_INSTANTIATION_TYPE... ");
 		for (int i = 0; i < 50; i++) {
-			s.execute("insert into TA_INSTANTIATION_TYPE (INST_TYPE_ID, DESCRIPTION) values ("+i+", 'foo');");
+			s.execute("insert into TA_INSTANTIATION_TYPE (INST_TYPE_ID) values ("+i+");");
 		}
+		//s.execute("create unique index inst_idx on  TA_INSTANTIATION_TYPE (INST_TYPE_ID)");
+		
+		
 		
 		System.out.println(" setup TA_BUDGET... ");
 		for (int i = 0; i < 200; i++) {
-			s.execute("insert into TA_BUDGET (BUDGET_ID, INST_TYPE_ID, INITIAL_VALUE, UNIT, INSTANTIATION_TYPE) values ("+i+", 1, 1234, 50, 50);");
+			s.execute("insert into TA_BUDGET (BUDGET_ID, INST_TYPE_ID, INITIAL_VALUE, UNIT) values ("+i+", 1, 1234, 50);");
 		}
+		//s.execute("create unique index budg_idx on  TA_BUDGET (BUDGET_ID)");
 
-		System.out.println(" setup TA_BUDGETSUBSCRIPTION... ");
-		for (int i = 0; i < Configuration.getInstance().getMaxSubsriptions(); i++) {
-			int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
-			int budgetID =  Math.abs(random.nextInt()) % 200;
-			s.execute("insert into TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID, CONTRACT_ID, BUDGET_ID, VALID_FROM) values ("+i+", "+contractID+", "+budgetID+", '2006-12-12 00:00:01');");
-		}
 		
-		System.out.println(" setup TA_BUDGET_INSTANCE... ");
-		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
-			int subID =  Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions();
-			s.execute("insert into TA_BUDGET_INSTANCE (SUBSCRIPTION_ID, BUDGETINSTANCE_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values ("+subID+", "+i+", '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL,  "+i+");");
+		
+		System.out.println(" setup TA_BUDGETSUBSCRIPTION... ");
+		PreparedStatement s4 = connection.prepareStatement("insert into TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID, CONTRACT_ID, BUDGET_ID, VALID_FROM) values (?, ?, ?, '2006-12-12 00:00:01');");
+		for (int i = 0; i < Configuration.getInstance().getMaxSubsriptions()*10; i++) {
+			s4.setInt(1, i);
+			s4.setInt(2, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts());
+			s4.setInt(3, Math.abs(random.nextInt()) % 200);
+			s4.execute();
 		}
+		//s.execute("create unique index budgs1_idx on TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID)");
+		//s.execute("create index budgs2_idx on TA_BUDGETSUBSCRIPTION (CONTRACT_ID )");
+
+		*/
+		System.out.println(" setup TA_BUDGET_INSTANCE... ");
+		PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?);");
+		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
+			s5.setInt(1, i);
+			s5.setInt(2, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions());
+			s5.setInt(3, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts());
+			s5.setInt(4, Math.abs(random.nextInt()) % 200);
+			s5.execute();
+		}
+		s.execute("create unique index budgi1_idx on  TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID)");
+		s.execute("create index budgi3_idx on  TA_BUDGET_INSTANCE (CONTRACT_ID)");
+
+		
 		connection.commit();
 		connection.setAutoCommit(true);
 	}
@@ -198,14 +224,17 @@ public class TTConnection {
 			//BeginTransaction();
 			lookupForInstance.setInt(1, contractID);
 			ResultSet rs = lookupForInstance.executeQuery();
+			int i = 0;
 			while ( rs.next() ) {
 				setLockForInstance.setInt(1, rs.getInt(1));
 				setLockForInstance.execute();
+				i++;
 				//CommitTransaction();
 			}
+			//System.out.println("updated: "+i);
 			
 		} catch (SQLException e) {
-			System.out.println("Lock-Error?: "+e.getMessage());
+			System.err.println("Lock-Error?: "+e.getMessage());
 			//reportSQLException(e);
 		}
 		return;

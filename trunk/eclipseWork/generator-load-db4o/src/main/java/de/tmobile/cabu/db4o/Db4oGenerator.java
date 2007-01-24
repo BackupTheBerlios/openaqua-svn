@@ -14,7 +14,7 @@ import com.db4o.query.Query;
  * @author behrenan
  *
  */
-public class TTGenerator extends Thread{
+public class Db4oGenerator extends Thread{
 
 	private int done = 0;
 	private int maxContracts = Configuration.getInstance().getMaxContracts();
@@ -23,18 +23,15 @@ public class TTGenerator extends Thread{
 
 
 
-	/**
-	 * Constructor
-	 * @throws ClassNotFoundException 
-	 */
-	public TTGenerator(String threadName)  {
+	public Db4oGenerator(String threadName, ObjectContainer database)  {
 		super( threadName); 
-		System.out.println("Start thread: " + threadName);
+		this.database = database;
 
 	}
 
 	public void setupDatabase() {
 		System.out.println("Create Contract ?");
+		Db4o.configure().objectClass(Contract.class).objectField("contractID").indexed(true);
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
 			//System.out.println("Create Contract " + i);
 
@@ -43,8 +40,6 @@ public class TTGenerator extends Thread{
 			database.set(c);
 		}
 		
-		database.commit();
-		Db4o.configure().objectClass(Contract.class).objectField("contractID").indexed(true);
 		database.commit();
 	}
 
@@ -57,21 +52,6 @@ public class TTGenerator extends Thread{
 			
 		}
 	}
-
-	/**
-	 * Init this thread
-	 *
-	 */
-	public void Open(){
-		database = Db4o.openFile("foo.dat");
-		System.out.println("File open");
-	}
-
-	public void Close(){
-		database.close();
-		System.out.println("File close");
-	}
-
 
 
 	private void executeRead() {

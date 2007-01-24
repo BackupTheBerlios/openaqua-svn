@@ -5,6 +5,9 @@ package de.tmobile.cabu.db4o;
 
 import java.util.Timer;
 
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+
 
 
 
@@ -13,6 +16,7 @@ import java.util.Timer;
  *
  */
 public class Main {
+	private static ObjectContainer database;
 
 
 	/**
@@ -23,11 +27,9 @@ public class Main {
 
 		try {
 			System.out.println("Setup faked data environment ... ");
-			TTGenerator main = new TTGenerator("main");
-			main.Open();
+			Db4oGenerator main = new Db4oGenerator("main", database);
 			main.setupDatabase();
 			main.ListAllContracts();
-			main.Close();
 			System.out.println("Setup faked data environment ... done");
 			return true;
 		} catch (Exception e) {
@@ -48,10 +50,9 @@ public class Main {
 	private static void execution ()  {		
 
 		//setup threads
-		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
+		Db4oGenerator[] threadArray = new Db4oGenerator[Configuration.getInstance().getMaxConnections()];
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			threadArray[i] = new TTGenerator( "" + i );
-			threadArray[i].Open();
+			threadArray[i] = new Db4oGenerator( "" + i, database);
 		}
 
 
@@ -65,7 +66,6 @@ public class Main {
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
 			try {
 				threadArray[i].join();
-				threadArray[i].Close();
 			} catch (InterruptedException e) {
 				System.err.println("Error while joining a thread");
 				e.printStackTrace();
@@ -81,13 +81,12 @@ public class Main {
 	}
 
 
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 */
 	public static void main(String[] args) {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
+		
+		database = Db4o.openFile("foo.dat");
+
 
 
 		//setup Database
@@ -113,6 +112,7 @@ public class Main {
 		}
 
 		//Stats
+		database.close();
 		System.out.println( "Runtime was " +runTime + "ms");
 
 

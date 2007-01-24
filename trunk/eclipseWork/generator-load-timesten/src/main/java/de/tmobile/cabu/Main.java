@@ -30,6 +30,8 @@ public class Main {
 			return true;
 		} catch (SQLException e) {
 			System.err.println("SQLException: " + e.getMessage());
+			e.printStackTrace();
+			
 		}
 		return false;
 	}
