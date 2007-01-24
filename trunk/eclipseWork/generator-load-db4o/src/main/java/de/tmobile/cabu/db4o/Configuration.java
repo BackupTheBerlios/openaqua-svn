@@ -24,9 +24,9 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 100;
-		maxContracts = 5000;
-		reqLoops     = 10;
+		maxConnections = 10;
+		maxContracts = 1000;
+		reqLoops     = 5;
 		statMilliSeconds = 1000;
 
 	}

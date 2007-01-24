@@ -26,7 +26,7 @@ public class Db4oGenerator extends Thread{
 	public Db4oGenerator(String threadName, ObjectContainer database)  {
 		super( threadName); 
 		this.database = database;
-
+		//this.database = Db4o.openFile("foo.dat");
 	}
 
 	public void setupDatabase() {
@@ -34,13 +34,19 @@ public class Db4oGenerator extends Thread{
 		Db4o.configure().objectClass(Contract.class).objectField("contractID").indexed(true);
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
 			//System.out.println("Create Contract " + i);
-
-			Contract c = new Contract(i);
-			c.setValue(100);
+			Contract c = new Contract();
+			c.contractID = i;
+			c.value = 0;
 			database.set(c);
+			if ((i % 100000) == 0) {
+				System.out.println("created " + i + " Contracts");
+				database.commit();
+			}
 		}
 		
 		database.commit();
+		System.out.println("created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
+		
 	}
 
 	public void ListAllContracts() {
@@ -48,7 +54,7 @@ public class Db4oGenerator extends Thread{
 		for ( Iterator i = list.iterator(); i.hasNext(); )
 		{
 			Contract c = (Contract) i.next();
-			//System.out.println("Contains Contract " + c.getContractID());
+			System.out.println("Contains Contract " + c.contractID);
 			
 		}
 	}
@@ -64,9 +70,28 @@ public class Db4oGenerator extends Thread{
 		query.descend("contractID").constrain(contractID);
 		ObjectSet result=query.execute();
 		if (!result.isEmpty()) {
-			//System.out.println("Found for Contract " + contractID);
+			result.next();
+			//Contract f = (Contract) result.next();
+			//System.out.println("Found Contract: " + f.contractID + " look for " + contractID);
+			
+		}
+
+		Stats.getInstance().addReadResults(1);
+		yield();
+	}
+
+	protected void executeWrite() {
+		//System.out.println("Execution in Thread: "+ getName());
+		int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+		//System.out.println("Lookup for Contract " + contractID);
+
+		Query query=database.query();
+		query.constrain(Contract.class);
+		query.descend("contractID").constrain(contractID);
+		ObjectSet result=query.execute();
+		if (!result.isEmpty()) {
 			Contract f = (Contract) result.next();
-			f.setValue(f.getValue()+1);
+			f.value = f.value+1;
 			database.set(f);
 			database.commit();
 		}
@@ -74,7 +99,6 @@ public class Db4oGenerator extends Thread{
 		Stats.getInstance().addReadResults(1);
 		yield();
 	}
-
 
 
 	/**

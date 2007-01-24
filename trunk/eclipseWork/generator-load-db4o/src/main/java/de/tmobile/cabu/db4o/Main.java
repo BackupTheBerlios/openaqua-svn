@@ -4,7 +4,7 @@
 package de.tmobile.cabu.db4o;
 
 import java.util.Timer;
-
+import java.io.File;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 
@@ -29,7 +29,7 @@ public class Main {
 			System.out.println("Setup faked data environment ... ");
 			Db4oGenerator main = new Db4oGenerator("main", database);
 			main.setupDatabase();
-			main.ListAllContracts();
+			//main.ListAllContracts();
 			System.out.println("Setup faked data environment ... done");
 			return true;
 		} catch (Exception e) {
@@ -85,7 +85,12 @@ public class Main {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
 		
+		System.out.println( "remove old file foo.dat file" );
+		File f = new File( "foo.dat" );
+		if (f.exists()) f.delete();
+		
 		database = Db4o.openFile("foo.dat");
+
 
 
 
