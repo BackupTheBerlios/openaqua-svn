@@ -26,8 +26,8 @@ public class TTConnection {
 	private PreparedStatement lookupForInstance = null;
 	private PreparedStatement setLockForInstance = null;
 	private Random random = new Random();
-	
-	
+
+
 
 
 	public void loadDriver() throws ClassNotFoundException
@@ -113,7 +113,7 @@ public class TTConnection {
 
 		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? ;");
 		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
-		
+
 		isConnected = true;
 	}
 
@@ -148,15 +148,60 @@ public class TTConnection {
 
 		System.out.println(" delete old data ... ");
 		connection.setAutoCommit (false);
-		
+
+		try {s.execute("drop table TA_BUDGET_INSTANCE;");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_BUDGETSUBSCRIPTION;");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_CONTRACTS;");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_BUDGET;");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_INSTANTIATION_TYPE;");}catch(SQLException e) {;}
+
+
+		s.execute("create table TA_INSTANTIATION_TYPE (INST_TYPE_ID  SMALLINT not null);");
+
+
+
+		s.execute("create table TA_BUDGET ("+
+				"BUDGET_ID            SMALLINT                       not null,"+
+				"INST_TYPE_ID         SMALLINT                       not null,"+
+				"INITIAL_VALUE        SMALLINT                       not null,"+
+				"UNIT                 SMALLINT                       not null"+		");");
+
+
+
+		s.execute("create table TA_CONTRACTS ("+
+				"CONTRACT_ID          INTEGER                         not null,"+
+				"VALID_FROM           TIMESTAMP                       not null,"+
+				"VALID_TO             TIMESTAMP,"+
+				"LAST_CHANGED         TIMESTAMP"+		");");
+
+
+
+		s.execute("create table TA_BUDGETSUBSCRIPTION ("+
+				"SUBSCRIPTION_ID      INTEGER                         not null,"+
+				"CONTRACT_ID          INTEGER                         not null,"+
+				"BUDGET_ID            SMALLINT                        not null,"+
+				"VALID_FROM           TIMESTAMP                       not null"+		");");
+
+
+		s.execute("create table TA_BUDGET_INSTANCE ("+
+				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
+				"SUBSCRIPTION_ID      INTEGER                         not null,"+
+				"CONTRACT_ID          INTEGER                         not null,"+
+				"VALID_FROM           TIMESTAMP,"+
+				"VALID_TO             TIMESTAMP,"+
+				"ALOCK                TIMESTAMP,"+
+				"VALUE                SMALLINT"+		");");
+
+
+
 		s.execute("delete from TA_BUDGET_INSTANCE ;");
 		s.execute("delete from TA_BUDGETSUBSCRIPTION ;");
 		s.execute("delete from TA_BUDGET ;");
 		s.execute("delete from TA_INSTANTIATION_TYPE ;");
 		s.execute("delete from TA_CONTRACTS ;");
-		
+
 		/*
-		
+
 		System.out.println(" setup TA_CONTRACTS... ");
 		PreparedStatement s1 = connection.prepareStatement("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
 		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
@@ -165,25 +210,25 @@ public class TTConnection {
 		}
 		//s.execute("create unique index contract_idx on  TA_CONTRACTS (CONTRACT_ID)");
 
-		
-		
-		
+
+
+
 		System.out.println(" setup TA_INSTANTIATION_TYPE... ");
 		for (int i = 0; i < 50; i++) {
 			s.execute("insert into TA_INSTANTIATION_TYPE (INST_TYPE_ID) values ("+i+");");
 		}
 		//s.execute("create unique index inst_idx on  TA_INSTANTIATION_TYPE (INST_TYPE_ID)");
-		
-		
-		
+
+
+
 		System.out.println(" setup TA_BUDGET... ");
 		for (int i = 0; i < 200; i++) {
 			s.execute("insert into TA_BUDGET (BUDGET_ID, INST_TYPE_ID, INITIAL_VALUE, UNIT) values ("+i+", 1, 1234, 50);");
 		}
 		//s.execute("create unique index budg_idx on  TA_BUDGET (BUDGET_ID)");
 
-		
-		
+
+
 		System.out.println(" setup TA_BUDGETSUBSCRIPTION... ");
 		PreparedStatement s4 = connection.prepareStatement("insert into TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID, CONTRACT_ID, BUDGET_ID, VALID_FROM) values (?, ?, ?, '2006-12-12 00:00:01');");
 		for (int i = 0; i < Configuration.getInstance().getMaxSubsriptions()*10; i++) {
@@ -195,7 +240,7 @@ public class TTConnection {
 		//s.execute("create unique index budgs1_idx on TA_BUDGETSUBSCRIPTION (SUBSCRIPTION_ID)");
 		//s.execute("create index budgs2_idx on TA_BUDGETSUBSCRIPTION (CONTRACT_ID )");
 
-		*/
+		 */
 		System.out.println(" setup TA_BUDGET_INSTANCE... ");
 		PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?);");
 		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
@@ -208,7 +253,7 @@ public class TTConnection {
 		s.execute("create unique index budgi1_idx on  TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID)");
 		s.execute("create index budgi3_idx on  TA_BUDGET_INSTANCE (CONTRACT_ID)");
 
-		
+
 		connection.commit();
 		connection.setAutoCommit(true);
 	}
@@ -220,7 +265,7 @@ public class TTConnection {
 	 */
 	public void executeRead (int contractID) {
 		try {
-			
+
 			//BeginTransaction();
 			lookupForInstance.setInt(1, contractID);
 			ResultSet rs = lookupForInstance.executeQuery();
@@ -232,7 +277,7 @@ public class TTConnection {
 				//CommitTransaction();
 			}
 			//System.out.println("updated: "+i);
-			
+
 		} catch (SQLException e) {
 			System.err.println("Lock-Error?: "+e.getMessage());
 			//reportSQLException(e);
