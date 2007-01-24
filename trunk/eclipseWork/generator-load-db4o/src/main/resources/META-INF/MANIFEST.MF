@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: de.tmobile.cabu.alma.Main
+Main-Class: de.tmobile.cabu.db4o.Main
