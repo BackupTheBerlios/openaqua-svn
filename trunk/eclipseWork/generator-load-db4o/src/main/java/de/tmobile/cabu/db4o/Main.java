@@ -27,7 +27,7 @@ public class Main {
 
 		try {
 			System.out.println("Setup faked data environment ... ");
-			Db4oGenerator main = new Db4oGenerator("main", database);
+			Db4oGenerator main = new Db4oGenerator("main", database, false);
 			main.setupDatabase();
 			//main.ListAllContracts();
 			System.out.println("Setup faked data environment ... done");
@@ -51,9 +51,20 @@ public class Main {
 
 		//setup threads
 		Db4oGenerator[] threadArray = new Db4oGenerator[Configuration.getInstance().getMaxConnections()];
+		int readInstance = 0;
+		int writeInstance = 0;
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			threadArray[i] = new Db4oGenerator( "" + i, database);
+			if (i%2==1) {
+				threadArray[i] = new Db4oGenerator( "" + i, database, true);
+				readInstance++;
+			} else {
+				threadArray[i] = new Db4oGenerator( "" + i, database, false);
+				writeInstance++;
+			}
 		}
+		System.out.println("Read  Access Threads: " + readInstance);
+		System.out.println("Write Access Threads: " + writeInstance);
+		
 
 
 		//fire up all threads
@@ -77,6 +88,7 @@ public class Main {
 		double ms = diff/1000000; //yepp, durch 10000. Oder???
 		double msP = ms/Configuration.getInstance().getMaxConnections();
 		System.out.println( "Finished Load Test in " + ms +" ms = " + msP + " ms/Connection ");
+		
 
 	}
 
@@ -84,40 +96,46 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
-		
+
+		/*
+		//remove old file
 		System.out.println( "remove old file foo.dat file" );
 		File f = new File( "foo.dat" );
 		if (f.exists()) f.delete();
+
 		
-		database = Db4o.openFile("foo.dat");
-
-
-
-
 		//setup Database
+		database = Db4o.openFile("foo.dat");
 		if (setupDatabase() != true) {
 			System.err.println("Finish after Error");
-
-		} else {
-
-			//and does the measuring stuff
-			Timer timer = null;
-			try {
-				timer = new Timer();
-				int count = Configuration.getInstance().getStatsAllMilliseconds();
-				timer.schedule(new MinuteTimer(count), count, count);
-				System.out.printf("type\t\t\treq\tmicSec\n");
-				long start = System.currentTimeMillis();
-
-				execution();
-				runTime = System.currentTimeMillis() - start;
-			} finally {
-				timer.cancel();
-			}
+			return ;
 		}
-
-		//Stats
 		database.close();
+*/
+
+		//and do the measuring stuff
+		database = Db4o.openFile("foo.dat");
+		Timer timer = null;
+		try {
+			timer = new Timer();
+			int count = Configuration.getInstance().getStatsAllMilliseconds();
+			timer.schedule(new MinuteTimer(count), count, count);
+			long start = System.currentTimeMillis();
+
+			execution();
+			runTime = System.currentTimeMillis() - start;
+		} finally {
+			timer.cancel();
+		}
+		database.close();
+		
+		//print a list of all stored values
+		database = Db4o.openFile("foo.dat");
+		Db4oGenerator main = new Db4oGenerator("main", database, false);
+		main.ListAllContracts();
+		database.close();
+
+		
 		System.out.println( "Runtime was " +runTime + "ms");
 
 

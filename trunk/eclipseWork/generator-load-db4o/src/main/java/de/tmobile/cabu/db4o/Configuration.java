@@ -24,10 +24,10 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 10;
-		maxContracts = 1000;
-		reqLoops     = 5;
-		statMilliSeconds = 1000;
+		maxConnections = 8;
+		maxContracts = 20;
+		reqLoops     = 1;
+		statMilliSeconds = 10000;
 
 	}
 

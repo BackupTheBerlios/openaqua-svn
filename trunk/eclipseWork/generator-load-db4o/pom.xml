@@ -1,41 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.tmobile.cabu</groupId>
-  <artifactId>generator-load-db4o</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0</version>
-  <name>generator-load-timesten</name>
-
-
-  	<dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.tmobile.cabu</groupId>
+	<artifactId>generator-load-db4o</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>generator-load-timesten</name>
+	
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>[4.0,5.0)</version>
 			<scope>compile</scope>
 		</dependency>
-
-
+		
 		<dependency>
 			<groupId>com.db4o</groupId>
 			<artifactId>db4o-java5</artifactId>
 			<version>6.0</version>
 		</dependency>
 	</dependencies>
-
-
-			<repositories>
-				<repository>
-					<id>maven.openaqua.de</id>
-					<name>OpenAqua Repository</name>
-					<url>http://maven.openaqua.de</url>
-				</repository>
-			</repositories>
-
-
-  <build>
-    <plugins>
+	
+	<repositories>
+		<repository>
+			<id>maven.openaqua.de</id>
+			<name>OpenAqua Repository</name>
+			<url>http://maven.openaqua.de</url>
+		</repository>
+	</repositories>
+	
+	<scm>
+		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
+		<developerConnection>
+			scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</developerConnection>
+		<tag>HEAD</tag>
+		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-db4o/</url>
+	</scm>
+	
+	<build>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -44,30 +50,31 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-	    <configuration>
-          <archive>
-            <index>true</index>
-            <manifest>
-              <mainClass>de.tmobile.Main</mainClass>
-              <packageName>de.tmobile.generator</packageName>
-              <!-- options
-              <addClasspath>true</addClasspath>
-              <addExtensions/>
-              <classpathPrefix/>
-              -->
-            </manifest>
-            <manifestEntries>
-              <mode>development</mode>
-              <url>${pom.url}</url>
-            </manifestEntries>
-            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-          </archive>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<mainClass>de.tmobile.Main</mainClass>
+							<packageName>de.tmobile.generator</packageName>
+							<!-- options
+							<addClasspath>true</addClasspath>
+							<addExtensions/>
+							<classpathPrefix/>
+							-->
+						</manifest>
+						<manifestEntries>
+							<mode>development</mode>
+							<url>${pom.url}</url>
+						</manifestEntries>
+						<manifestFile>
+							src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
