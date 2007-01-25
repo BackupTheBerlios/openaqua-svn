@@ -57,7 +57,7 @@ public class Db4oGenerator extends Thread{
 		int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 		
 		//get contract
-		Contract f = contractContainer.getContract(new ContractKey(contractID));
+		Contract f = contractContainer.getContract(contractID);
 		
 		//check result
 		if (f != null) {

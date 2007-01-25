@@ -22,6 +22,10 @@ public class ContractContainer {
 	public void addContract(Contract c) {
 		contractMap.put(c.getContractKey(), c);
 	}
+
+	public Contract getContract(int key) {
+		return getContract(new ContractKey(key));
+	}
 	
 	
 	public Contract getContract(ContractKey key) {
