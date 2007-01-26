@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.loadtest;
 
 import java.util.TimerTask;
-import java.text.*; 
-import de.tmobile.cabu.loadtest.Stats;
+import java.text.*;
 
 /**
  * @author behrenan
@@ -20,6 +19,8 @@ final public class MinuteTimer extends TimerTask{
 
 	public void run (){
 		Stats.getInstance().printResults(msec);
+		//System.out.println(shortTime.format(new Date()));
+
 	}
 
 }
