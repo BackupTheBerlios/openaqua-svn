@@ -20,15 +20,11 @@ public class Main {
 	private static ObjectContainer database;
 
 
-	private static boolean setupDatabase(){
-		return true;
-	}
 	/**
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static boolean setupDatabase2(){
-
+	private static boolean setupDatabase(){
 		try {
 			System.out.println("Setup faked data environment ... ");
 			Db4oGenerator main = new Db4oGenerator("main", database, false);
@@ -110,7 +106,7 @@ public class Main {
 		
 		//setup Database
 		database = Db4o.openFile("foo.dat");
-		if (setupDatabase() != true) {
+		if ((Configuration.getInstance().isSetupDatebase() == true) && (setupDatabase() != true)) {
 			System.err.println("Finish after Error");
 			return ;
 		}

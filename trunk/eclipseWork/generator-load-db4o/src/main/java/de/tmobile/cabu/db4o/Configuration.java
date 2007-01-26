@@ -12,22 +12,20 @@ final public class Configuration {
 	 * Its a singleton
 	 */
 	final private static Configuration INSTANCE = new Configuration();
-	private int maxConnections;
-	private int maxContracts;
-	private int reqLoops;
-	private String myDNS; 
-	private String myDriver;
-	private int statMilliSeconds;
-	private int almaPort;
-	private String almaHost;
+	final private int maxConnections;
+	final private int maxContracts;
+	final private int reqLoops;
+	final private int statMilliSeconds;
+	final private boolean setupDatebase;
 
 
 	private Configuration() {
 		super();
 		maxConnections = 2;
-		maxContracts = 100;
-		reqLoops     = 2;
+		maxContracts = 10000;
+		reqLoops     = 200;
 		statMilliSeconds = 10000;
+		setupDatebase = true;
 
 	}
 
@@ -42,14 +40,6 @@ final public class Configuration {
 		return statMilliSeconds;
 	}
 	
-	public String getDriver() {
-		return myDriver;
-	}
-	
-	public String getDNS() {
-		return myDNS;
-	}
-
 	public int getReqLoops() {
 		return reqLoops;
 	}
@@ -65,38 +55,9 @@ final public class Configuration {
 	}
 
 	/**
+	 * @return the setupDatebase
 	 */
-	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;
+	public boolean isSetupDatebase() {
+		return setupDatebase;
 	}
-
-	/**
-	 * @return the almaHost
-	 */
-	public String getAlmaHost() {
-		return almaHost;
-	}
-
-	/**
-	 * @param almaHost the almaHost to set
-	 */
-	public void setAlmaHost(String almaHost) {
-		this.almaHost = almaHost;
-	}
-
-	/**
-	 * @return the almaPort
-	 */
-	public int getAlmaPort() {
-		return almaPort;
-	}
-
-	/**
-	 * @param almaPort the almaPort to set
-	 */
-	public void setAlmaPort(int almaPort) {
-		this.almaPort = almaPort;
-	}
-
-
 }
