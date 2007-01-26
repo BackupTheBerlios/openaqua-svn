@@ -11,6 +11,8 @@ public class Contract {
 
 	private final ContractKey contractKey;
 	private int value = 0;
+	private final String stringId;
+	private String stringValue;
 
 
 	/**
@@ -18,6 +20,7 @@ public class Contract {
 	 public Contract(int contractKey) {
 		super();
 		this.contractKey = new ContractKey( contractKey );
+		this.stringId = "stringId("+contractKey+")";
 	 }
 
 
@@ -77,10 +80,23 @@ public class Contract {
 	 */
 	public void setValue(int value) {
 		this.value = value;
+		this.stringValue = "value("+value+")";
 	}
 
 	public String toString() {
 		return "Contract: ID=" + contractKey.toString() + " value="+value;
+	}
+
+
+	/**
+	 * @return the stringId
+	 */
+	public String getStringId() {
+		return stringId;
+	}
+
+	public String getStringValue() {
+		return stringValue;
 	}
 
 }

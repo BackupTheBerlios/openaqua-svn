@@ -19,11 +19,14 @@ public class Main {
 	private static ObjectContainer database;
 
 
+	private static boolean setupDatabase(){
+		return true;
+	}
 	/**
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static boolean setupDatabase(){
+	private static boolean setupDatabase2(){
 
 		try {
 			System.out.println("Setup faked data environment ... ");
@@ -97,7 +100,7 @@ public class Main {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
 
-		/*
+
 		//remove old file
 		System.out.println( "remove old file foo.dat file" );
 		File f = new File( "foo.dat" );
@@ -111,7 +114,7 @@ public class Main {
 			return ;
 		}
 		database.close();
-*/
+
 
 		//and do the measuring stuff
 		database = Db4o.openFile("foo.dat");

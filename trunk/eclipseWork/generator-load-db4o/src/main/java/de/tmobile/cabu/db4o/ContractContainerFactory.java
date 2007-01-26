@@ -17,13 +17,14 @@ final public class ContractContainerFactory {
 		return INSTANCE;
 	}
 
+	@SuppressWarnings("unchecked")
 	final public ContractContainer getContractContainer(ObjectContainer database){
 		ObjectSet result=database.get(new ContractContainer());
 		if (result.hasNext()) {
 			return (ContractContainer)result.next();
 		} else {
 			ContractContainer contractContainer = new ContractContainer();
-			contractContainer.contractMap = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
+			contractContainer.contractMap  = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
 			database.set(contractContainer);
 			return contractContainer;
 		}

@@ -29,10 +29,10 @@ public class Db4oGenerator extends Thread{
 	public void setupDatabase() {
 		System.out.println("Create Contract ?");
 
-		for (int i = 0; i < Configuration.getInstance().getMaxContracts(); i++) {
-			//System.out.println("Create Contract " + i);
+		for (int i = 1; i <= Configuration.getInstance().getMaxContracts(); i++) {
+			System.out.println("Create Contract " + i);
 			Contract c = new Contract(i);
-			c.setValue(0);
+			c.setValue(1);
 			contractContainer.addContract(c);
 			if ((i % 100000) == 0) {
 				System.out.println("created " + i + " Contracts");
@@ -54,7 +54,7 @@ public class Db4oGenerator extends Thread{
 
 	private void executeRead() {
 		//random contractID
-		int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 		
 		//get contract
 		Contract f = contractContainer.getContract(contractID);
@@ -66,7 +66,7 @@ public class Db4oGenerator extends Thread{
 			}
 			//System.out.println("Found Contract: " + f.getContractKey().getKey());
 		} else {
-			System.err.println("Error: Didn't found Contract: " + contractID);
+			System.err.println("RError: Didn't found Contract: " + contractID);
 		}
 		
 		Stats.getInstance().addReadResults(1);
@@ -75,23 +75,24 @@ public class Db4oGenerator extends Thread{
 
 	private void executeWrite() {
 		//random contractID
-		int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 		
 		//get contract
-		Contract f = contractContainer.getContract(new ContractKey(contractID));
+		Contract c = contractContainer.getContract(new ContractKey(contractID));
 		
 		//check result
-		if (f != null) {
-			if (f.getContractKey().getKey() != contractID) {
-				System.err.println("Error: Found Contract: " + f.getContractKey().getKey() + " looked for " + contractID);
+		if (c != null) {
+			if (c.getContractKey().getKey() != contractID) {
+				System.err.println("Error: Found Contract: " + c.getContractKey().getKey() + " looked for " + contractID);
 			} else {
-				System.out.println("Found Contract: " + f.getContractKey().getKey() + " with value: " + f.getValue());
-				f.setValue(f.getValue()+1);
-				contractContainer.updateContract(f);
+				//System.out.println("Found Contract: " + f.getContractKey().getKey() + " with value: " + f.getValue());
+				c.setValue(c.getValue()+1);
+				//contractContainer.removeContract(new ContractKey(contractID));
+				//contractContainer.addContract(c);
 				database.commit();
 			}
 		} else {
-			System.err.println("Error: Didn't found Contract: " + contractID);
+			System.err.println("WError: Didn't found Contract: " + contractID);
 		}
 		
 		Stats.getInstance().addWriteResults(1);
@@ -116,5 +117,7 @@ public class Db4oGenerator extends Thread{
 				done++;
 			}
 		}
+		database.set(contractContainer);
+		database.commit();
 	}
 }
