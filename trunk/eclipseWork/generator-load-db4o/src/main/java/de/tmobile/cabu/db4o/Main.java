@@ -26,19 +26,32 @@ public class Main {
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static boolean setupDatabase(){
+	private static boolean setupDatabase(final String filename){
+		boolean result = false;
+
+		//remove old file
+		System.out.println( "remove old file foo.dat file" );
+		File f = new File( filename );
+		if (f.exists()) f.delete();
+
+		
+		//setup new
 		try {
-			System.out.println("Setup faked data environment ... ");
+			System.out.println("Setup new database ... ");
+			Db4o.configure().activationDepth(5);
+			Db4o.configure().lockDatabaseFile(true);
+			database = Db4o.openFile(filename);
 			Db4oGenerator main = new Db4oGenerator("main", database, false);
 			main.setupDatabase();
 			//main.ListAllContracts();
-			System.out.println("Setup faked data environment ... done");
-			return true;
+			System.out.println("Setup new database ... done ");
+			result = false;
 		} catch (Exception e) {
 			System.err.println("Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
-		return false;
+		database.close();
+		return result;
 	}
 
 
@@ -57,7 +70,7 @@ public class Main {
 		int writeInstance = 0;
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
 			if (i%2==1) {
-				threadArray[i] = new Db4oGenerator( "" + i, database, true);
+				threadArray[i] = new Db4oGenerator( "" + i, database, false);
 				readInstance++;
 			} else {
 				threadArray[i] = new Db4oGenerator( "" + i, database, false);
@@ -98,25 +111,20 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
+		final String filename = "foo.dat";
 
-
-		//remove old file
-		System.out.println( "remove old file foo.dat file" );
-		File f = new File( "foo.dat" );
-		if (f.exists()) f.delete();
 
 		
 		//setup Database
-		database = Db4o.openFile("foo.dat");
-		if ((Configuration.getInstance().isSetupDatabase() == true) && (setupDatabase() != true)) {
+		if ((Configuration.getInstance().isSetupDatabase() == true) && (setupDatabase(filename) != true)) {
 			System.err.println("Finish after Error");
 			return ;
-		}
-		database.close();
+		} 
 
-
+		
 		//and do the measuring stuff
-		database = Db4o.openFile("foo.dat");
+		Db4o.configure().lockDatabaseFile(true);
+		database = Db4o.openFile(filename);
 		Timer timer = null;
 		try {
 			timer = new Timer();
@@ -132,7 +140,7 @@ public class Main {
 		database.close();
 		
 		//print a list of all stored values
-		database = Db4o.openFile("foo.dat");
+		database = Db4o.openFile(filename);
 		Db4oGenerator main = new Db4oGenerator("main", database, false);
 		main.ListAllContracts();
 		database.close();

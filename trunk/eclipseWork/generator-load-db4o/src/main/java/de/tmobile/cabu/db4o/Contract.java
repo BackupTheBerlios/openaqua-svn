@@ -14,15 +14,20 @@ public class Contract {
 	private final String stringId;
 	private String stringValue;
 
-
-	/**
-	 */
-	 public Contract(int contractKey) {
+	public Contract(int contractKey, int value) {
 		super();
 		this.contractKey = new ContractKey( contractKey );
 		this.stringId = "stringId("+contractKey+")";
-	 }
+		this.value = value;
+	}
 
+	public Contract(int contractKey, String stringValue, int value) {
+		super();
+		this.contractKey = new ContractKey( contractKey );
+		this.stringId = "stringId("+contractKey+")";
+		this.stringValue = stringValue;
+		this.value = value;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

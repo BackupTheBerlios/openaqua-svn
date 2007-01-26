@@ -26,23 +26,28 @@ public class Db4oGenerator extends Thread{
 		super(threadName); 
 		this.database = database;
 		this.readTest = readTest;
-		contractContainer = ContractContainerFactory.getInstance().getContractContainer(this.database);
+		contractContainer = ContractContainerFactory.getInstance().getContractContainer(database, "Sample ContractContainer");
+		database.activate(contractContainer, 1);
 	}
 
-	public void setupDatabase() {
-		System.out.println("Create Contract ?");
+	public void setupDatabase() {		
+		for (int key = 1; key <= Configuration.getInstance().getMaxContracts(); key++) {
+			System.out.println("Create Contract " + key);
+			contractContainer.addContract(new Contract(key, 1));
+			
 
-		for (int i = 1; i <= Configuration.getInstance().getMaxContracts(); i++) {
-			System.out.println("Create Contract " + i);
-			Contract c = new Contract(i);
-			c.setValue(1);
-			contractContainer.addContract(c);
-			if ((i % 100000) == 0) {
-				System.out.println("created " + i + " Contracts");
+			if (contractContainer.getContract(key)==null) {
+				System.err.println("murks");
+			}
+			
+			if ((key % 100000) == 0) {
+				System.out.println("created " + key + " Contracts");
+				database.set(contractContainer);
 				database.commit();
 			}
+			
 		}
-		//contractContainer.saveContainer();		
+		database.set(contractContainer);
 		database.commit();
 
 

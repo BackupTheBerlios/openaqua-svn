@@ -3,7 +3,9 @@
  */
 package de.tmobile.cabu.db4o;
 
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
+
 
 
 
@@ -12,37 +14,62 @@ import java.util.Map;
  *
  */
 public class ContractContainer {
-	Map<ContractKey, Contract> contractMap;
-	public ContractContainer () {
+	List<Contract> contractList;
+	String defaultString = "ABCDEFGEHA";
+	String containerName;
+
+	public ContractContainer (String name) {
 		super();
+		containerName = name;
 	}
 
-	
 	public void addContract(Contract c) {
-		contractMap.put(c.getContractKey(), c);
+		//contractMap.put(c.getContractKey(), c);
+		contractList.add(c);
 	}
 
 	public Contract getContract(int key) {
 		return getContract(new ContractKey(key));
 	}
-	
+
 	public void updateContract(Contract c) {
 		addContract(c);
 	}
-	
+
 	public Contract getContract(ContractKey key) {
-		return (Contract) contractMap.get(key);
+		Iterator<Contract> i = contractList.iterator();
+		while(i.hasNext()) {
+			Contract c = i.next();
+			if ( c.getContractKey().equals(key) ) {
+				return c;
+			}
+		}
+		return null;
 	}
 
 	public void removeContract(ContractKey key) {
-		contractMap.remove(key);
+		//contractMap.remove(key);
 	}
-	
-	
+
+
 	public void printContractList() {
 		//Collection<Contract> collection = contractMap.values();
 		//for ( Contract elem : collection ) 
 		//	  System.out.println( elem.toString() );
 	}
-	
+
+	/**
+	 * @return the containerName
+	 */
+	public final String getContainerName() {
+		return containerName;
+	}
+
+	/**
+	 * @param containerName the containerName to set
+	 */
+	public final void setContainerName(String containerName) {
+		this.containerName = containerName;
+	}
+
 }
