@@ -49,7 +49,13 @@ public class Main {
 		//setup threads
 		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			threadArray[i] = new TTGenerator( "" + i );
+			boolean readTest;
+			if (i%2==1) {
+				readTest=true;
+			} else {
+				readTest=false;
+			}
+			threadArray[i] = new TTGenerator( "" + i, readTest);
 			threadArray[i].Init();
 		}
 
@@ -112,7 +118,7 @@ public class Main {
 				timer = new Timer();
 				int count = Configuration.getInstance().getStatsAllMilliseconds();
 				timer.schedule(new MinuteTimer(count), count, count);
-				System.out.printf("type\t\t\treq\tmicSec\n");
+				System.out.printf("type\t\t\treq\tµs\n");
 				long start = System.currentTimeMillis();
 
 				execution();

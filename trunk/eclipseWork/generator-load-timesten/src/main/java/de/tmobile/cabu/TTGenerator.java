@@ -16,6 +16,7 @@ public class TTGenerator extends Thread{
 	private int maxContracts = Configuration.getInstance().getMaxContracts();
 	private TTConnection connection = null;
     private Random random = new Random();
+    private boolean readTest;
 
 
 
@@ -23,9 +24,10 @@ public class TTGenerator extends Thread{
 	 * Constructor
 	 * @throws ClassNotFoundException 
 	 */
-	public TTGenerator(String threadName) throws ClassNotFoundException {
+	public TTGenerator(String threadName, boolean readTest) throws ClassNotFoundException {
 		super( threadName); 
 		connection = new TTConnection();
+		this.readTest = readTest;
 
 	}
 
@@ -56,6 +58,14 @@ public class TTGenerator extends Thread{
 	}
 
 
+	private void executeWrite() {
+		//System.out.println("Execution in Thread: "+ getName());
+		int contractID = 1 + Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+		connection.executeWrite(contractID);
+		Stats.getInstance().addWriteResults(1);
+		yield();
+	}
+
 
 	/**
 	 * The thread execution method
@@ -67,8 +77,11 @@ public class TTGenerator extends Thread{
 			for (int i = 0; i < Configuration.getInstance().getReqLoops(); i++){
 				done = 0;
 				while (done < maxContracts) {
-					executeRead();
-					//executeWrite();
+					if (readTest == true) {
+						executeRead();
+					} else {
+						executeWrite();
+					}
 					loop++;
 					done++;
 				}

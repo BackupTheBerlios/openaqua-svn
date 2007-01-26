@@ -24,6 +24,7 @@ public class TTConnection {
 	private boolean isConnected = false;
 	private Connection connection = null;
 	private PreparedStatement lookupForInstance = null;
+	private PreparedStatement lookupForInstanceForUpdate = null;
 	private PreparedStatement setLockForInstance = null;
 	private Random random = new Random();
 
@@ -109,9 +110,11 @@ public class TTConnection {
 	{
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
-		connection.setAutoCommit (true);
+		connection.setAutoCommit (false);
 
 		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? ;");
+
+		lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update;");
 		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
 
 		isConnected = true;
@@ -185,6 +188,7 @@ public class TTConnection {
 
 		s.execute("create table TA_BUDGET_INSTANCE ("+
 				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
+				//"DESCRIPTION          CHAR(30),  "+
 				"SUBSCRIPTION_ID      INTEGER                         not null,"+
 				"CONTRACT_ID          INTEGER                         not null,"+
 				"VALID_FROM           TIMESTAMP,"+
@@ -265,24 +269,34 @@ public class TTConnection {
 	 */
 	public void executeRead (int contractID) {
 		try {
-
-			//BeginTransaction();
 			lookupForInstance.setInt(1, contractID);
 			ResultSet rs = lookupForInstance.executeQuery();
-			int i = 0;
 			while ( rs.next() ) {
-				setLockForInstance.setInt(1, rs.getInt(1));
-				setLockForInstance.execute();
-				i++;
-				//CommitTransaction();
+				//System.out.println("read: "+i);
 			}
-			//System.out.println("updated: "+i);
 
 		} catch (SQLException e) {
-			System.err.println("Lock-Error?: "+e.getMessage());
+			System.err.println("RLock-Error?: "+e.getMessage());
 			//reportSQLException(e);
 		}
 		return;
 	}
 
+	public void executeWrite (int contractID) {
+		try {
+			lookupForInstanceForUpdate.setInt(1, contractID);
+			ResultSet rs = lookupForInstanceForUpdate.executeQuery();
+			while ( rs.next() ) {
+				setLockForInstance.setInt(1, rs.getInt(1));
+				setLockForInstance.execute();
+				//System.out.println("updated: "+rs.getInt(1));
+			}
+			connection.commit();
+
+		} catch (SQLException e) {
+			System.err.println("Lock-Error?: "+e.getMessage());
+			reportSQLException(e);
+		}
+		return;
+	}
 }
