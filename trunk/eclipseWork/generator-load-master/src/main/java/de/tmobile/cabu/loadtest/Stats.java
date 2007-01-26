@@ -1,9 +1,12 @@
 /**
- *
+ * 
  */
 package de.tmobile.cabu.loadtest;
 
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import java.util.Locale;
+import java.util.concurrent.locks.ReentrantLock;
+
 
 /**
  * Collects statistical information
@@ -11,19 +14,18 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 final public class Stats {
 	final private static Stats INSTANCE = new Stats(); //yepp, is a singleton
-	private ReentrantReadWriteLock lockW = new ReentrantReadWriteLock(true);//the class lock
-	private ReentrantReadWriteLock lockR = new ReentrantReadWriteLock(true);//the class lock
-	private ReentrantReadWriteLock lockG = new ReentrantReadWriteLock(true);//the class lock
-	private int  counterWrite;
 	private int  counterRead;
+	private int  counterWrite;
 	private long globalTime;
+	private ReentrantLock lockWrite = new ReentrantLock();
+	private ReentrantLock lockRead = new ReentrantLock();
+
 
 
 	/*
 	 * Constructor
 	 */
 	private Stats() {
-		counterWrite = 0;
 		counterRead = 0;
 		globalTime = 0L;
 	}
@@ -37,39 +39,21 @@ final public class Stats {
 
 
 	public void addReadResults(int pCounter) {
-		lockR.writeLock().lock();
+		lockRead.lock();
 		try {
 			this.counterRead += pCounter;
 		} finally {
-			lockR.writeLock().unlock();
+			lockRead.unlock();
 		}
 		return;
 	}
 
-
 	public void addWriteResults(int pCounter) {
-		lockW.writeLock().lock();
+		lockWrite.lock();
 		try {
 			this.counterWrite += pCounter;
 		} finally {
-			lockW.writeLock().unlock();
-		}
-		return;
-	}
-
-
-	/*
-	 * resets all stored values
-	 */
-	public void resetResults() {
-		lockW.writeLock().lock();
-		lockR.writeLock().lock();
-		try {
-			counterWrite = 0;
-			counterRead = 0;
-		} finally {
-			lockW.writeLock().unlock();
-			lockR.writeLock().unlock();
+			lockWrite.unlock();
 		}
 		return;
 	}
@@ -78,40 +62,53 @@ final public class Stats {
 	/*
 	 * Prints the results
 	 */
+
+	private void printResultLine (final int cr, final int cw, final int msec) {
+		int myCounterRead = 1;
+		int myCounterWrite = 1;
+
+		if (cr>0) myCounterRead  = cr;
+		if (cw>0) myCounterWrite = cw;
+
+		int sR = msec * 1000  / myCounterRead;
+		int sW = msec * 1000  / myCounterWrite;
+
+		if (cr<1) {myCounterRead  = 0; sR=0;}
+		if (cw<1) {myCounterWrite = 0; sW=0;}
+
+		System.out.printf(Locale.GERMANY, "In %,d ms:\t%,7d read(%,7dµs)\t%,7d write(%,7dµs)%n", msec, myCounterRead, sR, myCounterWrite, sW);
+	}
+
+
+
 	public void printResults(int msec) {
-		int  acounterWrite;
-		int  acounterRead;
+		int acounterRead = 0;
+		int acounterWrite = 0;
 
-		lockW.writeLock().lock();
-		lockR.writeLock().lock();
-
+		//get write results
+		lockWrite.lock();
 		try {
-			acounterWrite = counterWrite;
-			acounterRead = counterRead;
-			if (acounterRead == 0) acounterRead  = 1;
-			if (acounterWrite == 0) acounterWrite  = 1;
-
+			acounterWrite = counterWrite;		
 			counterWrite = 0;
-			counterRead = 0;
-
 		} finally {
-			lockW.writeLock().unlock();
-			lockR.writeLock().unlock();
+			lockWrite.unlock();
 		}
 
 
-		//print read Stats
-		{
-			float s  = msec * 1000 / acounterRead;
-			System.out.printf("%s in %s msec:\t%s\t%s\n", "read ", msec, acounterRead, s);
-		}
-		//print write Stats
-		{
-			//float s  = msec * 1000 / acounterWrite;
-			//System.out.printf("%s in %s msec:\t%s\t%s\n", "write", msec, acounterWrite, s);
+		//get read results
+		lockRead.lock();
+		try {
+			acounterRead = counterRead;		
+			counterRead = 0;
+		} finally {
+			lockRead.unlock();
 		}
 
 
+		//print read stat
+		printResultLine(acounterRead, acounterWrite, msec);
+
+		//bye bye
 		return;
 	}
 
@@ -126,12 +123,7 @@ final public class Stats {
 	 * @param globalTime the globalTime to set
 	 */
 	public void setGlobalTime(long globalTime) {
-		lockG.writeLock().lock();
-		try {
-			this.globalTime = globalTime;
-		} finally {
-			lockG.writeLock().unlock();
-		}
+		this.globalTime = globalTime;
 		return;
 	}
 }
