@@ -12,7 +12,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.openaqua.dev</groupId>
-	<artifactId>de-openaqua-takanuka-connector</artifactId>
+	<artifactId>de-openaqua-connector</artifactId>
 	<name>connector, the Connection Handling Tool</name>
 	<description></description>
 	<url>http://dev.openaqua.de</url>
