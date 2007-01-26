@@ -9,6 +9,7 @@ import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.MinuteTimer;
+import de.tmobile.cabu.loadtest.Configuration;
 
 
 
@@ -107,7 +108,7 @@ public class Main {
 		
 		//setup Database
 		database = Db4o.openFile("foo.dat");
-		if ((Configuration.getInstance().isSetupDatebase() == true) && (setupDatabase() != true)) {
+		if ((Configuration.getInstance().isSetupDatabase() == true) && (setupDatabase() != true)) {
 			System.err.println("Finish after Error");
 			return ;
 		}
@@ -119,7 +120,7 @@ public class Main {
 		Timer timer = null;
 		try {
 			timer = new Timer();
-			int count = Configuration.getInstance().getStatsAllMilliseconds();
+			int count = Configuration.getInstance().getStatMilliSeconds();
 			timer.schedule(new MinuteTimer(count), count, count);
 			long start = System.currentTimeMillis();
 

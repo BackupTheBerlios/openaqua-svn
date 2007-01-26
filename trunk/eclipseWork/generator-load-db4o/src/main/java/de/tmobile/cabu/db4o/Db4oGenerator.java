@@ -4,6 +4,8 @@ package de.tmobile.cabu.db4o;
 import java.util.Random;
 import com.db4o.ObjectContainer;
 import de.tmobile.cabu.loadtest.Stats;
+import de.tmobile.cabu.loadtest.Configuration;
+
 
 /**
  * @author behrenan

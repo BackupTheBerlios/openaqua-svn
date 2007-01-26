@@ -5,6 +5,7 @@ package de.tmobile.cabu.db4o;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import de.tmobile.cabu.loadtest.Configuration;
 
 /**
  * 

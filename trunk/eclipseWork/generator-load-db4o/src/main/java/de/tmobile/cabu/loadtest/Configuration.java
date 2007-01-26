@@ -3,6 +3,7 @@
  */
 package de.tmobile.cabu.loadtest;
 
+
 /**
  * @author behrenan
  *
@@ -11,22 +12,23 @@ final public class Configuration {
 	/**
 	 * Its a singleton
 	 */
-	final private static Configuration INSTANCE = new Configuration();
-	private int maxConnections;
-	private int maxContracts;
-	private int maxSubsriptions;
-	private int maxInstances;
-	private int reqLoops;
-	private String myDNS;
-	private String myDriver;
-	private int statMilliSeconds;
+	final private static Configuration Instance = new Configuration();
+	final private int maxConnections;
+	final private int maxContracts;
+	final private int maxSubsriptions;
+	final private int maxInstances;
+	final private int reqLoops;
+	final private String myDNS;
+	final private String myDriver;
+	final private int statMilliSeconds;
+	final private boolean setupDatabase;
 
 
 	private Configuration() {
 		super();
 		maxConnections = 10;
 
-		maxContracts = 5000000;
+		maxContracts = 500;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
@@ -34,87 +36,89 @@ final public class Configuration {
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
 		statMilliSeconds = 1000;
+		
+		setupDatabase = true;
 
 	}
 
-	/*
-	 * @result returns a object reference to this singleton
-	 */
-	final public static Configuration getInstance() {
-		return INSTANCE;
-	}
-
-	public int getStatsAllMilliseconds() {
-		return statMilliSeconds;
-	}
-
-	public String getDriver() {
-		return myDriver;
-	}
-
-	public String getDNS() {
-		return myDNS;
-	}
-
-	public int getReqLoops() {
-		return reqLoops;
-	}
 
 	/**
-	 * @return the threadCounter
+	 * @return the instance
 	 */
-	public int getMaxConnections() {
+	public static final Configuration getInstance() {
+		return Instance;
+	}
+
+
+	/**
+	 * @return the maxConnections
+	 */
+	public final int getMaxConnections() {
 		return maxConnections;
 	}
 
-	/**
-	 */
-	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;
-
-	}
-
-	/**
-	 * @return the maxInstances
-	 */
-	public int getMaxInstances() {
-		return maxInstances;
-	}
-
-	/**
-	 * @param maxInstances the maxInstances to set
-	 */
-	public void setMaxInstances(int maxInstances) {
-		this.maxInstances = maxInstances;
-	}
-
-	/**
-	 * @return the maxSubsriptions
-	 */
-	public int getMaxSubsriptions() {
-		return maxSubsriptions;
-	}
-
-	/**
-	 * @param maxSubsriptions the maxSubsriptions to set
-	 */
-	public void setMaxSubsriptions(int maxSubsriptions) {
-		this.maxSubsriptions = maxSubsriptions;
-	}
 
 	/**
 	 * @return the maxContracts
 	 */
-	public int getMaxContracts() {
+	public final int getMaxContracts() {
 		return maxContracts;
 	}
 
+
 	/**
-	 * @param maxContracts the maxContracts to set
+	 * @return the maxInstances
 	 */
-	public void setMaxContracts(int maxContracts) {
-		this.maxContracts = maxContracts;
+	public final int getMaxInstances() {
+		return maxInstances;
 	}
 
+
+	/**
+	 * @return the maxSubsriptions
+	 */
+	public final int getMaxSubsriptions() {
+		return maxSubsriptions;
+	}
+
+
+	/**
+	 * @return the myDNS
+	 */
+	public final String getMyDNS() {
+		return myDNS;
+	}
+
+
+	/**
+	 * @return the myDriver
+	 */
+	public final String getMyDriver() {
+		return myDriver;
+	}
+
+
+	/**
+	 * @return the reqLoops
+	 */
+	public final int getReqLoops() {
+		return reqLoops;
+	}
+
+
+	/**
+	 * @return the setupDatabase
+	 */
+	public final boolean isSetupDatabase() {
+		return setupDatabase;
+	}
+
+
+	/**
+	 * @return the statMilliSeconds
+	 */
+	public final int getStatMilliSeconds() {
+		return statMilliSeconds;
+	}
 
 }
