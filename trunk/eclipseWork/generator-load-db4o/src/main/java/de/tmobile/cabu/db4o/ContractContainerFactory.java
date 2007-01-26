@@ -30,8 +30,12 @@ final public class ContractContainerFactory {
 			//contractContainer.addContract(new Contract(87654321, " FOOOO BAAAR ", 100));
 			database.set(contractContainer);
 			database.commit();
-			
-			return contractContainer;
+			result=database.get(new ContractContainer(name));
+			if (result.hasNext()) {
+				return (ContractContainer)result.next();
+			} else {
+				return null;
+			}
 		}
 	}
 

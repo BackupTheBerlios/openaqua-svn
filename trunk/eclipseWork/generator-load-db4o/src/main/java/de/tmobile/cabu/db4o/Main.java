@@ -124,6 +124,7 @@ public class Main {
 		
 		//and do the measuring stuff
 		Db4o.configure().lockDatabaseFile(true);
+		Db4o.configure().activationDepth(10);
 		database = Db4o.openFile(filename);
 		Timer timer = null;
 		try {
