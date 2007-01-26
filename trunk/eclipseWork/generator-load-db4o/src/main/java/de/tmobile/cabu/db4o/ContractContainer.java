@@ -72,4 +72,32 @@ public class ContractContainer {
 		this.containerName = containerName;
 	}
 
+	/**
+	 * @return the contractList
+	 */
+	public List<Contract> getContractList() {
+		return this.contractList;
+	}
+
+	/**
+	 * @param contractList the contractList to set
+	 */
+	public void setContractList(List<Contract> contractList) {
+		this.contractList = contractList;
+	}
+
+	/**
+	 * @return the defaultString
+	 */
+	public String getDefaultString() {
+		return this.defaultString;
+	}
+
+	/**
+	 * @param defaultString the defaultString to set
+	 */
+	public void setDefaultString(String defaultString) {
+		this.defaultString = defaultString;
+	}
+
 }

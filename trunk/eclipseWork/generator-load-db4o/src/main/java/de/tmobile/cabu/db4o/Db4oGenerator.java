@@ -3,6 +3,8 @@ package de.tmobile.cabu.db4o;
 
 import java.util.Random;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -26,28 +28,43 @@ public class Db4oGenerator extends Thread{
 		super(threadName); 
 		this.database = database;
 		this.readTest = readTest;
-		contractContainer = ContractContainerFactory.getInstance().getContractContainer(database, "Sample ContractContainer");
-		database.activate(contractContainer, 1);
+		contractContainer = ContractContainerFactory.getInstance().getContractContainer(this.database, "Sample ContractContainer");
+		//database.activate(contractContainer, 5);
+		contractContainer.setDefaultString("After Constructor");
+		database.set(contractContainer);
+		database.commit();
 	}
 
 	public void setupDatabase() {		
+		ObjectSet result=database.get(new ContractContainer("Sample ContractContainer"));
+		ContractContainer container = null;
+		if (result.hasNext()) {
+			container = (ContractContainer)result.next();
+		} else {
+			System.err.println("no ContractContainer");
+
+		}
+
+
+		container.setDefaultString(" jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj ");
+
 		for (int key = 1; key <= Configuration.getInstance().getMaxContracts(); key++) {
 			System.out.println("Create Contract " + key);
-			contractContainer.addContract(new Contract(key, 1));
-			
+			container.addContract(new Contract(key, 1));
 
-			if (contractContainer.getContract(key)==null) {
+
+			if (container.getContract(key)==null) {
 				System.err.println("murks");
 			}
-			
+
 			if ((key % 100000) == 0) {
 				System.out.println("created " + key + " Contracts");
-				database.set(contractContainer);
+				database.set(container);
 				database.commit();
 			}
-			
+
 		}
-		database.set(contractContainer);
+		database.set(container);
 		database.commit();
 
 
@@ -63,10 +80,10 @@ public class Db4oGenerator extends Thread{
 	private void executeRead() {
 		//random contractID
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
-		
+
 		//get contract
 		Contract f = contractContainer.getContract(contractID);
-		
+
 		//check result
 		if (f != null) {
 			if (f.getContractKey().getKey() != contractID) {
@@ -76,7 +93,7 @@ public class Db4oGenerator extends Thread{
 		} else {
 			System.err.println("RError: Didn't found Contract: " + contractID);
 		}
-		
+
 		Stats.getInstance().addReadResults(1);
 		//yield();
 	}
@@ -84,10 +101,10 @@ public class Db4oGenerator extends Thread{
 	private void executeWrite() {
 		//random contractID
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
-		
+
 		//get contract
 		Contract c = contractContainer.getContract(new ContractKey(contractID));
-		
+
 		//check result
 		if (c != null) {
 			if (c.getContractKey().getKey() != contractID) {
@@ -102,7 +119,7 @@ public class Db4oGenerator extends Thread{
 		} else {
 			System.err.println("WError: Didn't found Contract: " + contractID);
 		}
-		
+
 		Stats.getInstance().addWriteResults(1);
 		//yield();
 	}

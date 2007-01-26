@@ -38,8 +38,8 @@ public class Main {
 		//setup new
 		try {
 			System.out.println("Setup new database ... ");
-			Db4o.configure().activationDepth(5);
-			Db4o.configure().lockDatabaseFile(true);
+			//Db4o.configure().activationDepth(5);
+			//Db4o.configure().lockDatabaseFile(true);
 			database = Db4o.openFile(filename);
 			Db4oGenerator main = new Db4oGenerator("main", database, false);
 			main.setupDatabase();

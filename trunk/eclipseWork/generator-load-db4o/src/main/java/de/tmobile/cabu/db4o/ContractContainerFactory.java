@@ -28,12 +28,16 @@ final public class ContractContainerFactory {
 			contractContainer.contractList  = new ArrayList<Contract>();
 			//contractContainer.addContract(new Contract(12345678, " Hallo Ballo ", 100));
 			//contractContainer.addContract(new Contract(87654321, " FOOOO BAAAR ", 100));
+			contractContainer.setDefaultString(" haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaallllllllllllllllllllll ");
+			database.set(new ContractKey(222222222));
 			database.set(contractContainer);
 			database.commit();
 			result=database.get(new ContractContainer(name));
 			if (result.hasNext()) {
+				System.err.println("Factory: found ContractContainer");
 				return (ContractContainer)result.next();
 			} else {
+				System.err.println("Factory: no ContractContainer");
 				return null;
 			}
 		}
