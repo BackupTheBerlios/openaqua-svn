@@ -94,4 +94,20 @@ public class TTGenerator extends Thread{
 		}
 		connection.Disconnect();
 	}
+
+
+	/**
+	 * @return the connection
+	 */
+	public final TTConnection getConnection() {
+		return connection;
+	}
+
+
+	/**
+	 * @param connection the connection to set
+	 */
+	public final void setConnection(TTConnection connection) {
+		this.connection = connection;
+	}
 }

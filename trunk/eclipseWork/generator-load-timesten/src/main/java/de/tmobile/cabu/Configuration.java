@@ -24,16 +24,24 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 10;
+		maxConnections = 2;
 		
-		maxContracts = 500000;
+		maxContracts = 50;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
 		reqLoops     = 10000;
+		
+		//Timesten
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
-		statMilliSeconds = 10000;
+
+		//Oracle
+		//myDNS ="jdbc:oracle:thin:@ds63801a.mspr.detemobil.de:1521:talmgr"; //TCP
+		//myDNS ="jdbc:oracle:oci8:@talmgr.mspr.detemobil.de"; //Thick driver, might be over IPC
+		//myDriver = "oracle.jdbc.driver.OracleDriver";
+		
+		statMilliSeconds = 1000;
 
 	}
 

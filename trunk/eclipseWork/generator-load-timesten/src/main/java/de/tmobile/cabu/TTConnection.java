@@ -29,6 +29,12 @@ public class TTConnection {
 	private Random random = new Random();
 
 
+	public TTConnection() throws ClassNotFoundException
+	{
+		this.isDriverLoaded = false;
+		loadDriver();
+	}
+	
 
 
 	public void loadDriver() throws ClassNotFoundException
@@ -109,12 +115,13 @@ public class TTConnection {
 	public void Connect() throws SQLException
 	{
 		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
+		//connection = DriverManager.getConnection(Configuration.getInstance().getDNS(), "ALMGR_SCHEMA", "perf20tst");
 		reportSQLWarning(connection.getWarnings());
 		connection.setAutoCommit (false);
 
-		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? ;");
+		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=?");
 
-		lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update;");
+		lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update");
 		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
 
 		isConnected = true;
@@ -138,11 +145,6 @@ public class TTConnection {
 	}
 
 
-	public TTConnection() throws ClassNotFoundException
-	{
-		this.isDriverLoaded = false;
-		loadDriver();
-	}
 
 	public void CreateTableStructure() throws SQLException {
 		if (isConnected == false) return;
@@ -152,14 +154,14 @@ public class TTConnection {
 		System.out.println(" delete old data ... ");
 		connection.setAutoCommit (false);
 
-		try {s.execute("drop table TA_BUDGET_INSTANCE;");}catch(SQLException e) {;}
-		try {s.execute("drop table TA_BUDGETSUBSCRIPTION;");}catch(SQLException e) {;}
-		try {s.execute("drop table TA_CONTRACTS;");}catch(SQLException e) {;}
-		try {s.execute("drop table TA_BUDGET;");}catch(SQLException e) {;}
-		try {s.execute("drop table TA_INSTANTIATION_TYPE;");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_BUDGET_INSTANCE");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_BUDGETSUBSCRIPTION");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_CONTRACTS");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_BUDGET");}catch(SQLException e) {;}
+		try {s.execute("drop table TA_INSTANTIATION_TYPE");}catch(SQLException e) {;}
 
 
-		s.execute("create table TA_INSTANTIATION_TYPE (INST_TYPE_ID  SMALLINT not null);");
+		s.execute("create table TA_INSTANTIATION_TYPE (INST_TYPE_ID  SMALLINT not null)");
 
 
 
@@ -167,7 +169,7 @@ public class TTConnection {
 				"BUDGET_ID            SMALLINT                       not null,"+
 				"INST_TYPE_ID         SMALLINT                       not null,"+
 				"INITIAL_VALUE        SMALLINT                       not null,"+
-				"UNIT                 SMALLINT                       not null"+		");");
+				"UNIT                 SMALLINT                       not null"+		")");
 
 
 
@@ -175,7 +177,7 @@ public class TTConnection {
 				"CONTRACT_ID          INTEGER                         not null,"+
 				"VALID_FROM           TIMESTAMP                       not null,"+
 				"VALID_TO             TIMESTAMP,"+
-				"LAST_CHANGED         TIMESTAMP"+		");");
+				"LAST_CHANGED         TIMESTAMP"+		")");
 
 
 
@@ -183,9 +185,9 @@ public class TTConnection {
 				"SUBSCRIPTION_ID      INTEGER                         not null,"+
 				"CONTRACT_ID          INTEGER                         not null,"+
 				"BUDGET_ID            SMALLINT                        not null,"+
-				"VALID_FROM           TIMESTAMP                       not null"+		");");
+				"VALID_FROM           TIMESTAMP                       not null"+		")");
 
-
+/*
 		s.execute("create table TA_BUDGET_INSTANCE ("+
 				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
 				//"DESCRIPTION          CHAR(30),  "+
@@ -194,17 +196,28 @@ public class TTConnection {
 				"VALID_FROM           TIMESTAMP,"+
 				"VALID_TO             TIMESTAMP,"+
 				"ALOCK                TIMESTAMP,"+
-				"VALUE                SMALLINT"+		");");
+				"VALUE                SMALLINT"+		
+				")");
+*/
 
-
-
-		s.execute("delete from TA_BUDGET_INSTANCE ;");
-		s.execute("delete from TA_BUDGETSUBSCRIPTION ;");
-		s.execute("delete from TA_BUDGET ;");
-		s.execute("delete from TA_INSTANTIATION_TYPE ;");
-		s.execute("delete from TA_CONTRACTS ;");
-
+		s.execute("CREATE TABLE TA_BUDGET_INSTANCE 	("+
+				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
+				"SUBSCRIPTION_ID      INTEGER                         not null,"+
+				"CONTRACT_ID          INTEGER                         not null,"+
+				"VALID_FROM           TIMESTAMP,"+
+				"VALID_TO             TIMESTAMP,"+
+				"ALOCK                TIMESTAMP,"+
+				"VALUE                SMALLINT"+
+				")"		        
+		);
+		
 		/*
+
+		s.execute("delete from TA_BUDGET_INSTANCE");
+		s.execute("delete from TA_BUDGETSUBSCRIPTION");
+		s.execute("delete from TA_BUDGET");
+		s.execute("delete from TA_INSTANTIATION_TYPE");
+		s.execute("delete from TA_CONTRACTS");
 
 		System.out.println(" setup TA_CONTRACTS... ");
 		PreparedStatement s1 = connection.prepareStatement("insert into TA_CONTRACTS (CONTRACT_ID, VALID_FROM, VALID_TO, LAST_CHANGED) values (?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', '2006-12-12 00:16:16');");
@@ -246,7 +259,8 @@ public class TTConnection {
 
 		 */
 		System.out.println(" setup TA_BUDGET_INSTANCE... ");
-		PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?);");
+		//PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, to_date('2006-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), to_date('2007-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), NULL, ?)");
+		PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?)");
 		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
 			s5.setInt(1, i);
 			s5.setInt(2, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions());
@@ -298,5 +312,19 @@ public class TTConnection {
 			reportSQLException(e);
 		}
 		return;
+	}
+
+	/**
+	 * @return the isDriverLoaded
+	 */
+	public final boolean isDriverLoaded() {
+		return isDriverLoaded;
+	}
+
+	/**
+	 * @param isDriverLoaded the isDriverLoaded to set
+	 */
+	public final void setDriverLoaded(boolean isDriverLoaded) {
+		this.isDriverLoaded = isDriverLoaded;
 	}
 }

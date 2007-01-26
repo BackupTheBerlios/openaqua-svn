@@ -76,7 +76,7 @@ final public class Stats {
 		if (cr<1) {myCounterRead  = 0; sR=0;}
 		if (cw<1) {myCounterWrite = 0; sW=0;}
 
-		System.out.printf(Locale.GERMANY, "In %,d ms:\t%,7d read(%,7d탎)\t%,7d write(%,7d탎)%n", msec, myCounterRead, sR, myCounterWrite, sW);
+		System.out.printf(Locale.GERMANY, "In %,d ms:\t%,7d read(%,7d 탎)\t%,7d write(%,7d 탎)%n", msec, myCounterRead, sR, myCounterWrite, sW);
 	}
 
 
