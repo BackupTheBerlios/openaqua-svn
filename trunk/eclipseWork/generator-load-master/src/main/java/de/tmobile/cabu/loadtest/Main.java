@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package de.tmobile.cabu;
+package de.tmobile.cabu.loadtest;
 
 import java.sql.SQLException;
 import java.util.Timer;
@@ -31,7 +31,7 @@ public class Main {
 		} catch (SQLException e) {
 			System.err.println("SQLException: " + e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 		return false;
 	}
@@ -41,10 +41,10 @@ public class Main {
 
 	/**
 	 * makes the measuring
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
 	 *
 	 */
-	private static void execution () throws ClassNotFoundException {		
+	private static void execution () throws ClassNotFoundException {
 
 		//setup threads
 		TTGenerator[] threadArray = new TTGenerator[Configuration.getInstance().getMaxConnections()];
@@ -82,7 +82,7 @@ public class Main {
 
 	/**
 	 * @param args
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );

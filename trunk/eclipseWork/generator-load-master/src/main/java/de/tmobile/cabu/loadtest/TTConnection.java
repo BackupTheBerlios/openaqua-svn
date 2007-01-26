@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.tmobile.cabu;
+package de.tmobile.cabu.loadtest;
 
 import java.sql.Connection;
 import java.util.Random;

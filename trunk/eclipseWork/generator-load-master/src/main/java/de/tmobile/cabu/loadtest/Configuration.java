@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package de.tmobile.cabu;
+package de.tmobile.cabu.loadtest;
 
 /**
  * @author behrenan
@@ -17,7 +17,7 @@ final public class Configuration {
 	private int maxSubsriptions;
 	private int maxInstances;
 	private int reqLoops;
-	private String myDNS; 
+	private String myDNS;
 	private String myDriver;
 	private int statMilliSeconds;
 
@@ -25,7 +25,7 @@ final public class Configuration {
 	private Configuration() {
 		super();
 		maxConnections = 10;
-		
+
 		maxContracts = 5000000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
@@ -43,15 +43,15 @@ final public class Configuration {
 	final public static Configuration getInstance() {
 		return INSTANCE;
 	}
-	
+
 	public int getStatsAllMilliseconds() {
 		return statMilliSeconds;
 	}
-	
+
 	public String getDriver() {
 		return myDriver;
 	}
-	
+
 	public String getDNS() {
 		return myDNS;
 	}
@@ -70,7 +70,7 @@ final public class Configuration {
 	/**
 	 */
 	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;	
+		this.maxConnections = maxConnections;
 
 	}
 

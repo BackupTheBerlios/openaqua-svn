@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package de.tmobile.cabu;
+package de.tmobile.cabu.loadtest;
 
 import java.sql.SQLException;
 import java.util.Random;
@@ -21,10 +21,10 @@ public class TTGenerator extends Thread{
 
 	/**
 	 * Constructor
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
 	 */
 	public TTGenerator(String threadName) throws ClassNotFoundException {
-		super( threadName); 
+		super( threadName);
 		connection = new TTConnection();
 
 	}
