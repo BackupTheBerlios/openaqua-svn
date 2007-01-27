@@ -73,7 +73,7 @@ public class Db4oGenerator extends Thread{
 	}
 
 	public void ListAllContracts() {
-		contractContainer.printContractList();
+		//contractContainer.printContractList();
 	}
 
 

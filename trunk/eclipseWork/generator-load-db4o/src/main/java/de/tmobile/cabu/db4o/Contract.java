@@ -21,6 +21,8 @@ public class Contract {
 		this.value = value;
 	}
 
+	
+	
 	public Contract(int contractKey, String stringValue, int value) {
 		super();
 		this.contractKey = new ContractKey( contractKey );
@@ -29,6 +31,11 @@ public class Contract {
 		this.value = value;
 	}
 
+	
+	public void printContract() {
+		System.out.println("Contract("+contractKey.toString()+") value="+value+" stringId="+stringId+" stringValue="+stringValue);
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -88,7 +95,7 @@ public class Contract {
 		this.stringValue = "value("+value+")";
 	}
 
-	public String toString() {
+	public String dump() {
 		return "Contract: ID=" + contractKey.toString() + " value="+value;
 	}
 

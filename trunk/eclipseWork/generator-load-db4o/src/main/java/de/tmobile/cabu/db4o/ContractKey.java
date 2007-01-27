@@ -14,6 +14,10 @@ public class ContractKey {
 	public ContractKey(int key)         { 
 		this.key = new Integer(key);
 	}
+	
+	public String toString() {
+		return "ContractKey("+key+")";
+	}
 
 	/**
 	 * @return the key

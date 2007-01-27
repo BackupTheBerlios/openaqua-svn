@@ -16,16 +16,26 @@ import java.util.List;
 public class ContractContainer {
 	List<Contract> contractList;
 	String defaultString = "ABCDEFGEHA";
-	String containerName;
+	final String containerName;
 
 	public ContractContainer (String name) {
 		super();
 		containerName = name;
 	}
+	
+	public void dump() {
+		System.out.println("ContractContainer= (defaultString="+defaultString+" containerName="+containerName + ")");
+		if (contractList == null) return;
+		Iterator i = contractList.iterator();
+		while(i.hasNext()) {
+			Contract c = (Contract)i.next();
+			c.dump();
+		}
+		
+	}
 
-	public void addContract(Contract c) {
-		//contractMap.put(c.getContractKey(), c);
-		contractList.add(c);
+	public boolean addContract(Contract c) {
+		return contractList.add(c);
 	}
 
 	public Contract getContract(int key) {
@@ -47,29 +57,11 @@ public class ContractContainer {
 		return null;
 	}
 
-	public void removeContract(ContractKey key) {
-		//contractMap.remove(key);
-	}
-
-
-	public void printContractList() {
-		//Collection<Contract> collection = contractMap.values();
-		//for ( Contract elem : collection ) 
-		//	  System.out.println( elem.toString() );
-	}
-
 	/**
 	 * @return the containerName
 	 */
-	public final String getContainerName() {
-		return containerName;
-	}
-
-	/**
-	 * @param containerName the containerName to set
-	 */
-	public final void setContainerName(String containerName) {
-		this.containerName = containerName;
+	public String getContainerName() {
+		return this.containerName;
 	}
 
 	/**
