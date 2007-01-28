@@ -15,8 +15,8 @@ public class ContractKey {
 		this.key = new Integer(key);
 	}
 	
-	public String toString() {
-		return "ContractKey("+key+")";
+	public void dump() {
+		System.out.println("       ContractKey("+key+")");
 	}
 
 	/**

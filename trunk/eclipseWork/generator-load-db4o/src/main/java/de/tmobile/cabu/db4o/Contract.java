@@ -32,10 +32,7 @@ public class Contract {
 	}
 
 	
-	public void printContract() {
-		System.out.println("Contract("+contractKey.toString()+") value="+value+" stringId="+stringId+" stringValue="+stringValue);
-	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -95,8 +92,9 @@ public class Contract {
 		this.stringValue = "value("+value+")";
 	}
 
-	public String dump() {
-		return "Contract: ID=" + contractKey.toString() + " value="+value;
+	public void dump() {
+		System.out.println("   Contract( value="+value+" stringId="+stringId+" stringValue="+stringValue +")");
+		contractKey.dump();
 	}
 
 

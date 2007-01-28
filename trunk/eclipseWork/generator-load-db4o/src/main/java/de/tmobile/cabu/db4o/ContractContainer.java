@@ -25,7 +25,7 @@ public class ContractContainer {
 	
 	public void dump() {
 		System.out.println("ContractContainer= (defaultString="+defaultString+" containerName="+containerName + ")");
-		if (contractList == null) return;
+		if (contractList == null) 	return;
 		Iterator i = contractList.iterator();
 		while(i.hasNext()) {
 			Contract c = (Contract)i.next();

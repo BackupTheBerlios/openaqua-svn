@@ -4,9 +4,11 @@
 package de.tmobile.cabu.db4o;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Predicate;
 
 /**
  * @author tukaram
@@ -14,30 +16,15 @@ import com.db4o.ObjectSet;
  */
 public class DbTestClass {
 	public void simpleStore(ObjectContainer database) {
-		database.set(new Contract(1234567, "erster Test", 87654321));
-		database.set(new Contract(1234567, "erster Test", 87654321));
-		database.set(new Contract(1234567, "erster Test", 87654321));
-		database.set(new Contract(1234567, "erster Test", 87654321));
-		database.set(new Contract(1234567, "erster Test", 87654321));
 		ContractContainer cc = new ContractContainer("TestContainer");
 		cc.contractList  = new ArrayList<Contract>();
-		if (cc.addContract(new Contract(1234567, "erster Test", 87654321))!=true) {
-			System.err.println("neuen Contract nicht zugefügt");
-		}
-		cc.dump();
+		cc.addContract(new Contract(1234567, "erster Test", 87654321));
 		database.set(cc);
 		database.commit();
 	}
 
 
 	public void simpleLoad(ObjectContainer database) {
-		ObjectSet result=database.get(new Contract(1234567, null, 0));
-		Contract c = (Contract)result.next();
-		c.printContract();
-
-		result=database.get(new ContractContainer("TestContainer"));
-		ContractContainer cc = (ContractContainer)result.next();
-		cc.dump();
 	}
 
 	public void simpleUpdate(ObjectContainer database) {
@@ -49,7 +36,10 @@ public class DbTestClass {
 		result=database.get(new ContractContainer("TestContainer"));
 		ContractContainer cc = (ContractContainer)result.next();
 		cc.setDefaultString("neuer defaultString");
-		cc.addContract(new Contract(1111111, "haaaaaaaaaaaaa", 11));
+		Contract a = new Contract(2222, "haaaaaaaaaaaaa", 11);
+		cc.addContract(a);
+		database.set(a);
+		
 		database.set(cc);
 		
 		database.commit();
@@ -57,21 +47,37 @@ public class DbTestClass {
 	
 	
 	public void dumpDatabase(ObjectContainer database) {
-		ObjectSet result;
-
-		System.out.println("----------Dump all Contracts---------------");
-		result=database.get(Contract.class);
-		while(result.hasNext()) {
-			Contract c = (Contract)result.next();
+		
+		System.out.println("----------Dump all ContractsKeys---------------");
+		List<ContractKey> contractskeys = database.query(new Predicate<ContractKey>() {
+			private static final long serialVersionUID = 1L;
+			public boolean match(ContractKey c) {
+				return true;
+			}
+		});
+		for (ContractKey c : contractskeys) {
 			c.dump();
 		}
 
+		
+		System.out.println("----------Dump all Contracts---------------");
+		List<Contract> contracts = database.query(new Predicate<Contract>() {
+			private static final long serialVersionUID = -8917750895495402841L;
+			public boolean match(Contract c) {
+				return true;
+			}
+		});
+		for (Contract c : contracts) 	c.dump();
+
+		
 		System.out.println("----------Dump all ContractContainer---------------");
-		result=database.get(ContractContainer.class);
-		while(result.hasNext()) {
-			ContractContainer cc = (ContractContainer)result.next();
-			cc.dump();
-		}
+		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = -8917750895495402842L;
+			public boolean match(ContractContainer c) {
+				return true;
+			}
+		});
+		for (ContractContainer c : cc) 	c.dump();
 		
 		
 		

@@ -23,6 +23,7 @@ public class Main {
 		File f = new File( filename );
 		if (f.exists()) f.delete();
 
+		Db4o.configure().messageLevel(0);
 		ObjectContainer database;
 
 		System.out.println("===============Simple Store==============");
@@ -31,6 +32,7 @@ public class Main {
 		test.dumpDatabase(database);
 		database.close();
 
+		if (2==1) return;
 		database = Db4o.openFile(filename);
 		//test.simpleLoad(database);
 		test.dumpDatabase(database);
