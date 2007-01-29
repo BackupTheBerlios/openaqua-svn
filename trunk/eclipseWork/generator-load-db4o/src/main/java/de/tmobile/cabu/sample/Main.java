@@ -1,15 +1,19 @@
 /**
  * 
  */
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.sample;
 
 import java.util.Timer;
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+
+import de.tmobile.cabu.db4o.DatabaseServerRegistry;
+import de.tmobile.cabu.db4o.EmbeddedServerConfiguration;
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.MinuteTimer;
 import de.tmobile.cabu.loadtest.Configuration;
@@ -18,8 +22,10 @@ import de.tmobile.cabu.loadtest.Configuration;
 
 
 public class Main {
-	static String key = new String("test");
+	final static String key = new String("test");
+	final static String filename = "foo.dat"; 
 	final private static Logger logger = Logger.getRootLogger();
+	final static EmbeddedServerConfiguration conf = new EmbeddedServerConfiguration(filename, 10000, "localhost");
 
 
 	/**
@@ -33,7 +39,9 @@ public class Main {
 		System.out.println( "remove old file foo.dat file" );
 		File f = new File( filename );
 		if (f.exists()) f.delete();
-		Db4oDatabaseRegistry.getInstance().registerDatabasefile(key, "foo.dat");
+
+		
+		DatabaseServerRegistry.getInstance().registerServer(key, conf);
 
 		
 		//setup new
@@ -47,6 +55,8 @@ public class Main {
 			System.err.println("Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
+		
+		DatabaseServerRegistry.getInstance().stopAndRemoveAllServers();
 		return result;
 	}
 
@@ -55,10 +65,11 @@ public class Main {
 
 	/**
 	 * makes the measuring
+	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 *
 	 */
-	private static void execution ()  {		
+	private static void execution () throws IOException  {		
 
 		//setup threads
 		Db4oGenerator[] threadArray = new Db4oGenerator[Configuration.getInstance().getMaxConnections()];
@@ -104,19 +115,23 @@ public class Main {
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1}:%L -> %m%n" );
 		//PatternLayout layout = new PatternLayout( "%F:%L %-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 		logger.addAppender( consoleAppender );
 		logger.setLevel( Level.ALL);
+
+		
+		//finish server config
+		final String username = "test";
+		final String password = "test";
+		conf.addUser(username, password);
 		
 		logger.info( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 		long runTime = 0;
 		final String filename = "foo.dat";
 
-
-		
 		//setup Database
 		if ((Configuration.getInstance().isSetupDatabase() == true) && (setupDatabase(filename) != true)) {
 			System.err.println("Finish after Error");
@@ -142,7 +157,7 @@ public class Main {
 		Db4oGenerator main = new Db4oGenerator("main", key, false);
 		main.ListAllContracts();
 		
-		Db4oDatabaseRegistry.getInstance().stopAllServers();
+		DatabaseServerRegistry.getInstance().stopAndRemoveAllServers();
 		logger.info( "================Runtime was " +runTime + "ms");
 
 

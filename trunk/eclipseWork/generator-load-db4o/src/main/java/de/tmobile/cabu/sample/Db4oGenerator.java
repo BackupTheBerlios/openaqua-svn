@@ -1,12 +1,14 @@
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.sample;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import org.apache.log4j.Logger;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 
+import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractContainer;
 import de.tmobile.cabu.entities.ContractContainerFactory;
@@ -30,11 +32,11 @@ public class Db4oGenerator extends Thread{
 
 
 
-	public Db4oGenerator(final String threadName, final String key, boolean readTest)  {
+	public Db4oGenerator(final String threadName, final String key, boolean readTest) throws IOException  {
 		super(threadName);
 		//init the class
 		this.databaseKey = key;
-		this.database = Db4oDatabaseRegistry.getInstance().getClient(this.databaseKey);
+		this.database = DatabaseServerRegistry.getInstance().getClient(this.databaseKey, "test", "test");
 		this.readTest = readTest;
 
 	}
@@ -161,5 +163,6 @@ public class Db4oGenerator extends Thread{
 		});
 		for (ContractContainer c : cc) 	c.dump();
 		 */
+		if (database != null)		database.close();
 	}
 }
