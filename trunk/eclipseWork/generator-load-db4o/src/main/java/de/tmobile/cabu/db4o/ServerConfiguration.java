@@ -5,7 +5,7 @@ import java.util.List;
 
 
 
-public class EmbeddedServerConfiguration {
+public class ServerConfiguration {
 	public class UserPasswordPair{
 		public String user;
 		public String password;
@@ -22,7 +22,7 @@ public class EmbeddedServerConfiguration {
 	 * 
 	 * @param filename - name (inclusive path) for a database file.
 	 */
-	public EmbeddedServerConfiguration(final String filename, int port, final String hostname) {
+	public ServerConfiguration(final String filename, int port, final String hostname) {
 		super();
 		users = new LinkedList<UserPasswordPair>();
 		this.filename = filename;
@@ -35,7 +35,7 @@ public class EmbeddedServerConfiguration {
 	 * 
 	 * @param filename - name (inclusive path) for a database file.
 	 */
-	public EmbeddedServerConfiguration(final String filename) {
+	public ServerConfiguration(final String filename) {
 		super();
 		users = new LinkedList<UserPasswordPair>();
 		this.filename = filename;

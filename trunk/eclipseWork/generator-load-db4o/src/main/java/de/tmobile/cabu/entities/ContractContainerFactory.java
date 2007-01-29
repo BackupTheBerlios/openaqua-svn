@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 
-import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 
 /**
  * 
@@ -17,10 +16,7 @@ final public class ContractContainerFactory {
 	final private static ContractContainerFactory Instance = new ContractContainerFactory();
 
 
-	final public ContractContainer getNewContractContainer(final String key, final String name){
-		ObjectContainer database = DatabaseServerRegistry.getInstance().getClient(key);
-		if (database == null) throw new NullPointerException("Got no database object by key \""+key+"\"");
-
+	final public ContractContainer getNewContractContainer(final ObjectContainer database, final String name){
 		ObjectSet result=database.get(new ContractContainer(name));
 		if (result.hasNext()) {
 			return (ContractContainer)result.next();

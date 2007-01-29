@@ -15,7 +15,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectServer;
 
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
-import de.tmobile.cabu.db4o.EmbeddedServerConfiguration;
+import de.tmobile.cabu.db4o.ServerConfiguration;
 
 /**
  * @author tukaram
@@ -55,7 +55,7 @@ public class Main2 {
 
 			File f = new File( filename );
 			if (f.exists()) f.delete();
-			EmbeddedServerConfiguration conf = new EmbeddedServerConfiguration(filename, 10000, "localhost");
+			ServerConfiguration conf = new ServerConfiguration(filename, 10000, "localhost");
 			final String username = "test";
 			final String password = "test";
 			conf.addUser(username, password);
