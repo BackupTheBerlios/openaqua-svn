@@ -26,13 +26,13 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 1;
+		maxConnections = 2;
 
-		maxContracts = 2000;
+		maxContracts = 20;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
-		reqLoops     = 10;
+		reqLoops     = 1000;
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
 		statMilliSeconds = 1000;

@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class ContractContainer {
 	List<Contract> contractList;
-	String defaultString = "ABCDEFGEHA";
+	String defaultString;
 	final String containerName;
 
-	public ContractContainer (String name) {
+	public ContractContainer (final String name) {
 		super();
 		containerName = name;
 	}
@@ -26,25 +26,24 @@ public class ContractContainer {
 	public void dump() {
 		System.out.println("CC=(defaultString="+defaultString+" cName="+containerName);
 		if (contractList == null) 	return;
-		Iterator i = contractList.iterator();
-		while(i.hasNext()) {
-			Contract c = (Contract)i.next();
-			c.dump();
-		}
-		
+		for(Iterator i = contractList.iterator(); i.hasNext(); ) 	((Contract)i.next()).dump();
 	}
 
+	
 	public boolean addContract(Contract c) {
 		return contractList.add(c);
 	}
 
+	
 	public Contract getContract(int key) {
 		return getContract(new ContractKey(key));
 	}
 
+	
 	public void updateContract(Contract c) {
 		addContract(c);
 	}
+
 
 	public Contract getContract(ContractKey key) {
 		Iterator<Contract> i = contractList.iterator();

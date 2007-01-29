@@ -7,7 +7,7 @@ package de.tmobile.cabu.db4o;
  * @author behrenan
  *
  */
-public class EDatabaseAlreadyRegistered extends RuntimeException {
+public class EDatabaseAlreadyRegistered extends IllegalArgumentException {
 	private static final long serialVersionUID = 6616428412307084211L;
 	/**
 	 * 

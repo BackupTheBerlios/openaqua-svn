@@ -13,9 +13,12 @@ import com.db4o.ObjectSet;
  */
 final public class ContractContainerFactory {
 	final private static ContractContainerFactory Instance = new ContractContainerFactory();
-	
 
-	final public ContractContainer getContractContainer(final ObjectContainer database, final String name){
+
+	final public ContractContainer getNewContractContainer(final String key, final String name){
+		ObjectContainer database = Db4oDatabaseRegistry.getInstance().getClient(key);
+		if (database == null) throw new NullPointerException("Got no database object by key \""+key+"\"");
+
 		ObjectSet result=database.get(new ContractContainer(name));
 		if (result.hasNext()) {
 			return (ContractContainer)result.next();
@@ -26,20 +29,8 @@ final public class ContractContainerFactory {
 			//contractContainer.contractList  = database.ext().collections().newLinkedList();
 
 			contractContainer.contractList  = new ArrayList<Contract>();
-			//contractContainer.addContract(new Contract(12345678, " Hallo Ballo ", 100));
-			//contractContainer.addContract(new Contract(87654321, " FOOOO BAAAR ", 100));
-			contractContainer.setDefaultString(" haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaallllllllllllllllllllll ");
-			database.set(new ContractKey(222222222));
-			database.set(contractContainer);
-			database.commit();
-			result=database.get(new ContractContainer(name));
-			if (result.hasNext()) {
-				System.err.println("Factory: found ContractContainer");
-				return (ContractContainer)result.next();
-			} else {
-				System.err.println("Factory: no ContractContainer");
-				return null;
-			}
+			contractContainer.setDefaultString("defaultString");
+			return contractContainer;
 		}
 	}
 

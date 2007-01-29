@@ -1,10 +1,11 @@
 package de.tmobile.cabu.db4o;
 
 
+import java.util.List;
 import java.util.Random;
+import org.apache.log4j.Logger;
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-
+import com.db4o.query.Predicate;
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -16,49 +17,35 @@ import de.tmobile.cabu.loadtest.Configuration;
 public class Db4oGenerator extends Thread{
 
 	private int done = 0;
-	private int maxContracts = Configuration.getInstance().getMaxContracts();
-	private Random random = new Random();
-	private ObjectContainer database;
-	private boolean readTest;
-	private ContractContainer contractContainer ;
+	final private int maxContracts = Configuration.getInstance().getMaxContracts();
+	final private Random random = new Random();
+	final private ObjectContainer database;
+	final private boolean readTest;
+	final private String databaseKey;
+	final private static Logger logger = Logger.getRootLogger();
 
 
 
-	public Db4oGenerator(String threadName, ObjectContainer database, boolean readTest)  {
-		super(threadName); 
-		this.database = database;
+	public Db4oGenerator(final String threadName, final String key, boolean readTest)  {
+		super(threadName);
+		//init the class
+		this.databaseKey = key;
+		this.database = Db4oDatabaseRegistry.getInstance().getClient(this.databaseKey);
 		this.readTest = readTest;
-		contractContainer = ContractContainerFactory.getInstance().getContractContainer(this.database, "Sample ContractContainer");
-		//database.activate(contractContainer, 5);
-		contractContainer.setDefaultString("After Constructor");
-		database.set(contractContainer);
-		database.commit();
+
 	}
 
 	public void setupDatabase() {		
-		ObjectSet result=database.get(new ContractContainer("Sample ContractContainer"));
-		ContractContainer container = null;
-		if (result.hasNext()) {
-			container = (ContractContainer)result.next();
-		} else {
-			System.err.println("no ContractContainer");
-
-		}
-
-
-		container.setDefaultString(" jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj ");
+		//create a default contract container
+		ContractContainer container = ContractContainerFactory.getInstance().getNewContractContainer(databaseKey, "Sample ContractContainer");
+		container.setDefaultString("Sample Container");
 
 		for (int key = 1; key <= Configuration.getInstance().getMaxContracts(); key++) {
-			System.out.println("Create Contract " + key);
+			logger.debug("Create Contract " + key);
 			container.addContract(new Contract(key, 1));
 
-
-			if (container.getContract(key)==null) {
-				System.err.println("murks");
-			}
-
 			if ((key % 100000) == 0) {
-				System.out.println("created " + key + " Contracts");
+				logger.debug("created " + key + " Contracts");
 				database.set(container);
 				database.commit();
 			}
@@ -66,20 +53,38 @@ public class Db4oGenerator extends Thread{
 		}
 		database.set(container);
 		database.commit();
-
-
-		System.out.println("created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
-
+		logger.info("created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
 	}
 
+	
+	
 	public void ListAllContracts() {
-		//contractContainer.printContractList();
+		/*
+		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = -4653770118856489547L;
+			public boolean match(ContractContainer c) {		return true; }
+		});
+		for (ContractContainer c : cc) 	c.dump();
+		*/
 	}
 
 
 	private void executeRead() {
 		//random contractID
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
+		logger.info("Look for Contract with ID "+contractID);
+
+		//get ContractContainer
+		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = 0L;
+			public boolean match(ContractContainer c) {
+				if (c.getDefaultString().equals("Sample Container"))return true;
+				else return false;
+			}
+		});
+		for (ContractContainer c : cc) 	c.dump();
+		ContractContainer contractContainer = cc.get(0);
+
 
 		//get contract
 		Contract f = contractContainer.getContract(contractID);
@@ -87,11 +92,10 @@ public class Db4oGenerator extends Thread{
 		//check result
 		if (f != null) {
 			if (f.getContractKey().getKey() != contractID) {
-				System.err.println("Error: Found Contract: " + f.getContractKey().getKey() + " looked for " + contractID);
+				logger.error("Error: Found Contract: " + f.getContractKey().getKey() + " looked for " + contractID);
 			}
-			//System.out.println("Found Contract: " + f.getContractKey().getKey());
 		} else {
-			System.err.println("RError: Didn't found Contract: " + contractID);
+			logger.error("RError: Didn't found Contract: " + contractID);
 		}
 
 		Stats.getInstance().addReadResults(1);
@@ -100,6 +104,7 @@ public class Db4oGenerator extends Thread{
 
 	private void executeWrite() {
 		//random contractID
+		/*		
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 
 		//get contract
@@ -122,6 +127,7 @@ public class Db4oGenerator extends Thread{
 
 		Stats.getInstance().addWriteResults(1);
 		//yield();
+		 */
 	}
 
 
@@ -129,20 +135,27 @@ public class Db4oGenerator extends Thread{
 	 * The thread execution method
 	 */
 	public void run () {
+		/*
 		int loop = 0;
 		for (int i = 0; i < Configuration.getInstance().getReqLoops(); i++){
 			done = 0;
 			while (done < maxContracts) {
 				if (readTest == true) {
-					executeRead();
+					//executeRead();
 				} else {
-					executeWrite();
+					//executeRead();
+					//executeWrite();
 				}
 				loop++;
 				done++;
 			}
 		}
-		database.set(contractContainer);
-		database.commit();
+		//dump the found contract containers
+		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = -4653770118856489546L;
+			public boolean match(ContractContainer c) {		return true; }
+		});
+		for (ContractContainer c : cc) 	c.dump();
+		 */
 	}
 }
