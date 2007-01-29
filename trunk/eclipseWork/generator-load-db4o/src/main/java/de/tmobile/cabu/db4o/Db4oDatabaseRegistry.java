@@ -19,7 +19,7 @@ final public class Db4oDatabaseRegistry implements Runnable{
 	private Map<ObjectServer, String> mapServer2File;
 	final private static Logger logger = Logger.getRootLogger();
 	final static private Db4oDatabaseRegistry Instance = new Db4oDatabaseRegistry(); 
-2
+
 
 
 	/**
