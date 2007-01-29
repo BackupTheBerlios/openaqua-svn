@@ -5,6 +5,7 @@ package de.tmobile.cabu.entities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 
@@ -14,7 +15,9 @@ import java.util.List;
  *
  */
 public class ContractContainer {
-	public List<Contract> contractList;
+	//public List<Contract> contractList;
+	public Map<ContractKey, Contract> contractList;
+	
 	private String defaultString;
 	final private String containerName;
 
@@ -26,12 +29,13 @@ public class ContractContainer {
 	public void dump() {
 		System.out.println("CC=(defaultString="+defaultString+" cName="+containerName);
 		if (contractList == null) 	return;
-		for(Iterator i = contractList.iterator(); i.hasNext(); ) 	((Contract)i.next()).dump();
+		for(Iterator i = contractList.values().iterator(); i.hasNext(); ) 	((Contract)i.next()).dump();
 	}
 
 	
 	public boolean addContract(Contract c) {
-		return contractList.add(c);
+		contractList.put(c.getContractKey(), c);
+		return true;
 	}
 
 	
@@ -46,7 +50,7 @@ public class ContractContainer {
 
 
 	public Contract getContract(ContractKey key) {
-		Iterator<Contract> i = contractList.iterator();
+		Iterator<Contract> i = contractList.values().iterator();
 		while(i.hasNext()) {
 			Contract c = i.next();
 			if ( c.getContractKey().equals(key) ) {
@@ -67,14 +71,15 @@ public class ContractContainer {
 	 * @return the contractList
 	 */
 	public List<Contract> getContractList() {
-		return this.contractList;
+		//return this.contractList.values();
+		return null;
 	}
 
 	/**
 	 * @param contractList the contractList to set
 	 */
 	public void setContractList(List<Contract> contractList) {
-		this.contractList = contractList;
+		//this.contractList = contractList;
 	}
 
 	/**

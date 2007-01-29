@@ -18,7 +18,7 @@ import de.tmobile.cabu.entities.*;
 public class DbTestClass {
 	public void simpleStore(ObjectContainer database) {
 		ContractContainer cc = new ContractContainer("TestContainer");
-		cc.contractList  = new ArrayList<Contract>();
+		//cc.contractList  = new ArrayList<Contract>();
 		cc.addContract(new Contract(1234567, "erster Test", 87654321));
 		database.set(cc);
 		database.commit();

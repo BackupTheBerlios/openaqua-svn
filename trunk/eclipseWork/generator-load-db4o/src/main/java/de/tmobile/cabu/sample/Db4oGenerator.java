@@ -13,6 +13,7 @@ import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractContainer;
 import de.tmobile.cabu.entities.ContractContainerFactory;
+import de.tmobile.cabu.entities.ContractKey;
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -46,10 +47,10 @@ public class Db4oGenerator extends Thread{
 		container.setDefaultString("Sample Container");
 
 		for (int key = 1; key <= Configuration.getInstance().getMaxContracts(); key++) {
-			logger.debug("Create Contract " + key);
+			//logger.debug("Create Contract " + key);
 			container.addContract(new Contract(key, 1));
 
-			if ((key % 100000) == 0) {
+			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " Contracts");
 				database.set(container);
 				database.commit();
@@ -61,8 +62,8 @@ public class Db4oGenerator extends Thread{
 		logger.info("created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
 	}
 
-	
-	
+
+
 	public void ListAllContracts() {
 		/*
 		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
@@ -70,14 +71,25 @@ public class Db4oGenerator extends Thread{
 			public boolean match(ContractContainer c) {		return true; }
 		});
 		for (ContractContainer c : cc) 	c.dump();
-		*/
+		 */
 	}
 
 
 	private void executeRead() {
 		//random contractID
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
-		logger.info("Look for Contract with ID "+contractID);
+		//logger.info("Look for Contract with ID "+contractID);
+
+		List<ContractContainer> ccl = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = -8917750895495402842L;
+			public boolean match(ContractContainer c) {
+				return true;
+			}
+		});
+		for (ContractContainer cc2 : ccl) {
+			Contract c2 = cc2.contractList.get(new ContractKey(contractID));
+			c2.dump();
+		}
 
 
 		//get contract
@@ -87,9 +99,9 @@ public class Db4oGenerator extends Thread{
 		if (result.hasNext()) {
 			f = (Contract)result.next();
 		} else {
-			logger.error("nothing found" + contractID);
+			logger.error("nothing found " + contractID);
 		}
-			
+
 
 		//check result
 		if (f != null) {
@@ -158,7 +170,7 @@ public class Db4oGenerator extends Thread{
 			public boolean match(ContractContainer c) {		return true; }
 		});
 		for (ContractContainer c : cc) 	c.dump();
-		*/
+		 */
 		if (database != null)		database.close();
 	}
 }

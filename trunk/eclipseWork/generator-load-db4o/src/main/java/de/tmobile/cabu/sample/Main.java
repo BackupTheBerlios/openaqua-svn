@@ -36,6 +36,9 @@ public class Main {
 		logger.addAppender( consoleAppender );
 		logger.setLevel( Level.ALL);
 		long runTime = 0;
+		
+		File f = new File(filename);
+		if (f.exists()) f.delete();
 
 		
 		//finish server config
@@ -49,7 +52,7 @@ public class Main {
 		logger.info( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 
 		//setup Database
-		if ((Configuration.getInstance().isSetupDatabase() == true) && (setupDatabase(filename) != true)) {
+		if ((Configuration.getInstance().isSetupDatabase() ) && (setupDatabase() != true)) {
 			System.err.println("Finish after Error");
 			return ;
 		} 
@@ -134,11 +137,7 @@ public class Main {
 	 * setup a database structure
 	 * @return true if fine
 	 */
-	private static boolean setupDatabase(final String filename){
-
-		File f = new File( filename );
-		if (f.exists()) return true;
-
+	private static boolean setupDatabase(){
 		boolean result = false;
 		
 		//setup new
