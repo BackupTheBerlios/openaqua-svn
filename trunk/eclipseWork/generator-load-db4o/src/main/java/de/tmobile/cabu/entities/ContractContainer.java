@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.entities;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
  *
  */
 public class ContractContainer {
-	List<Contract> contractList;
-	String defaultString;
-	final String containerName;
+	public List<Contract> contractList;
+	private String defaultString;
+	final private String containerName;
 
 	public ContractContainer (final String name) {
 		super();

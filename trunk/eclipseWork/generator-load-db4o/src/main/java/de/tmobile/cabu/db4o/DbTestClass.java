@@ -9,6 +9,7 @@ import java.util.List;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
+import de.tmobile.cabu.entities.*;
 
 /**
  * @author tukaram

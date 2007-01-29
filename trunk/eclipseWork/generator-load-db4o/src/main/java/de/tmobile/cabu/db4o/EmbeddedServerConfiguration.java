@@ -1,14 +1,14 @@
 package de.tmobile.cabu.db4o;
 
-public class ServerConfiguration {
+public class EmbeddedServerConfiguration {
 	final private String   filename ;
 
-	private ServerConfiguration() {
+	private EmbeddedServerConfiguration() {
 		super();
 		filename = null;
 	}
 	
-	public ServerConfiguration(final String filename) {
+	public EmbeddedServerConfiguration(final String filename) {
 		super();
 		this.filename = filename;
 	}

@@ -1,11 +1,13 @@
 /**
  * 
  */
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.entities;
 
 import java.util.ArrayList;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+
+import de.tmobile.cabu.db4o.Db4oDatabaseRegistry;
 
 /**
  * 

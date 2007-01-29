@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.cabu.db4o;
+package de.tmobile.cabu.entities;
 
 /**
  * 

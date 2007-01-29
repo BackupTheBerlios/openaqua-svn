@@ -6,6 +6,10 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
+
+import de.tmobile.cabu.entities.Contract;
+import de.tmobile.cabu.entities.ContractContainer;
+import de.tmobile.cabu.entities.ContractContainerFactory;
 import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.Configuration;
 
