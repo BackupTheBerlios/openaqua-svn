@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tmobile.cabu</groupId>
 	<artifactId>generator-load-db4o</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>generator-load-timesten</name>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -16,14 +16,21 @@
 			<version>[4.0,5.0)</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2,2.0)</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.db4o</groupId>
 			<artifactId>db4o-java5</artifactId>
 			<version>6.0</version>
 		</dependency>
 	</dependencies>
-	
+
 	<repositories>
 		<repository>
 			<id>maven.openaqua.de</id>
@@ -31,7 +38,7 @@
 			<url>http://maven.openaqua.de</url>
 		</repository>
 	</repositories>
-	
+
 	<scm>
 		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
 		<developerConnection>
@@ -39,7 +46,7 @@
 		<tag>HEAD</tag>
 		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-db4o/</url>
 	</scm>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -76,5 +83,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

@@ -27,39 +27,42 @@ public class DbTestClass {
 	public void simpleLoad(ObjectContainer database) {
 	}
 
-	public void simpleUpdate(ObjectContainer database) {
+
+
+	public void simpleUpdateContract(ObjectContainer database) {
 		ObjectSet result=database.get(new Contract(1234567, null, 0));
 		Contract c = (Contract)result.next();
-		c.setValue(10000);
+		c.setValue(1);
 		database.set(c);
+		database.commit();
 
-		result=database.get(new ContractContainer("TestContainer"));
+		c.setValue(2);
+		database.set(c);
+		database.commit();
+	}
+
+	public void simpleUpdateContractContainer(ObjectContainer database) {
+		ObjectSet result=database.get(new ContractContainer("TestContainer"));
 		ContractContainer cc = (ContractContainer)result.next();
 		cc.setDefaultString("neuer defaultString");
 		Contract a = new Contract(2222, "haaaaaaaaaaaaa", 11);
 		cc.addContract(a);
-		database.set(a);
-		
 		database.set(cc);
-		
 		database.commit();
 	}
-	
-	
+
 	public void dumpDatabase(ObjectContainer database) {
-		
-		System.out.println("----------Dump all ContractsKeys---------------");
-		List<ContractKey> contractskeys = database.query(new Predicate<ContractKey>() {
-			private static final long serialVersionUID = 1L;
-			public boolean match(ContractKey c) {
+		System.out.println("----------Dump all ContractContainer---------------");
+		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
+			private static final long serialVersionUID = -8917750895495402842L;
+			public boolean match(ContractContainer c) {
 				return true;
 			}
 		});
-		for (ContractKey c : contractskeys) {
-			c.dump();
-		}
+		for (ContractContainer c : cc) 	c.dump();
 
-		
+
+
 		System.out.println("----------Dump all Contracts---------------");
 		List<Contract> contracts = database.query(new Predicate<Contract>() {
 			private static final long serialVersionUID = -8917750895495402841L;
@@ -69,18 +72,18 @@ public class DbTestClass {
 		});
 		for (Contract c : contracts) 	c.dump();
 
-		
-		System.out.println("----------Dump all ContractContainer---------------");
-		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
-			private static final long serialVersionUID = -8917750895495402842L;
-			public boolean match(ContractContainer c) {
+
+		System.out.println("----------Dump all ContractsKeys---------------");
+		List<ContractKey> contractskeys = database.query(new Predicate<ContractKey>() {
+			private static final long serialVersionUID = 1L;
+			public boolean match(ContractKey c) {
 				return true;
 			}
 		});
-		for (ContractContainer c : cc) 	c.dump();
-		
-		
-		
-		
+		for (ContractKey c : contractskeys) 		c.dump();
+
+
+
+
 	}
 }
