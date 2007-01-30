@@ -3,7 +3,6 @@
  */
 package de.tmobile.cabu.entities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import de.tmobile.cabu.loadtest.Configuration;
 

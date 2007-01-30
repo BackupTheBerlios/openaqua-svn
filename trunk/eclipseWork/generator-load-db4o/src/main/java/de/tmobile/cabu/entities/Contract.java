@@ -93,8 +93,8 @@ public class Contract {
 	}
 
 	public void dump() {
-		System.out.println("   Contract( value="+value+" stringId="+stringId+" stringValue="+stringValue +")");
-		contractKey.dump();
+		System.out.println("   Contract("+contractKey.getKey()+")\tvalue="+value);
+		//contractKey.dump();
 	}
 
 

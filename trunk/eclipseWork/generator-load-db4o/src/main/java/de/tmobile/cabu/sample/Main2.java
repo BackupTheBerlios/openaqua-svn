@@ -9,11 +9,8 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
-
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectServer;
-
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.db4o.ServerConfiguration;
 
@@ -66,20 +63,10 @@ public class Main2 {
 
 			System.out.println("===============Simple Store==============");
 			database = DatabaseServerRegistry.getInstance().getClient(key, username, password);
-			if (database == null) {
-				logger.error("database reference is null");
-				return;
-			}
 			test.simpleStore(database);
 			test.dumpDatabase(database);
 			database.close();
 
-			if(1==2) {
-				database = DatabaseServerRegistry.getInstance().getClient(key, username, password);
-				test.simpleLoad(database);
-				test.dumpDatabase(database);
-				database.close();
-			}
 
 			System.out.println("===============Simple Update=============");
 			database = DatabaseServerRegistry.getInstance().getClient(key, username, password);
@@ -88,9 +75,16 @@ public class Main2 {
 			test.dumpDatabase(database);
 			database.close();
 
+			System.out.println("===============Lookup and Update=============");
+			database = DatabaseServerRegistry.getInstance().getClient(key, username, password);
+			test.simpleLookupAndUpdate(database);
+			database.close();
+
+			System.out.println("===============Final Dump=============");
 			database = DatabaseServerRegistry.getInstance().getClient(key, username, password);
 			test.dumpDatabase(database);
 			database.close();
+
 			
 			DatabaseServerRegistry.getInstance().stopAndRemoveAllServers();
 			System.out.println("===============Finish=============");

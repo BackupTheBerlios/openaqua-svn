@@ -27,7 +27,7 @@ public class ContractContainer {
 	}
 	
 	public void dump() {
-		System.out.println("CC=(defaultString="+defaultString+" cName="+containerName);
+		System.out.println("ContractContainer=("+containerName+") defaultStrin="+defaultString);
 		if (contractList == null) 	return;
 		for(Iterator i = contractList.values().iterator(); i.hasNext(); ) 	((Contract)i.next()).dump();
 	}

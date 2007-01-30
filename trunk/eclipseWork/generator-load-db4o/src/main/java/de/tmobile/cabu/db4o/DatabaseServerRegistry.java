@@ -49,6 +49,7 @@ final public class DatabaseServerRegistry {
 	public synchronized  void registerServer(String pKey, ServerConfiguration configuration)	throws EDatabaseAlreadyRegistered {
 		if (mapKey2Server.containsKey(pKey)) throw (new EDatabaseAlreadyRegistered("Database key"+pKey+" already registered"));
 		ObjectServer s = Db4o.openServer(configuration.getFilename(), configuration.getPort());
+		logger.info("ObjectServer with file "+configuration.getFilename()+" on port "+configuration.getPort()+ " started");
 		for(Iterator<UserPasswordPair> i = configuration.getUsers().listIterator(); i.hasNext();) {
 			ServerConfiguration.UserPasswordPair pair = i.next();
 			s.grantAccess(pair.user, pair.password);

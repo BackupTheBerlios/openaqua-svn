@@ -3,9 +3,7 @@
  */
 package de.tmobile.cabu.sample;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
@@ -16,12 +14,19 @@ import de.tmobile.cabu.entities.*;
  *
  */
 public class DbTestClass {
+	final String testContainer="TestContainer";
 	public void simpleStore(ObjectContainer database) {
-		ContractContainer cc = new ContractContainer("TestContainer");
-		//cc.contractList  = new ArrayList<Contract>();
-		cc.addContract(new Contract(1234567, "erster Test", 87654321));
+		ContractContainer cc = ContractContainerFactory.getInstance().getNewContractContainer(database, testContainer);
+		Contract c = new Contract(1, "erster Test", 87654321);
+		cc.addContract(c);
 		database.set(cc);
 		database.commit();
+
+		ContractContainer cc2 = ContractContainerFactory.getInstance().getNewContractContainer(database, testContainer+"2");
+		cc2.addContract(c);
+		database.set(cc2);
+		database.commit();
+		
 	}
 
 
@@ -31,7 +36,7 @@ public class DbTestClass {
 
 
 	public void simpleUpdateContract(ObjectContainer database) {
-		ObjectSet result=database.get(new Contract(1234567, null, 0));
+		ObjectSet result=database.get(new Contract(1, null, 0));
 		Contract c = (Contract)result.next();
 		c.setValue(1);
 		database.set(c);
@@ -42,8 +47,10 @@ public class DbTestClass {
 		database.commit();
 	}
 
+	
+	
 	public void simpleUpdateContractContainer(ObjectContainer database) {
-		ObjectSet result=database.get(new ContractContainer("TestContainer"));
+		ObjectSet result=database.get(new ContractContainer(testContainer));
 		ContractContainer cc = (ContractContainer)result.next();
 		cc.setDefaultString("neuer defaultString");
 		Contract a = new Contract(2222, "haaaaaaaaaaaaa", 11);
@@ -52,6 +59,17 @@ public class DbTestClass {
 		database.commit();
 	}
 
+
+	public void simpleLookupAndUpdate(ObjectContainer database) {
+		ObjectSet result=database.get(new ContractContainer(testContainer));
+		ContractContainer cc = (ContractContainer)result.next();
+		Contract c = cc.getContract(1);
+		c.setValue(3);
+		database.set(cc);
+		database.commit();
+	}
+	
+	
 	public void dumpDatabase(ObjectContainer database) {
 		System.out.println("----------Dump all ContractContainer---------------");
 		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
@@ -62,7 +80,7 @@ public class DbTestClass {
 		});
 		for (ContractContainer c : cc) 	c.dump();
 
-
+		/*
 
 		System.out.println("----------Dump all Contracts---------------");
 		List<Contract> contracts = database.query(new Predicate<Contract>() {
@@ -84,7 +102,7 @@ public class DbTestClass {
 		for (ContractKey c : contractskeys) 		c.dump();
 
 
-
+		 */
 
 	}
 }
