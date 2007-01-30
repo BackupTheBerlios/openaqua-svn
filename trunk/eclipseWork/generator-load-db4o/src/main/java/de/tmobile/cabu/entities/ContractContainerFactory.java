@@ -24,8 +24,8 @@ final public class ContractContainerFactory {
 			return (ContractContainer)result.next();
 		} else {
 			ContractContainer contractContainer = new ContractContainer(name);
-			contractContainer.contractList  = new HashMap<ContractKey, Contract>(Configuration.getInstance().getMaxContracts());
-			//contractContainer.contractMap  = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
+			//contractContainer.contractList  = new HashMap<ContractKey, Contract>(Configuration.getInstance().getMaxContracts());
+			contractContainer.contractList  = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
 			//contractContainer.contractList  = database.ext().collections().newLinkedList();
 
 			//contractContainer.contractList  = new ArrayList<Contract>();

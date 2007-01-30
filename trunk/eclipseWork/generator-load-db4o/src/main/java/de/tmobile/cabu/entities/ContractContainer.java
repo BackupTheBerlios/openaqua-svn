@@ -43,22 +43,15 @@ public class ContractContainer {
 		return getContract(new ContractKey(key));
 	}
 
+	public Contract getContract(ContractKey key) {
+		return contractList.get(key);
+	}
 	
 	public void updateContract(Contract c) {
 		addContract(c);
 	}
 
 
-	public Contract getContract(ContractKey key) {
-		Iterator<Contract> i = contractList.values().iterator();
-		while(i.hasNext()) {
-			Contract c = i.next();
-			if ( c.getContractKey().equals(key) ) {
-				return c;
-			}
-		}
-		return null;
-	}
 
 	/**
 	 * @return the containerName

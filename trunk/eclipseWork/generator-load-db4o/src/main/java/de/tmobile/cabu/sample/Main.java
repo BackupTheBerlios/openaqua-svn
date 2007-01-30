@@ -12,6 +12,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
+import com.db4o.Db4o;
+
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.db4o.ServerConfiguration;
 import de.tmobile.cabu.loadtest.Stats;
@@ -30,6 +32,8 @@ public class Main {
 
 
 	public static void main(String[] args) throws IOException {
+		
+		//setup log4j config
 		PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1}:%L -> %m%n" );
 		//PatternLayout layout = new PatternLayout( "%F:%L %-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
@@ -37,11 +41,15 @@ public class Main {
 		logger.setLevel( Level.ALL);
 		long runTime = 0;
 		
+		
+		//remove old database file
 		File f = new File(filename);
 		if (f.exists()) f.delete();
 
 		
-		//finish server config
+		//setup ObjectServer
+		Db4o.configure().callConstructors(true);
+		Db4o.configure().lockDatabaseFile(true);
 		conf = new ServerConfiguration(filename, 10000, "localhost");
 		final String username = "test";
 		final String password = "test";
@@ -51,7 +59,7 @@ public class Main {
 		
 		logger.info( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
 
-		//setup Database
+		//create an initial setup for the database file
 		if ((Configuration.getInstance().isSetupDatabase() ) && (setupDatabase() != true)) {
 			System.err.println("Finish after Error");
 			return ;
@@ -59,13 +67,11 @@ public class Main {
 
 		
 		//and do the measuring stuff
-		Timer timer = null;
+		Timer timer = new Timer();
 		try {
-			timer = new Timer();
 			int count = Configuration.getInstance().getStatMilliSeconds();
 			timer.schedule(new MinuteTimer(count), count, count);
 			long start = System.currentTimeMillis();
-
 			execution();
 			runTime = System.currentTimeMillis() - start;
 		} finally {
@@ -73,8 +79,8 @@ public class Main {
 		}
 		
 		//print a list of all stored values
-		Db4oGenerator main = new Db4oGenerator("main", serverKey, false);
-		main.ListAllContracts();
+		//Db4oGenerator main = new Db4oGenerator("main", serverKey, false);
+		//main.ListAllContracts();
 		
 		DatabaseServerRegistry.getInstance().stopAndRemoveAllServers();
 		logger.info( "================Runtime was " +runTime + "ms");
@@ -90,29 +96,23 @@ public class Main {
 	 */
 	private static void execution () throws IOException  {		
 
-		//setup threads
+		//setup all threads
 		Db4oGenerator[] threadArray = new Db4oGenerator[Configuration.getInstance().getMaxConnections()];
 		int readInstance = 0;
 		int writeInstance = 0;
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			if (i%2==1) {
-				threadArray[i] = new Db4oGenerator( "" + i, serverKey, false);
-				readInstance++;
-			} else {
-				threadArray[i] = new Db4oGenerator( "" + i, serverKey, true);
-				writeInstance++;
+			if (i%2==1) {		threadArray[i] = new Db4oGenerator( "" + i, serverKey, true);
+								readInstance++;
+			} else {			threadArray[i] = new Db4oGenerator( "" + i, serverKey, false);
+								writeInstance++;
 			}
 		}
 		logger.info("Read  Access Threads: " + readInstance);
 		logger.info("Write Access Threads: " + writeInstance);
 		
 
-
 		//fire up all threads
-		Stats.getInstance().setGlobalTime(System.nanoTime());
-		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			threadArray[i].start();
-		}
+		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) 	threadArray[i].start();
 
 		//wait for finish
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
@@ -123,14 +123,6 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-		long diff = System.nanoTime()-Stats.getInstance().getGlobalTime();
-
-		//print stat infos
-		double ms = diff/1000000; //yepp, durch 10000. Oder???
-		double msP = ms/Configuration.getInstance().getMaxConnections();
-		logger.info( "Finished Load Test in " + ms +" ms = " + msP + " ms/Connection ");
-		
-
 	}
 
 	/**
@@ -145,7 +137,7 @@ public class Main {
 			logger.info("Setup new database ... ");
 			Db4oGenerator main = new Db4oGenerator("main", serverKey, false);
 			main.setupDatabase();
-			System.out.println("Setup new database ... done ");
+			logger.info("Setup new database ... done ");
 			result = true;
 		} catch (Exception e) {
 			System.err.println("Exception: " + e.getMessage());

@@ -2,6 +2,7 @@ package de.tmobile.cabu.sample;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import org.apache.log4j.Logger;
@@ -30,6 +31,7 @@ public class Db4oGenerator extends Thread{
 	final private ObjectContainer database;
 	final private boolean readTest;
 	final private static Logger logger = Logger.getRootLogger();
+	final private String containerName = "TestContainer";
 
 
 
@@ -41,25 +43,50 @@ public class Db4oGenerator extends Thread{
 
 	}
 
+	private ContractContainer getContainerFromDb(final String name) {
+		//get contract Container
+		List<ContractContainer> ccl = database.query(new Predicate <ContractContainer> () {
+			private static final long serialVersionUID = 5792132993232582586L;
+			public boolean match(final ContractContainer concon){
+				return concon.getContainerName().equals(name);
+			}
+		});
+
+		if (ccl==null) {
+			logger.error("No matching contract container found");
+			return null;
+		} else {
+			Iterator<ContractContainer> i = ccl.listIterator();
+			return i.next();
+		}
+	}
+
 	public void setupDatabase() {		
 		//create a default contract container
-		ContractContainer container = ContractContainerFactory.getInstance().getNewContractContainer(database, "Sample ContractContainer");
-		container.setDefaultString("Sample Container");
+		ContractContainer container = ContractContainerFactory.getInstance().getNewContractContainer(database, containerName);
+		container.setDefaultString("container before first store");
+		database.set(container);
+		database.commit();
+		container = getContainerFromDb(containerName);
+		container.setDefaultString("container after first store");
+		
 
 		for (int key = 1; key <= Configuration.getInstance().getMaxContracts(); key++) {
 			//logger.debug("Create Contract " + key);
-			container.addContract(new Contract(key, 1));
+			Contract c = new Contract(key, 1);
+			container.addContract(c);
+			database.set(c);
 
 			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " Contracts");
-				database.set(container);
-				database.commit();
+				//database.set(container);
+				//database.commit();
 			}
 
 		}
 		database.set(container);
 		database.commit();
-		logger.info("created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
+		logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
 	}
 
 
@@ -78,51 +105,34 @@ public class Db4oGenerator extends Thread{
 	private void executeRead() {
 		//random contractID
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
-		//logger.info("Look for Contract with ID "+contractID);
-
-		List<ContractContainer> ccl = database.query(new Predicate<ContractContainer>() {
-			private static final long serialVersionUID = -8917750895495402842L;
-			public boolean match(ContractContainer c) {
-				return true;
-			}
-		});
-		for (ContractContainer cc2 : ccl) {
-			Contract c2 = cc2.contractList.get(new ContractKey(contractID));
-			c2.dump();
-		}
-
 
 		//get contract
-		//Contract f = contractContainer.getContract(contractID);
-		Contract f = null;
-		ObjectSet result = database.get(new Contract(contractID, 0));
-		if (result.hasNext()) {
-			f = (Contract)result.next();
-		} else {
-			logger.error("nothing found " + contractID);
-		}
-
+		ContractContainer cc = getContainerFromDb(containerName);
+		Contract c = cc.getContract(contractID);
 
 		//check result
-		if (f != null) {
-			if (f.getContractKey().getKey() != contractID) {
-				logger.error("Error: Found Contract: " + f.getContractKey().getKey() + " looked for " + contractID);
+		if (c != null) {
+			if (c.getContractKey().getKey() != contractID) {
+				logger.error("Error: Found Contract: " + c.getContractKey().getKey() + " looked for " + contractID);
 			}
 		} else {
 			logger.error("RError: Didn't found Contract: " + contractID);
 		}
 
+
 		Stats.getInstance().addReadResults(1);
-		//yield();
+		yield();
+
 	}
 
 	private void executeWrite() {
 		//random contractID
-		/*		
 		int contractID = 1+Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts();
 
-		//get contract
+		/*		
 		Contract c = contractContainer.getContract(new ContractKey(contractID));
+
+		//get contract
 
 		//check result
 		if (c != null) {

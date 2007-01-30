@@ -28,14 +28,14 @@ final public class Configuration {
 		super();
 		maxConnections = 2;
 
-		maxContracts = 20000;
+		maxContracts = 10000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
-		reqLoops     = 1000;
+		reqLoops     = 100;
 		myDNS ="jdbc:timesten:direct:PerfTest";
 		myDriver = "com.timesten.jdbc.TimesTenDriver";
-		statMilliSeconds = 1000;
+		statMilliSeconds = 10000;
 		
 		setupDatabase = true;
 
