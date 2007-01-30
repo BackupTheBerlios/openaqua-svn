@@ -18,8 +18,6 @@ final public class Configuration {
 	final private int maxSubsriptions;
 	final private int maxInstances;
 	final private int reqLoops;
-	final private String myDNS;
-	final private String myDriver;
 	final private int statMilliSeconds;
 	final private boolean setupDatabase;
 
@@ -28,17 +26,13 @@ final public class Configuration {
 		super();
 		maxConnections = 2;
 
-		maxContracts = 10000;
+		maxContracts = 50000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
 		reqLoops     = 100;
-		myDNS ="jdbc:timesten:direct:PerfTest";
-		myDriver = "com.timesten.jdbc.TimesTenDriver";
 		statMilliSeconds = 10000;
-		
 		setupDatabase = true;
-
 	}
 
 
@@ -81,21 +75,6 @@ final public class Configuration {
 		return maxSubsriptions;
 	}
 
-
-	/**
-	 * @return the myDNS
-	 */
-	public final String getMyDNS() {
-		return myDNS;
-	}
-
-
-	/**
-	 * @return the myDriver
-	 */
-	public final String getMyDriver() {
-		return myDriver;
-	}
 
 
 	/**

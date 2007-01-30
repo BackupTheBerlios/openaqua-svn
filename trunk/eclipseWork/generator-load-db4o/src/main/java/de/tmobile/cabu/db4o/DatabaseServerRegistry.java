@@ -97,9 +97,13 @@ final public class DatabaseServerRegistry {
 			throw new NullPointerException(e);
 		}
 		
-		ObjectContainer oc = Db4o.openClient(c.getHostname(), c.getPort(), username, password);
+		if (c.getPort() == 0) {
+			//assume local accesss
+			return s.openClient();
+		} else {
+			return Db4o.openClient(c.getHostname(), c.getPort(), username, password);
+		}
 
-		return oc;		
 	}
 
 

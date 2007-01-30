@@ -3,9 +3,8 @@
  */
 package de.tmobile.cabu.entities;
 
-import java.util.HashMap;
-import de.tmobile.cabu.loadtest.Configuration;
 
+import de.tmobile.cabu.loadtest.Configuration;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 
@@ -14,6 +13,7 @@ import com.db4o.ObjectSet;
  * 
  *
  */
+@SuppressWarnings("unchecked")
 final public class ContractContainerFactory {
 	final private static ContractContainerFactory Instance = new ContractContainerFactory();
 
@@ -25,6 +25,7 @@ final public class ContractContainerFactory {
 		} else {
 			ContractContainer contractContainer = new ContractContainer(name);
 			//contractContainer.contractList  = new HashMap<ContractKey, Contract>(Configuration.getInstance().getMaxContracts());
+			//contractContainer.contractList  = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
 			contractContainer.contractList  = database.ext().collections().newHashMap(Configuration.getInstance().getMaxContracts());
 			//contractContainer.contractList  = database.ext().collections().newLinkedList();
 
