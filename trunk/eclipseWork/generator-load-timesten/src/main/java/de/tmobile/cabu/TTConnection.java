@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 import java.sql.Connection;
 import java.util.Random;
+import java.sql.Blob;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
+
+import oracle.sql.BLOB;
 
 /**
  * @author behrenan
@@ -34,7 +37,7 @@ public class TTConnection {
 		this.isDriverLoaded = false;
 		loadDriver();
 	}
-	
+
 
 
 	public void loadDriver() throws ClassNotFoundException
@@ -114,15 +117,23 @@ public class TTConnection {
 
 	public void Connect() throws SQLException
 	{
-		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
-		//connection = DriverManager.getConnection(Configuration.getInstance().getDNS(), "ALMGR_SCHEMA", "perf20tst");
+		if (Configuration.getInstance().isUseOracle()) {
+			connection = DriverManager.getConnection(Configuration.getInstance().getDNS(), "ALMGR_SCHEMA", "perf20tst");
+		} else {
+			connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
+		}
 		reportSQLWarning(connection.getWarnings());
-		connection.setAutoCommit (false);
+		connection.setAutoCommit (true);
 
-		lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=?");
-
-		lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update");
-		setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
+		if (Configuration.getInstance().isDoBlopTest()) {
+			lookupForInstance = connection.prepareStatement("select * from TA_BLOB where BLOB_ID=?");;
+			//lookupForInstanceForUpdate = connection.prepareStatement("select * from TA_BLOB where BLOB_ID=?");
+			setLockForInstance = connection.prepareStatement("UPDATE TA_BLOB set VAR1=?, VAR2=? where BLOB_ID=?");
+		} else {
+			lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=?");
+			lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update");
+			setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
+		}
 
 		isConnected = true;
 	}
@@ -154,6 +165,7 @@ public class TTConnection {
 		System.out.println(" delete old data ... ");
 		connection.setAutoCommit (false);
 
+		try {s.execute("drop table TA_BLOB");}catch(SQLException e) {;}
 		try {s.execute("drop table TA_BUDGET_INSTANCE");}catch(SQLException e) {;}
 		try {s.execute("drop table TA_BUDGETSUBSCRIPTION");}catch(SQLException e) {;}
 		try {s.execute("drop table TA_CONTRACTS");}catch(SQLException e) {;}
@@ -187,7 +199,7 @@ public class TTConnection {
 				"BUDGET_ID            SMALLINT                        not null,"+
 				"VALID_FROM           TIMESTAMP                       not null"+		")");
 
-/*
+		/*
 		s.execute("create table TA_BUDGET_INSTANCE ("+
 				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
 				//"DESCRIPTION          CHAR(30),  "+
@@ -198,7 +210,7 @@ public class TTConnection {
 				"ALOCK                TIMESTAMP,"+
 				"VALUE                SMALLINT"+		
 				")");
-*/
+		 */
 
 		s.execute("CREATE TABLE TA_BUDGET_INSTANCE 	("+
 				"BUDGETINSTANCE_ID    INTEGER                         not null,"+
@@ -210,7 +222,15 @@ public class TTConnection {
 				"VALUE                SMALLINT"+
 				")"		        
 		);
-		
+
+
+		if (Configuration.getInstance().isUseOracle()) {
+			s.execute("create table ta_blob (blob_id NUMBER(10,0) not null, var1 RAW(1024), var2 RAW(1024))");
+			
+		} else {
+			s.execute("create table ta_blob (blob_id bigint not null, var1 BINARY(1024), var2 BINARY(1024))");
+			
+		}
 		/*
 
 		s.execute("delete from TA_BUDGET_INSTANCE");
@@ -258,18 +278,43 @@ public class TTConnection {
 		//s.execute("create index budgs2_idx on TA_BUDGETSUBSCRIPTION (CONTRACT_ID )");
 
 		 */
-		System.out.println(" setup TA_BUDGET_INSTANCE... ");
-		//PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, to_date('2006-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), to_date('2007-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), NULL, ?)");
-		PreparedStatement s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?)");
-		for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
-			s5.setInt(1, i);
-			s5.setInt(2, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions());
-			s5.setInt(3, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts());
-			s5.setInt(4, Math.abs(random.nextInt()) % 200);
-			s5.execute();
+
+		if (Configuration.getInstance().isDoBlopTest()) {
+			System.out.println(" setup TA_BLOB... ");
+			PreparedStatement s5;
+			byte[] rawBuffer = new byte[ 1024 ];
+			int j = 0;
+			for (int i = 0;i<1024;i++) {
+				rawBuffer[i]=(byte) j++;
+				if (j>=255)j=0;
+			}
+			s5 = connection.prepareStatement("insert into TA_BLOB (BLOB_ID, VAR1, VAR2 ) values (?, ?, ?)");
+			for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
+				s5.setInt(1, i);
+				s5.setBytes(2, rawBuffer);
+				s5.setBytes(3, rawBuffer);
+				s5.execute();
+			}
+			s.execute("create unique index budgi1_idx on  TA_BLOB (BLOB_ID)");
+
+		} else {
+			System.out.println(" setup TA_BUDGET_INSTANCE... ");
+			PreparedStatement s5;
+			if (Configuration.getInstance().isUseOracle()) {
+				s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, to_date('2006-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), to_date('2007-12-12 00:00:01','YYYY-MM-DD HH24:MI:SS'), NULL, ?)");
+			} else {
+				s5 = connection.prepareStatement("insert into TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID, SUBSCRIPTION_ID, CONTRACT_ID, VALID_FROM, VALID_TO, ALOCK, VALUE) values (?, ?, ?, '2006-12-12 00:00:01', '2007-12-12 00:00:01', NULL, ?)");
+			}
+			for (int i = 0; i < Configuration.getInstance().getMaxInstances(); i++) {
+				s5.setInt(1, i);
+				s5.setInt(2, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxSubsriptions());
+				s5.setInt(3, Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts());
+				s5.setInt(4, Math.abs(random.nextInt()) % 200);
+				s5.execute();
+			}
+			s.execute("create unique index budgi1_idx on  TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID)");
+			s.execute("create index budgi3_idx on  TA_BUDGET_INSTANCE (CONTRACT_ID)");
 		}
-		s.execute("create unique index budgi1_idx on  TA_BUDGET_INSTANCE (BUDGETINSTANCE_ID)");
-		s.execute("create index budgi3_idx on  TA_BUDGET_INSTANCE (CONTRACT_ID)");
 
 
 		connection.commit();
@@ -286,29 +331,41 @@ public class TTConnection {
 			lookupForInstance.setInt(1, contractID);
 			ResultSet rs = lookupForInstance.executeQuery();
 			while ( rs.next() ) {
-				//System.out.println("read: "+i);
+				//System.out.println("read: "+contractID);
+				byte[] rawBuffer1 = rs.getBytes("var1");
+				byte[] rawBuffer2 = rs.getBytes("var2");
+				int k=0;
+				for (int i=0; i<1024;i++) {
+					k=rawBuffer1[i]+k;
+					k=rawBuffer2[i]+k;
+				}
+				if (k==123) {
+					System.out.println("k=123");
+				}
 			}
 
 		} catch (SQLException e) {
 			System.err.println("RLock-Error?: "+e.getMessage());
-			//reportSQLException(e);
+			reportSQLException(e);
 		}
 		return;
 	}
 
 	public void executeWrite (int contractID) {
 		try {
-			lookupForInstanceForUpdate.setInt(1, contractID);
-			ResultSet rs = lookupForInstanceForUpdate.executeQuery();
-			while ( rs.next() ) {
-				setLockForInstance.setInt(1, rs.getInt(1));
-				setLockForInstance.execute();
-				//System.out.println("updated: "+rs.getInt(1));
-			}
-			connection.commit();
+			
+			byte[] rawBuffer1 = new byte[ 1024 ];
+			byte[] rawBuffer2 = new byte[ 1024 ];
+			int j;
+			j = 5;	for (int i = 0;i<1024;i++) {rawBuffer1[i]=(byte) j++;	if (j>=255)j=0;		}
+			j = 5;	for (int i = 0;i<1024;i++) {rawBuffer2[i]=(byte) j++;	if (j>=255)j=0;		}
+			setLockForInstance.setBytes(1, rawBuffer1);
+			setLockForInstance.setBytes(2, rawBuffer2);
+			setLockForInstance.setLong(3, contractID);
+			setLockForInstance.execute();
 
 		} catch (SQLException e) {
-			System.err.println("Lock-Error?: "+e.getMessage());
+			System.err.println("RLock-Error?: "+e.getMessage());
 			reportSQLException(e);
 		}
 		return;

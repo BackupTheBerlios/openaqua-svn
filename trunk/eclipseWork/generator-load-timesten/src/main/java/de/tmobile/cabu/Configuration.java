@@ -12,36 +12,43 @@ final public class Configuration {
 	 * Its a singleton
 	 */
 	final private static Configuration INSTANCE = new Configuration();
-	private int maxConnections;
-	private int maxContracts;
-	private int maxSubsriptions;
-	private int maxInstances;
-	private int reqLoops;
-	private String myDNS; 
-	private String myDriver;
-	private int statMilliSeconds;
+	final private int maxConnections;
+	final private int maxContracts;
+	final private int maxSubsriptions;
+	final private int maxInstances;
+	final private int reqLoops;
+	final private String myDNS; 
+	final private String myDriver;
+	final private int statMilliSeconds;
+	final private boolean useOracle;
+	final private boolean doBlopTest;
 
 
 	private Configuration() {
 		super();
+		useOracle = true;
+		doBlopTest = true;
 		maxConnections = 2;
 		
-		maxContracts = 50;
+		maxContracts = 5000000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
 		reqLoops     = 10000;
 		
 		//Timesten
-		myDNS ="jdbc:timesten:direct:PerfTest";
-		myDriver = "com.timesten.jdbc.TimesTenDriver";
+		if (useOracle == false) {
+			myDNS ="jdbc:timesten:direct:PerfTest";
+			myDriver = "com.timesten.jdbc.TimesTenDriver";
+		} else {
+			//Oracle
+			myDNS ="jdbc:oracle:thin:@ds63801a.mspr.detemobil.de:1521:talmgr"; //TCP
+			//myDNS ="jdbc:oracle:oci8:@talmgr.mspr.detemobil.de"; //Thick driver, might be over IPC
+			myDriver = "oracle.jdbc.driver.OracleDriver";
+		}
 
-		//Oracle
-		//myDNS ="jdbc:oracle:thin:@ds63801a.mspr.detemobil.de:1521:talmgr"; //TCP
-		//myDNS ="jdbc:oracle:oci8:@talmgr.mspr.detemobil.de"; //Thick driver, might be over IPC
-		//myDriver = "oracle.jdbc.driver.OracleDriver";
 		
-		statMilliSeconds = 1000;
+		statMilliSeconds = 10000;
 
 	}
 
@@ -75,12 +82,6 @@ final public class Configuration {
 		return maxConnections;
 	}
 
-	/**
-	 */
-	public void setMaxConnections(int maxConnections) {
-		this.maxConnections = maxConnections;	
-
-	}
 
 	/**
 	 * @return the maxInstances
@@ -89,12 +90,6 @@ final public class Configuration {
 		return maxInstances;
 	}
 
-	/**
-	 * @param maxInstances the maxInstances to set
-	 */
-	public void setMaxInstances(int maxInstances) {
-		this.maxInstances = maxInstances;
-	}
 
 	/**
 	 * @return the maxSubsriptions
@@ -103,12 +98,6 @@ final public class Configuration {
 		return maxSubsriptions;
 	}
 
-	/**
-	 * @param maxSubsriptions the maxSubsriptions to set
-	 */
-	public void setMaxSubsriptions(int maxSubsriptions) {
-		this.maxSubsriptions = maxSubsriptions;
-	}
 
 	/**
 	 * @return the maxContracts
@@ -118,10 +107,20 @@ final public class Configuration {
 	}
 
 	/**
-	 * @param maxContracts the maxContracts to set
+	
+
+	/**
+	 * @return the useOracle
 	 */
-	public void setMaxContracts(int maxContracts) {
-		this.maxContracts = maxContracts;
+	public final boolean isUseOracle() {
+		return useOracle;
+	}
+
+	/**
+	 * @return the doBlopTest
+	 */
+	public final boolean isDoBlopTest() {
+		return doBlopTest;
 	}
 
 
