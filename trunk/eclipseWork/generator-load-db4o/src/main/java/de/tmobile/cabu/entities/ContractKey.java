@@ -3,13 +3,16 @@
  */
 package de.tmobile.cabu.entities;
 
+import com.db4o.config.annotations.Indexed;
+
 
 /**
  * @author behrenan
  *
  */
 public class ContractKey {
-	final public int key;
+	@Indexed
+	public int key;
 
 	public ContractKey(int key)         { 
 		this.key = key;
@@ -21,5 +24,4 @@ public class ContractKey {
 	public int getKey() {
 		return key;
 	}
-
 }

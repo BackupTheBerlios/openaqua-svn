@@ -13,17 +13,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import com.db4o.Db4o;
-import com.db4o.defragment.Defragment;
-import com.db4o.io.IoAdapter;
 import com.db4o.io.MemoryIoAdapter;
-import com.db4o.io.RandomAccessFileAdapter;
 
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.db4o.ServerConfiguration;
-import de.tmobile.cabu.entities.Contract;
-import de.tmobile.cabu.entities.ContractContainer;
-import de.tmobile.cabu.entities.ContractKey;
-import de.tmobile.cabu.loadtest.Stats;
 import de.tmobile.cabu.loadtest.MinuteTimer;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -50,27 +43,23 @@ public class Main {
 		
 		
 		//remove old database file
-		File f = new File(filename);
-		if (f.exists()) f.delete();
+		new File(filename).delete();
+		//if (f.exists()) f.delete();
 
 		Db4o.configure().io(new MemoryIoAdapter ());
 		
 		
 		//setup ObjectServer
 		Db4o.configure().callConstructors(true);
-		Db4o.configure().lockDatabaseFile(true);
+		//Db4o.configure().lockDatabaseFile(true);
 		//Db4o.configure().objectClass(Contract.class).objectField("contractKey").indexed(true);
-		Db4o.configure().objectClass(ContractKey.class).objectField("key").indexed(true);
-		//Db4o.configure().objectClass(ContractContainer.class).objectField("containerName").indexed(true);
-		//Db4o.configure().freespace().discardSmallerThan(2000000);
-		//Db4o.configure().weakReferences(false); //needs call off ExtObjectContainer.purge(object)
-		Db4o.configure().callbacks(false);
+		//Db4o.configure().objectClass(ContractKey.class).objectField("key").indexed(true);
+		//Db4o.configure().callbacks(false);
 		Db4o.configure().blockSize(8);
-		Db4o.configure().bTreeCacheHeight(100000);
-		Db4o.configure().bTreeNodeSize(100000);
 		
 		
 		conf = new ServerConfiguration(filename, 10000, "localhost");
+		//conf = new ServerConfiguration(filename, 0, "localhost");
 		final String username = "test";
 		final String password = "test";
 		conf.addUser(username, password);

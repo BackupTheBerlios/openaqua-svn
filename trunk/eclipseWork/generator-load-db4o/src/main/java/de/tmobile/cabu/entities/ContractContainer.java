@@ -34,7 +34,7 @@ public class ContractContainer {
 
 	
 	public boolean addContract(Contract c) {
-		contractList.put(c.getContractKey(), c);
+		//contractList.put(c.getContractKey(), c);
 		return true;
 	}
 

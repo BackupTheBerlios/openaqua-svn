@@ -3,83 +3,57 @@
  */
 package de.tmobile.cabu.entities;
 
+import com.db4o.config.annotations.Indexed;
+
 /**
  * 
  *
  */
 public class Contract {
 
-	private final ContractKey contractKey;
-	private int value = 0;
+	@Indexed
+	public ContractKey contractKey = new ContractKey(0);
+	@Indexed
+	private Integer value = 0;
 	private final String stringId;
 	private String stringValue;
 
 	public Contract(int contractKey, int value) {
 		super();
-		this.contractKey = new ContractKey( contractKey );
+		//this.contractKey = new ContractKey( contractKey );
+		this.contractKey.key = contractKey;
 		this.stringId = "stringId("+contractKey+")";
-		this.value = value;
+		this.value = new Integer(value);
 	}
 
 	
 	
 	public Contract(int contractKey, String stringValue, int value) {
 		super();
-		this.contractKey = new ContractKey( contractKey );
+		//this.contractKey = new ContractKey( contractKey );
+		this.contractKey.key = contractKey;
 		this.stringId = "stringId("+contractKey+")";
 		this.stringValue = stringValue;
-		this.value = value;
+		this.value = new Integer(value);
 	}
 
 	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int PRIME = 31;
-		int result = 1;
-		result = PRIME * result + ((contractKey == null) ? 0 : contractKey.hashCode());
-		return result;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 * 
-	 * Two Contracts are equal if the keys are equal
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Contract other = (Contract) obj;
-		if (contractKey == null) {
-			if (other.contractKey != null)
-				return false;
-		} else if (!contractKey.equals(other.contractKey))
-			return false;
-		return true;
-	}
 
 
 	/**
 	 * @return the contractKey
 	 */
-	public ContractKey getContractKey() {
-		return contractKey;
+	public int getContractKey() {
+		//return contractKey.getKey();
+		return contractKey.key;
 	}
 
 
 	/**
 	 * @return the value
 	 */
-	public int getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
@@ -93,7 +67,7 @@ public class Contract {
 	}
 
 	public void dump() {
-		System.out.println("   Contract("+contractKey.getKey()+")\tvalue="+value);
+		//System.out.println("   Contract("+contractKey.getKey()+")\tvalue="+value);
 		//contractKey.dump();
 	}
 
@@ -108,5 +82,6 @@ public class Contract {
 	public String getStringValue() {
 		return stringValue;
 	}
+
 
 }
