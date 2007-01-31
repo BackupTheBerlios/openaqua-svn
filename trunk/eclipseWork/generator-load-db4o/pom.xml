@@ -29,6 +29,14 @@
 			<artifactId>db4o-java5</artifactId>
 			<version>6.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>jpox</groupId>
+			<artifactId>jpox</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<repositories>
