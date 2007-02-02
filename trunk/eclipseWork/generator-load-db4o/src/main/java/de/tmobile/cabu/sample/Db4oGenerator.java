@@ -125,7 +125,7 @@ public class Db4oGenerator extends Thread{
 			while (done < maxContracts) {
 				int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts(); //random contractID
 				if (readTest == true) {
-					//executeRead(contractID);
+					executeRead(contractID);
 					Stats.getInstance().addReadResults(1);
 					//yield();
 				} else {

@@ -65,8 +65,6 @@
       	<name>Fornax Repository</name>
       	<url>http://www.fornax-platform.org/m2/repository</url>
       </repository>
-
-
    </repositories>
 
 	<!--Where to get Plugins-->

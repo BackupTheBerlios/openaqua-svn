@@ -41,3 +41,20 @@ http://maven.apache.org/plugins/maven-deploy-plugin/
 #db4o-6.1-java1.2.jar
 #db4o-6.1-nqopt.jar
 
+mvn -e deploy:deploy-file -DgeneratePom=true -DpomFile=./pom.xml -Dfile=../db4o-java11/db4o-6.0-java1.1.jar  -DcreateChecksum=true -Durl=file:///users/dxccwl/user7/behrenan/workspace/tmp/deploy
+
+
+mvn deploy:deploy-file -Durl=file:///users/dxccwl/user7/behrenan/workspace/tmp/deploy \
+                       -DrepositoryId=some.id \
+                       -Dfile=../db4o-java11/db4o-6.0-java1.1.jar  \
+                       -DpomFile=./pom.xml \
+                       -DgroupId=com.db4o \
+							  -DartifactId=your-artifact \
+                       -Dversion=6.0 \
+                       -Dpackaging=jar \
+                       -DgeneratePom=true \
+                       -DgeneratePom.description="DB4O Package" \
+                       -DrepositoryLayout=default
+
+
+mvn -e deploy:deploy-file -DartifactId=db4o-java11 -DgroupId=com.db4o -DgeneratePom=true -DpomFile=./pom.xml -Dfile=../db4o-java11/db4o-6.0-java1.1.jar  -DcreateChecksum=true -Durl=file:///users/dxccwl/user7/behrenan/workspace/tmp/deploy

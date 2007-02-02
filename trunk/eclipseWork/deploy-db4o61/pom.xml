@@ -1,0 +1,229 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.db4o</groupId>
+	<artifactId>db4o</artifactId>
+	<version>6.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>DB4O Parent Module</name>
+
+	<description>
+	<![CDATA[
+
+	db4o is the open source object database that enables Java and .NET developers to slash development time and costs and achieve unprecedented levels of performance.
+
+	The unique design of db4o's native object database engine makes it the ideal choice to be embedded in equipment and devices, in packaged software running on mobile or desktop platforms, or in real-time control systems - in short: in all Java and .NET environments, where no database administrator (DBA) is present.
+	]]>
+	</description>
+
+
+	<url>http://www.db4o.com/about/productinformation/</url>
+	<inceptionYear>2007</inceptionYear>
+
+
+	<organization>
+		<name>db4objects</name>
+		<url>http://www.db4o.com/</url>
+	</organization>
+
+	<modules>
+		<module>db4ounit</module>
+		<module>db4oj</module>
+		<module>db4oj.tools</module>
+		<module>db4ounit.extensions</module>
+		<module>db4oj.tests</module>
+		<module>db4ojdk1.2</module>
+<!--
+		<module>db4ojdk1.2.tests</module>
+-->
+		<module>db4ojdk5</module>
+		<module>db4ojdk5.plugins</module>
+		<!--
+		<module>db4ojdk5.tests</module>
+		-->
+		<module>bloat</module>
+		<module>db4onqopt</module>
+		<module>db4onqopt.tests</module>
+		<!--
+		<module>db4onqopt.testsExe</module>
+		-->
+	</modules>
+
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4oj</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojtools</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ounit</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ounit.extensions</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4oj.tests</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojdk1.2</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojdk1.2.tests</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+<!--
+-->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojdk5</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojdk5plugins</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!--
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ojdk5.tests</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			-->
+
+			<dependency>
+				<groupId>EDU.purdue.cs</groupId>
+				<artifactId>bloat</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4onqopt</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4onqopt.tests</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+<!--
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4onqopt.testsExe</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+-->
+		</dependencies>
+	</dependencyManagement>
+
+
+
+
+<!-- =========use the openaqua repository================= -->
+	<repositories>
+		<repository>
+			<id>maven.openaqua.de</id>
+			<name>OpenAqua Maven Repository</name>
+			<url>http://maven.openaqua.de</url>
+			</repository>
+	</repositories>
+
+
+
+<!-- ======== use Java 1.3 =============================== -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.3</source>
+					<target>1.3</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>[1.0-beta-2,)</version>
+			</extension>
+		</extensions>
+	</build>
+
+
+
+
+<!-- ===================================================== -->
+
+	<distributionManagement>
+
+		<repository>
+			<id>maven.openaqua.de</id>
+			<name>OpenAqua Maven Repository</name>
+			<url>ftp://ftp.openaqua.de/html/maven</url>
+		</repository>
+	<!--
+		<repository>
+			<id>local.rep</id>
+			<name>Local Private Repository</name>
+			<url>file://$(M2_REPO)</url>
+		</repository>
+	-->
+	</distributionManagement>
+
+
+<!-- ===================================================== -->
+  <contributors>
+    <contributor>
+      <name>Claudia Behrens</name>
+      <email>Claudia.Behrens@openaqua.de</email>
+      <url>http://www.openaqua.de</url>
+      <organization>OpenAqua</organization>
+      <organizationUrl>http://www.openaqua.de</organizationUrl>
+      <roles>	<role>Maintainer OpenAqua Maven Repository</role>	</roles>
+      <timezone>1</timezone>
+    </contributor>
+
+    <contributor>
+      <name>Andrey Behrens</name>
+      <email>Andrey.Behrens@openaqua.de</email>
+      <url>http://www.openaqua.de</url>
+      <organization>OpenAqua</organization>
+      <organizationUrl>http://www.openaqua.de</organizationUrl>
+      <roles>	<role>User</role>	</roles>
+      <timezone>1</timezone>
+    </contributor>
+
+  </contributors>
+
+</project>

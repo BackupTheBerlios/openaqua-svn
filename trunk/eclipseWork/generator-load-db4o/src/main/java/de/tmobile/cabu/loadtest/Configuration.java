@@ -26,11 +26,11 @@ final public class Configuration {
 		super();
 		maxConnections = 2;
 
-		maxContracts = 50000;
+		maxContracts = 1500;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
-		reqLoops     = 1;
+		reqLoops     = 100;
 		statMilliSeconds = 10000;
 		setupDatabase = true;
 	}
