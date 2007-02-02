@@ -1,10 +1,10 @@
 /**
- * 
+ *
  */
 package de.tmobile.cabu.alma;
 
 import java.util.TimerTask;
-import java.text.*; 
+import java.text.*;
 
 /**
  * @author behrenan
@@ -19,8 +19,8 @@ final public class MinuteTimer extends TimerTask{
 
 	public void run (){
 		Stats.getInstance().printResults(msec);
-		//System.out.println(shortTime.format(new Date())); 
-				
+		//System.out.println(shortTime.format(new Date()));
+
 	}
 
 }

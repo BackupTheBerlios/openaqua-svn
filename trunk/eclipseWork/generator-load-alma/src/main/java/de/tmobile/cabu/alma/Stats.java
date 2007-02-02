@@ -1,7 +1,11 @@
 /**
- * 
+ *
  */
 package de.tmobile.cabu.alma;
+
+
+import java.util.Locale;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -11,7 +15,11 @@ package de.tmobile.cabu.alma;
 final public class Stats {
 	final private static Stats INSTANCE = new Stats(); //yepp, is a singleton
 	private int  counterRead;
+	private int  counterWrite;
 	private long globalTime;
+	private ReentrantLock lockWrite = new ReentrantLock();
+	private ReentrantLock lockRead = new ReentrantLock();
+
 
 
 	/*
@@ -30,28 +38,77 @@ final public class Stats {
 	}
 
 
-	public synchronized void addReadResults(int pCounter) {
-		this.counterRead += pCounter;
+	public void addReadResults(int pCounter) {
+		lockRead.lock();
+		try {
+			this.counterRead += pCounter;
+		} finally {
+			lockRead.unlock();
+		}
 		return;
 	}
 
+	public void addWriteResults(int pCounter) {
+		lockWrite.lock();
+		try {
+			this.counterWrite += pCounter;
+		} finally {
+			lockWrite.unlock();
+		}
+		return;
+	}
 
 
 	/*
 	 * Prints the results
 	 */
-	public synchronized void printResults(int msec) {
-		int  acounterRead = counterRead;		counterRead = 0;
 
-		if (acounterRead > 0) {
-			float s = msec * 1000  / acounterRead;
-			System.out.printf("%s in %s msec:\t%s\t%s\n", "read ", msec, acounterRead, s);
-		} else {
-			System.out.printf("No successfull requests\n");
-			
+	private void printResultLine (final int cr, final int cw, final int msec) {
+		int myCounterRead = 1;
+		int myCounterWrite = 1;
+
+		if (cr>0) myCounterRead  = cr;
+		if (cw>0) myCounterWrite = cw;
+
+		int sR = msec * 1000  / myCounterRead;
+		int sW = msec * 1000  / myCounterWrite;
+
+		if (cr<1) {myCounterRead  = 0; sR=0;}
+		if (cw<1) {myCounterWrite = 0; sW=0;}
+
+		System.out.printf(Locale.GERMANY, "In %,d ms:\t%,7d read(%,7dms)\t%,7d write(%,7dms)%n", msec, myCounterRead, sR, myCounterWrite, sW);
+	}
+
+
+
+	public void printResults(int msec) {
+		int acounterRead = 0;
+		int acounterWrite = 0;
+
+		//get write results
+		lockWrite.lock();
+		try {
+			acounterWrite = counterWrite;
+			counterWrite = 0;
+		} finally {
+			lockWrite.unlock();
 		}
 
 
+		//get read results
+		lockRead.lock();
+		try {
+			acounterRead = counterRead;
+			counterRead = 0;
+		} finally {
+			lockRead.unlock();
+		}
+
+
+		//print read stat
+		printResultLine(acounterRead, acounterWrite, msec);
+
+		//bye bye
 		return;
 	}
 
