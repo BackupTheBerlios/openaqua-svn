@@ -39,17 +39,6 @@
 		<module>db4ojdk5</module>
 		<module>bloat</module>
 		<module>db4onqopt</module>
-	
-		<!--
-   		<module>db4ojdk5.plugins</module>
-   		<module>db4ojdk5.tests</module>
-
-   		<module>db4onqopt.testsExe</module>
-
-
-
-   		<module>db4onqopt.tests</module>
-	   -->
 	</modules>
 
 
@@ -92,28 +81,10 @@
 				<artifactId>db4ojdk1.2</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ojdk1.2.tests</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-<!--
--->
+
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>db4ojdk5</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ojdk5.plugins</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ojdk5.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -126,18 +97,6 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>db4onqopt</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4onqopt.tests</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4onqopt.testsExe</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -187,7 +146,7 @@
 	<distributionManagement>
 
 		<repository>
-			<id>maven.openaqua.de</id>
+			<id>ftp.openaqua.de</id>
 			<name>OpenAqua Maven Repository</name>
 			<url>ftp://ftp.openaqua.de/html/maven</url>
 		</repository>
