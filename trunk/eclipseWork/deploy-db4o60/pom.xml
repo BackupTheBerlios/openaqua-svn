@@ -36,25 +36,30 @@
 		<module>db4ounit.extensions</module>
 		<module>db4oj.tests</module>
 		<module>db4ojdk1.2</module>
-<!--
-		<module>db4ojdk1.2.tests</module>
--->
 		<module>db4ojdk5</module>
-		<module>db4ojdk5.plugins</module>
-		<!--
-		<module>db4ojdk5.tests</module>
-		-->
 		<module>bloat</module>
 		<module>db4onqopt</module>
-		<module>db4onqopt.tests</module>
+	
 		<!--
-		<module>db4onqopt.testsExe</module>
-		-->
+   		<module>db4ojdk5.plugins</module>
+   		<module>db4ojdk5.tests</module>
+
+   		<module>db4onqopt.testsExe</module>
+
+
+
+   		<module>db4onqopt.tests</module>
+	   -->
 	</modules>
 
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>db4ounit</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>${project.groupId}</groupId>
@@ -64,25 +69,21 @@
 
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ojtools</artifactId>
+				<artifactId>db4oj.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
+
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ounit</artifactId>
+				<artifactId>db4oj.tools</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
 
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>db4ounit.extensions</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4oj.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -106,17 +107,15 @@
 
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>db4ojdk5plugins</artifactId>
+				<artifactId>db4ojdk5.plugins</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
-			<!--
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>db4ojdk5.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			-->
 
 			<dependency>
 				<groupId>EDU.purdue.cs</groupId>
@@ -135,13 +134,13 @@
 				<artifactId>db4onqopt.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-<!--
+
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>db4onqopt.testsExe</artifactId>
 				<version>${project.version}</version>
 			</dependency>
--->
+
 		</dependencies>
 	</dependencyManagement>
 

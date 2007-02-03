@@ -32,8 +32,8 @@ rm -rf tmp
 #
 mkdir -p ./bloat/src/main/java
 mkdir -p ./db4ojdk1.2/src/main/java
-mkdir -p ./db4ojdk1.2.tests/src/main/java
-mkdir -p ./db4ojdk1.2.tests/src/main/resources
+#mkdir -p ./db4ojdk1.2.tests/src/main/java
+#mkdir -p ./db4ojdk1.2.tests/src/main/resources
 mkdir -p ./db4ojdk5.plugins/src/main/java
 mkdir -p ./db4ojdk5/src/main/java
 mkdir -p ./db4ojdk5.tests/src/main/java
@@ -53,7 +53,7 @@ mkdir -p ./db4ounit/src/main/resources
 
 #################################################
 #get the db4o file
-wget http://213.203.204.172/downloads/db4o-6.0-java.zip
+#wget http://213.203.204.172/downloads/db4o-6.0-java.zip
 
 
 
@@ -71,8 +71,10 @@ cd ..
 # rebuilds the environment
 #
 mv tmp/db4o-6.0/src/bloat/src/* 						./bloat/src/main/java/
+
 mv tmp/db4o-6.0/src/db4ojdk1.2/core/src/*   		./db4ojdk1.2/src/main/java
-mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/*   		./db4ojdk1.2.tests/src/main/java
+#mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/*   		./db4ojdk1.2.tests/src/main/java
+mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/com/db4o/* db4ojdk1.2/src/main/java/com/db4o
 mv tmp/db4o-6.0/src/db4ojdk5/plugins/src/*  		./db4ojdk5.plugins/src/main/java
 mv tmp/db4o-6.0/src/db4ojdk5/core/src/*     		./db4ojdk5/src/main/java
 mv tmp/db4o-6.0/src/db4ojdk5/test/src/*     		./db4ojdk5.tests/src/main/java
@@ -101,7 +103,7 @@ rm -rf tmp
 # build the environment
 # must be compiled two times!
 mvn compile
-mvn compile
+#mvn compile
 
 
 

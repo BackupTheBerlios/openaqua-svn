@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>db4ojtools</artifactId>
+			<artifactId>db4oj.tools</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

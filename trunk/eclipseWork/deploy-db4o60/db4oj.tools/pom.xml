@@ -10,15 +10,21 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>db4ojtools</artifactId>
+	<artifactId>db4oj.tools</artifactId>
 	<packaging>jar</packaging>
-	<name>db4ojtools: DB4O Java Core Tools Package</name>
+	<name>db4oj.tools: DB4O Java Core Tools Package</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>db4ounit</artifactId>
+		</dependency>
+	   
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>db4oj</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 </project>

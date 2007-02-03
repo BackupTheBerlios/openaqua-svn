@@ -19,22 +19,18 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4oj</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>db4ojtools</artifactId>
-			<version>${project.version}</version>
+			<artifactId>db4oj.tools</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ounit</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ounit.extensions</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

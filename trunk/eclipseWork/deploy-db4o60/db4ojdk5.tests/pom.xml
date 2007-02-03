@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>db4ojdk5plugins</artifactId>
+			<artifactId>db4ojdk5.plugins</artifactId>
 		</dependency>
 	</dependencies>
 
