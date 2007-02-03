@@ -78,7 +78,7 @@ mv tmp/db4o-6.0/src/db4oj.tests/src/*        	      ./db4oj.tests/src/main/java
 
 
 mv tmp/db4o-6.0/src/db4onqopt/core/src/*   	         ./db4onqopt/src/main/java
-mv tmp/db4o-6.0/src/db4onqopt/test/src/com/db4o/*     ./db4onqopt/src/main/java
+#mv tmp/db4o-6.0/src/db4onqopt/test/src/com/db4o/*     ./db4onqopt/src/main/java/com/db4o/
 
 mv tmp/db4o-6.0/src/db4ounit.extensions/src/*  	      ./db4ounit.extensions/src/main/java
 mv tmp/db4o-6.0/src/db4ounit/src/*					      ./db4ounit/src/main/java
