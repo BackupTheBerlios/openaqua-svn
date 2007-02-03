@@ -33,5 +33,5 @@ rm -rf ./db4ojdk5.tests/src
 #
 find . -name \*~ -exec rm {} \;
 
-rm -f db4o-6.0-java.zip
+#rm -f db4o-6.0-java.zip
 

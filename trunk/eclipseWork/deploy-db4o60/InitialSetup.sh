@@ -32,21 +32,14 @@ rm -rf tmp
 #
 mkdir -p ./bloat/src/main/java
 mkdir -p ./db4ojdk1.2/src/main/java
-#mkdir -p ./db4ojdk1.2.tests/src/main/java
-#mkdir -p ./db4ojdk1.2.tests/src/main/resources
-mkdir -p ./db4ojdk5.plugins/src/main/java
-mkdir -p ./db4ojdk5/src/main/java
-mkdir -p ./db4ojdk5.tests/src/main/java
-mkdir -p ./db4ojdk5.tests/src/main/resources
-mkdir -p ./db4oj/src/main/java
-mkdir -p ./db4oj.tests/src/main/java
+mkdir -p ./db4ojdk5/src/main/java/com/db4o/
+mkdir -p ./db4oj/src/main/java/com/db4o/
+mkdir -p ./db4oj.tests/src/main/java/
+mkdir -p ./db4oj.tools/src/main/java/
 mkdir -p ./db4oj.tests/src/main/resources
-mkdir -p ./db4oj.tools/src/main/java
-mkdir -p ./db4onqopt/src/main/java
-mkdir -p ./db4onqopt.testsExe/src/main/java
-mkdir -p ./db4onqopt.tests/src/main/java
-mkdir -p ./db4ounit.extensions/src/main/java
-mkdir -p ./db4ounit/src/main/java
+mkdir -p ./db4onqopt/src/main/java/com/db4o/
+mkdir -p ./db4ounit.extensions/src/main/java/com/db4o/
+mkdir -p ./db4ounit/src/main/java/com/db4o/
 mkdir -p ./db4ounit/src/main/resources
 
 
@@ -70,21 +63,28 @@ cd ..
 #################################################
 # rebuilds the environment
 #
-mv tmp/db4o-6.0/src/bloat/src/* 						./bloat/src/main/java/
+mv tmp/db4o-6.0/src/bloat/src/* 						      ./bloat/src/main/java/
 
-mv tmp/db4o-6.0/src/db4ojdk1.2/core/src/*   		./db4ojdk1.2/src/main/java
-#mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/*   		./db4ojdk1.2.tests/src/main/java
-mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/com/db4o/* db4ojdk1.2/src/main/java/com/db4o
-mv tmp/db4o-6.0/src/db4ojdk5/plugins/src/*  		./db4ojdk5.plugins/src/main/java
-mv tmp/db4o-6.0/src/db4ojdk5/core/src/*     		./db4ojdk5/src/main/java
-mv tmp/db4o-6.0/src/db4ojdk5/test/src/*     		./db4ojdk5.tests/src/main/java
-mv tmp/db4o-6.0/src/db4oj/core/src/*          	./db4oj/src/main/java
-mv tmp/db4o-6.0/src/db4oj.tests/src/*        	./db4oj.tests/src/main/java
-mv tmp/db4o-6.0/src/db4oj/tools/src/*         	./db4oj.tools/src/main/java
-mv tmp/db4o-6.0/src/db4onqopt/core/src/*      	./db4onqopt/src/main/java
-mv tmp/db4o-6.0/src/db4onqopt/test/src/*      	./db4onqopt.tests/src/main/java
-mv tmp/db4o-6.0/src/db4ounit.extensions/src/*  	./db4ounit.extensions/src/main/java
-mv tmp/db4o-6.0/src/db4ounit/src/*					./db4ounit/src/main/java
+mv tmp/db4o-6.0/src/db4ojdk1.2/core/src/com/db4o/*   	./db4ojdk1.2/src/main/java/com/db4o/
+mv tmp/db4o-6.0/src/db4ojdk1.2/test/src/com/db4o/*    ./db4ojdk1.2/src/main/java/com/db4o
+
+
+mv tmp/db4o-6.0/src/db4ojdk5/core/src/com/db4o/*      ./db4ojdk5/src/main/java/com/db4o/
+mv tmp/db4o-6.0/src/db4ojdk5/test/src/com/db4o/*      ./db4ojdk5/src/main/java/com/db4o/
+mv tmp/db4o-6.0/src/db4ojdk5/plugins/src/com/db4o/*   ./db4ojdk5/src/main/java/com/db4o/
+
+
+mv tmp/db4o-6.0/src/db4oj/core/src/* 	               ./db4oj/src/main/java/
+mv tmp/db4o-6.0/src/db4oj/tools/src/*         	      ./db4oj.tools/src/main/java
+
+mv tmp/db4o-6.0/src/db4oj.tests/src/*        	      ./db4oj.tests/src/main/java
+
+
+mv tmp/db4o-6.0/src/db4onqopt/core/src/*   	         ./db4onqopt/src/main/java
+mv tmp/db4o-6.0/src/db4onqopt/test/src/com/db4o/*     ./db4onqopt/src/main/java
+
+mv tmp/db4o-6.0/src/db4ounit.extensions/src/*  	      ./db4ounit.extensions/src/main/java
+mv tmp/db4o-6.0/src/db4ounit/src/*					      ./db4ounit/src/main/java
 
 
 #./db4ojdk1.2.tests/src/main/resources
@@ -97,7 +97,7 @@ mv tmp/db4o-6.0/src/db4ounit/src/*					./db4ounit/src/main/java
 # clean tmp
 #
 rm -rf tmp
-
+exit 0;
 
 #################################################
 # build the environment
