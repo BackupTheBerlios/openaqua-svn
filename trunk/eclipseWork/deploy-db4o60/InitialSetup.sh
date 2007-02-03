@@ -84,23 +84,15 @@ mv tmp/db4o-6.0/src/db4ounit.extensions/src/*  	      ./db4ounit.extensions/src/
 mv tmp/db4o-6.0/src/db4ounit/src/*					      ./db4ounit/src/main/java
 
 
-#./db4ojdk1.2.tests/src/main/resources
-#./db4ojdk5.tests/src/main/resources
-#./db4oj.tests/src/main/resources
-#./db4onqopt.testsExe/src/main/java
-#./db4ounit/src/main/resources
 
 #################################################
 # clean tmp
 #
 rm -rf tmp
-exit 0;
 
 #################################################
 # build the environment
-# must be compiled two times!
 mvn compile
-#mvn compile
 
 
 
