@@ -25,18 +25,17 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4oj.tests</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>db4oj.tools</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ounit</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ounit.extensions</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ojdk1.2</artifactId>

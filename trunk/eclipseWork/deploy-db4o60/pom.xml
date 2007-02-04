@@ -32,7 +32,6 @@
 	<modules>
 		<module>db4ounit</module>
 		<module>db4oj</module>
-		<module>db4oj.tools</module>
 		<module>db4ounit.extensions</module>
 		<module>db4oj.tests</module>
 		<module>db4ojdk1.2</module>
@@ -61,14 +60,6 @@
 				<artifactId>db4oj.tests</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
-
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>db4oj.tools</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
 
 			<dependency>
 				<groupId>${project.groupId}</groupId>
