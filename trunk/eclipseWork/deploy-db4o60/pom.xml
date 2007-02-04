@@ -32,10 +32,12 @@
 	<modules>
 		<module>db4ounit</module>
 		<module>db4oj</module>
-		<module>db4ounit.extensions</module>
 		<module>db4oj.tests</module>
+		<module>db4ounit.extensions</module>
 		<module>db4ojdk1.2</module>
+		<!--
 		<module>db4ojdk5</module>
+	-->
 		<module>bloat</module>
 		<module>db4onqopt</module>
 	</modules>

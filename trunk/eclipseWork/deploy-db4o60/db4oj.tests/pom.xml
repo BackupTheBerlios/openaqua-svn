@@ -14,7 +14,6 @@
 	<packaging>jar</packaging>
 	<name>db4oj.tests: DB4O Java Core Unit Tests</name>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -30,6 +29,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>db4ounit.extensions</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 </project>
