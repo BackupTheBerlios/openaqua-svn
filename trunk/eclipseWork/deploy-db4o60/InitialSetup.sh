@@ -47,6 +47,7 @@ mkdir -p ./db4ounit/src/main/resources
 #################################################
 # unpack the db4o file
 #
+rm -rf tmp
 mkdir -p tmp
 cd tmp
 unzip ../db4o-6.0-java.zip
@@ -63,9 +64,9 @@ mv tmp/db4o-6.0/src/db4ojdk1.2/core             	   ./db4ojdk1.2/src/main/java
 mv tmp/db4o-6.0/src/db4ojdk1.2/test                   ./db4ojdk1.2/src/main/java
 
 
-#mv tmp/db4o-6.0/src/db4ojdk5/core                     ./db4ojdk5/src/main/java
-#mv tmp/db4o-6.0/src/db4ojdk5/test                     ./db4ojdk5/src/main/java
-#mv tmp/db4o-6.0/src/db4ojdk5/plugins                  ./db4ojdk5/src/main/java
+mv tmp/db4o-6.0/src/db4ojdk5/core/src/*               ./db4ojdk5/src/main/java
+mv tmp/db4o-6.0/src/db4ojdk5/test/src/com/db4o/*      ./db4ojdk5/src/main/java/com/db4o
+mv tmp/db4o-6.0/src/db4ojdk5/plugins/src/com/db4o/*            ./db4ojdk5/src/main/java/com/db4o
 
 mv tmp/db4o-6.0/src/db4oj/core      	               ./db4oj/src/main/java
 mv tmp/db4o-6.0/src/db4oj/tools               	      ./db4oj/src/main/java
