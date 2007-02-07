@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.db4o</groupId>
 		<artifactId>db4o</artifactId>
-		<version>6.0</version>
+		<version>6.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>

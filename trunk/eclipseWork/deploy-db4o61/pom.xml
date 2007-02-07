@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.db4o</groupId>
 	<artifactId>db4o</artifactId>
-	<version>6.0</version>
+	<version>6.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>DB4O Parent Module</name>
 

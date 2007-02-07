@@ -31,56 +31,43 @@ mkdir -p ./db4ojdk1.2/src/main/java
 mkdir -p ./db4ojdk5/src/main/java
 mkdir -p ./db4oj/src/main/java/
 mkdir -p ./db4oj.tests/src/main/java/
-mkdir -p ./db4oj.tests/src/main/resources
+#mkdir -p ./db4oj.tests/src/main/resources
 mkdir -p ./db4onqopt/src/main/java
 mkdir -p ./db4ounit.extensions/src/main/java
 mkdir -p ./db4ounit/src/main/java
-mkdir -p ./db4ounit/src/main/resources
-
-
-
-#################################################
-#get the db4o file
-filename=db4o-6.0-java.zip
-if [ -f $filename ];
-then
-	echo "reuse $filename"
-else
-	wget http://213.203.204.172/downloads/db4o-6.0-java.zip
-fi
+#mkdir -p ./db4ounit/src/main/resources
 
 
 
 
-
-#################################################
-# unpack the db4o file
-#
-rm -rf tmp
-mkdir -p tmp
-cd tmp
-unzip ../db4o-6.0-java.zip
-cd ..
 
 
 #################################################
 # rebuilds the environment
 #
-cp -R tmp/db4o-6.0/src/bloat/src/* 						      bloat/src/main/java/
-cp -R tmp/db4o-6.0/src/db4ojdk1.2/* 	            	   db4ojdk1.2/src/main/java
-cp -R tmp/db4o-6.0/src/db4ojdk5/*			               db4ojdk5/src/main/java
-cp -R tmp/db4o-6.0/src/db4oj/*	      	               db4oj/src/main/java
-cp -R tmp/db4o-6.0/src/db4oj.tests/src/*        	      db4oj.tests/src/main/java
-cp -R tmp/db4o-6.0/src/db4onqopt/*	   	               db4onqopt/src/main/java
-cp -R tmp/db4o-6.0/src/db4ounit.extensions/src/*  	      db4ounit.extensions/src/main/java
-cp -R tmp/db4o-6.0/src/db4ounit/src/*					      db4ounit/src/main/java
-
-
+#cp -R tmp/db4o-6.0/src/bloat/src/* 						      bloat/src/main/java/
+#cp -R tmp/db4o-6.0/src/db4ojdk1.2/* 	            	   db4ojdk1.2/src/main/java
+#cp -R tmp/db4o-6.0/src/db4ojdk5/*			               db4ojdk5/src/main/java
+#cp -R tmp/db4o-6.0/src/db4oj/*	      	               db4oj/src/main/java
+#cp -R tmp/db4o-6.0/src/db4oj.tests/src/*        	      db4oj.tests/src/main/java
+#cp -R tmp/db4o-6.0/src/db4onqopt/*	   	               db4onqopt/src/main/java
+#cp -R tmp/db4o-6.0/src/db4ounit.extensions/src/*  	      db4ounit.extensions/src/main/java
+#cp -R tmp/db4o-6.0/src/db4ounit/src/*					      db4ounit/src/main/java
 
 #################################################
-# clean tmp
+# get a fresh copy from subversion
 #
-#rm -rf tmp
+svn co https://db4objects.net/svn/db4o/trunk/bloat/src									bloat/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4ojdk1.2									db4ojdk1.2/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4ojdk5										db4ojdk5/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4oj											db4oj/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4oj.tests/src/com						db4oj.tests/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4onqopt									db4onqopt/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4ounit/src/db4ounit					db4ounit/src/main/java
+svn co https://db4objects.net/svn/db4o/trunk/db4ounit.extensions/src/db4ounit		db4ounit.extensions/src/main/java
+
+
+
 
 #################################################
 # build the environment
