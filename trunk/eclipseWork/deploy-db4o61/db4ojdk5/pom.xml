@@ -59,7 +59,9 @@
 						</goals>
 						<configuration>
 							<sources>
+							   <!--
 								<source>src/main/java/test/src</source>
+							-->
 								<source>src/main/java/plugins/src</source>
 							</sources>
 						</configuration>
