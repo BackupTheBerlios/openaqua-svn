@@ -56,6 +56,8 @@
 	</dependencies>
 
 	<build>
+	 	<sourceDirectory>src/main/java/core/src</sourceDirectory>
+
 		<plugins>
 			<!-- ======== use Java 1.5 =============================== -->
 			<plugin>
@@ -80,7 +82,6 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/main/java/core/src</source>
 								<source>src/main/java/test/src</source>
 							</sources>
 						</configuration>

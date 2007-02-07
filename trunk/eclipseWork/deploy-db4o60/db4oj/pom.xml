@@ -23,6 +23,7 @@
 
 
 	<build>
+	 	<sourceDirectory>src/main/java/core/src</sourceDirectory>
 		<plugins>
 			<!-- ======== add src dirs =============================== -->
 			<plugin>
@@ -37,8 +38,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/main/java/core/src</source>
-								<source>src/main/java/test/src</source>
+								<source>src/main/java/tools/src</source>
 							</sources>
 						</configuration>
 					</execution>

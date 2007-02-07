@@ -33,8 +33,10 @@
 		</dependency>
 	</dependencies>
 
-<!-- ======== use Java 1.5 =============================== -->
 	<build>
+	 	<sourceDirectory>src/main/java/core/src</sourceDirectory>
+
+		<!-- ======== use Java 1.5 =============================== -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -57,7 +59,6 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/main/java/core/src</source>
 								<source>src/main/java/test/src</source>
 								<source>src/main/java/plugins/src</source>
 							</sources>
