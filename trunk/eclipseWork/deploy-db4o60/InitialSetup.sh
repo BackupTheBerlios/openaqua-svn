@@ -1,3 +1,4 @@
+#!/bin/bash
 #################################################
 # remove everything with maven
 #
@@ -40,8 +41,14 @@ mkdir -p ./db4ounit/src/main/resources
 
 #################################################
 #get the db4o file
-#rm -f db4o-6.0-java.zip
-#wget http://213.203.204.172/downloads/db4o-6.0-java.zip
+filename=db4o-6.0-java.zip
+if [ -f $filename ];
+then
+	echo "reuse $filename"
+else
+	wget http://213.203.204.172/downloads/db4o-6.0-java.zip
+fi
+
 
 
 
