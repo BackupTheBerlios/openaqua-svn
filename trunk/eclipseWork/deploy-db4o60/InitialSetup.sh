@@ -84,7 +84,7 @@ cp -R tmp/db4o-6.0/src/db4ounit/src/*					      db4ounit/src/main/java
 
 #################################################
 # build the environment
-mvn compile
+mvn compile eclipse:eclipse -DdownloadSources=true
 
 
 
