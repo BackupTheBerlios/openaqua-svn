@@ -26,7 +26,7 @@
 
 		<dependency>
 			<groupId>com.db4o</groupId>
-			<artifactId>db4o</artifactId>
+			<artifactId>db4oj</artifactId>
 			<version>6.1-SNAPSHOT</version>
 		</dependency>
 <!--
@@ -38,7 +38,7 @@
 -->
 
 	</dependencies>
-<!--
+
 	<repositories>
 		<repository>
 			<id>maven.openaqua.de</id>
@@ -46,7 +46,7 @@
 			<url>http://maven.openaqua.de</url>
 		</repository>
 	</repositories>
--->
+
 	<scm>
 		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
 		<developerConnection>
@@ -90,6 +90,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+
 	</build>
+
 
 </project>

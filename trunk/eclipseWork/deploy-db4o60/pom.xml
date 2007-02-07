@@ -23,6 +23,14 @@
 	<url>http://www.db4o.com/about/productinformation/</url>
 	<inceptionYear>2007</inceptionYear>
 
+	<licenses>
+		<license>
+			<name>GPL V2</name>
+			<url>http://www.gnu.org/copyleft/gpl.html</url>
+			<distribution>repo</distribution>
+			<comments>GNU GENERAL PUBLIC LICENSE</comments>
+		</license>
+	</licenses>
 
 	<organization>
 		<name>db4objects</name>
@@ -100,10 +108,21 @@
 <!-- =========use the openaqua repository================= -->
 	<repositories>
 		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
 			<id>maven.openaqua.de</id>
 			<name>OpenAqua Maven Repository</name>
 			<url>http://maven.openaqua.de</url>
-			</repository>
+			<layout>default</layout>
+		</repository>
 	</repositories>
 
 
