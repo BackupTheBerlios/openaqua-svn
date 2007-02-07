@@ -1,6 +1,7 @@
 #################################################
 # remove everything with maven
 #
+mvn eclipse:clean
 mvn clean
 
 
@@ -39,7 +40,8 @@ mkdir -p ./db4ounit/src/main/resources
 
 #################################################
 #get the db4o file
-wget http://213.203.204.172/downloads/db4o-6.0-java.zip
+#rm -f db4o-6.0-java.zip
+#wget http://213.203.204.172/downloads/db4o-6.0-java.zip
 
 
 
@@ -85,7 +87,7 @@ cp -R tmp/db4o-6.0/src/db4ounit/src/*					      ./db4ounit/src/main/java
 #################################################
 # clean tmp
 #
-rm -rf tmp
+#rm -rf tmp
 
 #################################################
 # build the environment
