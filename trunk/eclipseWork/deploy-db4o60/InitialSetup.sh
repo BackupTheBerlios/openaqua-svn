@@ -60,7 +60,6 @@ cd ..
 # rebuilds the environment
 #
 cp -R tmp/db4o-6.0/src/bloat/src/* 						      bloat/src/main/java/
-
 cp -R tmp/db4o-6.0/src/db4ojdk1.2/* 	            	   db4ojdk1.2/src/main/java
 cp -R tmp/db4o-6.0/src/db4ojdk5/*			               db4ojdk5/src/main/java
 cp -R tmp/db4o-6.0/src/db4oj/*	      	               db4oj/src/main/java

@@ -1,7 +1,7 @@
 #################################################
 # remove everything with maven
 #
-mvn clean
+mvn eclipse:clean clean
 
 
 
@@ -23,6 +23,7 @@ rm -rf ./bloat/src
 # remove potential existing original directories
 #
 find . -name \*~ -exec rm {} \;
+rm -rf tmp
 
-#rm -f db4o-6.0-java.zip
+rm -f db4o-6.0-java.zip
 
