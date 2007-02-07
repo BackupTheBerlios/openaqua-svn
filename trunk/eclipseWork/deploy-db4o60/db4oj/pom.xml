@@ -20,6 +20,31 @@
 			<artifactId>db4ounit</artifactId>
 		</dependency>
 	</dependencies>
-	
+
+
+	<build>
+		<plugins>
+			<!-- ======== add src dirs =============================== -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/java/core/src</source>
+								<source>src/main/java/test/src</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

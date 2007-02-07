@@ -42,9 +42,6 @@
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
-					<includes>
-						<include>**/src/**/*.java</include>
-					</includes>
 				</configuration>
 			</plugin>
 

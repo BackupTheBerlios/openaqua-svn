@@ -55,9 +55,9 @@
 
 	</dependencies>
 
-<!-- ======== use Java 1.5 =============================== -->
 	<build>
 		<plugins>
+			<!-- ======== use Java 1.5 =============================== -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -67,6 +67,7 @@
 				</configuration>
 			</plugin>
 
+			<!-- ======== add src dirs =============================== -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
