@@ -28,7 +28,38 @@
 			<groupId>com.db4o</groupId>
 			<artifactId>db4oj</artifactId>
 			<version>6.1-SNAPSHOT</version>
+			<type>pom</type>
 		</dependency>
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4ounit</artifactId>
+			<version>6.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4ojdk5</artifactId>
+			<version>6.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4ojdk1.2</artifactId>
+			<version>6.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4ounit.extensions</artifactId>
+			<version>6.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
 <!--
 		<dependency>
 			<groupId>jpox</groupId>

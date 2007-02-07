@@ -1,0 +1,13 @@
+
+#field         allowed values
+#-----         --------------
+#minute        0-59
+##hour          0-23
+#day of month  1-31
+#month         1-12 (or names, see below)
+#day of week   0-7 (0 or 7 is Sun, or use names)
+
+SHELL=/bin/bash
+MAILTO=tukaram
+
+30 2  *  *  *  /Volumes/user/tukaram/workspace/openaqua/eclipseWork/deploy-db4o61/Cronjob.sh
