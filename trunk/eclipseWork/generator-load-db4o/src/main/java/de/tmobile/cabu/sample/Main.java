@@ -17,6 +17,7 @@ import com.db4o.io.MemoryIoAdapter;
 
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.db4o.ServerConfiguration;
+import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.loadtest.MinuteTimer;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -44,18 +45,16 @@ public class Main {
 		
 		//remove old database file
 		new File(filename).delete();
-		//if (f.exists()) f.delete();
 
 		Db4o.configure().io(new MemoryIoAdapter ());
 		
 		
 		//setup ObjectServer
 		Db4o.configure().callConstructors(true);
-		//Db4o.configure().lockDatabaseFile(true);
-		//Db4o.configure().objectClass(Contract.class).objectField("contractKey").indexed(true);
-		//Db4o.configure().objectClass(ContractKey.class).objectField("key").indexed(true);
+		Db4o.configure().lockDatabaseFile(true);
 		//Db4o.configure().callbacks(false);
 		Db4o.configure().blockSize(8);
+		Db4o.configure().objectClass(Contract.class).minimumActivationDepth(1);
 		
 		
 		conf = new ServerConfiguration(filename, 10000, "localhost");

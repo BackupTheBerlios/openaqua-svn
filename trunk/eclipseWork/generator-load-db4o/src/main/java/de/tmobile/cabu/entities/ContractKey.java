@@ -3,9 +3,9 @@
  */
 package de.tmobile.cabu.entities;
 
+
+
 import com.db4o.config.annotations.Indexed;
-
-
 /**
  * @author behrenan
  *

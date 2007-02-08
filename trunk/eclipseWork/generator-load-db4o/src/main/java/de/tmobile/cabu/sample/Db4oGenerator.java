@@ -2,12 +2,11 @@ package de.tmobile.cabu.sample;
 
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 import org.apache.log4j.Logger;
 import com.db4o.ObjectContainer;
-import com.db4o.query.Predicate;
-
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractKey;
@@ -38,41 +37,47 @@ public class Db4oGenerator extends Thread{
 
 	}
 
+	
+	private Contract getContractFromDbByName(final int id) {
+		Query query=database.query();
+		query.constrain(Contract.class);
+		query.descend("name").constrain("name"+id);
+		ObjectSet result=query.execute();
 
-	private Contract getContractFromDb(final int id) {
-		//final ContractKey key = new ContractKey(id);
-		final int key = id;
-		List<Contract> ccl = database.query(new Predicate <Contract> () {
-			private static final long serialVersionUID = -8834454829647279541L;
-			public boolean match(final Contract concon){
-				//return concon.getContractKey() == key;
-				//return concon.getValue() == key;
-				return concon.contractKey.key == key;
-			}
-		});
-
-		if ((ccl==null) || (ccl.isEmpty() == true)) {
+		if (result.hasNext()) {
+			return (Contract)result.next();
+		} else {
 			logger.error("No matching contract found");
 			return null;
+		}
+	}
+	
+
+	private Contract getContractFromDb(final int id) {
+		Query query=database.query();
+		query.constrain(Contract.class);
+		query.descend("contractKey").constrain(new ContractKey(id));
+		ObjectSet result=query.execute();
+
+		if (result.hasNext()) {
+			return (Contract)result.next();
 		} else {
-			return ccl.listIterator().next();
+			logger.error("No matching contract found");
+			return null;
 		}
 	}
 
 	private ContractKey getContractKeyFromDb(final int id) {
-		//get contract Container
-		List<ContractKey> ccl = database.query(new Predicate <ContractKey> () {
-			private static final long serialVersionUID = -8930087358020376676L;
-			public boolean match(final ContractKey concon){
-				return concon.getKey() == id;
-			}
-		});
+		Query query=database.query();
+		query.constrain(ContractKey.class);
+		query.descend("key").constrain(id);
+		ObjectSet result=query.execute();
 
-		if ((ccl==null) || (ccl.isEmpty() == true)) {
-			logger.error("No matching contractkey found");
-			return null;
+		if (result.hasNext()) {
+			return (ContractKey)result.next();
 		} else {
-			return ccl.listIterator().next();
+			logger.error("No matching contract found");
+			return null;
 		}
 	}
 	
@@ -80,6 +85,7 @@ public class Db4oGenerator extends Thread{
 	public void setupDatabase() {		
 		for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
 			Contract c = new Contract(key, key);
+			c.setName("name"+key);
 			database.set(c);
 			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " Contracts");
@@ -103,9 +109,19 @@ public class Db4oGenerator extends Thread{
 		 */
 	}
 
+	private void executeReadByName(final int contractID) {
+		Contract c = getContractFromDbByName(contractID); //get contract
+		if (c.getContractKeyAsInteger() != contractID) {
+			logger.error("RError: Returned Contract has a wrong ID: " + c.getContractKeyAsInteger() + " expected was "+contractID);
+		}
+		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
+	}
 
 	private void executeRead(final int contractID) {
 		Contract c = getContractFromDb(contractID); //get contract
+		if (c.getContractKeyAsInteger() != contractID) {
+			logger.error("RError: Returned Contract has a wrong ID: " + c.getContractKeyAsInteger() + " expected was "+contractID);
+		}
 		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
 	}
 
@@ -126,6 +142,7 @@ public class Db4oGenerator extends Thread{
 				int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts(); //random contractID
 				if (readTest == true) {
 					executeRead(contractID);
+					//executeReadByName(contractID);					
 					Stats.getInstance().addReadResults(1);
 					//yield();
 				} else {

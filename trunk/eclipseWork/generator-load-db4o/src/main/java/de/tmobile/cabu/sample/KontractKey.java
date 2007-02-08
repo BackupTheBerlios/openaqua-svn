@@ -54,6 +54,7 @@ public class KontractKey {
 		// Retrieve objects
 		oc = Db4o.openFile("test.yap");
 		long start = System.currentTimeMillis();
+		/*
 		for (int i = 0; i < RETRIEVED_OBJECTS; i++) {
 			final int contractID = Math.abs(new Random().nextInt(STORED_OBJECTS));
 			List<KontractKey> ccl = oc.query(new Predicate<KontractKey>() {
@@ -66,6 +67,7 @@ public class KontractKey {
 				System.out.println("Benchmarking is fun...");
 			}
 		}
+		*/
 		long finish = System.currentTimeMillis();
 
 		System.out.println(RETRIEVED_OBJECTS + " objects in " +  (finish - start) / 1000.0 + " seconds.");

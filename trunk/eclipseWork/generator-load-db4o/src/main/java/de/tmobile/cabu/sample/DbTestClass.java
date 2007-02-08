@@ -72,6 +72,7 @@ public class DbTestClass {
 	
 	public void dumpDatabase(ObjectContainer database) {
 		System.out.println("----------Dump all ContractContainer---------------");
+		/*
 		List<ContractContainer> cc = database.query(new Predicate<ContractContainer>() {
 			private static final long serialVersionUID = -8917750895495402842L;
 			public boolean match(ContractContainer c) {
@@ -79,6 +80,7 @@ public class DbTestClass {
 			}
 		});
 		for (ContractContainer c : cc) 	c.dump();
+		*/
 
 		/*
 
