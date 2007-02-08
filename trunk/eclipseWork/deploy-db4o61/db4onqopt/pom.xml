@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>EDU.purdue.cs</groupId>
 			<artifactId>bloat</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 	</dependencies>
@@ -70,7 +70,7 @@
 
 			<!-- ======== add src dirs =============================== -->
 			<!--
-			Hint: The test dir doesn't compile since one or two files has errors
+			Hint: The test dir doesn't compile since one or two files have errors
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>

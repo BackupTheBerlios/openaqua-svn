@@ -3,34 +3,121 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>com.db4o</groupId>
-		<artifactId>db4o</artifactId>
-		<version>6.0</version>
-	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>EDU.purdue.cs</groupId>
 	<artifactId>bloat</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>bloat: Java Bytecode Optimizer</name>
-	<!--
+
 	<url>https://sourceforge.net/projects/javabloat</url>
-	-->
 
 	<description>
 	BLOAT is a Java bytecode optimizer and class rewriter implemented entirely in Java. By optimizing Java bytecode, code improvements can occur regardless of the compiler that compiled the bytecode or the virtual machine on which the bytecode is run.
 	</description>
-
-	<url>http://www.db4o.com/about/productinformation/</url>
-	<inceptionYear>2007</inceptionYear>
-
 
 	<organization>
 		<name>Purdue University</name>
 		<url>http://www.cs.purdue.edu/s3/projects/bloat/</url>
 	</organization>
 
+	<licenses>
+		<license>
+			<name>GPL V2</name>
+			<url>http://www.gnu.org/copyleft/gpl.html</url>
+			<distribution>repo</distribution>
+			<comments>GNU GENERAL PUBLIC LICENSE</comments>
+		</license>
+	</licenses>
+
+
+   <!-- =========use the openaqua repository================= -->
+   	<repositories>
+   		<repository>
+   			<releases>
+   				<enabled>true</enabled>
+   				<updatePolicy>always</updatePolicy>
+   				<checksumPolicy>warn</checksumPolicy>
+   			</releases>
+   			<snapshots>
+   				<enabled>true</enabled>
+   				<updatePolicy>never</updatePolicy>
+   				<checksumPolicy>fail</checksumPolicy>
+   			</snapshots>
+   			<id>maven.openaqua.de</id>
+   			<name>OpenAqua Maven Repository</name>
+   			<url>http://maven.openaqua.de</url>
+   			<layout>default</layout>
+   		</repository>
+   	</repositories>
+
+
+
+   <!-- ======== use Java 1.3 =============================== -->
+   	<build>
+   		<plugins>
+   			<plugin>
+   				<groupId>org.apache.maven.plugins</groupId>
+   				<artifactId>maven-compiler-plugin</artifactId>
+   				<configuration>
+   					<source>1.3</source>
+   					<target>1.3</target>
+   				</configuration>
+   			</plugin>
+   		</plugins>
+   		<extensions>
+   			<extension>
+   				<groupId>org.apache.maven.wagon</groupId>
+   				<artifactId>wagon-ftp</artifactId>
+   				<version>[1.0-beta-2,)</version>
+   			</extension>
+   		</extensions>
+   	</build>
+
+
+
+
+   <!-- ===================================================== -->
+
+   	<distributionManagement>
+
+   		<repository>
+   			<id>ftp.openaqua.de</id>
+   			<name>OpenAqua Maven Repository</name>
+   			<url>ftp://ftp.openaqua.de/html/maven</url>
+   		</repository>
+   	<!--
+   		<repository>
+   			<id>local.rep</id>
+   			<name>Local Private Repository</name>
+   			<url>file://$(M2_REPO)</url>
+   		</repository>
+   	-->
+   	</distributionManagement>
+
+
+   <!-- ===================================================== -->
+     <contributors>
+       <contributor>
+         <name>Claudia Behrens</name>
+         <email>Claudia.Behrens@openaqua.de</email>
+         <url>http://www.openaqua.de</url>
+         <organization>OpenAqua</organization>
+         <organizationUrl>http://www.openaqua.de</organizationUrl>
+         <roles>	<role>Maintainer OpenAqua Maven Repository</role>	</roles>
+         <timezone>1</timezone>
+       </contributor>
+
+       <contributor>
+         <name>Andrey Behrens</name>
+         <email>Andrey.Behrens@openaqua.de</email>
+         <url>http://www.openaqua.de</url>
+         <organization>OpenAqua</organization>
+         <organizationUrl>http://www.openaqua.de</organizationUrl>
+         <roles>	<role>User</role>	</roles>
+         <timezone>1</timezone>
+       </contributor>
+
+     </contributors>
 
 </project>
