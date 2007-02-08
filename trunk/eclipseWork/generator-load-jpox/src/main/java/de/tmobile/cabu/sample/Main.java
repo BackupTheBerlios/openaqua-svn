@@ -6,18 +6,10 @@ package de.tmobile.cabu.sample;
 import java.util.Timer;
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
-
-import com.db4o.Db4o;
-import com.db4o.io.MemoryIoAdapter;
-
-import de.tmobile.cabu.db4o.DatabaseServerRegistry;
-import de.tmobile.cabu.db4o.ServerConfiguration;
-import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.loadtest.MinuteTimer;
 import de.tmobile.cabu.loadtest.Configuration;
 
@@ -28,7 +20,6 @@ public class Main {
 	final static String serverKey = "testDatabase";
 	final static String filename = "foo.dat"; 
 	final private static Logger logger = Logger.getRootLogger();
-	static ServerConfiguration conf = null;
 	
 
 
@@ -45,24 +36,6 @@ public class Main {
 		
 		//remove old database file
 		new File(filename).delete();
-
-		Db4o.configure().io(new MemoryIoAdapter ());
-		
-		
-		//setup ObjectServer
-		Db4o.configure().callConstructors(true);
-		Db4o.configure().lockDatabaseFile(true);
-		//Db4o.configure().callbacks(false);
-		Db4o.configure().blockSize(8);
-		Db4o.configure().objectClass(Contract.class).minimumActivationDepth(1);
-		
-		
-		conf = new ServerConfiguration(filename, 10000, "localhost");
-		//conf = new ServerConfiguration(filename, 0, "localhost");
-		final String username = "test";
-		final String password = "test";
-		conf.addUser(username, password);
-		DatabaseServerRegistry.getInstance().registerServer(serverKey, conf);
 
 		
 		logger.info( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
@@ -90,7 +63,6 @@ public class Main {
 		//Db4oGenerator main = new Db4oGenerator("main", serverKey, false);
 		//main.ListAllContracts();
 		
-		DatabaseServerRegistry.getInstance().stopAndRemoveAllServers();
 		logger.info( "================Runtime was " +runTime + "ms");
 
 
@@ -105,13 +77,13 @@ public class Main {
 	private static void execution () throws IOException  {		
 
 		//setup all threads
-		Db4oGenerator[] threadArray = new Db4oGenerator[Configuration.getInstance().getMaxConnections()];
+		JpoxGenerator[] threadArray = new JpoxGenerator[Configuration.getInstance().getMaxConnections()];
 		int readInstance = 0;
 		int writeInstance = 0;
 		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
-			if (i%2==1) {		threadArray[i] = new Db4oGenerator( "" + i, serverKey, true);
+			if (i%2==1) {		threadArray[i] = new JpoxGenerator( "" + i, serverKey, true);
 								readInstance++;
-			} else {			threadArray[i] = new Db4oGenerator( "" + i, serverKey, false);
+			} else {			threadArray[i] = new JpoxGenerator( "" + i, serverKey, false);
 								writeInstance++;
 			}
 		}
@@ -143,7 +115,7 @@ public class Main {
 		//setup new
 		try {
 			logger.info("Setup new database ... ");
-			Db4oGenerator main = new Db4oGenerator("main", serverKey, false);
+			JpoxGenerator main = new JpoxGenerator("main", serverKey, false);
 			main.setupDatabase();
 			logger.info("Setup new database ... done ");
 			result = true;
