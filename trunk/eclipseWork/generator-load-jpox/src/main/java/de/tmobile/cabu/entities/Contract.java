@@ -14,6 +14,15 @@ public class Contract {
 	private Integer value;
 	private String stringValue;
 	private String name;
+	
+	private Contract() {
+		contractKey = new ContractKey(0);
+		value = 0;
+		stringValue = "";
+		name = "";		
+	}
+	
+	
 
 	public Contract(final int contractKey, final int value) {
 		super();

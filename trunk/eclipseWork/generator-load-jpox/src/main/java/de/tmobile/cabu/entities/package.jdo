@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE jdo PUBLIC 
+    "-//Sun Microsystems, Inc.//DTD Java Data Objects Metadata 2.0//EN" 
+    "http://java.sun.com/dtd/jdo_2_0.dtd">
+<jdo>
+    <package name="de.tmobile.cabu.entities">
+        <class name="Contract" identity-type="datastore">
+            <inheritance strategy="new-table"/>
+            <field name="contractKey" persistence-modifier="persistent">
+                <column length="100" jdbc-type="VARCHAR"/>
+            </field>
+            <field name="stringValue" persistence-modifier="persistent">
+                <column length="255" jdbc-type="VARCHAR"/>
+            </field>
+            <field name="value" persistence-modifier="persistent"/>
+                <column length="255" jdbc-type="INT"/>			
+        </class>
+
+        <class name="ContractKey" identity-type="datastore">
+            <inheritance strategy="new-table"/>
+            <field name="key" persistence-modifier="persistent">
+                <column length="20" jdbc-type="VARCHAR"/>
+            </field>
+        </class>
+    </package>
+</jdo>
