@@ -21,8 +21,7 @@ public class Contract {
 		stringValue = "";
 		name = "";		
 	}
-	
-	
+		
 
 	public Contract(final int contractKey, final int value) {
 		super();

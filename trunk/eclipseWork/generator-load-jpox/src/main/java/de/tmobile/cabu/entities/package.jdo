@@ -4,23 +4,26 @@
     "http://java.sun.com/dtd/jdo_2_0.dtd">
 <jdo>
     <package name="de.tmobile.cabu.entities">
-        <class name="Contract" identity-type="datastore">
-            <inheritance strategy="new-table"/>
-            <field name="contractKey" persistence-modifier="persistent">
-                <column length="100" jdbc-type="VARCHAR"/>
-            </field>
-            <field name="stringValue" persistence-modifier="persistent">
-                <column length="255" jdbc-type="VARCHAR"/>
-            </field>
-            <field name="value" persistence-modifier="persistent"/>
-                <column length="255" jdbc-type="INT"/>			
-        </class>
-
-        <class name="ContractKey" identity-type="datastore">
+		
+		
+        <class name="ContractKey" table="CONTRACTKEY" identity-type="datastore">
             <inheritance strategy="new-table"/>
             <field name="key" persistence-modifier="persistent">
-                <column length="20" jdbc-type="VARCHAR"/>
+                <column name ="KEY" />
             </field>
         </class>
+		
+        <class name="Contract" table="CONTRACT" identity-type="datastore">
+            <inheritance strategy="new-table"/>
+            <field name="contractKey" persistence-modifier="persistent">
+                <column name = "KEY" />
+            </field>
+            <field name="stringValue" persistence-modifier="persistent">
+                <column name="STRINGVALUE" column length="255" jdbc-type="VARCHAR"/>
+            </field>
+            <field name="value" persistence-modifier="persistent"/>
+                <column name="VALUE"/>			
+        </class>
+
     </package>
 </jdo>

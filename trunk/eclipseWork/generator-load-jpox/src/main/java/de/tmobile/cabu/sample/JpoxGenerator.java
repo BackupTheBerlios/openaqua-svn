@@ -5,8 +5,11 @@ package de.tmobile.cabu.sample;
 
 import java.io.IOException;
 import java.util.Random;
-
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManagerFactory;
 import org.apache.log4j.Logger;
+import org.jpox.PersistenceManager;
+import org.jpox.Transaction;
 
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractKey;
@@ -24,6 +27,8 @@ public class JpoxGenerator extends Thread{
 	final private Random random = new Random();
 	final private boolean readTest;
 	final private static Logger logger = Logger.getRootLogger();
+	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("jpox.properties");
+	private PersistenceManager pm = (PersistenceManager) pmf.getPersistenceManager();
 
 
 
@@ -32,34 +37,40 @@ public class JpoxGenerator extends Thread{
 		this.readTest = readTest;
 	}
 
-	
+
 	private Contract getContractFromDbByName(final int id) {
 		return null;
 	}
-	
+
 
 	private Contract getContractFromDb(final int id) {
-			return null;
+		return null;
 	}
 
 	private ContractKey getContractKeyFromDb(final int id) {
-			return null;
+		return null;
 	}
-	
-	
+
+
 	public void setupDatabase() {		
-		for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
-			Contract c = new Contract(key, key);
-			c.setName("name"+key);
-			//database.set(c);
-			if ((key % 1000) == 0) {
-				logger.debug("created " + key + " Contracts");
+		Transaction tx=(Transaction) pm.currentTransaction();
+		try  {
+			tx.begin();
+			for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
+				Contract c = new Contract(key, key);
+				c.setName("name"+key);
+				pm.makePersistent(c);
+				if ((key % 1000) == 0) 	logger.debug("created " + key + " Contracts");
 			}
 
+			tx.commit();
+			logger.debug("created " + Configuration.getInstance().getMaxContracts() + " Contracts");
+			logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
+		} finally {
+			if (tx.isActive()) tx.rollback();
+			pm.close();
 		}
-		logger.debug("created " + Configuration.getInstance().getMaxContracts() + " Contracts");
-		//database.commit();
-		logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
+
 	}
 
 
@@ -74,7 +85,7 @@ public class JpoxGenerator extends Thread{
 		 */
 	}
 
-	
+
 	private void executeReadByName(final int contractID) {
 		Contract c = getContractFromDbByName(contractID); //get contract
 		if (c.getContractKeyAsInteger() != contractID) {
@@ -95,7 +106,7 @@ public class JpoxGenerator extends Thread{
 		ContractKey c = getContractKeyFromDb(contractID); //get contract
 		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
 	}
-	
+
 
 	/**
 	 * The thread execution method
@@ -124,6 +135,6 @@ public class JpoxGenerator extends Thread{
 		}
 		//if (database != null)		database.close();
 	}
-	
+
 
 }
