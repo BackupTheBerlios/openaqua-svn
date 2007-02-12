@@ -9,21 +9,16 @@
         <class name="ContractKey" table="CONTRACTKEY" identity-type="datastore">
             <inheritance strategy="new-table"/>
             <field name="key" persistence-modifier="persistent">
-                <column name ="KEY" />
+                <column name="KEY" />
             </field>
-        </class>
-		
-        <class name="Contract" table="CONTRACT" identity-type="datastore">
-            <inheritance strategy="new-table"/>
-            <field name="contractKey" persistence-modifier="persistent">
-                <column name = "KEY" />
-            </field>
-            <field name="stringValue" persistence-modifier="persistent">
-                <column name="STRINGVALUE" column length="255" jdbc-type="VARCHAR"/>
-            </field>
-            <field name="value" persistence-modifier="persistent"/>
-                <column name="VALUE"/>			
         </class>
 
+        <class name="Contract" table="CONTRACT" identity-type="datastore">
+            <inheritance strategy="new-table"/>
+            <field name="contractKey" persistence-modifier="persistent" />
+            <field name="stringValue" persistence-modifier="persistent" />
+            <field name="value" persistence-modifier="persistent" />
+        </class>
+				
     </package>
 </jdo>
