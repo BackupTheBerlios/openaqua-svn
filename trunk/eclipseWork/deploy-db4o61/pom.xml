@@ -115,7 +115,7 @@
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
+				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 			<id>maven.openaqua.de</id>
@@ -160,6 +160,11 @@
 			<name>OpenAqua Maven Repository</name>
 			<url>ftp://ftp.openaqua.de/html/maven</url>
 		</repository>
+		<snapshotRepository>
+			<id>ftp.openaqua.de</id>
+			<name>OpenAqua Maven Repository</name>
+			<url>ftp://ftp.openaqua.de/html/maven</url>
+		</snapshotRepository>
 	<!--
 		<repository>
 			<id>local.rep</id>
