@@ -113,6 +113,8 @@ final public class DatabaseServerRegistry {
 		//return s.getDatabaseFilename();
 		return null;
 	}
+        
+        
 
 	/*
 	 * Stop all known servers but don't remove them from the system.<br>
