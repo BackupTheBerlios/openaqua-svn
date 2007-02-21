@@ -1,0 +1,30 @@
+import org::fornax::cartridges::uml2::javabasic;
+
+String DTJavaName (uml::Type t) :
+	DTName(t, "Java");
+
+String DTName (uml::Type t, String spec) :
+	JAVA org.fornax.cartridges.uml2.javabasic.DataTypeHelper.getDataTypeName(org.eclipse.uml2.uml.Type, java.lang.String);
+
+String ReturnType(uml::Parameter p):
+	JAVA org.fornax.cartridges.uml2.javabasic.DataTypeHelper.getReturnType(org.eclipse.uml2.uml.Parameter);
+
+/**
+*	Returns the default value for the given <code>uml::Type</code>
+*	@param type The <code>uml::Type</code> the default value to return
+*/
+String DefaultValue(uml::Type type):
+	JAVA org.fornax.cartridges.uml2.javabasic.DataTypeHelper.getDefaultValue(org.eclipse.uml2.uml.Type);
+
+/**
+*	Returns the default value for the given <code>uml::Property</code>. This is different to
+*	<code>DefaultValue(uml::Type type)</code>. In this extension the modelled default value will be
+*	evaluated.
+*	@param type The <code>uml::Property</code> the default value to return
+*/
+String DefaultValue(uml::Property property):
+	JAVA org.fornax.cartridges.uml2.javabasic.DataTypeHelper.getDefaultValue(org.eclipse.uml2.uml.Property);
+
+Object TaggedValue(uml::Classifier classifier, String stereoTypeName, String name, String type):
+	JAVA org.fornax.cartridges.uml2.javabasic.DataTypeHelper.getTaggedValue(org.eclipse.uml2.uml.Classifier,
+		java.lang.String, java.lang.String, java.lang.String);

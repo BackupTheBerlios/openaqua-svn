@@ -1,0 +1,23 @@
+«EXTENSION org::fornax::cartridges::uml2::javabasic::extensions::Helper»
+
+/**
+*	Creates a java class with full support for generalization and realization
+*/
+«DEFINE class FOR uml::Class»
+	«FILE getFQNPackagePath()+"/"+name+".java"»
+		package «getFQNPackageName()»;
+		«EXPAND Documentation::documentation»
+		public «IF isAbstract»abstract«ENDIF» class «name»	
+			«EXPAND Generalization::generalization»
+			«EXPAND Realization::realization»{
+			«EXPAND Attribute::attribute»			
+			«EXPAND Association::attribute»
+			«EXPAND Attribute::staticAttribute»
+			
+			«EXPAND Attribute::getterSetter»
+			«EXPAND Operation::operation»
+			«EXPAND Generalization::operation»
+			«EXPAND Association::accessors»
+		}
+	«ENDFILE»
+«ENDDEFINE»

@@ -1,0 +1,21 @@
+
+String toSetter(uml::Property property):
+	"set"+property.name.toFirstUpper();
+	
+String toGetter(uml::Property property):
+	"get"+property.name.toFirstUpper();
+	
+String toAdder(uml::Property property):
+	"addTo"+property.name.toFirstUpper();
+	
+String toAddAll(uml::Property property):
+	"addAllTo"+property.name.toFirstUpper();
+	
+String toRemover(uml::Property property):
+	"removeFrom"+property.name.toFirstUpper();
+	
+String toRemoveAll(uml::Property property):
+	"removeAllFrom"+property.name.toFirstUpper();
+	
+String toVar(uml::Type type):
+	type.name.toFirstLower();

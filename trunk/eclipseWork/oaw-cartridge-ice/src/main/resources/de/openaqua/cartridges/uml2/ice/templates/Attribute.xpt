@@ -1,0 +1,97 @@
+«EXTENSION org::fornax::cartridges::uml2::javabasic::extensions::Helper»
+«EXTENSION org::fornax::cartridges::uml2::javabasic::extensions::Names»
+«EXTENSION org::fornax::cartridges::uml2::javabasic::extensions::DataType»
+
+/**
+*	Creates the a field for every attribute the uml::Classifier must implement.
+*	All attributes from interfaces this uml::Classifier must implement is included.
+*/
+«DEFINE attribute FOR uml::Classifier»
+	«FOREACH AllAttributes().typeSelect(uml::Property).select(a|!a.isStatic) AS attr»
+		«EXPAND field FOR attr»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+* 	Creates a static field. The attribute must habe the static option set in the model.
+*/
+«DEFINE staticAttribute FOR uml::Classifier»
+	«FOREACH attribute.typeSelect(uml::Property).select(a|a.isStatic) AS attr»
+		«EXPAND Documentation::documentation FOR attr»
+		public static «attr.type.name» «attr.name.toUpperCase()» = «attr.type.DefaultValue()»;
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+* Creates the getter/setter methods for the uml::Classiefier.
+* Here all interface that must be implemented are considered.
+*/
+«DEFINE getterSetter FOR uml::Classifier»
+	«FOREACH AllAttributes().typeSelect(uml::Property).select(a|!a.isStatic) AS attr»
+		«EXPAND getterSetter FOR attr»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+* Creates a field for the given uml::Property
+*/
+«DEFINE field FOR uml::Property»
+	«IF isNavigable()»
+	 	«IF getUpper() == -1»
+	 		private «IF isOrdered»java.util.List«ELSE»java.util.Set«ENDIF» «name» = 
+	 			new «IF isOrdered»java.util.ArrayList«ELSE»java.util.HashSet«ENDIF»();
+	 	«ELSE»
+	 		«visibility» «type.name» «name» = «DefaultValue()»;
+	 	«ENDIF»
+	 «ENDIF»
+«ENDDEFINE»
+
+/**
+* Creates the getter/setter for the  given uml::Property of an interface
+*/
+«DEFINE getterSetterInterface FOR uml::Property»
+	«IF isNavigable()»
+		«IF getUpper() == -1»
+			«EXPAND Documentation::documentationGetter»
+			public «IF isOrdered»java.util.List«ELSE»java.util.Set«ENDIF» «toGetter()»();
+			
+			«EXPAND Documentation::documentationSetter»
+			public void «toSetter()»(«IF isOrdered»java.util.List«ELSE»java.util.Set«ENDIF» «name»);
+		«ELSEIF getUpper() == 1»
+			«EXPAND Documentation::documentationGetter»
+		public «type.name» «toGetter()»();
+	
+		«EXPAND Documentation::documentationSetter»
+		public void «toSetter()»(«type.name» «name»);
+		«ENDIF»
+	«ENDIF»	
+«ENDDEFINE»
+
+/**
+* Creates the getter/setter for the given uml::Property
+*/
+«DEFINE getterSetter FOR uml::Property»
+	«IF isNavigable()»
+		«IF getUpper() == -1»
+			«EXPAND Documentation::documentationGetter»
+			public «IF isOrdered»java.util.List«ELSE»java.util.Set«ENDIF» «toGetter()»(){
+				return «name»;
+			}
+			
+			«EXPAND Documentation::documentationSetter»
+			public void «toSetter()»(«IF isOrdered»java.util.List«ELSE»java.util.Set«ENDIF» «name»){
+				this.«name» = «name»;
+			}
+		«ELSEIF getUpper() == 1»
+			«EXPAND Documentation::documentationGetter»
+		public «type.name» «toGetter()»(){
+			return «name»;
+		}
+	
+		«EXPAND Documentation::documentationSetter»
+		public void «toSetter()»(«type.name» «name»){
+			this.«name» = «name»;
+		}
+		«ENDIF»
+	«ENDIF»	
+«ENDDEFINE»
