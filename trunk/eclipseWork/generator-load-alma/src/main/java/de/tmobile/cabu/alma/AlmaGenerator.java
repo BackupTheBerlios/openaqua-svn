@@ -32,6 +32,7 @@ public class AlmaGenerator extends Thread{
 		clientSocket = new Socket( Configuration.getInstance().getAlmaHost(), Configuration.getInstance().getAlmaPort());
 		outStream = clientSocket.getOutputStream();
 		resStream = clientSocket.getInputStream();
+		System.out.println("Thread " + threadName + " created");
 
 	}
 

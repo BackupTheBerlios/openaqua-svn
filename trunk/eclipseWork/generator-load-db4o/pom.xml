@@ -55,6 +55,19 @@
 		</repository>
 	</repositories>
 
+	<profiles>
+        <profile>
+            <id>netbeans-public</id>
+            <activation>
+                <property>
+                    <name>netbeans.execution</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build />
+        </profile>
+    </profiles>
+
 	<scm>
 		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
 		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</developerConnection>
