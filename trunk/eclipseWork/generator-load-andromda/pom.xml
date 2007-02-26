@@ -14,6 +14,10 @@
 		<!--
 			 -->
 	</modules>
+
+	<properties>
+	</properties>
+	
 	
 	<dependencies>
 		<dependency>
@@ -33,6 +37,84 @@
 	</dependencies>
 
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.andromda.profiles.uml14</groupId>
+				<artifactId>andromda-profile</artifactId>
+				<version>3.2</version>
+				<type>xml.zip</type>
+				<scope>runtime</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.andromda</groupId>
+				<artifactId>andromda-core</artifactId>
+				<version>3.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xalan</groupId>
+						<artifactId>xalan</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.andromda.translationlibraries</groupId>
+				<artifactId>andromda-ocl-translation-core</artifactId>
+				<version>3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.translationlibraries</groupId>
+				<artifactId>andromda-ocl-validation-library</artifactId>
+				<version>3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.cartridges</groupId>
+				<artifactId>andromda-spring-cartridge</artifactId>
+				<version>3.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.cartridges</groupId>
+				<artifactId>andromda-hibernate-cartridge</artifactId>
+				<version>3.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.cartridges</groupId>
+				<artifactId>andromda-java-cartridge</artifactId>
+				<version>3.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.cartridges</groupId>
+				<artifactId>andromda-bpm4struts-cartridge</artifactId>
+				<version>3.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.andromda.translationlibraries</groupId>
+				<artifactId>andromda-ocl-query-library</artifactId>
+				<version>3.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+	
 	<scm>
 		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-andromda</connection>
 		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-andromda</developerConnection>
@@ -41,14 +123,31 @@
 	</scm>
 
 	<build>
-		<defaultGoal>compile</defaultGoal>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.andromda.maven.plugins</groupId>
+					<artifactId>andromdapp-maven-plugin</artifactId>
+               <version>3.2</version>
+					<!--
+					<configuration>
+						<scriptWrapper>org.andromda.scriptwrappers.GroovyScriptWrapper</scriptWrapper>
+						<locations>
+							<location>
+								<rootPath>${pom.basedir}/src/main/java</rootPath>
+						 	</location>
+						</locations>
+					</configuration>
+					-->
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
-			
-			<!--============== configure the andromda plugin =================-->
 			<plugin>
-				<groupId>org.andromda.maven.plugins</groupId>
-				<artifactId>andromdapp-maven-plugin</artifactId>
-				<version>3.2</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.2</version>
 			</plugin>
 
 			<!--============== configure maven for use by Eclipse =================-->
@@ -82,10 +181,10 @@
 							<mainClass>de.tmobile.Main</mainClass>
 							<packageName>de.tmobile.generator</packageName>
 							<!-- options
-								  <addClasspath>true</addClasspath>
-								  <addExtensions/>
-								  <classpathPrefix/>
-								  -->
+							  <addClasspath>true</addClasspath>
+							  <addExtensions/>
+							  <classpathPrefix/>
+							  -->
 						</manifest>
 						<manifestEntries>
 							<mode>development</mode>
@@ -99,6 +198,7 @@
 		<!-- end of plugin configuring -->
 		</plugins>
 	</build>
+	
 
 	<repositories>
 		<repository>
@@ -123,4 +223,8 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<prerequisites>
+		<maven>2.0.4</maven>
+	</prerequisites>
+	
 </project>
