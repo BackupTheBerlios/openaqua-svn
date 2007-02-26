@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tmobile.cabu</groupId>
-	<artifactId>generator-load-andromda</artifactId>
+	<artifactId>generator-load-andromda-parent</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
-   <name>generator-load-andromda</name>
+	<version>1.0-SNAPSHOT</version>
+	<name>generator-load-andromda-parent</name>
 
 	<dependencies>
 		<dependency>
@@ -28,15 +28,17 @@
 
 
 	<scm>
-		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-jpox</connection>
-		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-jpox</developerConnection>
+		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-andromda</connection>
+		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-andromda</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-jpox/</url>
+		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-andromda/</url>
 	</scm>
 
 	<build>
 		<defaultGoal>compile</defaultGoal>
 		<plugins>
+			
+			<!--============== configure the andromda plugin =================-->
 			<plugin>
 				<groupId>org.andromda.maven.plugins</groupId>
 				<artifactId>andromdapp-maven-plugin</artifactId>
@@ -88,10 +90,8 @@
 				</configuration>
 			</plugin>
 
-			
+		<!-- end of plugin configuring -->
 		</plugins>
-
-		
 	</build>
 
 	<repositories>
