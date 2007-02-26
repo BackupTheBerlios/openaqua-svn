@@ -5,11 +5,11 @@ package de.tmobile.cabu.sample;
 
 import java.io.IOException;
 import java.util.Random;
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManagerFactory;
+//import javax.jdo.JDOHelper;
+//import javax.jdo.PersistenceManagerFactory;
 import org.apache.log4j.Logger;
-import org.jpox.PersistenceManager;
-import org.jpox.Transaction;
+//import org.jpox.PersistenceManager;
+//import org.jpox.Transaction;
 
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractKey;
@@ -27,8 +27,8 @@ public class JpoxGenerator extends Thread{
 	final private Random random = new Random();
 	final private boolean readTest;
 	final private static Logger logger = Logger.getRootLogger();
-	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("jpox.properties");
-	private PersistenceManager pm = (PersistenceManager) pmf.getPersistenceManager();
+//	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("jpox.properties");
+//	private PersistenceManager pm = (PersistenceManager) pmf.getPersistenceManager();
 
 
 
@@ -53,22 +53,22 @@ public class JpoxGenerator extends Thread{
 
 
 	public void setupDatabase() {		
-		Transaction tx=(Transaction) pm.currentTransaction();
+		//Transaction tx=(Transaction) pm.currentTransaction();
 		try  {
-			tx.begin();
+			//tx.begin();
 			for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
 				Contract c = new Contract(key, key);
 				c.setName("name"+key);
-				pm.makePersistent(c);
+				//pm.makePersistent(c);
 				if ((key % 1000) == 0) 	logger.debug("created " + key + " Contracts");
 			}
 
-			tx.commit();
+			//tx.commit();
 			logger.debug("created " + Configuration.getInstance().getMaxContracts() + " Contracts");
 			logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
 		} finally {
-			if (tx.isActive()) tx.rollback();
-			pm.close();
+			//if (tx.isActive()) tx.rollback();
+			//pm.close();
 		}
 
 	}

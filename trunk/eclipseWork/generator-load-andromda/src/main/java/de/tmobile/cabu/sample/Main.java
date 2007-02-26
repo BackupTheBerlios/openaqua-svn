@@ -7,8 +7,8 @@ import java.util.Timer;
 import java.io.File;
 import java.io.IOException;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManagerFactory;
+//import javax.jdo.JDOHelper;
+//import javax.jdo.PersistenceManagerFactory;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -24,7 +24,7 @@ public class Main {
 	final static String serverKey = "testDatabase";
 	final static String filename = "foo.dat"; 
 	final private static Logger logger = Logger.getRootLogger();
-	private static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("jpox.properties");	
+	//private static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("jpox.properties");	
 
 
 	public static void main(String[] args) throws IOException {
@@ -37,7 +37,7 @@ public class Main {
 		logger.setLevel( Level.ALL);
 		long runTime = 0;
 		
-		pmf.close();
+		//pmf.close();
 		
 		
 		//remove old database file
