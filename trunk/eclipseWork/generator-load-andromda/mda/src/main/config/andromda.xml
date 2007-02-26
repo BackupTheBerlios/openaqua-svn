@@ -16,12 +16,12 @@
 
 	
 	<repositories>
-		<repository name="magicDraw">
+		<repository name="emf-uml2">
 			<models>
-				<model type="magicDraw	">
+				<model type="emf-uml2">
 					<uri>${model.uri}</uri>
 					<moduleSearchLocations>
-						<location patterns="**/*.mdxml">
+						<location patterns="**/*.uml2">
 							${settings.localRepository}/org/andromda/profiles/emf/uml2
 						</location>
 					</moduleSearchLocations>
