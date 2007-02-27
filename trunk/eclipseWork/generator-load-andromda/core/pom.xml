@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.andromda.samples.crud</groupId>
-        <artifactId>crud</artifactId>
-        <version>3.2</version>
+       <groupId>de.openaqua.dev</groupId>
+       <artifactId>generator-load-andromda</artifactId>
+       <version>1.0</version>
     </parent>
-    <artifactId>crud-core</artifactId>
+    <artifactId>core</artifactId>
     <packaging>ejb</packaging>
     <name>AndroMDA CRUD Sample Core Business Tier</name>
     <dependencies>
         <dependency>
             <groupId>${pom.groupId}</groupId>
-            <artifactId>crud-common</artifactId>
+            <artifactId>common</artifactId>
             <version>${pom.version}</version>
         </dependency>
         <dependency>
