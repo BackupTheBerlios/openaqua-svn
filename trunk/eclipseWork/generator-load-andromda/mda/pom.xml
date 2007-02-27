@@ -78,7 +78,6 @@
 	</build>
 	
 	<properties>
-		 <!--<model.uri>file:${project.build.sourceDirectory}/emf/uml.uml2</model.uri>-->
 		 <model.uri>file:${project.build.sourceDirectory}/</model.uri>
 		 <filter></filter>
 		 <validation>true</validation>
