@@ -7,18 +7,24 @@
         <host>localhost</host>
         <port>4446</port>
     </server>
+
+
+	 <!--where are the models???-->
     <repositories>
-        <repository name="netBeansMDR">
-            <models>
-                <model>
-                    <uri>${andromda.model.uri}</uri>
-                    <moduleSearchLocations>
-                        <location patterns="**/*">${andromda.dist.dir}/andromda/org/andromda/profiles</location>
-                    </moduleSearchLocations>                    
-                </model>
-            </models>
+		 <repository name="emf-uml2">
+			 <models>
+				 <model type="emf-uml2">
+					 <uri>${model.uri}</uri>
+					 <moduleSearchLocations>
+						 <location patterns="**/*.uml2">${project.build.sourceDirectory}/</location>
+						 <!--<location patterns="**/*.uml2">${andromda.dist.dir}/andromda/org/andromda/profiles</location>-->
+					 </moduleSearchLocations>
+				 </model>
+			 </models>
         </repository>
     </repositories>
+
+	 
     <mappingsSearchLocations>
         <location patterns="**/*.xml">${andromda.mappings.dir}</location>
     </mappingsSearchLocations>
