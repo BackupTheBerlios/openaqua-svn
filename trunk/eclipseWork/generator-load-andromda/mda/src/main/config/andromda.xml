@@ -30,6 +30,14 @@
                 <property name="hibernateVersion">3</property>
             </properties>
         </namespace>
+		  <namespace name="java">
+			  <properties>
+				  <property name="enumerations">${common.generated.dir}</property>
+				  <property name="exceptions">${common.generated.dir}</property>
+				  <property name="value-objects">${common.generated.dir}</property>
+			  </properties>
+		  </namespace>
+<!--		  
         <namespace name="spring">
             <properties>
                 <property name="dataSource">${dataSource}</property>
@@ -66,13 +74,6 @@
                 <property name="cache">${core.generated.dir}</property>
             </properties>
         </namespace>
-        <namespace name="java">
-            <properties>
-                <property name="enumerations">${common.generated.dir}</property>
-                <property name="exceptions">${common.generated.dir}</property>
-                <property name="value-objects">${common.generated.dir}</property>
-            </properties>
-        </namespace>
         <namespace name="bpm4struts">
             <properties>
                 <property name="forms">${web.generated.dir}</property>
@@ -87,5 +88,6 @@
                 <property name="manageableServiceAccessorPattern">${application.package}.ManageableServiceLocator.instance().get{1}()</property>
             </properties>
         </namespace>
+		  -->
     </namespaces>
 </andromda>

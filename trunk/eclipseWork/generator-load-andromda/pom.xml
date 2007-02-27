@@ -376,10 +376,10 @@
             org.hibernate.dialect.HSQLDialect
         </hibernate.dialect>
         <jboss.home>${env.JBOSS_HOME}</jboss.home>
-        <application.id>crud</application.id>
-        <application.package>org.andromda.samples.crud</application.package>
-        <application.name>AndroMDA CRUD Sample</application.name>
-        <application.version>3.2</application.version>
+        <application.id>connection</application.id>
+        <application.package>de.openaqua.dev.connection</application.package>
+        <application.name>AndroMDA Sample</application.name>
+        <application.version>1.0</application.version>
         <dataSource.name>jdbc/${application.id}</dataSource.name>
         <dataSource>java:/${dataSource.name}</dataSource>
     </properties>
