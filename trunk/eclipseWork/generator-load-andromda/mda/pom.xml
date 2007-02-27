@@ -41,6 +41,8 @@
             <artifactId>andromda-ocl-query-library</artifactId>
         </dependency>
     </dependencies>
+    
+      
     <build>
         <sourceDirectory>${project.basedir}/src/main/uml</sourceDirectory>
         <plugins>
