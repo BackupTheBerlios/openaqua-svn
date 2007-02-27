@@ -37,7 +37,7 @@
 				  <property name="value-objects">${common.generated.dir}</property>
 			  </properties>
 		  </namespace>
-<!--		  
+
         <namespace name="spring">
             <properties>
                 <property name="dataSource">${dataSource}</property>
@@ -57,6 +57,7 @@
                 <property name="value-objects">${common.generated.dir}</property>
             </properties>
         </namespace>
+<!--		  
         <namespace name="hibernate">
             <properties>
                 <property name="hibernateEnableCache">false</property>
