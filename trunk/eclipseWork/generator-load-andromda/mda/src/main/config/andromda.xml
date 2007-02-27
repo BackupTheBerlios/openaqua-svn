@@ -11,23 +11,19 @@
 
 	 <!--where are the models???-->
     <repositories>
-		 <repository name="emf-uml2">
+		 <repository name="netBeansMDR">
 			 <models>
-				 <model type="emf-uml2">
+				 <model>
 					 <uri>${model.uri}</uri>
 					 <moduleSearchLocations>
-						 <location patterns="**/*.uml2">${project.build.sourceDirectory}/</location>
-						 <!--<location patterns="**/*.uml2">${andromda.dist.dir}/andromda/org/andromda/profiles</location>-->
+						 <location patterns="**/*.xml.zip, **/*.uml2">${settings.localRepository}/org/andromda/profiles</location>
 					 </moduleSearchLocations>
 				 </model>
 			 </models>
-        </repository>
+		 </repository>
     </repositories>
 
 	 
-    <mappingsSearchLocations>
-        <location patterns="**/*.xml">${andromda.mappings.dir}</location>
-    </mappingsSearchLocations>
     <namespaces>
         <namespace name="default">
             <properties>
