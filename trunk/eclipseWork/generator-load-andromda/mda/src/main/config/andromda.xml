@@ -4,14 +4,10 @@
         <property name="cartridgeFilter">${filter}</property>
     </properties>
     <repositories>
-        <repository name="netBeansMDR">
+        <repository name="emf-uml2">
             <models>
-                <model>
+                <model type="emf-uml2">
                     <uri>${model.uri}</uri>
-                    <moduleSearchLocations>
-                        <location>${maven.repo.local}/andromda/xml.zips</location>
-                        <location patterns="**/*.xml.zip">${settings.localRepository}/org/andromda/profiles/uml14</location>
-                    </moduleSearchLocations>
                 </model>
             </models>            
         </repository>
