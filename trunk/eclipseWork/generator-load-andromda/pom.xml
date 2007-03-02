@@ -347,11 +347,11 @@
 	
 	<modules>
 		<module>mda</module>
-		<module>common</module>
 		<module>core</module>
-		<!--
+		<module>common</module>
 		<module>app</module>
 		<module>web</module>
+		<!--
 		-->
 	</modules>
 	<properties>
