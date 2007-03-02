@@ -286,6 +286,8 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+		  
+		  
     </dependencies>
     <build>
         <defaultGoal>install</defaultGoal>
@@ -323,19 +325,36 @@
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.2</version>
                 </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-    <modules>
-        <module>mda</module>
-		  <!--
-				<module>common</module>
-				<module>core</module>
-				<module>web</module>
-				<module>app</module>
-				-->
-    </modules>
-    <properties>
+			</plugins>
+		</pluginManagement>
+
+		  
+		<!--============== Use java 1.5=================-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+		  </plugin>
+	  </plugins>
+
+	  
+	</build>
+
+	
+	<modules>
+		<module>mda</module>
+		<module>common</module>
+		<module>core</module>
+		<!--
+		<module>app</module>
+		<module>web</module>
+		-->
+	</modules>
+	<properties>
         <!--
             Change this to generate to the correct MDA database mappings,
             For MySql use: MySQL

@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>de.openaqua.dev</groupId>
-        <artifactId>generator-load-andromda</artifactId>
-        <version>1.0</version>
-    </parent>
+
+	<parent>
+		<groupId>de.openaqua.dev</groupId>
+		<artifactId>generator-load-andromda</artifactId>
+		<version>1.0</version>
+	</parent>
+
 	 <artifactId>mda</artifactId>
     <packaging>pom</packaging>
     <name>AndroMDA mda</name>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.andromda.cartridges</groupId>
             <artifactId>andromda-java-cartridge</artifactId>
-        </dependency>
+			</dependency>
         <dependency>
             <groupId>org.andromda.cartridges</groupId>
             <artifactId>andromda-bpm4struts-cartridge</artifactId>
