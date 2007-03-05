@@ -10,14 +10,15 @@
 #define ORMEXCEPTION_H
 
 #include <string>
+#include <exception>
 
 /**
 
 */
 class OrmException{
 public:
-	OrmException(const std::string& description);
-	~OrmException();
+	OrmException(const std::string& description) throw();
+	~OrmException() throw();
 
 
 protected:

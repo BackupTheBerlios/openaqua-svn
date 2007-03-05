@@ -7,8 +7,12 @@
 #include <QDateTime>
 #include <QDate>
 
+
 #include <iostream>
+#include <typeinfo>
 using namespace std;
+
+
 
 class Entity: public OrmEntity{
 private:
@@ -30,10 +34,36 @@ public:
 };
 
 
+
+class Person: public OrmEntity{
+private:
+	QString	   lastname;
+	QString		firstname;
+
+public:
+	Person(QObject *parent = 0): OrmEntity(parent){};
+
+	QString 		getLastname()		{ return lastname; };
+	QString 		getFirstname()		{ return firstname; };
+
+	void setLastname(const QString& n)		{ lastname = n; };
+	void setFirstname(const QString& n)		{ firstname = n; };
+};
+
+
+int mytype(OrmEntity *entity) {
+	if (typeid(*entity) == typeid(Person)) {
+		cout << "Class if of Type Person" <<endl;
+	}
+	return 0;
+}
+
+
 int main() {
-	//setup a new sample Entity
+	//---------------------------------
 	cout << "setup test object" <<endl;
 	Entity foo;
+	Person person;
 
 	QString name("Hallo Ballo");
 	QDate date; date.setDate(2007, 01, 01);
@@ -42,25 +72,35 @@ int main() {
 	foo.setName(name);
 	foo.setDate(date);
 	foo.setDatetime( datetime );
+	person.setLastname("Gates");
+	person.setFirstname("Bill");
 
 
-	//setup a new Orm Environment
+	//---------------------------------
+	cout << "setup Orm Environment" << endl;
 	OrmConfiguration *configuration = new OrmConfiguration(0);
 	OrmSessionFactory *sessions = configuration->buildSessionFactory();
 	OrmSession *session = sessions->openSession();
 	
 
+	//---------------------------------
 	cout << "store object" << endl;
 	OrmTransaction *trx = session->beginTransaction();
 	session->save(&foo);
+	session->save(&person);
 	trx->commitTransaction();
+	mytype(&foo);
+	mytype(&person);
 
 
+	//---------------------------------
 	cout << "load object" << endl;
 	//Entity *bar = session->load(Entity);
 
-	delete session; //removes all other objects too
-	cout << "hello" <<endl;
+
+	//---------------------------------
+	cout << "clear everything" << endl;
+	delete configuration; //removes all other objects too
 	return 0;
 }
 

@@ -13,13 +13,15 @@ OrmException::OrmException()
 }
 
 
-OrmException::OrmException(const std::string& description)
+OrmException::OrmException(const std::string& description) throw()
 : m_description(description)
+
 {
 }
 
 
 OrmException::~OrmException()
+throw()
 {
 }
 

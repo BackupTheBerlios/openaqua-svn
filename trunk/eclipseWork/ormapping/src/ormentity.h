@@ -17,9 +17,14 @@
 class OrmEntity : public QObject
 {
 public:
-    OrmEntity(QObject *parent=0);
+	OrmEntity(const int type = 0, QObject *parent=0);
+	virtual ~OrmEntity();
+	
+	const int getType() const;
 
-    ~OrmEntity();
+
+private:
+	int m_type;
 
 };
 
