@@ -19,7 +19,7 @@ message         ("Build Library")
 #########################################
 } else: ormapping_test {
 	INCLUDEPATH		+=		../../src
-	LIBS				*=		-L../../lib
+	LIBS				*=		-L../../lib -lormapping
 	TEMPLATE			=			app
 	CONFIG			*=		link_prl
 	message			("Build Application")

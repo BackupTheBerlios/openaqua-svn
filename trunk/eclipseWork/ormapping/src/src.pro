@@ -5,10 +5,18 @@
 
 HEADERS += ormsession.h \
            ormtransaction.h \
-           ormexception.h 
+           ormexception.h \
+           ormquery.h \
+           ormentity.h \
+           ormsessionfactory.h \
+           ormconfiguration.h 
 SOURCES += ormsession.cpp \
            ormtransaction.cpp \
-           ormexception.cpp 
+           ormexception.cpp \
+           ormquery.cpp \
+           ormentity.cpp \
+           ormsessionfactory.cpp \
+           ormconfiguration.cpp 
 PRECOMPILED_HEADER = all_headers.h
 CONFIG *= ormapping_libs
 QT += sql
