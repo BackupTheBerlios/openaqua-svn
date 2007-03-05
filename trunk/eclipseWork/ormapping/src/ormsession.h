@@ -4,6 +4,15 @@
 #include <QObject>
 
 class OrmSession: public QObject {
+public:
+
+	OrmSession (QObject *parent = 0);
+	~OrmSession ();
+
+private:
+
+
+
 
 };
 

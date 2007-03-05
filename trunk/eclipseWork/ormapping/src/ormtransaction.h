@@ -4,6 +4,13 @@
 #include <QObject>
 
 class OrmTransaction: public QObject {
+public:
+
+	OrmTransaction(QObject* parent = 0);
+	~OrmTransaction();
+
+private:
+
 
 };
 
