@@ -18,18 +18,17 @@ message         ("Build Library")
 
 #########################################
 } else: ormapping_test {
-#INCLUDEPATH     +=   ../framework/inc
-#INCLUDEPATH     +=   ../../framework/inc
-LIBS            *= -L../../lib
-TEMPLATE        =       app
-CONFIG          *=      link_prl
-message         ("Build Application")
+	INCLUDEPATH		+=		../../src
+	LIBS				*=		-L../../lib
+	TEMPLATE			=			app
+	CONFIG			*=		link_prl
+	message			("Build Application")
 
 
 #########################################
 #catch errors
 } else {
-      error   ("Target Type not declared")
+	error   ("Target Type not declared")
 }
 
 
