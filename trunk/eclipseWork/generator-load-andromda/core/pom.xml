@@ -8,7 +8,7 @@
        <version>1.0</version>
     </parent>
     <artifactId>core</artifactId>
-    <packaging>ejb</packaging>
+    <packaging>jar</packaging>
     <name>AndroMDA CRUD Sample Core Business Tier</name>
     <dependencies>
         <dependency>
@@ -114,7 +114,9 @@
                     -->
                 </configuration>
             </plugin>
+            <!--
             <plugin>
+               
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
                 <configuration>
@@ -126,6 +128,7 @@
                     <generateClient>true</generateClient>
                 </configuration>
             </plugin>
+         -->
         </plugins>
         <resources>
             <resource>

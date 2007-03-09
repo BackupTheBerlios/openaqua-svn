@@ -21,7 +21,7 @@
             <groupId>${pom.groupId}</groupId>
             <artifactId>core</artifactId>
             <version>${pom.version}</version>
-            <type>ejb</type>
+            <type>jar</type>
             <scope>provided</scope>
        </dependency>
         <dependency>
