@@ -9,7 +9,7 @@
     </parent>
     <artifactId>app</artifactId>
     <packaging>ear</packaging>
-    <name>AndroMDA CRUD Sample Application</name>
+    <name>Application</name>
     <dependencyManagement>
         <dependencies>
             <dependency>
