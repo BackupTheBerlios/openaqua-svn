@@ -3,7 +3,7 @@
 
 	<parent>
 		<groupId>de.openaqua.dev</groupId>
-		<artifactId>generator-load-andromda</artifactId>
+		<artifactId>generator-load-andromda2</artifactId>
 		<version>1.0</version>
 	</parent>
 
@@ -41,8 +41,8 @@
             <artifactId>andromda-ocl-query-library</artifactId>
         </dependency>
     </dependencies>
-    
-      
+
+
     <build>
         <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>
         <plugins>
@@ -81,21 +81,23 @@
         </plugins>
     </build>
     <properties>
-         <model.uri>${project.build.sourceDirectory}/emf/timetracker.uml2</model.uri>
+		 <model.uri>${project.build.sourceDirectory}/emf/andromda2.uml2</model.uri>
 		  <!--
-				<model.uri>jar:file:${project.build.sourceDirectory}/CRUDModel.xml.zip!/CRUDModel.xml</model.uri>
+				<model.uri>${project.build.sourceDirectory}/emf/timetracker.uml2</model.uri>
 				-->
         <filter></filter>
         <validation>true</validation>
         <conf.dir>${pom.basedir}/src/main/config</conf.dir>
-        <!-- cartridge output locations -->
+
+		  <!-- cartridge output locations -->
         <core.generated.dir>${pom.basedir}/../core/target/src</core.generated.dir>
         <core.manual.dir>${pom.basedir}/../core/src/main/java</core.manual.dir>
         <web.generated.dir>${pom.basedir}/../web/target/src</web.generated.dir>
         <web.manual.dir>${pom.basedir}/../web/src/main</web.manual.dir>
-        <web.manual.java.dir>${web.manual.dir}/java</web.manual.java.dir> 
-        <common.generated.dir>${pom.basedir}/../common/target/src</common.generated.dir>      
-        <!-- hibernate configuration -->
+        <web.manual.java.dir>${web.manual.dir}/java</web.manual.java.dir>
+        <common.generated.dir>${pom.basedir}/../common/target/src</common.generated.dir>
+
+		  <!-- hibernate configuration -->
         <!-- default strategy to use when using inhertiance -->
         <hibernate.inheritance.strategy>subclass</hibernate.inheritance.strategy>
         <hibernate.db.showSql>true</hibernate.db.showSql>

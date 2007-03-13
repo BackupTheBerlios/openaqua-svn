@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	 <groupId>de.openaqua.dev</groupId>
-	 <artifactId>generator-load-andromda</artifactId>
+	 <artifactId>generator-load-andromda2</artifactId>
 	 <version>1.0</version>
     <packaging>pom</packaging>
-    <name>generator-load-andromda</name>
+    <name>generator-load-andromda2</name>
 
 
     <ciManagement>

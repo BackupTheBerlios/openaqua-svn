@@ -1,10 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
        <groupId>de.openaqua.dev</groupId>
-       <artifactId>generator-load-andromda</artifactId>
+       <artifactId>generator-load-andromda2</artifactId>
        <version>1.0</version>
     </parent>
     <artifactId>app</artifactId>
@@ -46,23 +46,23 @@
         <dependency>
             <groupId>${pom.groupId}</groupId>
             <artifactId>common</artifactId>
-            <version>${pom.version}</version>            
+            <version>${pom.version}</version>
         </dependency>
         <dependency>
             <groupId>${pom.groupId}</groupId>
             <artifactId>core</artifactId>
-            <version>${pom.version}</version>  
-            <type>ejb</type>          
+            <version>${pom.version}</version>
+            <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>${pom.groupId}</groupId>
             <artifactId>web</artifactId>
-            <version>${pom.version}</version>            
+            <version>${pom.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>    
+            <artifactId>commons-logging</artifactId>
         </dependency>
     </dependencies>
     <build>

@@ -9,18 +9,18 @@
 		<port>4446</port>
 	</server>
 
-	
+
     <repositories>
         <repository name="emf-uml2">
             <models>
                 <model type="emf-uml2">
                     <uri>${model.uri}</uri>
                 </model>
-            </models>            
+            </models>
         </repository>
     </repositories>
-	
-	
+
+
     <namespaces>
         <namespace name="default">
             <properties>
@@ -88,6 +88,7 @@
  			  </properties>
  		  </namespace>
 
+		  <!--
         <namespace name="bpm4struts">
             <properties>
                 <property name="forms">${web.generated.dir}</property>
@@ -102,6 +103,7 @@
                 <property name="manageableServiceAccessorPattern">${application.package}.ManageableServiceLocator.instance().get{1}()</property>
             </properties>
 		 </namespace>
+		 -->
 
 	 </namespaces>
 </andromda>
