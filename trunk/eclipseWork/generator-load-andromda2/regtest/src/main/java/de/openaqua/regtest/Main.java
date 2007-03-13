@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import de.openaqua.dev.entities.Country;
+import de.openaqua.dev.entities.CountryDao;
+import de.openaqua.dev.entities.CountryDaoImpl;
 
 public class Main {
 	private static Logger logger = Logger.getRootLogger();
@@ -17,6 +19,7 @@ public class Main {
 	    logger.setLevel( Level.ALL);
 	    logger.info("-------------------Begin Test-----------------------");
 	    playWithCountry();
+	    playWithCountryByDb();
 
 	}
 	
@@ -26,4 +29,11 @@ public class Main {
 		dumper.dumpCountry(c);		
 	}
 
+	public static void playWithCountryByDb() {
+		CountryDao dao = new CountryDaoImpl();
+		CountryDumper dumper = new CountryDumper();
+		
+		Country c =  dao.create("UK", "Great Britian", "000-000-000000","+31");
+		dumper.dumpCountry(c);		
+	}
 }
