@@ -17,21 +17,7 @@
 	<packaging>jar</packaging>
 
 
-	<dependencies>
-		<dependency>
-		   <groupId>org.fornax.cartridges</groupId>
-         <artifactId>fornax-cartridges-uml2-javabasic-generator</artifactId>
-         <version>1.3.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openarchitectureware</groupId>
-			<artifactId>oaw-classic-xmiInstantiator</artifactId>
-			<version>4.1.1</version>
-		</dependency>
-	</dependencies>
-	
-
-	<!--
+<!--
 	<build>
 		<plugins>
 			<plugin>
