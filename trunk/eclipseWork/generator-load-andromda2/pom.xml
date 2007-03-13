@@ -46,10 +46,6 @@
                         <groupId>xalan</groupId>
                         <artifactId>xalan</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -271,10 +267,6 @@
                         <groupId>taglibs</groupId>
                         <artifactId>standard</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
                 </exclusions>
             </dependency>
         </dependencies>
@@ -296,10 +288,17 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4.0,5.0)</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.12</version>
-			<scope>test</scope>
+			<version>[1.2,2.0)</version>
+<!--			<scope>compile</scope>-->
 		</dependency>
 
 
@@ -382,10 +381,11 @@
 		<module>mda</module>
 		<module>core</module>
 		<module>common</module>
-		<module>app</module>
-		<module>web</module>
 		<!--
+			 <module>app</module>
+			 <module>web</module>
 		-->
+			 <module>regtest</module>
 	</modules>
 	<properties>
         <!--
