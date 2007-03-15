@@ -24,12 +24,14 @@ public class Main {
 	}
 	
 	public static void playWithCountry() {
+		logger.info("-------------------playWithCountry()-----------------------");
 		Country c =  Country.Factory.newInstance();
 		CountryDumper dumper = new CountryDumper();
 		dumper.dumpCountry(c);		
 	}
 
 	public static void playWithCountryByDb() {
+		logger.info("-------------------playWithCountryByDb()-----------------------");
 		CountryDao dao = new CountryDaoImpl();
 		CountryDumper dumper = new CountryDumper();
 		

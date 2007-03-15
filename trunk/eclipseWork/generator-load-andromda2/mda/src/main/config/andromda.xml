@@ -33,6 +33,11 @@
                 <property name="ejbJndiNamePrefix">${application.id}</property>
                 <!-- used in both hibernate and spring cartridges -->
                 <property name="hibernateVersion">3</property>
+					 <property name="richClient">true</property>
+					 <property name="configPropertyPrefix">${application.id}.</property>
+					 <property name="toDoTag">TODO</property>
+					 <property name="securityRealm">${application.id}</property>
+					 <property name="mergeLocation">mda/src/custom</property>
             </properties>
         </namespace>
 
