@@ -10,24 +10,6 @@
     <artifactId>regtest</artifactId>
     <packaging>jar</packaging>
     <name>directory: regtest (Regression Test)</name>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>${pom.groupId}</groupId>
-                <artifactId>common</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>${pom.groupId}</groupId>
-                        <artifactId>mda</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.andromda.profiles.uml2</groupId>
-                        <artifactId>andromda-profile</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>${pom.groupId}</groupId>
@@ -38,16 +20,7 @@
             <groupId>${pom.groupId}</groupId>
             <artifactId>core</artifactId>
             <version>${pom.version}</version>
-            <type>ejb</type>
         </dependency>
-		  <!--
-        <dependency>
-            <groupId>${pom.groupId}</groupId>
-            <artifactId>web</artifactId>
-            <version>${pom.version}</version>
-            <type>war</type>
-        </dependency>
-		  -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
