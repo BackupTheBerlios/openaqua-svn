@@ -2,6 +2,7 @@ package de.tmobile.cabu.sample;
 
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Random;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -31,7 +32,7 @@ public class HibernateGenerator extends Thread{
 	//private Configuration configuration;
 	private SessionFactory sessionFactory;
 	private Session session;
-	 
+
 
 
 
@@ -41,13 +42,14 @@ public class HibernateGenerator extends Thread{
 		//sessionFactory = configuration.buildSessionFactory();
 		sessionFactory = new org.hibernate.cfg.Configuration().configure("hibernate.cfg.mapping.xml").buildSessionFactory();
 		session = sessionFactory.openSession();
+		
 		//init the class
 		//this.database = DatabaseServerRegistry.getInstance().getClient(key, "test", "test");
 		this.readTest = readTest;
 
 	}
 
-	
+
 	private Contract getContractFromDbByName(final int id) {
 		/*
 		Query query=database.query();
@@ -61,11 +63,11 @@ public class HibernateGenerator extends Thread{
 			logger.error("No matching contract found");
 			return null;
 		}
-		*/
-		 
+		 */
+
 		return null;
 	}
-	
+
 
 	private Contract getContractFromDb(final int id) {
 		return null;
@@ -81,25 +83,41 @@ public class HibernateGenerator extends Thread{
 			logger.error("No matching contract found");
 			return null;
 		}
-		*/
+		 */
 	}
 
 	private ContractKey getContractKeyFromDb(final int id) {
-		return (ContractKey) session.get(ContractKey.class, id);
+		Session s = sessionFactory.openSession();
+		ContractKey c = (ContractKey) s.get(ContractKey.class, id);
+		s.close();
+		return c;
 	}
-	
-	
+
+
 	public void setupDatabase() {
+		//Session s = sessionFactory.openSession();
+		//Transaction trx = s.beginTransaction();
 		Transaction trx = session.beginTransaction();
 		for (int key = 0; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
-			new ContractKey(key
-			session.save(new ContractKey(key));
-			
+			try {
+				ContractKey c = new ContractKey(key);
+				c.setSss("KKKKKKKKKKKKK="+key);
+				//s.save(c);
+				session.save(c);
+				if (key != c.getKey()) {
+					logger.error("was: " + key+ " is "+ c.getKey());
+				}
+				logger.info("store key: "+c.getKey());
+			}catch (Exception e) {
+				logger.error("Error while persisting keys: "+e.getMessage());
+			}
+
 			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " keys");
 			}
 		}
 		trx.commit();
+		session.close();
 		logger.debug("created " + de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts() + " Contracts");
 		logger.info("setup Database created " +de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts()+ " Contracts");
 	}
@@ -136,12 +154,13 @@ public class HibernateGenerator extends Thread{
 		ContractKey c = getContractKeyFromDb(contractID); //get contractKey
 		if (c == null) 	logger.error("RError: Didn't found ContractKey: " + contractID);
 	}
-	
+
 
 	/**
 	 * The thread execution method
 	 */
 	public void run () {
+
 		int loop = 0;
 		for (int i = 0; i < de.tmobile.cabu.loadtest.Configuration.getInstance().getReqLoops(); i++){
 			done = 0;
@@ -164,5 +183,6 @@ public class HibernateGenerator extends Thread{
 			}
 		}
 		//if (database != null)		database.close();
+
 	}
 }

@@ -3,30 +3,45 @@
  */
 package de.tmobile.cabu.entities;
 
-import javax.persistence.*;
+
 
 /**
  * @author behrenan
  *
  */
-@Entity
-@Table(name = "contractkey")
 public class ContractKey {
 	
 	private Integer key;
-	public ContractKey(Integer key)         { 
+	private String sss;
+	
+	public ContractKey()         {
+		super();
+	}
+	
+	
+	public ContractKey(Integer key)         {
+		super();
 		this.key = key;
 	}
 	
 	/**
 	 * @return the key
 	 */
-	@Id
 	public Integer getKey() {
 		return key;
 	}
 
 	public void setKey(Integer key) {
 		this.key = key;
+	}
+
+
+	public String getSss() {
+		return sss;
+	}
+
+
+	public void setSss(String sss) {
+		this.sss = sss;
 	}
 }
