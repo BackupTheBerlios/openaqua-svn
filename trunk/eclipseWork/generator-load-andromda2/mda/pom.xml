@@ -30,12 +30,10 @@
 			  <groupId>org.andromda.cartridges</groupId>
 				<artifactId>andromda-java-cartridge</artifactId>
 			</dependency>
-			<!--
         <dependency>
             <groupId>org.andromda.cartridges</groupId>
             <artifactId>andromda-bpm4struts-cartridge</artifactId>
         </dependency>
-		  -->
 		  <dependency>
 			<groupId>org.andromda.translationlibraries</groupId>
 				<artifactId>andromda-ocl-validation-library</artifactId>
@@ -78,7 +76,6 @@
 						<excludes>
 						<exclude>app/pom.xml</exclude>
 						<exclude>mda/pom.xml</exclude>
-						<exclude>webservice/pom.xml</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
