@@ -4,10 +4,6 @@ package de.tmobile.cabu.sample;
 import java.io.IOException;
 import java.util.Random;
 import org.apache.log4j.Logger;
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.query.Query;
-import de.tmobile.cabu.db4o.DatabaseServerRegistry;
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractKey;
 import de.tmobile.cabu.loadtest.Stats;
@@ -18,27 +14,27 @@ import de.tmobile.cabu.loadtest.Configuration;
  * @author behrenan
  *
  */
-public class Db4oGenerator extends Thread{
+public class HibernateGenerator extends Thread{
 
 	private int done = 0;
 	final private int maxContracts = Configuration.getInstance().getMaxContracts();
 	final private Random random = new Random();
-	final private ObjectContainer database;
 	final private boolean readTest;
 	final private static Logger logger = Logger.getRootLogger();
 
 
 
-	public Db4oGenerator(final String threadName, final String key, boolean readTest) throws IOException  {
+	public HibernateGenerator(final String threadName, final String key, boolean readTest) throws IOException  {
 		super(threadName);
 		//init the class
-		this.database = DatabaseServerRegistry.getInstance().getClient(key, "test", "test");
+		//this.database = DatabaseServerRegistry.getInstance().getClient(key, "test", "test");
 		this.readTest = readTest;
 
 	}
 
 	
 	private Contract getContractFromDbByName(final int id) {
+		/*
 		Query query=database.query();
 		query.constrain(Contract.class);
 		query.descend("name").constrain("name"+id);
@@ -50,10 +46,15 @@ public class Db4oGenerator extends Thread{
 			logger.error("No matching contract found");
 			return null;
 		}
+		*/
+		 
+		return null;
 	}
 	
 
 	private Contract getContractFromDb(final int id) {
+		return null;
+		/*
 		Query query=database.query();
 		query.constrain(Contract.class);
 		query.descend("contractKey").constrain(new ContractKey(id));
@@ -65,9 +66,12 @@ public class Db4oGenerator extends Thread{
 			logger.error("No matching contract found");
 			return null;
 		}
+		*/
 	}
 
 	private ContractKey getContractKeyFromDb(final int id) {
+		return null;
+		/*
 		Query query=database.query();
 		query.constrain(ContractKey.class);
 		query.descend("key").constrain(id);
@@ -79,10 +83,13 @@ public class Db4oGenerator extends Thread{
 			logger.error("No matching contract found");
 			return null;
 		}
+		*/
 	}
 	
 	
-	public void setupDatabase() {		
+	public void setupDatabase() {
+		return ;
+		/*
 		for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
 			Contract c = new Contract(key, key);
 			c.setName("name"+key);
@@ -95,6 +102,7 @@ public class Db4oGenerator extends Thread{
 		logger.debug("created " + Configuration.getInstance().getMaxContracts() + " Contracts");
 		database.commit();
 		logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
+		*/
 	}
 
 
@@ -155,6 +163,6 @@ public class Db4oGenerator extends Thread{
 				done++;
 			}
 		}
-		if (database != null)		database.close();
+		//if (database != null)		database.close();
 	}
 }

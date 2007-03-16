@@ -3,10 +3,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tmobile.cabu</groupId>
-	<artifactId>generator-load-db4o</artifactId>
+	<artifactId>generator-load-hibernate</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>generator-load-db4o</name>
+	<name>generator-load-hibernate</name>
 
 	<dependencies>
 		<dependency>
@@ -24,26 +24,12 @@
 		</dependency>
 
 
+		<!--Hibernate Dependencies-->
 		<dependency>
-			<groupId>com.db4o</groupId>
-			<artifactId>db4ojdk5</artifactId>
-			<version>6.1-SNAPSHOT</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.2.ga</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.db4o</groupId>
-			<artifactId>db4onqopt</artifactId>
-			<version>6.1-SNAPSHOT</version>
-		</dependency>
-
-
-<!--
-		<dependency>
-			<groupId>jpox</groupId>
-			<artifactId>jpox</artifactId>
-			<version>1.1.3</version>
-		</dependency>
--->
 
 	</dependencies>
 
@@ -56,24 +42,8 @@
 	</repositories>
 
 	<profiles>
-        <profile>
-            <id>netbeans-public</id>
-            <activation>
-                <property>
-                    <name>netbeans.execution</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build />
-        </profile>
     </profiles>
 
-	<scm>
-		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
-		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</developerConnection>
-		<tag>HEAD</tag>
-		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-db4o/</url>
-	</scm>
 
 	<build>
 		<plugins>

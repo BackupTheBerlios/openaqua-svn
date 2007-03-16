@@ -3,7 +3,7 @@
  */
 package de.tmobile.cabu.entities;
 
-import com.db4o.config.annotations.Indexed;
+
 
 /**
  * 
@@ -11,12 +11,9 @@ import com.db4o.config.annotations.Indexed;
  */
 public class Contract {
 
-	@Indexed
 	final private ContractKey contractKey;
-	@Indexed
 	private Integer value;
 	private String stringValue;
-	@Indexed
 	private String name;
 
 	public Contract(final int contractKey, final int value) {
