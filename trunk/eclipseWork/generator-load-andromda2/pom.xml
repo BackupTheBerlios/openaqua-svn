@@ -7,7 +7,7 @@
 	<artifactId>generator-load-andromda2</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>generator-load-andromda2</name>
+	<name>directory: . (generator-load-andromda2)</name>
 
 
     <dependencyManagement>

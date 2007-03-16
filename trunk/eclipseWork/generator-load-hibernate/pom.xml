@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.tmobile.cabu</groupId>
+	<artifactId>generator-load-db4o</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>generator-load-db4o</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4.0,5.0)</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2,2.0)</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4ojdk5</artifactId>
+			<version>6.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4onqopt</artifactId>
+			<version>6.1-SNAPSHOT</version>
+		</dependency>
+
+
+<!--
+		<dependency>
+			<groupId>jpox</groupId>
+			<artifactId>jpox</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+-->
+
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>maven.openaqua.de</id>
+			<name>OpenAqua Repository</name>
+			<url>http://maven.openaqua.de</url>
+		</repository>
+	</repositories>
+
+	<profiles>
+        <profile>
+            <id>netbeans-public</id>
+            <activation>
+                <property>
+                    <name>netbeans.execution</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build />
+        </profile>
+    </profiles>
+
+	<scm>
+		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</connection>
+		<developerConnection>scm:svn:https://developername@svn.berlios.de/svnroot/repos/openaqua/trunk/eclipseWork/generator-load-db4o</developerConnection>
+		<tag>HEAD</tag>
+		<url>http://svn.berlios.de/wsvn/openaqua/trunk/eclipseWork/generator-load-db4o/</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<!--============== configure maven for use by Eclipse =================-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<eclipse.useProjectReferences>false</eclipse.useProjectReferences>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+
+			<!--============== Use java 1.5=================-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+
+
+			<!--============== configure the packaging=================-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<mainClass>de.tmobile.Main</mainClass>
+							<packageName>de.tmobile.generator</packageName>
+							<!-- options
+							<addClasspath>true</addClasspath>
+							<addExtensions/>
+							<classpathPrefix/>
+							-->
+						</manifest>
+						<manifestEntries>
+							<mode>development</mode>
+							<url>${pom.url}</url>
+						</manifestEntries>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
+
+
+</project>

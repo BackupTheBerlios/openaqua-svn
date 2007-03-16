@@ -9,7 +9,7 @@
     </parent>
     <artifactId>common</artifactId>
     <packaging>jar</packaging>
-    <name>AndroMDA CRUD Sample Common</name>
+	 <name>directory: common (Common)</name>
     <dependencies>
         <dependency>
             <groupId>${pom.groupId}</groupId>

@@ -9,7 +9,7 @@
     </parent>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <name>AndroMDA CRUD Sample Core Business Tier</name>
+    <name>directory: core (Core Business Tier)</name>
     <dependencies>
         <dependency>
             <groupId>${pom.groupId}</groupId>

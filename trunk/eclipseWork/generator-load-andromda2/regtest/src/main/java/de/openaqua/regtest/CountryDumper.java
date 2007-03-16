@@ -10,7 +10,7 @@ public class CountryDumper {
 		String foo = "";
 		foo += c.getIso() + " ";
 		//foo += c.getPredial() + " ";
-		foo += c.getPhoneFormat() + " ";
+		//foo += c.getPhoneFormat() + " ";
 		foo += c.getDescription() + " ";
 		
 		logger.info("Country: " + foo);

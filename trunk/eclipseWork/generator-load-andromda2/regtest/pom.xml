@@ -9,7 +9,7 @@
     </parent>
     <artifactId>regtest</artifactId>
     <packaging>jar</packaging>
-    <name>Regression Test</name>
+    <name>directory: regtest (Regression Test)</name>
     <dependencyManagement>
         <dependencies>
             <dependency>

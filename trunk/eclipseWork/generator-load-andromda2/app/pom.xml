@@ -9,7 +9,7 @@
     </parent>
     <artifactId>app</artifactId>
     <packaging>ear</packaging>
-    <name>Application</name>
+	 <name>directory: app (Application)</name>
     <dependencyManagement>
         <dependencies>
             <dependency>

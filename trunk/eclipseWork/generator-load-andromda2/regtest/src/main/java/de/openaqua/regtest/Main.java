@@ -35,7 +35,9 @@ public class Main {
 		CountryDao dao = new CountryDaoImpl();
 		CountryDumper dumper = new CountryDumper();
 		
-		//Country c =  dao.create("UK", "Great Britian", "000-000-000000","+31");
-		//dumper.dumpCountry(c);		
+		Country c = dao.create("Germany", "+49");
+		c.setIso("DE");
+		
+		dumper.dumpCountry(c);		
 	}
 }

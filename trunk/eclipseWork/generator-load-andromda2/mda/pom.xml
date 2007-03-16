@@ -9,7 +9,7 @@
 
 	<artifactId>mda</artifactId>
 	<packaging>pom</packaging>
-	<name>Directory: mda</name>
+	<name>directory: mda</name>
 
 
 	<dependencies>
