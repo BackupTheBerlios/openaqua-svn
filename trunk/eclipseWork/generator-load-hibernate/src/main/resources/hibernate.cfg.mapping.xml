@@ -32,8 +32,7 @@
         <property name="hbm2ddl.auto">create</property>
         
         <property name="hibernate.format_sql">true</property>
-        
-        <mapping resource="de/hanser/buch/opiz/domain/Pizza.hbm.xml"/>
+        <mapping resource="de/tmobile/cabu/entities/ContractKey.hbm.xml"/>
 
     </session-factory>
 

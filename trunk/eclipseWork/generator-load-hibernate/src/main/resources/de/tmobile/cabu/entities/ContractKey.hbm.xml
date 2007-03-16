@@ -3,8 +3,8 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="de.hanser.buch.opiz.domain">
+<hibernate-mapping package="de.tmobile.cabu.entities">
   <class name="ContractKey">
-    <id name="id" />
+    <id name="key" />
   </class>
 </hibernate-mapping>

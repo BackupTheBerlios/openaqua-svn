@@ -25,4 +25,8 @@ public class ContractKey {
 	public Integer getKey() {
 		return key;
 	}
+
+	public void setKey(Integer key) {
+		this.key = key;
+	}
 }
