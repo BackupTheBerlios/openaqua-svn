@@ -4,10 +4,16 @@ package de.tmobile.cabu.sample;
 import java.io.IOException;
 import java.util.Random;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.classic.Session;
+
 import de.tmobile.cabu.entities.Contract;
 import de.tmobile.cabu.entities.ContractKey;
 import de.tmobile.cabu.loadtest.Stats;
-import de.tmobile.cabu.loadtest.Configuration;
+
 
 
 /**
@@ -17,15 +23,24 @@ import de.tmobile.cabu.loadtest.Configuration;
 public class HibernateGenerator extends Thread{
 
 	private int done = 0;
-	final private int maxContracts = Configuration.getInstance().getMaxContracts();
+	final private int maxContracts = de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts();
 	final private Random random = new Random();
 	final private boolean readTest;
 	final private static Logger logger = Logger.getRootLogger();
+	//private AnnotationConfiguration configuration;
+	//private Configuration configuration;
+	private SessionFactory sessionFactory;
+	private Session session;
+	 
 
 
 
 	public HibernateGenerator(final String threadName, final String key, boolean readTest) throws IOException  {
 		super(threadName);
+		//configuration = new Configuration();
+		//sessionFactory = configuration.buildSessionFactory();
+		sessionFactory = new org.hibernate.cfg.Configuration().configure("hibernate.cfg.mapping.xml").buildSessionFactory();
+		session = sessionFactory.openSession();
 		//init the class
 		//this.database = DatabaseServerRegistry.getInstance().getClient(key, "test", "test");
 		this.readTest = readTest;
@@ -88,21 +103,16 @@ public class HibernateGenerator extends Thread{
 	
 	
 	public void setupDatabase() {
-		return ;
-		/*
-		for (int key = 0; key <= Configuration.getInstance().getMaxContracts(); key++) {
-			Contract c = new Contract(key, key);
-			c.setName("name"+key);
-			database.set(c);
+		Transaction trx = session.beginTransaction();
+		for (int key = 0; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
+			session.save(new ContractKey(key));
 			if ((key % 1000) == 0) {
-				logger.debug("created " + key + " Contracts");
+				logger.debug("created " + key + " keys");
 			}
-
 		}
-		logger.debug("created " + Configuration.getInstance().getMaxContracts() + " Contracts");
-		database.commit();
-		logger.info("setup Database created " +Configuration.getInstance().getMaxContracts()+ " Contracts");
-		*/
+		trx.commit();
+		logger.debug("created " + de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts() + " Contracts");
+		logger.info("setup Database created " +de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts()+ " Contracts");
 	}
 
 
@@ -144,12 +154,13 @@ public class HibernateGenerator extends Thread{
 	 */
 	public void run () {
 		int loop = 0;
-		for (int i = 0; i < Configuration.getInstance().getReqLoops(); i++){
+		for (int i = 0; i < de.tmobile.cabu.loadtest.Configuration.getInstance().getReqLoops(); i++){
 			done = 0;
 			while (done < maxContracts) {
-				int contractID = Math.abs(random.nextInt()) % Configuration.getInstance().getMaxContracts(); //random contractID
+				int contractID = Math.abs(random.nextInt()) % de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); //random contractID
 				if (readTest == true) {
-					executeRead(contractID);
+					executeReadKeys(contractID);
+					//executeRead(contractID);
 					//executeReadByName(contractID);					
 					Stats.getInstance().addReadResults(1);
 					//yield();

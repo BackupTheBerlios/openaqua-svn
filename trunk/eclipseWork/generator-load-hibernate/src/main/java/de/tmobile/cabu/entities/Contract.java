@@ -3,15 +3,21 @@
  */
 package de.tmobile.cabu.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 
 /**
  * 
  *
  */
+@Entity
+@Table(name = "contract")
 public class Contract {
 
 	final private ContractKey contractKey;
+	private Integer id;
 	private Integer value;
 	private String stringValue;
 	private String name;
@@ -38,6 +44,7 @@ public class Contract {
 	/**
 	 * @return the contractKey
 	 */
+	
 	public int getContractKeyAsInteger() {
 		return contractKey.getKey();
 	}
