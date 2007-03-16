@@ -8,7 +8,7 @@
        <version>1.0</version>
     </parent>
     <artifactId>regtest</artifactId>
-    <packaging>ear</packaging>
+    <packaging>jar</packaging>
     <name>directory: regtest (Regression Test)</name>
     <dependencies>
         <dependency>

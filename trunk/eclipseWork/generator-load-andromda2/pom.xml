@@ -22,6 +22,7 @@
                 <groupId>org.andromda</groupId>
                 <artifactId>andromda-core</artifactId>
                 <version>3.2</version>
+
                 <exclusions>
                     <exclusion>
                         <groupId>xml-apis</groupId>
@@ -37,6 +38,8 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+				<!--AndroMDA dependencies-->
             <dependency>
                 <groupId>org.andromda.translationlibraries</groupId>
                 <artifactId>andromda-ocl-translation-core</artifactId>
@@ -105,14 +108,19 @@
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>1.0.4</version>
-                <scope>provided</scope>
+					 <!--
+						  <scope>provided</scope>
+						  -->
             </dependency>
+				<!--
             <dependency>
                 <groupId>jboss</groupId>
                 <artifactId>jboss-j2ee</artifactId>
                 <version>3.2.3</version>
                 <scope>provided</scope>
             </dependency>
+				-->
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate</artifactId>
@@ -265,14 +273,14 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>4.7</version>
-			<scope>test</scope>
+			<!--			<scope>test</scope>-->
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
-			<scope>compile</scope>
+			<!--			<scope>compile</scope>-->
 		</dependency>
 
 		<dependency>
@@ -284,6 +292,9 @@
 
 
     </dependencies>
+
+
+
     <build>
         <defaultGoal>install</defaultGoal>
         <pluginManagement>
@@ -347,18 +358,17 @@
 		<module>mda</module>
 		<module>core</module>
 		<module>common</module>
-		<module>app</module>
 		<!--
-			 <module>web</module>
-		-->
-			 <module>regtest</module>
+			 <module>app</module>
+			 -->
+		<module>regtest</module>
 	</modules>
 	<properties>
         <sql.mappings>HypersonicSql</sql.mappings>
         <hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
         <jboss.home>${env.JBOSS_HOME}</jboss.home>
         <application.id>connection</application.id>
-        <application.package>de.openaqua.dev.connection</application.package>
+        <application.package>de.openaqua.dev</application.package>
         <application.name>Generator AndroMDA</application.name>
         <application.version>1.0</application.version>
         <dataSource.name>jdbc/${application.id}</dataSource.name>
@@ -373,7 +383,7 @@
             <properties>
                 <jdbc.driver.jar>${jboss.home}/server/default/lib/hsqldb.jar</jdbc.driver.jar>
                 <jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
-                <jdbc.url>jdbc:hsqldb:hsql://127.0.0.1:1701</jdbc.url>
+                <jdbc.url>jdbc:hsqldb:file:/tmp/foojdbc.dat</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password></jdbc.password>
                 <jdbc.exception.sorter>org.jboss.resource.adapter.jdbc.vendor.DummyExceptionSorter</jdbc.exception.sorter>
