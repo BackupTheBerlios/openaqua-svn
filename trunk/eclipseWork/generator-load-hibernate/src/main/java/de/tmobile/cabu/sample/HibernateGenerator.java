@@ -85,27 +85,16 @@ public class HibernateGenerator extends Thread{
 	}
 
 	private ContractKey getContractKeyFromDb(final int id) {
-		return null;
-		/*
-		Query query=database.query();
-		query.constrain(ContractKey.class);
-		query.descend("key").constrain(id);
-		ObjectSet result=query.execute();
-
-		if (result.hasNext()) {
-			return (ContractKey)result.next();
-		} else {
-			logger.error("No matching contract found");
-			return null;
-		}
-		*/
+		return (ContractKey) session.get(ContractKey.class, id);
 	}
 	
 	
 	public void setupDatabase() {
 		Transaction trx = session.beginTransaction();
 		for (int key = 0; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
+			new ContractKey(key
 			session.save(new ContractKey(key));
+			
 			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " keys");
 			}
@@ -144,8 +133,8 @@ public class HibernateGenerator extends Thread{
 	}
 
 	private void executeReadKeys(final int contractID) {
-		ContractKey c = getContractKeyFromDb(contractID); //get contract
-		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
+		ContractKey c = getContractKeyFromDb(contractID); //get contractKey
+		if (c == null) 	logger.error("RError: Didn't found ContractKey: " + contractID);
 	}
 	
 

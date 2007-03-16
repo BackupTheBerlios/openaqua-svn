@@ -33,7 +33,7 @@ public class Main {
 		//PatternLayout layout = new PatternLayout( "%F:%L %-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 		logger.addAppender( consoleAppender );
-		logger.setLevel( Level.ALL);
+		logger.setLevel( Level.INFO);
 		long runTime = 0;
 		
 		
