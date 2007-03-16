@@ -9,7 +9,7 @@
 
 	<artifactId>mda</artifactId>
 	<packaging>pom</packaging>
-	<name>directory: mda</name>
+	<name>directory: mda (andromda configuration)</name>
 
 
 	<dependencies>

@@ -64,8 +64,8 @@
 
          <namespace name="hibernate">
              <properties>
-                 <property name="hibernateEnableCache">false</property>
-                 <property name="hibernateEnableAssociationsCache">false</property>
+                 <property name="hibernateEnableCache">true</property>
+                 <property name="hibernateEnableAssociationsCache">true</property>
                  <property name="hibernateTypeMappingsUri">Hibernate</property>
                  <property name="hibernateInheritanceStrategy">${hibernate.inheritance.strategy}</property>
                  <property name="defaultHibernateGeneratorClass">${hibernate.generatorClass}</property>
