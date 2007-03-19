@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+ <!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="de.tmobile.cabu.entities">
+  <class name="Contract" table="CONTRACTKEY">
+	  
+        <id name="id" type="java.lang.Long" unsaved-value="null">
+            <column name="ID" sql-type="BIGINT"/>
+            <generator class="native">
+            </generator>
+        </id>
+	  
+		<property name="value" type="java.lang.Integer">
+            <column name="value" />
+        </property>
+
+		<property name="stringValue" type="java.lang.String">
+            <column name="NAME" not-null="true" unique="false" sql-type="VARCHAR(256)"/>
+        </property>
+
+	  		<property name="name" type="java.lang.String">
+            <column name="name" not-null="true" unique="false" sql-type="VARCHAR(256)"/>
+        </property>
+	  
+	  	  </class>
+</hibernate-mapping>

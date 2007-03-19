@@ -98,7 +98,35 @@ public class HibernateGenerator extends Thread{
 		//Session s = sessionFactory.openSession();
 		//Transaction trx = s.beginTransaction();
 		Transaction trx = session.beginTransaction();
-		for (int key = 0; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
+		for (int key = 1; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
+			try {
+				Contract c = new Contract(key, "value="+key, key);
+				session.save(c);
+				if (key != c.getContractKeyAsInteger()) {
+					logger.error("was: " + key+ " is "+ c.getContractKeyAsInteger());
+				}
+			 } catch (Exception e) {
+				logger.error("Error while persisting keys: "+e.getMessage());
+			}
+
+			if ((key % 1000) == 0) {
+				logger.debug("created " + key + " keys");
+			}
+		}
+		trx.commit();
+		session.close();
+		logger.debug("created " + de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts() + " Contracts");
+		logger.info("setup Database created " +de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts()+ " Contracts");
+		
+	}
+
+	
+	
+	public void setupDatabaseWithKeys() {
+		//Session s = sessionFactory.openSession();
+		//Transaction trx = s.beginTransaction();
+		Transaction trx = session.beginTransaction();
+		for (int key = 1; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
 			try {
 				ContractKey c = new ContractKey(key);
 				c.setSss("KKKKKKKKKKKKK="+key);
@@ -166,9 +194,10 @@ public class HibernateGenerator extends Thread{
 			done = 0;
 			while (done < maxContracts) {
 				int contractID = Math.abs(random.nextInt()) % de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); //random contractID
+				contractID += 1;
 				if (readTest == true) {
-					executeReadKeys(contractID);
-					//executeRead(contractID);
+					//executeReadKeys(contractID);
+					executeRead(contractID);
 					//executeReadByName(contractID);					
 					Stats.getInstance().addReadResults(1);
 					//yield();

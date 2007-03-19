@@ -1,10 +1,13 @@
 package de.openaqua.regtest;
 
+import java.util.Arrays;
+
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 import de.openaqua.dev.entities.Country;
@@ -55,7 +58,12 @@ public class Main {
 
 	public static void springTest() throws ServiceException {
 		logger.info("-------------------play with springTest()-----------------------");
-		ClassPathResource res = new ClassPathResource("application-contex.xml");
+		String segs[] = System.getProperty("java.class.path",".").split( ":" );
+		for (int i = 0; i < segs.length; ++i) {
+			logger.info("Path: " + segs[i]);		
+		}
+		
+		ClassPathResource res = new ClassPathResource("applicationContext.xml");
 		XmlBeanFactory factory = new XmlBeanFactory(res);
 		CountryService myService = (CountryService) factory.getBean("countryService");
 		CountryVO[] list =  myService.getAllCountries();

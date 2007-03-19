@@ -9,7 +9,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.url">jdbc:hsqldb:file:/tmp/foo2.dat</property>
+        <property name="connection.url">jdbc:hsqldb:mem:foo</property>
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
         
@@ -32,6 +32,7 @@
         
         <property name="hibernate.format_sql">true</property>
         <mapping resource="de/tmobile/cabu/entities/ContractKey.hbm.xml"/>
+        <mapping resource="de/tmobile/cabu/entities/Contract.hbm.xml"/>		
 
     </session-factory>
 

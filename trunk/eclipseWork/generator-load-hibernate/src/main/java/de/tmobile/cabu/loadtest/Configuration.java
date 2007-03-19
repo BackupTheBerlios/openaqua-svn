@@ -30,7 +30,7 @@ final public class Configuration {
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
-		reqLoops     = 1;
+		reqLoops     = 1000;
 		statMilliSeconds = 10000;
 		setupDatabase = true;
 	}
