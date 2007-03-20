@@ -6,6 +6,9 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.BeanFactoryReference;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -63,10 +66,13 @@ public class Main {
 			logger.info("Path: " + segs[i]);		
 		}
 		
-		ClassPathResource res = new ClassPathResource("applicationContext.xml");
-		XmlBeanFactory factory = new XmlBeanFactory(res);
-		CountryService myService = (CountryService) factory.getBean("countryService");
-		CountryVO[] list =  myService.getAllCountries();
+		 BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
+		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+		
+		//ClassPathResource res = new ClassPathResource("applicationContext.xml");
+		 //XmlBeanFactory factory = new XmlBeanFactory(res);
+		 //CountryService myService = (CountryService) factory.getBean("countryService");
+		 //CountryVO[] list =  myService.getAllCountries();
 		
 		//PizzaOrderService myService = (PizzaOrderService) factory.getBean("pizzaOrderService");
 	}

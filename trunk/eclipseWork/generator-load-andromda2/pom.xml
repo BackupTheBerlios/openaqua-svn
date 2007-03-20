@@ -135,10 +135,12 @@
                         <artifactId>servlet-api</artifactId>
                         <groupId>javax.servlet</groupId>
                     </exclusion>
+						  <!--
                     <exclusion>
                         <artifactId>jta</artifactId>
                         <groupId>javax.transaction</groupId>
                     </exclusion>
+						  -->
                     <exclusion>
                         <artifactId>connector</artifactId>
                         <groupId>javax.resource</groupId>
