@@ -90,10 +90,15 @@
 		<!-- cartridge output locations -->
 		<core.generated.dir>${pom.basedir}/../core/target/src</core.generated.dir>
 		<core.manual.dir>${pom.basedir}/../core/src/main/java</core.manual.dir>
-		<web.generated.dir>${pom.basedir}/../web/target/src</web.generated.dir>
-		<web.manual.dir>${pom.basedir}/../web/src/main</web.manual.dir>
-		<web.manual.java.dir>${web.manual.dir}/java</web.manual.java.dir>
+
 		<common.generated.dir>${pom.basedir}/../common/target/src</common.generated.dir>
+		<common.manual.dir>${pom.basedir}/../common/src/main/java</common.manual.dir>
+
+		<server.generated.dir>${pom.basedir}/../server/target/src</server.generated.dir>
+		<server.manual.dir>${pom.basedir}/../server/src/main/java</server.manual.dir>
+
+		<client.generated.dir>${pom.basedir}/../server/target/src</client.generated.dir>
+		<client.manual.dir>${pom.basedir}/../server/src/main/java</client.manual.dir>
 
 		<!-- hibernate configuration -->
 		<!-- default strategy to use when using inhertiance -->
