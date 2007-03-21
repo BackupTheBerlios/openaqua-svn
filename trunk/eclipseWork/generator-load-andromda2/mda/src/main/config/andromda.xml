@@ -57,12 +57,14 @@
 				<property name="service-interfaces">${common.generated.dir}</property>
 				<property name="service-impls">${core.manual.dir}</property>
 				<property name="value-objects">${common.generated.dir}</property>
+				<!--
 				<property name="richClient">true</property>
 				<property name="server">${core.generated.dir}</property>
 				<property name="server-impls">${core.manual.dir}</property>
 				<property name="server-config">${core.manual.dir}</property>
 				<property name="server-test">${core.manual.dir}</property>
 				<property name="server-test-config">${core.manual.dir}</property>
+				-->
 
 				<!--
 					 <property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
