@@ -1,7 +1,5 @@
 package de.openaqua.regtest;
 
-import java.util.Arrays;
-
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -10,13 +8,11 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.BeanFactoryReference;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 import de.openaqua.dev.entities.Country;
 import de.openaqua.dev.exception.ServiceException;
 import de.openaqua.dev.services.CountryService;
-import de.openaqua.dev.vo.CountryVO;
 
 
 public class Main {
@@ -66,12 +62,12 @@ public class Main {
 			logger.info("Path: " + segs[i]);		
 		}
 		
-		 BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
-		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+		//BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
+		 //BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
 		
-		//ClassPathResource res = new ClassPathResource("applicationContext.xml");
-		 //XmlBeanFactory factory = new XmlBeanFactory(res);
-		 //CountryService myService = (CountryService) factory.getBean("countryService");
+		ClassPathResource res = new ClassPathResource("applicationContext.xml");
+		 XmlBeanFactory factory = new XmlBeanFactory(res);
+		 CountryService myService = (CountryService) factory.getBean("countryService");
 		 //CountryVO[] list =  myService.getAllCountries();
 		
 		//PizzaOrderService myService = (PizzaOrderService) factory.getBean("pizzaOrderService");

@@ -42,8 +42,11 @@
 
 		<namespace name="spring">
 			<properties>
+				<!--
 				<property name="dataSource">${dataSource}</property>
+				-->
 				<property name="sessionFactory">org.springframework.orm.hibernate3.LocalSessionFactoryBean</property>
+				<property name="hibernateVersion">3</property>
 				<property name="hibernateDialect">${hibernate.dialect}</property>
 				<property name="hibernateShowSql">${hibernate.db.showSql}</property>
 				<property name="hibernateInheritanceStrategy">${hibernate.inheritance.strategy}</property>
@@ -65,15 +68,18 @@
 				<property name="server">${server.generated.dir}</property>
 				<property name="server-impls">${server.manual.dir}</property>
 				<property name="server-config">${server.manual.dir}</property>
+
 				<property name="client">${client.generated.dir}</property>
 				<property name="client-impls">${client.manual.dir}</property>
 				<property name="client-config">${client.manual.dir}</property>
 
-				<property name="applicationContextServer" />
-				<property name="acegiServiceSecurity" />
 
 
 				<!--
+					 <property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
+					 <property name="applicationContextClient" >applicationContextClient.xml</property>
+					 <property name="applicationContextServer" />
+					 <property name="acegiServiceSecurity" />
 					 <property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
 					 <property name="applicationContextClient"></property>
 					 -->
@@ -99,6 +105,7 @@
 				<property name="cache">${core.generated.dir}</property>
 			</properties>
 		</namespace>
+
 
 		<namespace name="java">
 			<properties>
