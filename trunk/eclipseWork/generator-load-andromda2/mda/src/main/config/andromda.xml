@@ -75,10 +75,10 @@
 				<property name="client-config">${client.manual.dir}</property>
 
 				<property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
+				<property name="applicationContextServer"> applicationContextServer.xml</property>
 
 				<!--
 					 <property name="applicationContextClient" >applicationContextClient.xml</property>
-					 <property name="applicationContextServer" />
 					 <property name="acegiServiceSecurity" />
 					 <property name="applicationContextClient"></property>
 					 -->
