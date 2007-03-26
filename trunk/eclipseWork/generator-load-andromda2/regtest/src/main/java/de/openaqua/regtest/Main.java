@@ -57,12 +57,12 @@ public class Main {
 		
 		PhoneFormat p = new PhoneFormatImpl();
 		p.setFormat(".*\\-.*");
-		short id = p.getId();
 		session.save(p);
+		long id = p.getId();
 		if ( p.getId() != id) {
 			logger.info("ID was: " + id + " is: "+ p.getId());
 		} else {
-			logger.info("PhoneFormat stored");
+			logger.info("PhoneFormat stored id is " + p.getId());
 		}
 		
 		Country c = new CountryImpl();
@@ -72,8 +72,8 @@ public class Main {
 		Collection<PhoneFormat> cp = new LinkedList<PhoneFormat>();
 		cp.add(p);
 		c.setPhoneFormat(cp);
-		long cId = c.getId();
 		session.save(c);
+		long cId = c.getId();
 		if ( c.getId() != cId ) {
 			logger.info("iso was: " + cId + " is: "+ c.getId() );
 		}

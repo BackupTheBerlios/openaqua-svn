@@ -12,7 +12,7 @@
         <property name="connection.url">jdbc:hsqldb:mem:foo</property>
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
-        
+
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
 
@@ -28,16 +28,16 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="transaction.factory_class"> org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>				
-        
+		  <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
         <property name="hibernate.format_sql">true</property>
 
-		<mapping resource="de/openaqua/dev/entities/PhoneFormat.hbm.xml"/>		
-        <mapping resource="de/openaqua/dev/entities/Person.hbm.xml"/>		
-        <mapping resource="de/openaqua/dev/entities/Country.hbm.xml"/>		
-        <mapping resource="de/openaqua/dev/entities/Contract.hbm.xml"/>		
-        <mapping resource="de/openaqua/dev/entities/City.hbm.xml"/>		
-        <mapping resource="de/openaqua/dev/entities/Address.hbm.xml"/>		
+		<mapping resource="de/openaqua/dev/entities/PhoneFormat.hbm.xml"/>
+        <mapping resource="de/openaqua/dev/entities/Person.hbm.xml"/>
+        <mapping resource="de/openaqua/dev/entities/Country.hbm.xml"/>
+        <mapping resource="de/openaqua/dev/entities/Contract.hbm.xml"/>
+        <mapping resource="de/openaqua/dev/entities/City.hbm.xml"/>
+        <mapping resource="de/openaqua/dev/entities/Address.hbm.xml"/>
 
     </session-factory>
 
