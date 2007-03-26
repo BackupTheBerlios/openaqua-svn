@@ -5,11 +5,7 @@ package de.openaqua.regtest;
  * 
  */
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 import org.apache.log4j.ConsoleAppender;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -19,9 +15,6 @@ import org.hibernate.classic.Session;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.BeanFactoryReference;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
-
 import de.openaqua.dev.entities.Country;
 import de.openaqua.dev.entities.CountryImpl;
 import de.openaqua.dev.entities.PhoneFormat;
@@ -43,10 +36,10 @@ public class Main {
 
 		logger.info("-------------------setup Hibernate-----------------------");
 		testHibernate();
-		playWithCountry();
-		playWithCountryByDb();
-		hibernateTest();
-		springTest();
+		//playWithCountry();
+		//playWithCountryByDb();
+		//hibernateTest();
+		//springTest();
 
 	}
 
@@ -69,9 +62,7 @@ public class Main {
 		c.setIso("DE");
 		c.setDescription("Germany");
 		c.setPreDial("+49");
-		Collection<PhoneFormat> cp = new LinkedList<PhoneFormat>();
-		cp.add(p);
-		c.setPhoneFormat(cp);
+		c.getPhoneFormat().add(p);
 		session.save(c);
 		long cId = c.getId();
 		if ( c.getId() != cId ) {
@@ -103,11 +94,6 @@ public class Main {
 		//dumper.dumpCountry(c);		
 	}
 
-	public static void hibernateTest()  {
-		logger.info("-------------------play with hibernateTest()-----------------------");
-		
-		
-	}
 
 	public static void springTest()  {
 		logger.info("-------------------play with springTest()-----------------------");
@@ -116,9 +102,9 @@ public class Main {
 			logger.info("Path: " + segs[i]);		
 		}
 		
-		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
-		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
-		 CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
+		//BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
+		//		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+//		 CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
 			/*
 		 CountryVO c = cs.getCountryByIso("DE");
 		 if (c != null) {
