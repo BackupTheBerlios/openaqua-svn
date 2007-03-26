@@ -5,11 +5,17 @@ package de.openaqua.regtest;
  * 
  */
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import org.apache.log4j.ConsoleAppender;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.BeanFactoryReference;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
@@ -17,22 +23,26 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import de.openaqua.dev.entities.Country;
-import de.openaqua.dev.entities.CountryDao;
-import de.openaqua.dev.entities.CountryDaoImpl;
-import de.openaqua.dev.exception.ServiceException;
+import de.openaqua.dev.entities.CountryImpl;
+import de.openaqua.dev.entities.PhoneFormat;
+import de.openaqua.dev.entities.PhoneFormatImpl;
 import de.openaqua.dev.services.CountryService;
-import de.openaqua.dev.vo.CountryVO;
+
 
 
 public class Main {
 	private static Logger logger = Logger.getRootLogger();
 
-	public static void main(String[] args) throws ServiceException {
+
+	public static void main(String[] args)  {
 		PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 		logger.addAppender( consoleAppender );
 		logger.setLevel( Level.ALL);
 		logger.info("-------------------Begin Test-----------------------");
+
+		logger.info("-------------------setup Hibernate-----------------------");
+		testHibernate();
 		playWithCountry();
 		playWithCountryByDb();
 		hibernateTest();
@@ -40,11 +50,46 @@ public class Main {
 
 	}
 
+	public static void testHibernate() {
+		SessionFactory sessionFactory = new org.hibernate.cfg.Configuration().configure("hibernate.cfg.mapping.xml").buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction trx = session.beginTransaction();
+		
+		PhoneFormat p = new PhoneFormatImpl();
+		p.setFormat(".*\\-.*");
+		short id = p.getId();
+		session.save(p);
+		if ( p.getId() != id) {
+			logger.info("ID was: " + id + " is: "+ p.getId());
+		} else {
+			logger.info("PhoneFormat stored");
+		}
+		
+		Country c = new CountryImpl();
+		c.setIso("DE");
+		c.setDescription("Germany");
+		c.setPreDial("+49");
+		Collection<PhoneFormat> cp = new LinkedList<PhoneFormat>();
+		cp.add(p);
+		c.setPhoneFormat(cp);
+		String iso = c.getIso();
+		session.save(c);
+		if ( ! c.getIso().equals( iso )) {
+			logger.info("iso was: " + iso + " is: "+ c.getIso());
+		}
+		logger.info("Country c stored");
+		
+		trx.commit();
+		
+	}
+	
 	public static void playWithCountry() {
 		logger.info("-------------------playWithCountry()-----------------------");
+		/*
 		Country c =  Country.Factory.newInstance();
 		CountryDumper dumper = new CountryDumper();
-		dumper.dumpCountry(c);		
+		dumper.dumpCountry(c);
+		*/		
 	}
 
 	public static void playWithCountryByDb() {
@@ -64,7 +109,7 @@ public class Main {
 		
 	}
 
-	public static void springTest() throws ServiceException {
+	public static void springTest()  {
 		logger.info("-------------------play with springTest()-----------------------");
 		String segs[] = System.getProperty("java.class.path",".").split( ":" );
 		for (int i = 0; i < segs.length; ++i) {
@@ -74,6 +119,7 @@ public class Main {
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
 		 CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
+			/*
 		 CountryVO c = cs.getCountryByIso("DE");
 		 if (c != null) {
 			 logger.info("Got CountryVO for DE:");
@@ -88,6 +134,7 @@ public class Main {
 			 //CountryDao dao = new CountryDaoImpl();
 			 //dao.create(description, preDial)
 		 }
+		 */
 		
 		//ClassPathResource res = new ClassPathResource("applicationContext.xml");
 		 // XmlBeanFactory factory = new XmlBeanFactory(res);

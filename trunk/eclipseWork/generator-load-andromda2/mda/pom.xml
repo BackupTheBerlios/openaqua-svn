@@ -101,10 +101,6 @@
 		<client.manual.dir>${pom.basedir}/../server/src/main/java</client.manual.dir>
 
 		<!-- hibernate configuration -->
-		<!-- default strategy to use when using inhertiance -->
-		<hibernate.inheritance.strategy>subclass</hibernate.inheritance.strategy>
-		<hibernate.db.showSql>true</hibernate.db.showSql>
-		<!-- hibernate generator class to use for identifiers -->
 		<hibernate.generatorClass>native</hibernate.generatorClass>
 	</properties>
 </project>

@@ -369,54 +369,17 @@
 		<module>client</module>
 		<module>server</module>
 		<module>regtest</module>
+		<!--
+
+			 -->
 	</modules>
+
 	<properties>
-        <sql.mappings>HypersonicSql</sql.mappings>
-        <hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-        <jboss.home>${env.JBOSS_HOME}</jboss.home>
         <application.id>connection</application.id>
         <application.package>de.openaqua.dev</application.package>
         <application.name>Generator AndroMDA</application.name>
         <application.version>1.0</application.version>
-        <dataSource.name>jdbc/${application.id}</dataSource.name>
-        <dataSource>java:/${dataSource.name}</dataSource>
     </properties>
-    <profiles>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jdbc.driver.jar>${jboss.home}/server/default/lib/hsqldb.jar</jdbc.driver.jar>
-                <jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
-                <jdbc.url>jdbc:hsqldb:file:/tmp/foojdbc.dat</jdbc.url>
-                <jdbc.username>sa</jdbc.username>
-                <jdbc.password></jdbc.password>
-                <jdbc.exception.sorter>org.jboss.resource.adapter.jdbc.vendor.DummyExceptionSorter</jdbc.exception.sorter>
-            </properties>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.andromda.maven.plugins</groupId>
-                            <artifactId>andromdapp-maven-plugin</artifactId>
-                            <version>3.2</version>
-                            <configuration>
-                                <scriptWrapper>org.andromda.scriptwrappers.GroovyScriptWrapper</scriptWrapper>
-                                <locations>
-                                    <location>
-                                        <rootPath>${pom.basedir}/src/main/java</rootPath>
-                                    </location>
-                                </locations>
-                            </configuration>
-                        </plugin>
-
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-	</profiles>
 
 	<!--Setup a additional repositories -->
 	<repositories>

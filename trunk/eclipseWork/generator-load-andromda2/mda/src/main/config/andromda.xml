@@ -20,31 +20,65 @@
 
 
 	<namespaces>
+		<!--default settings for andromda
+
+						-->
 		<namespace name="default">
 			<properties>
 				<property name="languageMappingsUri">Java</property>
 				<property name="wrapperMappingsUri">JavaWrapper</property>
-				<property name="sqlMappingsUri">${sql.mappings}</property>
+				<property name="sqlMappingsUri">HypersonicSql</property>
 				<property name="jdbcMappingsUri">JDBC</property>
-				<property name="maxSqlNameLength">30</property>
-				<property name="foreignKeySuffix">_FK</property>
-				<!--<property name="ejbJndiNamePrefix">${application.id}</property>-->
-				<!-- used in both hibernate and spring cartridges -->
-				<property name="hibernateVersion">3</property>
-				<property name="richClient">true</property>
-				<property name="configPropertyPrefix">${application.id}.</property>
-				<property name="toDoTag">TODO</property>
-				<property name="securityRealm">${application.id}</property>
-				<property name="mergeLocation">mda/src/custom</property>
+				<property name="enableTemplating">true</property>
 			</properties>
 		</namespace>
 
+		<namespace name="java">
+			<properties>
+				<property name="enablePropertyConstructors">true</property>
+				<property name="enumerations">${common.generated.dir}</property>
+				<property name="exceptions">${common.generated.dir}</property>
+				<property name="value-objects">${common.generated.dir}</property>
+				<property name="services">${common.generated.dir}</property>
+				<property name="service-impls">${common.generated.dir}</property>
+				<property name="interfaces">${common.generated.dir}</property>
+				<property name="interface-impls">${common.generated.dir}</property>
+			</properties>
+		</namespace>
 
+		<namespace name="hibernate">
+			<properties>
+				<!--cache-->
+				<property name="hibernateEnableCache">false</property>
+
+				<!--jdbc-->
+				<property name="driver">org.hsqldb.jdbcDriver</property>
+				<property name="username">sa</property>
+				<property name="password"></property>
+				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat</property>
+
+				<!--name patterns-->
+				<property name="entities">${core.generated.dir}</property>
+				<property name="entity-impls">${core.manual.dir}</property>
+				<property name="entity-mappings">${core.generated.dir}</property>
+				<property name="user-types">${core.generated.dir}</property>
+				<property name="customTypesPackage">${application.package}</property>
+				<property name="cache">${core.generated.dir}</property>
+
+
+				<!--other-->
+				<property name="hibernateVersion">3</property>
+				<property name="hibernateShowSql">true</property>
+				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
+				<property name="hibernateHbm2DDLAuto">update</property>
+				<property name="hibernateInheritanceStrategy">subclass</property>
+
+			</properties>
+		</namespace>
+
+<!--
 		<namespace name="spring">
 			<properties>
-				<!--
-
-				-->
 				<property name="dataSource">${dataSource}</property>
 
 				<property name="sessionFactory">org.springframework.orm.hibernate3.LocalSessionFactoryBean</property>
@@ -75,77 +109,9 @@
 
 				<property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
 
-				<!--
-					 <property name="applicationContextServer"> applicationContextServer.xml</property>
-					 <property name="applicationContextClient" >applicationContextClient.xml</property>
-					 <property name="acegiServiceSecurity" />
-					 <property name="applicationContextClient"></property>
-					 -->
 			</properties>
 		</namespace>
 
-
-		<namespace name="hibernate">
-			<properties>
-				<property name="hibernateVersion">3</property>
-				<property name="hibernateEnableCache">true</property>
-				<property name="hibernateEnableAssociationsCache">true</property>
-				<property name="hibernateTypeMappingsUri">Hibernate</property>
-				<property name="hibernateInheritanceStrategy">${hibernate.inheritance.strategy}</property>
-				<property name="defaultHibernateGeneratorClass">${hibernate.generatorClass}</property>
-				<property name="hibernateDefaultCascade">none</property>
-				<property name="entities">${core.generated.dir}</property>
-				<property name="entity-impls">${core.manual.dir}</property>
-				<property name="entity-mappings">${core.generated.dir}</property>
-				<property name="user-types">${core.generated.dir}</property>
-				<property name="customTypesPackage">${application.package}</property>
-				<property name="compositionDefinesEagerLoading">true</property>
-				<property name="cache">${core.generated.dir}</property>
-
-				<property name="driver">org.hsqldb.jdbcDriver</property>
-				<property name="username">sa</property>
-				<property name="password"></property>
-				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat</property>
-
-				<property name="hibernateShowSql">true</property>
-				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
-
-				<property name="hibernateHbm2DDLAuto">update</property>
-
-
-			</properties>
-		</namespace>
-
-
-		<namespace name="java">
-			<properties>
-				<property name="enumerations">${common.generated.dir}</property>
-				<property name="exceptions">${common.generated.dir}</property>
-				<property name="value-objects">${common.generated.dir}</property>
-				<property name="services">${common.generated.dir}</property>
-				<property name="service-impls">${common.generated.dir}</property>
-				<property name="interfaces">${common.generated.dir}</property>
-				<property name="interface-impls">${common.generated.dir}</property>
-
-			</properties>
-		</namespace>
-
-		  <!--
-        <namespace name="bpm4struts">
-            <properties>
-                <property name="forms">${web.generated.dir}</property>
-                <property name="pages">${web.generated.dir}</property>
-                <property name="actions">${web.generated.dir}</property>
-                <property name="controllers">${web.generated.dir}</property>
-                <property name="controller-impls">${web.manual.java.dir}</property>
-                <property name="decorators">${web.manual.java.dir}</property>
-                <property name="messages">${web.generated.dir}/WEB-INF/classes</property>
-                <property name="configuration">${web.generated.dir}/WEB-INF</property>
-                <property name="serviceAccessorPattern">${application.package}.ServiceLocator.instance().get{1}()</property>
-                <property name="manageableServiceAccessorPattern">${application.package}.ManageableServiceLocator.instance().get{1}()</property>
-            </properties>
-		 </namespace>
-		 -->
-
-	 </namespaces>
+-->
+	</namespaces>
 </andromda>
