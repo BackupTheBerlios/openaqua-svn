@@ -43,8 +43,9 @@
 		<namespace name="spring">
 			<properties>
 				<!--
-				<property name="dataSource">${dataSource}</property>
 				-->
+				<property name="dataSource">${dataSource}</property>
+
 				<property name="sessionFactory">org.springframework.orm.hibernate3.LocalSessionFactoryBean</property>
 				<property name="hibernateVersion">3</property>
 				<property name="hibernateDialect">${hibernate.dialect}</property>
@@ -73,14 +74,12 @@
 				<property name="client-impls">${client.manual.dir}</property>
 				<property name="client-config">${client.manual.dir}</property>
 
-
+				<property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
 
 				<!--
-					 <property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
 					 <property name="applicationContextClient" >applicationContextClient.xml</property>
 					 <property name="applicationContextServer" />
 					 <property name="acegiServiceSecurity" />
-					 <property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
 					 <property name="applicationContextClient"></property>
 					 -->
 			</properties>
