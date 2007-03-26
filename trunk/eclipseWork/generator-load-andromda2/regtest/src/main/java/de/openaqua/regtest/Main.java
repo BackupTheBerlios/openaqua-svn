@@ -1,6 +1,12 @@
 package de.openaqua.regtest;
 
+/*
+ * @todo: In beanRefFactory.xml: Verweis auf remote irgendwas
+ * 
+ */
+
 import org.apache.log4j.ConsoleAppender;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -11,8 +17,11 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import de.openaqua.dev.entities.Country;
+import de.openaqua.dev.entities.CountryDao;
+import de.openaqua.dev.entities.CountryDaoImpl;
 import de.openaqua.dev.exception.ServiceException;
 import de.openaqua.dev.services.CountryService;
+import de.openaqua.dev.vo.CountryVO;
 
 
 public class Main {
@@ -62,12 +71,27 @@ public class Main {
 			logger.info("Path: " + segs[i]);		
 		}
 		
-		//BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
-		 //BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
+		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+		 CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
+		 CountryVO c = cs.getCountryByIso("DE");
+		 if (c != null) {
+			 logger.info("Got CountryVO for DE:");
+			 logger.info("id="+c.getId());
+		 } else {
+			 logger.info("Got not CountryVO for DE:");
+			 CountryVO d = new CountryVO();
+			 d.setIso("DE");
+			 d.setDescription("Germany");
+			 d.setPhoneFormat("");
+			 d.setPredial("+49");
+			 //CountryDao dao = new CountryDaoImpl();
+			 //dao.create(description, preDial)
+		 }
 		
-		ClassPathResource res = new ClassPathResource("applicationContext.xml");
-		 XmlBeanFactory factory = new XmlBeanFactory(res);
-		 CountryService myService = (CountryService) factory.getBean("countryService");
+		//ClassPathResource res = new ClassPathResource("applicationContext.xml");
+		 // XmlBeanFactory factory = new XmlBeanFactory(res);
+		 //CountryService myService = (CountryService) factory.getBean("countryService");
 		 //CountryVO[] list =  myService.getAllCountries();
 		
 		//PizzaOrderService myService = (PizzaOrderService) factory.getBean("pizzaOrderService");
