@@ -72,10 +72,10 @@ public class Main {
 		Collection<PhoneFormat> cp = new LinkedList<PhoneFormat>();
 		cp.add(p);
 		c.setPhoneFormat(cp);
-		String iso = c.getIso();
+		long cId = c.getId();
 		session.save(c);
-		if ( ! c.getIso().equals( iso )) {
-			logger.info("iso was: " + iso + " is: "+ c.getIso());
+		if ( c.getId() != cId ) {
+			logger.info("iso was: " + cId + " is: "+ c.getId() );
 		}
 		logger.info("Country c stored");
 		
