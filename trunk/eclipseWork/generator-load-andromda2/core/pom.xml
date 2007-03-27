@@ -11,6 +11,11 @@
     <packaging>jar</packaging>
     <name>directory: core (Core Business Tier)</name>
     <dependencies>
+		 <dependency>
+			 <groupId>hsqldb</groupId>
+			 <artifactId>hsqldb</artifactId>
+		 </dependency>
+
         <dependency>
             <groupId>${pom.groupId}</groupId>
             <artifactId>common</artifactId>
@@ -56,12 +61,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-		  <!--
-        <dependency>
-            <groupId>jboss</groupId>
-            <artifactId>jboss-j2ee</artifactId>
-        </dependency>
-		  -->
         <dependency>
             <groupId>org.andromda</groupId>
             <artifactId>andromda-script-wrappers</artifactId>
@@ -84,12 +83,17 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jdbcDriver>${jdbc.driver}</jdbcDriver>
-                    <jdbcDriverJar>${jdbc.driver.jar}</jdbcDriverJar>
-                    <jdbcConnectionUrl>${jdbc.url}</jdbcConnectionUrl>
-                    <jdbcUsername>${jdbc.username}</jdbcUsername>
-                    <jdbcPassword>${jdbc.password}</jdbcPassword>
-                    <properties>
+						 <jdbcDriver>org.hsqldb.jdbcDriver</jdbcDriver>
+						 <jdbcDriverJar>hsqldb.jar</jdbcDriverJar>
+						 <jdbcConnectionUrl>jdbc:hsqldb:file:/tmp/foo2.dat;shutdown=true</jdbcConnectionUrl>
+						 <jdbcUsername>sa</jdbcUsername>
+						 <jdbcPassword></jdbcPassword>
+						 <properties>
+							 <property>
+								 <name>hibernate.dialect</name>
+								 <value>org.hibernate.dialect.HSQLDialect</value>
+							 </property>
+
                         <property>
                             <name>mappingsLocation</name>
                             <value>${project.basedir}/target/src</value>

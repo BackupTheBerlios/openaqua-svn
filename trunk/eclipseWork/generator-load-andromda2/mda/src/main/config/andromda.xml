@@ -86,7 +86,7 @@
 				<property name="driver">org.hsqldb.jdbcDriver</property>
 				<property name="username">sa</property>
 				<property name="password"></property>
-				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat</property>
+				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat;shutdown=true</property>
 
 				<!--config-->
 				<property name="spring-configuration">${core.generated.dir}</property>

@@ -10,12 +10,14 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
+import de.openaqua.dev.exception.ServiceException;
+
 
 public class Main {
 	private static Logger logger = Logger.getRootLogger();
 
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) throws ServiceException  {
 		PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 		logger.addAppender( consoleAppender );
@@ -35,7 +37,7 @@ public class Main {
 		
 	}
 	
-	public static void testSpring() {
+	public static void testSpring() throws ServiceException {
 		SpringTest test = new SpringTest();
 		test.mainTest();
 		
@@ -67,33 +69,6 @@ public class Main {
 		for (int i = 0; i < segs.length; ++i) {
 			logger.info("Path: " + segs[i]);		
 		}
-		
-		//BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
-		//		 BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
-//		 CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
-			/*
-		 CountryVO c = cs.getCountryByIso("DE");
-		 if (c != null) {
-			 logger.info("Got CountryVO for DE:");
-			 logger.info("id="+c.getId());
-		 } else {
-			 logger.info("Got not CountryVO for DE:");
-			 CountryVO d = new CountryVO();
-			 d.setIso("DE");
-			 d.setDescription("Germany");
-			 d.setPhoneFormat("");
-			 d.setPredial("+49");
-			 //CountryDao dao = new CountryDaoImpl();
-			 //dao.create(description, preDial)
-		 }
-		 */
-		
-		//ClassPathResource res = new ClassPathResource("applicationContext.xml");
-		 // XmlBeanFactory factory = new XmlBeanFactory(res);
-		 //CountryService myService = (CountryService) factory.getBean("countryService");
-		 //CountryVO[] list =  myService.getAllCountries();
-		
-		//PizzaOrderService myService = (PizzaOrderService) factory.getBean("pizzaOrderService");
 	}
 
 }
