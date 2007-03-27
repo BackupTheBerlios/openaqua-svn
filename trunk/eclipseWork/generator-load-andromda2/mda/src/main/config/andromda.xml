@@ -1,7 +1,7 @@
 <andromda>
 	<properties>
 		<property name="modelValidation">true</property>
-		<property name="cartridgeFilter">${filter}</property>
+		<property name="cartridgeFilter" />
 	</properties>
 
 	<server>
@@ -30,24 +30,33 @@
 				<property name="sqlMappingsUri">HypersonicSql</property>
 				<property name="jdbcMappingsUri">JDBC</property>
 				<property name="enableTemplating">true</property>
+				<property name="hibernateVersion">3</property>
 			</properties>
 		</namespace>
 
 		<namespace name="java">
 			<properties>
+				<!--config-->
 				<property name="enablePropertyConstructors">true</property>
+
+				<!--output-->
 				<property name="enumerations">${common.generated.dir}</property>
 				<property name="exceptions">${common.generated.dir}</property>
 				<property name="value-objects">${common.generated.dir}</property>
-				<property name="services">${common.generated.dir}</property>
-				<property name="service-impls">${common.generated.dir}</property>
-				<property name="interfaces">${common.generated.dir}</property>
-				<property name="interface-impls">${common.generated.dir}</property>
 			</properties>
 		</namespace>
 
 		<namespace name="hibernate">
 			<properties>
+				<!--config-->
+				<property name="hibernateVersion">3</property>
+				<property name="hibernateShowSql">true</property>
+				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
+				<property name="hibernateHbm2DDLAuto">update</property>
+				<property name="hibernateInheritanceStrategy">subclass</property>
+				<property name="hibernateDefaultCascade">none</property>
+				<property name="compsitionDefinesEagerLoading">true</property>
+
 				<!--cache-->
 				<property name="hibernateEnableCache">false</property>
 
@@ -66,38 +75,35 @@
 				<property name="cache">${core.generated.dir}</property>
 
 
-				<!--other-->
-				<property name="hibernateVersion">3</property>
-				<property name="hibernateShowSql">true</property>
-				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
-				<property name="hibernateHbm2DDLAuto">update</property>
-				<property name="hibernateInheritanceStrategy">subclass</property>
 
 			</properties>
 		</namespace>
 
-<!--
+
 		<namespace name="spring">
 			<properties>
-				<property name="dataSource">${dataSource}</property>
+				<!--databae-->
+				<property name="driver">org.hsqldb.jdbcDriver</property>
+				<property name="username">sa</property>
+				<property name="password"></property>
+				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat</property>
+
+				<!--config-->
+				<property name="spring-configuration">${core.generated.dir}</property>
+				<property name="applicationContextLocalDataSource">applicationContext-localDataSource.xml</property>
 
 				<property name="sessionFactory">org.springframework.orm.hibernate3.LocalSessionFactoryBean</property>
-
-
-				<property name="hibernateInheritanceStrategy">${hibernate.inheritance.strategy}</property>
+				<property name="hibernateInheritanceStrategy">subclass</property>
 				<property name="hibernateCacheProvider">org.hibernate.cache.EhCacheProvider</property>
-				<property name="transactionManager">org.springframework.orm.hibernate3.HibernateTransactionManager</property>
-				<property name="springTypesPackage">${application.package}</property>
+				<property name="hibernateVersion">3</property>
 
-				<property name="spring-configuration">${core.generated.dir}</property>
+				<!--code output-->
+				<property name="services">${core.generated.dir}</property>
+				<property name="service-impls">${core.manual.dir}</property>
+				<property name="service-interfaces">${common.generated.dir}</property>
 
 				<property name="daos">${core.generated.dir}</property>
 				<property name="dao-impls">${core.manual.dir}</property>
-
-				<property name="services">${core.generated.dir}</property>
-				<property name="service-interfaces">${common.generated.dir}</property>
-				<property name="service-impls">${common.manual.dir}</property>
-				<property name="value-objects">${common.generated.dir}</property>
 
 				<property name="server">${server.generated.dir}</property>
 				<property name="server-impls">${server.manual.dir}</property>
@@ -107,11 +113,9 @@
 				<property name="client-impls">${client.manual.dir}</property>
 				<property name="client-config">${client.generated.dir}</property>
 
-				<property name="applicationContextLocalDataSource">applicationContextLocalDataSource.xml</property>
-
 			</properties>
 		</namespace>
 
--->
+
 	</namespaces>
 </andromda>

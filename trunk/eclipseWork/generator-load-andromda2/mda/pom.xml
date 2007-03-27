@@ -83,8 +83,6 @@
 	</build>
 	<properties>
 		<model.uri>${project.build.sourceDirectory}/emf/andromda2.uml2</model.uri>
-		<filter></filter>
-		<validation>true</validation>
 		<conf.dir>${pom.basedir}/src/main/config</conf.dir>
 
 		<!-- cartridge output locations -->
