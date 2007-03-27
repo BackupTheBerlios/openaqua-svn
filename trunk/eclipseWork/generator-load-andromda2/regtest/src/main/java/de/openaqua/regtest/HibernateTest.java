@@ -5,14 +5,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 
 import de.openaqua.dev.entities.City;
 import de.openaqua.dev.entities.CityImpl;
 import de.openaqua.dev.entities.Country;
 
+
 public class HibernateTest {
+	private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	private final static Logger logger = Logger.getRootLogger();
 	
 	private Country  getGermany(Session session) {
@@ -31,7 +35,7 @@ public class HibernateTest {
 
 	
 	private void storeGermanCities() {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction trx = session.beginTransaction();
 		
 		Country germany = getGermany(session); 
@@ -44,15 +48,12 @@ public class HibernateTest {
 		logger.info("Saved Köln. ID="+cologne.getId());
 
 		trx.commit();
+		session.close();
 		
 	}
 	
 	public HibernateTest() {
 		super();
-	}
-	
-	public void close() {
-		HibernateUtil.getSessionFactory().close();
 	}
 	
 	public void mainTest() {

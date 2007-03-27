@@ -22,12 +22,10 @@ public class Main {
 		logger.setLevel( Level.INFO);
 		logger.info("-------------------Begin Test-----------------------");
 
-		logger.info("-------------------setup Hibernate-----------------------");
-		testHibernate();
-		//playWithCountry();
-		//playWithCountryByDb();
-		//hibernateTest();
-		//springTest();
+		//logger.info("-------------------setup Hibernate-----------------------");
+		//testHibernate();
+		
+		testSpring();
 
 	}
 
@@ -37,6 +35,11 @@ public class Main {
 		
 	}
 	
+	public static void testSpring() {
+		SpringTest test = new SpringTest();
+		test.mainTest();
+		
+	}
 	public static void playWithCountry() {
 		logger.info("-------------------playWithCountry()-----------------------");
 		/*

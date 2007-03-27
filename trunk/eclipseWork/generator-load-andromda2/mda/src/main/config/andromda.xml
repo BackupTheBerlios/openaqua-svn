@@ -82,7 +82,7 @@
 
 		<namespace name="spring">
 			<properties>
-				<!--databae-->
+				<!--database-->
 				<property name="driver">org.hsqldb.jdbcDriver</property>
 				<property name="username">sa</property>
 				<property name="password"></property>
@@ -91,6 +91,7 @@
 				<!--config-->
 				<property name="spring-configuration">${core.generated.dir}</property>
 				<property name="applicationContextLocalDataSource">applicationContext-localDataSource.xml</property>
+				<property name="localTransactionManager">org.springframework.orm.hibernate3.HibernateTransactionManager</property>
 
 				<property name="sessionFactory">org.springframework.orm.hibernate3.LocalSessionFactoryBean</property>
 				<property name="hibernateInheritanceStrategy">subclass</property>
