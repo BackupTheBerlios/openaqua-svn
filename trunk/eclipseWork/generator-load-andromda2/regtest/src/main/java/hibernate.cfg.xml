@@ -9,12 +9,14 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.url">jdbc:hsqldb:mem:foo</property>
+		  <property name="hibernate.connection.url">jdbc:hsqldb:file:/tmp/myDB;shutdown=true</property>
+		  <!--<property name="connection.url">jdbc:hsqldb:hsql://localhost</property>-->
+
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+        <property name="connection.pool_size">4</property>
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
@@ -23,21 +25,23 @@
         <property name="current_session_context_class">thread</property>
 
             <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="transaction.factory_class"> org.hibernate.transaction.JDBCTransactionFactory</property>
+		<!--
+        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
-		  <property name="hibernate.hbm2ddl.auto">create-drop</property>
+			-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <property name="hibernate.format_sql">true</property>
 
 		<mapping resource="de/openaqua/dev/entities/PhoneFormat.hbm.xml"/>
-        <mapping resource="de/openaqua/dev/entities/Person.hbm.xml"/>
-        <mapping resource="de/openaqua/dev/entities/Country.hbm.xml"/>
-        <mapping resource="de/openaqua/dev/entities/Contract.hbm.xml"/>
-        <mapping resource="de/openaqua/dev/entities/City.hbm.xml"/>
-        <mapping resource="de/openaqua/dev/entities/Address.hbm.xml"/>
+		<mapping resource="de/openaqua/dev/entities/Person.hbm.xml"/>
+		<mapping resource="de/openaqua/dev/entities/Country.hbm.xml"/>
+		<mapping resource="de/openaqua/dev/entities/Contract.hbm.xml"/>
+		<mapping resource="de/openaqua/dev/entities/City.hbm.xml"/>
+		<mapping resource="de/openaqua/dev/entities/Address.hbm.xml"/>
 
     </session-factory>
 

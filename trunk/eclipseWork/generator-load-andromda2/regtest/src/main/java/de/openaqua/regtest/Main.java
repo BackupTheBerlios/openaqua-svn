@@ -9,18 +9,6 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.BeanFactoryReference;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import de.openaqua.dev.entities.Country;
-import de.openaqua.dev.entities.CountryImpl;
-import de.openaqua.dev.entities.PhoneFormat;
-import de.openaqua.dev.entities.PhoneFormatImpl;
-import de.openaqua.dev.services.CountryService;
-
 
 
 public class Main {
@@ -31,7 +19,7 @@ public class Main {
 		PatternLayout layout = new PatternLayout( "%-5p [%t] %C{1} -> %m%n" );
 		ConsoleAppender consoleAppender = new ConsoleAppender( layout );
 		logger.addAppender( consoleAppender );
-		logger.setLevel( Level.ALL);
+		logger.setLevel( Level.INFO);
 		logger.info("-------------------Begin Test-----------------------");
 
 		logger.info("-------------------setup Hibernate-----------------------");
@@ -44,33 +32,8 @@ public class Main {
 	}
 
 	public static void testHibernate() {
-		SessionFactory sessionFactory = new org.hibernate.cfg.Configuration().configure("hibernate.cfg.mapping.xml").buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction trx = session.beginTransaction();
-		
-		PhoneFormat p = new PhoneFormatImpl();
-		p.setFormat(".*\\-.*");
-		session.save(p);
-		long id = p.getId();
-		if ( p.getId() != id) {
-			logger.info("ID was: " + id + " is: "+ p.getId());
-		} else {
-			logger.info("PhoneFormat stored id is " + p.getId());
-		}
-		
-		Country c = new CountryImpl();
-		c.setIso("DE");
-		c.setDescription("Germany");
-		c.setPreDial("+49");
-		c.getPhoneFormat().add(p);
-		session.save(c);
-		long cId = c.getId();
-		if ( c.getId() != cId ) {
-			logger.info("iso was: " + cId + " is: "+ c.getId() );
-		}
-		logger.info("Country c stored");
-		
-		trx.commit();
+		HibernateTest test = new HibernateTest();
+		test.mainTest();
 		
 	}
 	
