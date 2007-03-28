@@ -107,17 +107,12 @@ public class CountryDaoImpl
      */
     private de.openaqua.dev.entities.Country loadCountryFromCountryVOLookupCriteria(de.openaqua.dev.vo.CountryVOLookupCriteria countryVOLookupCriteria)
     {
-        // @todo implement loadCountryFromCountryVOLookupCriteria
-        throw new java.lang.UnsupportedOperationException("de.openaqua.dev.entities.loadCountryFromCountryVOLookupCriteria(de.openaqua.dev.vo.CountryVOLookupCriteria) not yet implemented.");
-
-        /* A typical implementation looks like this:
         de.openaqua.dev.entities.Country country = this.load(countryVOLookupCriteria.getId());
         if (country == null)
         {
             country = de.openaqua.dev.entities.Country.Factory.newInstance();
         }
         return country;
-        */
     }
 
     

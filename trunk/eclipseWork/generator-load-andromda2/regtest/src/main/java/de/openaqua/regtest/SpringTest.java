@@ -14,9 +14,11 @@ import de.openaqua.dev.vo.CountryVO;
 public class SpringTest {
 	private final static Logger logger = Logger.getRootLogger();
 	
+	
 	public SpringTest () {
 		super();
 	}
+	
 	
 	public void listAllCountries() throws ServiceException {
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
@@ -27,15 +29,15 @@ public class SpringTest {
 		CountryVO[] vos =  cs.getAllCountries();
 		if (vos == null) {
 			logger.error("Array vos is empty");
-			
 		}
+
 		for (int i = 0; i< vos.length; ++i) {
 			CountryVO v = vos[i];
 			logger.info("Found Country with ISO "+ v.getIso());
 		}
-
-
 	}
+	
+	
 	
 	public CountryVO getCountry(final String iso, final String name) throws ServiceException {
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
@@ -46,12 +48,12 @@ public class SpringTest {
 		//breaks since getCountryByIso still not implemented 
 		if (cs.getCountryByIso(iso) == null) {
 			cdao.create(iso, name, "");
-			
 			logger.info("created country for iso " + iso);
-			
 		}
 		return cs.getCountryByIso(iso);
 	}
+	
+	
 	
 	public void mainTest() throws ServiceException {
 		logger.info(" ===================== Run Spring Test =====================");
@@ -70,8 +72,7 @@ public class SpringTest {
 		if (de == null) 	logger.error("Error with country de");
 		if (us == null) 	logger.error("Error with country us");
 		if (uk == null) 	logger.error("Error with country uk");
-
-		
+	
 	}
 
 }
