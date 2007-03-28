@@ -21,7 +21,7 @@ public class SpringTest {
 	public void listAllCountries() throws ServiceException {
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
-		CountryDao cdao = (CountryDao) bf.getFactory().getBean("countryDao");
+		//CountryDao cdao = (CountryDao) bf.getFactory().getBean("countryDao");
 		CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
 		
 		CountryVO[] vos =  cs.getAllCountries();
