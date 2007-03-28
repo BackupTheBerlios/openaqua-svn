@@ -5,6 +5,11 @@
  */
 package de.openaqua.dev.services;
 
+import java.util.Collection;
+
+import de.openaqua.dev.entities.CountryDao;
+import de.openaqua.dev.vo.CountryVO;
+
 /**
  * @see de.openaqua.dev.services.CountryService
  */
@@ -14,12 +19,15 @@ public class CountryServiceImpl
 
     /**
      * @see de.openaqua.dev.services.CountryService#getAllCountries()
+     * @todo TRANSFORM_NONE?
+     * @todo dao selbst erzeugen???
      */
-    protected de.openaqua.dev.vo.CountryVO[] handleGetAllCountries()
+    @SuppressWarnings("unchecked")
+	protected de.openaqua.dev.vo.CountryVO[] handleGetAllCountries()
         throws java.lang.Exception
     {
-        // @todo implement protected de.openaqua.dev.vo.CountryVO[] handleGetAllCountries()
-        return null;
+    	final Collection<de.openaqua.dev.entities.Country> collection = getCountryDao().loadAll(CountryDao.TRANSFORM_COUNTRYVO);
+    	return collection.toArray(new CountryVO[0]);
     }
 
     /**

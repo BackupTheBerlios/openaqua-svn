@@ -65,6 +65,8 @@ public class SpringTest {
 		CountryVO us = getCountry("US", "United States");
 		CountryVO uk = getCountry("UK", "United Kingdom");
 		
+		listAllCountries();
+		
 		if (de == null) 	logger.error("Error with country de");
 		if (us == null) 	logger.error("Error with country us");
 		if (uk == null) 	logger.error("Error with country uk");
