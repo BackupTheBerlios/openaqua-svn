@@ -11,6 +11,7 @@ import de.openaqua.dev.exception.ServiceException;
 import de.openaqua.dev.services.CountryService;
 import de.openaqua.dev.vo.CountryVO;
 
+
 public class SpringTest {
 	private final static Logger logger = Logger.getRootLogger();
 	
@@ -33,7 +34,7 @@ public class SpringTest {
 
 		for (int i = 0; i< vos.length; ++i) {
 			CountryVO v = vos[i];
-			logger.info("Found Country with ISO "+ v.getIso());
+			logger.info("Found Country with ISO "+ v.getIso() + " and name " + v.getDescription());
 		}
 	}
 	
@@ -46,11 +47,12 @@ public class SpringTest {
 		CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
 		
 		//breaks since getCountryByIso still not implemented 
-		if (cs.getCountryByIso(iso) == null) {
+		if (cs.getCountriesByIso(iso) == null) {
 			cdao.create(iso, name, "");
 			logger.info("created country for iso " + iso);
 		}
-		return cs.getCountryByIso(iso);
+		//return cs.getCountriesByIso(iso);
+		return null;
 	}
 	
 	
@@ -60,14 +62,15 @@ public class SpringTest {
 		
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
-		PhoneFormatDao phone = (PhoneFormatDao) bf.getFactory().getBean("phoneFormatDao");
-		phone.create("*");
+		//PhoneFormatDao phone = (PhoneFormatDao) bf.getFactory().getBean("phoneFormatDao");
+		//phone.create("*");
+
+		listAllCountries();
 		
 		CountryVO de = getCountry("DE", "Germany");
 		CountryVO us = getCountry("US", "United States");
 		CountryVO uk = getCountry("UK", "United Kingdom");
 		
-		listAllCountries();
 		
 		if (de == null) 	logger.error("Error with country de");
 		if (us == null) 	logger.error("Error with country us");

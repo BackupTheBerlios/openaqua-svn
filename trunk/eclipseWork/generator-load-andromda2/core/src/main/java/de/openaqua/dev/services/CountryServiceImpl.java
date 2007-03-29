@@ -7,13 +7,9 @@ package de.openaqua.dev.services;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
-import org.hibernate.property.Getter;
-
 import de.openaqua.dev.entities.Country;
 import de.openaqua.dev.entities.CountryDao;
 import de.openaqua.dev.vo.CountryVO;
-import de.openaqua.dev.vo.CountryVOLookupCriteria;
 
 /**
  * @see de.openaqua.dev.services.CountryService
@@ -21,7 +17,6 @@ import de.openaqua.dev.vo.CountryVOLookupCriteria;
 public class CountryServiceImpl
     extends de.openaqua.dev.services.CountryServiceBase
 {
-	Logger logger = Logger.getRootLogger();
 
     /**
      * @see de.openaqua.dev.services.CountryService#getAllCountries()
@@ -29,22 +24,20 @@ public class CountryServiceImpl
     protected de.openaqua.dev.vo.CountryVO[] handleGetAllCountries()
         throws java.lang.Exception
     {
-    	final Collection<de.openaqua.dev.entities.Country> collection = getCountryDao().loadAll(CountryDao.TRANSFORM_COUNTRYVO);
-    	return collection.toArray(new CountryVO[0]);
+        // @todo implement protected de.openaqua.dev.vo.CountryVO[] handleGetAllCountries()
+    	final Collection collection = getCountryDao().loadAll();
+    	getCountryDao().toCountryVOCollection(collection);
+    	return (CountryVO[]) collection.toArray();
     }
 
     /**
-     * @see de.openaqua.dev.services.CountryService#getCountryByIso(java.lang.String)
+     * @see de.openaqua.dev.services.CountryService#getCountriesByIso(java.lang.String)
      */
-    protected de.openaqua.dev.vo.CountryVO handleGetCountryByIso(java.lang.String iso)
+    protected java.util.List handleGetCountriesByIso(java.lang.String iso)
         throws java.lang.Exception
     {
-    	logger.info("Look for ISO "+iso);
-    	CountryVOLookupCriteria crit = new CountryVOLookupCriteria();
-    	crit.setIso(iso);
-        Country c = getCountryDao().countryVOLookupCriteriaToEntity(crit);
-        logger.info("Found country with id "+c.getId());
-        return getCountryDao().toCountryVO(c);
+        // @todo implement protected java.util.List handleGetCountriesByIso(java.lang.String iso)
+        return null;
     }
 
 }
