@@ -105,16 +105,19 @@
 				<property name="service-impls">${core.manual.dir}</property>
 				<property name="service-interfaces">${common.generated.dir}</property>
 
+				<!--
+					 <property name="server">${server.generated.dir}</property>
+					 <property name="server-impls">${server.manual.dir}</property>
+					 <property name="server-config">${server.generated.dir}</property>
+
+					 <property name="client">${client.generated.dir}</property>
+					 <property name="client-impls">${client.manual.dir}</property>
+					 <property name="client-config">${client.generated.dir}</property>
+				-->
+
 				<property name="daos">${core.generated.dir}</property>
 				<property name="dao-impls">${core.manual.dir}</property>
 
-				<property name="server">${server.generated.dir}</property>
-				<property name="server-impls">${server.manual.dir}</property>
-				<property name="server-config">${server.generated.dir}</property>
-
-				<property name="client">${client.generated.dir}</property>
-				<property name="client-impls">${client.manual.dir}</property>
-				<property name="client-config">${client.generated.dir}</property>
 
 			</properties>
 		</namespace>
