@@ -12,6 +12,8 @@ import de.openaqua.dev.entities.Country;
 import de.openaqua.dev.entities.CountryDao;
 import de.openaqua.dev.entities.PhoneFormatDao;
 import de.openaqua.dev.entities.crud.CountryManageableDao;
+import de.openaqua.dev.entities.crud.CountryManageableService;
+import de.openaqua.dev.entities.crud.CountryValueObject;
 import de.openaqua.dev.exception.ServiceException;
 import de.openaqua.dev.services.CountryCriteria;
 import de.openaqua.dev.services.CountryService;
@@ -50,6 +52,7 @@ public class SpringTest {
 	
 	
 	public Country getCountry(final String iso, final String name) {
+		
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
 		CountryManageableDao dao = (CountryManageableDao) bf.getFactory().getBean("CountryManageableDao");
@@ -82,6 +85,20 @@ public class SpringTest {
 	}
 	
 	
+	public CountryValueObject getCountryValueObject(final String iso) {
+		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
+		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
+		CountryManageableService service = (CountryManageableService) bf.getFactory().getBean("CountryManageableService");
+		try {
+			List list;
+			list = service.read(iso, null, null, null, null);
+			if (list.isEmpty()) return null;
+			else return (CountryValueObject) list.get(0); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public void mainTest() throws ServiceException {
 		logger.info(" ===================== Run Spring Test =====================");
@@ -105,7 +122,13 @@ public class SpringTest {
 		if (us == null) 	logger.error("Error with country us");
 		if (uk == null) 	logger.error("Error with country uk");
 		if (at == null) 	logger.error("Error with country at");
+		
+		logger.info(" ===================== Run Services Test =====================");
 	
+		if (getCountryValueObject("AN") == null) logger.error("Got Null while loading AN");
+		CountryValueObject c = getCountryValueObject("DE"); 
+		if ( c == null){ logger.error("Got Null while loading DE"); } else { logger.error("Got "+c.getIso()+ " ID="+c.getId()); }
+		
 	}
 
 }
