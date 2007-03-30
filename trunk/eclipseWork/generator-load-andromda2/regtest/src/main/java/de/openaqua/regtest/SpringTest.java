@@ -25,14 +25,15 @@ public class SpringTest {
 	}
 	
 	
-	public void listAllCountries() throws ServiceException {
+	public void listAllCountries() {
+		
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
 		//CountryDao cdao = (CountryDao) bf.getFactory().getBean("countryDao");
-		CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
+		//CountryService cs = (CountryService) bf.getFactory().getBean("countryService");
 		
 		logger.warn("=====================List all Countries=====================");
-		
+		/*
 		CountryVO[] vos =  cs.getAllCountries();
 		if (vos == null) {
 			logger.warn("Array vos is empty");
@@ -42,6 +43,7 @@ public class SpringTest {
 			CountryVO v = vos[i];
 			logger.warn("Found Country with ISO "+ v.getIso() + " and name " + v.getDescription());
 		}
+		*/
 	}
 	
 	
@@ -52,6 +54,7 @@ public class SpringTest {
 	return (CountryVO[]) (countries.toArray(new CountryVO[0]));
 	*/
 	
+	/*
 	public CountryVO getCountry(final String iso, final String name) throws ServiceException {
 		BeanFactoryLocator bfl = SingletonBeanFactoryLocator.getInstance();
 		BeanFactoryReference bf = bfl.useBeanFactory("beanRefFactory");
@@ -69,9 +72,10 @@ public class SpringTest {
 			return results[0];
 		}
 	}
+		*/
 	
 	
-	
+/*	
 	public void mainTest() throws ServiceException {
 		logger.info(" ===================== Run Spring Test =====================");
 		
@@ -94,5 +98,5 @@ public class SpringTest {
 		if (uk == null) 	logger.error("Error with country uk");
 	
 	}
-
+*/
 }
