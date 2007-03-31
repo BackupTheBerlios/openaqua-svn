@@ -74,8 +74,6 @@
 				<property name="customTypesPackage">${application.package}</property>
 				<property name="cache">${core.generated.dir}</property>
 
-
-
 			</properties>
 		</namespace>
 
@@ -119,6 +117,22 @@
 				<property name="dao-impls">${core.manual.dir}</property>
 
 
+			</properties>
+		</namespace>
+
+		<namespace name="jbpm">
+			<properties>
+			   <!--
+   				<property name=""></property>
+		      -->
+				<property name="definitions">${jbpm.generated.dir}</property>
+				<property name="handlers">${jbpm.generated.dir}</property>
+				<property name="handlers-impls">${jbpm.manual.dir}</property>
+				<property name="nodes">${jbpm.generated.dir}</property>
+				<property name="helpers">${jbpm.generated.dir}</property>
+				<property name="clients">${jbpm.generated.dir}</property>
+				<property name="configuration">${jbpm.generated.dir}</property>
+				<property name="clientPackage">${jbpm.generated.dir}</property>
 			</properties>
 		</namespace>
 

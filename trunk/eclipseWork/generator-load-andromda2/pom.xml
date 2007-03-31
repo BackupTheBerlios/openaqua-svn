@@ -70,7 +70,7 @@
             </dependency>
             <dependency>
                 <groupId>org.andromda.cartridges</groupId>
-                <artifactId>andromda-bpm4struts-cartridge</artifactId>
+                <artifactId>andromda-jbpm-cartridge</artifactId>
                 <version>3.2</version>
                 <scope>runtime</scope>
             </dependency>

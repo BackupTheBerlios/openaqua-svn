@@ -32,7 +32,7 @@
 			</dependency>
         <dependency>
             <groupId>org.andromda.cartridges</groupId>
-            <artifactId>andromda-bpm4struts-cartridge</artifactId>
+            <artifactId>andromda-jbpm-cartridge</artifactId>
         </dependency>
 		  <dependency>
 			<groupId>org.andromda.translationlibraries</groupId>
@@ -97,6 +97,9 @@
 
 		<client.generated.dir>${pom.basedir}/../server/target/src</client.generated.dir>
 		<client.manual.dir>${pom.basedir}/../server/src/main/java</client.manual.dir>
+
+		<jbpm.generated.dir>${pom.basedir}/../jbpm/target/src</jbpm.generated.dir>
+		<jbpm.manual.dir>${pom.basedir}/../jbpm/src/main/java</jbpm.manual.dir>
 
 		<!-- hibernate configuration -->
 		<hibernate.generatorClass>native</hibernate.generatorClass>
