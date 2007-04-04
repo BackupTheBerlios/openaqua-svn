@@ -6,7 +6,7 @@ import de.openaqua.dev.alma.crud.ContractManageableService;
 import de.openaqua.dev.alma.crud.CounterTemplateManageableService;
 
 public class AlmaTest extends RegTest {
-	final int maxContracts = 1000;
+	final int maxContracts = 10;
 	final int maxCounterTemplates = 10;
 	public AlmaTest(String name) {
 		super(name);
@@ -29,17 +29,14 @@ public class AlmaTest extends RegTest {
 		
 		for (int i = 0; i < maxContracts;++i) {
 			String msisdn = "" + i;
-			String contract = null;
-			int validFrom = 0;
 			int validTo = 0;
-			long id = 0;
 			java.lang.Long[] budgets = new java.lang.Long[0];
 			List list;
 			try {
-				list = cms.read(msisdn, null, 0, 0, id, budgets);
+				list = cms.read(msisdn, null, 0, 0, 0L, budgets);
 				if (list.isEmpty()){
 					//1136139540 = 2006-01-01T19:19:00
-					cms.create(msisdn, msisdn, 1136139540, validTo, id, budgets);
+					cms.create(msisdn, msisdn, 1136139540, validTo, 0L, budgets);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
