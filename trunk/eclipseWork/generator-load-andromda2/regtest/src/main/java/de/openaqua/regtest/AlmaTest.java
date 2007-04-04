@@ -6,7 +6,7 @@ import de.openaqua.dev.alma.crud.ContractManageableService;
 import de.openaqua.dev.alma.crud.CounterTemplateManageableService;
 
 public class AlmaTest extends RegTest {
-	final int maxContracts = 10;
+	final int maxContracts = 100000;
 	final int maxCounterTemplates = 10;
 	public AlmaTest(String name) {
 		super(name);
@@ -14,7 +14,7 @@ public class AlmaTest extends RegTest {
 
 
 	public boolean RunTest() {
-		//if (createContract() != true) return false;
+		if (createContract() != true) return false;
 		if (createCounterTemplate() != true) return false;
 		return true;
 	}
