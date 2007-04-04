@@ -15,7 +15,7 @@ import de.openaqua.dev.entities.CityImpl;
 import de.openaqua.dev.entities.Country;
 
 
-public class HibernateTest {
+public class HibernateTest extends RegTest{
 	private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	private final static Logger logger = Logger.getRootLogger();
 	
@@ -52,15 +52,16 @@ public class HibernateTest {
 		
 	}
 	
-	public HibernateTest() {
-		super();
+	public HibernateTest(final String name) {
+		super(name);
 	}
 	
-	public void mainTest() {
+	public boolean RunTest() {
 		storeGermanCities();
 		storeGermanCities();
 		storeGermanCities();
 		storeGermanCities();
+		return true;
 	}
 	
 

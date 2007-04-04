@@ -26,51 +26,15 @@ public class Main {
 
 		//logger.info("-------------------setup Hibernate-----------------------");
 		//testHibernate();
-		
-		testSpring();
 
-	}
-
-	public static void testHibernate() {
-		HibernateTest test = new HibernateTest();
-		test.mainTest();
-		
-	}
-	
-	public static void testSpring() throws ServiceException {
-		SpringTest test = new SpringTest();
-		test.mainTest();
-		
-	}
-	public static void playWithCountry() {
-		logger.info("-------------------playWithCountry()-----------------------");
-		/*
-		Country c =  Country.Factory.newInstance();
-		CountryDumper dumper = new CountryDumper();
-		dumper.dumpCountry(c);
-		*/		
-	}
-
-	public static void playWithCountryByDb() {
-		logger.info("-------------------playWithCountryByDb()-----------------------");
-		//CountryDao dao = new CountryDaoImpl();
-		//CountryDumper dumper = new CountryDumper();
-
-		//Country c = dao.create("Germany", "+49");
-		//c.setIso("DE");
-
-		//dumper.dumpCountry(c);		
-	}
-
-
-	public static void springTest()  {
-		logger.info("-------------------play with springTest()-----------------------");
-		String segs[] = System.getProperty("java.class.path",".").split( ":" );
-		for (int i = 0; i < segs.length; ++i) {
-			logger.info("Path: " + segs[i]);		
+		//new SpringTest("SpringTest").RunTest();
+		//new HibernateTest().RunTest();
+		if (new AlmaTest("AlmaTest").RunTest() != true) {
+			logger.error("Test not successfull");
 		}
+		
+		
+		logger.info("=======================================================");
+		logger.info("================Test successfull=======================");
 	}
-
 }
-
-
