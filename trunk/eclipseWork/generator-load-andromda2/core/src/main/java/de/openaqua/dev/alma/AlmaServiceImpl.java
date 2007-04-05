@@ -5,6 +5,8 @@
  */
 package de.openaqua.dev.alma;
 
+import java.util.List;
+
 /**
  * @see de.openaqua.dev.alma.AlmaService
  */
@@ -48,8 +50,14 @@ public class AlmaServiceImpl
     protected void handleCreateContract(java.lang.String msisdn, java.lang.String contract, int validFrom, int validTo)
         throws java.lang.Exception
     {
-        // @todo implement protected void handleCreateContract(java.lang.String msisdn, java.lang.String contract, int validFrom, int validTo)
-        throw new java.lang.UnsupportedOperationException("de.openaqua.dev.alma.AlmaService.handleCreateContract(java.lang.String msisdn, java.lang.String contract, int validFrom, int validTo) Not implemented!");
+    	Contract c = Contract.Factory.newInstance(msisdn, contract, validFrom, validTo);
+    	getContractDao().create(c);
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected ContractVO[] handleGetContractsByMsisdn(String msisdn) throws Exception {
+		return  (ContractVO[]) getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn).toArray(new ContractVO[0]);
+	}
 
 }
