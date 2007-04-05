@@ -1,17 +1,12 @@
 package de.openaqua.regtest;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import de.openaqua.regtest.RegTest;
 import de.openaqua.dev.alma.AlmaException;
 import de.openaqua.dev.alma.AlmaService;
-import de.openaqua.dev.alma.Contract;
-import de.openaqua.dev.alma.ContractDao;
-import de.openaqua.dev.alma.ContractDaoImpl;
 import de.openaqua.dev.alma.ContractVO;
-import de.openaqua.dev.alma.crud.ContractManageableService;
 import de.openaqua.dev.alma.crud.CounterTemplateManageableService;
 
 
@@ -38,31 +33,6 @@ public class AlmaTest extends RegTest {
 	}
 
 
-	public boolean createContract() {
-		ContractManageableService cms = (ContractManageableService) getBeanFactory().getFactory().getBean("ContractManageableService", ContractManageableService.class);
-		if (cms == null) {
-			logger().error("got no ContractManageableService service reference");
-			return false;
-		}
-
-		for (int i = 0; i < maxContracts;++i) {
-			String msisdn = "" + i;
-			int validTo = 0;
-			java.lang.Long[] budgets = new java.lang.Long[0];
-			List list;
-			try {
-				list = cms.read(msisdn, null, 0, 0, 0L, budgets);
-				if (list.isEmpty()){
-					//1136139540 = 2006-01-01T19:19:00
-					cms.create(msisdn, msisdn, 1136139540, validTo, 0L, budgets);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return true;
-	}
 
 	public boolean createCounterTemplate() {
 		CounterTemplateManageableService cms = (CounterTemplateManageableService) getBeanFactory().getFactory().getBean("CounterTemplateManageableService");

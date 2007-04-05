@@ -5,7 +5,7 @@
  */
 package de.openaqua.dev.alma;
 
-import java.util.List;
+
 
 /**
  * @see de.openaqua.dev.alma.AlmaService
@@ -50,7 +50,7 @@ public class AlmaServiceImpl
     protected void handleCreateContract(java.lang.String msisdn, java.lang.String contract, int validFrom, int validTo)
         throws java.lang.Exception
     {
-    	Contract c = Contract.Factory.newInstance(msisdn, contract, validFrom, validTo);
+    	Contract c = Contract.Factory.newInstance(validFrom, validTo, msisdn, contract);
     	getContractDao().create(c);
     }
 
