@@ -95,6 +95,10 @@
 				<property name="hibernateInheritanceStrategy">subclass</property>
 				<property name="hibernateCacheProvider">org.hibernate.cache.EhCacheProvider</property>
 				<property name="hibernateVersion">3</property>
+				<property name="daoInheritanceEnabled">false</property>
+				<property name="enableTemplating">true</property>
+				
+				
 
 				<!--code output-->
 				<property name="value-objects">${common.generated.dir}</property>

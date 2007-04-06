@@ -7,6 +7,8 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.BeanFactoryReference;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 
+
+
 public class RegTest {
 	
 	private final static Logger logger = Logger.getRootLogger();
@@ -15,10 +17,12 @@ public class RegTest {
 
 	private RegTest(){super();};
 	
+	
 	public RegTest(final String name) {
 		logger.info("start --------------" + name + "---------------");
 		
 	}
+	
 	
 	public boolean RunTest(){
 		return false;		

@@ -3,11 +3,11 @@ package de.openaqua.regtest;
 import java.util.List;
 import java.util.Random;
 
-import de.openaqua.regtest.RegTest;
 import de.openaqua.dev.alma.AlmaException;
 import de.openaqua.dev.alma.AlmaService;
 import de.openaqua.dev.alma.ContractVO;
 import de.openaqua.dev.alma.crud.CounterTemplateManageableService;
+import de.openaqua.regtest.RegTest;
 
 
 public class AlmaTest extends RegTest {
@@ -61,7 +61,7 @@ public class AlmaTest extends RegTest {
 	public boolean createContractWithService() {
 		AlmaService service = (AlmaService)getBeanFactory().getFactory().getBean("almaService");
 
-		for (int i = 0; i < maxContracts;++i) {
+		for (int i = 1; i <= maxContracts;++i) {
 			try {
 				//1136139540 = 2006-01-01T19:19:00			
 				service.createContract("49160"+i, ""+i, 1136139540, 0);
@@ -82,32 +82,38 @@ public class AlmaTest extends RegTest {
 	public boolean findContractWithService() {
 
 		//try to find n times a contract there must be at last one contract for each time
-		try {
-			for (int i = 0; i < maxContracts;++i) {
-				//look for results
-				final String msisdn = "49160"+ (Math.abs(random.nextInt()) % maxContracts);
-				final ContractVO[] vos = almaService.getContractsByMsisdn(msisdn);
+		for (int i = 0; i < maxContracts;++i) {
+			//look for results
+			final String msisdn = "49160"+ (Math.abs(random.nextInt()) % maxContracts);
+			logger().info("Try lookup for misdn="+msisdn);
+			try {
+				List list = almaService.getContractsByMsisdn(msisdn);
+				ContractVO[] vos = (ContractVO[]) list.toArray();
+
 				
 				//at least one?
 				if (vos.length == 0) {
 					logger().error("No Contract found for msisdn"+msisdn);
 					return false;
 				}
-				
+
 				//print results
 				logger().info("List of MSISDNs for misdn \""+msisdn+"\"");
 				for (int j = 0; j < vos.length;j++ ) {
 					ContractVO d = vos[j];
 					logger().info("MISDN="+d.getMsisdn()+" CONTRACT="+d.getContract());
 				}
+
+			} catch (AlmaException e) {
+				printError(e);
+				return false;
 			}
-			
-		} catch (AlmaException e) {
-			printError(e);
-			return false;
+			logger().info("done lookup for misdn="+msisdn);
+
 		}
-		
-		
+
+
+
 		return true;
 	}
 

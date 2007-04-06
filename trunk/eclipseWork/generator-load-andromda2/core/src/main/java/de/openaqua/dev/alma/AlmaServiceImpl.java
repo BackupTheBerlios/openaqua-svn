@@ -5,6 +5,9 @@
  */
 package de.openaqua.dev.alma;
 
+import java.util.Iterator;
+import java.util.List;
+
 
 
 /**
@@ -44,20 +47,41 @@ public class AlmaServiceImpl
         throw new java.lang.UnsupportedOperationException("de.openaqua.dev.alma.AlmaService.handleCreateBudgetForMsisdn(de.openaqua.dev.alma.BudgetVO budget) Not implemented!");
     }
 
-    /**
-     * @see de.openaqua.dev.alma.AlmaService#createContract(java.lang.String, java.lang.String, int, int)
-     */
-    protected void handleCreateContract(java.lang.String msisdn, java.lang.String contract, int validFrom, int validTo)
-        throws java.lang.Exception
-    {
-    	Contract c = Contract.Factory.newInstance(validFrom, validTo, msisdn, contract);
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleCreateContract(java.lang.String, java.lang.String, int, int)
+	 */
+	@Override
+	protected void handleCreateContract(String msisdn, String contract, int validFrom, int validTo) throws Exception {
+		Contract c = Contract.Factory.newInstance(validFrom, validTo, msisdn, contract);
     	getContractDao().create(c);
-    }
+	}
 
-	@SuppressWarnings("unchecked")
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleGetContractsByMsisdn(java.lang.String)
+	 */
+	@Override
+	protected List handleGetContractsByMsisdn(String msisdn) throws Exception {
+		return getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleGetContractsByMsisdn(java.lang.String)
+	 */
+	/*
 	@Override
 	protected ContractVO[] handleGetContractsByMsisdn(String msisdn) throws Exception {
-		return  (ContractVO[]) getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn).toArray(new ContractVO[0]);
+		List<?> list = getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
+		for(Object e : list) {
+		    if (e == null)
+		        System.out.println("null");
+		    else
+		        System.out.println(e.getClass());
+		}
+		ContractVO[] result = (ContractVO[]) list.toArray();
+		System.err.println("bye");
+		return result;
 	}
+	*/
+
 
 }
