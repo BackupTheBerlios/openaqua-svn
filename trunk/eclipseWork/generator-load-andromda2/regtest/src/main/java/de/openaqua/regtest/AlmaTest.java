@@ -1,5 +1,6 @@
 package de.openaqua.regtest;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -88,19 +89,18 @@ public class AlmaTest extends RegTest {
 			logger().info("Try lookup for misdn="+msisdn);
 			try {
 				List list = almaService.getContractsByMsisdn(msisdn);
-				ContractVO[] vos = (ContractVO[]) list.toArray();
 
-				
 				//at least one?
-				if (vos.length == 0) {
+				if (list.isEmpty()) {
 					logger().error("No Contract found for msisdn"+msisdn);
 					return false;
 				}
 
 				//print results
 				logger().info("List of MSISDNs for misdn \""+msisdn+"\"");
-				for (int j = 0; j < vos.length;j++ ) {
-					ContractVO d = vos[j];
+				Iterator it = list.iterator();
+				while(it.hasNext()) {
+					ContractVO d = (ContractVO) it.next();
 					logger().info("MISDN="+d.getMsisdn()+" CONTRACT="+d.getContract());
 				}
 
