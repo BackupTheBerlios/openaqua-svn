@@ -16,23 +16,24 @@ import javax.persistence.Table;
 @Table(name = "contract")
 public class Contract {
 
-	final private ContractKey contractKey;
-	private Integer id;
-	private Integer value;
+	private long id;
+	private int value;
 	private String stringValue;
 	private String name;
 
-	public Contract(final int contractKey, final int value) {
+	public Contract() {
 		super();
-		this.contractKey = new ContractKey( contractKey );
+	}
+
+	public Contract(final int value) {
+		super();
 		this.value = new Integer(value);
 	}
 
 	
 	
-	public Contract(final int contractKey, final String stringValue, final int value) {
+	public Contract(final String stringValue, final int value) {
 		super();
-		this.contractKey = new ContractKey( contractKey );
 		this.stringValue = stringValue;
 		this.value = new Integer(value);
 	}
@@ -41,20 +42,7 @@ public class Contract {
 
 
 
-	/**
-	 * @return the contractKey
-	 */
-	
-	public int getContractKeyAsInteger() {
-		return contractKey.getKey();
-	}
 
-	/**
-	 * @return the contractKey
-	 */
-	public ContractKey getContractKey() {
-		return contractKey;
-	}
 
 	/**
 	 * @return the value
@@ -99,6 +87,45 @@ public class Contract {
 	public final void setName(String name) {
 		this.name = name;
 	}
+
+
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return this.id;
+	}
+
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+
+	/**
+	 * @param stringValue the stringValue to set
+	 */
+	public void setStringValue(String stringValue) {
+		this.stringValue = stringValue;
+	}
+
+
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+
+
+
 
 
 }

@@ -9,6 +9,13 @@
 	<name>generator-load-hibernate</name>
 
 	<dependencies>
+	   
+	    <dependency>
+         <groupId>mysql</groupId>
+         <artifactId>mysql-connector-java</artifactId>
+         <version>5.0.5</version>
+		 </dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

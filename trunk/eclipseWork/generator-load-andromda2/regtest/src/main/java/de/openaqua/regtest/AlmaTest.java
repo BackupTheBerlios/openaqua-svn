@@ -27,16 +27,16 @@ public class AlmaTest extends RegTest {
 	public AlmaTest(String name) {
 		super(name);
 	}
-	
-	
+
+
 
 
 	public boolean RunTest() {
-		//if (cleanAllContracts() != true) return false;
-		//if (createCounterTemplate() != true) return false;
-		//if (createContractWithService() != true) return false;
-		//if (findContractWithService() != true) return false;
-		//if (updateContractWithService() != true) return false;
+		if (cleanAllContracts() != true) return false;
+		if (createCounterTemplate() != true) return false;
+		if (createContractWithService() != true) return false;
+		if (findContractWithService() != true) return false;
+		if (updateContractWithService() != true) return false;
 		if (RunLoadTest() != true) return false;
 
 		return true;
@@ -46,29 +46,33 @@ public class AlmaTest extends RegTest {
 	public boolean RunLoadTest() {
 		logger().info("### RunLoadTest()");
 		return new AlmaLoadGenerator(true, "").fireUpLoadTest();
-		
+
 	}
-	
+
 	public boolean cleanAllContracts() {
 		logger().info("### cleanAllContracts()");
 		ContractManageableService cms = (ContractManageableService) getBeanFactory().getFactory().getBean("ContractManageableService");
-		
+
 		try {
-			List list = cms.readAll();
-			List<Long> ids = new LinkedList<Long>();
-			Iterator it = list.iterator();
-			while(it.hasNext()) {
-				ContractValueObject c = (ContractValueObject) it.next();
-				ids.add(c.getId());
-			}
-			if (ids.size() > 0 ) {
-				cms.delete(ids.toArray(new Long[0]));
+			while(true) {
+				List list = cms.readAll();
+				List<Long> ids = new LinkedList<Long>();
+				Iterator it = list.iterator();
+				while(it.hasNext()) {
+					ContractValueObject c = (ContractValueObject) it.next();
+					ids.add(c.getId());
+				}
+				if (ids.size() > 0 ) {
+					cms.delete(ids.toArray(new Long[0]));
+				} else {
+					break;
+				}
 			}
 		} catch (Exception e) {
 			printError(e);
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -106,14 +110,14 @@ public class AlmaTest extends RegTest {
 			int validFrom = 1136139540; //1136139540 = 2006-01-01T19:19:00
 			int validTo = 0;
 			try {
-							
+
 				ContractVO v = new ContractVO();
 				v.setMsisdn(msisdn);
 				v.setValidFrom(validFrom);
 				v.setValidTo(validTo);
 				v.setContractId(contractId);
 				v = almaService.createContract(v);
-				
+
 				if (! v.getMsisdn().equals(msisdn)) {
 					logger().error("msisdn not equals: is="+v.getMsisdn() + " should="+msisdn);
 					return false;
@@ -169,7 +173,7 @@ public class AlmaTest extends RegTest {
 					ContractVO d = (ContractVO) it.next();
 					logger().info("MISDN="+d.getMsisdn()+" CONTRACT="+d.getContractId()+" VAL_FROM="+d.getValidFrom()+ " VAL_TO="+d.getValidTo());
 				}
-				*/
+				 */
 
 			} catch (AlmaException e) {
 				printError(e);

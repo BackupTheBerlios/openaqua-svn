@@ -11,6 +11,13 @@
     <packaging>jar</packaging>
     <name>directory: core (Core Business Tier)</name>
     <dependencies>
+       
+		 <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.0.5</version>
+		 </dependency>
+           
 		 <dependency>
 			 <groupId>hsqldb</groupId>
 			 <artifactId>hsqldb</artifactId>
@@ -83,16 +90,29 @@
                     </execution>
                 </executions>
                 <configuration>
+                   <!--
 						 <jdbcDriver>org.hsqldb.jdbcDriver</jdbcDriver>
 						 <jdbcDriverJar>hsqldb.jar</jdbcDriverJar>
 						 <jdbcConnectionUrl>jdbc:hsqldb:file:/tmp/foo2.dat;shutdown=true</jdbcConnectionUrl>
 						 <jdbcUsername>sa</jdbcUsername>
 						 <jdbcPassword></jdbcPassword>
+					 -->
+					 <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+					 <jdbcDriverJar>hsqldb.jar</jdbcDriverJar>
+					 <jdbcConnectionUrl>jdbc:mysql://localhost:3306/mytest</jdbcConnectionUrl>
+					 <jdbcUsername>root</jdbcUsername>
+					 <jdbcPassword></jdbcPassword>
 						 <properties>
+						    <!--
 							 <property>
 								 <name>hibernate.dialect</name>
 								 <value>org.hibernate.dialect.HSQLDialect</value>
 							 </property>
+						 -->
+						 <property>
+							 <name>hibernate.dialect</name>
+							 <value>org.hibernate.dialect.MySQLInnoDBDialect</value>
+						 </property>
 
                         <property>
                             <name>mappingsLocation</name>

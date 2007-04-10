@@ -69,42 +69,20 @@ public class HibernateGenerator extends Thread{
 	}
 
 
-	private Contract getContractFromDb(final int id) {
-		return null;
-		/*
-		Query query=database.query();
-		query.constrain(Contract.class);
-		query.descend("contractKey").constrain(new ContractKey(id));
-		ObjectSet result=query.execute();
-
-		if (result.hasNext()) {
-			return (Contract)result.next();
-		} else {
-			logger.error("No matching contract found");
-			return null;
-		}
-		 */
+	private Contract getContractFromDb(final long id) {
+		return (Contract) session.get(Contract.class, id);
 	}
 
-	private ContractKey getContractKeyFromDb(final int id) {
-		Session s = sessionFactory.openSession();
-		ContractKey c = (ContractKey) s.get(ContractKey.class, id);
-		s.close();
-		return c;
-	}
 
 
 	public void setupDatabase() {
-		//Session s = sessionFactory.openSession();
-		//Transaction trx = s.beginTransaction();
 		Transaction trx = session.beginTransaction();
 		for (int key = 1; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
 			try {
-				Contract c = new Contract(key, "value="+key, key);
+				Contract c = new Contract("value="+key, key);
+				c.setName("name");
+				c.setId(key);
 				session.save(c);
-				if (key != c.getContractKeyAsInteger()) {
-					logger.error("was: " + key+ " is "+ c.getContractKeyAsInteger());
-				}
 			 } catch (Exception e) {
 				logger.error("Error while persisting keys: "+e.getMessage());
 			}
@@ -114,42 +92,11 @@ public class HibernateGenerator extends Thread{
 			}
 		}
 		trx.commit();
-		session.close();
+		session.flush();
 		logger.debug("created " + de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts() + " Contracts");
 		logger.info("setup Database created " +de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts()+ " Contracts");
 		
 	}
-
-	
-	
-	public void setupDatabaseWithKeys() {
-		//Session s = sessionFactory.openSession();
-		//Transaction trx = s.beginTransaction();
-		Transaction trx = session.beginTransaction();
-		for (int key = 1; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
-			try {
-				ContractKey c = new ContractKey(key);
-				c.setSss("KKKKKKKKKKKKK="+key);
-				//s.save(c);
-				session.save(c);
-				if (key != c.getKey()) {
-					logger.error("was: " + key+ " is "+ c.getKey());
-				}
-				logger.info("store key: "+c.getKey());
-			}catch (Exception e) {
-				logger.error("Error while persisting keys: "+e.getMessage());
-			}
-
-			if ((key % 1000) == 0) {
-				logger.debug("created " + key + " keys");
-			}
-		}
-		trx.commit();
-		session.close();
-		logger.debug("created " + de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts() + " Contracts");
-		logger.info("setup Database created " +de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts()+ " Contracts");
-	}
-
 
 
 	public void ListAllContracts() {
@@ -161,26 +108,10 @@ public class HibernateGenerator extends Thread{
 		for (ContractContainer c : cc) 	c.dump();
 		 */
 	}
-
-	private void executeReadByName(final int contractID) {
-		Contract c = getContractFromDbByName(contractID); //get contract
-		if (c.getContractKeyAsInteger() != contractID) {
-			logger.error("RError: Returned Contract has a wrong ID: " + c.getContractKeyAsInteger() + " expected was "+contractID);
-		}
-		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
-	}
-
-	private void executeRead(final int contractID) {
+	private void executeRead(final long contractID) {
 		Contract c = getContractFromDb(contractID); //get contract
-		if (c.getContractKeyAsInteger() != contractID) {
-			logger.error("RError: Returned Contract has a wrong ID: " + c.getContractKeyAsInteger() + " expected was "+contractID);
-		}
 		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
-	}
-
-	private void executeReadKeys(final int contractID) {
-		ContractKey c = getContractKeyFromDb(contractID); //get contractKey
-		if (c == null) 	logger.error("RError: Didn't found ContractKey: " + contractID);
+		if (c.getId() != contractID) 	logger.error("ID not equals should=" + contractID+ " is="+c.getId());
 	}
 
 
@@ -196,14 +127,11 @@ public class HibernateGenerator extends Thread{
 				int contractID = Math.abs(random.nextInt()) % de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); //random contractID
 				contractID += 1;
 				if (readTest == true) {
-					//executeReadKeys(contractID);
 					executeRead(contractID);
-					//executeReadByName(contractID);					
 					Stats.getInstance().addReadResults(1);
 					//yield();
 				} else {
-					//executeRead(contractID);
-					executeReadKeys(contractID);
+					executeRead(contractID);
 					Stats.getInstance().addWriteResults(1);
 					//yield();
 				}

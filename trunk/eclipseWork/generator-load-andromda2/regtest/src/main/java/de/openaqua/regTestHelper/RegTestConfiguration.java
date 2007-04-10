@@ -13,9 +13,9 @@ final public class RegTestConfiguration {
 
 	private RegTestConfiguration() {
 		super();
-		maxConnections = 2;
-		reqLoops     = 100;
-		statMilliSeconds = 1000;
+		maxConnections = 8;
+		reqLoops     = 1000;
+		statMilliSeconds = 2000;
 
 	}
 

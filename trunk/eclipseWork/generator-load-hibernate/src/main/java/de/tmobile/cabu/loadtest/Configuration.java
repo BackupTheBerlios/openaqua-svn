@@ -24,13 +24,13 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 2;
+		maxConnections = 8;
 
-		maxContracts = 1500;
+		maxContracts = 15000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
-		reqLoops     = 1000;
+		reqLoops     = 10000;
 		statMilliSeconds = 10000;
 		setupDatabase = true;
 	}

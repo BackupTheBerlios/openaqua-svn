@@ -27,7 +27,8 @@
 			<properties>
 				<property name="languageMappingsUri">Java</property>
 				<property name="wrapperMappingsUri">JavaWrapper</property>
-				<property name="sqlMappingsUri">HypersonicSql</property>
+				<property name="sqlMappingsUri">MySQL</property>
+				<!--				<property name="sqlMappingsUri">HypersonicSql</property>-->
 				<property name="jdbcMappingsUri">JDBC</property>
 				<property name="enableTemplating">true</property>
 				<property name="hibernateVersion">3</property>
@@ -50,21 +51,30 @@
 			<properties>
 				<!--config-->
 				<property name="hibernateVersion">3</property>
-				<property name="hibernateShowSql">true</property>
-				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
+				<property name="hibernateShowSql">false</property>
+				<property name="hibernateDialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+				<!--
+   				<property name="hibernateDialect">org.hibernate.dialect.HSQLDialect</property>
+			   -->
 				<property name="hibernateHbm2DDLAuto">update</property>
 				<property name="hibernateInheritanceStrategy">subclass</property>
 				<property name="hibernateDefaultCascade">none</property>
-				<property name="compsitionDefinesEagerLoading">true</property>
+				<property name="compsitionDefinesEagerLoading">false</property>
 
 				<!--cache-->
 				<property name="hibernateEnableCache">false</property>
 
 				<!--jdbc-->
+				<property name="driver">com.mysql.jdbc.Driver</property>
+				<property name="username">root</property>
+				<property name="password"></property>
+				<property name="connectionUrl">jdbc:mysql://localhost:3306/mytest</property>
+				<!--
 				<property name="driver">org.hsqldb.jdbcDriver</property>
 				<property name="username">sa</property>
 				<property name="password"></property>
 				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat</property>
+			-->
 
 				<!--name patterns-->
 				<property name="entities">${core.generated.dir}</property>
@@ -81,10 +91,13 @@
 		<namespace name="spring">
 			<properties>
 				<!--database-->
-				<property name="driver">org.hsqldb.jdbcDriver</property>
-				<property name="username">sa</property>
+				<property name="driver">com.mysql.jdbc.Driver</property>
+				<property name="username">root</property>
 				<property name="password"></property>
+				<!--
 				<property name="connectionUrl">jdbc:hsqldb:file:/tmp/foo2.dat;shutdown=true</property>
+			-->
+				<property name="connectionUrl">jdbc:mysql://localhost:3306/mytest</property>
 
 				<!--config-->
 				<property name="spring-configuration">${core.generated.dir}</property>
