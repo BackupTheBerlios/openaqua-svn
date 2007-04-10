@@ -39,17 +39,12 @@ public class ContractDaoImpl
      */
     private de.openaqua.dev.alma.Contract loadContractFromContractVO(de.openaqua.dev.alma.ContractVO contractVO)
     {
-        // @todo implement loadContractFromContractVO
-        throw new java.lang.UnsupportedOperationException("de.openaqua.dev.alma.loadContractFromContractVO(de.openaqua.dev.alma.ContractVO) not yet implemented.");
-
-        /* A typical implementation looks like this:
         de.openaqua.dev.alma.Contract contract = this.load(contractVO.getId());
         if (contract == null)
         {
             contract = de.openaqua.dev.alma.Contract.Factory.newInstance();
         }
         return contract;
-        */
     }
 
     

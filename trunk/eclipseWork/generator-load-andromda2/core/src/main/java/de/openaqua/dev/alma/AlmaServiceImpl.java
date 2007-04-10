@@ -5,7 +5,6 @@
  */
 package de.openaqua.dev.alma;
 
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -17,71 +16,54 @@ public class AlmaServiceImpl
     extends de.openaqua.dev.alma.AlmaServiceBase
 {
 
-    /**
-     * @see de.openaqua.dev.alma.AlmaService#getBudgetByMsisdn(java.lang.String)
-     */
-    protected de.openaqua.dev.alma.BudgetVO[] handleGetBudgetByMsisdn(java.lang.String msisdn)
-        throws java.lang.Exception
-    {
-        // @todo implement protected de.openaqua.dev.alma.BudgetVO[] handleGetBudgetByMsisdn(java.lang.String msisdn)
-        return null;
-    }
-
-    /**
-     * @see de.openaqua.dev.alma.AlmaService#createBudgetTemplate(de.openaqua.dev.alma.BudgetTemplateVO)
-     */
-    protected void handleCreateBudgetTemplate(de.openaqua.dev.alma.BudgetTemplateVO budgetTemplate)
-        throws java.lang.Exception
-    {
-        // @todo implement protected void handleCreateBudgetTemplate(de.openaqua.dev.alma.BudgetTemplateVO budgetTemplate)
-        throw new java.lang.UnsupportedOperationException("de.openaqua.dev.alma.AlmaService.handleCreateBudgetTemplate(de.openaqua.dev.alma.BudgetTemplateVO budgetTemplate) Not implemented!");
-    }
-
-    /**
-     * @see de.openaqua.dev.alma.AlmaService#createBudgetForMsisdn(de.openaqua.dev.alma.BudgetVO)
-     */
-    protected void handleCreateBudgetForMsisdn(de.openaqua.dev.alma.BudgetVO budget)
-        throws java.lang.Exception
-    {
-        // @todo implement protected void handleCreateBudgetForMsisdn(de.openaqua.dev.alma.BudgetVO budget)
-        throw new java.lang.UnsupportedOperationException("de.openaqua.dev.alma.AlmaService.handleCreateBudgetForMsisdn(de.openaqua.dev.alma.BudgetVO budget) Not implemented!");
-    }
-
-	/* (non-Javadoc)
-	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleCreateContract(java.lang.String, java.lang.String, int, int)
-	 */
-	@Override
-	protected void handleCreateContract(String msisdn, String contract, int validFrom, int validTo) throws Exception {
-		Contract c = Contract.Factory.newInstance(validFrom, validTo, msisdn, contract);
-    	getContractDao().create(c);
-	}
-
-	/* (non-Javadoc)
-	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleGetContractsByMsisdn(java.lang.String)
-	 */
-	@Override
-	protected List handleGetContractsByMsisdn(String msisdn) throws Exception {
-		return getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
-	}
-
 	/* (non-Javadoc)
 	 * @see de.openaqua.dev.alma.AlmaServiceBase#handleGetContractsByMsisdn(java.lang.String)
 	 */
 	/*
 	@Override
-	protected ContractVO[] handleGetContractsByMsisdn(String msisdn) throws Exception {
-		List<?> list = getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
-		for(Object e : list) {
-		    if (e == null)
-		        System.out.println("null");
-		    else
-		        System.out.println(e.getClass());
-		}
-		ContractVO[] result = (ContractVO[]) list.toArray();
-		System.err.println("bye");
-		return result;
+	protected List handleGetContractsByMsisdn(String msisdn) throws Exception {
+		return getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
 	}
 	*/
+
+	@Override
+	protected ContractVO handleCreateContract(ContractVO contractVO) throws Exception {
+		Contract c = Contract.Factory.newInstance();
+		c.setContractId(contractVO.getContractId());
+		c.setMsisdn(contractVO.getMsisdn());
+		c.setValidFrom(contractVO.getValidFrom());
+		c.setValidTo(contractVO.getValidTo());
+		return (ContractVO) getContractDao().create(ContractDao.TRANSFORM_CONTRACTVO, getContractDao().create(c));
+	}
+
+	@Override
+	protected ContractVO handleTerminateContract(ContractVO contract) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ContractVO handleUpdateContract(ContractVO contract) throws Exception {
+		getContractDao().update(getContractDao().contractVOToEntity(contract));		
+		return contract;
+	}
+
+	@Override
+	protected List handleGetAllContracts() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List handleGetContractsByExample(ContractVO contract) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List handleGetContractsByMsisdn(String msisdn) throws Exception {
+		return getContractDao().findByMsisdn(ContractDao.TRANSFORM_CONTRACTVO, msisdn);
+	}
 
 
 }
