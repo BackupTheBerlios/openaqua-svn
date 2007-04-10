@@ -13,6 +13,7 @@ import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 
 
 
+
 /**
  * @author behrenan
  *
@@ -69,13 +70,13 @@ public abstract class LoadGenerator extends Thread{
 	 * runs endless
 	 */
 	final public void run () {
-		for (int i = 0; i < Configuration.getInstance().getReqLoops(); i++){
+		for (int i = 0; i < RegTestConfiguration.getInstance().getReqLoops(); i++){
 			if (doReadTest) {
 				executeRead();				
-				Stats.getInstance().addReadResults(1);
+				RegTestStats.getInstance().addReadResults(1);
 			} else {
 				executeWrite();				
-				Stats.getInstance().addWriteResults(1);
+				RegTestStats.getInstance().addWriteResults(1);
 			}
 		}
 
@@ -84,7 +85,7 @@ public abstract class LoadGenerator extends Thread{
 
 	final public boolean fireUpLoadTest() {
 		final Logger logger = Logger.getRootLogger();
-		logger.info( "Start Load Test with " + Configuration.getInstance().getMaxConnections()+" Threads" );
+		logger.info( "Start Load Test with " + RegTestConfiguration.getInstance().getMaxConnections()+" Threads" );
 		
 		
 		//setup enironment
@@ -96,12 +97,12 @@ public abstract class LoadGenerator extends Thread{
 		
 		
 		//setup threads
-		final LoadGenerator[] threadArray = new LoadGenerator[Configuration.getInstance().getMaxConnections()];
+		final LoadGenerator[] threadArray = new LoadGenerator[RegTestConfiguration.getInstance().getMaxConnections()];
 
 		int readInstance = 0;
 		int writeInstance = 0;
 
-		for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
+		for (int i = 0; i < RegTestConfiguration.getInstance().getMaxConnections(); i++) {
 			if (i%2==1) {		
 				threadArray[i] = getNewInstance(true, ""+i);
 				readInstance++;
@@ -118,15 +119,15 @@ public abstract class LoadGenerator extends Thread{
 		long runTime = 0;
 		Timer timer = new Timer();
 		try {
-			int count = Configuration.getInstance().getStatsAllMilliseconds();
+			int count = RegTestConfiguration.getInstance().getStatsAllMilliseconds();
 			timer.schedule(new MinuteTimer(count), count, count);
 			long start = System.currentTimeMillis();
 
 			//fire the loader up
-			for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) 	threadArray[i].start();
+			for (int i = 0; i < RegTestConfiguration.getInstance().getMaxConnections(); i++) 	threadArray[i].start();
 			
 			//wait for finish
-			for (int i = 0; i < Configuration.getInstance().getMaxConnections(); i++) {
+			for (int i = 0; i < RegTestConfiguration.getInstance().getMaxConnections(); i++) {
 				try {
 					threadArray[i].join();
 				} catch (InterruptedException e) {

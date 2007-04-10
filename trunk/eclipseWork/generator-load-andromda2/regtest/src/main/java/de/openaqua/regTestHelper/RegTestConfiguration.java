@@ -7,14 +7,14 @@ package de.openaqua.regTestHelper;
  * @author behrenan
  *
  */
-final public class Configuration {
-	final private static Configuration INSTANCE = new Configuration();
+final public class RegTestConfiguration {
+	final private static RegTestConfiguration INSTANCE = new RegTestConfiguration();
 	final private int maxConnections;
 	final private int reqLoops;
 	final private int statMilliSeconds;
 
 
-	private Configuration() {
+	private RegTestConfiguration() {
 		super();
 		maxConnections = 2;
 		reqLoops     = 100;
@@ -25,7 +25,7 @@ final public class Configuration {
 	/*
 	 * @result returns a object reference to this singleton
 	 */
-	final public static Configuration getInstance() {
+	final public static RegTestConfiguration getInstance() {
 		return INSTANCE;
 	}
 

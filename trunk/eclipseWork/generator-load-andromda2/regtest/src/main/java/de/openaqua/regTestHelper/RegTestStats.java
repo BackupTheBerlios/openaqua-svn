@@ -8,12 +8,13 @@ import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
 
 
+
 /**
  * Collects statistical information
  *
  */
-final public class Stats {
-	final private static Stats INSTANCE = new Stats(); //yepp, is a singleton
+final public class RegTestStats {
+	final private static RegTestStats INSTANCE = new RegTestStats(); //yepp, is a singleton
 	private int  counterRead;
 	private int  counterWrite;
 	private long globalTime;
@@ -25,7 +26,7 @@ final public class Stats {
 	/*
 	 * Constructor
 	 */
-	private Stats() {
+	private RegTestStats() {
 		counterRead = 0;
 		globalTime = 0L;
 	}
@@ -33,7 +34,7 @@ final public class Stats {
 	/*
 	 * @result returns a object reference to this singleton
 	 */
-	final public static Stats getInstance() {
+	final public static RegTestStats getInstance() {
 		return INSTANCE;
 	}
 

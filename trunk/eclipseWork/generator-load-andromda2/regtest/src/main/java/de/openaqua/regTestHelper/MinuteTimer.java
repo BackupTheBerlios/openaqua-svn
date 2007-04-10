@@ -18,7 +18,7 @@ final public class MinuteTimer extends TimerTask{
 	}
 
 	public void run (){
-		Stats.getInstance().printResults(msec);
+		RegTestStats.getInstance().printResults(msec);
 		//System.out.println(shortTime.format(new Date()));
 
 	}

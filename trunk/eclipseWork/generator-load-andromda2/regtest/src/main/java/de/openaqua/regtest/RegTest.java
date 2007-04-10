@@ -2,15 +2,6 @@ package de.openaqua.regtest;
 
 
 
-
-
-
-
-
-
-
-
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.BeanFactoryReference;
