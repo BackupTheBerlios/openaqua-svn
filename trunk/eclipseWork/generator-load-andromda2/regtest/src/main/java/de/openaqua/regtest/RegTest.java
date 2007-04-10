@@ -9,6 +9,7 @@ import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 
 
 
+
 public class RegTest {
 	
 	private final static Logger logger = Logger.getRootLogger();

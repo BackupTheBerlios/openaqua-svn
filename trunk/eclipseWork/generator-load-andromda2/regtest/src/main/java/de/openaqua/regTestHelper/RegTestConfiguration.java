@@ -1,6 +1,3 @@
-/**
- *
- */
 package de.openaqua.regTestHelper;
 
 /**
@@ -29,14 +26,20 @@ final public class RegTestConfiguration {
 		return INSTANCE;
 	}
 
+	
+	
 	public int getStatsAllMilliseconds() {
 		return statMilliSeconds;
 	}
 
+	
+	
 	public int getReqLoops() {
 		return reqLoops;
 	}
 
+	
+	
 	/**
 	 * @return the threadCounter
 	 */

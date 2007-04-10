@@ -13,12 +13,13 @@ import de.openaqua.dev.alma.AlmaService;
 import de.openaqua.dev.alma.ContractVO;
 import de.openaqua.dev.alma.crud.ContractManageableService;
 import de.openaqua.dev.alma.crud.ContractValueObject;
-import de.openaqua.regTestHelper.LoadGenerator;
+import de.openaqua.regTestHelper.*;
+
 
 public class AlmaLoadGenerator extends LoadGenerator {
 	
 	private final AlmaService almaService = (AlmaService)getBeanFactory().getFactory().getBean("almaService");
-	private final int maxContracts = 10;
+	private final int maxContracts = 10000;
 	private final Random random = new Random();
 	private final static Logger logger = Logger.getRootLogger();
 	
@@ -47,7 +48,9 @@ public class AlmaLoadGenerator extends LoadGenerator {
 				ContractValueObject c = (ContractValueObject) it.next();
 				ids.add(c.getId());
 			}
-			cms.delete(ids.toArray(new Long[0]));
+			if (ids.size()> 0) {
+				cms.delete(ids.toArray(new Long[0]));
+			}
 		} catch (Exception e) {
 			printError(e);
 			return false;

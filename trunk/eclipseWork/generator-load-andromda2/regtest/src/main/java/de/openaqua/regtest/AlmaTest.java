@@ -27,15 +27,17 @@ public class AlmaTest extends RegTest {
 	public AlmaTest(String name) {
 		super(name);
 	}
+	
+	
 
 
 	public boolean RunTest() {
-		if (cleanAllContracts() != true) return false;
+		//if (cleanAllContracts() != true) return false;
 		//if (createCounterTemplate() != true) return false;
 		//if (createContractWithService() != true) return false;
 		//if (findContractWithService() != true) return false;
 		//if (updateContractWithService() != true) return false;
-		//if (RunLoadTest() != true) return false;
+		if (RunLoadTest() != true) return false;
 
 		return true;
 	}
@@ -59,7 +61,9 @@ public class AlmaTest extends RegTest {
 				ContractValueObject c = (ContractValueObject) it.next();
 				ids.add(c.getId());
 			}
-			cms.delete(ids.toArray(new Long[0]));
+			if (ids.size() > 0 ) {
+				cms.delete(ids.toArray(new Long[0]));
+			}
 		} catch (Exception e) {
 			printError(e);
 			return false;

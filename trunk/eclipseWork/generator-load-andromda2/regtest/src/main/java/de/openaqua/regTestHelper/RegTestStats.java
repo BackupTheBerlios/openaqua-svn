@@ -22,7 +22,6 @@ final public class RegTestStats {
 	private ReentrantLock lockRead = new ReentrantLock();
 
 
-
 	/*
 	 * Constructor
 	 */
@@ -82,6 +81,8 @@ final public class RegTestStats {
 
 
 
+	
+	
 	public void printResults(int msec) {
 		int acounterRead = 0;
 		int acounterWrite = 0;
