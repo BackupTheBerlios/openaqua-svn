@@ -30,15 +30,22 @@ public class AlmaTest extends RegTest {
 
 
 	public boolean RunTest() {
-		if (cleanAllContracts() != true) return false;
+		//if (cleanAllContracts() != true) return false;
 		//if (createCounterTemplate() != true) return false;
-		if (createContractWithService() != true) return false;
-		if (findContractWithService() != true) return false;
-		if (updateContractWithService() != true) return false;
+		//if (createContractWithService() != true) return false;
+		//if (findContractWithService() != true) return false;
+		//if (updateContractWithService() != true) return false;
+		if (RunLoadTest() != true) return false;
+
 		return true;
 	}
 
 
+	public boolean RunLoadTest() {
+		logger().info("### RunLoadTest()");
+		return new AlmaLoadGenerator(true, "").fireUpLoadTest();
+		
+	}
 	
 	public boolean cleanAllContracts() {
 		logger().info("### cleanAllContracts()");
