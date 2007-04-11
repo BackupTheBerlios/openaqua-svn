@@ -2,17 +2,13 @@ package de.tmobile.cabu.sample;
 
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Random;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
 import de.tmobile.cabu.entities.Contract;
-import de.tmobile.cabu.entities.ContractKey;
 import de.tmobile.cabu.loadtest.Stats;
 
 
@@ -38,39 +34,23 @@ public class HibernateGenerator extends Thread{
 
 	public HibernateGenerator(final String threadName, final String key, boolean readTest) throws IOException  {
 		super(threadName);
-		//configuration = new Configuration();
-		//sessionFactory = configuration.buildSessionFactory();
 		sessionFactory = new org.hibernate.cfg.Configuration().configure("hibernate.cfg.mapping.xml").buildSessionFactory();
 		session = sessionFactory.openSession();
-		
-		//init the class
-		//this.database = DatabaseServerRegistry.getInstance().getClient(key, "test", "test");
 		this.readTest = readTest;
-
 	}
 
 
-	private Contract getContractFromDbByName(final int id) {
-		/*
-		Query query=database.query();
-		query.constrain(Contract.class);
-		query.descend("name").constrain("name"+id);
-		ObjectSet result=query.execute();
-
-		if (result.hasNext()) {
-			return (Contract)result.next();
-		} else {
-			logger.error("No matching contract found");
-			return null;
-		}
-		 */
-
-		return null;
-	}
 
 
-	private Contract getContractFromDb(final long id) {
-		return (Contract) session.get(Contract.class, id);
+	private Contract getContractFromDb(final String msisdn) {
+		org.hibernate.Query queryObject = session.createQuery("from de.tmobile.cabu.entities.ContractImpl as Contract where Contract.msisdn = ?");
+        queryObject.setParameter(0, msisdn);
+        java.util.List results = queryObject.list();
+        if (results.size()>0) {
+        	return (Contract)results.get(0);        	
+        } else {
+        	return null;
+        }
 	}
 
 
@@ -79,9 +59,11 @@ public class HibernateGenerator extends Thread{
 		Transaction trx = session.beginTransaction();
 		for (int key = 1; key <= de.tmobile.cabu.loadtest.Configuration.getInstance().getMaxContracts(); key++) {
 			try {
-				Contract c = new Contract("value="+key, key);
-				c.setName("name");
-				c.setId(key);
+				Contract c = Contract.Factory.newInstance();
+				c.setMsisdn("49160"+key);
+				c.setContractId("ctrct"+key);
+				c.setValidFrom(1000000);
+				c.setValidTo(0);
 				session.save(c);
 			 } catch (Exception e) {
 				logger.error("Error while persisting keys: "+e.getMessage());
@@ -89,6 +71,9 @@ public class HibernateGenerator extends Thread{
 
 			if ((key % 1000) == 0) {
 				logger.debug("created " + key + " keys");
+				trx.commit();
+				session.flush();
+				trx = session.beginTransaction();
 			}
 		}
 		trx.commit();
@@ -108,10 +93,11 @@ public class HibernateGenerator extends Thread{
 		for (ContractContainer c : cc) 	c.dump();
 		 */
 	}
-	private void executeRead(final long contractID) {
-		Contract c = getContractFromDb(contractID); //get contract
+	private void executeRead(final int contractID) {
+		final String msisdn = "49160"+contractID;
+		Contract c = getContractFromDb(msisdn); //get contract
 		if (c == null) 	logger.error("RError: Didn't found Contract: " + contractID);
-		if (c.getId() != contractID) 	logger.error("ID not equals should=" + contractID+ " is="+c.getId());
+		if (!c.getMsisdn().equals(msisdn) ) 	logger.error("MSISDN not equals should=" + msisdn+ " is="+c.getMsisdn());
 	}
 
 
