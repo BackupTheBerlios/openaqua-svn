@@ -26,7 +26,7 @@ final public class Configuration {
 		super();
 		maxConnections = 8;
 
-		maxContracts = 150000;
+		maxContracts = 15000;
 		maxSubsriptions = maxContracts/5;
 		maxInstances=maxSubsriptions*3;
 
