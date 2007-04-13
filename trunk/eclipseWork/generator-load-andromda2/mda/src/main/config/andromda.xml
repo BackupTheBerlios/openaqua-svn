@@ -137,11 +137,9 @@
 			</properties>
 		</namespace>
 
+      <!--
 		<namespace name="jbpm">
 			<properties>
-			   <!--
-   				<property name=""></property>
-		      -->
 				<property name="definitions">${jbpm.generated.dir}</property>
 				<property name="handlers">${jbpm.generated.dir}</property>
 				<property name="handlers-impls">${jbpm.manual.dir}</property>
@@ -152,6 +150,7 @@
 				<property name="clientPackage">${jbpm.generated.dir}</property>
 			</properties>
 		</namespace>
+	-->
 
 
 	</namespaces>
