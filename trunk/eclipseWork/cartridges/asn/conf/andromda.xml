@@ -10,20 +10,14 @@
 		<property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
 	</properties>
 	<repositories>
-		<repository name="emf-uml2">
-			<models>
-				<model type="emf-uml2">
-					<uri>${model.uri}</uri>
-					<moduleSearchLocations>
-                        <location patterns="a*.emx">${basedir}/src/uml</location>
-                    </moduleSearchLocations>
-					<modelPackages processAll="true">
-						<modelPackage process="false">org::andromda::metafacades::uml</modelPackage>
-					</modelPackages>
-				</model>
-			</models>
-		</repository>
-	</repositories>
+   		<repository name="emf-uml2">
+   			<models>
+   				<model type="emf-uml2">
+   					<uri>${model.uri}</uri>
+   				</model>
+   			</models>
+   		</repository>
+   	</repositories>
 	<namespaces>
 		<namespace name="default">
 			<properties>
