@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- contains the cartridge metafacade mappings -->
+<metafacades>
+
+    <metafacade class="com.andromda.samples.cartridges.forms.metafacades.FormFacadeLogicImpl">
+        <mapping>
+            <stereotype>FORM</stereotype>
+        </mapping>
+    </metafacade>
+
+</metafacades>

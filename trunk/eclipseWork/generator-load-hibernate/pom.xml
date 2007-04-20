@@ -56,16 +56,6 @@
 
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>maven.openaqua.de</id>
-			<name>OpenAqua Repository</name>
-			<url>http://maven.openaqua.de</url>
-		</repository>
-	</repositories>
-
-	<profiles>
-    </profiles>
 
 
 	<build>

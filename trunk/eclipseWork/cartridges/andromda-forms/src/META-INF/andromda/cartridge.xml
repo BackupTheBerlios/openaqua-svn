@@ -1,0 +1,26 @@
+<cartridge>
+
+    <!-- uncomment this if you want to use FreeMarker instead of Velocity
+    <templateEngine
+      className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine">
+    </templateEngine>
+    -->
+
+    <!-- define the template objects that are made available to the template -->
+    <templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
+
+    <template
+        path="templates/forms/HtmlForm.vsl"
+        outputPattern="{0}/{1}.html"
+        outlet="forms"
+        overwrite="true"
+        outputToSingleFile="false"
+        outputOnEmptyElements="true">
+        <modelElements variable="formFacade">
+            <modelElement>
+                <type name="com.andromda.samples.cartridges.forms.metafacades.FormFacade"/>
+            </modelElement>
+        </modelElements>
+    </template>
+
+</cartridge>
