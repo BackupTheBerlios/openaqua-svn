@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_ejMEIbrxEduQeMwIv6qPTw" name="FormProfile" metamodelReference="_ejMELbrxEduQeMwIv6qPTw">
+  <eAnnotations xmi:id="_ejMEIrrxEduQeMwIv6qPTw" source="attributes">
+    <details xmi:id="_ejMEI7rxEduQeMwIv6qPTw" key="version" value="2"/>
+  </eAnnotations>
+  <eAnnotations xmi:id="_ejMEJLrxEduQeMwIv6qPTw" source="ePackages">
+    <contents xmi:type="ecore:EPackage" xmi:id="_ejMEJbrxEduQeMwIv6qPTw" name="FormProfile_2" nsURI="http:///_TODCsLrvEduQeMwIv6qPTw.profile.uml2" nsPrefix="FormProfile_2">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ejMEJrrxEduQeMwIv6qPTw" name="FormProfile__Form">
+        <eAnnotations xmi:id="_ejMEJ7rxEduQeMwIv6qPTw" source="stereotype" references="_ejMELrrxEduQeMwIv6qPTw"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_ejMEKLrxEduQeMwIv6qPTw" name="FormProfile_1" nsURI="http:///_1W5z0LruEduQeMwIv6qPTw.profile.uml2" nsPrefix="FormProfile_1">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ejMEKbrxEduQeMwIv6qPTw" name="FormProfile__Form">
+        <eAnnotations xmi:id="_ejMEKrrxEduQeMwIv6qPTw" source="stereotype" references="_ejMELrrxEduQeMwIv6qPTw"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_ejMEK7rxEduQeMwIv6qPTw" name="FormProfile_0" nsURI="http:///_yGjdY7ruEduQeMwIv6qPTw.profile.uml2" nsPrefix="FormProfile_0"/>
+  </eAnnotations>
+  <packageImport xmi:id="_ejMELLrxEduQeMwIv6qPTw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_EfRZoK86EdieaYgxtVWN8Q"/>
+  </packageImport>
+  <packageImport xmi:id="_ejMELbrxEduQeMwIv6qPTw" visibility="private">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_METAMODELS/UML2.metamodel.uml2#_m8qbA686EdiEh75YJ_3n8g"/>
+  </packageImport>
+  <ownedMember xmi:type="uml:Stereotype" xmi:id="_ejMELrrxEduQeMwIv6qPTw" name="Form">
+    <ownedAttribute xmi:id="_ejMEL7rxEduQeMwIv6qPTw" name="base$Class" association="_ejMEMLrxEduQeMwIv6qPTw">
+      <type xmi:type="uml:Class" href="pathmap://UML2_METAMODELS/UML2.metamodel.uml2#_m88uxq86EdiEh75YJ_3n8g"/>
+    </ownedAttribute>
+  </ownedMember>
+  <ownedMember xmi:type="uml:Extension" xmi:id="_ejMEMLrxEduQeMwIv6qPTw" name="Class_Form" memberEnd="_ejMEMbrxEduQeMwIv6qPTw _ejMEL7rxEduQeMwIv6qPTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_ejMEMbrxEduQeMwIv6qPTw" name="extension$Form" type="_ejMELrrxEduQeMwIv6qPTw" association="_ejMEMLrxEduQeMwIv6qPTw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ejMEMrrxEduQeMwIv6qPTw"/>
+    </ownedEnd>
+  </ownedMember>
+</uml:Profile>

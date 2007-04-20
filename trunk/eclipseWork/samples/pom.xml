@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.andromda.samples</groupId>
+    <artifactId>androprof-samples</artifactId>
+    <version>2.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <name>AndroMDA.com samples</name>
+    
+    <description>This module contains samples to be used in AndroMDA professional services.</description>
+ 
+    <build>
+        <defaultGoal>install</defaultGoal>
+    </build>
+ 
+    <modules>
+        <module>cartridges</module>
+    </modules>
+    
+    <properties>
+        <andromda.version>3.2</andromda.version>
+    </properties>
+</project>

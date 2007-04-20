@@ -1,0 +1,21 @@
+You can install and try all this, using the following instructions:
+
+* Download and install JBoss 4.0.5.GA
+* Set JBOSS_HOME=directory where you installed JBoss
+* Copy $JBOSS_HOME/server/default to $JBOSS_HOME/server/mdlibrary
+* Check out the mdlibrary project from CVS
+* Rebuild using mvn install -Ddeploy -Dmaven.test.skip=true
+   (Watch it copy two files into $JBOSS_HOME/server/mdlibrary/deploy!)
+* Copy jboss/deploy/* from the mdlibrary project into $JBOSS_HOME/server/mdlibrary/deploy
+* Copy jboss/bin/* from the mdlibrary project into $JBOSS_HOME/bin
+* Run JBoss using $JBOSS_HOME/bin/run.sh -c mdlibrary
+* Start a database viewer and connect to the HSQL database on localhost, port 1701
+* See the open, empty database
+* Create the database tables using mvn -f core/pom.xml andromdapp:schema -Dtasks=create
+* Import some test data using mvn test (runs the InventoryServiceTest testcase)
+* Start your browser and open http://localhost:8080/mdlibrary-web-1.0-SNAPSHOT/
+* You should see the "Search titles" dialog, now.
+* Enter %Bach% in the "Author" field and click "Search". You should see a book from Richard Bach as a result.
+* Clear the author field, click on the calendar icon near "Published At" and select the current date. Click "Search". You should see the same book, again.
+* Click on the title of the book called "Illusions". You should now see the book details form.
+* Click "Make title reservation", and so on...

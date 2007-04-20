@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.magicdraw.samples.library</groupId>
+        <artifactId>mdlibrary</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>mdlibrary-common</artifactId>
+    <packaging>jar</packaging>
+    <name>MagicDraw Library Common</name>
+    <dependencies>
+        <dependency>
+            <groupId>${pom.groupId}</groupId>
+            <artifactId>mdlibrary-mda</artifactId>
+            <version>${pom.version}</version>
+            <type>pom</type>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.andromda.maven.plugins</groupId>
+                <artifactId>andromda-multi-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

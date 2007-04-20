@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_IMvZb-8_EduxubWGn_ftCQ" name="form-profile" metamodelReference="_IMvZdu8_EduxubWGn_ftCQ">
+  <eAnnotations xmi:id="_IMvZcO8_EduxubWGn_ftCQ" source="attributes">
+    <details xmi:id="_IMvZce8_EduxubWGn_ftCQ" key="version" value="0"/>
+  </eAnnotations>
+  <eAnnotations xmi:id="_IMvZcu8_EduxubWGn_ftCQ" source="ePackages">
+    <contents xmi:type="ecore:EPackage" xmi:id="_IMvZc-8_EduxubWGn_ftCQ" name="formprofile_0" nsURI="http:///formprofile_0_H76u0O8_EduxubWGn_ftCQ.profile.uml2" nsPrefix="formprofile_0">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_IMvZdO8_EduxubWGn_ftCQ" name="formprofile__Form">
+        <eAnnotations xmi:id="_IMvZde8_EduxubWGn_ftCQ" source="stereotype" references="_IMvZee8_EduxubWGn_ftCQ"/>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <packageImport xmi:id="_IMvZdu8_EduxubWGn_ftCQ" visibility="private">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_METAMODELS/UML2.metamodel.uml2#_m8qbA686EdiEh75YJ_3n8g"/>
+  </packageImport>
+  <packageImport xmi:id="_IMvZd-8_EduxubWGn_ftCQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_LIBRARIES/UML2PrimitiveTypes.library.uml2#_EfRZoK86EdieaYgxtVWN8Q"/>
+  </packageImport>
+  <packageImport xmi:id="_IMvZeO8_EduxubWGn_ftCQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML2_LIBRARIES/JavaPrimitiveTypes.library.uml2#_RjmyoK86EdieaYgxtVWN8Q"/>
+  </packageImport>
+  <ownedMember xmi:type="uml:Stereotype" xmi:id="_IMvZee8_EduxubWGn_ftCQ" name="Form">
+    <ownedAttribute xmi:id="_IMvZeu8_EduxubWGn_ftCQ" name="base_Class" visibility="private" association="_IMvZe-8_EduxubWGn_ftCQ">
+      <type xmi:type="uml:Class" href="pathmap://UML2_METAMODELS/UML2.metamodel.uml2#_m88uxq86EdiEh75YJ_3n8g"/>
+    </ownedAttribute>
+  </ownedMember>
+  <ownedMember xmi:type="uml:Extension" xmi:id="_IMvZe-8_EduxubWGn_ftCQ" memberEnd="_IMvZfO8_EduxubWGn_ftCQ _IMvZeu8_EduxubWGn_ftCQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_IMvZfO8_EduxubWGn_ftCQ" name="extension_Form" visibility="private" type="_IMvZee8_EduxubWGn_ftCQ" association="_IMvZe-8_EduxubWGn_ftCQ" aggregation="composite">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IMvZfe8_EduxubWGn_ftCQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IMvZfu8_EduxubWGn_ftCQ"/>
+    </ownedEnd>
+  </ownedMember>
+</uml:Profile>

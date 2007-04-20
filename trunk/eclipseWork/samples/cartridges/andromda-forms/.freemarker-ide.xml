@@ -1,0 +1,9 @@
+<config>
+	<context-values>
+		<resource path="src/templates/forms/HtmlForm.ftl">
+			<value key="formFacade" object-class="com.andromda.samples.cartridges.forms.metafacades.FormFacadeLogic"/>
+		</resource>
+	</context-values>
+	<macro-library>
+	</macro-library>
+</config>
