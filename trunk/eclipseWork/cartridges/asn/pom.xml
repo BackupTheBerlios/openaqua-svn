@@ -14,12 +14,11 @@
        <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>asn-cartridge</artifactId>
-    <packaging>andromda-cartridge</packaging>
-    <name>ASN.1 Cartridge</name>
+	<artifactId>asn-cartridge</artifactId>
+	<packaging>andromda-cartridge</packaging>
+	<name>ASN.1 Cartridge</name>
 
-    <description>Generates a ASN.1 Description from a UML Model</description>
-
+	<description>Generates a ASN.1 Description from a UML Model</description>
 
     <build>
        <pluginManagement>
@@ -59,29 +58,30 @@
                </plugin>
            </plugins>
        </pluginManagement>
-       <resources>
-           <resource>
-               <directory>src/java</directory>
-               <includes>
-                   <include>**/*.xml</include>
-                   <include>**/*.properties</include>
-               </includes>
-           </resource>
-           <resource>
-               <directory>src</directory>
-               <excludes>
-                   <exclude>java/**/*.java</exclude>
-                   <exclude>uml/**/*</exclude>
-                   <exclude>test/**/*</exclude>
-               </excludes>
-           </resource>
-           <resource>
-               <directory>target/src</directory>
-               <excludes>
-                   <exclude>**/*.java</exclude>
-               </excludes>
-           </resource>
-       </resources>
+		 <sourceDirectory>src/java</sourceDirectory>
+		 <resources>
+			 <resource>
+				 <directory>src/java</directory>
+				 <includes>
+					 <include>**/*.xml</include>
+					 <include>**/*.properties</include>
+				 </includes>
+			 </resource>
+			 <resource>
+				 <directory>src</directory>
+				 <excludes>
+					 <exclude>java/**/*.java</exclude>
+					 <exclude>uml/**/*</exclude>
+					 <exclude>test/**/*</exclude>
+				 </excludes>
+			 </resource>
+			 <resource>
+				 <directory>target/src</directory>
+				 <excludes>
+					 <exclude>**/*.java</exclude>
+				 </excludes>
+			 </resource>
+		 </resources>
        <plugins>
            <plugin>
                <groupId>org.andromda.maven.plugins</groupId>

@@ -1,6 +1,6 @@
 <cartridge>
 
-    <templateEngine className="org.andromda.templateengines.velocity.VelocityTemplateEngine">
+    <templateEngine className="org.andromda.templateengines.FreeMarker">
     </templateEngine>
 
     <!-- cartridge-property merge-point -->

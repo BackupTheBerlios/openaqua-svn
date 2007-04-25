@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-
-<!-- contains the bpm4struts cartridge metafacade mappings
-	  -->
+<!-- contains the hibernate cartridge metafacade mappings -->
 <metafacades>
 
-	<metafacade class="de.openaqua.dev.cartridges.asn.metafacades.AsnFacadeLogicImpl">
+	 <metafacade class="de.openaqua.dev.cartridges.asn.metafacades.AsnFacadeLogicImpl" contextRoot="true">
         <mapping>
             <stereotype>ASNSIMPLEDESCRIPTION</stereotype>
         </mapping>

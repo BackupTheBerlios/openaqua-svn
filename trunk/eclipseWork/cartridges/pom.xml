@@ -139,9 +139,9 @@
 
     <modules>
        <!--
-        <module>andromda-forms</module>
      -->
-        <module>asn</module>
+		<module>andromda-forms</module>
+		<module>asn</module>
     </modules>
 
 
