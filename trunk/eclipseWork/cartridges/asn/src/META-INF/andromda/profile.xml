@@ -5,9 +5,8 @@
     </documentation>
     <elements>
         <elementGroup name="Stereotypes">
-			  <element name="ASNSIMPLEDESCRIPTION">
-                <documentation>
-						 doc for elementGroup Stereotypes and simpledescription
+	    <element name="ASNSIMPLEDESCRIPTION">
+                <documentation>doc for elementGroup Stereotypes and simpledescription
                 </documentation>
                 <value>AsnSimpleDescription</value>
                 <appliedOnElement>class</appliedOnElement>

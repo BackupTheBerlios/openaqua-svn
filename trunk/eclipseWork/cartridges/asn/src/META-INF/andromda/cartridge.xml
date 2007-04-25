@@ -16,7 +16,7 @@
         overwrite="true"
         outputToSingleFile="true"
         outputOnEmptyElements="true">
-        <modelElements variable="AsnDescription">
+        <modelElements variable="asnDescription">
             <modelElement>
                 <type name="de.openaqua.dev.cartridges.asn.metafacades.AsnFacade"/>
             </modelElement>
