@@ -4,14 +4,16 @@
 		<property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
 	</properties>
 	<repositories>
-		<repository name="emf-uml2">
+		<repository name="netBeansMDR">
 			<models>
-				<model type="emf-uml2">
+				<model>
 					<uri>${model.uri}</uri>
 					<moduleSearchLocations>
-                        <location patterns="a*.emx">${basedir}/src/uml</location>
-                    </moduleSearchLocations>
-					<modelPackages processAll="true">
+						<location>${maven.repo.local}/andromda/xml.zips</location>
+						<location patterns="**/*.xml.zip">${settings.localRepository}/org/andromda/profiles</location>
+						<location patterns="**/*.xml.zip">${settings.localRepository}/org/andromda/metafacades</location>
+					</moduleSearchLocations>
+					<modelPackages>
 						<modelPackage process="false">org::andromda::metafacades::uml</modelPackage>
 					</modelPackages>
 				</model>

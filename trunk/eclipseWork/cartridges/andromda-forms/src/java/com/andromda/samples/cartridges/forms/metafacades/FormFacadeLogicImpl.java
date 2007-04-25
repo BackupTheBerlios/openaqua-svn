@@ -65,6 +65,7 @@ public class FormFacadeLogicImpl extends FormFacadeLogic
      */
     private FormSection transformClassifierToFormSection(ClassifierFacade theClass)
     {
+    	/*
         FormSection section = new FormSection("Fields for " + theClass.getFullyQualifiedName(),
                 new ArrayList());
         for (Iterator iter = theClass.getAttributes().iterator(); iter.hasNext();)
@@ -73,5 +74,8 @@ public class FormFacadeLogicImpl extends FormFacadeLogic
             section.getFormfields().add(new FormField(element.getName(), 40));
         }
         return section;
+        */
+    	//TODO Fill out the method
+    	return null;
     }
 }

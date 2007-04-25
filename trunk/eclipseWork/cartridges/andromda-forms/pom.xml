@@ -1,34 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.andromda.samples.cartridges</groupId>
-        <artifactId>androprof-sample-cartridges</artifactId>
-        <version>2.1-SNAPSHOT</version>
-    </parent>
-    <artifactId>androprof-forms-cartridge</artifactId>
-    <packaging>andromda-cartridge</packaging>
-    <name>AndroMDA.com Sample Forms Cartridge</name>
-    <description>Produces forms from classes.</description>
-    <dependencies>
-        <dependency>
-            <groupId>org.andromda.translationlibraries</groupId>
-            <artifactId>andromda-ocl-query-library</artifactId>
-            <version>${andromda.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.andromda.templateengines</groupId>
-            <artifactId> andromda-templateengine-freemarker</artifactId>
-            <version>${andromda.version}</version>
-        </dependency>
-    </dependencies>
-    <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!--
+		 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		 Forms Test Cartridge
+		 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		 -->
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.openaqua.dev.cartridges</groupId>
+		<artifactId>openaqua-cartridges</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>forms-cartridge</artifactId>
+	<packaging>andromda-cartridge</packaging>
+	<name>AndroMDA.com Sample Forms Cartridge</name>
+
+	<description>Produces forms from classes.</description>
+
+	 <build>
         <plugins>
             <plugin>
                 <groupId>org.andromda.maven.plugins</groupId>
                 <artifactId>andromda-maven-plugin</artifactId>
+					 <executions>
+						 <execution>
+							 <goals>
+								 <goal>run</goal>
+							 </goals>
+							 <configuration>
+								 <buildSourceDirectory>${basedir}/target/src</buildSourceDirectory>
+								 <configurationUri>file:${basedir}/conf/andromda.xml</configurationUri>
+								 <lastModifiedCheck>true</lastModifiedCheck>
+							 </configuration>
+						 </execution>
+					 </executions>
                 <dependencies>
                     <dependency>
                         <groupId>org.andromda.cartridges</groupId>
@@ -74,11 +82,9 @@
                 </excludes>
             </resource>
         </resources>
-    </build>
-    <properties>
-        <model.uri> 
-            file:${src.dir}/uml/FormsCartridgeMetafacadeModel.uml2</model.uri>
-        <test.model.uri> 
-            file:${test.src.dir}/uml/FormsCartridgeTestModel.uml2</test.model.uri>
-    </properties>
+	</build>
+	<properties>
+		<model.uri>jar:file:${pom.basedir}/src/uml/FormsFacades.xml.zip!/FormsFacades.xml</model.uri>
+		<test.model.uri>file:${test.src.dir}/uml/FormsCartridgeTestModel.uml2</test.model.uri>
+	</properties>
 </project>
