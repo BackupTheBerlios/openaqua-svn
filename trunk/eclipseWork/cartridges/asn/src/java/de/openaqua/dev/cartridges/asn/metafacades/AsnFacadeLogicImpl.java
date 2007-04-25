@@ -33,6 +33,7 @@ public class AsnFacadeLogicImpl
     protected java.util.Collection handleGetAsnSimpleDescriptions()
     {
     	
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaoooooooooooooooooooooooo");
     	Collection result = new ArrayList();
 
     	Collection sourceDependencies = this.getSourceDependencies();
