@@ -10,7 +10,7 @@
 						 doc for elementGroup Stereotypes and simpledescription
                 </documentation>
                 <value>AsnSimpleDescription</value>
-                <appliedOnElement>Class</appliedOnElement>
+                <appliedOnElement>class</appliedOnElement>
             </element>
         </elementGroup>
     </elements>

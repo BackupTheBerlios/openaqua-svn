@@ -1,9 +1,4 @@
 <andromda>
-   <!--
-      ++++++++++++++++++++++++++++++++++++++++++++++
-      asn/conf/test/andromda.xml
-      ++++++++++++++++++++++++++++++++++++++++++++++
-   -->
     <properties>
         <property name="failOnValidationErrors">false</property>
         <property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
