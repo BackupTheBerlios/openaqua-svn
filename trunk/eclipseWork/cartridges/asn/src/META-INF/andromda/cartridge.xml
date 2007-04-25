@@ -3,38 +3,22 @@
     <templateEngine className="org.andromda.templateengines.FreeMarker">
     </templateEngine>
 
+
+    <!-- define the template objects that are made available to the template -->
+    <templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
+
     <!-- cartridge-property merge-point -->
 
-    <!-- copy resources -->
-    <resource
-        path="resources/*.*"
-        outputPattern="layout/{0}"
-        outlet="pages"
-        overwrite="true"/>
-
-    <resource
-        path="resources/calendar/*.*"
-        outputPattern="layout/calendar/{0}"
-        outlet="pages"
-        overwrite="true"/>
-
-    <resource
-        path="resources/WEB-INF/lib/*.jar"
-        outputPattern="lib/{0}"
-        outlet="configuration"
-        overwrite="true"/>
-
-    <!-- cartridge-resource merge-point -->
-
-    <!-- process templates on model elements -->
     <template
-        path="templates/asn/description/description.asn.vsl"
-        outputPattern="$generatedFile"
-        outlet="actions"
-        overwrite="true">
-        <modelElements variable="action">
+        path="templates/asn/asnDescription.ftl"
+        outputPattern="{0}/{1}.html"
+        outlet="forms"
+        overwrite="true"
+        outputToSingleFile="true"
+        outputOnEmptyElements="true">
+        <modelElements variable="AsnDescription">
             <modelElement>
-                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsAction"/>
+                <type name="de.openaqua.dev.cartridges.asn.metafacades.AsnFacade"/>
             </modelElement>
         </modelElements>
     </template>

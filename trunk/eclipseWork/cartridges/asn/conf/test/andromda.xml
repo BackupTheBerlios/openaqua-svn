@@ -9,7 +9,7 @@
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
                     <modelPackages processAll="false">
-                        <modelPackage process="true">com::andromda::samples::cartridges::forms::test</modelPackage>
+                        <modelPackage process="true">de.openaqua.dev.cartridges.asn.test</modelPackage>
                     </modelPackages>
                 </model>
             </models>

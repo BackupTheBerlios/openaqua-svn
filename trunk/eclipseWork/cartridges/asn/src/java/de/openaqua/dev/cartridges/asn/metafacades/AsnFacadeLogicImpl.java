@@ -1,5 +1,15 @@
 package de.openaqua.dev.cartridges.asn.metafacades;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.andromda.metafacades.uml.ClassifierFacade;
+import org.andromda.metafacades.uml.DependencyFacade;
+import org.andromda.metafacades.uml.ModelElementFacade;
+
+import de.openaqua.dev.cartridges.asn.psm.Description;
+
 
 
 /**
@@ -22,8 +32,26 @@ public class AsnFacadeLogicImpl
      */
     protected java.util.Collection handleGetAsnSimpleDescriptions()
     {
-        // TODO: put your implementation here.
-        return null;
+    	
+    	Collection<Description> result = new ArrayList<Description>();
+
+    	Collection sourceDependencies = this.getSourceDependencies();
+        for (Iterator iter = sourceDependencies.iterator(); iter.hasNext();)
+        {
+            DependencyFacade element = (DependencyFacade) iter.next();
+        	System.out.println("aaaaaaaaaaaaaaaaaaaaa"+element.getFullyQualifiedName());
+            ModelElementFacade targetElement = element.getTargetElement();
+            if (targetElement instanceof ClassifierFacade)
+            {
+            	System.out.println("bbbb");
+
+            	ClassifierFacade otherClass = (ClassifierFacade) targetElement;
+            	Description description = new Description();
+            	description.setDescription("otherClass.getFullyQualifiedNamePath()="+otherClass.getFullyQualifiedNamePath());
+            	result.add(description);
+            }
+        }
+        return result;
     }
 
 }
