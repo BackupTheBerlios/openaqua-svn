@@ -1,0 +1,14 @@
+<projectDescription>
+  <name>asn-cartridge</name>
+  <comment>Generates a ASN.1 Description from a UML Model</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

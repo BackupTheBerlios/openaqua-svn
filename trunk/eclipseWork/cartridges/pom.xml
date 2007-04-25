@@ -1,14 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>AndroMDA.com sample cartridges</name>
-    <groupId>com.andromda.samples.cartridges</groupId>
-    <artifactId>androprof-sample-cartridges</artifactId>
-    <version>2.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <dependencies>
+
+    <groupId>de.openaqua.dev.cartridges</groupId>
+    <artifactId>openaqua-cartridges</artifactId>
+    <version>1.0-SNAPSHOT</version>
+	 <name>OpenAqua Cartridges</name>
+
+	 <packaging>pom</packaging>
+
+	 <dependencies>
         <dependency>
             <groupId>org.andromda</groupId>
             <artifactId>andromda-core</artifactId>
@@ -19,30 +22,59 @@
             <artifactId>andromda-utils</artifactId>
             <version>${andromda.version}</version>
         </dependency>
+		  <dependency>
+			  <groupId>org.andromda</groupId>
+			  <artifactId>andromda-utils</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-breadcrumbs-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
         <dependency>
             <groupId>org.andromda.metafacades</groupId>
             <artifactId>andromda-metafacades-uml</artifactId>
             <version>${andromda.version}</version>
             <type>xml.zip</type>
         </dependency>
-        <dependency>
-            <groupId>org.andromda.translationlibraries</groupId>
-            <artifactId>andromda-ocl-validation-library</artifactId>
-            <version>${andromda.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
-        </dependency>
-    </dependencies> 
-    <build>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-formatting-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-collections-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.cartridges</groupId>
+			  <artifactId>andromda-meta-cartridge</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+
+		<dependency>
+			<groupId>org.andromda.translationlibraries</groupId>
+			<artifactId>andromda-ocl-validation-library</artifactId>
+			<version>${andromda.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.andromda.profiles.uml14</groupId>
+			<artifactId>andromda-profile</artifactId>
+			<version>${andromda.version}</version>
+			<type>xml.zip</type>
+			<!--
+			-->
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -65,7 +97,7 @@
                 <plugin>
                     <extensions>true</extensions>
                     <groupId>org.andromda.maven.plugins</groupId>
-                    <artifactId>andromda-cartridge-plugin</artifactId>  
+                    <artifactId>andromda-cartridge-plugin</artifactId>
                     <version>${andromda.version}</version>
                     <executions>
                         <execution>
@@ -76,7 +108,7 @@
                                 <configurationUri>file:${basedir}/conf/test/andromda.xml</configurationUri>
                             </configuration>
                         </execution>
-                    </executions> 
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -102,22 +134,46 @@
                     <exclude>**/*.java</exclude>
                 </excludes>
             </resource>
-        </resources>  
+        </resources>
     </build>
+
     <modules>
        <!--
         <module>andromda-forms</module>
      -->
         <module>asn</module>
     </modules>
-    <properties>
-        <maven.build.src>${pom.basedir}/target/src</maven.build.src>
-        <java.src.dir>${pom.basedir}/src/java</java.src.dir>
-        <test.src.dir>${pom.basedir}/src/test</test.src.dir>
-        <src.dir>${pom.basedir}/src</src.dir>
-        <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
-        <andromda.version>3.2</andromda.version>
-        
-    </properties>
+
+
+
+
+ 	<!--Setup a additional repositories -->
+ 	<repositories>
+ 		<repository>
+ 			<id>andromda</id>
+ 			<name>AndroMDA Repository</name>
+ 			<url>http://team.andromda.org/maven2</url>
+ 		</repository>
+ 	</repositories>
+
+
+ 	<!--Setup a additional repositories for maven plugins -->
+ 	<pluginRepositories>
+ 		<pluginRepository>
+ 			<id>andromda</id>
+ 			<name>AndroMDA Repository</name>
+ 			<url>http://team.andromda.org/maven2</url>
+ 		</pluginRepository>
+ 	</pluginRepositories>
+
+
+   <properties>
+       <maven.build.src>${pom.basedir}/target/src</maven.build.src>
+       <java.src.dir>${pom.basedir}/src/java</java.src.dir>
+       <test.src.dir>${pom.basedir}/src/test</test.src.dir>
+       <src.dir>${pom.basedir}/src</src.dir>
+       <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
+       <andromda.version>3.2</andromda.version>
+   </properties>
 
 </project>
