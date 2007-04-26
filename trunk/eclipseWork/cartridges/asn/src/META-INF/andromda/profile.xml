@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <profile>
-    <documentation>
-    </documentation>
     <elements>
         <elementGroup name="Stereotypes">
-	    <element name="ASNSIMPLEDESCRIPTION">
-                <documentation>doc for elementGroup Stereotypes and simpledescription
+            <element name="ASN_SIMPLE_DESCRIPTION">
+                <documentation>
                 </documentation>
                 <value>AsnSimpleDescription</value>
                 <appliedOnElement>class</appliedOnElement>

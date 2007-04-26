@@ -16,12 +16,12 @@
         </repository>
     </repositories>
     <namespaces>
-        <namespace name="forms">
+        <namespace name="asn1">
             <properties>
                 <property name="languageMappingsUri">Java</property>
                 <property name="wrapperMappingsUri">JavaWrapper</property>
                 <property name="jdbcMappingsUri">JDBC</property>
-                <property name="forms">${test.output.dir}</property>
+                <property name="descriptions">${test.output.dir}</property>
             </properties>
         </namespace>
     </namespaces>

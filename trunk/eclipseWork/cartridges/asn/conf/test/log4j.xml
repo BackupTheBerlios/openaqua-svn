@@ -40,7 +40,7 @@
     </category>
 
     <category name="org.andromda">
-        <priority value="INFO" />
+        <priority value="DEBUG" />
     </category>
 
     <category name="org.andromda.namespaces">

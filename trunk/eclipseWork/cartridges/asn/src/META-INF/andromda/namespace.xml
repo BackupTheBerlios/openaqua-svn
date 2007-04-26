@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <namespace name="asn1">
+	
     <components>
         <component name="cartridge">
             <path>META-INF/andromda/cartridge.xml</path>
@@ -12,16 +13,18 @@
             <path>META-INF/andromda/profile.xml</path>
         </component>
     </components>
+	
+	
+	
     <properties>
         <!-- namespace-propertyGroup merge-point -->
-        <propertyGroup name="File Creation">
+        <propertyGroup name="Outlets">
             <documentation>
-                bla bla
+                Defines the locations to which output is generated.
             </documentation>
-            <property name="asn1DescriptionFilePath">
-                <default>false</default>
+            <property name="descriptions">
                 <documentation>
-						 Describes the place where AndromMDA stores the generated ASN.1 Description File(s).
+                    The location where the forms will be written.
                 </documentation>
             </property>
 
