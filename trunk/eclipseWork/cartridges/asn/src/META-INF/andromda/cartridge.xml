@@ -1,7 +1,9 @@
 <cartridge>
 
+	<!--
     <templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine">
     </templateEngine>
+		-->
 
 
     <!-- define the template objects that are made available to the template -->
