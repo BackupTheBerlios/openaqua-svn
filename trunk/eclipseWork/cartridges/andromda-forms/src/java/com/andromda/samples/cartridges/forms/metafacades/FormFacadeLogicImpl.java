@@ -67,16 +67,7 @@ public class FormFacadeLogicImpl extends FormFacadeLogic
     {
         FormSection section = new FormSection();
         section.setName("Fields for " + theClass.getFullyQualifiedName());
-        /**
-         * Fehler im Model
-         */
         section.setFormField(formField)
-        FormSection section = new FormSection("Fields for " + theClass.getFullyQualifiedName(), new ArrayList());
-        for (Iterator iter = theClass.getAttributes().iterator(); iter.hasNext();)
-        {
-            AttributeFacade element = (AttributeFacade) iter.next();
-            section.getFormfields().add(new FormField(element.getName(), 40));
-        }
         return section;
     }
 }

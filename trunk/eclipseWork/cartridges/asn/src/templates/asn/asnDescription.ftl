@@ -2,6 +2,5 @@
 aaaaaaaaaaaaaaaaaa
 -- ---------------------------------------------------
 --Descriptions:
-<#list asnFacade.asnSimpleDescriptions as description>
-{description.}
-</#list>
+fullyQualifiedName=asnSimpleDescription.fullyQualifiedName
+--formatShortVersion=asnSimpleDescription.formatShortVersion	
