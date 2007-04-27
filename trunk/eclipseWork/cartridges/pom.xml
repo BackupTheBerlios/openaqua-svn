@@ -49,6 +49,11 @@
 			  <version>${andromda.version}</version>
 		  </dependency>
 		  <dependency>
+			  <groupId>org.andromda.templateengines</groupId>
+			  <artifactId>andromda-templateengine-freemarker</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
 			  <groupId>org.andromda.cartridges</groupId>
 			  <artifactId>andromda-meta-cartridge</artifactId>
 			  <version>${andromda.version}</version>
@@ -65,8 +70,6 @@
 			<artifactId>andromda-profile</artifactId>
 			<version>${andromda.version}</version>
 			<type>xml.zip</type>
-			<!--
-			-->
 			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
