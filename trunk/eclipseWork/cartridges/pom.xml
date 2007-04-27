@@ -176,7 +176,7 @@
        <test.src.dir>${pom.basedir}/src/test</test.src.dir>
        <src.dir>${pom.basedir}/src</src.dir>
        <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
-       <andromda.version>3.2</andromda.version>
+       <andromda.version>3.3-SNAPSHOT</andromda.version>
    </properties>
 
 </project>

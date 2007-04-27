@@ -7,7 +7,7 @@
 
 	<!-- cartridge-property merge-point -->
 	<template	path="templates/asn/asnDescription.ftl"
-					outputPattern="{0}/{1}.asn"
+					outputPattern="{1}.asn"
 					outlet="descriptions"
 					overwrite="true"
 					outputToSingleFile="true"

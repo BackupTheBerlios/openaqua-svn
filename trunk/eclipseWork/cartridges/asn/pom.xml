@@ -26,7 +26,7 @@
                <plugin>
                    <groupId>org.andromda.maven.plugins</groupId>
                    <artifactId>andromda-maven-plugin</artifactId>
-                   <version>3.2</version>
+						 <version>${andromda.version}</version>
                    <executions>
                        <execution>
                            <goals>
@@ -44,7 +44,7 @@
                    <extensions>true</extensions>
                    <groupId>org.andromda.maven.plugins</groupId>
                    <artifactId>andromda-cartridge-plugin</artifactId>
-                   <version>3.2</version>
+						 <version>${andromda.version}</version>
                    <executions>
                        <execution>
                            <goals>
@@ -90,7 +90,7 @@
                    <dependency>
                        <groupId>org.andromda.cartridges</groupId>
                        <artifactId>andromda-meta-cartridge</artifactId>
-                       <version>3.2</version>
+							  <version>${andromda.version}</version>
                    </dependency>
                </dependencies>
            </plugin>
