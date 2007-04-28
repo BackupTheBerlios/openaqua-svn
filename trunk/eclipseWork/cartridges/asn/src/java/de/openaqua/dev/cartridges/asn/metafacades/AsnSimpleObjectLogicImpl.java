@@ -24,4 +24,8 @@ public class AsnSimpleObjectLogicImpl
         return 0;
     }
 
+	public boolean isEmbeddedValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

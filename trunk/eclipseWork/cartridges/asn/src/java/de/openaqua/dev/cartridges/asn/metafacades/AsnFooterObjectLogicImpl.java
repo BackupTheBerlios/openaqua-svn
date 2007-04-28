@@ -14,4 +14,12 @@ public class AsnFooterObjectLogicImpl
     {
         super (metaObject, context);
     }
+
+	/* (non-Javadoc)
+	 * @see org.andromda.metafacades.uml.ClassifierFacade#isEmbeddedValue()
+	 */
+	public boolean isEmbeddedValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

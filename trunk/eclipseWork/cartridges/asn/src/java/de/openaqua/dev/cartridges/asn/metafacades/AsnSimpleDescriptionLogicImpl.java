@@ -59,5 +59,9 @@ public class AsnSimpleDescriptionLogicImpl
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public boolean isEmbeddedValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

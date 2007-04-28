@@ -14,4 +14,8 @@ public class AsnHeaderObjectLogicImpl
     {
         super (metaObject, context);
     }
+	public boolean isEmbeddedValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
