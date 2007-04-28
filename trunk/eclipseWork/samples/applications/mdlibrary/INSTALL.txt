@@ -2,7 +2,7 @@ You can install and try all this, using the following instructions:
 
 * Download and install JBoss 4.0.5.GA
 * Set JBOSS_HOME=directory where you installed JBoss
-* Copy $JBOSS_HOME/server/default to $JBOSS_HOME/server/mdlibrary
+* Copy $JBOSS_HOME/server/default to $JBOSS/HOME/server/mdlibrary
 * Check out the mdlibrary project from CVS
 * Rebuild using mvn install -Ddeploy -Dmaven.test.skip=true
    (Watch it copy two files into $JBOSS_HOME/server/mdlibrary/deploy!)

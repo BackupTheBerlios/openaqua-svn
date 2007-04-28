@@ -5,7 +5,7 @@
 ##                                                                          ##
 ### ====================================================================== ###
 
-### $Id: debug.sh,v 1.1 2007/04/17 10:17:52 andromdacvs Exp $ ###
+### $Id: debug.sh,v 1.1 2007/04/07 14:07:52 mattes3 Exp $ ###
 
 DIRNAME=`dirname $0`
 PROGNAME=`basename $0`

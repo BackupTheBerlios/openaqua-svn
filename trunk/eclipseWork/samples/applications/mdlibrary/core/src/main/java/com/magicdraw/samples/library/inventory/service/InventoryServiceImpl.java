@@ -7,8 +7,7 @@ package com.magicdraw.samples.library.inventory.service;
 
 import java.util.Collection;
 
-import com.magicdraw.samples.library.inventory.entity.Book;
-import com.magicdraw.samples.library.inventory.vo.TitleSearchCriteria;
+import com.magicdraw.samples.library.inventory.domain.Title;
 
 /**
  * @see com.magicdraw.samples.library.inventory.service.InventoryService
@@ -17,19 +16,39 @@ public class InventoryServiceImpl
     extends com.magicdraw.samples.library.inventory.service.InventoryServiceBase
 {
 
-    /**
-     * @see com.magicdraw.samples.library.inventory.service.InventoryService#createBook(com.magicdraw.samples.library.inventory.entity.Book)
+    /** 
+     * {@inheritDoc}
      */
-    protected Book handleCreateBook(Book book)
+    protected void handleSaveBook(com.magicdraw.samples.library.inventory.domain.Book b)
         throws java.lang.Exception
     {
-        return (Book) getBookDao().create(book);
+        getBookDao().create(b);
     }
 
-    @Override
-    protected Collection handleFindTitlesByCriteria(TitleSearchCriteria criteria) throws Exception
+    /** 
+     * {@inheritDoc}
+     */
+    protected Title[] handleFindTitlesByCriteria(com.magicdraw.samples.library.inventory.vo.TitleSearchCriteria criteria)
+        throws java.lang.Exception
     {
-        return getTitleDao().findTitlesByCriteria(criteria);
+        try
+        {
+            Collection titlesFound = getTitleDao().findTitlesByCriteria(criteria);
+            return (Title[]) titlesFound.toArray(new Title[]{});
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    /** 
+     * {@inheritDoc}
+     */
+    protected Title handleLoadTitle(Long titleId) throws Exception
+    {
+        return getTitleDao().load(titleId);
     }
 
 }
