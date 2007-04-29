@@ -64,6 +64,11 @@
 			<artifactId>andromda-ocl-validation-library</artifactId>
 			<version>${andromda.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.andromda.templateengines</groupId>
+			<artifactId>andromda-templateengine-freemarker</artifactId>
+			<version>${andromda.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.andromda.profiles.uml14</groupId>
@@ -151,8 +156,8 @@
 
     <modules>
        <!--
+    		<module>andromda-forms</module>
      -->
-		<module>andromda-forms</module>
 		<module>asn</module>
     </modules>
 
