@@ -11,10 +11,12 @@ import java.util.Collection;
 public class AsnSimpleDescriptionLogicImpl
     extends AsnSimpleDescriptionLogic
 {
+    String myTest;
 
     public AsnSimpleDescriptionLogicImpl (Object metaObject, String context)
     {
         super (metaObject, context);
+        myTest="fooo";
     }
 
     /**

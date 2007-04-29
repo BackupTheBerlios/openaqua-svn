@@ -2,5 +2,5 @@
 aaaaaaaaaaaaaaaaaa
 -- ---------------------------------------------------
 --Descriptions:
-fullyQualifiedName=asnSimpleDescription.fullyQualifiedName
+fullyQualifiedName=${asnSimpleDescription.myTest}
 --formatShortVersion=asnSimpleDescription.formatShortVersion	
