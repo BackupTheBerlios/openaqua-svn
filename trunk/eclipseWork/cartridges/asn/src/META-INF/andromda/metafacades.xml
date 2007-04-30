@@ -2,7 +2,7 @@
 <!-- contains the hibernate cartridge metafacade mappings -->
 <metafacades>
 
-	 <metafacade class="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionLogicImpl">
+	 <metafacade class="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl">
         <mapping>
             <stereotype>ASN_SIMPLE_DESCRIPTION</stereotype>
         </mapping>
