@@ -22,12 +22,11 @@
             <documentation>
                 Defines the locations to which output is generated.
             </documentation>
-            <property name="descriptions">
+            <property name="asnDescriptionFiles">
                 <documentation>
-                    The location where the forms will be written.
+                    The location to which ASN.1 Description files are generated.
                 </documentation>
             </property>
-
         </propertyGroup>
     </properties>
 </namespace>

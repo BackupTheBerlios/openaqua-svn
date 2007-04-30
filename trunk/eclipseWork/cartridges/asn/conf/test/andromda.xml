@@ -8,20 +8,22 @@
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
-                    <modelPackages processAll="false">
-                        <modelPackage process="true">de.openaqua.dev.cartridges.asn.test</modelPackage>
-                    </modelPackages>
+                    <modelPackages processAll="true" />
                 </model>
             </models>
         </repository>
     </repositories>
     <namespaces>
-        <namespace name="asn1">
+        <namespace name="default">
             <properties>
                 <property name="languageMappingsUri">Java</property>
                 <property name="wrapperMappingsUri">JavaWrapper</property>
                 <property name="jdbcMappingsUri">JDBC</property>
-                <property name="descriptions">${test.output.dir}</property>
+            </properties>
+        </namespace>
+        <namespace name="asn1">
+            <properties>
+                <property name="asnDescriptionFiles">${test.output.dir}</property>
             </properties>
         </namespace>
     </namespaces>

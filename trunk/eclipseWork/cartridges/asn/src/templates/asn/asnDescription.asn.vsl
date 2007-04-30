@@ -1,0 +1,8 @@
+aaaaaaaaaaaaaaaaaaaaaaaa
+
+${descriptionFile.fullyQualifiedName}
+#if ($descriptionFile.fullyQualifiedName)
+package $descriptionFile.fullyQualifiedName;
+#else
+nööööö
+#end

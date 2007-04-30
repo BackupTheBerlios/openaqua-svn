@@ -1,23 +1,24 @@
 <cartridge>
 
+	<!--
 	<templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine" />
+		-->
 
 	<!-- define the template objects that are made available to the template -->
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
 
 	<!-- cartridge-property merge-point -->
-	<template	path="templates/asn/asnDescription.ftl"
-					outputPattern="{1}.asn"
-					outlet="descriptions"
-					overwrite="true"
-					outputToSingleFile="true"
-					outputOnEmptyElements="true">
-		<modelElements variable="asnSimpleDescription">
-			<modelElement>
-				<type name="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl"/>
-			</modelElement>
-		</modelElements>
-	</template>
-
+    <template
+        path="templates/asn/asnDescription.asn.vsl"
+        outputPattern="{0}/{1}.generated.asn"
+        outlet="asnDescriptionFiles"
+        overwrite="true">
+        <modelElements variable="descriptionFile">
+            <modelElement>
+				<type name="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>				
+            </modelElement>
+        </modelElements>
+    </template>
+	
 
 </cartridge>

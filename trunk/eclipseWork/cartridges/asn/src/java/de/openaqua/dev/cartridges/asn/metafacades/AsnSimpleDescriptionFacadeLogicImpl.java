@@ -70,4 +70,22 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleGetDescriptionImplementationName()
+	 */
+	@Override
+	protected String handleGetDescriptionImplementationName() {
+		// TODO Auto-generated method stub
+		return "handleGetDescriptionImplementationName";
+	}
+
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleGetDescriptionName()
+	 */
+	@Override
+	protected String handleGetDescriptionName() {
+		// TODO Auto-generated method stub
+		return "handleGetDescriptionName";
+	}
+
 }
