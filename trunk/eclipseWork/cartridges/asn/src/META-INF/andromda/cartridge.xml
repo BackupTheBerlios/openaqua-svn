@@ -1,15 +1,18 @@
 <cartridge>
 
-	<!--
+
 	<templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine" />
-		-->
+
 
 	<!-- define the template objects that are made available to the template -->
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
 
 	<!-- cartridge-property merge-point -->
-    <template
+	<!--
         path="templates/asn/asnDescription.asn.vsl"
+		-->
+    <template
+        path="templates/asn/asnDescription.ftl"
         outputPattern="{0}/{1}.generated.asn"
         outlet="asnDescriptionFiles"
         overwrite="true">
