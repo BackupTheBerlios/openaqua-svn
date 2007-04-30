@@ -6,7 +6,8 @@ package de.openaqua.dev.cartridges.asn.helper;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-//import org.andromda.metafacades.emf.uml2.ClassifierFacadeLogicImpl;
+
+import org.andromda.metafacades.emf.uml2.ClassifierFacadeLogicImpl;
 
 
 /**
@@ -18,10 +19,10 @@ public class AsnHelper {
 	final public String currentDateTime;
 	public AsnHelper() {
 		super();
-		Calendar cal = Calendar.getInstance(); 
 		DateFormat formater = new SimpleDateFormat(); 
-		currentDateTime = formater.format(cal.getTime());
-		//org.andromda.metafacades.emf.uml2.ClassifierFacadeLogicImpl foo;
+		currentDateTime = formater.format(Calendar.getInstance().getTime());
+		org.andromda.metafacades.emf.uml2.ClassifierFacadeLogicImpl foo;
+		
 	}
 	
 	

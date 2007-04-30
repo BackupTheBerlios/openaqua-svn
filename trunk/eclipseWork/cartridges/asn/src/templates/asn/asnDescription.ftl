@@ -11,6 +11,9 @@ RE-07-01 DEFINITIONS IMPLICIT TAGS ::=
 
 BEGIN
 
+--${file.descriptionName}
+${file.name}
+
 RETransferBatch ::= [APPLICATION 80] SEQUENCE
 {
      headerRecord                      HeaderRecord,
@@ -19,9 +22,10 @@ RETransferBatch ::= [APPLICATION 80] SEQUENCE
 
 
 Properties
-<#list file.properties as property>
-	property: ${property.type} ${property.fullyQualifiedNamePath}
-</#list>
+#list file.properties as property
+	${property}
+	property: {property.type} {property.fullyQualifiedNamePath}
+/#list
 
 allProperties
 <#list file.allProperties as tooff>

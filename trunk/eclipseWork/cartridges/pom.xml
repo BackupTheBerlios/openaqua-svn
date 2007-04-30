@@ -39,6 +39,17 @@
             <type>xml.zip</type>
         </dependency>
 		  <dependency>
+			  <groupId>org.andromda.metafacades</groupId>
+			  <artifactId>andromda-metafacades-uml</artifactId>
+			  <version>${andromda.version}</version>
+			  <type>xml.zip</type>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.metafacades</groupId>
+			  <artifactId>andromda-metafacades-emf-uml2</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
 			  <groupId>org.andromda.taglibs</groupId>
 			  <artifactId>andromda-formatting-taglib</artifactId>
 			  <version>${andromda.version}</version>
