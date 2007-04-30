@@ -1,6 +1,7 @@
 package de.openaqua.dev.cartridges.asn.metafacades;
 
 
+
 /**
  * MetafacadeLogic implementation for de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade.
  *
@@ -23,7 +24,7 @@ public class AsnSimpleDescriptionFacadeLogicImpl
     protected java.lang.String handleGetFormatShortName()
     {
         // TODO: put your implementation here.
-        return null;
+        return "handleGetFormatShortName";
     }
 
     /**
@@ -32,35 +33,9 @@ public class AsnSimpleDescriptionFacadeLogicImpl
     protected java.lang.String handleGetFormatShortVersion()
     {
         // TODO: put your implementation here.
-        return null;
+        return "handleGetFormatShortVersion";
     }
 
-    /**
-     * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade#getHeader()
-     */
-    protected java.lang.Object handleGetHeader()
-    {
-        // TODO: add your implementation here!
-        return null;
-    }
-
-    /**
-     * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade#getValues()
-     */
-    protected java.util.Collection handleGetValues()
-    {
-        // TODO: add your implementation here!
-        return null;
-    }
-
-    /**
-     * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade#getFooter()
-     */
-    protected java.lang.Object handleGetFooter()
-    {
-        // TODO: add your implementation here!
-        return null;
-    }
 
 	/* (non-Javadoc)
 	 * @see org.andromda.metafacades.uml.ClassifierFacade#isEmbeddedValue()

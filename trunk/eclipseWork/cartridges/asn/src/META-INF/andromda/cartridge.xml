@@ -6,18 +6,16 @@
 
 	<!-- define the template objects that are made available to the template -->
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
+	<templateObject name="asnHelper"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
 
 	<!-- cartridge-property merge-point -->
-	<!--
-        path="templates/asn/asnDescription.asn.vsl"
-		-->
     <template
         path="templates/asn/asnDescription.ftl"
-        outputPattern="{0}/{1}.generated.asn"
+        outputPattern="{0}/{1}.asn"
         outlet="asnDescriptionFiles"
         overwrite="true">
-        <modelElements variable="descriptionFile">
-            <modelElement>
+        <modelElements variable="class">
+            <modelElement variable="file">
 				<type name="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>				
             </modelElement>
         </modelElements>
