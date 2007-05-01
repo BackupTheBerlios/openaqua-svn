@@ -1,5 +1,9 @@
 package de.openaqua.dev.cartridges.asn.metafacades;
 
+import java.util.Iterator;
+
+import org.andromda.metafacades.emf.uml2.ClassifierFacadeLogicImpl;
+
 
 
 /**
@@ -10,32 +14,10 @@ package de.openaqua.dev.cartridges.asn.metafacades;
 public class AsnSimpleDescriptionFacadeLogicImpl
     extends AsnSimpleDescriptionFacadeLogic
 {
-
-	public String myTest;
     public AsnSimpleDescriptionFacadeLogicImpl (Object metaObject, String context)
     {
         super (metaObject, context);
-        myTest="fooo";
     }
-
-    /**
-     * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade#getFormatShortName()
-     */
-    protected java.lang.String handleGetFormatShortName()
-    {
-        // TODO: put your implementation here.
-        return "handleGetFormatShortName";
-    }
-
-    /**
-     * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade#getFormatShortVersion()
-     */
-    protected java.lang.String handleGetFormatShortVersion()
-    {
-        // TODO: put your implementation here.
-        return "handleGetFormatShortVersion";
-    }
-
 
 	/* (non-Javadoc)
 	 * @see org.andromda.metafacades.uml.ClassifierFacade#isEmbeddedValue()
@@ -45,22 +27,44 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 		return false;
 	}
 
+	private boolean hasAssocWithCertainStereotype(final String stereotype){
+		Iterator it = getAllAssociatedClasses().iterator();
+		while(it.hasNext()) {
+			Object o = it.next();
+			if (o instanceof ClassifierFacadeLogicImpl){
+				ClassifierFacadeLogicImpl c = (ClassifierFacadeLogicImpl)o;
+				if (true == c.hasExactStereotype(stereotype)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+		
+	}
+	
 	/* (non-Javadoc)
-	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleGetDescriptionImplementationName()
+	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleIsHasDetailRecords()
 	 */
 	@Override
-	protected String handleGetDescriptionImplementationName() {
-		// TODO Auto-generated method stub
-		return "handleGetDescriptionImplementationName";
+	protected boolean handleIsHasDetailRecords() {
+		return hasAssocWithCertainStereotype("AsnStorable");
 	}
 
 	/* (non-Javadoc)
-	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleGetDescriptionName()
+	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleIsHasFooterRecord()
 	 */
 	@Override
-	protected String handleGetDescriptionName() {
-		// TODO Auto-generated method stub
-		return "handleGetDescriptionName";
+	protected boolean handleIsHasFooterRecord() {
+		return hasAssocWithCertainStereotype("AsnSimpleFooter");
+	}
+
+	/* (non-Javadoc)
+	 * @see de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogic#handleIsHasHeaderRecord()
+	 */
+	@Override
+	protected boolean handleIsHasHeaderRecord() {
+		return hasAssocWithCertainStereotype("AsnSimpleHeader");
 	}
 
 }

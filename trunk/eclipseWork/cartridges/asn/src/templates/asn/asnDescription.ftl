@@ -1,18 +1,80 @@
 <#-- This is a freemarker comment-->
 
 -- This is a generated file, dont modify it manually
---------------------------------------------------------
+-- ------------------------------------------------------
 -- SYNTAX PRODUCED BY: AndroMDA ASN.1 Cartridge
--- SYNTAX PRODUCED AT: asnHelper
--- SYNTAX LOCATION ON: ${file.fullyQualifiedNamePath}.asn
+-- SYNTAX LOCATION AT: ${file.fullyQualifiedNamePath}.asn
 
 
-RE-07-01 DEFINITIONS IMPLICIT TAGS ::=
+-- --------------------------------------
+${file.getDocumentation("-- ")}
+-- --------------------------------------
+
+
+${file.name} DEFINITIONS IMPLICIT TAGS ::=
 
 BEGIN
 
---${file.descriptionName}
-${file.name}
+<#if file.isHasHeaderRecord()>
+-- --------------------------------------
+-- ---------Header Record----------------
+<#list file.allAssociatedClasses as class>
+<#if asnHelp.hasStereotype("AsnSimpleHeader", class)>
+${class.getDocumentation("-- ")}
+${class.name} ::= SEQUENCE
+{
+}
+
+
+</#if>
+</#list>
+</#if>
+
+<#if file.isHasFooterRecord()>
+-- --------------------------------------
+-- ---------Footer Record----------------
+<#list file.allAssociatedClasses as class>
+<#if asnHelp.hasStereotype("AsnSimpleFooter", class)>
+${class.getDocumentation("-- ")}
+${class.name} ::= SEQUENCE
+{
+}
+
+
+</#if>
+</#list>
+</#if>
+
+<#if file.isHasDetailRecords()>
+-- --------------------------------------
+-- ---------Detail Record----------------
+AsnDetailRecord ::= CHOICE 
+{
+<#list file.allAssociatedClasses as class>
+<#if asnHelp.hasStereotype("AsnStorable", class)>
+	${class.name}
+</#if>
+</#list>
+}
+
+
+</#if>
+
+<#if file.isHasDetailRecords()>
+-- --------------------------------------
+-- ---------Other Declarations Record----------------
+<#list file.allAssociatedClasses as class>
+<#if asnHelp.hasStereotype("AsnStorable", class)>
+${class.getDocumentation("-- ")}
+${class.name} ::= SEQUENCE
+{
+}
+
+
+</#if>
+</#list>
+</#if>
+
 
 RETransferBatch ::= [APPLICATION 80] SEQUENCE
 {
@@ -21,24 +83,6 @@ RETransferBatch ::= [APPLICATION 80] SEQUENCE
 }
 
 
-Properties
-#list file.properties as property
-	${property}
-	property: {property.type} {property.fullyQualifiedNamePath}
-/#list
 
-allProperties
-<#list file.allProperties as tooff>
-	tooff: ${tooff.fullyQualifiedNamePath}
-</#list>
-
-allAssociatedClasses
-<#list file.allAssociatedClasses as assoc>
-	assoc: ${assoc.fullyQualifiedNamePath}
-</#list>
-
-
-
-
-
+-- --------------------------------------
 END

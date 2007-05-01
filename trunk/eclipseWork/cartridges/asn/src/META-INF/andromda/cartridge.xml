@@ -6,7 +6,7 @@
 
 	<!-- define the template objects that are made available to the template -->
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
-	<templateObject name="asnHelper"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
+	<templateObject name="asnHelp"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
 
 	<!-- cartridge-property merge-point -->
     <template
