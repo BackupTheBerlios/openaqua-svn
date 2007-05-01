@@ -15,74 +15,63 @@ ${file.name} DEFINITIONS IMPLICIT TAGS ::=
 
 BEGIN
 
-<#if file.isHasHeaderRecord()>
+<#if file.hasHeaderDescription()>
 -- --------------------------------------
 -- ---------Header Record----------------
-<#list file.allAssociatedClasses as class>
-<#if asnHelp.hasStereotype("AsnSimpleHeader", class)>
+<#list file.getHeaderDescription() as class>
 ${class.getDocumentation("-- ")}
 ${class.name} ::= SEQUENCE
 {
 }
 
 
-</#if>
 </#list>
 </#if>
 
-<#if file.isHasFooterRecord()>
+<#if file.hasFooterDescription()>
 -- --------------------------------------
 -- ---------Footer Record----------------
-<#list file.allAssociatedClasses as class>
-<#if asnHelp.hasStereotype("AsnSimpleFooter", class)>
+<#list file.getFooterDescription() as class>
 ${class.getDocumentation("-- ")}
 ${class.name} ::= SEQUENCE
 {
 }
 
 
-</#if>
 </#list>
 </#if>
 
-<#if file.isHasDetailRecords()>
+<#if file.hasDetailDescription()>
 -- --------------------------------------
 -- ---------Detail Record----------------
 AsnDetailRecord ::= CHOICE 
 {
-<#list file.allAssociatedClasses as class>
-<#if asnHelp.hasStereotype("AsnStorable", class)>
-	${class.name}
-</#if>
+<#list file.getDetailDescription() as class>
+	//hier müssen die Attribute gelesen werden, nicht die zugeordneten Klassen!
+	foo ${class.name}
 </#list>
 }
 
 
 </#if>
 
-<#if file.isHasDetailRecords()>
+
+<#-- 
+Construct the ASN.1 Blocks for all Value Objects
+-->
+<#if file.hasDetailDescription()>
 -- --------------------------------------
 -- ---------Other Declarations Record----------------
-<#list file.allAssociatedClasses as class>
-<#if asnHelp.hasStereotype("AsnStorable", class)>
+<#list file.getDetailDescription() as class>
+
+-- --------------------------------------
 ${class.getDocumentation("-- ")}
 ${class.name} ::= SEQUENCE
 {
 }
 
-
-</#if>
 </#list>
 </#if>
-
-
-RETransferBatch ::= [APPLICATION 80] SEQUENCE
-{
-     headerRecord                      HeaderRecord,
-     detailRecordList                  DetailRecordList
-}
-
-
 
 -- --------------------------------------
 END
