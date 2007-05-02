@@ -16,7 +16,7 @@
         overwrite="true">
         <modelElements variable="class">
             <modelElement variable="file">
-				<type name="de.openaqua.dev.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>				
+				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
             </modelElement>
         </modelElements>
     </template>

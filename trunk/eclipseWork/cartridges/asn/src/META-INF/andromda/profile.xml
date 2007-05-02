@@ -3,10 +3,10 @@
 <profile>
     <elements>
         <elementGroup name="Stereotypes">
-            <element name="ASN_SIMPLE_DESCRIPTION">
+            <element name="ASN_DESCRIPTION">
                 <documentation>
                 </documentation>
-                <value>AsnSimpleDescription</value>
+                <value>AsnDescription</value>
                 <appliedOnElement>class</appliedOnElement>
             </element>
         </elementGroup>
