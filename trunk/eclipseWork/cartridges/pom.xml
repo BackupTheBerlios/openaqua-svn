@@ -90,6 +90,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.andromda.profiles.uml2</groupId>
+			<artifactId>andromda-profile</artifactId>
+			<version>${andromda.version}</version>
+			<type>xml.zip</type>
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 
