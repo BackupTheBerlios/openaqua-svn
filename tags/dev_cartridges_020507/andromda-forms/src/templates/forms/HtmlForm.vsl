@@ -1,0 +1,24 @@
+<!-- Generated code - please do not edit! -->
+<html>
+    <head>
+        <title>Form for ${formFacade.fullyQualifiedName}</title>
+    </head>
+    <body>
+        <form action="post">
+#foreach ($section in $formFacade.formSections)
+            <table>
+                <tr>
+                    <td colspan="2">${section.name}</td>
+                </tr>
+#foreach ($formfield in $section.formfields)
+                <tr>
+                    <td>${formfield.label}:</td>
+                    <td><input size="${formfield.inputLength}" /></td>
+                </tr>                    
+#end
+            </table>
+            <hr/>
+#end
+        </form>
+    </body>
+</html>

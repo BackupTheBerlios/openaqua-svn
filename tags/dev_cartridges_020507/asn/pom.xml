@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!--
+       +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+       ASN Cartridge
+       +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+       <groupId>de.openaqua.dev.cartridges</groupId>
+       <artifactId>openaqua-cartridges</artifactId>
+       <version>1.0-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>asn-cartridge</artifactId>
+	<packaging>andromda-cartridge</packaging>
+	<name>ASN.1 Cartridge</name>
+
+	<description>Generates a ASN.1 Description from a UML Model</description>
+
+    <build>
+       <pluginManagement>
+           <plugins>
+               <plugin>
+                   <groupId>org.andromda.maven.plugins</groupId>
+                   <artifactId>andromda-maven-plugin</artifactId>
+						 <version>${andromda.version}</version>
+                   <executions>
+                       <execution>
+                           <goals>
+                               <goal>run</goal>
+                           </goals>
+                           <configuration>
+                               <buildSourceDirectory>${basedir}/target/src</buildSourceDirectory>
+                               <configurationUri>file:${basedir}/conf/andromda.xml</configurationUri>
+                               <lastModifiedCheck>true</lastModifiedCheck>
+                           </configuration>
+                       </execution>
+                   </executions>
+               </plugin>
+               <plugin>
+                   <extensions>true</extensions>
+                   <groupId>org.andromda.maven.plugins</groupId>
+                   <artifactId>andromda-cartridge-plugin</artifactId>
+						 <version>${andromda.version}</version>
+                   <executions>
+                       <execution>
+                           <goals>
+                               <goal>test</goal>
+                           </goals>
+                           <configuration>
+                               <configurationUri>file:${basedir}/conf/test/andromda.xml</configurationUri>
+                           </configuration>
+                       </execution>
+                   </executions>
+               </plugin>
+           </plugins>
+       </pluginManagement>
+		 <sourceDirectory>src/java</sourceDirectory>
+		 <resources>
+			 <resource>
+				 <directory>src/java</directory>
+				 <includes>
+					 <include>**/*.xml</include>
+					 <include>**/*.properties</include>
+				 </includes>
+			 </resource>
+			 <resource>
+				 <directory>src</directory>
+				 <excludes>
+					 <exclude>java/**/*.java</exclude>
+					 <exclude>uml/**/*</exclude>
+					 <exclude>test/**/*</exclude>
+				 </excludes>
+			 </resource>
+			 <resource>
+				 <directory>target/src</directory>
+				 <excludes>
+					 <exclude>**/*.java</exclude>
+				 </excludes>
+			 </resource>
+		 </resources>
+       <plugins>
+           <plugin>
+               <groupId>org.andromda.maven.plugins</groupId>
+               <artifactId>andromda-maven-plugin</artifactId>
+               <dependencies>
+                   <dependency>
+                       <groupId>org.andromda.cartridges</groupId>
+                       <artifactId>andromda-meta-cartridge</artifactId>
+							  <version>${andromda.version}</version>
+                   </dependency>
+               </dependencies>
+           </plugin>
+           <plugin>
+               <groupId>org.andromda.maven.plugins</groupId>
+               <artifactId>andromda-cartridge-plugin</artifactId>
+               <configuration>
+                   <artifacts>
+                       <artifact>
+                           <groupId>org.andromda.taglibs</groupId>
+                           <artifactId>andromda-breadcrumbs-taglib</artifactId>
+                           <path>resources/WEB-INF/lib</path>
+                       </artifact>
+                       <artifact>
+                           <groupId>org.andromda.taglibs</groupId>
+                           <artifactId>andromda-formatting-taglib</artifactId>
+                           <path>resources/WEB-INF/lib</path>
+                       </artifact>
+                       <artifact>
+                           <groupId>org.andromda.taglibs</groupId>
+                           <artifactId>andromda-collections-taglib</artifactId>
+                           <path>resources/WEB-INF/lib</path>
+                       </artifact>
+                   </artifacts>
+               </configuration>
+           </plugin>
+       </plugins>
+
+    </build>
+
+
+    <properties>
+        <maven.build.src>${pom.basedir}/target/src</maven.build.src>
+        <java.src.dir>${pom.basedir}/src/java</java.src.dir>
+        <test.src.dir>${pom.basedir}/src/test</test.src.dir>
+        <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
+		  <model.uri>jar:file:${pom.basedir}/src/uml/AsnMetaFacadesModel.xml.zip!/AsnMetaFacadesModel.xml</model.uri>
+        <test.model.uri>${test.src.dir}/uml/AsnCartridgeTest.uml2</test.model.uri>
+
+    </properties>
+
+</project>

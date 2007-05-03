@@ -1,0 +1,27 @@
+<cartridge>
+
+
+	<templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine" >
+	</templateEngine>
+
+
+	<!-- define the template objects that are made available to the template -->
+	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
+	<templateObject name="asnHelp"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
+
+    <template
+        path="templates/asn/asnDescription.ftl"
+        outputPattern="{0}/{1}.asn"
+        outlet="configs"
+        overwrite="true"
+        outputToSingleFile="false"
+        outputOnEmptyElements="true">
+        <modelElements variable="file">
+            <modelElement >
+				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
+			</modelElement>
+        </modelElements>
+    </template>
+	
+
+</cartridge>

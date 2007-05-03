@@ -1,0 +1,215 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>de.openaqua.dev.cartridges</groupId>
+    <artifactId>openaqua-cartridges</artifactId>
+    <version>1.0-SNAPSHOT</version>
+	 <name>OpenAqua Cartridges</name>
+
+	 <packaging>pom</packaging>
+
+	 <dependencies>
+        <dependency>
+            <groupId>org.andromda</groupId>
+            <artifactId>andromda-core</artifactId>
+            <version>${andromda.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.andromda</groupId>
+            <artifactId>andromda-utils</artifactId>
+            <version>${andromda.version}</version>
+        </dependency>
+		  <dependency>
+			  <groupId>org.andromda</groupId>
+			  <artifactId>andromda-utils</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-breadcrumbs-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+        <dependency>
+            <groupId>org.andromda.metafacades</groupId>
+            <artifactId>andromda-metafacades-uml</artifactId>
+            <version>${andromda.version}</version>
+            <type>xml.zip</type>
+        </dependency>
+		  <dependency>
+			  <groupId>org.andromda.metafacades</groupId>
+			  <artifactId>andromda-metafacades-uml</artifactId>
+			  <version>${andromda.version}</version>
+			  <type>xml.zip</type>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.metafacades</groupId>
+			  <artifactId>andromda-metafacades-emf-uml2</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-formatting-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.taglibs</groupId>
+			  <artifactId>andromda-collections-taglib</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.templateengines</groupId>
+			  <artifactId>andromda-templateengine-freemarker</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.andromda.cartridges</groupId>
+			  <artifactId>andromda-meta-cartridge</artifactId>
+			  <version>${andromda.version}</version>
+		  </dependency>
+
+		<dependency>
+			<groupId>org.andromda.translationlibraries</groupId>
+			<artifactId>andromda-ocl-validation-library</artifactId>
+			<version>${andromda.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.andromda.templateengines</groupId>
+			<artifactId>andromda-templateengine-freemarker</artifactId>
+			<version>${andromda.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.andromda.profiles.uml14</groupId>
+			<artifactId>andromda-profile</artifactId>
+			<version>${andromda.version}</version>
+			<type>xml.zip</type>
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.andromda.profiles.uml2</groupId>
+			<artifactId>andromda-profile</artifactId>
+			<version>${andromda.version}</version>
+			<type>xml.zip</type>
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+        <pluginManagement>
+            <plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>1.5</source>
+							<target>1.5</target>
+						</configuration>
+					</plugin>
+
+                <plugin>
+                    <groupId>org.andromda.maven.plugins</groupId>
+                    <artifactId>andromda-maven-plugin</artifactId>
+                    <version>${andromda.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <buildSourceDirectory>${basedir}/target/src</buildSourceDirectory>
+                                <configurationUri>file:${basedir}/conf/andromda.xml</configurationUri>
+                                <lastModifiedCheck>true</lastModifiedCheck>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <extensions>true</extensions>
+                    <groupId>org.andromda.maven.plugins</groupId>
+                    <artifactId>andromda-cartridge-plugin</artifactId>
+                    <version>${andromda.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <configurationUri>file:${basedir}/conf/test/andromda.xml</configurationUri>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>java/**/*.java</exclude>
+                    <exclude>uml/**/*</exclude>
+                    <exclude>test/**/*</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>target/src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+    <modules>
+       <!--
+    		<module>andromda-forms</module>
+     -->
+		<module>asn</module>
+    </modules>
+
+
+
+
+ 	<!--Setup a additional repositories -->
+ 	<repositories>
+ 		<repository>
+ 			<id>andromda</id>
+ 			<name>AndroMDA Repository</name>
+ 			<url>http://team.andromda.org/maven2</url>
+ 		</repository>
+ 	</repositories>
+
+
+ 	<!--Setup a additional repositories for maven plugins -->
+ 	<pluginRepositories>
+ 		<pluginRepository>
+ 			<id>andromda</id>
+ 			<name>AndroMDA Repository</name>
+ 			<url>http://team.andromda.org/maven2</url>
+ 		</pluginRepository>
+ 	</pluginRepositories>
+
+
+   <properties>
+       <maven.build.src>${pom.basedir}/target/src</maven.build.src>
+       <java.src.dir>${pom.basedir}/src/java</java.src.dir>
+       <test.src.dir>${pom.basedir}/src/test</test.src.dir>
+       <src.dir>${pom.basedir}/src</src.dir>
+       <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
+       <andromda.version>3.3-SNAPSHOT</andromda.version>
+   </properties>
+
+</project>
