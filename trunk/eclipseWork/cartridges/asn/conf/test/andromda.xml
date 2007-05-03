@@ -8,8 +8,9 @@
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
-                    <modelPackages processAll="true" />
-                </model>
+						  <modelPackages processAll="false">
+							  <modelPackage process="true">class**</modelPackage>
+                    </modelPackages>                </model>
             </models>
         </repository>
     </repositories>
