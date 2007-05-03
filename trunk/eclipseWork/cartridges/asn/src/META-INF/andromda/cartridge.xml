@@ -1,13 +1,20 @@
 <cartridge>
 
 
-	<templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine" />
+	<templateEngine className="org.andromda.templateengines.freemarker.FreeMarkerTemplateEngine" >
+		<!--
+        <macrolibrary name="templates/hibernate/hibernate.java.vm"/>
+			-->
+	</templateEngine>
 
 
 	<!-- define the template objects that are made available to the template -->
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
 	<templateObject name="asnHelp"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
 
+	
+    <property reference="asnDescriptions"/>
+	
 	<!-- cartridge-property merge-point -->
     <template
         path="templates/asn/asnDescription.ftl"
@@ -16,7 +23,7 @@
         overwrite="true">
         <modelElements variable="asnDescription">
             <modelElement >
-				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl"/>
+				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
 			</modelElement>
         </modelElements>
     </template>

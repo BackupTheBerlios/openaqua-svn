@@ -1,6 +1,10 @@
 package org.andromda.cartridges.asn.metafacades;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import org.andromda.cartridges.asn.psm.AsnPsmAsnDescription;
+import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
 
 
 /**
@@ -22,7 +26,7 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 	 * @see org.andromda.metafacades.uml.ClassifierFacade#isEmbeddedValue()
 	 */
 	public boolean isEmbeddedValue() {
-		return false;
+		return true;
 	}
 
 
@@ -31,8 +35,10 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 	 */
 	@Override
 	protected Collection handleGetAsnDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		AsnPsmAsnDescription desc = new AsnPsmAsnDescriptionImpl();
+		Collection<AsnPsmAsnDescription> result = new ArrayList<AsnPsmAsnDescription>();
+		result.add(desc);
+		return result;
 	}
 
 }

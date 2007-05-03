@@ -1,20 +1,23 @@
 <andromda>
-    <properties>
+	<properties>
+		<property name="modelValidation">true</property>
+		<!--
+		<property name="cartridgeFilter" >asn1</property>
+			-->
         <property name="failOnValidationErrors">false</property>
         <property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
-    </properties>
-    <repositories>
+	</properties>
+	
+	<repositories>
          <repository name="emf-uml2">
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
-				    <modelPackages processAll="false">
-						<modelPackage process="true">class**</modelPackage>
-					</modelPackages>
 				</model>
             </models>
         </repository>
     </repositories>
+
     <namespaces>
         <namespace name="default">
             <properties>

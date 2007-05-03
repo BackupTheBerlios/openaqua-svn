@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <profile>
-    <elements>
+    <documentation>
+		
+    </documentation>
+	<elements>
         <elementGroup name="Stereotypes">
             <element name="ASN_DESCRIPTION">
                 <documentation>
                 </documentation>
                 <value>AsnDescription</value>
+                <appliedOnElement>class</appliedOnElement>
+            </element>
+			
+			
+            <element name="ASN_BLOCK">
+                <documentation>
+                </documentation>
+                <value>AsnBlock</value>
+                <appliedOnElement>class</appliedOnElement>
+            </element>
+			
+			
+            <element name="ASN_ELEMENT">
+                <documentation>
+                </documentation>
+                <value>AsnElement</value>
                 <appliedOnElement>class</appliedOnElement>
             </element>
         </elementGroup>
