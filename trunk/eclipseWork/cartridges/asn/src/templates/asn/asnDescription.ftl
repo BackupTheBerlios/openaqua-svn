@@ -15,63 +15,63 @@ ${file.name} DEFINITIONS IMPLICIT TAGS ::=
 
 BEGIN
 
-<#if file.hasHeaderDescription()>
+#if file.hasHeaderDescription()>
 -- --------------------------------------
 -- ---------Header Record----------------
-<#list file.getHeaderDescription() as class>
-${class.getDocumentation("-- ")}
-${class.name} ::= SEQUENCE
+#list file.getHeaderDescription() as class>
+{class.getDocumentation("-- ")}
+{class.name} ::= SEQUENCE
 {
 }
 
 
-</#list>
-</#if>
+/#list>
+/#if>
 
-<#if file.hasFooterDescription()>
+#if file.hasFooterDescription()>
 -- --------------------------------------
 -- ---------Footer Record----------------
-<#list file.getFooterDescription() as class>
-${class.getDocumentation("-- ")}
-${class.name} ::= SEQUENCE
+#list file.getFooterDescription() as class>
+{class.getDocumentation("-- ")}
+{class.name} ::= SEQUENCE
 {
 }
 
 
-</#list>
-</#if>
+/#list>
+/#if>
 
-<#if file.hasDetailDescription()>
+#if file.hasDetailDescription()>
 -- --------------------------------------
 -- ---------Detail Record----------------
 AsnDetailRecord ::= CHOICE 
 {
-<#list file.getDetailDescription() as class>
+#list file.getDetailDescription() as class>
 	//hier müssen die Attribute gelesen werden, nicht die zugeordneten Klassen!
-	foo ${class.name}
-</#list>
+	foo {class.name}
+/#list>
 }
 
 
-</#if>
+/#if>
 
 
 <#-- 
 Construct the ASN.1 Blocks for all Value Objects
 -->
-<#if file.hasDetailDescription()>
+#if file.hasDetailDescription()>
 -- --------------------------------------
 -- ---------Other Declarations Record----------------
-<#list file.getDetailDescription() as class>
+#list file.getDetailDescription() as class>
 
 -- --------------------------------------
-${class.getDocumentation("-- ")}
-${class.name} ::= SEQUENCE
+{class.getDocumentation("-- ")}
+{class.name} ::= SEQUENCE
 {
 }
 
-</#list>
-</#if>
+/#list>
+/#if>
 
 -- --------------------------------------
 END

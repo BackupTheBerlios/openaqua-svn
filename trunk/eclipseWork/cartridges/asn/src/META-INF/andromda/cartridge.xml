@@ -10,15 +10,15 @@
 	<templateObject name="asnHelp"   className="de.openaqua.dev.cartridges.asn.helper.AsnHelper"/>
 
     <template
-        path="templates/asn/asnDescription.ftla"
+        path="templates/asn/asnDescription.ftl"
         outputPattern="{0}/{1}.asn"
-        outlet="configsa"
+        outlet="configs"
         overwrite="true"
         outputToSingleFile="false"
         outputOnEmptyElements="true">
-        <modelElements variable="asnFacade">
+        <modelElements variable="file">
             <modelElement >
-				<type name="aorg.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
+				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
 			</modelElement>
         </modelElements>
     </template>

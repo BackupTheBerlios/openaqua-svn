@@ -10,7 +10,7 @@
          ============================================ -->
     <appender name="FILE" class="org.apache.log4j.FileAppender">
         <param name="File" value="andromda-cartridge-test.log"/>
-        <param name="Threshold" value="DEBUG"/>
+        <param name="Threshold" value="INFO"/>
         <param name="Append" value="true"/>
         <layout class="org.apache.log4j.PatternLayout">
             <!-- The default pattern: Date Priority [Category] Message\n -->
@@ -40,11 +40,11 @@
     </category>
 
     <category name="org.andromda">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
     </category>
 
     <category name="org.andromda.namespaces">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
     </category>
 
     <!-- =========================

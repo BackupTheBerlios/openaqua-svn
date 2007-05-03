@@ -5,25 +5,31 @@
  */
 package org.andromda.cartridges.asn.psm;
 
+import org.apache.log4j.Logger;
+
 /**
  * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription
  */
 public class AsnPsmAsnDescriptionImpl
     extends org.andromda.cartridges.asn.psm.AsnPsmAsnDescription
 {
-    public AsnPsmAsnDescriptionImpl()
+	final Logger logger = Logger.getRootLogger();
+	public AsnPsmAsnDescriptionImpl()
     {
         super();
+        logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
     }
 
     public AsnPsmAsnDescriptionImpl(java.lang.String name)
     {
        super(name);
+       logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
     }
 
     public AsnPsmAsnDescriptionImpl(java.lang.String name, java.util.Collection detailDesc, java.util.Collection headerDesc, java.util.Collection footerDesc)
     {
         super(name, detailDesc, headerDesc, footerDesc);
+        logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
     }
 
     /**
