@@ -28,9 +28,9 @@
         </namespace>
 		
 		<!-- A sample configuration for a the ASN.1 Package -->
-        <namespace name="asn1">
+        <namespace name="ASN.1">
             <properties>
-                <property name="asnDescriptions">${test.output.dir}</property>
+                <property name="configs">${test.output.dir}</property>
             </properties>
         </namespace>
     </namespaces>

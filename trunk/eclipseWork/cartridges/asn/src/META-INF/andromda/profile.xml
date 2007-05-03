@@ -10,7 +10,9 @@
                 <documentation>
                 </documentation>
                 <value>AsnDescription</value>
+				<!--
                 <appliedOnElement>class</appliedOnElement>
+					-->
             </element>
 			
 			

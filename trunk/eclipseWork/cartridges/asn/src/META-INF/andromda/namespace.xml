@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<namespace name="asn1">
+<namespace name="ASN.1">
 	
     <components>
         <component name="cartridge">
@@ -22,7 +22,7 @@
             <documentation>
                 Defines the locations to which output is generated.
             </documentation>
-            <property name="asnDescriptions" required="true">
+            <property name="configs" required="true">
                 <documentation>
                     The location to which ASN.1 Description files are generated.
                 </documentation>

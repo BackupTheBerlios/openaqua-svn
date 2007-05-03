@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescription;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -15,10 +16,11 @@ import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
 public class AsnSimpleDescriptionFacadeLogicImpl
     extends AsnSimpleDescriptionFacadeLogic
 {
-
+	final Logger logger = Logger.getRootLogger();
     public AsnSimpleDescriptionFacadeLogicImpl (Object metaObject, String context)
     {
         super (metaObject, context);
+        logger.error("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
     
     

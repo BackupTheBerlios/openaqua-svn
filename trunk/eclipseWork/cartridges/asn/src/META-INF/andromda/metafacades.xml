@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!-- contains the ASN.1 cartridge metafacade mappings -->
 <metafacades>
-    <property reference="asnDescriptions"/>
 
 	<!--
-    <metafacade class="org.andromda.cartridges.hibernate.metafacades.HibernateEntityLogicImpl" contextRoot="true">
+    <metafacade class="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl" contextRoot="true">
 		-->
 	
     <metafacade class="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl" >
         <mapping>
             <stereotype>ASN_DESCRIPTION</stereotype>
         </mapping>
+	    <property reference="configs"/>
     </metafacade>
 	
 
