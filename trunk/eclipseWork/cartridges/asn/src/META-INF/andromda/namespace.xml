@@ -22,7 +22,7 @@
             <documentation>
                 Defines the locations to which output is generated.
             </documentation>
-            <property name="asnDescriptionFiles">
+            <property name="asnDescriptions" required="true">
                 <documentation>
                     The location to which ASN.1 Description files are generated.
                 </documentation>

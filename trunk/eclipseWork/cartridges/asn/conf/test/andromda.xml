@@ -8,9 +8,10 @@
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
-						  <modelPackages processAll="false">
-							  <modelPackage process="true">class**</modelPackage>
-                    </modelPackages>                </model>
+				    <modelPackages processAll="false">
+						<modelPackage process="true">class**</modelPackage>
+					</modelPackages>
+				</model>
             </models>
         </repository>
     </repositories>
@@ -22,9 +23,11 @@
                 <property name="jdbcMappingsUri">JDBC</property>
             </properties>
         </namespace>
+		
+		<!-- A sample configuration for a the ASN.1 Package -->
         <namespace name="asn1">
             <properties>
-                <property name="asnDescriptionFiles">${test.output.dir}</property>
+                <property name="asnDescriptions">${test.output.dir}</property>
             </properties>
         </namespace>
     </namespaces>

@@ -12,12 +12,12 @@
     <template
         path="templates/asn/asnDescription.ftl"
         outputPattern="{0}/{1}.asn"
-        outlet="asnDescriptionFiles"
+        outlet="asnDescriptions"
         overwrite="true">
-        <modelElements variable="class">
-            <modelElement variable="file">
-				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
-            </modelElement>
+        <modelElements variable="asnDescription">
+            <modelElement >
+				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacadeLogicImpl"/>
+			</modelElement>
         </modelElements>
     </template>
 	
