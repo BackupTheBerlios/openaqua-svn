@@ -20,7 +20,7 @@ public class AsnSimpleDescriptionFacadeLogicImpl
     public AsnSimpleDescriptionFacadeLogicImpl (Object metaObject, String context)
     {
         super (metaObject, context);
-        logger.error("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        logger.info("Instanciate ASN.1 Facade");
     }
     
     
@@ -28,7 +28,7 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 	 * @see org.andromda.metafacades.uml.ClassifierFacade#isEmbeddedValue()
 	 */
 	public boolean isEmbeddedValue() {
-		return true;
+		return false;
 	}
 
 
