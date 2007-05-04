@@ -1,19 +1,17 @@
 <andromda>
-	<properties>
-		<property name="modelValidation">true</property>
-		<!--
-		<property name="cartridgeFilter" >asn1</property>
-			-->
-        <property name="failOnValidationErrors">false</property>
-        <property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
-	</properties>
+   <properties>
+	   <property name="modelValidation">true</property>
+		<property name="cartridgeFilter" />
+      <property name="failOnValidationErrors">false</property>
+      <property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
+   </properties>
 	
 	<repositories>
          <repository name="emf-uml2">
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
-				</model>
+				     </model>
             </models>
         </repository>
     </repositories>
@@ -24,14 +22,28 @@
                 <property name="languageMappingsUri">Java</property>
                 <property name="wrapperMappingsUri">JavaWrapper</property>
                 <property name="jdbcMappingsUri">JDBC</property>
+    				 <property name="sqlMappingsUri">MySQL</property>
+    				 <property name="enableTemplating">true</property>
+    				 <property name="hibernateVersion">3</property>
             </properties>
-        </namespace>
+         </namespace>
 		
 		<!-- A sample configuration for a the ASN.1 Package -->
-        <namespace name="ASN.1">
+      <namespace name="ASN.1">
             <properties>
                 <property name="configs">${test.output.dir}</property>
             </properties>
-        </namespace>
-    </namespaces>
+      </namespace>
+    
+    	<namespace name="java">
+			<properties>
+				<property name="enablePropertyConstructors">true</property>
+				<property name="enumerations">${test.output.dir}</property>
+				<property name="exceptions">${test.output.dir}</property>
+				<property name="value-objects">${test.output.dir}</property>
+			</properties>
+		</namespace>
+		
+   </namespaces>
+	
 </andromda>
