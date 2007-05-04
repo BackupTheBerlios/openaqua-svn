@@ -5,31 +5,25 @@
  */
 package org.andromda.cartridges.asn.psm;
 
-import org.apache.log4j.Logger;
-
 /**
  * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription
  */
 public class AsnPsmAsnDescriptionImpl
     extends org.andromda.cartridges.asn.psm.AsnPsmAsnDescription
 {
-	final Logger logger = Logger.getRootLogger();
-	public AsnPsmAsnDescriptionImpl()
+    public AsnPsmAsnDescriptionImpl()
     {
         super();
-        logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
     }
 
     public AsnPsmAsnDescriptionImpl(java.lang.String name)
     {
        super(name);
-       logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
     }
 
-    public AsnPsmAsnDescriptionImpl(java.lang.String name, java.util.Collection detailDesc, java.util.Collection headerDesc, java.util.Collection footerDesc)
+    public AsnPsmAsnDescriptionImpl(java.lang.String name, java.util.Collection detail, java.util.Collection header, java.util.Collection footer)
     {
-        super(name, detailDesc, headerDesc, footerDesc);
-        logger.error("ERZEUGE AsnPsmAsnDescriptionImpl");
+        super(name, detail, header, footer);
     }
 
     /**
@@ -40,7 +34,7 @@ public class AsnPsmAsnDescriptionImpl
      */
     public AsnPsmAsnDescriptionImpl(AsnPsmAsnDescription otherBean)
     {
-        this(otherBean.getName(), otherBean.getDetailDesc(), otherBean.getHeaderDesc(), otherBean.getFooterDesc());
+        this(otherBean.getName(), otherBean.getDetail(), otherBean.getHeader(), otherBean.getFooter());
     }
 
     /**
@@ -53,30 +47,12 @@ public class AsnPsmAsnDescriptionImpl
     }
 
     /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#getHeader()
+     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade)
      */
-    public java.util.Collection getHeader()
+    public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
     {
-        // @todo implement public java.util.Collection getHeader()
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.getHeader() Not implemented!");
-    }
-
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#getFooter()
-     */
-    public java.util.Collection getFooter()
-    {
-        // @todo implement public java.util.Collection getFooter()
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.getFooter() Not implemented!");
-    }
-
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#getDetails()
-     */
-    public java.util.Collection getDetails()
-    {
-        // @todo implement public java.util.Collection getDetails()
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.getDetails() Not implemented!");
+        // @todo implement public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
+        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier) Not implemented!");
     }
 
 }

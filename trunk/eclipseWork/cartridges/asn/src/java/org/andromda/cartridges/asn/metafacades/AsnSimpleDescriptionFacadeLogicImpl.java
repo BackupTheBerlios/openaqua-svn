@@ -3,6 +3,8 @@ package org.andromda.cartridges.asn.metafacades;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.andromda.cartridges.asn.psm.AsnLogger;
+import org.andromda.cartridges.asn.psm.AsnLoggerImpl;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescription;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
 import org.apache.log4j.Logger;
@@ -16,7 +18,8 @@ import org.apache.log4j.Logger;
 public class AsnSimpleDescriptionFacadeLogicImpl
     extends AsnSimpleDescriptionFacadeLogic
 {
-	final Logger logger = Logger.getRootLogger();
+	private AsnLogger logger = new AsnLoggerImpl();
+	
     public AsnSimpleDescriptionFacadeLogicImpl (Object metaObject, String context)
     {
         super (metaObject, context);
