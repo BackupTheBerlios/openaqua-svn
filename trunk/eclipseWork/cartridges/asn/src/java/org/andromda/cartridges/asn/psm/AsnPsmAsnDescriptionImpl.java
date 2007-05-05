@@ -16,14 +16,14 @@ public class AsnPsmAsnDescriptionImpl
         super();
     }
 
-    public AsnPsmAsnDescriptionImpl(java.lang.String name)
+    public AsnPsmAsnDescriptionImpl(org.andromda.cartridges.asn.psm.AsnPsmHeaderDescription header, java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation)
     {
-       super(name);
+       super(header, type, shortName, fullName, documentation);
     }
 
-    public AsnPsmAsnDescriptionImpl(java.lang.String name, java.util.Collection detail, java.util.Collection header, java.util.Collection footer)
+    public AsnPsmAsnDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation, java.util.Collection footer, org.andromda.cartridges.asn.psm.AsnPsmHeaderDescription header, java.util.Collection details)
     {
-        super(name, detail, header, footer);
+        super(type, shortName, fullName, documentation, footer, header, details);
     }
 
     /**
@@ -34,7 +34,7 @@ public class AsnPsmAsnDescriptionImpl
      */
     public AsnPsmAsnDescriptionImpl(AsnPsmAsnDescription otherBean)
     {
-        this(otherBean.getName(), otherBean.getDetail(), otherBean.getHeader(), otherBean.getFooter());
+        this(otherBean.getType(), otherBean.getShortName(), otherBean.getFullName(), otherBean.getDocumentation(), otherBean.getFooter(), otherBean.getHeader(), otherBean.getDetails());
     }
 
     /**
@@ -44,15 +44,6 @@ public class AsnPsmAsnDescriptionImpl
     {
         // @todo implement public java.util.Collection getAllBlocks()
         throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.getAllBlocks() Not implemented!");
-    }
-
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade)
-     */
-    public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
-    {
-        // @todo implement public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier) Not implemented!");
     }
 
 }

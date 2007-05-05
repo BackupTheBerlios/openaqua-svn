@@ -1,17 +1,15 @@
 <#-- This is a freemarker comment-->
-
+<#list description.getAsnDescription() as file>
 -- This is a generated file, dont modify it manually
 -- ------------------------------------------------------
 -- SYNTAX PRODUCED BY: AndroMDA ASN.1 Cartridge
--- SYNTAX LOCATION AT: ${file.fullyQualifiedNamePath}.asn
+-- SYNTAX LOCATION AT: ${file.getFullName()}.asn
 
 
 -- --------------------------------------
-${file.getDocumentation("-- ")}
+${file.getDocumentation()}
 -- --------------------------------------
-
-
-${file.name} DEFINITIONS IMPLICIT TAGS ::=
+${file.getShortName()} DEFINITIONS IMPLICIT TAGS ::=
 
 BEGIN
 
@@ -75,3 +73,5 @@ Construct the ASN.1 Blocks for all Value Objects
 
 -- --------------------------------------
 END
+
+</#list>

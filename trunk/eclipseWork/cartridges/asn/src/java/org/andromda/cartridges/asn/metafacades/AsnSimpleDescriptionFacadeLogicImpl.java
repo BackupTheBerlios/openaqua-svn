@@ -7,7 +7,6 @@ import org.andromda.cartridges.asn.psm.AsnLogger;
 import org.andromda.cartridges.asn.psm.AsnLoggerImpl;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescription;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -41,6 +40,7 @@ public class AsnSimpleDescriptionFacadeLogicImpl
 	@Override
 	protected Collection handleGetAsnDescription() {
 		AsnPsmAsnDescription desc = new AsnPsmAsnDescriptionImpl();
+		desc.buildFromClassifier(this);
 		Collection<AsnPsmAsnDescription> result = new ArrayList<AsnPsmAsnDescription>();
 		result.add(desc);
 		return result;

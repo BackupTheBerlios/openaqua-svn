@@ -10,5 +10,5 @@
 SHELL=/bin/bash
 MAILTO=tukaram
 
-00 2  *  *  *  /Volumes/user/tukaram/workspace/openaqua/eclipseWork/RepUpdate.sh
-30 2  *  *  *  /Volumes/user/tukaram/workspace/openaqua/eclipseWork/deploy-db4o61/Cronjob.sh
+#00 2  *  *  *  /Volumes/user/tukaram/workspace/openaqua/eclipseWork/RepUpdate.sh
+#30 2  *  *  *  /Volumes/user/tukaram/workspace/openaqua/eclipseWork/deploy-db4o61/Cronjob.sh

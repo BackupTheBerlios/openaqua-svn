@@ -16,9 +16,9 @@ public abstract class AsnPsmElementDescriptionImpl
         super();
     }
 
-    public AsnPsmElementDescriptionImpl(java.lang.String name, java.lang.String type)
+    public AsnPsmElementDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation)
     {
-        super(name, type);
+        super(type, shortName, fullName, documentation);
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class AsnPsmElementDescriptionImpl
      */
     public AsnPsmElementDescriptionImpl(AsnPsmElementDescription otherBean)
     {
-        this(otherBean.getName(), otherBean.getType());
+        this(otherBean.getType(), otherBean.getShortName(), otherBean.getFullName(), otherBean.getDocumentation());
     }
 
     /**
@@ -37,8 +37,19 @@ public abstract class AsnPsmElementDescriptionImpl
      */
     public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
     {
-        // @todo implement public boolean buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier)
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmElementDescription.buildFromClassifier(org.andromda.metafacades.uml.ClassifierFacade classifier) Not implemented!");
+    	boolean result;
+    	
+    	if (classifier == null){
+    		error("got null reference as classifier");
+    		result = false;
+    	} else {
+        	this.setFullName(classifier.getFullyQualifiedName().replaceAll("\\.", "/"));
+        	this.setShortName(classifier.getName());
+        	this.setDocumentation(classifier.getDocumentation("-- "));
+        	result = true;
+    	}
+
+    	return result;
     }
 
 }
