@@ -5,6 +5,14 @@
  */
 package org.andromda.cartridges.asn.psm;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.andromda.metafacades.uml.ClassifierFacade;
+
 /**
  * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription
  */
@@ -16,14 +24,14 @@ public class AsnPsmAsnDescriptionImpl
         super();
     }
 
-    public AsnPsmAsnDescriptionImpl(org.andromda.cartridges.asn.psm.AsnPsmHeaderDescription header, java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation)
+    public AsnPsmAsnDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation)
     {
-       super(header, type, shortName, fullName, documentation);
+       super(type, shortName, fullName, documentation);
     }
 
-    public AsnPsmAsnDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation, java.util.Collection footer, org.andromda.cartridges.asn.psm.AsnPsmHeaderDescription header, java.util.Collection details)
+    public AsnPsmAsnDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation, org.andromda.cartridges.asn.psm.AsnPsmFooterDescription footer, org.andromda.cartridges.asn.psm.AsnPsmHeaderDescription header, java.util.Collection details, java.util.Collection blocks)
     {
-        super(type, shortName, fullName, documentation, footer, header, details);
+        super(type, shortName, fullName, documentation, footer, header, details, blocks);
     }
 
     /**
@@ -34,16 +42,137 @@ public class AsnPsmAsnDescriptionImpl
      */
     public AsnPsmAsnDescriptionImpl(AsnPsmAsnDescription otherBean)
     {
-        this(otherBean.getType(), otherBean.getShortName(), otherBean.getFullName(), otherBean.getDocumentation(), otherBean.getFooter(), otherBean.getHeader(), otherBean.getDetails());
+        this(otherBean.getType(), otherBean.getShortName(), otherBean.getFullName(), otherBean.getDocumentation(), otherBean.getFooter(), otherBean.getHeader(), otherBean.getDetails(), otherBean.getBlocks());
     }
 
+
     /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#getAllBlocks()
+     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#hasHeader()
      */
-    public java.util.Collection getAllBlocks()
+    public boolean hasHeader()
     {
-        // @todo implement public java.util.Collection getAllBlocks()
-        throw new java.lang.UnsupportedOperationException("org.andromda.cartridges.asn.psm.AsnPsmAsnDescription.getAllBlocks() Not implemented!");
+    	if (getHeader() == null) {
+    		return false;
+    	} else {
+    		return true;
+    	}
     }
+
+    
+    
+    /**
+     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#hasFoter()
+     */
+    public boolean hasFooter()
+    {
+    	if (getFooter() == null) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    }
+
+    
+    
+    /**
+     * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#hasDetails()
+     */
+    public boolean hasDetails()
+    {
+    	return false;
+    	
+    }
+
+    
+    
+    private void collectAllBlocks(ClassifierFacade clFacade, Map<String, ClassifierFacade> blocks) {
+    	if (!blocks.containsKey(clFacade.getFullyQualifiedName())) {
+        	error("found block"+clFacade.getFullyQualifiedName());
+    		blocks.put(clFacade.getFullyQualifiedName(), clFacade);
+    		Collection col = clFacade.getAllAssociatedClasses();
+    		Iterator it = col.iterator();
+    		while (it.hasNext()) {
+    			Object o = it.next();
+    			if (o instanceof ClassifierFacade) {
+    				collectAllBlocks((ClassifierFacade) o, blocks);
+    			}
+    		}
+    	}
+    }
+    
+    
+    
+    private void storeHeaderFromBlocks(Map<String, ClassifierFacade> blocks) {
+    	Iterator it = blocks.values().iterator();
+    	while(it.hasNext()) {
+    		Object o = it.next();
+    		if (o instanceof ClassifierFacade) {
+    			ClassifierFacade cl = (ClassifierFacade) o;
+    			if (cl.hasExactStereotype("AsnHeader")){
+    				AsnPsmHeaderDescription  header = new AsnPsmHeaderDescription();
+    				header.buildFromClassifier(cl);
+    				this.setHeader(header);
+    				blocks.remove(cl.getFullyQualifiedName());
+    				return;
+    			}
+    		}
+    	}
+    }
+
+    
+    
+    private void storeFooterFromBlocks(Map<String, ClassifierFacade> blocks) {
+    	Iterator it = blocks.values().iterator();
+    	while(it.hasNext()) {
+    		Object o = it.next();
+    		if (o instanceof ClassifierFacade) {
+    			ClassifierFacade cl = (ClassifierFacade) o;
+    			if (cl.hasExactStereotype("AsnFooter")){
+    				AsnPsmHeaderDescription  header = new AsnPsmHeaderDescription();
+    				header.buildFromClassifier(cl);
+    				this.setHeader(header);
+    				blocks.remove(cl.getFullyQualifiedName());
+    				return;
+    			}
+    		}
+    	}
+    }
+
+    
+    
+    private void storeDetailsFromBlocks(Map<String, ClassifierFacade> blocks) {
+    	Iterator it = blocks.values().iterator();
+    	Collection<AsnPsmDetailDescription> details = new ArrayList<AsnPsmDetailDescription>();
+    	while(it.hasNext()) {
+    		Object o = it.next();
+    		if (o instanceof ClassifierFacade) {
+    			ClassifierFacade cl = (ClassifierFacade) o;
+    			if (cl.hasExactStereotype("ValueObject")){
+    				AsnPsmDetailDescription  detail = new AsnPsmDetailDescription();
+    				detail.buildFromClassifier(cl);
+    				details.add(detail);
+    			}
+    		}
+    	}
+    	setBlocks(details);
+    }
+
+    
+    
+    @Override
+    public boolean buildFromClassifier(ClassifierFacade classifier) {
+    	boolean result = super.buildFromClassifier(classifier);
+    	
+    	//collect all possible blocks
+    	Map<String, ClassifierFacade> blocks = new HashMap<String, ClassifierFacade>();
+    	collectAllBlocks(classifier, blocks);
+    	
+    	//get header from them
+    	storeHeaderFromBlocks(blocks);
+    	storeFooterFromBlocks(blocks);
+    	storeDetailsFromBlocks(blocks);
+    	return result;
+    }
+
 
 }

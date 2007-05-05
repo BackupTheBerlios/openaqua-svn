@@ -54,4 +54,12 @@ public class AsnLoggerImpl
     	logger.info(msg);
     }
 
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnLogger#debug(java.lang.String)
+	 */
+	@Override
+	public void debug(String msg) {
+    	logger.debug(msg);
+	}
+
 }
