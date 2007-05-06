@@ -33,6 +33,7 @@ public class AsnLoggerImpl
     /**
      * @see org.andromda.cartridges.asn.psm.AsnLogger#error(java.lang.String)
      */
+	@Override
     public void error(java.lang.String msg)
     {
     	logger.error(msg);
@@ -41,6 +42,7 @@ public class AsnLoggerImpl
     /**
      * @see org.andromda.cartridges.asn.psm.AsnLogger#warn(java.lang.String)
      */
+	@Override
     public void warn(java.lang.String msg)
     {
     	logger.warn(msg);
@@ -49,6 +51,7 @@ public class AsnLoggerImpl
     /**
      * @see org.andromda.cartridges.asn.psm.AsnLogger#info(java.lang.String)
      */
+	@Override
     public void info(java.lang.String msg)
     {
     	logger.info(msg);

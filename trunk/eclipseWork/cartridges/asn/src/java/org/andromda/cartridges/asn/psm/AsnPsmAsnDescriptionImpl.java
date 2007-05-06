@@ -102,13 +102,13 @@ public class AsnPsmAsnDescriptionImpl
     
     
     
-    private void storeHeaderFromBlocks(Map<String, ClassifierFacade> blocks) {
+    private void extractHeaderFromBlocks(Map<String, ClassifierFacade> blocks) {
     	Iterator it = blocks.values().iterator();
     	while(it.hasNext()) {
     		Object o = it.next();
     		if (o instanceof ClassifierFacade) {
     			ClassifierFacade cl = (ClassifierFacade) o;
-    			if (cl.hasExactStereotype("AsnHeader")){
+    			if (cl.hasStereotype("AsnHeader")){
     				AsnPsmHeaderDescription  header = new AsnPsmHeaderDescription();
     				header.buildFromClassifier(cl);
     				this.setHeader(header);
@@ -121,16 +121,16 @@ public class AsnPsmAsnDescriptionImpl
 
     
     
-    private void storeFooterFromBlocks(Map<String, ClassifierFacade> blocks) {
+    private void extractFooterFromBlocks(Map<String, ClassifierFacade> blocks) {
     	Iterator it = blocks.values().iterator();
     	while(it.hasNext()) {
     		Object o = it.next();
     		if (o instanceof ClassifierFacade) {
     			ClassifierFacade cl = (ClassifierFacade) o;
-    			if (cl.hasExactStereotype("AsnFooter")){
-    				AsnPsmHeaderDescription  header = new AsnPsmHeaderDescription();
-    				header.buildFromClassifier(cl);
-    				this.setHeader(header);
+    			if (cl.hasStereotype("AsnFooter")){
+    				AsnPsmFooterDescription  footer = new AsnPsmFooterDescription();
+    				footer.buildFromClassifier(cl);
+    				this.setFooter(footer);
     				blocks.remove(cl.getFullyQualifiedName());
     				return;
     			}
@@ -140,7 +140,7 @@ public class AsnPsmAsnDescriptionImpl
 
     
     
-    private void storeDetailsFromBlocks(Map<String, ClassifierFacade> blocks) {
+    private void extractDetailsFromBlocks(Map<String, ClassifierFacade> blocks) {
     	Iterator it = blocks.values().iterator();
     	Collection<AsnPsmDetailDescription> details = new ArrayList<AsnPsmDetailDescription>();
     	while(it.hasNext()) {
@@ -168,11 +168,19 @@ public class AsnPsmAsnDescriptionImpl
     	collectAllBlocks(classifier, blocks);
     	
     	//get header from them
-    	storeHeaderFromBlocks(blocks);
-    	storeFooterFromBlocks(blocks);
-    	storeDetailsFromBlocks(blocks);
+    	extractHeaderFromBlocks(blocks);
+    	extractFooterFromBlocks(blocks);
+    	extractDetailsFromBlocks(blocks);
     	return result;
     }
+
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnPsmAsnDescription#isOneDetailOnly()
+	 */
+	@Override
+	public boolean isOneDetailOnly() {
+		return false;
+	}
 
 
 }
