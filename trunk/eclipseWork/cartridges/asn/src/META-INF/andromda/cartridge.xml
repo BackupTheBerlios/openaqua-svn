@@ -15,9 +15,9 @@
         overwrite="true"
         outputToSingleFile="false"
         outputOnEmptyElements="true">
-        <modelElements variable="description">
+        <modelElements variable="facade">
             <modelElement >
-				<type name="org.andromda.cartridges.asn.metafacades.AsnSimpleDescriptionFacade"/>
+				<type name="org.andromda.cartridges.asn.metafacades.AsnDescriptionFacade"/>
 			</modelElement>
         </modelElements>
     </template>

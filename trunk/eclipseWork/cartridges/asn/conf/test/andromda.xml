@@ -5,12 +5,15 @@
       <property name="failOnValidationErrors">false</property>
       <property name="loggingConfigurationUri">file:${basedir}/conf/test/log4j.xml</property>
    </properties>
-	
+
 	<repositories>
          <repository name="emf-uml2">
             <models>
                 <model type="emf-uml2">
                     <uri>${test.model.uri}</uri>
+						  <modelPackages processAll="false">
+							  <modelPackage process="true">org.andromda.test.asn::rr72</modelPackage>
+						  </modelPackages>
 				     </model>
             </models>
         </repository>
@@ -27,14 +30,14 @@
     				 <property name="hibernateVersion">3</property>
             </properties>
          </namespace>
-		
+
 		<!-- A sample configuration for a the ASN.1 Package -->
       <namespace name="ASN.1">
             <properties>
                 <property name="configs">${test.output.dir}</property>
             </properties>
       </namespace>
-    
+
     	<namespace name="java">
 			<properties>
 				<property name="enablePropertyConstructors">true</property>
@@ -43,7 +46,7 @@
 				<property name="value-objects">${test.output.dir}</property>
 			</properties>
 		</namespace>
-		
+
    </namespaces>
-	
+
 </andromda>
