@@ -2,6 +2,10 @@
 <!-- contains the ASN.1 cartridge metafacade mappings -->
 <metafacades>
 
+	<!--
+    <metafacade class="org.andromda.cartridges.asn.metafacades.AsnDescriptionFacadeLogicImpl">
+		-->
+	
     <metafacade class="org.andromda.cartridges.asn.metafacades.AsnDescriptionFacadeLogicImpl" contextRoot="true">
         <mapping>
             <stereotype>ASN_DESCRIPTION</stereotype>

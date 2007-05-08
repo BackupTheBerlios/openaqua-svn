@@ -27,7 +27,7 @@ public class AsnDescriptionFacadeLogicImpl
     protected org.andromda.cartridges.asn.psm.AsnPsmAsnDescription handleGetAsnDescription()
     {
 		AsnPsmAsnDescription desc = new AsnPsmAsnDescriptionImpl();
-		desc.buildFromClassifier(this);
+		desc.buildFromClassifierFacade(this);		
 		return desc;
     }
 
