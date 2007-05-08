@@ -8,8 +8,6 @@ package org.andromda.cartridges.asn.psm;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
 import org.andromda.metafacades.uml.ClassifierFacade;
