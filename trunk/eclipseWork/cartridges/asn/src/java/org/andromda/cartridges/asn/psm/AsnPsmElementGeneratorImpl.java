@@ -86,15 +86,34 @@ public class AsnPsmElementGeneratorImpl
     {
 		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
     	if (knownElements.containsKey(datatype)) {
-        	debug("found AsnElement: "+datatype);
+        	//debug("found AsnElement: "+datatype);
     		return (AsnPsmElement)knownElements.get(datatype);
     	} else {
-        	debug("build AsnElement: "+datatype);
+        	//debug("build AsnElement: "+datatype);
 
         	AsnPsmElement result = new AsnPsmElement();
     		result.setDocumentation(element.getDocumentation("-- "));
         	result.setName(datatype);
         	result.setSubElements(new ArrayList<AsnPsmNameElementPair>());
+        	Object tagged = element.findTaggedValue("range");
+        	Collection a = element.getTaggedValues();
+        	Iterator i = a.iterator();
+        	while(i.hasNext()){
+        		Object o = i.next();
+        		error ("-------+"+o.toString());
+        	}
+        	
+        	if (tagged instanceof Integer) {
+            	//result.setApplicationId((Integer)tagged);
+        	} else {
+        		if (tagged == null){
+            		//error("unknown object: NULL ");
+        			
+        		} else {
+            		error("##################unknown object: "+tagged.toString());
+        			
+        		}
+        	}
 
         	knownElements.put(datatype, result);
         	allElements.add(result);
@@ -196,10 +215,22 @@ public class AsnPsmElementGeneratorImpl
 	 */
 	@Override
 	public String dataTypeMapping(String original) {
-		if (original.equals("java.lang.String")) return "VisibleString";
-		if (original.equals("boolean")) return "BOOLEAN";
-		if (original.equals("int")) return "INTEGER";
-		error("Datatype: "+original);
+		if (original.toUpperCase().equals("java.lang.String")) return "VisibleString";
+
+		if (original.toUpperCase().equals("boolean")) return "BOOLEAN";
+		if (original.toUpperCase().equals("java.lang.boolean")) return "BOOLEAN";
+		
+		if (original.toUpperCase().equals("int")) return "INTEGER";
+		if (original.toUpperCase().equals("integer")) return "INTEGER";
+		if (original.toUpperCase().equals("java.lang.integer")) return "INTEGER";
+		if (original.toUpperCase().equals("long")) return "INTEGER";
+		if (original.toUpperCase().equals("java.lang.long")) return "INTEGER";
+
+		if (original.toUpperCase().equals("java.lang.double")) return "NUMBER";
+		if (original.toUpperCase().equals("java.lang.float")) return "NUMBER";
+		if (original.toUpperCase().equals("double")) return "NUMBER";
+		if (original.toUpperCase().equals("float")) return "NUMBER";
+
 		return original;
 	}
 
