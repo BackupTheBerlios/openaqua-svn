@@ -46,7 +46,8 @@ public class AsnPsmAsnDescriptionGeneratorImpl
      */
     public org.andromda.cartridges.asn.psm.AsnPsmAsnDescription buildDescription(org.andromda.metafacades.uml.ClassifierFacade classifier)
     {
-    	debug("build AsnDescription: "+classifier.getFullyQualifiedName());
+		AsnPsmElementGenerator elementGenerator = new AsnPsmElementGeneratorImpl();
+    	debug("build AsnDescription: "+elementGenerator.dataTypeMapping(classifier.getFullyQualifiedName()));
     	AsnPsmAsnDescription desc = new AsnPsmAsnDescription();
     	desc.setDocumenation(classifier.getDocumentation("-- "));
     	desc.setName(classifier.getName());
@@ -58,9 +59,8 @@ public class AsnPsmAsnDescriptionGeneratorImpl
     	Collection col = classifier.getAllProperties();
     	Iterator it = col.iterator();
     	while(it.hasNext()){
-    		AsnPsmElementGenerator elementGenerator = new AsnPsmElementGeneratorImpl();
     		ModelElementFacade m = (ModelElementFacade) it.next();
-    		debug("   with: "+m.getFullyQualifiedName());
+    		debug("   with: "+elementGenerator.dataTypeMapping(m.getFullyQualifiedName()));
     		elementGenerator.getAsnElement(m, knownElements, allElements);
     	}
     	desc.setAllElements(allElements);

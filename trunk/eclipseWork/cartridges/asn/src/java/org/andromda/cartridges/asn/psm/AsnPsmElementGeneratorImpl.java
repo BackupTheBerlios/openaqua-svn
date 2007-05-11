@@ -84,19 +84,19 @@ public class AsnPsmElementGeneratorImpl
 	@SuppressWarnings("unchecked")
     private AsnPsmElement newAsnElement(ModelElementFacade  element, Map knownElements, Collection allElements)
     {
-    	if (knownElements.containsKey(element.getFullyQualifiedName())) {
-        	debug("found AsnElement: "+element.getFullyQualifiedName());
-    		return (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
+    	if (knownElements.containsKey(datatype)) {
+        	debug("found AsnElement: "+datatype);
+    		return (AsnPsmElement)knownElements.get(datatype);
     	} else {
-        	debug("build AsnElement: "+element.getFullyQualifiedName());
+        	debug("build AsnElement: "+datatype);
 
         	AsnPsmElement result = new AsnPsmElement();
     		result.setDocumentation(element.getDocumentation("-- "));
-        	result.setName(element.getName());
-        	result.setFullQualifiedName(element.getFullyQualifiedName());
+        	result.setName(datatype);
         	result.setSubElements(new ArrayList<AsnPsmNameElementPair>());
 
-        	knownElements.put(element.getFullyQualifiedName(), result);
+        	knownElements.put(datatype, result);
         	allElements.add(result);
 
         	return result;
@@ -112,8 +112,9 @@ public class AsnPsmElementGeneratorImpl
     public AsnPsmElement getAsnElement(ClassifierFacade element, Map knownElements, Collection allElements)  
     {
 		//Warning: Removing this check will result in a unchecked recursive loop!
-    	if (knownElements.containsKey(element.getFullyQualifiedName())) {
-    		return (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
+    	if (knownElements.containsKey(datatype)) {
+    		return (AsnPsmElement)knownElements.get(datatype);
     	} 
     	
 		AsnPsmElement result = newAsnElement(element, knownElements, allElements);
@@ -126,7 +127,8 @@ public class AsnPsmElementGeneratorImpl
     	Iterator it = col.iterator();
     	while(it.hasNext()){
     		ModelElementFacade m = (ModelElementFacade) it.next();
-    		debug("   with: "+m.getFullyQualifiedName() + " and name="+m.getName());
+    		final String mDatatype = dataTypeMapping(element.getFullyQualifiedName());
+    		debug("   with: "+mDatatype + " and name="+m.getName());
     		AsnPsmElement e = getAsnElement(m, knownElements, allElements);
     		if (e != null) {
     			AsnPsmNameElementPair pair = new AsnPsmNameElementPair();
@@ -187,6 +189,18 @@ public class AsnPsmElementGeneratorImpl
 	{
 		error("getAsnElement(AttributeLinkFacade element)  not finished");
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#dataTypeMapping(java.lang.String)
+	 */
+	@Override
+	public String dataTypeMapping(String original) {
+		if (original.equals("java.lang.String")) return "VisibleString";
+		if (original.equals("boolean")) return "BOOLEAN";
+		if (original.equals("int")) return "INTEGER";
+		error("Datatype: "+original);
+		return original;
 	}
 
 }
