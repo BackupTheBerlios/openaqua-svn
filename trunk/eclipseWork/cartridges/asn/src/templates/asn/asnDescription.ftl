@@ -14,7 +14,7 @@ ${description.getName()} DEFINITIONS IMPLICIT TAGS ::=
 BEGIN
 
 
-<#list description.getAllAsnElements() as aBlock>
+<#list description.getAllElements() as aBlock>
 <@MakeBlock block=aBlock />
 </#list>
 

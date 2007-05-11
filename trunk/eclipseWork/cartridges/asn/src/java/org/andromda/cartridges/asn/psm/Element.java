@@ -5,16 +5,6 @@
  */
 package org.andromda.cartridges.asn.psm;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import org.andromda.cartridges.asn.AsnUtils;
-import org.andromda.metafacades.emf.uml2.AssociationEndFacadeLogicImpl;
-import org.andromda.metafacades.uml.AssociationEndFacade;
-import org.andromda.metafacades.uml.AttributeFacade;
-import org.andromda.metafacades.uml.ClassifierFacade;
-import org.andromda.metafacades.uml.ModelElementFacade;
 
 
 /**

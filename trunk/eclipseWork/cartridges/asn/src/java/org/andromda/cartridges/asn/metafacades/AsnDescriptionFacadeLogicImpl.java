@@ -2,7 +2,6 @@ package org.andromda.cartridges.asn.metafacades;
 
 import org.andromda.cartridges.asn.psm.AsnLogger;
 import org.andromda.cartridges.asn.psm.AsnLoggerImpl;
-import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionGenerator;
 import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionGeneratorImpl;
 
 

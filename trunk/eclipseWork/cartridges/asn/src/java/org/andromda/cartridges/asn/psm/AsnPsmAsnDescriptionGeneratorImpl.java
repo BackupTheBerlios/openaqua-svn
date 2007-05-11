@@ -7,10 +7,8 @@ package org.andromda.cartridges.asn.psm;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.andromda.metafacades.uml.ModelElementFacade;
@@ -53,7 +51,7 @@ public class AsnPsmAsnDescriptionGeneratorImpl
     	desc.setDocumenation(classifier.getDocumentation("-- "));
     	desc.setName(classifier.getName());
     	desc.setPackageName(classifier.getPackagePath());
-    	Collection<AsnPsmElement> allAsnElements = new ArrayList<AsnPsmElement>();
+    	Collection<AsnPsmElement> allElements = new ArrayList<AsnPsmElement>();
     	Map<String, AsnPsmElement> knownElements = new TreeMap<String, AsnPsmElement>();
     	
     	//build AsnElements
@@ -63,13 +61,9 @@ public class AsnPsmAsnDescriptionGeneratorImpl
     		AsnPsmElementGenerator elementGenerator = new AsnPsmElementGeneratorImpl();
     		ModelElementFacade m = (ModelElementFacade) it.next();
     		debug("   with: "+m.getFullyQualifiedName());
-    		AsnPsmElement e = elementGenerator.getAsnElement(m, knownElements);
-    		if (e != null) {
-        		allAsnElements.add(e);
-    		}
+    		elementGenerator.getAsnElement(m, knownElements, allElements);
     	}
-    	
-    	desc.setAllAsnElements(allAsnElements);    	
+    	desc.setAllElements(allElements);
     	return desc;
     }
 }
