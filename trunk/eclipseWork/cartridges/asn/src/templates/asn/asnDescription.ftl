@@ -1,27 +1,25 @@
 <#include "asnMacros.ftl" parse=true>
 <#assign description=facade.getAsnDescription()>
-<#-- This is a freemarker comment
 -- This is a generated file, dont modify it manually
 -- ------------------------------------------------------
 -- SYNTAX PRODUCED BY: AndroMDA ASN.1 Cartridge
--- SYNTAX LOCATION AT: ${description.getFullName()}.asn
+-- SYNTAX LOCATION AT: ${description.getPackageName()}.asn
 
 
 
 -- --------------------------------------
-${description.getDocumentation()}
+${description.getDocumenation()}
 -- --------------------------------------
-${description.getShortName()} DEFINITIONS IMPLICIT TAGS ::=
+${description.getName()} DEFINITIONS IMPLICIT TAGS ::=
 BEGIN
 
--->
 
-<#-- Lets collect blocks now 
-<#list description.getBlocks() as aBlock>
+<#list description.getAllAsnElements() as aBlock>
 <@MakeBlock block=aBlock />
 </#list>
--->
 
+<#-- Lets collect blocks now 
+-->
 
 
 -- --------------------------------------

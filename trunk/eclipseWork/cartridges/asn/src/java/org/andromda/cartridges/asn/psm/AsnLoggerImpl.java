@@ -65,4 +65,12 @@ public class AsnLoggerImpl
     	logger.debug(msg);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnLogger#fatal(java.lang.String)
+	 */
+	@Override
+	public void fatal(String msg) {
+		logger.fatal(msg);		
+	}
+
 }

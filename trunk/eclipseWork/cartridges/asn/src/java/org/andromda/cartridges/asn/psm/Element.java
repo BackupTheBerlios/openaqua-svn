@@ -20,17 +20,17 @@ import org.andromda.metafacades.uml.ModelElementFacade;
 /**
  * @see org.andromda.cartridges.asn.psm.AsnPsmElementDescription
  */
-public abstract class AsnPsmElementDescriptionImpl
-extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
+public abstract class Element
+//extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
 {
-	public AsnPsmElementDescriptionImpl()
+	public Element()
 	{
 		super();
 	}
 
-	public AsnPsmElementDescriptionImpl(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation, java.lang.String range, boolean optional, boolean isAbstract)
+	public Element(java.lang.String type, java.lang.String shortName, java.lang.String fullName, java.lang.String documentation, java.lang.String range, boolean optional, boolean isAbstract)
 	{
-		super(type, shortName, fullName, documentation, range, optional, isAbstract);
+		//super(type, shortName, fullName, documentation, range, optional, isAbstract);
 	}
 
 	/**
@@ -39,10 +39,12 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
 	 * @param otherBean, cannot be <code>null</code>
 	 * @throws java.lang.NullPointerException if the argument is <code>null</code>
 	 */
-	public AsnPsmElementDescriptionImpl(AsnPsmElementDescription otherBean)
+	/*
+	public Element(AsnPsmElementDescription otherBean)
 	{
 		this(otherBean.getType(), otherBean.getShortName(), otherBean.getFullName(), otherBean.getDocumentation(), otherBean.getRange(), otherBean.isOptional(), otherBean.isIsAbstract());
 	}
+	*/
 
 
 	/*
@@ -52,6 +54,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
 	 * allElements holds all object in the order of modeling!
 	 * allNames holds the name of all known objects to make them unique - a Map doesn't work
 	 */
+	/*
 	@Override
 	public boolean buildFromElementFacade(org.andromda.metafacades.uml.ModelElementFacade element, java.util.Collection allElements, java.util.Set allNames) {
 		if (element == null){
@@ -94,6 +97,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
     		error("got unkown element type: " +element.toString());
     		result = false;
     	}
+    	*/
 
 		/*
 
@@ -112,8 +116,10 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementDescription
             	result = true;
 
 		 */
+	/*
 		return result;
 	}
+	*/
 
 
 }

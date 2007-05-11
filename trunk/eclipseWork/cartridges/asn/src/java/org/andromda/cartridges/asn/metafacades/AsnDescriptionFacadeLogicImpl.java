@@ -2,8 +2,9 @@ package org.andromda.cartridges.asn.metafacades;
 
 import org.andromda.cartridges.asn.psm.AsnLogger;
 import org.andromda.cartridges.asn.psm.AsnLoggerImpl;
-import org.andromda.cartridges.asn.psm.AsnPsmAsnDescription;
-import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionImpl;
+import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionGenerator;
+import org.andromda.cartridges.asn.psm.AsnPsmAsnDescriptionGeneratorImpl;
+
 
 
 /**
@@ -21,14 +22,15 @@ public class AsnDescriptionFacadeLogicImpl
         super (metaObject, context);
         logger.info("Instanciate ASN.1 Facade");
     }
+    
+    
+    
     /**
      * @see org.andromda.cartridges.asn.metafacades.AsnDescriptionFacade#getAsnDescription()
      */
     protected org.andromda.cartridges.asn.psm.AsnPsmAsnDescription handleGetAsnDescription()
     {
-		AsnPsmAsnDescription desc = new AsnPsmAsnDescriptionImpl();
-		desc.buildFromClassifierFacade(this);		
-		return desc;
+    	return new AsnPsmAsnDescriptionGeneratorImpl().buildDescription(this);
     }
 
 }
