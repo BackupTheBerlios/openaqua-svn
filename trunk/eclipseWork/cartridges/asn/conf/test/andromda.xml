@@ -7,16 +7,25 @@
    </properties>
 
 	<repositories>
-         <repository name="emf-uml2">
-            <models>
-                <model type="emf-uml2">
-                    <uri>${test.model.uri}</uri>
-						  <modelPackages processAll="false">
-							  <modelPackage process="true">org.andromda.test.asn::rr72</modelPackage>
-						  </modelPackages>
-				     </model>
-            </models>
-        </repository>
+        <repository name="netBeansMDR">
+  			<models>
+  				<model>
+  					<uri>${test.model.uri}</uri>
+  					<moduleSearchLocations>
+  						<location>${maven.repo.local}/andromda/xml.zips</location>
+  						<location patterns="**/*.xml.zip">${settings.localRepository}/org/andromda/profiles</location>
+  						<location patterns="**/*.xml.zip">${settings.localRepository}/org/andromda/metafacades</location>
+  						<location patterns="**/*.xml.zip">${basedir}/src/uml/uml14/</location>
+  					</moduleSearchLocations>
+  					<!--
+					  <modelPackages processAll="false">
+						  <modelPackage process="true">org.andromda.test.asn::rr72</modelPackage>
+					  </modelPackages>
+				  -->
+  				</model>
+  			</models>
+  		</repository>
+  		
     </repositories>
 
     <namespaces>

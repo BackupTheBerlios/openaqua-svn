@@ -128,7 +128,7 @@
         <test.src.dir>${pom.basedir}/src/test</test.src.dir>
         <test.output.dir>${pom.basedir}/target/cartridge-test/actual</test.output.dir>
 		  <model.uri>jar:file:${pom.basedir}/src/uml/AsnMetaFacadesModel.xml.zip!/AsnMetaFacadesModel.xml</model.uri>
-        <test.model.uri>${test.src.dir}/uml/AsnCartridgeTest.uml2</test.model.uri>
+		  <test.model.uri>jar:file:${pom.basedir}/src/test/uml/testmodel.xml.zip!/testmodel.xml</test.model.uri>
 
     </properties>
 
