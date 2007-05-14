@@ -7,7 +7,7 @@ The following Macro builds the elements in a ASN.1 block
 
 <#macro MakeElements e>
 	<#assign asnElement=e.getElement()>
-	${e.getName()}   ${asnElement.getName()}
+	${e.getName()}			${asnElement.getName()}
 </#macro>
 
 
@@ -19,17 +19,12 @@ The following macro builds a ASN.1 structure Block
    
    
    
---
---
 ${block.getDocumentation()}
 ${block.getName()} ::= SEQUENCE
 {
-
 <#list block.getSubElements() as Element>
 <@MakeElements e=Element />
 </#list>
-
 }
---
 </#macro>
 
