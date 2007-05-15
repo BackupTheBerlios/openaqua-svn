@@ -43,7 +43,9 @@ public class AsnDescriptionFacadeLogicImpl
 	@Override
 	protected String handleGetAsnDescriptionAsString() {
 		AsnPsmDescriptionStringBuilder builder = new AsnPsmDescriptionStringBuilderImpl();
-		return builder.getString(getAsnDescription());
+		String str =builder.getString(getAsnDescription());
+		logger.error(str);
+		return str;
 	}
 
 }
