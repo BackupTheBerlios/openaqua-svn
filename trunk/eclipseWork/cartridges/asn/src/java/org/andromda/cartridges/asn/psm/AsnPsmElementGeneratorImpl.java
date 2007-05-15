@@ -1,4 +1,4 @@
-// license-header java merge-point
+//license-header java merge-point
 /**
  * This is only generated once! It will never be overwritten.
  * You can (and have to!) safely modify it by hand.
@@ -23,153 +23,158 @@ import org.andromda.metafacades.uml.ModelElementFacade;
  */
 
 public class AsnPsmElementGeneratorImpl
-    extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
+extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 {
-    public AsnPsmElementGeneratorImpl()
-    {
-        super();
-    }
+	public AsnPsmElementGeneratorImpl()
+	{
+		super();
+	}
 
-    /**
-     * Copy-constructor from other AsnPsmElementGenerator
-     *
-     * @param otherBean, cannot be <code>null</code>
-     * @throws java.lang.NullPointerException if the argument is <code>null</code>
-     */
-    public AsnPsmElementGeneratorImpl(AsnPsmElementGenerator otherBean)
-    {
-        this();
-    }
+	/**
+	 * Copy-constructor from other AsnPsmElementGenerator
+	 *
+	 * @param otherBean, cannot be <code>null</code>
+	 * @throws java.lang.NullPointerException if the argument is <code>null</code>
+	 */
+	public AsnPsmElementGeneratorImpl(AsnPsmElementGenerator otherBean)
+	{
+		this();
+	}
 
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ModelElementFacade)
-     */
-    @Override
-    public AsnPsmElement getAsnElement(ModelElementFacade element, Map knownElements, Collection allElements)  
-    {
-    	if (knownElements.containsKey(element.getFullyQualifiedName())) {
-    		return (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
-    	}
-    	
-    	if (element instanceof ClassifierFacade) {
-    		return getAsnElement((ClassifierFacade)element, knownElements, allElements);
-    	} else if (element instanceof AssociationEndFacade ) {
-    		return getAsnElement((AssociationEndFacade)element, knownElements, allElements);
-    	} else if (element instanceof AssociationClassFacade ) {
-    		return getAsnElement((AssociationClassFacade)element, knownElements, allElements);
-    	} else if (element instanceof AssociationFacade ) {
-    		return getAsnElement((AssociationFacade)element, knownElements, allElements);
-    	} else if (element instanceof AttributeFacade ) {
-    		return getAsnElement((AttributeFacade)element, knownElements, allElements);
-    	} else if (element instanceof AttributeLinkFacade ) {
-    		return getAsnElement((AttributeLinkFacade)element, knownElements, allElements);
-    	} else {
-    		String error="Unhandled ModelElementFacade: "+element.toString();
-            throw new java.lang.UnsupportedOperationException(error);
-    	}
-    }
-
-    
-    
-    /**
-     * Creates a predefined AsnElement from a ModelElementFacade 
-     * The Element doesn't have any subElements but will be stored in the 
-     * Map of known Elements and the list of predefined elements.
-     * That Element
-     * @param element
-     * @param knownElements
-     * @param allElements
-     * @return
-     */
-	@SuppressWarnings("unchecked")
-    private AsnPsmElement newAsnElement(ModelElementFacade  element, Map knownElements, Collection allElements)
-    {
-		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
-    	if (knownElements.containsKey(datatype)) {
-        	//debug("found AsnElement: "+datatype);
-    		return (AsnPsmElement)knownElements.get(datatype);
-    	} else {
-        	//debug("build AsnElement: "+datatype);
-
-        	AsnPsmElement result = new AsnPsmElement();
-    		result.setDocumentation(element.getDocumentation("-- "));
-        	result.setName(datatype);
-        	result.setSubElements(new ArrayList<AsnPsmNameElementPair>());
-        	Object tagged = element.findTaggedValue("range");
-        	Collection a = element.getTaggedValues();
-        	Iterator i = a.iterator();
-        	while(i.hasNext()){
-        		Object o = i.next();
-        		error ("-------+"+o.toString());
-        	}
-        	
-        	if (tagged instanceof Integer) {
-            	//result.setApplicationId((Integer)tagged);
-        	} else {
-        		if (tagged == null){
-            		//error("unknown object: NULL ");
-        			
-        		} else {
-            		error("##################unknown object: "+tagged.toString());
-        			
-        		}
-        	}
-
-        	knownElements.put(datatype, result);
-        	allElements.add(result);
-
-        	return result;
-    	}
-    }
-
-    
-    
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ClassifierFacade)
-     */
+	/**
+	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ModelElementFacade)
+	 */
 	@Override
-    public AsnPsmElement getAsnElement(ClassifierFacade element, Map knownElements, Collection allElements)  
-    {
+	public AsnPsmElement getAsnElement(ModelElementFacade element, Map knownElements, Collection allElements)  
+	{
+		if (knownElements.containsKey(element.getFullyQualifiedName())) {
+			return (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+		}
+
+		if (element instanceof ClassifierFacade) {
+			return getAsnElement((ClassifierFacade)element, knownElements, allElements);
+		} else if (element instanceof AssociationEndFacade ) {
+			return getAsnElement((AssociationEndFacade)element, knownElements, allElements);
+		} else if (element instanceof AssociationClassFacade ) {
+			return getAsnElement((AssociationClassFacade)element, knownElements, allElements);
+		} else if (element instanceof AssociationFacade ) {
+			return getAsnElement((AssociationFacade)element, knownElements, allElements);
+		} else if (element instanceof AttributeFacade ) {
+			return getAsnElement((AttributeFacade)element, knownElements, allElements);
+		} else if (element instanceof AttributeLinkFacade ) {
+			return getAsnElement((AttributeLinkFacade)element, knownElements, allElements);
+		} else {
+			String error="Unhandled ModelElementFacade: "+element.toString();
+			throw new java.lang.UnsupportedOperationException(error);
+		}
+	}
+
+
+
+	/**
+	 * Creates a predefined AsnElement from a ModelElementFacade 
+	 * The Element doesn't have any subElements but will be stored in the 
+	 * Map of known Elements and the list of predefined elements.
+	 * That Element
+	 * @param element
+	 * @param knownElements
+	 * @param allElements
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private AsnPsmElement newAsnElement(ModelElementFacade  element, Map knownElements, Collection allElements)
+	{
+		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
+		
+		if (knownElements.containsKey(datatype)) {
+			return (AsnPsmElement)knownElements.get(datatype);
+		} else {
+			AsnPsmElement result = new AsnPsmElement();
+			result.setDocumentation(element.getDocumentation("-- "));
+			result.setName(element.getName());
+			result.setSubElements(new ArrayList<AsnPsmNameElementPair>());
+
+			//get the applicationID tag
+			Object tagged;
+			//TODO replace strings by global constants
+			tagged = element.findTaggedValue("applicationID");
+			String applicationIDstr = (String) tagged;
+			if (applicationIDstr!=null) {
+				int id;
+				try {
+					id = Integer.parseInt(applicationIDstr);
+				} catch ( NumberFormatException e ) {
+					id = 0;
+				}
+				result.setApplicationId(id);
+			}
+
+			//get the valueRange string
+			//TODO replace strings by global constants
+			tagged = element.findTaggedValue("valueRange");
+			String range = (String)tagged;
+			if (range != null) result.setValueRange(range);
+
+			knownElements.put(datatype, result);
+			allElements.add(result);
+
+			return result;
+		}
+	}
+
+
+
+	/**
+	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ClassifierFacade)
+	 */
+	@Override
+	public AsnPsmElement getAsnElement(ClassifierFacade element, Map knownElements, Collection allElements)  
+	{
 		//Warning: Removing this check will result in a unchecked recursive loop!
 		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
-    	if (knownElements.containsKey(datatype)) {
-    		return (AsnPsmElement)knownElements.get(datatype);
-    	} 
-    	
+		if (knownElements.containsKey(datatype)) {
+			return (AsnPsmElement)knownElements.get(datatype);
+		} 
+
 		AsnPsmElement result = newAsnElement(element, knownElements, allElements);
-    	
-    	//build Sub AsnElements
-        @SuppressWarnings("unchecked")
-    	Collection<AsnPsmNameElementPair> subElements = result.getSubElements();
 
-        Collection col = element.getAllProperties();
-    	Iterator it = col.iterator();
-    	while(it.hasNext()){
-    		ModelElementFacade m = (ModelElementFacade) it.next();
-    		final String mDatatype = dataTypeMapping(element.getFullyQualifiedName());
-    		debug("   with: "+mDatatype + " and name="+m.getName());
-    		AsnPsmElement e = getAsnElement(m, knownElements, allElements);
-    		if (e != null) {
-    			AsnPsmNameElementPair pair = new AsnPsmNameElementPair();
-    			pair.setName(m.getName());
-    			pair.setElement(e);
-        		subElements.add(pair);
-    		}
-    	}
-    	result.setSubElements(subElements);
+		//build Sub AsnElements
+		@SuppressWarnings("unchecked")
+		Collection<AsnPsmNameElementPair> subElements = result.getSubElements();
 
-    	return result;
-    }
+		Collection col = element.getAllProperties();
+		Iterator it = col.iterator();
+		while(it.hasNext()){
+			ModelElementFacade m = (ModelElementFacade) it.next();
+			final String mDatatype = dataTypeMapping(element.getFullyQualifiedName());
+			debug("   with: "+mDatatype + " and name="+m.getName());
+			AsnPsmElement e = getAsnElement(m, knownElements, allElements);
+			if (e != null) {
+				AsnPsmNameElementPair pair = new AsnPsmNameElementPair();
+				pair.setName(m.getName());
+				pair.setElement(e);
+				subElements.add(pair);
+			}
+		}
+		result.setSubElements(subElements);
 
-    /**
-     * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationEndFacade)
-     */
-    @Override
-    public AsnPsmElement getAsnElement(AssociationEndFacade element, Map knownElements, Collection allElements)
-    {
-    	return getAsnElement(element.getType(), knownElements, allElements);
-    }
+		return result;
+	}
 
+	
+	
+	
+	/**
+	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationEndFacade)
+	 */
+	@Override
+	public AsnPsmElement getAsnElement(AssociationEndFacade element, Map knownElements, Collection allElements)
+	{
+		return getAsnElement(element.getType(), knownElements, allElements);
+	}
+
+	
+	
 	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationFacade)
 	 */
@@ -180,6 +185,8 @@ public class AsnPsmElementGeneratorImpl
 		return null;
 	}
 
+	
+	
 	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationClassFacade)
 	 */
@@ -190,6 +197,8 @@ public class AsnPsmElementGeneratorImpl
 		return null;
 	}
 
+	
+	
 	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AttributeFacade)
 	 */
@@ -200,6 +209,8 @@ public class AsnPsmElementGeneratorImpl
 	}
 
 
+	
+	
 	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AttributeLinkFacade)
 	 */
@@ -210,6 +221,8 @@ public class AsnPsmElementGeneratorImpl
 		return null;
 	}
 
+	
+	
 	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#dataTypeMapping(java.lang.String)
 	 */
@@ -219,7 +232,7 @@ public class AsnPsmElementGeneratorImpl
 
 		if (original.toUpperCase().equals("boolean")) return "BOOLEAN";
 		if (original.toUpperCase().equals("java.lang.boolean")) return "BOOLEAN";
-		
+
 		if (original.toUpperCase().equals("int")) return "INTEGER";
 		if (original.toUpperCase().equals("integer")) return "INTEGER";
 		if (original.toUpperCase().equals("java.lang.integer")) return "INTEGER";

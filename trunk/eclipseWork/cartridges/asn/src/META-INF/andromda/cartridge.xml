@@ -9,7 +9,7 @@
 	<templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
 
     <template
-        path="templates/asn/asnDescription.ftl"
+        path="templates/asn/asnDescriptionSimple.ftl"
         outputPattern="{0}/{1}.asn"
         outlet="configs"
         overwrite="true"
