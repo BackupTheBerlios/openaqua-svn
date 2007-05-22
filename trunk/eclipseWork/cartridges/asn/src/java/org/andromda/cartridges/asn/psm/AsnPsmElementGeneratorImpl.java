@@ -41,36 +41,72 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 		this();
 	}
 
+
 	/**
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ModelElementFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(ModelElementFacade element, Map knownElements, Collection allElements)  
+	public AsnPsmElement getAsnElement(ModelElementFacade element, Map knownElements, Integer level)  
 	{
+		//test for preexisting elements
 		if (knownElements.containsKey(element.getFullyQualifiedName())) {
-			return (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+			AsnPsmElement e = (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+			debug("with preexisting Type: "+e.getType(), level);
+			return e;
 		}
 
+		//otherwise create new elements
 		if (element instanceof ClassifierFacade) {
-			return getAsnElement((ClassifierFacade)element, knownElements, allElements);
+			return getAsnElement((ClassifierFacade)element, knownElements, level);
 		} else if (element instanceof AssociationEndFacade ) {
-			return getAsnElement((AssociationEndFacade)element, knownElements, allElements);
+			return getAsnElement((AssociationEndFacade)element, knownElements, level);
 		} else if (element instanceof AssociationClassFacade ) {
-			return getAsnElement((AssociationClassFacade)element, knownElements, allElements);
+			return getAsnElement((AssociationClassFacade)element, knownElements, level);
 		} else if (element instanceof AssociationFacade ) {
-			return getAsnElement((AssociationFacade)element, knownElements, allElements);
+			return getAsnElement((AssociationFacade)element, knownElements, level);
 		} else if (element instanceof AttributeFacade ) {
-			return getAsnElement((AttributeFacade)element, knownElements, allElements);
+			return getAsnElement((AttributeFacade)element, knownElements, level);
 		} else if (element instanceof AttributeLinkFacade ) {
-			return getAsnElement((AttributeLinkFacade)element, knownElements, allElements);
+			return getAsnElement((AttributeLinkFacade)element, knownElements, level);
 		} else {
 			String error="Unhandled ModelElementFacade: "+element.toString();
 			throw new java.lang.UnsupportedOperationException(error);
 		}
 	}
 
+	
+	//get the applicationID tag
+	private int getApplicationId(ModelElementFacade  element, Integer level) {
+		int result = 0;
+		
+		//TODO replace strings by global constants
+		Object tagged = element.findTaggedValue("applicationID");
+		String applicationIDstr = (String) tagged;
+		if (applicationIDstr!=null) {
+			try {
+				result = Integer.parseInt(applicationIDstr);
+			} catch ( NumberFormatException e ) {
+				result = 0;
+			}
+		}
+		
+		debug ("with Application ID="+result, level);
+		return result;
+	}
 
 
+	private String getValueRange(ModelElementFacade  element, Integer level) {
+		//TODO replace strings by global constants
+		Object tagged = element.findTaggedValue("valueRange");
+		String result = (String) tagged;
+		if (result == null)
+			result = "";
+		
+		debug ("with Range="+result, level);
+		return result;
+	}
+	
+	
 	/**
 	 * Creates a predefined AsnElement from a ModelElementFacade 
 	 * The Element doesn't have any subElements but will be stored in the 
@@ -82,42 +118,31 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private AsnPsmElement newAsnElement(ModelElementFacade  element, Map knownElements, Collection allElements)
+	private AsnPsmElement newAsnElement(ModelElementFacade  element, Map knownElements, Integer level)
 	{
-		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
+		final String datatype = dataTypeMapping(element.getFullyQualifiedName(), level);
 		
+		//return pre existing elements
 		if (knownElements.containsKey(datatype)) {
-			return (AsnPsmElement)knownElements.get(datatype);
+			AsnPsmElement e = (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+			debug("with preexisting Type: "+e.getType(), level);
+			return e;
+			
+		//or create a new one
 		} else {
+			debug ("with Type: "+datatype, level);
+
+			//create a default Element
 			AsnPsmElement result = new AsnPsmElement();
 			result.setDocumentation(element.getDocumentation("-- "));
-			result.setName(element.getName());
+			result.setType(datatype); //like org.foo.bar.ClassName
+			result.setName(element.getName());//like ClassName
 			result.setSubElements(new ArrayList<AsnPsmNameElementPair>());
+			result.setApplicationId(getApplicationId(element, level));
+			result.setValueRange(getValueRange(element, level));
 
-			//get the applicationID tag
-			Object tagged;
-			//TODO replace strings by global constants
-			tagged = element.findTaggedValue("applicationID");
-			String applicationIDstr = (String) tagged;
-			if (applicationIDstr!=null) {
-				int id;
-				try {
-					id = Integer.parseInt(applicationIDstr);
-				} catch ( NumberFormatException e ) {
-					id = 0;
-				}
-				result.setApplicationId(id);
-			}
-
-			//get the valueRange string
-			//TODO replace strings by global constants
-			tagged = element.findTaggedValue("valueRange");
-			String range = (String)tagged;
-			if (range != null) result.setValueRange(range);
 
 			knownElements.put(datatype, result);
-			allElements.add(result);
-
 			return result;
 		}
 	}
@@ -128,36 +153,52 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.ClassifierFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(ClassifierFacade element, Map knownElements, Collection allElements)  
+	public AsnPsmElement getAsnElement(ClassifierFacade element, Map knownElements, Integer level)  
 	{
+		//check for pre existing elements
 		//Warning: Removing this check will result in a unchecked recursive loop!
-		final String datatype = dataTypeMapping(element.getFullyQualifiedName()); 
+		final String datatype = dataTypeMapping(element.getFullyQualifiedName(), level); 
 		if (knownElements.containsKey(datatype)) {
-			return (AsnPsmElement)knownElements.get(datatype);
+			AsnPsmElement e = (AsnPsmElement)knownElements.get(element.getFullyQualifiedName());
+			debug("with preexisting Type: "+e.getType(), level);
+			return e;
 		} 
 
-		AsnPsmElement result = newAsnElement(element, knownElements, allElements);
-
-		//build Sub AsnElements
+		//create a default Element
+		AsnPsmElement result = newAsnElement(element, knownElements, level);
+		
+		//add subElements
+		debug ("with subElements: ", level);
 		@SuppressWarnings("unchecked")
 		Collection<AsnPsmNameElementPair> subElements = result.getSubElements();
-
 		Collection col = element.getAllProperties();
 		Iterator it = col.iterator();
+		int countSubElements=1; //counts the elements, just for nice debug output
 		while(it.hasNext()){
+			//get the sub element facade
 			ModelElementFacade m = (ModelElementFacade) it.next();
-			final String mDatatype = dataTypeMapping(element.getFullyQualifiedName());
-			debug("   with: "+mDatatype + " and name="+m.getName());
-			AsnPsmElement e = getAsnElement(m, knownElements, allElements);
-			if (e != null) {
+			final String name = m.getFullyQualifiedName();
+
+			//make a debug output
+			debug("Element No "+countSubElements++ + " with Name: "+name, level+1);
+			final int subLevel=level+2;
+
+			//build the subElement
+			AsnPsmElement subElement = getAsnElement(m, knownElements, subLevel);
+			
+			//store the subElement
+			if (subElement != null) {
 				AsnPsmNameElementPair pair = new AsnPsmNameElementPair();
 				pair.setName(m.getName());
-				pair.setElement(e);
+				pair.setElement(subElement);
 				subElements.add(pair);
 			}
 		}
+		
+		//store all subElements
 		result.setSubElements(subElements);
 
+		//return the created Element
 		return result;
 	}
 
@@ -168,9 +209,9 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationEndFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(AssociationEndFacade element, Map knownElements, Collection allElements)
+	public AsnPsmElement getAsnElement(AssociationEndFacade element, Map knownElements, Integer level)
 	{
-		return getAsnElement(element.getType(), knownElements, allElements);
+		return getAsnElement(element.getType(), knownElements, level);
 	}
 
 	
@@ -179,7 +220,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(AssociationFacade element, Map knownElements, Collection allElements) 
+	public AsnPsmElement getAsnElement(AssociationFacade element, Map knownElements, Integer level) 
 	{
 		error("getAsnElement(AssociationFacade element)  not finished");
 		return null;
@@ -191,7 +232,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AssociationClassFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(AssociationClassFacade element, Map knownElements, Collection allElements) 
+	public AsnPsmElement getAsnElement(AssociationClassFacade element, Map knownElements, Integer level) 
 	{
 		error("getAsnElement(AssociationClassFacade element)  not finished");
 		return null;
@@ -203,9 +244,9 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AttributeFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(AttributeFacade element, Map knownElements, Collection allElements) 
+	public AsnPsmElement getAsnElement(AttributeFacade element, Map knownElements, Integer level) 
 	{
-		return getAsnElement(element.getType(), knownElements, allElements);
+		return getAsnElement(element.getType(), knownElements, level);
 	}
 
 
@@ -215,7 +256,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#getAsnElement(org.andromda.metafacades.uml.AttributeLinkFacade)
 	 */
 	@Override
-	public AsnPsmElement getAsnElement(AttributeLinkFacade element, Map knownElements, Collection allElements) 
+	public AsnPsmElement getAsnElement(AttributeLinkFacade element, Map knownElements, Integer Level) 
 	{
 		error("getAsnElement(AttributeLinkFacade element)  not finished");
 		return null;
@@ -227,7 +268,7 @@ extends org.andromda.cartridges.asn.psm.AsnPsmElementGenerator
 	 * @see org.andromda.cartridges.asn.psm.AsnPsmElementGenerator#dataTypeMapping(java.lang.String)
 	 */
 	@Override
-	public String dataTypeMapping(String original) {
+	public String dataTypeMapping(String original, Integer Level) {
 		if (original.toUpperCase().equals("java.lang.String")) return "VisibleString";
 
 		if (original.toUpperCase().equals("boolean")) return "BOOLEAN";

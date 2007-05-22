@@ -47,23 +47,35 @@ public class AsnPsmAsnDescriptionGeneratorImpl
     public org.andromda.cartridges.asn.psm.AsnPsmAsnDescription buildDescription(org.andromda.metafacades.uml.ClassifierFacade classifier)
     {
 		AsnPsmElementGenerator elementGenerator = new AsnPsmElementGeneratorImpl();
-    	debug("build AsnDescription: "+elementGenerator.dataTypeMapping(classifier.getFullyQualifiedName()));
+    	debug("build AsnDescription: "+elementGenerator.dataTypeMapping(classifier.getFullyQualifiedName(),0));
+    	
+    	
+    	//create a new Description object
     	AsnPsmAsnDescription desc = new AsnPsmAsnDescription();
+    	
+    	//setup primary data
     	desc.setDocumenation(classifier.getDocumentation("-- "));
     	desc.setName(classifier.getName());
-    	desc.setPackageName(classifier.getPackagePath());
-    	Collection<AsnPsmElement> allElements = new ArrayList<AsnPsmElement>();
+    	desc.setPackageName(classifier.getPackagePath()+"/"+classifier.getName());
+
+    	//variables for Elements
+    	Collection<AsnPsmElement> subElements = new ArrayList<AsnPsmElement>();
     	Map<String, AsnPsmElement> knownElements = new TreeMap<String, AsnPsmElement>();
     	
     	//build AsnElements
-    	Collection col = classifier.getAllProperties();
+    	Collection col = classifier.getAllAssociatedClasses();
     	Iterator it = col.iterator();
     	while(it.hasNext()){
     		ModelElementFacade m = (ModelElementFacade) it.next();
-    		debug("   with: "+elementGenerator.dataTypeMapping(m.getFullyQualifiedName()));
-    		elementGenerator.getAsnElement(m, knownElements, allElements);
+    		debug("add subElement: "+m.getFullyQualifiedName(), 1);
+    		subElements.add(elementGenerator.getAsnElement(m, knownElements, 2));
     	}
-    	desc.setAllElements(allElements);
+    
+    	desc.setSubElements(subElements);
+    	desc.setKnownElements(knownElements);
+    	
+    	
     	return desc;
+
     }
 }

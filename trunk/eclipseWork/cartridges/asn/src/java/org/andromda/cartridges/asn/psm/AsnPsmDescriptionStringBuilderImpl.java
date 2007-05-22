@@ -5,8 +5,6 @@
  */
 package org.andromda.cartridges.asn.psm;
 
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * @see org.andromda.cartridges.asn.psm.AsnPsmDescriptionStringBuilder
@@ -20,6 +18,8 @@ public class AsnPsmDescriptionStringBuilderImpl
         super();
     }
 
+    
+    
     /**
      * Copy-constructor from other AsnPsmDescriptionStringBuilder
      *
@@ -34,7 +34,8 @@ public class AsnPsmDescriptionStringBuilderImpl
     /**
      * @see org.andromda.cartridges.asn.psm.AsnPsmDescriptionStringBuilder#getString(org.andromda.cartridges.asn.psm.AsnPsmAsnDescription)
      */
-    public java.lang.String getString(AsnPsmAsnDescription description)
+    @Override
+    public java.lang.String getAsString(AsnPsmAsnDescription description)
     {
         String result = "";
         result += getFileHeader(description);
@@ -65,6 +66,7 @@ public class AsnPsmDescriptionStringBuilderImpl
     private String getFileBody(final AsnPsmAsnDescription description) {
     	String result ="\n";
     	
+    	/*
     	Iterator it = description.getAllElements().iterator();
     	while(it.hasNext()) {
     		AsnPsmElement element = (AsnPsmElement) it.next();
@@ -91,6 +93,7 @@ public class AsnPsmDescriptionStringBuilderImpl
     		//result += element.getType();
     		//result +="\n";
     	}
+    	*/
     	return result;
     }
     

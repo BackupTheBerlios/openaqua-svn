@@ -58,19 +58,29 @@ public class AsnLoggerImpl
     }
 
 	/* (non-Javadoc)
-	 * @see org.andromda.cartridges.asn.psm.AsnLogger#debug(java.lang.String)
-	 */
-	@Override
-	public void debug(String msg) {
-    	logger.debug(msg);
-	}
-
-	/* (non-Javadoc)
 	 * @see org.andromda.cartridges.asn.psm.AsnLogger#fatal(java.lang.String)
 	 */
 	@Override
 	public void fatal(String msg) {
 		logger.fatal(msg);		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnLogger#debug(java.lang.String, java.lang.Integer)
+	 */
+	@Override
+	public void debug(String msg, Integer level) {
+		String spaces = "";
+		for (int i=0;i<level;i++) spaces += "   ";
+		logger.debug(spaces + msg);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.andromda.cartridges.asn.psm.AsnLogger#debug(java.lang.String)
+	 */
+	@Override
+	public void debug(String msg) {
+		debug(msg, 0);		
 	}
 
 }
