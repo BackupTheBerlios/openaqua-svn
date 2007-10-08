@@ -18,10 +18,10 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		maxConnections = 1;
+		maxConnections = 5;
 		reqLoops     = 100000;
 		statMilliSeconds = 10000;
-		almaPort = 32504;
+		almaPort = 10007;
 		almaHost = "localhost";
 
 	}
