@@ -5,7 +5,6 @@ package de.tmobile.cabu;
 
 import java.sql.Connection;
 import java.util.Random;
-import java.sql.Blob;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 
-//import oracle.sql.BLOB;
 
 /**
  * @author behrenan
@@ -27,7 +25,6 @@ public class TTConnection {
 	private boolean isConnected = false;
 	private Connection connection = null;
 	private PreparedStatement lookupForInstance = null;
-	private PreparedStatement lookupForInstanceForUpdate = null;
 	private PreparedStatement setLockForInstance = null;
 	private Random random = new Random();
 
@@ -117,11 +114,7 @@ public class TTConnection {
 
 	public void Connect() throws SQLException
 	{
-		if (Configuration.getInstance().isUseOracle()) {
-			connection = DriverManager.getConnection(Configuration.getInstance().getDNS(), "ALMGR_SCHEMA", "perf20tst");
-		} else {
-			connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
-		}
+		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
 		reportSQLWarning(connection.getWarnings());
 		connection.setAutoCommit (true);
 
@@ -131,7 +124,6 @@ public class TTConnection {
 			setLockForInstance = connection.prepareStatement("UPDATE TA_BLOB set VAR1=?, VAR2=? where BLOB_ID=?");
 		} else {
 			lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=?");
-			lookupForInstanceForUpdate = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=? for update");
 			setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
 		}
 
