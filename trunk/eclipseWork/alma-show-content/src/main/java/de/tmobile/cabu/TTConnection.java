@@ -4,14 +4,20 @@
 package de.tmobile.cabu;
 
 import java.sql.Connection;
-import java.util.Random;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
-import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 
 /**
@@ -24,12 +30,14 @@ public class TTConnection {
 	boolean shouldWait = false;
 	private boolean isConnected = false;
 	private Connection connection = null;
-	private PreparedStatement statementGetAllTemplates= null;
-	private Random random = new Random();
+	private Logger logger = Logger.getRootLogger();
+	private Map<Integer, String> mapSubType;
+
 
 
 	public TTConnection() throws ClassNotFoundException
 	{
+		this.mapSubType = new HashMap<Integer, String>();
 		this.isDriverLoaded = false;
 		loadDriver();
 	}
@@ -39,7 +47,7 @@ public class TTConnection {
 	public void loadDriver() throws ClassNotFoundException
 	{
 		if (!isDriverLoaded) {
-			Class.forName(Configuration.getInstance().getDriver());
+			Class.forName("com.timesten.jdbc.TimesTenDriver");
 			isDriverLoaded = true;
 		}
 	}
@@ -111,37 +119,164 @@ public class TTConnection {
 
 
 
-	public void Connect() throws SQLException
-	{
-		connection = DriverManager.getConnection(Configuration.getInstance().getDNS());
-		reportSQLWarning(connection.getWarnings());
-		connection.setAutoCommit (true);
-
-		//lookupForInstance = connection.prepareStatement("select budgetinstance_id, alock, value from TA_BUDGET_instance where CONTRACT_ID=?");
-		//setLockForInstance = connection.prepareStatement("UPDATE TA_BUDGET_instance set alock=sysdate where budgetinstance_id=? ");
-
-		isConnected = true;
-	}
-
-
-
-
-	public void Disconnect()
-	{
+	public boolean Connect(final String dsn) {
 		try {
-			if (connection != null && connection.isClosed() == false) {
-				//lookupForInstance.close();
-				//setLockForInstance.close();
-				connection.close();
-			}
+			connection = DriverManager.getConnection(dsn);
+			reportSQLWarning(connection.getWarnings());
+			//connection.setAutoCommit (true);
+			isConnected = true;
+			BuildSubTypeDescription();
+			return true;
+		} catch (SQLException e) {
 			isConnected = false;
-		}  catch (SQLException ex) {
-			reportSQLException(ex);
+			logger.error("Cannot Connect to DSN: "+dsn);
+			reportSQLException(e);
+			return false;
 		}
 	}
 
 
 
+
+	public boolean Disconnect()
+	{
+		try {
+			if (connection != null && connection.isClosed() == false) {
+				connection.close();
+			}
+			isConnected = false;
+			return true;
+		}  catch (SQLException ex) {
+			reportSQLException(ex);
+			return false;
+		}
+	}
+	
+	
+	public String GetSubTypeDescription(Integer id) {
+		String result = "<unknown>";
+		if (mapSubType.containsKey(id)) {
+			result = mapSubType.get(id);
+		}
+		return result;
+	}
+
+	public void ListKnownSubTypes(){
+		Iterator<Integer> it = mapSubType.keySet().iterator();
+		while(it.hasNext()) {
+			Integer id=it.next();
+			logger.debug("Know Subtype "+id+"="+mapSubType.get(id));
+		}
+		
+	}
+	
+	
+	public void BuildSubTypeDescription() {
+		if (isConnected == false) return ;
+		mapSubType = new HashMap<Integer, String>();
+
+		try {
+			//exec SQL command
+			Statement stmt;
+			stmt = connection.createStatement();
+
+			ResultSet rs = stmt.executeQuery("select sub.element_subtype_cv, desc.description from acm_schema.acm$ta_element_subtype_cv sub, acm_schema.acm$ta_description desc where sub.description_id=desc.description_id");   
+			
+			//parse the result
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				String element_value = rs.getString(2);
+				mapSubType.put(id, element_value);
+			}
+			
+			//close statements
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			logger.error("Error while List Root ids for templates:");
+			reportSQLException(e);
+		}
+		
+	}
+	 
+	
+
+	
+	public void listTemplateDescription(Integer rootId) {
+		
+		if (isConnected == false) return ;
+
+		try {
+			//exec SQL command
+			Statement stmt;
+			stmt = connection.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("select ELEMENT_TEMPLATE_ID, element_type_cv, element_subtype_cv, value  from acm_schema.acm$ta_element_tmpl where root_id = parent_id and root_id="+rootId);
+			
+			//parse the result
+			while(rs.next()) {
+				int element_id = rs.getInt(1);
+				int element_type = rs.getInt(2);
+				int element_subtype = rs.getInt(3);
+				String element_value = rs.getString(4);
+				logger.debug("Element Id="+element_id + " type="+element_type+" subtype("+element_subtype+")="+GetSubTypeDescription(element_subtype)+" value="+element_value);
+			}
+			
+			//close statements
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			logger.error("Error while List Root ids for templates:");
+			reportSQLException(e);
+		}
+	}
+
+	
+	public void listTemplate(Integer elementId) {
+		logger.debug("List Template for ID "+elementId);
+		listTemplateDescription(elementId);
+	}
+
+	
+	public void listAllTemplates(List<Integer> ids) {
+		ListIterator<Integer> it = ids.listIterator();
+		while(it.hasNext()) {
+			listTemplate(it.next());
+		}
+	}
+
+	
+	public List<Integer> getTemplateIds() {
+		List<Integer> result = new LinkedList<Integer>(); 
+		if (isConnected == false) return result;
+		
+		try {
+			//exec SQL command
+			Statement stmt;
+			stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select ELEMENT_TEMPLATE_ID from ACM_SCHEMA.ACM$TA_ELEMENT_TMPL where element_template_id = root_id order by ELEMENT_TEMPLATE_ID ; ");
+			
+			//parse the result
+			while(rs.next()) {
+				int element_id = rs.getInt(1);
+				result.add(element_id);
+			}
+			
+			//close statements
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			logger.error("Error while List Root ids for templates:");
+			reportSQLException(e);
+		}
+		return result;
+	}
+
+	
+	
 	/**
 	 * Reads all bundle instances for a given contract id
 	 *

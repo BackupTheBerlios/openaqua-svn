@@ -26,8 +26,8 @@ final public class Configuration {
 
 	private Configuration() {
 		super();
-		useOracle = true;
-		doBlopTest = true;
+		useOracle = false;
+		doBlopTest = false;
 		maxConnections = 2;
 		
 		maxContracts = 5000000;
