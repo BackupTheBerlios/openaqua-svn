@@ -3,56 +3,45 @@
  */
 package de.tmobile.cabu;
 
-import java.sql.SQLException;
-
-
-
-
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 
 /**
  * @author behrenan
- *
+ * 
  */
 public class Main {
 	static TTConnection mainConnection = null;
 
-
-
-
-	/**
-	 * makes the measuring
-	 * @throws ClassNotFoundException 
-	 *
-	 */
-	private static void execution ()  {		
-
-		//setup threads
-
-	}
-
+	final private static Logger logger = Logger.getRootLogger();
 
 	/**
 	 * @param args
-	 * @throws InterruptedException 
-	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
+		setupLogging();
 
+		AlmaConnection alma;
 		try {
-			mainConnection = new TTConnection();
-			mainConnection.Connect();
-		} catch (ClassNotFoundException e1) {
-			System.err.println("Java ClassNotFound: " + e1.getMessage());
-			return;
-		} catch (SQLException e) {
-			System.err.println("SQLException: " + e.getMessage());
+			alma = new AlmaConnection("DSN");
+		} catch (ClassNotFoundException e) {
+			logger.error("Class not Found");
 			e.printStackTrace();
+			return;
 		}
+		alma.listTemplates();
 
-		execution();
-		mainConnection.Disconnect();
+	}
 
-
+	private static void setupLogging() {
+		SimpleLayout layout = new SimpleLayout();
+		ConsoleAppender consoleAppender = new ConsoleAppender(layout);
+		logger.addAppender(consoleAppender);
+		// ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
+		logger.setLevel(Level.ALL);
+		logger.debug("Logger Environment set up");
 	}
 
 }
