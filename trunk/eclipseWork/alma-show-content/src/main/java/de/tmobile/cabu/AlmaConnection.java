@@ -4,6 +4,7 @@
 package de.tmobile.cabu;
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -25,11 +26,18 @@ public class AlmaConnection {
 
 	public void listTemplates() {
 		if (allFine != true) return;
+		try {
+			CSubTypeList.getInstances().refresh(connection);
+			CSubTypeList.getInstances().list();
+			
+		} catch (SQLException e) {
+			connection.reportSQLException(e);
+		}
 		//connection.ListKnownSubTypes();
-		List<Integer> ids = connection.getTemplateIds();
-		logger.info("Found " + ids.size() + " Templates ");
+		//List<Integer> ids = connection.getTemplateIds();
+		//logger.info("Found " + ids.size() + " Templates ");
 		//connection.listTemplate(2);
-		connection.listAllTemplates(ids);
+		//connection.listAllTemplates(ids);
 	}
 	
 	public void Connect(final String dsn) {
