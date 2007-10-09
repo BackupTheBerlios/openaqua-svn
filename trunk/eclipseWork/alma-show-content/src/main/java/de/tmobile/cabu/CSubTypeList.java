@@ -6,32 +6,54 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.Map.Entry;
+
+//import org.apache.log4j.Logger;
 
 
 /**
  * @author behrenan
  * 
  */
-public class CSubTypeList {
+public class CSubTypeList extends CListableObject  {
 
-	private Map<Integer, CSubType> mapSubTypes;
+
 	private static CSubTypeList INSTANCE = new CSubTypeList();
+	private Map<Integer, CSubType> mapElements = new TreeMap<Integer, CSubType>();
+	//private Logger logger = Logger.getRootLogger();
 
 	public CSubTypeList() {
 		super();
-		this.mapSubTypes = new HashMap<Integer, CSubType>();
 	}
-	
+
 	public static CSubTypeList getInstances() {
 		return INSTANCE;		
 	}
 
+	
+	public void clear() {
+		mapElements.clear();
+
+	}
+	
+	public CSubType get(Integer id) {
+		return mapElements.get(id);
+	}
+	
+	public void list(String type, Integer spaces) {
+		Iterator<Entry<Integer, CSubType>> it = mapElements.entrySet().iterator();
+		while(it.hasNext()) {
+			it.next().getValue().list("SUBTYPE", spaces);
+		}
+
+	}
+
+	
 	public void refresh(TTConnection connection) throws SQLException {
-		mapSubTypes.clear();
+		clear();
 		if (connection.isConnected()) {
 			// exec SQL command
 			Statement stmt = connection.createStatement();
@@ -41,7 +63,8 @@ public class CSubTypeList {
 			while (rs.next()) {
 				int id = rs.getInt(1);
 				String value = rs.getString(2);
-				mapSubTypes.put(id, new CSubType(id, value));
+				//logger.debug("Add SubType id="+id+" value="+value);
+				mapElements.put(id, new CSubType(id, value));
 			}
 
 			// close statements
@@ -52,15 +75,5 @@ public class CSubTypeList {
 
 	}
 
-	public void list() {
-		Iterator<Entry<Integer, CSubType>> it = mapSubTypes.entrySet().iterator();
-		while(it.hasNext()) {
-			it.next().getValue().list();
-		}
-	}
 	
-	
-	public CSubType get(Integer id) {
-		return mapSubTypes.get(id);
-	}
 }

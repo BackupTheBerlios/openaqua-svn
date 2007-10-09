@@ -6,15 +6,9 @@ package de.tmobile.cabu;
 import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -29,11 +23,9 @@ public class TTConnection {
 	private boolean isConnected = false;
 	private Connection connection = null;
 	private Logger logger = Logger.getRootLogger();
-	private Map<Integer, CTemplate> mapTemplates;
 
 	public TTConnection() throws ClassNotFoundException {
 		super();
-		this.mapTemplates = new HashMap<Integer, CTemplate>();
 		this.isDriverLoaded = false;
 		loadDriver();
 	}
@@ -182,12 +174,6 @@ public class TTConnection {
 		return result;
 	}
 
-	public void listAllTemplates(List<Integer> ids) {
-		ListIterator<Integer> it = ids.listIterator();
-		while (it.hasNext()) {
-			listTemplate(it.next());
-		}
-	}
 
 	public List<Integer> getTemplateIds() {
 		List<Integer> result = new LinkedList<Integer>();
