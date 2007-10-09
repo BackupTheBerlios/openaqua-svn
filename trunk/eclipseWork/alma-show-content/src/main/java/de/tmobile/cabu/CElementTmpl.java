@@ -6,7 +6,8 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Set;
+
+
 
 /**
  * @author behrenan
@@ -26,6 +27,7 @@ public class CElementTmpl extends CListableObject{
 	private String validFrom;
 	private String validTo;
 
+
 	private CElementTmpl() {
 		id = 0;
 	}
@@ -35,19 +37,6 @@ public class CElementTmpl extends CListableObject{
 		this.id =id;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.IElement#list()
-	 */
-	public void list(String type, Integer spaces) {
-		String result = spaces(spaces)+id;
-		if (subType != null) result = result + " " + subType.getDescription();
-		result = result + " = " + value;
-		System.out.println(result);
-	}
-
-	public Integer id() {
-		return id;
-	}
 
 	public void refresh(TTConnection connection) throws SQLException {
 		if (!connection.isConnected()) return;
@@ -59,13 +48,14 @@ public class CElementTmpl extends CListableObject{
 
 		// parse the result
 		while (rs.next()) {
-			value = rs.getString(1);
+			if (rs.getString(1) != null)	value = rs.getString(1).trim();
 			subType = CSubTypeList.getInstances().get(rs.getInt(2));
 			rootId = rs.getInt(3);
 			objVersion = rs.getInt(4);
 			parentId = rs.getInt(5);
-			//validFrom = rs.getTime(6).toGMTString();
-			//validTo = rs.getTime(7).toLocaleString();
+			validFrom = rs.getDate(6).toString() +  " " + rs.getTime(6).toString();
+			validTo = rs.getDate(7).toString() +  " " + rs.getTime(7).toString();
+			
 		}
 
 		// close statements
@@ -73,20 +63,29 @@ public class CElementTmpl extends CListableObject{
 		stmt.close();
 	}
 
-	public void collectElementTmplSubTypes(Set<Integer> ids) {
-		if (subType != null && value != null) {
-			ids.add(subType.getId());
-		}
-	}
-	
 	public void setValue(final String value) {
-		this.value = value;
+		this.value=value;
 	}
 	
-	public void listFormated(Set<Integer> attributeTypes, String line) {
-		if (subType == null) return;
-		if (!attributeTypes.contains(subType.getId())) return;
-		line=value+sep();
+	public String getPrintLine(final String prefix) {
+		String result = "";
+		result += prefix		+ sep();
+		result += getId() 		+ sep();
+		result += getRootId()	+ sep();
+		result += getParentId() + sep();
+		return result;
+	}
+	
+	
+	@Override
+	public void print(final String prefix) {
+		System.out.println(getPrintLine(prefix));
+	}
+	
+	
+
+	public Integer id() {
+		return id;
 	}
 
 	/**

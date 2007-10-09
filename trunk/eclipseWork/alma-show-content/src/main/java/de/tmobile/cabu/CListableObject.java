@@ -3,13 +3,14 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  *
  */
 public abstract class CListableObject {
 	
-	public String spaces(Integer spaces) {
+	public static String spaces(Integer spaces) {
 		String result = "";
 		for (Integer i = 0;i < spaces;i++) {
 			result = result + sep();
@@ -17,10 +18,9 @@ public abstract class CListableObject {
 		return result;
 	}
 
-	public String sep() {
+	public static String sep() {
 		return "\t";
 	}
 	
-	abstract public void list(String type, Integer spaces);
-
+	abstract public void print(final String prefix);
 }

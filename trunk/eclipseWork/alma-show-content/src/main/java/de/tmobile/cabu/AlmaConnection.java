@@ -28,9 +28,9 @@ public class AlmaConnection {
 		if (allFine != true) return;
 		try {
 			CSubTypeList.getInstances().refresh(connection);
-			//CSubTypeList.getInstances().list(0);
+			//CSubTypeList.getInstances().print("SUBTYPE");
 			CTemplateList.getInstances().refresh(connection);
-			CTemplateList.getInstances().list("TEMPLATE", 0);
+			CTemplateList.getInstances().print("TEMPLATE");
 			
 		} catch (SQLException e) {
 			connection.reportSQLException(e);

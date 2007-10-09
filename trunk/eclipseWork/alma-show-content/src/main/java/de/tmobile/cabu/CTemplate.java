@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import java.util.TreeSet;
+
 
 /**
  * @author behrenan
@@ -16,30 +17,32 @@ import org.apache.log4j.Logger;
 public class CTemplate extends CElementTmpl {
 	CAttributeList attributes;
 
-	private Logger logger = Logger.getRootLogger();
-
 	public CTemplate(Integer rootId) {
 		super(rootId);
 		attributes = new CAttributeList();
 	}
 
-	public void clearAttributes() {
-		attributes.clear();
-	}
 
-	public void addAttribute(CAttribute attribute) {
+	
+	public String getSubElements() {
+		Set<Integer> values = new TreeSet<Integer>();
+		values.add(14004); //max instances
+		values.add(14005); //ProRating Flag
+		return attributes.getElementsValues(values);
 	}
-
-	public void list(String type, Integer spaces) {
-		//System.out.println("");
-		
-		//super.list("TEMPLATE", spaces);
-		//attributes.list("ATTR", spaces+1);
-		
+	
+	
+	public String getPrintLine(final String prefix) {
+		String result = super.getPrintLine(prefix);
+		result += getSubElements();
+		return result;
 	}
-
+	
+	
+	
 	private void refreshAttributes(TTConnection connection) throws SQLException {
-		clearAttributes();
+		attributes.clear();
+		if (!connection.isConnected()) return;
 
 		// exec SQL command
 		Statement stmt = connection.createStatement();
@@ -49,7 +52,6 @@ public class CTemplate extends CElementTmpl {
 		// parse the result
 		while (rs.next()) {
 			int id = rs.getInt(1);
-			//logger.debug("Add Attribute with ID "+id);
 			attributes.put(connection, id, new CAttribute(id));
 		}
 
@@ -59,22 +61,11 @@ public class CTemplate extends CElementTmpl {
 		
 	}
 	
+	
 	public void refresh(TTConnection connection) throws SQLException {
-		if (!connection.isConnected())
-			return;
-		logger.debug("Refresh Template rootId " + id());
 		super.refresh(connection);
 		setValue("");
 		refreshAttributes(connection);
 	}
-	
-	public void collectElementTmplSubTypes(Set<Integer> ids) {
-		super.collectElementTmplSubTypes(ids);
-		attributes.collectElementTmplSubTypes(ids);
-	}
-	
-	public void listFormated(Set<Integer> attributeTypes, String line) {
-		super.listFormated(attributeTypes, line);
-	}
-	
+
 }

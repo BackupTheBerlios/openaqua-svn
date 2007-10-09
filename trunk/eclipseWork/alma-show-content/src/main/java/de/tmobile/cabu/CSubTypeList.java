@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-//import org.apache.log4j.Logger;
 
 
 /**
@@ -23,7 +22,6 @@ public class CSubTypeList extends CListableObject  {
 
 	private static CSubTypeList INSTANCE = new CSubTypeList();
 	private Map<Integer, CSubType> mapElements = new TreeMap<Integer, CSubType>();
-	//private Logger logger = Logger.getRootLogger();
 
 	public CSubTypeList() {
 		super();
@@ -42,15 +40,21 @@ public class CSubTypeList extends CListableObject  {
 	public CSubType get(Integer id) {
 		return mapElements.get(id);
 	}
+
 	
-	public void list(String type, Integer spaces) {
+
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
+	 */
+	@Override
+	public void print(final String prefix) {
 		Iterator<Entry<Integer, CSubType>> it = mapElements.entrySet().iterator();
 		while(it.hasNext()) {
-			it.next().getValue().list("SUBTYPE", spaces);
+			it.next().getValue().print(prefix);
 		}
-
+		
 	}
-
+	
 	
 	public void refresh(TTConnection connection) throws SQLException {
 		clear();
@@ -74,6 +78,7 @@ public class CSubTypeList extends CListableObject  {
 		}
 
 	}
+
 
 	
 }

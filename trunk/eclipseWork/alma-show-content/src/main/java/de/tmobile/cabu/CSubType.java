@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 
+
 /**
  * @author behrenan
  *
@@ -21,9 +22,9 @@ public class CSubType extends CListableObject{
 	}
 
 	
-
+	
 	public void list(String type, Integer spaces) {
-		System.out.println(spaces(spaces)+type+sep()+id+sep()+description);
+		
 	}
 
 	public String getDescription() {
@@ -33,6 +34,16 @@ public class CSubType extends CListableObject{
 
 	public Integer getId() {
 		return this.id;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
+	 */
+	@Override
+	public void print(String prefix) {
+		System.out.println(prefix+sep()+id+sep()+description);
 	}
 
 
