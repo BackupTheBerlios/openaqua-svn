@@ -29,4 +29,7 @@ public class Logger {
 	public void warn(final String text) {
 		System.out.println("WRN " + text);
 	}
+	public void out(final String text) {
+		System.out.println(text);
+	}
 }

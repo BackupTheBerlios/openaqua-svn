@@ -3,38 +3,29 @@
  */
 package de.tmobile.cabu;
 
+import java.sql.Timestamp;
+
 /**
  * @author behrenan
  *
  */
-public class CCareDescription extends CListableObject{
-	private Integer id;
+public class CCareDescription extends CBaseType{
 	private String description;
 	Logger logger = Logger.getRootLogger();
-	
-	private CCareDescription () {super();}
-	
-	public CCareDescription (Integer id, String description) {
-		this.id = id;
+
+	public CCareDescription (int id, int obj_version, Timestamp valid_from, Timestamp valid_to, final String description) {
+		super(id, obj_version, valid_from, valid_to);
 		this.description = description;
 	}
+	
 
 	public String getDescription() {
 		return this.description;
 	}
 
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public Integer getDescId() {
-		return this.id;
-	}
-
-	
 	public void print(String prefix) {
-		logger.info(prefix+sep()+id+sep()+description);
+		logger.info(prefix+sep()+getId()+sep()+description);
 	}
 	
 }

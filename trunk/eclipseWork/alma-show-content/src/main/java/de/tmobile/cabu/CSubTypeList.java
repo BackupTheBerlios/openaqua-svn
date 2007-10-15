@@ -19,7 +19,7 @@ import java.util.TreeMap;
  */
 public class CSubTypeList extends CListableListObject  {
 
-
+	final private Logger logger=Logger.getRootLogger();
 	private static CSubTypeList INSTANCE = new CSubTypeList();
 	private Map mapElements = new TreeMap();
 
@@ -54,6 +54,7 @@ public class CSubTypeList extends CListableListObject  {
 	
 	
 	public void refresh(TTConnection connection) throws SQLException {
+		logger.debug("Refresh SubTypeList");
 		clear();
 		if (connection.isConnected()) {
 			// exec SQL command

@@ -31,21 +31,24 @@ public class AlmaConnection {
 			CSubTypeList.getInstances().refresh(connection);
 			CCareDescriptionList.getInstances().refresh(connection);
 			CDescriptionList.getInstances().refresh(connection);
-			CIdentificationList.getInstances().refresh(connection);
-
+			CIdentificationTemplatesList.getInstances().refresh(connection);
+			CAssocList.getInstances().refresh(connection);
+			
 			if (whatToRun == 0) {
-				CSubTypeList.getInstances().print("SUBTYPE");
-				CCareDescriptionList.getInstances().print("CareDescription");
-				CDescriptionList.getInstances().print("Description");
-				CIdentificationList.getInstances().printTemplateIds("TEMPL_IDs");
-				CIdentificationList.getInstances().printContractIds("CONTR_IDs");
+				//CSubTypeList.getInstances().print("SUBTYPE");
+				//CCareDescriptionList.getInstances().print("CareDescription");
+				//CDescriptionList.getInstances().print("Description");
+				CIdentificationTemplatesList.getInstances().printTemplateIds("TEMPL_IDs");
+				CIdentificationTemplatesList.getInstances().printContractIds("CONTR_IDs");
+				CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 			}
 			
-			if (whatToRun == 1) CIdentificationList.getInstances().printTemplateIds("TEMPL_IDs");
-			if (whatToRun == 2) CIdentificationList.getInstances().printContractIds("CONTR_IDs");
+			if (whatToRun == 1) CIdentificationTemplatesList.getInstances().printTemplateIds("TEMPL_IDs");
+			if (whatToRun == 2) CIdentificationTemplatesList.getInstances().printContractIds("CONTR_IDs");
 			if (whatToRun == 3) CSubTypeList.getInstances().print("SUBTYPE");;
-			if (whatToRun == 4) CDescriptionList.getInstances().print("Description");
-			if (whatToRun == 5) CCareDescriptionList.getInstances().print("CareDescription");
+			if (whatToRun == 4) CDescriptionList.getInstances().print("TA_DESCRIPITON");
+			if (whatToRun == 5) CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPITON");
+			if (whatToRun == 6) CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 			
 			
 		} catch (SQLException e) {

@@ -55,7 +55,6 @@ public class CDescriptionList  extends CListableListObject  {
 			CDescription c = (CDescription )it.next();
 			c.print(prefix);
 		}
-		
 	}
 	
 	
