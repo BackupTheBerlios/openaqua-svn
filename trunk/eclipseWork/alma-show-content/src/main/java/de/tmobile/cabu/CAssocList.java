@@ -20,12 +20,11 @@ public class CAssocList  extends CBaseList  {
 	
 	public void HandleQueryResult(ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			CBaseType t = new CAssoc(rs.getInt(1), rs.getInt(3), rs.getTimestamp(4), rs.getTimestamp(5), rs.getLong(2)); 
-			store(t);
+			store(new CAssoc(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getLong(5)));
 		}
 	}
 
 	protected String getQueryString() {
-		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc";
+		return "select identification_id, obj_version, valid_from, valid_to, element_Id from acm_schema.acm$ta_element_ident_assoc";
 	}
 }

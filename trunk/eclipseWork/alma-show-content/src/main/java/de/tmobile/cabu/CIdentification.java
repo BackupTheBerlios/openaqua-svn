@@ -20,10 +20,10 @@ public class CIdentification extends CBaseType {
 
 	final private Logger logger = Logger.getRootLogger();
 
-	public CIdentification(int id, int obj_version, Timestamp valid_from,
-			Timestamp valid_to, int type, int cv, int mandator,
-			int elementTemplateId, int elementMasterTemplateId,
-			String externalIdentifier) {
+	public CIdentification(
+			int id, 		int obj_version,	Timestamp valid_from,		Timestamp valid_to, 
+			int type, 		int cv, 			int mandator,				int elementTemplateId, 
+			int elementMasterTemplateId,		String externalIdentifier) {
 		super(id, obj_version, valid_from, valid_to);
 		this.type = type;
 		this.cv = cv;
