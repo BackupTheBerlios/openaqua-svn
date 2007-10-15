@@ -47,7 +47,11 @@ public class CIdentification extends CListableObject{
 	}
 
 	public void setEXTERNAL_IDENTIFIER(String external_identifier) {
-		this.EXTERNAL_IDENTIFIER = external_identifier;
+		if (external_identifier != null) {
+			this.EXTERNAL_IDENTIFIER = external_identifier.trim();
+		} else {
+			this.EXTERNAL_IDENTIFIER = null;
+		}
 	}
 
 	public int getIDENTIFICATION_CV() {
@@ -98,8 +102,28 @@ public class CIdentification extends CListableObject{
 		this.VALID_FROM = valid_from;
 	}
 
+	public void setVALID_FROM(String date, String time) {
+		String result = "";
+		if (date != null) result += date;
+		if (time != null) {
+			if (result != null) result += " ";
+			result += time;
+		}
+		this.VALID_FROM=result;
+	}
+	
 	public String getVALID_TO() {
 		return this.VALID_TO;
+	}
+
+	public void setVALID_TO(String date, String time) {
+		String result = "";
+		if (date != null) result += date;
+		if (time != null) {
+			if (result != null) result += " ";
+			result += time;
+		}
+		this.VALID_TO=result;
 	}
 
 	public void setVALID_TO(String valid_to) {
@@ -109,7 +133,16 @@ public class CIdentification extends CListableObject{
 
 	@Override
 	public void print(String prefix) {
-		logger.info("Identification:\t"+getIDENTIFICATION_ID());
+		String result = "";
+		result += getIDENTIFICATION_ID()+sep(); //Database ID
+		result += getOBJ_VERSION()+sep();
+		result += getMANDATOR_ID()+sep();
+		result += getEXTERNAL_IDENTIFIER()+sep(); //MSISDN oder Vertrag
+		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_TY()).getDescription()+"\""+sep();; //Type of Element
+		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_CV()).getDescription()+"\""+sep();; //Description
+		result += getVALID_FROM()+sep();
+		result += getVALID_TO();
+		logger.info(result);
 	}
 
 }

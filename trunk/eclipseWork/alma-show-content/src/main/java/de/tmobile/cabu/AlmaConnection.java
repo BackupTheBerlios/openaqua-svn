@@ -29,8 +29,14 @@ public class AlmaConnection {
 		if (allFine != true) return;
 		try {
 			CSubTypeList.getInstances().refresh(connection);
-			CSubTypeList.getInstances().print("SUBTYPE");
+			//CSubTypeList.getInstances().print("SUBTYPE");
+
+			CCareDescriptionList.getInstances().refresh(connection);
+			//CCareDescriptionList.getInstances().print("CareDescription");
 			
+			CDescriptionList.getInstances().refresh(connection);
+			//CDescriptionList.getInstances().print("Description");
+
 			CIdentificationList.getInstances().refresh(connection);
 			CIdentificationList.getInstances().print("???");
 			
