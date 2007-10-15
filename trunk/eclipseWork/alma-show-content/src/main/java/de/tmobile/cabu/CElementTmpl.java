@@ -3,9 +3,8 @@
  */
 package de.tmobile.cabu;
 
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.sql.Statement;
 
 
 
@@ -14,6 +13,7 @@ import java.sql.Statement;
  *
  */
 public class CElementTmpl extends CListableObject{
+	
 	private Integer id;
 	private Integer tmplVersion;
 	private Integer typeCv;
@@ -39,6 +39,7 @@ public class CElementTmpl extends CListableObject{
 
 
 	public void refresh(TTConnection connection) throws SQLException {
+/*
 		if (!connection.isConnected()) return;
 
 		// exec SQL command
@@ -61,6 +62,7 @@ public class CElementTmpl extends CListableObject{
 		// close statements
 		rs.close();
 		stmt.close();
+		*/
 	}
 
 	public void setValue(final String value) {

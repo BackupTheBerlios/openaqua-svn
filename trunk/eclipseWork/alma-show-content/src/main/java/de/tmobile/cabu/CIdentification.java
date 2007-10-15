@@ -63,6 +63,7 @@ public class CIdentification extends CBaseType {
 
 	public void print(String prefix) {
 		String result = super.getPrintString(prefix) + sep();
+		/*
 		result += "\""
 				+ CDescriptionList.getInstances().get(new Integer(getType()))
 						.getDescription() + "\"" + sep();
@@ -70,6 +71,7 @@ public class CIdentification extends CBaseType {
 				+ CDescriptionList.getInstances().get(new Integer(getCv()))
 						.getDescription() + "\"" + sep();
 
+		*/
 		logger.out(result);
 	}
 

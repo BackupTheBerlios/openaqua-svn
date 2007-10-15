@@ -48,18 +48,17 @@ public abstract class CBaseList extends CListableObject {
 	}
 	
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
-	abstract public void refresh(TTConnection connection, final String query) throws SQLException;
+	abstract protected String getQueryString();
 
-	protected void refreshList(TTConnection connection, final String query) throws SQLException {
+	protected void refreshList(TTConnection connection) throws SQLException {
 		clear();
 		if (connection.isConnected()) {
 			// exec SQL command
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
+			ResultSet rs = stmt.executeQuery(getQueryString());
 			HandleQueryResult(rs);
 			rs.close();
 			stmt.close();
-
 		}
 	}
 

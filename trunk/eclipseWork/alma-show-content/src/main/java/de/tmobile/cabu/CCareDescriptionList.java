@@ -17,10 +17,14 @@ public class CCareDescriptionList  extends CBaseList  {
 		return INSTANCE;		
 	}
 
-	public void RandleQueryResult(ResultSet rs) throws SQLException {
+	protected void HandleQueryResult(ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new CCareDescription(rs.getInt(1), 0, null, null, rs.getString(2)));
+			store(new CCareDescription(rs.getInt(1), rs.getString(2)));
 		}
+	}
+
+	protected String getQueryString() {
+		return "select acm_description_id, acm_description from acm_schema.acm$ta_care_description";
 	}
 }
 

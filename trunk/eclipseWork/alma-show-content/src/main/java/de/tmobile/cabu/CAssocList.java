@@ -24,10 +24,8 @@ public class CAssocList  extends CBaseList  {
 			store(t);
 		}
 	}
-	
-	public void refresh(TTConnection connection, final String query) throws SQLException {
-		refreshList(connection, "");
-	}
-	
 
+	protected String getQueryString() {
+		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc";
+	}
 }

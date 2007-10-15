@@ -63,13 +63,14 @@ public class CElementTmplList extends CListableObject{
 	
 	public String getElementsValues(Set values) {
 		String result = "";
+		/*
 		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
 			CElementTmpl element = (CElementTmpl)it.next();
 			if (values.contains(element.getSubType().getId())) {
 				result += element.getValue() + sep();
 			}
-		}
+		}*/
 		return result;
 	}
 	

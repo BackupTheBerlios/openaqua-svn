@@ -5,42 +5,15 @@ package de.tmobile.cabu;
 
 
 
-
-
 /**
  * @author behrenan
  *
  */
-public class CSubType extends CListableObject{
-	private Integer id;
-	private String description;
-	
-	
-	public CSubType(Integer id, String description) {
-		this.id = id;
-		this.description = description.replaceFirst("CABU[- ]", "");
-		this.description = this.description.replaceFirst("Attribut[e]?", "");
-	}
-
-	
-	
-	
-	public void list(String type, Integer spaces) {
-		
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-
-	public Integer getId() {
-		return this.id;
-	}
-
-
-
-	public void print(String prefix) {
-		System.out.println(prefix+sep()+id+sep()+description);
+public class CSubType extends CCareDescription{
+	public CSubType(int id, String description) {
+		super(id, description);
+		String desc = description.replaceFirst("CABU[- ]", "");
+		desc = desc.replaceFirst("Attribut[e]?", "");
+		setDescription(desc);
 	}
 }
