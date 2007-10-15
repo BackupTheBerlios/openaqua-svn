@@ -8,6 +8,7 @@ package de.tmobile.cabu;
  *
  */
 public class Logger {
+	
 	private static Logger INSTANCE = new Logger();
 	private Logger() {super();}
 	

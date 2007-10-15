@@ -28,7 +28,6 @@ public class CCareDescription extends CListableObject{
 		return this.id;
 	}
 
-	@Override
 	public void print(String prefix) {
 		logger.info(prefix+sep()+id+sep()+description);
 	}

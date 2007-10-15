@@ -27,7 +27,7 @@ public class CAttributeList extends CElementTmplList {
 
 			// parse the result
 			while (rs.next()) {
-				int id = rs.getInt(1);
+				Integer id = new Integer(rs.getInt(1));
 				put(connection, id, new CAttribute(id));
 			}
 

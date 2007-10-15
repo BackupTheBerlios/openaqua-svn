@@ -29,7 +29,7 @@ public class CElementTmpl extends CListableObject{
 
 
 	private CElementTmpl() {
-		id = 0;
+		id = new Integer(0);
 	}
 
 	public CElementTmpl(Integer id) {
@@ -49,10 +49,10 @@ public class CElementTmpl extends CListableObject{
 		// parse the result
 		while (rs.next()) {
 			if (rs.getString(1) != null)	value = rs.getString(1).trim();
-			subType = CSubTypeList.getInstances().get(rs.getInt(2));
-			rootId = rs.getInt(3);
-			objVersion = rs.getInt(4);
-			parentId = rs.getInt(5);
+			subType = CSubTypeList.getInstances().get(new Integer(rs.getInt(2)));
+			rootId = new Integer(rs.getInt(3));
+			objVersion = new Integer(rs.getInt(4));
+			parentId = new Integer(rs.getInt(5));
 			validFrom = rs.getDate(6).toString() +  " " + rs.getTime(6).toString();
 			validTo = rs.getDate(7).toString() +  " " + rs.getTime(7).toString();
 			
@@ -77,7 +77,7 @@ public class CElementTmpl extends CListableObject{
 	}
 	
 	
-	@Override
+	
 	public void print(final String prefix) {
 		System.out.println(getPrintLine(prefix));
 	}

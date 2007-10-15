@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Map.Entry;
+
 
 
 
@@ -21,7 +21,7 @@ public class CSubTypeList extends CListableListObject  {
 
 
 	private static CSubTypeList INSTANCE = new CSubTypeList();
-	private Map<Integer, CSubType> mapElements = new TreeMap<Integer, CSubType>();
+	private Map mapElements = new TreeMap();
 
 	public CSubTypeList() {
 		super();
@@ -38,19 +38,16 @@ public class CSubTypeList extends CListableListObject  {
 	}
 	
 	public CSubType get(Integer id) {
-		return mapElements.get(id);
+		return (CSubType)mapElements.get(id);
 	}
 
 	
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
-	 */
-	@Override
 	public void print(final String prefix) {
-		Iterator<Entry<Integer, CSubType>> it = mapElements.entrySet().iterator();
+		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
-			it.next().getValue().print(prefix);
+			CSubType sub =	(CSubType)it.next();
+			sub.print(prefix);
 		}
 		
 	}
@@ -65,10 +62,10 @@ public class CSubTypeList extends CListableListObject  {
 
 			// parse the result
 			while (rs.next()) {
-				int id = rs.getInt(1);
+				Integer id = new Integer(rs.getInt(1));
 				String value = rs.getString(2);
-				//logger.debug("Add SubType id="+id+" value="+value);
 				mapElements.put(id, new CSubType(id, value));
+				
 			}
 
 			// close statements

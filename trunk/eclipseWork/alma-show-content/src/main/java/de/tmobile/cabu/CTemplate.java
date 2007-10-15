@@ -25,9 +25,9 @@ public class CTemplate extends CElementTmpl {
 
 	
 	public String getSubElements() {
-		Set<Integer> values = new TreeSet<Integer>();
-		values.add(14004); //max instances
-		values.add(14005); //ProRating Flag
+		Set values = new TreeSet();
+		values.add(new Integer(14004)); //max instances
+		values.add(new Integer(14005)); //ProRating Flag
 		return attributes.getElementsValues(values);
 	}
 	
@@ -51,7 +51,7 @@ public class CTemplate extends CElementTmpl {
 
 		// parse the result
 		while (rs.next()) {
-			int id = rs.getInt(1);
+			Integer id = new Integer(rs.getInt(1));
 			attributes.put(connection, id, new CAttribute(id));
 		}
 

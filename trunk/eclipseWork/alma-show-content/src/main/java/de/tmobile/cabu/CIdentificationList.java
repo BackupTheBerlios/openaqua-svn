@@ -6,17 +6,19 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Map.Entry;
+
+
+
 
 /**
  * @author behrenan
  *
  */
 public class CIdentificationList extends CListableListObject  {
-	private Map<Integer, CIdentification> mapElements = new TreeMap<Integer, CIdentification>();
+	private Map mapElements = new TreeMap();
+	final private Logger logger = Logger.getRootLogger();
 	
 	private static CIdentificationList  INSTANCE = new CIdentificationList ();
 	public static CIdentificationList getInstances() {
@@ -28,8 +30,9 @@ public class CIdentificationList extends CListableListObject  {
 	}
 	
 
-	@Override
+	
 	public void refresh(TTConnection connection) throws SQLException {
+		logger.debug("Refresh Identifiction List");
 		clear();
 		if (connection.isConnected()) {
 			// exec SQL command
@@ -55,7 +58,7 @@ public class CIdentificationList extends CListableListObject  {
 				ident.setOBJ_VERSION(rs.getInt(8));
 				ident.setVALID_FROM(rs.getDate(9).toString(),rs.getTime(9).toString());
 				//ident.setVALID_TO(rs.getDate(10).toString(), rs.getTime(10).toString());
-				mapElements.put(ident.getIDENTIFICATION_ID(), ident);
+				mapElements.put(new Integer (ident.getIDENTIFICATION_ID()), ident);
 			}
 
 			// close statements
@@ -66,15 +69,15 @@ public class CIdentificationList extends CListableListObject  {
 
 	}
 	
-	@Override
 	public void print(String prefix) {
+		/*
 		Iterator<Entry<Integer, CIdentification>> it = mapElements.entrySet().iterator();
 		while(it.hasNext()) {
 			it.next().getValue().print(prefix);
 		}
+		*/
 	}
 
-	@Override
 	public void clear() {
 		mapElements.clear();
 	}

@@ -20,7 +20,8 @@ public class CIdentification extends CListableObject{
 	private int OBJ_VERSION;
 	private String VALID_FROM;
 	private String VALID_TO;
-	private Logger logger = Logger.getRootLogger();
+	final private Logger logger = Logger.getRootLogger();
+
 
 	public CIdentification() {
 		super();
@@ -131,15 +132,14 @@ public class CIdentification extends CListableObject{
 	}
 
 
-	@Override
 	public void print(String prefix) {
 		String result = "";
 		result += getIDENTIFICATION_ID()+sep(); //Database ID
 		result += getOBJ_VERSION()+sep();
 		result += getMANDATOR_ID()+sep();
 		result += getEXTERNAL_IDENTIFIER()+sep(); //MSISDN oder Vertrag
-		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_TY()).getDescription()+"\""+sep();; //Type of Element
-		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_CV()).getDescription()+"\""+sep();; //Description
+//		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_TY()).getDescription()+"\""+sep();; //Type of Element
+		//		result += "\""+CDescriptionList.getInstances().get(getIDENTIFICATION_CV()).getDescription()+"\""+sep();; //Description
 		result += getVALID_FROM()+sep();
 		result += getVALID_TO();
 		logger.info(result);

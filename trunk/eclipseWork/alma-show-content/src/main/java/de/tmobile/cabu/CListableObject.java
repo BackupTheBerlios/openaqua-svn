@@ -10,9 +10,9 @@ package de.tmobile.cabu;
  *
  */
 public abstract class CListableObject {
-	public static String spaces(Integer spaces) {
+	public static String spaces(final int spaces) {
 		String result = "";
-		for (Integer i = 0;i < spaces;i++) {
+		for (int i = 0; i < spaces;i++) {
 			result = result + sep();
 		}
 		return result;

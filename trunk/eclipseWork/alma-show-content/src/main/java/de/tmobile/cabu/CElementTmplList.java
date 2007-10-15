@@ -16,7 +16,8 @@ import java.util.TreeMap;
  * 
  */
 public class CElementTmplList extends CListableObject{
-	private Map<Integer, CElementTmpl> mapElements = new TreeMap<Integer, CElementTmpl>();
+//	private Map<Integer, CElementTmpl> mapElements = new TreeMap<Integer, CElementTmpl>();
+	private Map mapElements = new TreeMap();
 
 
 	/*
@@ -35,7 +36,7 @@ public class CElementTmplList extends CListableObject{
 	 * @see de.tmobile.cabu.IElementList#get(java.lang.Integer)
 	 */
 	public CElementTmpl get(Integer id) {
-		return mapElements.get(id);
+		return (CElementTmpl) mapElements.get(id);
 	}
 
 
@@ -51,19 +52,20 @@ public class CElementTmplList extends CListableObject{
 	
 	
 	public void print(final String prefix) {
-		Iterator<CElementTmpl> it = mapElements.values().iterator();
+		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
-			it.next().print(prefix);
+			CElementTmpl t = (CElementTmpl)it.next(); 
+			t.print(prefix);
 		}
 		
 	}
 
 	
-	public String getElementsValues(Set<Integer> values) {
+	public String getElementsValues(Set values) {
 		String result = "";
-		Iterator<CElementTmpl> it = mapElements.values().iterator();
+		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
-			CElementTmpl element = it.next();
+			CElementTmpl element = (CElementTmpl)it.next();
 			if (values.contains(element.getSubType().getId())) {
 				result += element.getValue() + sep();
 			}

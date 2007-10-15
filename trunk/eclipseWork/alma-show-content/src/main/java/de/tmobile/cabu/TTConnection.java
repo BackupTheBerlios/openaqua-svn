@@ -16,6 +16,7 @@ import java.sql.SQLWarning;
  * @author behrenan
  * 
  */
+
 public class TTConnection {
 	boolean hasReceivedSignal = false;
 	private boolean isDriverLoaded;
@@ -24,15 +25,15 @@ public class TTConnection {
 	private Connection connection = null;
 	private Logger logger = Logger.getRootLogger();
 
-	public TTConnection() throws ClassNotFoundException {
+	public TTConnection(final String driver) throws ClassNotFoundException {
 		super();
 		this.isDriverLoaded = false;
-		loadDriver();
+		loadDriver(driver);
 	}
 
-	public void loadDriver() throws ClassNotFoundException {
+	public void loadDriver(final String driver) throws ClassNotFoundException {
 		if (!isDriverLoaded) {
-			Class.forName("com.timesten.jdbc.TimesTenDriver");
+			Class.forName(driver);
 			isDriverLoaded = true;
 		}
 	}
@@ -107,6 +108,7 @@ public class TTConnection {
 			warnCount++;
 		}
 	}
+	
 
 	public boolean Connect(final String dsn) {
 		try {

@@ -19,7 +19,6 @@ public class CTemplateList extends CElementTmplList {
 	}
 
 	
-	@Override
 	public void print(final String prefix) {
 		System.out.println("");
 		System.out.println("");
@@ -41,7 +40,7 @@ public class CTemplateList extends CElementTmplList {
 
 			// parse the result
 			while (rs.next()) {
-				int id = rs.getInt(1);
+				Integer id = new Integer(rs.getInt(1));
 				put(connection, id, new CTemplate(id));
 			}
 

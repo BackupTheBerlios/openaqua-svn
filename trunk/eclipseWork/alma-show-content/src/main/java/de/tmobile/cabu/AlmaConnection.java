@@ -19,8 +19,8 @@ public class AlmaConnection {
 	private boolean allFine = false;
 
 	
-	AlmaConnection() throws ClassNotFoundException {
-		connection = new TTConnection();
+	AlmaConnection(final String driver) throws ClassNotFoundException {
+		connection = new TTConnection(driver);
 		allFine = true;
 	}
 	
@@ -29,16 +29,16 @@ public class AlmaConnection {
 		if (allFine != true) return;
 		try {
 			CSubTypeList.getInstances().refresh(connection);
-			//CSubTypeList.getInstances().print("SUBTYPE");
+			CSubTypeList.getInstances().print("SUBTYPE");
 
 			CCareDescriptionList.getInstances().refresh(connection);
-			//CCareDescriptionList.getInstances().print("CareDescription");
+			CCareDescriptionList.getInstances().print("CareDescription");
 			
-			CDescriptionList.getInstances().refresh(connection);
+			//CDescriptionList.getInstances().refresh(connection);
 			//CDescriptionList.getInstances().print("Description");
 
-			CIdentificationList.getInstances().refresh(connection);
-			CIdentificationList.getInstances().print("???");
+			//CIdentificationList.getInstances().refresh(connection);
+			//CIdentificationList.getInstances().print("???");
 			
 			//CTemplateList.getInstances().refresh(connection);
 			//CTemplateList.getInstances().print("TEMPLATE");

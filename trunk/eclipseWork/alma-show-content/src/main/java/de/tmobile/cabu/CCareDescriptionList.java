@@ -6,10 +6,8 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 /**
  * @author behrenan
@@ -20,7 +18,7 @@ public class CCareDescriptionList  extends CListableListObject  {
 
 
 	private static CCareDescriptionList INSTANCE = new CCareDescriptionList();
-	private Map<Integer, CCareDescription> mapElements = new TreeMap<Integer, CCareDescription>();
+	private Map mapElements = new TreeMap();
 
 	public CCareDescriptionList() {
 		super();
@@ -37,7 +35,7 @@ public class CCareDescriptionList  extends CListableListObject  {
 	}
 	
 	public CCareDescription get(Integer id) {
-		return mapElements.get(id);
+		return (CCareDescription )mapElements.get(id);
 	}
 
 	
@@ -45,12 +43,13 @@ public class CCareDescriptionList  extends CListableListObject  {
 	/* (non-Javadoc)
 	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
 	 */
-	@Override
 	public void print(final String prefix) {
+		/*
 		Iterator<Entry<Integer, CCareDescription>> it = mapElements.entrySet().iterator();
 		while(it.hasNext()) {
 			it.next().getValue().print(prefix);
 		}
+		*/
 		
 	}
 	
@@ -64,7 +63,7 @@ public class CCareDescriptionList  extends CListableListObject  {
 
 			// parse the result
 			while (rs.next()) {
-				int id = rs.getInt(1);
+				Integer id = new Integer(rs.getInt(1));
 				String value = rs.getString(2);
 				mapElements.put(id, new CCareDescription(id, value));
 			}
