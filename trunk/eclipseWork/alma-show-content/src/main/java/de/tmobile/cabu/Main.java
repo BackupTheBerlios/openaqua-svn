@@ -3,10 +3,6 @@
  */
 package de.tmobile.cabu;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 
 /**
  * @author behrenan
@@ -21,8 +17,6 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		setupLogging();
-
 		AlmaConnection alma;
 		try {
 			
@@ -39,14 +33,4 @@ public class Main {
 		}
 
 	}
-
-	private static void setupLogging() {
-		SimpleLayout layout = new SimpleLayout();
-		ConsoleAppender consoleAppender = new ConsoleAppender(layout);
-		logger.addAppender(consoleAppender);
-		// ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
-		logger.setLevel(Level.ALL);
-		logger.debug("Logger Environment set up");
-	}
-
 }

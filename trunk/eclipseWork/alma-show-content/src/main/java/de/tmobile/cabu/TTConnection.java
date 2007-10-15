@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 
-import org.apache.log4j.Logger;
+
 
 /**
  * @author behrenan

@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 
 
 
+
 /**
  * @author behrenan
  *
@@ -45,6 +46,4 @@ public class CSubType extends CListableObject{
 	public void print(String prefix) {
 		System.out.println(prefix+sep()+id+sep()+description);
 	}
-
-
 }

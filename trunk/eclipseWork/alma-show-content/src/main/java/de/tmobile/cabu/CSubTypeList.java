@@ -17,7 +17,7 @@ import java.util.Map.Entry;
  * @author behrenan
  * 
  */
-public class CSubTypeList extends CListableObject  {
+public class CSubTypeList extends CListableListObject  {
 
 
 	private static CSubTypeList INSTANCE = new CSubTypeList();
