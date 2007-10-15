@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,7 +18,8 @@ import java.util.TreeMap;
  *
  */
 public class CIdentificationList extends CListableListObject  {
-	private Map mapElements = new TreeMap();
+	private Map mapContracts = new TreeMap();
+	private Map mapTemplates = new TreeMap();
 	final private Logger logger = Logger.getRootLogger();
 	
 	private static CIdentificationList  INSTANCE = new CIdentificationList ();
@@ -49,7 +51,8 @@ public class CIdentificationList extends CListableListObject  {
 			while (rs.next()) {
 				CIdentification ident = new CIdentification();
 				ident.setIDENTIFICATION_ID(rs.getInt(1));
-				ident.setIDENTIFICATION_TY(rs.getInt(2));
+				int type = rs.getInt(2);
+				ident.setIDENTIFICATION_TY(type);
 				ident.setIDENTIFICATION_CV(rs.getInt(3));
 				ident.setMANDATOR_ID(rs.getInt(4));
 				ident.setELEMENT_TEMPLATE_ID(rs.getInt(5));
@@ -57,8 +60,17 @@ public class CIdentificationList extends CListableListObject  {
 				ident.setEXTERNAL_IDENTIFIER(rs.getString(7));
 				ident.setOBJ_VERSION(rs.getInt(8));
 				ident.setVALID_FROM(rs.getDate(9).toString(),rs.getTime(9).toString());
-				//ident.setVALID_TO(rs.getDate(10).toString(), rs.getTime(10).toString());
-				mapElements.put(new Integer (ident.getIDENTIFICATION_ID()), ident);
+				if (rs.getObject(10) == null) {
+					ident.setVALID_TO(null);
+				} else {
+					ident.setVALID_TO(rs.getDate(10).toString(), rs.getTime(10).toString());
+				}
+				if (type == 43) {
+					mapTemplates.put(new Integer(ident.getIDENTIFICATION_ID()), ident);
+				}
+				if (type == 41) {
+					mapContracts.put(new Integer(ident.getIDENTIFICATION_ID()), ident);
+				}
 			}
 
 			// close statements
@@ -69,17 +81,32 @@ public class CIdentificationList extends CListableListObject  {
 
 	}
 	
-	public void print(String prefix) {
-		/*
-		Iterator<Entry<Integer, CIdentification>> it = mapElements.entrySet().iterator();
+	
+	public void printTemplateIds(String prefix) {
+		//print templates
+		Iterator it = mapTemplates.values().iterator();
 		while(it.hasNext()) {
-			it.next().getValue().print(prefix);
+			CIdentification id = (CIdentification )it.next();
+			id.print(prefix);
 		}
-		*/
+	}
+
+	public void printContractIds(String prefix) {
+		Iterator it = mapContracts.values().iterator();
+		while(it.hasNext()) {
+			CIdentification id = (CIdentification )it.next();
+			id.print(prefix);
+		}
+	}
+	
+	public void print(String prefix) {
+		printTemplateIds(prefix);
+		printContractIds(prefix);
 	}
 
 	public void clear() {
-		mapElements.clear();
+		mapContracts.clear();
+		mapTemplates.clear();
 	}
 
 }

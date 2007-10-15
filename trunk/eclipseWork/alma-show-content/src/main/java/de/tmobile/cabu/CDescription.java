@@ -9,7 +9,7 @@ package de.tmobile.cabu;
  */
 public class CDescription extends  CCareDescription{
 
-	public CDescription(Integer id, String description) {
+	public CDescription(Integer id,String description) {
 		super(id, description);
 	}
 }

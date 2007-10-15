@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -38,7 +39,7 @@ public class CDescriptionList  extends CListableListObject  {
 	public CDescription get(Integer id) {
 		CDescription result = (CDescription )mapElements.get(id);
 		if (result == null) {
-			result = new CDescription(new Integer(0), "<null>");
+			result = new CDescription(new Integer(0),  "<null>");
 		}
 		return result;
 	}
@@ -49,12 +50,11 @@ public class CDescriptionList  extends CListableListObject  {
 	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
 	 */
 	public void print(final String prefix) {
-		/*
-		Iterator<Entry<Integer, CDescription>> it = mapElements.entrySet().iterator();
+		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
-			it.next().getValue().print(prefix);
+			CDescription c = (CDescription )it.next();
+			c.print(prefix);
 		}
-		*/
 		
 	}
 	
@@ -72,7 +72,7 @@ public class CDescriptionList  extends CListableListObject  {
 			while (rs.next()) {
 				Integer id = new Integer(rs.getInt(1));
 				String value = rs.getString(2);
-				mapElements.put(id, new CDescription(id, value));
+				mapElements.put(id, new CDescription(id,  value));
 			}
 
 			// close statements

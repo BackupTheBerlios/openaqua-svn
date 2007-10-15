@@ -84,12 +84,6 @@ public class Main {
 					System.exit(1);
 				}
 
-				if (whatToRun < 0 || whatToRun > 6) {
-					System.err
-							.println("Error: -run option requires a number between 1 and 6");
-					usage();
-					System.exit(1);
-				}
 
 			} else if (args[argInd].equalsIgnoreCase("-dsn")) {
 				argInd++;
@@ -147,12 +141,12 @@ public class Main {
 			if (isCSConn) {
 				alma = new AlmaConnection(CLIENT_DRIVER);
 				alma.Connect(CLIENT_CONNECT_PREFIX + dsnname);
-				alma.listTemplates();
+				alma.listTemplates(whatToRun);
 				alma.Disconnect();
 			} else {
 				alma = new AlmaConnection(DIRECT_DRIVER);
 				alma.Connect(DIRECT_CONNECT_PREFIX + dsnname);
-				alma.listTemplates();
+				alma.listTemplates(whatToRun);
 				alma.Disconnect();
 			}
 		} catch (ClassNotFoundException e) {
@@ -170,12 +164,11 @@ public class Main {
 						+ "    -run num\tExample number to run (Default is run all)\n"
 						+ "    -dsn\tName of the data store to connect to (required)\n"
 						+ "\n    Example number values:\n"
-						+ "    1    Loads appropriate driver for the connection type\n"
-						+ "    2    Connects to and disconnect from specified data store\n"
-						+ "    3    Shows operations performed by a typical application\n"
-						+ "    4    Shows how to checkpoint a data store\n"
-						+ "    5    Shows how to change and print a query plan\n"
-						+ "    6    Shows how to use the batch update facility\n"
+						+ "    1    Template IDs\n"
+						+ "    2    Contract IDs\n"
+						+ "    3    Element SubTypes\n"
+						+ "    4    Ident Descriptions\n"
+						+ "    5    Care Descriptions\n"
 						+ "\n\tExample command lines:\n"
 						+ "    java -jar alma-show-content-1.0.jar pALMAa\n"
 						+ "    java -jar alma-show-content-1.0.jar -run 2 pALMAa\n"

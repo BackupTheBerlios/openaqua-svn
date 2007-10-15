@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,6 +20,7 @@ public class CCareDescriptionList  extends CListableListObject  {
 
 	private static CCareDescriptionList INSTANCE = new CCareDescriptionList();
 	private Map mapElements = new TreeMap();
+	private Logger logger = Logger.getRootLogger();
 
 	public CCareDescriptionList() {
 		super();
@@ -44,17 +46,16 @@ public class CCareDescriptionList  extends CListableListObject  {
 	 * @see de.tmobile.cabu.CListableObject#print(java.lang.String)
 	 */
 	public void print(final String prefix) {
-		/*
-		Iterator<Entry<Integer, CCareDescription>> it = mapElements.entrySet().iterator();
+		Iterator it = mapElements.values().iterator();
 		while(it.hasNext()) {
-			it.next().getValue().print(prefix);
+			CCareDescription c = (CCareDescription )it.next();
+			c.print(prefix);
 		}
-		*/
-		
 	}
 	
 	
 	public void refresh(TTConnection connection) throws SQLException {
+		logger.debug("Refresh Care Description List");
 		clear();
 		if (connection.isConnected()) {
 			// exec SQL command

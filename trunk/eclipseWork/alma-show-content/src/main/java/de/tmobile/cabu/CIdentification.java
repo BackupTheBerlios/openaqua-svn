@@ -134,6 +134,7 @@ public class CIdentification extends CListableObject{
 
 	public void print(String prefix) {
 		String result = "";
+		result += prefix + sep();
 		result += getIDENTIFICATION_ID()+sep(); //Database ID
 		result += getOBJ_VERSION()+sep();
 		result += getMANDATOR_ID()+sep();

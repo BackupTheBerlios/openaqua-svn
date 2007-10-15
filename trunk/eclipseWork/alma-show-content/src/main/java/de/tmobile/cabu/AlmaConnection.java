@@ -25,23 +25,28 @@ public class AlmaConnection {
 	}
 	
 
-	public void listTemplates() {
+	public void listTemplates(int whatToRun) {
 		if (allFine != true) return;
 		try {
 			CSubTypeList.getInstances().refresh(connection);
-			CSubTypeList.getInstances().print("SUBTYPE");
-
 			CCareDescriptionList.getInstances().refresh(connection);
-			CCareDescriptionList.getInstances().print("CareDescription");
-			
-			//CDescriptionList.getInstances().refresh(connection);
-			//CDescriptionList.getInstances().print("Description");
+			CDescriptionList.getInstances().refresh(connection);
+			CIdentificationList.getInstances().refresh(connection);
 
-			//CIdentificationList.getInstances().refresh(connection);
-			//CIdentificationList.getInstances().print("???");
+			if (whatToRun == 0) {
+				CSubTypeList.getInstances().print("SUBTYPE");
+				CCareDescriptionList.getInstances().print("CareDescription");
+				CDescriptionList.getInstances().print("Description");
+				CIdentificationList.getInstances().printTemplateIds("TEMPL_IDs");
+				CIdentificationList.getInstances().printContractIds("CONTR_IDs");
+			}
 			
-			//CTemplateList.getInstances().refresh(connection);
-			//CTemplateList.getInstances().print("TEMPLATE");
+			if (whatToRun == 1) CIdentificationList.getInstances().printTemplateIds("TEMPL_IDs");
+			if (whatToRun == 2) CIdentificationList.getInstances().printContractIds("CONTR_IDs");
+			if (whatToRun == 3) CSubTypeList.getInstances().print("SUBTYPE");;
+			if (whatToRun == 4) CDescriptionList.getInstances().print("Description");
+			if (whatToRun == 5) CCareDescriptionList.getInstances().print("CareDescription");
+			
 			
 		} catch (SQLException e) {
 			connection.reportSQLException(e);
