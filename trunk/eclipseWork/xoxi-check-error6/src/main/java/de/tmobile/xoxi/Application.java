@@ -3,6 +3,10 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 /**
  * @author behrenan
@@ -16,7 +20,7 @@ public class Application {
 		
 	}
 	
-	public int run(final String[] arg) {
+	public int run(final String[] arg) throws FileNotFoundException {
 		int result = 0;
 		
 		//check parameters
@@ -25,10 +29,21 @@ public class Application {
 			usage();
 			return result;
 		}
+		logger.debug("Check file " + Configuration.getInstance().getLogFile());
 		
-		//do something ...
+		//Read/Parse file
+		LogFile logfile = new LogFile(Configuration.getInstance().getLogFile());
+		logfile.read();
 		
+		//Get Error6
+		Collection error6 = new ArrayList();
+		Error6Parser error6Parser = new Error6Parser();
+		error6Parser.parse(logfile.iterator(), error6);
+
 		
+		//Print Results:
+		Logger.getRootLogger().info("Average: "+Statistic.getInstance().getAverageTime());
+		Logger.getRootLogger().info("Stat Lines: "+Statistic.getInstance().getReadStatLines());
 		return result;
 	}
 	
@@ -72,10 +87,10 @@ public class Application {
 					|| args[argInd].equalsIgnoreCase("-help")) {
 				return -1;
 
-			} else if (args[argInd].equalsIgnoreCase("-d")
-					|| args[argInd].equalsIgnoreCase("-dir")) {
+			} else if (args[argInd].equalsIgnoreCase("-l")
+					|| args[argInd].equalsIgnoreCase("-logfile")) {
 				argInd++;
-				Configuration.getInstance().setLogDir(args[argInd]);
+				Configuration.getInstance().setLogFile(args[argInd]);
 
 			} else if (args[argInd].equalsIgnoreCase("-m")
 					|| args[argInd].equalsIgnoreCase("-mail")) {
@@ -89,7 +104,7 @@ public class Application {
 			}
 		}
 		
-		if (Configuration.getInstance().getLogDir()==null) {
+		if (Configuration.getInstance().getLogFile()==null) {
 			logger.error("Program needs a logFile directory");
 			return -3;
 		}

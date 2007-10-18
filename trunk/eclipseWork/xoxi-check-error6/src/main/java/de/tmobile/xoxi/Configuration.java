@@ -9,7 +9,7 @@ package de.tmobile.xoxi;
  */
 final public class Configuration {
 	private static Configuration INSTANCE = new Configuration();
-	private String logDir;
+	private String logFile;
 	private String mailToFile;
 	private boolean sendMail;
 	
@@ -18,18 +18,18 @@ final public class Configuration {
 	}
 	
 	private Configuration() {
-		logDir=null;
+		logFile=null;
 		mailToFile=null;
 		sendMail=false;
 		
 	}
 
-	public String getLogDir() {
-		return this.logDir;
+	public String getLogFile() {
+		return this.logFile;
 	}
 
-	public void setLogDir(String logDir) {
-		this.logDir = logDir;
+	public void setLogFile(final String logFile) {
+		this.logFile = logFile;
 	}
 
 	public String getMailToFile() {
