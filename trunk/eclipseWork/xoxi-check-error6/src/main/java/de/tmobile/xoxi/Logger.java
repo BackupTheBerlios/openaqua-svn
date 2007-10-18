@@ -1,13 +1,13 @@
 /**
  * 
  */
-package de.tmobile.cabu;
+package de.tmobile.xoxi;
 
 /**
  * @author behrenan
  *
  */
-public class Logger {
+public final class Logger {
 	
 	private static Logger INSTANCE = new Logger();
 	private Logger() {super();}
