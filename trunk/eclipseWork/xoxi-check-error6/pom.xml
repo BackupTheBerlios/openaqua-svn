@@ -5,7 +5,7 @@
   <artifactId>alma-show-content</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
-  <name>alma-show-content</name>
+  <name>xoxi-check-error6</name>
 
 
   	<dependencies>
@@ -30,8 +30,8 @@
           <archive>
             <index>true</index>
             <manifest>
-              <mainClass>de.tmobile.Main</mainClass>
-              <packageName>de.tmobile.generator</packageName>
+              <mainClass>de.tmobile.xoxi.Main</mainClass>
+              <packageName>de.tmobile.xoxi</packageName>
               <!-- options
               <addClasspath>true</addClasspath>
               <addExtensions/>
