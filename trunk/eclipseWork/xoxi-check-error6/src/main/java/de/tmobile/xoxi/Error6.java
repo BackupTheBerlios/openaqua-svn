@@ -93,7 +93,7 @@ public class Error6 {
 				ErrorEntry e = (ErrorEntry) cit.next();
 				e.print(3);
 			}
-			if (cit.hasNext()) Logger.getRootLogger().out("             ...");
+			if (cit.hasNext()) Logger.getRootLogger().out("             ... (has "+col.size()+" more)");
 			Logger.getRootLogger().out("   ");
 		}
 	}

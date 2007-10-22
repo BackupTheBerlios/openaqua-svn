@@ -3,7 +3,7 @@
  */
 package de.tmobile.xoxi;
 
-import java.io.IOException;
+
 
 /**
  * @author behrenan
@@ -71,13 +71,13 @@ public class Statistic {
 		return lines;
 	}
 	
-	public void print() throws IOException {
+	public void print() {
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
 		log.out("Statistic        : "+getRequestsDay()+ " Requests/Day");
 		log.out("Statistic Average: "+getAverageTime() + " Microsec/Request");
 		log.out("Statistic Average: "+getRequestsMinute()+ " Requests/Min");
-		log.out("Checked "+getReadStatLines()+" lines Logfile");
+		log.out("Checked "+getReadStatLines()+" lines from Logfile");
 		log.out("");
 	}
 }

@@ -3,7 +3,6 @@
  */
 package de.tmobile.xoxi;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -30,7 +29,7 @@ public class ErrorMisc {
 		return listOther.size();
 	}
 
-	public void print() throws IOException {
+	public void print() {
 		if (countOtherErrors() <= 0) return;
 		Logger log = Logger.getRootLogger();
 		log.smallHeader();
