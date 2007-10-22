@@ -23,7 +23,7 @@ public class ErrorNoAlma {
 	public void print() {
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
-		log.out("Found "+count+" Errors while Alma was not available");
+		log.out("Found "+count+" Errors for unhandled requests of type \"Alma was not available\"");
 		log.out("");
 		
 	}

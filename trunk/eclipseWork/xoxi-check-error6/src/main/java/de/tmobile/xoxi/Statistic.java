@@ -47,10 +47,17 @@ public class Statistic {
 	}
 	
 	
+	public long getRequestsMinute () {
+		return amount/24/60;
+	}
+	public long getRequestsDay () {
+		return amount;
+	}
 	
 	public long getAverageTime() {
-		if (time == 0) return 0;
-		else return time/amount;
+		if (amount == 0) return 0;
+		return time/amount;
+		
 	}
 
 	
@@ -62,8 +69,10 @@ public class Statistic {
 	public void print() {
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
-		log.out("Static Average: "+Statistic.getInstance().getAverageTime());
-		log.out("Static Amount of read Lines: "+Statistic.getInstance().getReadStatLines());
+		log.out("Statistic        : "+getRequestsDay()+ " Requests/Day");
+		log.out("Statistic Average: "+getAverageTime() + " Microsec/Request");
+		log.out("Statistic Average: "+getRequestsMinute()+ " Requests/Min");
+		log.out("Checked "+getReadStatLines()+" lines Logfile");
 		log.out("");
 	}
 }

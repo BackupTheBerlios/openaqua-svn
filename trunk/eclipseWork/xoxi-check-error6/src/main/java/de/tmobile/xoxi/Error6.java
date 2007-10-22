@@ -30,7 +30,7 @@ public class Error6 {
 	
 	
 	public void add(LogFileLine line) {
-		Error6Entry entry = new Error6Entry(line);
+		ErrorEntry entry = new ErrorEntry(line);
 		if (entry.getVasCodeGroup().length() > 0) {
 			Collection col = (Collection)mapByVasCodeGroup.get(entry.getVasCodeGroup());
 			if (col == null) {

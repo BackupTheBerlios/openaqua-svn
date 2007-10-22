@@ -7,7 +7,7 @@ package de.tmobile.xoxi;
  * @author behrenan
  *
  */
-public class Error6Entry {
+public class ErrorEntry {
 	private String vasCodeService;
 	private String vasCodeGroup;
 	private int usageBegin;
@@ -18,7 +18,7 @@ public class Error6Entry {
 	private int prepay;
 	private int partner;
 	
-	public Error6Entry(LogFileLine line) {
+	public ErrorEntry(LogFileLine line) {
 		super();
 		final String msg = line.getMessage();
 		this.tariffNumber	= getInt(msg, "tariffNumber=");
