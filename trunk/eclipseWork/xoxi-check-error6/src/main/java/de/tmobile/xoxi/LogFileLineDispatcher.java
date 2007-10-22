@@ -24,8 +24,11 @@ public class LogFileLineDispatcher {
 
 	private static  void parseLine(LogFileLine line) {
 		if (isEmty(line)) return;
-		else if (isStatistic(line)) Statistic.getInstance().add(line);
-		else if (isError6(line)) Error6.getInstance().add(line);
+		else if (isStatistic(line)) 	{Statistic.getInstance().add(line); return;}
+		else if (isError6(line)) 		{Error6.getInstance().add(line); return;}
+		else if (isErrorNoAlma(line)) 	{ErrorNoAlma.getInstance().add(line); return;}
+		else if (isComingRequest(line)) 	{return;}
+		Logger.getRootLogger().warn("Unknown Logfile Entry: "+line.getMessage());
 		return;
 			
 	}
@@ -50,10 +53,29 @@ public class LogFileLineDispatcher {
 	
 	private static boolean isError6(LogFileLine line) {
 		final String msg = line.getMessage();
-		if (msg != null && msg.startsWith("statistics for ")) {
+		if (msg != null && msg.startsWith("(ASYNC) has no pricelist and no counter with fixprice or 100% discount / rexRequest(T =49188)=")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
+	private static boolean isErrorNoAlma(LogFileLine line) {
+		final String msg = line.getMessage();
+		if (msg != null && msg.startsWith("(ASYNC) Request has no counterValues (no Alma?) but tries to use counterAppliances  / rexRequest(T =49188)={seqNr=")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private static boolean isComingRequest(LogFileLine line) {
+		final String msg = line.getMessage();
+		if (msg != null && msg.startsWith("coming requests are served by ")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }

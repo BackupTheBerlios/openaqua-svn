@@ -52,12 +52,13 @@ public class LogFile {
 				LogFileLine entry = new LogFileLine();
 				entry.setTime(parts[0]);
 				entry.setSystem(parts[1]);
-				//entry.setTime(parts[0]);
+				//entry.setTime(parts[2]);
 				entry.setProcess(parts[3]);
 				entry.setId(Integer.valueOf(parts[4]).intValue());
 				entry.setType(parts[5]);
 				entry.setNumber(Integer.valueOf(parts[6]).intValue());
 				entry.setMessage(parts[7]);
+				lines.add(entry);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

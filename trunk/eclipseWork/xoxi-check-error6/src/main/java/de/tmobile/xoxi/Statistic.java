@@ -58,4 +58,12 @@ public class Statistic {
 	public int getReadStatLines() {
 		return lines;
 	}
+	
+	public void print() {
+		Logger log = Logger.getRootLogger();
+		log.out("-------------------------------------------------------------");
+		log.out("Static Average: "+Statistic.getInstance().getAverageTime());
+		log.out("Static Amount of read Lines: "+Statistic.getInstance().getReadStatLines());
+		log.out("");
+	}
 }

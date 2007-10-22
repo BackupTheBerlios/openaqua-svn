@@ -13,11 +13,6 @@ import java.io.FileNotFoundException;
 public class Application {
 	final private static Logger logger = Logger.getRootLogger();
 
-	public Application() {
-		logger.debug("Application::Application");
-		
-	}
-	
 	public int run(final String[] arg) throws FileNotFoundException {
 		int result = 0;
 		
@@ -27,18 +22,23 @@ public class Application {
 			usage();
 			return result;
 		}
-		logger.debug("Check file " + Configuration.getInstance().getLogFile());
+		logger.out("===========================================================================");
+		logger.out("Output basing on file " + Configuration.getInstance().getLogFile());
+		logger.out("");
 		
 		//Read Content
 		LogFile logfile = new LogFile(Configuration.getInstance().getLogFile());
+		logfile.read();
+		
 		
 		//Process Content
 		LogFileLineDispatcher.parse(logfile.iterator());
 
 		
 		//Print Results:
-		Logger.getRootLogger().info("Average: "+Statistic.getInstance().getAverageTime());
-		Logger.getRootLogger().info("Stat Lines: "+Statistic.getInstance().getReadStatLines());
+		Error6.getInstance().print();
+		ErrorNoAlma.getInstance().print();
+		Statistic.getInstance().print();
 		return result;
 	}
 	

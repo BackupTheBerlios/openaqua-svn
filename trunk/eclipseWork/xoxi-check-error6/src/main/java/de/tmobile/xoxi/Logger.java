@@ -18,16 +18,16 @@ public final class Logger {
 	}
 	
 	public void debug(final String text) {
-		System.out.println("DBG " + text);
+		System.err.println("DBG " + text);
 	}
 	public void info(final String text) {
-		System.out.println("INF " + text);
+		System.err.println("INF " + text);
 	}
 	public void error(final String text) {
-		System.out.println("ERR " + text);
+		System.err.println("ERR " + text);
 	}
 	public void warn(final String text) {
-		System.out.println("WRN " + text);
+		System.err.println("WRN " + text);
 	}
 	public void out(final String text) {
 		System.out.println(text);
