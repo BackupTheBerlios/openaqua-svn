@@ -21,9 +21,11 @@ public class ErrorNoAlma {
 	}
 	
 	public void print() {
+		if (count == 0) return;
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
 		log.out("Found "+count+" Errors for unhandled requests of type \"Alma was not available\"");
+		log.out("   (Not listended here ...)");
 		log.out("");
 		
 	}

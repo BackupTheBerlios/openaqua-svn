@@ -21,15 +21,15 @@ public class ErrorEntry {
 	public ErrorEntry(LogFileLine line) {
 		super();
 		final String msg = line.getMessage();
-		this.tariffNumber	= getInt(msg, "tariffNumber=");
-		this.tariffOwner	= getInt(msg, "tariffOwner=");
-		this.prepay 		= getInt(msg, "prepayIndicator=");
-		this.partner		= getInt(msg, "wholesalePartnerId=");
-		this.refTime 		= getInt(msg, "refTimestamp=");
+		this.vasCodeService	= getStr(msg, "vasCodeService=");
+		this.vasCodeGroup	= getStr(msg, "vasCodeGroup=");
 		this.usageBegin		= getInt(msg, "usageIntervalBegin=");
 		this.usageEnd		= getInt(msg, "usageIntervalEnd=");
-		this.vasCodeGroup	= getStr(msg, "vasCodeGroup=");
-		this.vasCodeService	= getStr(msg, "vasCodeService=");
+		this.refTime 		= getInt(msg, "refTimestamp=");
+		this.tariffOwner	= getInt(msg, "tariffOwner=");
+		this.tariffNumber	= getInt(msg, "tariffNumber=");
+		this.prepay 		= getInt(msg, "prepayIndicator=");
+		this.partner		= getInt(msg, "wholesalePartnerId=");
 	}
 	
 	protected int getInt(final String str, final String search) {
@@ -41,16 +41,28 @@ public class ErrorEntry {
 	}
 
 	protected final String getStr(final String str, final String search) {
-		try {
-			int begin = str.indexOf(search);
-			int length = str.indexOf(',', begin);
-			return str.substring(begin, length);
-		} catch (Exception e) {
-			return "";
-		}
+		int begin = str.indexOf(search);
+		int length = str.indexOf(',', begin);
+		String result = str.substring(begin+search.length(), length);
+		//Logger.getRootLogger().debug(result);
+		return result;
 	}
 	
-	
+	public void print(final int spaces) {
+		//Leerstring anlegen
+		String s = new String();
+		for(int i =0;i<spaces;i++) s += " ";
+		
+		//Ausgabe des Errors
+		s+="Request: ";
+		if (vasCodeService.length()> 0)	s+=" vasCodeService="+vasCodeService;
+		if (vasCodeGroup.length()> 0)	s+=" vasCodeGroup="+vasCodeGroup;
+		s+=" refTime="+refTime;
+		s+=" usageBegin="+usageBegin;
+		s+=" usageEnd="+usageEnd;
+		Logger.getRootLogger().out(s);
+		
+	}
 	
 	public int getRefTime() {
 		return this.refTime;

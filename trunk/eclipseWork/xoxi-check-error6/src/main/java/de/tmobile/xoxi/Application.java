@@ -38,6 +38,7 @@ public class Application {
 		//Print Results:
 		Error6.getInstance().print();
 		ErrorNoAlma.getInstance().print();
+		ErrorMisc.getInstance().print();
 		Statistic.getInstance().print();
 		return result;
 	}

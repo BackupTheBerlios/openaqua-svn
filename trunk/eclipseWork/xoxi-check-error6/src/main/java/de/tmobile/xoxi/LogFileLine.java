@@ -68,4 +68,13 @@ public class LogFileLine {
 		this.type = type;
 	}
 
+	public void print(final int spaces) {
+	//Leerstring anlegen
+	String s = new String();
+	for(int i =0;i<spaces;i++) s += " ";
+	
+	s+=" MSG: "+message;
+	Logger.getRootLogger().out(s);
+	
+	}
 }
