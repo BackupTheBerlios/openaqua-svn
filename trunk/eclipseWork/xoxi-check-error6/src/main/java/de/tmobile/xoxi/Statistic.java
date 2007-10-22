@@ -27,7 +27,8 @@ public class Statistic {
 	
 	
 	
-	public void add(final String line) {
+	public void add(final LogFileLine entry) {
+		final String line = entry.getMessage(); 
 		if (line == null) return; 
 		if (!line.startsWith("statistics for ")) return;
 

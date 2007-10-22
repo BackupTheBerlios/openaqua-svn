@@ -4,8 +4,6 @@
 package de.tmobile.xoxi;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**
@@ -31,14 +29,11 @@ public class Application {
 		}
 		logger.debug("Check file " + Configuration.getInstance().getLogFile());
 		
-		//Read/Parse file
+		//Read Content
 		LogFile logfile = new LogFile(Configuration.getInstance().getLogFile());
-		logfile.read();
 		
-		//Get Error6
-		Collection error6 = new ArrayList();
-		Error6Parser error6Parser = new Error6Parser();
-		error6Parser.parse(logfile.iterator(), error6);
+		//Process Content
+		LogFileLineDispatcher.parse(logfile.iterator());
 
 		
 		//Print Results:

@@ -58,7 +58,6 @@ public class LogFile {
 				entry.setType(parts[5]);
 				entry.setNumber(Integer.valueOf(parts[6]).intValue());
 				entry.setMessage(parts[7]);
-				if (entry.getMessage() != null && isStatistic(entry) != true) lines.add(entry);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,20 +79,6 @@ public class LogFile {
 		return 0;
 	}
 	
-
-	
-	/******************************************
-	 * 
-	 * @return
-	 */
-	public boolean isStatistic(LogFileLine line) {
-		boolean result = false;
-		String msg = line.getMessage();
-		if (msg != null && msg.startsWith("statistics for ")) {
-			Statistic.getInstance().add(msg);
-		}
-		return result;
-	}
 
 	
 	public Iterator iterator() {
