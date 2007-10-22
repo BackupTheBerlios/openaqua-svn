@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -63,6 +64,7 @@ public class LogFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Statistic.getInstance().setReadLines(lines.size());
 		return 0;
 	}
 	
@@ -70,8 +72,9 @@ public class LogFile {
 	/******************************************
 	 * 
 	 * @return
+	 * @throws IOException 
 	 */
-	public int print() {
+	public int print() throws IOException {
 		Iterator it = lines.iterator();
 		while(it.hasNext()) {
 			LogFileLine line = (LogFileLine)it.next();

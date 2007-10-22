@@ -3,6 +3,8 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.IOException;
+
 /**
  * @author behrenan
  *
@@ -39,11 +41,14 @@ public class Statistic {
 			int t = Integer.valueOf(parts[parts.length-2]).intValue();
 			amount += c;
 			time += (t*c);
-			lines ++;
 		} catch (NumberFormatException e) {
 			Logger.getRootLogger().error("Could not parse line "+line);
 		}
 
+	}
+	
+	public void setReadLines(final int lines) {
+		this.lines = lines;
 	}
 	
 	
@@ -66,7 +71,7 @@ public class Statistic {
 		return lines;
 	}
 	
-	public void print() {
+	public void print() throws IOException {
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
 		log.out("Statistic        : "+getRequestsDay()+ " Requests/Day");

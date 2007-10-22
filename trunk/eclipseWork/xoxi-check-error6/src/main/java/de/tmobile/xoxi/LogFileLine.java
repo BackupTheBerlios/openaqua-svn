@@ -3,6 +3,8 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.IOException;
+
 
 /**
  * @author behrenan
@@ -68,7 +70,7 @@ public class LogFileLine {
 		this.type = type;
 	}
 
-	public void print(final int spaces) {
+	public void print(final int spaces) throws IOException {
 	//Leerstring anlegen
 	String s = new String();
 	for(int i =0;i<spaces;i++) s += " ";

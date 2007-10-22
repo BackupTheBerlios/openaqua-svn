@@ -3,6 +3,7 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,16 +30,16 @@ public class ErrorMisc {
 		return listOther.size();
 	}
 
-	public void print() {
-		if (countOtherErrors() > 0) return;
+	public void print() throws IOException {
+		if (countOtherErrors() <= 0) return;
 		Logger log = Logger.getRootLogger();
-		log.out("-------------------------------------------------------------");
+		log.smallHeader();
 		log.out("Found " + countOtherErrors() + " Unknown Error Type");
 		Iterator it = listOther.iterator();
 		for (int max = 0; (max < 3) && it.hasNext(); max++) {
 			LogFileLine l = (LogFileLine) it.next();
 			l.print(3);
 		}
-		log.out(" ");
+		log.empty();
 	}
 }

@@ -3,6 +3,7 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -79,7 +80,7 @@ public class Error6 {
 		return listOther.size();
 	}
 
-	public void printVasCodeErrors(Map map) {
+	public void printVasCodeErrors(Map map) throws IOException {
 		if (map.size() <= 0) return;
 		int max = countVasCodeErrors(map)/map.size()+1;
 		if (max > 5) max = 5;
@@ -97,26 +98,26 @@ public class Error6 {
 		}
 	}
 	
-	public void print() {
+	public void print() throws IOException {
 		Logger log = Logger.getRootLogger();
 		if (countVasCodeGroupErrors() > 0) {
-			log.out("-------------------------------------------------------------");
+			log.smallHeader();
 			log.out("Found " + countVasCodeGroupErrors()					+ " Errors with VasCodeGroup:");
 			printVasCodeErrors(mapByVasCodeGroup);
-			log.out("");
+			log.empty();
 		}
 
 		if (countVasCodeServiceErrors() > 0) {
-			log.out("-------------------------------------------------------------");
+			log.smallHeader();
 			log.out("Found " + countVasCodeServiceErrors()				+ " Errors with VasCodeService:");
 			printVasCodeErrors(mapByVasCodeService);
-			log.out("");
+			log.empty();
 		}
 
 		if (countOtherErrors() > 0) {
-			log.out("-------------------------------------------------------------");
+			log.smallHeader();
 			log.out("Found " + countOtherErrors() + " Errors with other Errors:");
-			log.out("");
+			log.empty();
 		}
 	}
 }

@@ -3,7 +3,11 @@
  */
 package de.tmobile.xoxi;
 
-import java.io.FileNotFoundException;
+
+import java.io.IOException;
+ 
+
+
 
 
 /**
@@ -13,18 +17,21 @@ import java.io.FileNotFoundException;
 public class Application {
 	final private static Logger logger = Logger.getRootLogger();
 
-	public int run(final String[] arg) throws FileNotFoundException {
+	public int run(final String[] arg) throws IOException {
 		int result = 0;
 		
 		//check parameters
-		result = parseCommandLine(arg);
+		try {
+			result = parseCommandLine(arg);
+		} catch (Exception e) {
+			result = -1;
+		}
 		if (result != 0) {
 			usage();
 			return result;
 		}
-		logger.out("===========================================================================");
-		logger.out("Output basing on file " + Configuration.getInstance().getLogFile());
-		logger.out("");
+		
+		logger.printHeader();
 		
 		//Read Content
 		LogFile logfile = new LogFile(Configuration.getInstance().getLogFile());
@@ -36,32 +43,26 @@ public class Application {
 
 		
 		//Print Results:
+		Logger.getRootLogger().header();
+		
 		Error6.getInstance().print();
 		ErrorNoAlma.getInstance().print();
 		ErrorMisc.getInstance().print();
 		Statistic.getInstance().print();
+		logger.empty();
+		logger.header();
+
+
+
 		return result;
 	}
 	
 	
-	protected void usage() {
-		logger.out( "\nUsage: AlmaTest [-h] [-t] [-c] [-run num] [-dsn] dsnname\n"
+	protected void usage() throws IOException {
+		logger.out( "\nUsage: ParseLogFile [-h] [-logfile logfile] [-mail mailtargets]\n"
 				+ "    -h[elp]\tPrint this usage message and exit\n"
-				+ "    -t[race]\tTurn on JDBC driver debug tracing\n"
-				+ "    -c[lient]\tConnect using client/server (default is direct connect)\n"
-				+ "    -run num\tExample number to run (Default is run all)\n"
-				+ "    -dsn\tName of the data store to connect to (required)\n"
-				+ "\n    Example number values:\n"
-				+ "    1    Element SubType\n"
-				+ "    2    Care Descriptions\n"
-				+ "    3    Type Descriptions\n"
-				+ "    4    Contracts (MSISDN+Contract)\n"
-				+ "    5    Tempalte Identifications\n"
-				+ "    6    Element Ident Assocs\n"
-				+ "\n\tExample command lines:\n"
-				+ "    java -jar alma-show-content-1.0.jar pALMAa\n"
-				+ "    java -jar alma-show-content-1.0.jar -run 2 pALMAa\n"
-				+ "    java -jar alma-show-content-1.0.jar -client -run 2 -dsn RunDataCS");
+				+ "    -l[logfile]\tParse the given logfile"
+				+ "    \n");
 		
 		
 	}
@@ -87,12 +88,6 @@ public class Application {
 					|| args[argInd].equalsIgnoreCase("-logfile")) {
 				argInd++;
 				Configuration.getInstance().setLogFile(args[argInd]);
-
-			} else if (args[argInd].equalsIgnoreCase("-m")
-					|| args[argInd].equalsIgnoreCase("-mail")) {
-				argInd++;
-				Configuration.getInstance().setMailToFile(args[argInd]);
-
 
 			} else {
 				logger.error("unknown argument " + args[argInd]);

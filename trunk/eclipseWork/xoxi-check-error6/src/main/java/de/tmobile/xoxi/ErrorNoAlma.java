@@ -3,6 +3,8 @@
  */
 package de.tmobile.xoxi;
 
+import java.io.IOException;
+
 /**
  * @author behrenan
  *
@@ -20,7 +22,7 @@ public class ErrorNoAlma {
 		count++;
 	}
 	
-	public void print() {
+	public void print() throws IOException {
 		if (count == 0) return;
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");

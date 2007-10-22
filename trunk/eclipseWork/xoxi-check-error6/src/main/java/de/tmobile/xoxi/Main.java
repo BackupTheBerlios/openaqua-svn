@@ -3,7 +3,6 @@
  */
 package de.tmobile.xoxi;
 
-import java.io.FileNotFoundException;
 
 
 /**
@@ -19,12 +18,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		logger.info("Start Application");
 		Application app = new Application();
 		int returncode;
 			try {
 				returncode = app.run(args);
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				//e.printStackTrace();
 				logger.error("Could not found file");
 				returncode = -10;
