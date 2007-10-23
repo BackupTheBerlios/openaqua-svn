@@ -3,6 +3,10 @@
  */
 package de.tmobile.xoxi;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 /**
  * @author behrenan
  *
@@ -10,14 +14,20 @@ package de.tmobile.xoxi;
 final public class Configuration {
 	private static Configuration INSTANCE = new Configuration();
 	private String logFile;
+	private DateFormat format;
+	
+	private Configuration() {
+		super();
+		logFile=null;
+		format = new SimpleDateFormat( "yyyyMMdd HHmmss z" );
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+	}
 	
 	static public Configuration getInstance() {
 		return INSTANCE;
 	}
 	
-	private Configuration() {
-		logFile=null;
-	}
 
 	public String getLogFile() {
 		return this.logFile;
@@ -27,4 +37,7 @@ final public class Configuration {
 		this.logFile = logFile;
 	}
 
+	public DateFormat getDateFormat() {
+		return format;
+	}
 }

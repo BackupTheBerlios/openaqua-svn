@@ -3,6 +3,9 @@
  */
 package de.tmobile.xoxi;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 
 
 /**
@@ -19,9 +22,9 @@ public class ErrorEntry {
 	private int tariffNumber;
 	private int prepay;
 	private int partner;
-	
 	public ErrorEntry(LogFileLine line) {
 		super();
+
 		final String msg = line.getMessage();
 		this.vasCodeService	= getStr(msg, "vasCodeService=");
 		this.vasCodeGroup	= getStr(msg, "vasCodeGroup=");
@@ -49,6 +52,12 @@ public class ErrorEntry {
 		//Logger.getRootLogger().debug(result);
 		return result;
 	}
+
+	protected String unixTimeToString(final long time) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(time*1000);
+		return Configuration.getInstance().getDateFormat().format(cal.getTime());
+	}
 	
 	public void print(final int spaces)  {
 		//Leerstring anlegen
@@ -56,12 +65,9 @@ public class ErrorEntry {
 		for(int i =0;i<spaces;i++) s += " ";
 		
 		//Ausgabe des Errors
-		s+="Request: ";
-		if (vasCodeService.length()> 0)	s+=" vasCodeService="+vasCodeService;
-		if (vasCodeGroup.length()> 0)	s+=" vasCodeGroup="+vasCodeGroup;
-		s+=" refTime="+refTime;
-		s+=" usageBegin="+usageBegin;
-		s+=" usageEnd="+usageEnd;
+		s+="refTime="+unixTimeToString(refTime);
+		s+=" usageBegin="+unixTimeToString(usageBegin);
+		s+=" usageEnd="+unixTimeToString(usageEnd);
 		Logger.getRootLogger().out(s);
 		
 	}

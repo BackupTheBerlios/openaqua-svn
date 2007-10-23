@@ -96,7 +96,7 @@ public class Application {
 		}
 		
 		if (Configuration.getInstance().getLogFile()==null) {
-			logger.error("Program needs a logFile directory");
+			logger.error("Program needs a logFile ");
 			return -3;
 		}
 		
