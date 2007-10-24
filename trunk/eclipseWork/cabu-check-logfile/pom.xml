@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.tmobile.cabu</groupId>
-  <artifactId>xoxi-check-error6</artifactId>
+  <artifactId>cabu-check-logfile</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <name>xoxi-check-error6</name>
@@ -30,8 +30,8 @@
           <archive>
             <index>true</index>
             <manifest>
-              <mainClass>de.tmobile.xoxi.Main</mainClass>
-              <packageName>de.tmobile.xoxi</packageName>
+              <mainClass>de.tmobile.cabu.Main</mainClass>
+              <packageName>de.tmobile.cabu</packageName>
               <!-- options
               <addClasspath>true</addClasspath>
               <addExtensions/>
