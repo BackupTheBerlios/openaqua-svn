@@ -24,6 +24,7 @@ public class ErrorNoAlma {
 	
 	public void print() throws IOException {
 		if (count == 0) return;
+		if (Configuration.getInstance().getLogFileType() != 1) return; //for CHC - Logfiles only
 		Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
 		log.out("Found "+count+" Errors for unhandled requests of type \"Alma was not available\"");

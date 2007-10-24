@@ -83,17 +83,20 @@ public class Error6 {
 	public void printVasCodeErrors(Map map) throws IOException {
 		if (map.size() <= 0) return;
 		int max = countVasCodeErrors(map)/map.size()+1;
-		if (max > 5) max = 5;
-		//Logger.getRootLogger().debug("MAX"+max);
-		Iterator it = map.values().iterator();
+		if (max > 8) max = 8;
+		
+		Iterator it = map.keySet().iterator();
 		while (it.hasNext()) {
-			Collection col = (Collection) it.next();
+			String key = (String) it.next();
+			Collection col = (Collection) map.get(key);
+			Logger.getRootLogger().out("VasCode: "+key);
 			Iterator cit = col.iterator();
-			for(int cur = 0; (cur < max) && (cit.hasNext());cur++) {
+			for(int cur = 0; cit.hasNext() ;cur++) {
+				if (!Configuration.getInstance().isShowAll()) if (cur >= max) break;
 				ErrorEntry e = (ErrorEntry) cit.next();
 				e.print(3);
 			}
-			if (cit.hasNext()) Logger.getRootLogger().out("             ... (has "+col.size()+" more)");
+			if (cit.hasNext()) Logger.getRootLogger().out("   ...(has "+col.size()+" more)");
 			Logger.getRootLogger().out("   ");
 		}
 	}

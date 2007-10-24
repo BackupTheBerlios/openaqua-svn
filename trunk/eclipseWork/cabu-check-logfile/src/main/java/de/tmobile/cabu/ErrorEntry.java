@@ -13,6 +13,7 @@ import java.util.Calendar;
  *
  */
 public class ErrorEntry {
+	private String atTime;
 	private String vasCodeService;
 	private String vasCodeGroup;
 	private int usageBegin;
@@ -22,9 +23,12 @@ public class ErrorEntry {
 	private int tariffNumber;
 	private int prepay;
 	private int partner;
+	
+	
 	public ErrorEntry(LogFileLine line) {
 		super();
 
+		setAtTime(line.getTime());
 		final String msg = line.getMessage();
 		this.vasCodeService	= getStr(msg, "vasCodeService=");
 		this.vasCodeGroup	= getStr(msg, "vasCodeGroup=");
@@ -62,9 +66,14 @@ public class ErrorEntry {
 		for(int i =0;i<spaces;i++) s += " ";
 		
 		//Ausgabe des Errors
-		s+="refTime="+unixTimeToString(refTime);
-		s+=" usageBegin="+unixTimeToString(usageBegin);
-		s+=" usageEnd="+unixTimeToString(usageEnd);
+		s += "at " + getAtTime() + ": ";
+		s += " refTime="+unixTimeToString(refTime);
+		s += " usageBegin="+unixTimeToString(usageBegin);
+		s += " usageEnd="+unixTimeToString(usageEnd);
+		s += " tariffOwner="+tariffOwner;
+		s += " tariffNumber="+tariffNumber;
+		s += " prepay="+prepay;
+		s += " wholesalep="+partner;
 		Logger.getRootLogger().out(s);
 		
 	}
@@ -130,6 +139,20 @@ public class ErrorEntry {
 
 	public void setTariffOwner(int tariffOwner) {
 		this.tariffOwner = tariffOwner;
+	}
+
+	/**
+	 * @return the atTime
+	 */
+	public String getAtTime() {
+		return this.atTime;
+	}
+
+	/**
+	 * @param atTime the atTime to set
+	 */
+	public void setAtTime(String atTime) {
+		this.atTime = atTime;
 	}
 	
 

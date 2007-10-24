@@ -43,13 +43,11 @@ public class Application {
 
 		
 		//Print Results:
-		Logger.getRootLogger().header();
-		
+		Statistic.getInstance().print();
 		
 		Error6.getInstance().print();
 		ErrorNoAlma.getInstance().print();
 		ErrorMisc.getInstance().print();
-		Statistic.getInstance().print();
 		
 		
 		logger.empty();
@@ -63,7 +61,9 @@ public class Application {
 	protected void usage() throws IOException {
 		logger.out( "\nUsage: ParseLogFile [-h] [-logfile logfile] [-mail mailtargets]\n"
 				+ "    -h[elp]\tPrint this usage message and exit\n"
-				+ "    -l[logfile]\tParse the given logfile"
+				+ "    -t[type]\tThe Type of logfile, might be \"chc\" or \"xoxi\"\n"
+				+ "    -l[logfile]\tParse the given logfile\n"
+				+ "    -a[ll]\t show all entries\n"
 				+ "    \n");
 		
 		
@@ -86,10 +86,27 @@ public class Application {
 					|| args[argInd].equalsIgnoreCase("-help")) {
 				return -1;
 
+			} else if (args[argInd].equalsIgnoreCase("-a")
+					|| args[argInd].equalsIgnoreCase("-all")) {
+				Configuration.getInstance().setShowAll(true);
+				
 			} else if (args[argInd].equalsIgnoreCase("-l")
 					|| args[argInd].equalsIgnoreCase("-logfile")) {
 				argInd++;
 				Configuration.getInstance().setLogFile(args[argInd]);
+
+			} else if (args[argInd].equalsIgnoreCase("-t")
+					|| args[argInd].equalsIgnoreCase("-type")) {
+				argInd++;
+				String type = args[argInd];
+				if (type.equals("chc")) {
+					Configuration.getInstance().setLogFileType(1);
+				} else if (type.equals("xoxi")) {
+					Configuration.getInstance().setLogFileType(2);
+				} else {
+					logger.error("Unknown Type of Logfile, can be xoxi or chc only");
+					return -3;
+				}
 
 			} else {
 				logger.error("unknown argument " + args[argInd]);
@@ -99,7 +116,11 @@ public class Application {
 		
 		if (Configuration.getInstance().getLogFile()==null) {
 			logger.error("Program needs a logFile ");
-			return -3;
+			return -4;
+		}
+		if (Configuration.getInstance().getLogFileType() == 0) {
+			logger.error("Program needs a Type of Logfile ");
+			return -5;
 		}
 		
 		return 0;

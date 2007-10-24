@@ -15,11 +15,13 @@ final public class Configuration {
 	private static Configuration INSTANCE = new Configuration();
 	private String logFile;
 	private DateFormat format;
+	private int logFileType = 0;
+	private boolean showAll = false;
 	
 	private Configuration() {
 		super();
 		logFile=null;
-		format = new SimpleDateFormat( "yyyyMMdd HHmmss" );
+		format = new SimpleDateFormat( "yyyyMMddHHmmss" );
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 
 	}
@@ -29,6 +31,7 @@ final public class Configuration {
 	}
 	
 
+	
 	public String getLogFile() {
 		return this.logFile;
 	}
@@ -39,5 +42,34 @@ final public class Configuration {
 
 	public DateFormat getDateFormat() {
 		return format;
+	}
+
+	
+	/*
+	 * 0 - unknown
+	 * 1 - CHC
+	 * 2 - XOXI
+	 * 
+	 */
+	public int getLogFileType() {
+		return this.logFileType;
+	}
+
+	public void setLogFileType(int logFileType) {
+		this.logFileType = logFileType;
+	}
+
+	/**
+	 * @return the showAll
+	 */
+	public boolean isShowAll() {
+		return this.showAll;
+	}
+
+	/**
+	 * @param showAll the showAll to set
+	 */
+	public void setShowAll(boolean showAll) {
+		this.showAll = showAll;
 	}
 }

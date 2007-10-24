@@ -3,8 +3,6 @@
  */
 package de.tmobile.cabu;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 
 /**
@@ -58,29 +56,10 @@ public final class Logger {
 	}
 
 	public void printHeader() {
-		
-		
-		String hostname = "<unknown>";
-		String fqhostname = "<unknown>";
-		String ip = "<unknown>";
-		try {
-			hostname = InetAddress.getLocalHost().getHostName();
-			fqhostname = InetAddress.getLocalHost().getCanonicalHostName();
-			ip = InetAddress.getLocalHost().getHostAddress();
-			
-		} catch (UnknownHostException e) {
-			Logger.getRootLogger().error("Cannot resolv hostname");
-			e.printStackTrace();
-		}
-
-
-		
-		
 		header();
 		empty();
-		out("Output basing on file " + Configuration.getInstance().getLogFile());
-		out("Output for system " + hostname + " ("+fqhostname+")");
-		out("with IP " + ip);
+		out ("The Cabu Logfile checker made a analyses of a CABU logfile");
+		out ("These are the result:");
 		empty();
 
 	}
