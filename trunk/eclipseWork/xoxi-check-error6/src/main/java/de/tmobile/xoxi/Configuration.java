@@ -19,7 +19,7 @@ final public class Configuration {
 	private Configuration() {
 		super();
 		logFile=null;
-		format = new SimpleDateFormat( "yyyyMMdd HHmmss z" );
+		format = new SimpleDateFormat( "yyyyMMdd HHmmss" );
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 
 	}

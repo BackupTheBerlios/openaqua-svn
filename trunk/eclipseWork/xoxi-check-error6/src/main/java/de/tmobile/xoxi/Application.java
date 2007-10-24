@@ -49,6 +49,8 @@ public class Application {
 		ErrorNoAlma.getInstance().print();
 		ErrorMisc.getInstance().print();
 		Statistic.getInstance().print();
+		
+		
 		logger.empty();
 		logger.header();
 
