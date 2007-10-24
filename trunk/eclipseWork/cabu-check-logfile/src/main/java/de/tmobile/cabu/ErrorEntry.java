@@ -62,18 +62,30 @@ public class ErrorEntry {
 	
 	public void print(final int spaces)  {
 		//Leerstring anlegen
-		String s = new String();
-		for(int i =0;i<spaces;i++) s += " ";
+		String leer = new String();
+		for(int i =0;i<spaces;i++) leer += " ";
+		
 		
 		//Ausgabe des Errors
+		String s = new String();
+		
+		s = leer;
 		s += "at " + getAtTime() + ": ";
-		s += " refTime="+unixTimeToString(refTime);
-		s += " usageBegin="+unixTimeToString(usageBegin);
-		s += " usageEnd="+unixTimeToString(usageEnd);
-		s += " tariffOwner="+tariffOwner;
-		s += " tariffNumber="+tariffNumber;
-		s += " prepay="+prepay;
-		s += " wholesalep="+partner;
+		s += " refTime    ="+unixTimeToString(refTime);
+		Logger.getRootLogger().out(s);
+
+		s = leer;
+		s += "                    usageBegin ="+unixTimeToString(usageBegin);
+		s += " usageEnd    ="+unixTimeToString(usageEnd);
+		Logger.getRootLogger().out(s);
+		
+		s = leer;
+		s += "                    tariffOwner="+tariffOwner;
+		s += "              tariffNumber="+tariffNumber;
+		Logger.getRootLogger().out(s);
+		s = leer;
+		s += "                    prepay     ="+prepay;
+		s += "              wholesalep  ="+partner;
 		Logger.getRootLogger().out(s);
 		
 	}

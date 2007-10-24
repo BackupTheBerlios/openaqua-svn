@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 package de.tmobile.cabu;
 
 import java.io.IOException;
@@ -10,28 +11,35 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+
+
 /**
  * @author behrenan
  * 
  */
 public class Error6 {
-	private static Error6 INSTANCE = new Error6();
-	private Map mapByVasCodeGroup = new TreeMap();
-	private Map mapByVasCodeService = new TreeMap();
-	private Collection listOther = new LinkedList();
+	private static Error6	INSTANCE	= new Error6();
+
+
 	public static Error6 getInstance() {
 		return INSTANCE;
 	}
+
+	private final Map	     mapByVasCodeGroup	 = new TreeMap();
+	private final Map	     mapByVasCodeService	= new TreeMap();
+
+	private final Collection	listOther	     = new LinkedList();
+
 
 	private Error6() {
 		super();
 	}
 
-	public void add(LogFileLine line) {
-		ErrorEntry entry = new ErrorEntry(line);
+
+	public void add(final LogFileLine line) {
+		final ErrorEntry entry = new ErrorEntry(line);
 		if (entry.getVasCodeGroup().length() > 0) {
-			Collection col = (Collection) mapByVasCodeGroup.get(entry
-					.getVasCodeGroup());
+			Collection col = (Collection) mapByVasCodeGroup.get(entry.getVasCodeGroup());
 			if (col == null) {
 				col = new LinkedList();
 				mapByVasCodeGroup.put(entry.getVasCodeGroup(), col);
@@ -39,8 +47,7 @@ public class Error6 {
 			col.add(entry);
 
 		} else if (entry.getVasCodeService().length() > 0) {
-			Collection col = (Collection) mapByVasCodeService.get(entry
-					.getVasCodeService());
+			Collection col = (Collection) mapByVasCodeService.get(entry.getVasCodeService());
 			if (col == null) {
 				col = new LinkedList();
 				mapByVasCodeService.put(entry.getVasCodeService(), col);
@@ -59,60 +66,45 @@ public class Error6 {
 		return listOther.size();
 	}
 
-	public int countVasCodeErrors(Map map) {
-		Iterator it = map.values().iterator();
+
+	public int countVasCodeErrors(final Map map) {
+		final Iterator it = map.values().iterator();
 		int result = 0;
 		while (it.hasNext()) {
-			Collection col = (Collection) it.next();
+			final Collection col = (Collection) it.next();
 			result += col.size();
 		}
 		return result;
 	}
-	public int countVasCodeServiceErrors() {
-		return countVasCodeErrors(mapByVasCodeService);
-	}
-	
+
+
 	public int countVasCodeGroupErrors() {
 		return countVasCodeErrors(mapByVasCodeGroup);
 	}
+
+
+	public int countVasCodeServiceErrors() {
+		return countVasCodeErrors(mapByVasCodeService);
+	}
+
 
 	public int otherErrors() {
 		return listOther.size();
 	}
 
-	public void printVasCodeErrors(Map map) throws IOException {
-		if (map.size() <= 0) return;
-		int max = countVasCodeErrors(map)/map.size()+1;
-		if (max > 8) max = 8;
-		
-		Iterator it = map.keySet().iterator();
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			Collection col = (Collection) map.get(key);
-			Logger.getRootLogger().out("VasCode: "+key);
-			Iterator cit = col.iterator();
-			for(int cur = 0; cit.hasNext() ;cur++) {
-				if (!Configuration.getInstance().isShowAll()) if (cur >= max) break;
-				ErrorEntry e = (ErrorEntry) cit.next();
-				e.print(3);
-			}
-			if (cit.hasNext()) Logger.getRootLogger().out("   ...(has "+col.size()+" more)");
-			Logger.getRootLogger().out("   ");
-		}
-	}
-	
+
 	public void print() throws IOException {
-		Logger log = Logger.getRootLogger();
+		final Logger log = Logger.getRootLogger();
 		if (countVasCodeGroupErrors() > 0) {
 			log.smallHeader();
-			log.out("Found " + countVasCodeGroupErrors()					+ " Errors with VasCodeGroup:");
+			log.out("Found " + countVasCodeGroupErrors() + " Errors with VasCodeGroup:");
 			printVasCodeErrors(mapByVasCodeGroup);
 			log.empty();
 		}
 
 		if (countVasCodeServiceErrors() > 0) {
 			log.smallHeader();
-			log.out("Found " + countVasCodeServiceErrors()				+ " Errors with VasCodeService:");
+			log.out("Found " + countVasCodeServiceErrors() + " Errors with VasCodeService:");
 			printVasCodeErrors(mapByVasCodeService);
 			log.empty();
 		}
@@ -121,6 +113,37 @@ public class Error6 {
 			log.smallHeader();
 			log.out("Found " + countOtherErrors() + " Errors with other Errors:");
 			log.empty();
+		}
+	}
+
+
+	public void printVasCodeErrors(final Map map) throws IOException {
+		if (map.size() <= 0) { return; }
+		int max = countVasCodeErrors(map) / map.size() + 1;
+		if (max > 8) {
+			max = 8;
+		}
+
+		final Iterator it = map.keySet().iterator();
+		while (it.hasNext()) {
+			final String key = (String) it.next();
+			final Collection col = (Collection) map.get(key);
+			if (max > col.size()) {
+				Logger.getRootLogger().out("VasCode " + key + ": found " + col.size() + " error(s)");
+			} else {
+				Logger.getRootLogger().out("VasCode " + key + ": found " + col.size() + " error(s), show " + max + " only");
+			}
+			final Iterator cit = col.iterator();
+			for (int cur = 0; cit.hasNext(); cur++) {
+				if (!Configuration.getInstance().isShowAll()) {
+					if (cur >= max) {
+						break;
+					}
+				}
+				final ErrorEntry e = (ErrorEntry) cit.next();
+				e.print(3);
+			}
+			Logger.getRootLogger().out("   ");
 		}
 	}
 }
