@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.xoxi;
+package de.tmobile.cabu;
 
 import java.util.Calendar;
 
@@ -47,10 +47,7 @@ public class ErrorEntry {
 
 	protected final String getStr(final String str, final String search) {
 		int begin = str.indexOf(search);
-		int length = str.indexOf(',', begin);
-		String result = str.substring(begin+search.length(), length);
-		//Logger.getRootLogger().debug(result);
-		return result;
+		return str.substring(begin+search.length(), str.indexOf(',', begin));
 	}
 
 	protected String unixTimeToString(final long time) {

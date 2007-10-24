@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.tmobile.xoxi;
+package de.tmobile.cabu;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
