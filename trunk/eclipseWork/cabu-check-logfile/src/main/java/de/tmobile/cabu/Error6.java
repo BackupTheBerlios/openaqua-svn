@@ -129,9 +129,9 @@ public class Error6 {
 			final String key = (String) it.next();
 			final Collection col = (Collection) map.get(key);
 			if (max > col.size()) {
-				Logger.getRootLogger().out("VasCode " + key + ": found " + col.size() + " error(s)");
+				Logger.getRootLogger().out("VASCODE " + key + ": found " + col.size() + " error(s)");
 			} else {
-				Logger.getRootLogger().out("VasCode " + key + ": found " + col.size() + " error(s), show " + max + " only");
+				Logger.getRootLogger().out("VASCODE " + key + ": found " + col.size() + " error(s), show " + max + " only");
 			}
 			final Iterator cit = col.iterator();
 			for (int cur = 0; cit.hasNext(); cur++) {

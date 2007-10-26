@@ -67,13 +67,11 @@ public class Application {
 
 
 	public int run(final String[] arg) throws IOException {
-		int result = 0;
 
 		// check parameters
+		int result = -1;
 		try {
 			result = parseCommandLine(arg);
-		} catch (final Exception e) {
-			result = -1;
 		} finally {
 			if (result != 0) {
 				usage();
@@ -105,6 +103,5 @@ public class Application {
 
 	protected void usage() throws IOException {
 		logger.out("\nUsage: ParseLogFile [-h] [-logfile logfile] [-mail mailtargets]\n" + "    -h[elp]\tPrint this usage message and exit\n" + "    -t[type]\tThe Type of logfile, might be \"chc\" or \"xoxi\"\n" + "    -l[logfile]\tParse the given logfile\n" + "    -a[ll]\t show all entries\n" + "    \n");
-
 	}
 }
