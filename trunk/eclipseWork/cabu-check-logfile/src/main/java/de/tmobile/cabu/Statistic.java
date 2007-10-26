@@ -3,6 +3,7 @@
  */
 package de.tmobile.cabu;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -88,17 +89,6 @@ public class Statistic {
 
 		final Logger log = Logger.getRootLogger();
 		log.out("-------------------------------------------------------------");
-		log.out("Statistic         : " + getRequestsDay() + " Requests/Day");
-		log.out("Statistic Average : " + getAverageTime() + " Microsec/Request");
-		log.out("Statistic Average : " + getRequestsMinute() + " Requests/Min");
-		log.out("Checked           : " + getReadStatLines() + " lines of Logfile");
-		log.empty();
-		log.out("hostname          : " + hostname);
-		log.out("FQ hostname       : " + fqhostname);
-		log.out("IP Address        : " + ip);
-		log.empty();
-		log.out("created at        : " + new java.util.Date().toString());
-		log.out("created from      : " + Configuration.getInstance().getLogFile());
 		switch (Configuration.getInstance().getLogFileType()) {
 		case 1:
 			log.out("Application       : CHC");
@@ -109,6 +99,17 @@ public class Statistic {
 		default:
 			log.out("Application       : Unknown, Type ID " + Configuration.getInstance().getLogFileType());
 		}
+		log.out("Logfile           : " + new File(Configuration.getInstance().getLogFile()).getName());
+		log.empty();
+		log.out("Statistic         : " + getRequestsDay() + " Requests/Day");
+		log.out("Statistic Average : " + getAverageTime() + " Microsec/Request");
+		log.out("Statistic Average : " + getRequestsMinute() + " Requests/Min");
+		log.out("Checked           : " + getReadStatLines() + " lines of Logfile");
+		log.empty();
+		log.out("hostname          : " + hostname);
+		log.out("FQ hostname       : " + fqhostname);
+		log.out("IP Address        : " + ip);
+		log.empty();
 		log.empty();
 		log.empty();
 		log.empty();

@@ -13,6 +13,26 @@ import java.util.Iterator;
  */
 public class LogFileLineDispatcher {
 
+	private static boolean isChcNoPriceListMmsg(final LogFileLine line) {
+		final String msg = line.getMessage();
+		if (msg != null && msg.equals("(ASYNC) Error-Response: code = 6, text = 'has no pricelist and no counter with fixprice or 100% discount'")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	private static boolean isChcOneOrMoreCounterLocked(final LogFileLine line) {
+		final String msg = line.getMessage();
+		if (msg != null && msg.equals("(ASYNC) Error-Response: code = 6, text = '1 or more counter locked.'")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
 	private static boolean isComingRequest(final LogFileLine line) {
 		final String msg = line.getMessage();
 		if (msg != null && msg.startsWith("coming requests are served by ")) {
@@ -87,8 +107,7 @@ public class LogFileLineDispatcher {
 		while (it.hasNext()) {
 			final Object o = it.next();
 			if (o instanceof LogFileLine) {
-				final LogFileLine line = (LogFileLine) o;
-				parseLine(line);
+				parseLine((LogFileLine) o);
 
 			}
 		}
@@ -112,6 +131,12 @@ public class LogFileLineDispatcher {
 		} else if (isRequestCompleted(line)) {
 			return;
 		} else if (isRequestTimedOut(line)) {
+			return;
+		} else if (isChcNoPriceListMmsg(line)) {
+			ErrorChc.getInstance().increaseErrNoPricelist();
+			return;
+		} else if (isChcOneOrMoreCounterLocked(line)) {
+			ErrorChc.getInstance().increaseErrCounterLocked();
 			return;
 		} else {
 			ErrorMisc.getInstance().add(line);

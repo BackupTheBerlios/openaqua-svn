@@ -93,6 +93,7 @@ public class Application {
 		Error6.getInstance().print();
 		ErrorNoAlma.getInstance().print();
 		ErrorMisc.getInstance().print();
+		ErrorChc.getInstance().print();
 
 		logger.empty();
 		logger.header();
