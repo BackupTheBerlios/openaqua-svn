@@ -13,6 +13,16 @@ import java.util.Iterator;
  */
 public class LogFileLineDispatcher {
 
+	private static boolean isAlmaTimesTenProblem(final LogFileLine line) {
+		final String msg = line.getMessage();
+		if (msg != null && msg.startsWith("(ASYNC) Error-Response: code = 6, text = '[TimesTen][TimesTen 5.1.30 ODBC Driver][TimesTen]TT6003: Lock request denied because of time-out<LF>Details: Tran ")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
 	private static boolean isChcNoPriceListMmsg(final LogFileLine line) {
 		final String msg = line.getMessage();
 		if (msg != null && msg.equals("(ASYNC) Error-Response: code = 6, text = 'has no pricelist and no counter with fixprice or 100% discount'")) {
@@ -134,6 +144,9 @@ public class LogFileLineDispatcher {
 			return;
 		} else if (isChcNoPriceListMmsg(line)) {
 			ErrorChc.getInstance().increaseErrNoPricelist();
+			return;
+		} else if (isAlmaTimesTenProblem(line)) {
+			ErrorChc.getInstance().increaseAlmaTimestTen();
 			return;
 		} else if (isChcOneOrMoreCounterLocked(line)) {
 			ErrorChc.getInstance().increaseErrCounterLocked();

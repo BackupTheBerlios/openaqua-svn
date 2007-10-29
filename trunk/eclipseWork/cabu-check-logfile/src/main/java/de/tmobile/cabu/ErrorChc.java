@@ -19,6 +19,16 @@ public class ErrorChc {
 
 	private int	errNoPricelist	 = 0;
 
+	private int	errAlmaTimesTen	 = 0;
+
+
+	/**
+	 * @return the almaTimesTen
+	 */
+	public int getErrAlmaTimesTen() {
+		return errAlmaTimesTen;
+	}
+
 
 	/**
 	 * @return the errCounterLocked
@@ -33,6 +43,11 @@ public class ErrorChc {
 	 */
 	public int getErrNoPricelist() {
 		return errNoPricelist;
+	}
+
+
+	public void increaseAlmaTimestTen() {
+		errAlmaTimesTen++;
 	}
 
 
@@ -63,5 +78,12 @@ public class ErrorChc {
 			log.empty();
 
 		}
+		if (errAlmaTimesTen > 0) {
+			log.out("Found " + errAlmaTimesTen + " Errors with Alma TimesTen Problems");
+			log.out("      (Check the Alma Logfiles for better information)");
+			log.empty();
+
+		}
 	}
+
 }
