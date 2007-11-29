@@ -10,56 +10,71 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+
+
 /**
  * @author behrenan
  * 
  */
-public abstract class CBaseList extends CListableObject {
-	private Map mapElements = new TreeMap();
+public abstract class CBaseList
+        extends
+        CListableObject {
+	private final Map<Integer, CBaseType>	mapElements	= new TreeMap<Integer, CBaseType>();
+
 
 	public CBaseList() {
 		super();
 	}
 
+
 	public void clear() {
 		mapElements.clear();
 	}
 
-	public void print(String prefix) {
-		Iterator it = mapElements.values().iterator();
+
+	public CBaseType get(final int id) {
+		return get(new Integer(id));
+
+	}
+
+
+	public CBaseType get(final Integer id) {
+		final Object o = mapElements.get(id);
+		if (o == null) { return null; }
+		return (CBaseType) o;
+	}
+
+
+	abstract protected String getQueryString();
+
+
+	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
+
+
+	@Override
+	public void print(final String prefix) {
+		final Iterator<CBaseType> it = mapElements.values().iterator();
 		while (it.hasNext()) {
-			((CBaseType) it.next()).print(prefix);
+			(it.next()).print(prefix);
 		}
 	}
 
-	public void store(CBaseType type) {
-		mapElements.put(type.getIntegerId(), type);
-	}
-	
-	public CBaseType get(int id) {
-		return get(new Integer(id));
-		
-	}
 
-	public CBaseType get(Integer id) {
-		Object o = mapElements.get(id);
-		if (o == null) return null;
-		return (CBaseType)o;		
-	}
-	
-	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
-	abstract protected String getQueryString();
-
-	protected void refreshList(TTConnection connection) throws SQLException {
+	protected void refreshList(final TTConnection connection) throws SQLException {
 		clear();
 		if (connection.isConnected()) {
 			// exec SQL command
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(getQueryString());
+			final Statement stmt = connection.createStatement();
+			final ResultSet rs = stmt.executeQuery(getQueryString());
 			HandleQueryResult(rs);
 			rs.close();
 			stmt.close();
 		}
+	}
+
+
+	public void store(final CBaseType type) {
+		mapElements.put(type.getIntegerId(), type);
 	}
 
 }
