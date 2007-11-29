@@ -3,70 +3,87 @@
  */
 package de.tmobile.cabu;
 
-
-import java.sql.SQLException;
-
-
-
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * @author behrenan
  * 
  */
 public class AlmaConnection {
-	private Logger logger = Logger.getRootLogger();
-	private TTConnection connection = null;
-	private boolean allFine = false;
+	private final Logger logger = Logger.getRootLogger();
 
-	
-	AlmaConnection(final String driver) throws ClassNotFoundException {
-		connection = new TTConnection(driver);
-		allFine = true;
-	}
-	
-
-	public void listTemplates(int whatToRun) {
-		if (allFine != true) return;
-		try {
-			CSubTypeList.getInstances().refreshList(connection);
-			CDescriptionList.getInstances().refreshList(connection);
-			CCareDescriptionList.getInstances().refreshList(connection);
-			CIdentificationContractsList.getInstances().refreshList(connection);
-			CAssocList.getInstances().refreshList(connection);
-			
-			if (whatToRun == 0) {
-				CSubTypeList.getInstances().print("SUBTYPE");
-				CDescriptionList.getInstances().print("TA_DESCRIPTION");
-				CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
-				CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
-				CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
-				CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
-			}
-			
-			if (whatToRun == 1) CSubTypeList.getInstances().print("SUBTYPE");
-			if (whatToRun == 2) CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
-			if (whatToRun == 3) CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			if (whatToRun == 4) CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
-			if (whatToRun == 5) CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
-			if (whatToRun == 6) CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
-			
-			
-		} catch (SQLException e) {
-			connection.reportSQLException(e);
-		}
-	}
-	
-	public void Connect(final String dsn) {
-		if (allFine != true) return;
+	AlmaConnection(final String driver, final String dsn) throws ClassNotFoundException {
 		logger.info("Make Connection to: " + dsn);
-		allFine = connection.Connect(dsn);
-		
+		Configuration.getInstance().setConnection(new TTConnection(driver));
+		Configuration.getInstance().getConnection().Connect(dsn);
 	}
 
 	public void Disconnect() {
-		if (allFine != true) return;
-		logger.info("Disconnected");
-		connection.Disconnect();		
+		if (Configuration.getInstance().isError()) { return; }
+		Configuration.getInstance().getConnection().Disconnect();
+		logger.info("AlmaConnection: Disconnected");
 	}
 
+	public void listTemplates(final int whatToRun) {
+		if (Configuration.getInstance().isError()) { return; }
+
+		try {
+			// A list for all List (-threads)
+			final List<Thread> threadList = new LinkedList<Thread>();
+			threadList.add(new Thread(CSubTypeList.getInstances()));
+			threadList.add(new Thread(CDescriptionList.getInstances()));
+			threadList.add(new Thread(CCareDescriptionList.getInstances()));
+			threadList.add(new Thread(CIdentificationContractsList.getInstances()));
+			threadList.add(new Thread(CAssocList.getInstances()));
+
+			// start the loader part of all lists once
+			ListIterator<Thread> iter = threadList.listIterator();
+			while (iter.hasNext()) {
+				iter.next().start();
+			}
+
+			// and wait for finishing their jobs
+			iter = threadList.listIterator();
+			while (iter.hasNext()) {
+				iter.next().join();
+			}
+
+		} catch (final InterruptedException e) {
+			Logger.getRootLogger().error("Something went wrong while loading data...");
+			e.printStackTrace();
+			Configuration.getInstance().getConnection().Disconnect();
+			return;
+		}
+
+		// whatToRun = 1;
+		if (whatToRun == 0) {
+			CSubTypeList.getInstances().print("SUBTYPE");
+			CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
+			// CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
+			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
+			// CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+		}
+
+		if (whatToRun == 1) {
+			CSubTypeList.getInstances().print("SUBTYPE");
+		}
+		if (whatToRun == 2) {
+			CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
+		}
+		if (whatToRun == 3) {
+			CDescriptionList.getInstances().print("TA_DESCRIPTION");
+		}
+		if (whatToRun == 4) {
+			CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
+		}
+		if (whatToRun == 5) {
+			CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
+		}
+		if (whatToRun == 6) {
+			CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+		}
+	}
 }
