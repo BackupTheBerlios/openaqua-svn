@@ -8,26 +8,48 @@ import java.sql.SQLException;
 
 /**
  * @author behrenan
- *
+ * 
  */
 
-public class CDescriptionList  extends CBaseList  {
+public class CDescriptionList extends CBaseList {
 	private static CDescriptionList INSTANCE = new CDescriptionList();
+
 	public static CDescriptionList getInstances() {
-		return INSTANCE;		
+		return INSTANCE;
 	}
 
-	protected void HandleQueryResult(ResultSet rs) throws SQLException {
-		while (rs.next()) {
-			store (new CDescription(rs.getInt(1),  rs.getString(2)));
-		}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
+	 */
+	@Override
+	public String getPrintDescription() {
+		// TODO Auto-generated method stub
+		return "";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintHeader()
+	 */
+	@Override
+	public String getPrintHeader(final String prefix) {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	@Override
 	protected String getQueryString() {
 		return "select description_id, description from acm_schema.acm$ta_description";
 	}
-	
+
+	@Override
+	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
+		while (rs.next()) {
+			store(new CDescription(rs.getInt(1), rs.getString(2)));
+		}
+	}
+
 }
-
-	
-

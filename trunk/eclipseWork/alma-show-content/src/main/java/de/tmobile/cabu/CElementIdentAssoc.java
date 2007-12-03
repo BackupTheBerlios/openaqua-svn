@@ -10,6 +10,10 @@ import java.sql.Timestamp;
  * 
  */
 public class CElementIdentAssoc extends CBaseType {
+	public static String getPrintHeader(final String prefix) {
+		return CBaseType.getPrintHeader(prefix) + sep() + "elementId";
+	}
+
 	long elementId;
 
 	public CElementIdentAssoc(final int id, final long elementId, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {

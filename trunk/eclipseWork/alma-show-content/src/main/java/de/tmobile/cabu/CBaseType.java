@@ -10,19 +10,36 @@ import java.sql.Timestamp;
  * 
  */
 public abstract class CBaseType extends CListableObject {
-	private int id;
-	private Integer id2;
-	private int obj_version;
+	public static String getPrintHeader(final String prefix) {
+		String result = "prefix" + sep() + sep() + sep();
+		result += "id" + sep();
+		result += "objVersion" + sep();
+		result += "valid_from" + sep();
+		result += "valid_to" + sep();
+		return result;
+	}
+
+	private final int id;
+	private final Integer id2;
+	private final int obj_version;
 	private Timestamp valid_from;
 	private Timestamp valid_to;
 
-	public CBaseType(int id, int obj_version, Timestamp valid_from, Timestamp valid_to) {
+	public CBaseType(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
 		super();
 		this.id = id;
-		this.id2 = new Integer(id);
+		id2 = new Integer(id);
 		this.obj_version = obj_version;
 		this.valid_from = valid_from;
 		this.valid_to = valid_to;
+
+		if (this.valid_to == null) {
+			this.valid_to = new Timestamp(2145913199000L);
+		}
+
+		if (this.valid_from == null) {
+			this.valid_from = new Timestamp(0L);
+		}
 	}
 
 	public int getId() {
@@ -34,17 +51,7 @@ public abstract class CBaseType extends CListableObject {
 	}
 
 	public int getObj_version() {
-		return this.obj_version;
-	}
-
-	public String getValid_from() {
-		if (this.valid_from == null) return null;
-		return this.valid_from.toString();
-	}
-
-	public String getValid_to() {
-		if (this.valid_to == null) return null;
-		return this.valid_to.toString();
+		return obj_version;
 	}
 
 	public String getPrintString(final String prefix) {
@@ -56,6 +63,17 @@ public abstract class CBaseType extends CListableObject {
 		return result;
 	}
 
+	public String getValid_from() {
+		if (valid_from == null) { return null; }
+		return valid_from.toString();
+	}
+
+	public String getValid_to() {
+		if (valid_to == null) { return null; }
+		return valid_to.toString();
+	}
+
+	@Override
 	abstract public void print(String prefix);
 
 }

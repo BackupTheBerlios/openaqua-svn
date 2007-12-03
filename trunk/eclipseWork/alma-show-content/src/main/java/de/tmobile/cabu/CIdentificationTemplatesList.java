@@ -20,24 +20,23 @@ public class CIdentificationTemplatesList extends CBaseList {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.tmobile.cabu.CBaseList#HandleQueryResult(java.sql.ResultSet)
+	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
 	 */
-	protected void HandleQueryResult(ResultSet rs) throws SQLException {
-		while (rs.next()) {
-			int type = rs.getInt(5);
-			int cv = rs.getInt(6);
-			int mandator = rs.getInt(7);
-			int elementTemplateId = rs.getInt(8);
-			int elementMasterTemplateId = rs.getInt(9);
-			String externalIdentifier = rs.getString(10);
+	@Override
+	public String getPrintDescription() {
+		// TODO Auto-generated method stub
+		return "";
+	}
 
-			CIdentification ident = new CIdentification(rs.getInt(1), rs
-					.getInt(2), rs.getTimestamp(3), rs.getTimestamp(4), type,
-					cv, mandator, elementTemplateId, elementMasterTemplateId,
-					externalIdentifier);
-			store(ident);
-		}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintHeader()
+	 */
+	@Override
+	public String getPrintHeader(final String prefix) {
+		// TODO Auto-generated method stub
+		return "";
 	}
 
 	/*
@@ -45,6 +44,7 @@ public class CIdentificationTemplatesList extends CBaseList {
 	 * 
 	 * @see de.tmobile.cabu.CBaseList#getQueryString()
 	 */
+	@Override
 	protected String getQueryString() {
 		String command = "Select ";
 		command += " id.IDENTIFICATION_ID, id.OBJ_VERSION,    	id.VALID_FROM, id.VALID_TO, ";
@@ -55,6 +55,28 @@ public class CIdentificationTemplatesList extends CBaseList {
 		command += " and id.identification_ty=ty.identification_ty";
 		command += " and ty.description_id=43 ";
 		return command;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#HandleQueryResult(java.sql.ResultSet)
+	 */
+	@Override
+	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
+		while (rs.next()) {
+			final int type = rs.getInt(5);
+			final int cv = rs.getInt(6);
+			final int mandator = rs.getInt(7);
+			final int elementTemplateId = rs.getInt(8);
+			final int elementMasterTemplateId = rs.getInt(9);
+			final String externalIdentifier = rs.getString(10);
+
+			final CIdentification ident = new CIdentification(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getTimestamp(4), type, cv,
+					mandator, elementTemplateId, elementMasterTemplateId, externalIdentifier);
+			store(ident);
+		}
+
 	}
 
 }

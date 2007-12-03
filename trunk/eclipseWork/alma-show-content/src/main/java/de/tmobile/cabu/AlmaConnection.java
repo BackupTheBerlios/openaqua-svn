@@ -37,6 +37,8 @@ public class AlmaConnection {
 			threadList.add(new Thread(CCareDescriptionList.getInstances()));
 			threadList.add(new Thread(CIdentificationContractsList.getInstances()));
 			threadList.add(new Thread(CElementIdentAssocList.getInstances()));
+			threadList.add(new Thread(CIdentification_CvList.getInstances()));
+			threadList.add(new Thread(CIdentification_TyList.getInstances()));
 
 			// start the loader part of all lists once
 			ListIterator<Thread> iter = threadList.listIterator();
@@ -59,12 +61,14 @@ public class AlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
-			CSubTypeList.getInstances().print("SUBTYPE");
-			CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			// CSubTypeList.getInstances().print("SUBTYPE");
+			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
+			CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
+			CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			// CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
-			// CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
 
 		if (whatToRun == 1) {
@@ -83,7 +87,7 @@ public class AlmaConnection {
 			CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 		}
 		if (whatToRun == 6) {
-			CAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
 	}
 }

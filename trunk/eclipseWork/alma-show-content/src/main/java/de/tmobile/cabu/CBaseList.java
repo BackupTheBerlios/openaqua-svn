@@ -36,12 +36,20 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		return (CBaseType) o;
 	}
 
+	abstract public String getPrintDescription();
+
+	abstract public String getPrintHeader(final String prefix);
+
 	abstract protected String getQueryString();
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
 	@Override
 	public void print(final String prefix) {
+		Logger.getRootLogger().emptyLine();
+		Logger.getRootLogger().out(getPrintDescription());
+		Logger.getRootLogger().emptyLine();
+		Logger.getRootLogger().out(getPrintHeader(prefix));
 		final Iterator<CBaseType> it = mapElements.values().iterator();
 		while (it.hasNext()) {
 			it.next().print(prefix);

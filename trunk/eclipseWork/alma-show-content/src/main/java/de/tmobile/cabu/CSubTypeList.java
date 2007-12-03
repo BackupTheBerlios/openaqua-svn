@@ -18,6 +18,28 @@ public class CSubTypeList extends CBaseList {
 		return INSTANCE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
+	 */
+	@Override
+	public String getPrintDescription() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintHeader()
+	 */
+	@Override
+	public String getPrintHeader(final String prefix) {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
 	@Override
 	protected String getQueryString() {
 		return "select sub.element_subtype_cv, desc.description from acm_schema.acm$ta_element_subtype_cv sub, acm_schema.acm$ta_description desc where sub.description_id=desc.description_id";

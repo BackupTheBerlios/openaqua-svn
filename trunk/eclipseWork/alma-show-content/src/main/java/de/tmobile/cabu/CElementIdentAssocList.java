@@ -19,9 +19,31 @@ public class CElementIdentAssocList extends CBaseList {
 		return INSTANCE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
+	 */
+	@Override
+	public String getPrintDescription() {
+		String result = "# Verbindung zwischen Elementen (Counter Instances) und Kunden\n";
+		result += "# ID zeigt auf das ID element eines Vertrags, elementId auf eine CounterInstance";
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.tmobile.cabu.CBaseList#getPrintHeader()
+	 */
+	@Override
+	public String getPrintHeader(final String prefix) {
+		return CElementIdentAssoc.getPrintHeader(prefix);
+	}
+
 	@Override
 	protected String getQueryString() {
-		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc";
+		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc order by identification_id";
 	}
 
 	@Override
