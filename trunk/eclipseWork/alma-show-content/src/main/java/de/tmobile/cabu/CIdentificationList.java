@@ -25,8 +25,7 @@ public class CIdentificationList extends CBaseList {
 	 */
 	@Override
 	public String getPrintDescription() {
-		// TODO Auto-generated method stub
-		return "";
+		return "# Liste aller Idenifier wie MSISDN, Vertragsnummer, BundleID";
 	}
 
 	/*
@@ -36,8 +35,7 @@ public class CIdentificationList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		// TODO Auto-generated method stub
-		return "";
+		return CIdentification.getPrintHeader(prefix);
 	}
 
 	/*
@@ -77,6 +75,6 @@ public class CIdentificationList extends CBaseList {
 			store(new CIdentification(id, objVer, val_from, val_to, ty, cv, mandator, elementTemplateId, elementMasterTemplateId,
 					externalIdentifier));
 		}
-
 	}
+
 }

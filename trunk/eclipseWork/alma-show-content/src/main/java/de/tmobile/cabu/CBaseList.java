@@ -44,6 +44,10 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
+	public Iterator<CBaseType> iterator() {
+		return mapElements.values().iterator();
+	}
+
 	@Override
 	public void print(final String prefix) {
 		Logger.getRootLogger().emptyLine();
@@ -58,8 +62,10 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 
 	protected void refreshList(final TTConnection connection) throws SQLException {
 		if (Configuration.getInstance().isError()) { return; }
-		clear();
 		if (getQueryString() == null) { return; }
+		clear();
+
+		Logger.getRootLogger().debug("BEG refresh " + this.getClass().getName());
 
 		// exec SQL command
 		final Statement stmt = connection.createStatement();
@@ -67,6 +73,8 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		HandleQueryResult(rs);
 		rs.close();
 		stmt.close();
+
+		Logger.getRootLogger().debug("END refresh " + this.getClass().getName());
 	}
 
 	public void run() {
@@ -87,5 +95,4 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 	public void store(final CBaseType type) {
 		mapElements.put(type.getIntegerId(), type);
 	}
-
 }
