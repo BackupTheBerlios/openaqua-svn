@@ -7,7 +7,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CIdentification_TypeBase extends CBaseType {
+public class CIdentification_Type extends CBaseType {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -18,19 +18,23 @@ public class CIdentification_TypeBase extends CBaseType {
 		return result;
 	}
 
-	int desription;
+	int desriptionId;
 	int sorting;
 	int valid;
 
-	public CIdentification_TypeBase(final int id, final int descriptionId, final int sorting, final int valid) {
+	public CIdentification_Type(final int id, final int dId, final int sorting, final int valid) {
 		super(id, 0, null, null);
-		desription = descriptionId;
+		desriptionId = dId;
 		this.sorting = sorting;
 		this.valid = valid;
 	}
 
-	public int getDesription() {
-		return desription;
+	public final String getDesription() {
+		return "";
+	}
+
+	public int getDesriptionId() {
+		return desriptionId;
 	}
 
 	public int getSorting() {
@@ -48,7 +52,7 @@ public class CIdentification_TypeBase extends CBaseType {
 		result += getSorting() + sep();
 		result += getValid() + sep();
 		result += getDesription() + sep();
-		final CBaseType base = CDescriptionList.getInstances().get(getDesription());
+		final CBaseType base = CDescriptionList.getInstances().get(getDesriptionId());
 		if (base instanceof CDescription) {
 			final CDescription desc = (CDescription) base;
 			result += desc.getDescription();
@@ -58,8 +62,8 @@ public class CIdentification_TypeBase extends CBaseType {
 		Logger.getRootLogger().out(result);
 	}
 
-	public void setDesription(final int desription) {
-		this.desription = desription;
+	public void setDesriptionId(final int desription) {
+		desriptionId = desription;
 	}
 
 	public void setSorting(final int sorting) {

@@ -66,7 +66,7 @@ public class AlmaConnection {
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
-			// CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
+			CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
