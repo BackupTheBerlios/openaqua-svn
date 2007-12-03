@@ -36,7 +36,7 @@ public class AlmaConnection {
 			threadList.add(new Thread(CDescriptionList.getInstances()));
 			threadList.add(new Thread(CCareDescriptionList.getInstances()));
 			threadList.add(new Thread(CIdentificationContractsList.getInstances()));
-			threadList.add(new Thread(CAssocList.getInstances()));
+			threadList.add(new Thread(CElementIdentAssocList.getInstances()));
 
 			// start the loader part of all lists once
 			ListIterator<Thread> iter = threadList.listIterator();
