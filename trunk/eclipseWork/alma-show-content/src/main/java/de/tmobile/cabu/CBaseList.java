@@ -93,6 +93,6 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 	 */
 
 	public void store(final CBaseType type) {
-		mapElements.put(type.getIntegerId(), type);
+		mapElements.put(type.getId(), type);
 	}
 }

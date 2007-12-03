@@ -68,11 +68,12 @@ public class CIdentification extends CBaseType {
 	@Override
 	public void print(final String prefix) {
 		String result = super.getPrintString(prefix) + sep();
-		result += getType() + sep();
-		result += CIdentification_TyList.getInstances().getTypeAsString(getType()) + sep();
-		result += getCv() + sep();
-		result += CIdentification_CvList.getInstances().getTypeAsString(getCv()) + sep();
+		// result += getType() + sep();
+		// result +=
+		// CIdentification_TyList.getInstances().getTypeAsString(getType()) +
+		// sep();
+		result += getExternalIdentifier() + sep();
+		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
 		logger.out(result);
 	}
-
 }

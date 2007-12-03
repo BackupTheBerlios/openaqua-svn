@@ -26,6 +26,16 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 		return 0;
 	}
 
+	public int getMasterTemplateIdTypeId() {
+		final Iterator<CBaseType> iter = iterator();
+		while (iter.hasNext()) {
+			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final String desc = type.getDescription().toLowerCase();
+			if (desc.contains("master")) { return type.getId(); }
+		}
+		return 0;
+	}
+
 	public int getMsisdnTypeId() {
 		final Iterator<CBaseType> iter = iterator();
 		while (iter.hasNext()) {
@@ -39,6 +49,16 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 	@Override
 	protected String getQueryString() {
 		return "select identification_cv, description_id, sorting, valid from acm_schema.acm$ta_identification_cv ";
+	}
+
+	public int getTemplateIdTypeId() {
+		final Iterator<CBaseType> iter = iterator();
+		while (iter.hasNext()) {
+			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final String desc = type.getDescription().toLowerCase();
+			if (desc.contains("template")) { return type.getId(); }
+		}
+		return 0;
 	}
 
 }
