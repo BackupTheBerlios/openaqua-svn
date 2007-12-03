@@ -21,9 +21,9 @@ public class CIdentification extends CBaseType {
 	private final int elementTemplateId;
 	private final int elementMasterTemplateId;
 
-	private String externalIdentifier;
+	private final String externalIdentifier;
 
-	final private Logger logger = Logger.getRootLogger();
+	private final Logger logger = Logger.getRootLogger();
 
 	public CIdentification(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int cv, final int mandator, final int elementTemplateId, final int elementMasterTemplateId, final String externalIdentifier) {
@@ -33,9 +33,10 @@ public class CIdentification extends CBaseType {
 		this.mandator = mandator;
 		this.elementTemplateId = elementTemplateId;
 		this.elementMasterTemplateId = elementMasterTemplateId;
-		this.externalIdentifier = externalIdentifier;
-		if (this.externalIdentifier != null) {
+		if (externalIdentifier != null) {
 			this.externalIdentifier = externalIdentifier.trim();
+		} else {
+			this.externalIdentifier = null;
 		}
 
 	}

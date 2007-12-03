@@ -47,9 +47,9 @@ public class CIdentification_TypeList extends CBaseList {
 		final CBaseType type = get(id);
 		if (type instanceof CIdentification_Type) {
 			final CIdentification_Type i = (CIdentification_Type) type;
-			return i.getDesription();
+			return i.getDescription();
 		} else {
-			return "unkown";
+			return "unkownType";
 		}
 	}
 

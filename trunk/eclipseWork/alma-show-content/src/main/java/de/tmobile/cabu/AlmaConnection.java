@@ -35,7 +35,7 @@ public class AlmaConnection {
 			threadList.add(new Thread(CSubTypeList.getInstances()));
 			threadList.add(new Thread(CDescriptionList.getInstances()));
 			threadList.add(new Thread(CCareDescriptionList.getInstances()));
-			threadList.add(new Thread(CIdentificationContractsList.getInstances()));
+			threadList.add(new Thread(CIdentificationList.getInstances()));
 			threadList.add(new Thread(CElementIdentAssocList.getInstances()));
 			threadList.add(new Thread(CIdentification_CvList.getInstances()));
 			threadList.add(new Thread(CIdentification_TyList.getInstances()));
@@ -66,7 +66,7 @@ public class AlmaConnection {
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
-			CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
+			CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
@@ -84,7 +84,7 @@ public class AlmaConnection {
 			CIdentificationContractsList.getInstances().print("TA_IDENTIFICATION");
 		}
 		if (whatToRun == 5) {
-			CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
+			CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 		}
 		if (whatToRun == 6) {
 			CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");

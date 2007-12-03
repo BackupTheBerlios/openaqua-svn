@@ -29,8 +29,15 @@ public class CIdentification_Type extends CBaseType {
 		this.valid = valid;
 	}
 
-	public final String getDesription() {
-		return "";
+	public final String getDescription() {
+		final CBaseType base = CDescriptionList.getInstances().get(getDesriptionId());
+		if (base instanceof CDescription) {
+			final CDescription desc = (CDescription) base;
+			return desc.getDescription();
+		} else {
+			return "unknownDescription";
+		}
+
 	}
 
 	public int getDesriptionId() {
@@ -51,14 +58,8 @@ public class CIdentification_Type extends CBaseType {
 		result += getId() + sep();
 		result += getSorting() + sep();
 		result += getValid() + sep();
-		result += getDesription() + sep();
-		final CBaseType base = CDescriptionList.getInstances().get(getDesriptionId());
-		if (base instanceof CDescription) {
-			final CDescription desc = (CDescription) base;
-			result += desc.getDescription();
-		} else {
-			result += "unknownDescription";
-		}
+		result += getDesriptionId() + sep();
+		result += getDescription();
 		Logger.getRootLogger().out(result);
 	}
 
