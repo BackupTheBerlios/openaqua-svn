@@ -13,7 +13,7 @@ public class CIdentification_Type extends CBaseType {
 		result += "id" + sep();
 		result += "sorting" + sep();
 		result += "valid" + sep();
-		result += "descriptionId" + sep();
+		result += "descId" + sep();
 		result += "description";
 		return result;
 	}

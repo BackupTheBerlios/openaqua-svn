@@ -3,32 +3,36 @@
  */
 package de.tmobile.cabu;
 
-
-
 /**
  * @author behrenan
- *
+ * 
  */
-public class CCareDescription extends CBaseType{
-	private String description;
-	Logger logger = Logger.getRootLogger();
+public class CCareDescription extends CBaseType {
+	public static String getPrintHeader(final String prefix) {
+		String result = "prefix" + sep() + sep() + sep();
+		result += "id" + sep();
+		result += "description";
+		return result;
+	}
 
-	public CCareDescription (int id, final String description) {
+	private String description;
+
+	public CCareDescription(final int id, final String description) {
 		super(id, 0, null, null);
 		this.description = description;
 	}
-	
 
 	public String getDescription() {
-		return this.description;
+		return description;
+	}
+
+	@Override
+	public void print(final String prefix) {
+		Logger.getRootLogger().out(prefix + sep() + getId() + sep() + description);
 	}
 
 	public void setDescription(final String description) {
 		this.description = description;
-	}
-
-	public void print(String prefix) {
-		logger.out(prefix+sep()+getId()+sep()+description);
 	}
 
 }

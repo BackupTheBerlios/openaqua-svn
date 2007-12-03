@@ -25,8 +25,7 @@ public class CCareDescriptionList extends CBaseList {
 	 */
 	@Override
 	public String getPrintDescription() {
-		// TODO Auto-generated method stub
-		return "";
+		return "#Echtnamen von Bundles";
 	}
 
 	/*
@@ -36,8 +35,7 @@ public class CCareDescriptionList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		// TODO Auto-generated method stub
-		return "";
+		return CCareDescription.getPrintHeader(prefix);
 	}
 
 	@Override

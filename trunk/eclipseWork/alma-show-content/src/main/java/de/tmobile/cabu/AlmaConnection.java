@@ -35,10 +35,14 @@ public class AlmaConnection {
 			threadList.add(new Thread(CElementIdentAssocList.getInstances()));
 			threadList.add(new Thread(CIdentificationList.getInstances()));
 			threadList.add(new Thread(CSubTypeList.getInstances()));
+			threadList.add(new Thread(CDataTypeList.getInstances()));
 			threadList.add(new Thread(CDescriptionList.getInstances()));
 			threadList.add(new Thread(CCareDescriptionList.getInstances()));
 			threadList.add(new Thread(CIdentification_CvList.getInstances()));
 			threadList.add(new Thread(CIdentification_TyList.getInstances()));
+			threadList.add(new Thread(CUnitTypeList.getInstances()));
+			threadList.add(new Thread(CElementTypeList.getInstances()));
+			threadList.add(new Thread(CElementSubtypeList.getInstances()));
 
 			// start the loader part of all lists once
 			ListIterator<Thread> iter = threadList.listIterator();
@@ -65,12 +69,18 @@ public class AlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
-			// CSubTypeList.getInstances().print("SUBTYPE");
-			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
+			// CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
+			// CDataTypeList.getInstances().print("ACM_TA_DATA_TYPE_CV");
+			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
+			// CElementTypeList.getInstances().print("TA_ELEMENT_TYPE_CV");
+			// CElementSubtypeList.getInstances().print("TA_ELEMENT_SUBTYPE_CV");
 			// CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
+			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
+			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			// 
+
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
-			CIdentificationList.getInstances().print("TA_IDENTIFICATION");
+			// CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
