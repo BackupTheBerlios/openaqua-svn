@@ -51,6 +51,7 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 	protected void refreshList(final TTConnection connection) throws SQLException {
 		if (Configuration.getInstance().isError()) { return; }
 		clear();
+		if (getQueryString() == null) { return; }
 
 		// exec SQL command
 		final Statement stmt = connection.createStatement();

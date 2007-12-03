@@ -1,0 +1,5 @@
+Select id.IDENTIFICATION_ID, id.OBJ_VERSION,    	id.VALID_FROM, id.VALID_TO, 
+ty.description_id,    cv.description_id,	id.MANDATOR_ID, 
+id.ELEMENT_TEMPLATE_ID, id.ELEMENT_MASTER_TEMPLATE_ID, id.EXTERNAL_IDENTIFIER 
+ from acm_schema.acm$ta_identification id, acm_schema.acm$ta_identification_cv cv, acm_schema.acm$ta_identification_ty ty
+  where id.identification_cv=cv.identification_cv and id.identification_ty=ty.identification_ty and ty.description_id=41 
