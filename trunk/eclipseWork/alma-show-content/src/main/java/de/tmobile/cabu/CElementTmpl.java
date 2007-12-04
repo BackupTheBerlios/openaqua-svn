@@ -3,109 +3,106 @@
  */
 package de.tmobile.cabu;
 
-import java.sql.SQLException;
+
+import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
  * 
  */
-public class CElementTmpl extends CListableObject {
+public class CElementTmpl extends CBaseType {
+	public static String getPrintHeader(final String prefix) {
+		return CBaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
+	}
 
-	private final Integer id;
-	private Integer tmplVersion;
-	private Integer typeCv;
-	private Integer objVersion;
-	// private CSubType subType;
-	private Integer dataType;
-	private Integer unitCv;
-	private Integer parentId;
-	private Integer rootId;
-	private String value;
-	private String validFrom;
-	private String validTo;
+	int type;
+	int subtype;
+	int datatype;
+	int unittype;
+	int parentId;
+	int rootId;
+	int amcDescId;
+	int constFlag;
+	String value;
+	CElementTmplPartList list;
 
-	public CElementTmpl(final Integer id) {
-		super();
-		this.id = id;
+	public CElementTmpl(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
+			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final int amcDescId,
+			final int constFlag, final String value) {
+		super(id, obj_version, valid_from, valid_to);
+		this.type = type;
+		this.subtype = subtype;
+		this.datatype = datatype;
+		this.unittype = unittype;
+		this.parentId = parentId;
+		this.rootId = rootId;
+		this.amcDescId = amcDescId;
+		this.constFlag = constFlag;
+		if (value == null) {
+			this.value = "";
+		} else {
+			this.value = value.trim();
+		}
+		list = new CElementTmplPartList(id);
+		list.run();
+
 	}
 
 	/**
-	 * @return the dataType
+	 * @return the amcDescId
 	 */
-	public Integer getDataType() {
-		return dataType;
+	public int getAmcDescId() {
+		return amcDescId;
 	}
 
 	/**
-	 * @return the id
+	 * @return the constFlag
 	 */
-	public Integer getId() {
-		return id;
+	public int getConstFlag() {
+		return constFlag;
 	}
 
 	/**
-	 * @return the objVersion
+	 * @return the datatype
 	 */
-	public Integer getObjVersion() {
-		return objVersion;
+	public int getDatatype() {
+		return datatype;
 	}
 
 	/**
 	 * @return the parentId
 	 */
-	public Integer getParentId() {
+	public int getParentId() {
 		return parentId;
-	}
-
-	public String getPrintLine(final String prefix) {
-		String result = "";
-		result += prefix + sep();
-		result += getId() + sep();
-		result += getRootId() + sep();
-		result += getParentId() + sep();
-		return result;
 	}
 
 	/**
 	 * @return the rootId
 	 */
-	public Integer getRootId() {
+	public int getRootId() {
 		return rootId;
 	}
 
 	/**
-	 * @return the tmplVersion
+	 * @return the subtype
 	 */
-	public Integer getTmplVersion() {
-		return tmplVersion;
+	public int getSubtype() {
+		return subtype;
 	}
 
 	/**
-	 * @return the typeCv
+	 * @return the type
 	 */
-	public Integer getTypeCv() {
-		return typeCv;
+	public int getType() {
+		return type;
 	}
 
 	/**
-	 * @return the unitCv
+	 * @return the unittype
 	 */
-	public Integer getUnitCv() {
-		return unitCv;
-	}
-
-	/**
-	 * @return the validFrom
-	 */
-	public String getValidFrom() {
-		return validFrom;
-	}
-
-	/**
-	 * @return the validTo
-	 */
-	public String getValidTo() {
-		return validTo;
+	public int getUnittype() {
+		return unittype;
 	}
 
 	/**
@@ -115,34 +112,92 @@ public class CElementTmpl extends CListableObject {
 		return value;
 	}
 
-	public Integer id() {
-		return id;
-	}
-
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.CBaseType#print(java.lang.String)
+	 */
 	@Override
 	public void print(final String prefix) {
-		System.out.println(getPrintLine(prefix));
+		String result = super.getPrintString(prefix) + sep();
+		result += rootId + sep();
+		result += "\"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"" + sep();
+		result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
+		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
+		result += "\"" + value + "\"" + sep();
+		Logger.getRootLogger().out(result);
+		list.printElements("   " + prefix);
 	}
 
-	public void refresh(final TTConnection connection) throws SQLException {
-		/*
-		 * if (!connection.isConnected()) return; // exec SQL command Statement
-		 * stmt = connection.createStatement(); ResultSet rs = stmt
-		 * .executeQuery("select value, element_subtype_cv, root_id, obj_version,
-		 * parent_id, valid_from, valid_to from acm_schema.acm$ta_element_tmpl
-		 * where element_template_id=" + id()); // parse the result while
-		 * (rs.next()) { if (rs.getString(1) != null) value =
-		 * rs.getString(1).trim(); subType = CSubTypeList.getInstances().get(new
-		 * Integer(rs.getInt(2))); rootId = new Integer(rs.getInt(3)); objVersion =
-		 * new Integer(rs.getInt(4)); parentId = new Integer(rs.getInt(5));
-		 * validFrom = rs.getDate(6).toString() + " " + rs.getTime(6).toString();
-		 * validTo = rs.getDate(7).toString() + " " + rs.getTime(7).toString(); } //
-		 * close statements rs.close(); stmt.close();
-		 */
+	/**
+	 * @param amcDescId
+	 *           the amcDescId to set
+	 */
+	public void setAmcDescId(final int amcDescId) {
+		this.amcDescId = amcDescId;
 	}
 
+	/**
+	 * @param constFlag
+	 *           the constFlag to set
+	 */
+	public void setConstFlag(final int constFlag) {
+		this.constFlag = constFlag;
+	}
+
+	/**
+	 * @param datatype
+	 *           the datatype to set
+	 */
+	public void setDatatype(final int datatype) {
+		this.datatype = datatype;
+	}
+
+	/**
+	 * @param parentId
+	 *           the parentId to set
+	 */
+	public void setParentId(final int parentId) {
+		this.parentId = parentId;
+	}
+
+	/**
+	 * @param rootId
+	 *           the rootId to set
+	 */
+	public void setRootId(final int rootId) {
+		this.rootId = rootId;
+	}
+
+	/**
+	 * @param subtype
+	 *           the subtype to set
+	 */
+	public void setSubtype(final int subtype) {
+		this.subtype = subtype;
+	}
+
+	/**
+	 * @param type
+	 *           the type to set
+	 */
+	public void setType(final int type) {
+		this.type = type;
+	}
+
+	/**
+	 * @param unittype
+	 *           the unittype to set
+	 */
+	public void setUnittype(final int unittype) {
+		this.unittype = unittype;
+	}
+
+	/**
+	 * @param value
+	 *           the value to set
+	 */
 	public void setValue(final String value) {
 		this.value = value;
 	}
+
 
 }

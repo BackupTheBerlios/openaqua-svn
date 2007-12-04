@@ -3,69 +3,34 @@
  */
 package de.tmobile.cabu;
 
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+
+
 
 /**
  * @author behrenan
  * 
  */
-public class CElementTmplList extends CListableObject {
+public class CElementTmplList extends CElementTmplPartList {
+	private static CElementTmplList INSTANCE = new CElementTmplList(0);
 
-    private final Map<Integer, CElementTmpl> mapElements = new TreeMap<Integer, CElementTmpl>();
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.tmobile.cabu.IElementList#clear()
-     */
-    public void clear() {
-	mapElements.clear();
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.tmobile.cabu.IElementList#get(java.lang.Integer)
-     */
-    public CElementTmpl get(final Integer id) {
-	return mapElements.get(id);
-    }
-
-    public String getElementsValues(final Set values) {
-	final String result = "";
-	/*
-	 * Iterator it = mapElements.values().iterator(); while(it.hasNext()) {
-	 * CElementTmpl element = (CElementTmpl)it.next(); if
-	 * (values.contains(element.getSubType().getId())) { result +=
-	 * element.getValue() + sep(); } }
-	 */
-	return result;
-    }
-
-    @Override
-    public void print(final String prefix) {
-	final Iterator<CElementTmpl> it = mapElements.values().iterator();
-	while (it.hasNext()) {
-	    final CElementTmpl t = it.next();
-	    t.print(prefix);
+	public static CElementTmplList getInstances() {
+		return INSTANCE;
 	}
 
-    }
+	/**
+	 * @param parentId
+	 */
+	public CElementTmplList(final int parentId) {
+		super(parentId);
+	}
 
-    public void put(final TTConnection connection, final Integer id,
-	    final CElementTmpl element) throws SQLException {
-	element.refresh(connection);
-	mapElements.put(id, element);
 
-    }
-
-    public void refresh(final TTConnection connection) throws SQLException {
-	clear();
-    }
-
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.CBaseList#getQueryString()
+	 */
+	//@Override
+	//protected String getQueryString() {
+	//	return "select element_template_id, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
+	//			+ " root_id, acm_description_id, const_flag, value, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_tmpl where parent_id is null";
+	//}
 }

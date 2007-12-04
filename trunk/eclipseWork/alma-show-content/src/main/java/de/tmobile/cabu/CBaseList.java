@@ -3,12 +3,14 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
 
 /**
  * @author behrenan
@@ -54,10 +56,15 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		Logger.getRootLogger().out(getPrintDescription());
 		Logger.getRootLogger().emptyLine();
 		Logger.getRootLogger().out(getPrintHeader(prefix));
+		printElements(prefix);
+	}
+
+	public void printElements(final String prefix) {
 		final Iterator<CBaseType> it = mapElements.values().iterator();
 		while (it.hasNext()) {
 			it.next().print(prefix);
 		}
+
 	}
 
 	protected void refreshList(final TTConnection connection) throws SQLException {
@@ -65,7 +72,7 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		if (getQueryString() == null) { return; }
 		clear();
 
-		Logger.getRootLogger().debug("BEG refresh " + this.getClass().getName());
+		///Logger.getRootLogger().debug("BEG refresh " + this.getClass().getName());
 
 		// exec SQL command
 		final Statement stmt = connection.createStatement();
@@ -74,7 +81,7 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		rs.close();
 		stmt.close();
 
-		Logger.getRootLogger().debug("END refresh " + this.getClass().getName());
+		//Logger.getRootLogger().debug("END refresh " + this.getClass().getName());
 	}
 
 	public void run() {

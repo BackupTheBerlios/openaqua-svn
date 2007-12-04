@@ -3,9 +3,8 @@
  */
 package de.tmobile.cabu;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+
+
 
 /**
  * @author behrenan
@@ -29,43 +28,29 @@ public class AlmaConnection {
 	public void listTemplates(final int whatToRun) {
 		if (Configuration.getInstance().isError()) { return; }
 
-		try {
-			// A list for all List (-threads)
-			final List<Thread> threadList = new LinkedList<Thread>();
-			threadList.add(new Thread(CElementIdentAssocList.getInstances()));
-			threadList.add(new Thread(CIdentificationList.getInstances()));
-			threadList.add(new Thread(CSubTypeList.getInstances()));
-			threadList.add(new Thread(CDataTypeList.getInstances()));
-			threadList.add(new Thread(CDescriptionList.getInstances()));
-			threadList.add(new Thread(CCareDescriptionList.getInstances()));
-			threadList.add(new Thread(CIdentification_CvList.getInstances()));
-			threadList.add(new Thread(CIdentification_TyList.getInstances()));
-			threadList.add(new Thread(CUnitTypeList.getInstances()));
-			threadList.add(new Thread(CElementTypeList.getInstances()));
-			threadList.add(new Thread(CElementSubtypeList.getInstances()));
 
-			// start the loader part of all lists once
-			ListIterator<Thread> iter = threadList.listIterator();
-			while (iter.hasNext()) {
-				iter.next().start();
-			}
+		//Register (and load from TT) new DataList
+		AlmaDataLoader.getInstances().addList(CElementIdentAssocList.getInstances());
+		AlmaDataLoader.getInstances().addList(CIdentificationList.getInstances());
+		AlmaDataLoader.getInstances().addList(CSubTypeList.getInstances());
+		AlmaDataLoader.getInstances().addList(CDataTypeList.getInstances());
+		AlmaDataLoader.getInstances().addList(CDescriptionList.getInstances());
+		AlmaDataLoader.getInstances().addList(CCareDescriptionList.getInstances());
+		AlmaDataLoader.getInstances().addList(CIdentification_CvList.getInstances());
+		AlmaDataLoader.getInstances().addList(CIdentification_TyList.getInstances());
+		AlmaDataLoader.getInstances().addList(CUnitTypeList.getInstances());
+		AlmaDataLoader.getInstances().addList(CElementTypeList.getInstances());
+		AlmaDataLoader.getInstances().addList(CElementSubtypeList.getInstances());
+		AlmaDataLoader.getInstances().addList(CElementTmplList.getInstances());
 
-			// and wait for finishing their jobs
-			iter = threadList.listIterator();
-			while (iter.hasNext()) {
-				iter.next().join();
-			}
+		//Wait until they are finished
+		AlmaDataLoader.getInstances().join();
+		AlmaDataLoader.getInstances().clear();
 
-			// Build higher Objects
-			// CIdentificationList.getInstances().print("IDENT");
-			// BCustomerList.getInstances().buildCustomerList();
 
-		} catch (final InterruptedException e) {
-			Logger.getRootLogger().error("Something went wrong while loading data...");
-			e.printStackTrace();
-			Configuration.getInstance().getConnection().Disconnect();
-			return;
-		}
+		// Build higher Objects
+		// CIdentificationList.getInstances().print("IDENT");
+		// BCustomerList.getInstances().buildCustomerList();
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
@@ -77,10 +62,11 @@ public class AlmaConnection {
 			// CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
 			// 
 
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
-			CIdentificationList.getInstances().print("TA_IDENTIFICATION");
+			// CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
