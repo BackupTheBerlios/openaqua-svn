@@ -80,7 +80,7 @@ public class AlmaConnection {
 			// 
 
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
-			// CIdentificationList.getInstances().print("TA_IDENTIFICATION");
+			CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}

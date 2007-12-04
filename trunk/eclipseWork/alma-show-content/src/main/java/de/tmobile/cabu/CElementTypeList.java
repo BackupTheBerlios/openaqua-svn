@@ -7,7 +7,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CElementTypeList extends CIdentification_TypeList {
+public class CElementTypeList extends CAlmaDataTypeBaseList {
 
 	private static CElementTypeList INSTANCE = new CElementTypeList();
 

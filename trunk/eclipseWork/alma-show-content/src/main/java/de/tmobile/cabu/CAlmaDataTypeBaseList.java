@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author behrenan
  * 
  */
-public class CIdentification_TypeList extends CBaseList {
+public class CAlmaDataTypeBaseList extends CBaseList {
 
 	/*
 	 * (non-Javadoc)
@@ -30,7 +30,7 @@ public class CIdentification_TypeList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return CIdentification_Type.getPrintHeader(prefix);
+		return CAlmaDataType.getPrintHeader(prefix);
 	}
 
 	/*
@@ -45,8 +45,8 @@ public class CIdentification_TypeList extends CBaseList {
 
 	public final String getTypeAsString(final int id) {
 		final CBaseType type = get(id);
-		if (type instanceof CIdentification_Type) {
-			final CIdentification_Type i = (CIdentification_Type) type;
+		if (type instanceof CAlmaDataType) {
+			final CAlmaDataType i = (CAlmaDataType) type;
 			return i.getDescription();
 		} else {
 			return "unkownType";
@@ -65,7 +65,7 @@ public class CIdentification_TypeList extends CBaseList {
 			final int descId = rs.getInt(2);
 			final int sorting = rs.getInt(3);
 			final int valid = rs.getInt(4);
-			store(new CIdentification_Type(id, descId, sorting, valid));
+			store(new CAlmaDataType(id, descId, sorting, valid));
 		}
 
 	}

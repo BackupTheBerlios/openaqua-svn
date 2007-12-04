@@ -74,6 +74,7 @@ public class CIdentification extends CBaseType {
 		// sep();
 		result += getExternalIdentifier() + sep();
 		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
+		result += "\"" + CIdentification_TyList.getInstances().getTypeAsString(getType()) + "\"" + sep();
 		logger.out(result);
 	}
 }

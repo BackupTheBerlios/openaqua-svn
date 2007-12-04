@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author behrenan
  * 
  */
-public class CIdentification_CvList extends CIdentification_TypeList {
+public class CIdentification_CvList extends CAlmaDataTypeBaseList {
 	private static CIdentification_CvList INSTANCE = new CIdentification_CvList();
 
 	public static CIdentification_CvList getInstances() {
@@ -19,7 +19,7 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 	public int getContractidTypeId() {
 		final Iterator<CBaseType> iter = iterator();
 		while (iter.hasNext()) {
-			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final CAlmaDataType type = (CAlmaDataType) iter.next();
 			final String desc = type.getDescription().toLowerCase();
 			if (desc.contains("contract")) { return type.getId(); }
 		}
@@ -29,7 +29,7 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 	public int getMasterTemplateIdTypeId() {
 		final Iterator<CBaseType> iter = iterator();
 		while (iter.hasNext()) {
-			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final CAlmaDataType type = (CAlmaDataType) iter.next();
 			final String desc = type.getDescription().toLowerCase();
 			if (desc.contains("master")) { return type.getId(); }
 		}
@@ -39,7 +39,7 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 	public int getMsisdnTypeId() {
 		final Iterator<CBaseType> iter = iterator();
 		while (iter.hasNext()) {
-			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final CAlmaDataType type = (CAlmaDataType) iter.next();
 			final String desc = type.getDescription().toLowerCase();
 			if (desc.contains("msisdn")) { return type.getId(); }
 		}
@@ -54,7 +54,7 @@ public class CIdentification_CvList extends CIdentification_TypeList {
 	public int getTemplateIdTypeId() {
 		final Iterator<CBaseType> iter = iterator();
 		while (iter.hasNext()) {
-			final CIdentification_Type type = (CIdentification_Type) iter.next();
+			final CAlmaDataType type = (CAlmaDataType) iter.next();
 			final String desc = type.getDescription().toLowerCase();
 			if (desc.contains("template")) { return type.getId(); }
 		}

@@ -7,7 +7,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CIdentification_Type extends CBaseType {
+public class CAlmaDataType extends CBaseType {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -22,7 +22,7 @@ public class CIdentification_Type extends CBaseType {
 	int sorting;
 	int valid;
 
-	public CIdentification_Type(final int id, final int dId, final int sorting, final int valid) {
+	public CAlmaDataType(final int id, final int dId, final int sorting, final int valid) {
 		super(id, 0, null, null);
 		desriptionId = dId;
 		this.sorting = sorting;
