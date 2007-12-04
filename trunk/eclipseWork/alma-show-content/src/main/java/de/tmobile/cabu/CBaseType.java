@@ -3,7 +3,9 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
@@ -13,7 +15,7 @@ public abstract class CBaseType extends CListableObject {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
-		result += "objVersion" + sep();
+		result += "objVers" + sep();
 		result += "valid_from" + sep();
 		result += "valid_to" + sep();
 		return result;
@@ -52,8 +54,8 @@ public abstract class CBaseType extends CListableObject {
 		String result = prefix + sep();
 		result += id + sep();
 		result += obj_version + sep();
-		result += valid_from + sep();
-		result += valid_to;
+		result += valid_from.getTime() / 1000 + sep();
+		result += valid_to.getTime() / 1000;
 		return result;
 	}
 

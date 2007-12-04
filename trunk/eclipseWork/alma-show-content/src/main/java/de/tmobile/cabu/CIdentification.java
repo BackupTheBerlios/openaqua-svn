@@ -3,7 +3,9 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
@@ -20,9 +22,7 @@ public class CIdentification extends CBaseType {
 	private final int mandator;
 	private final int elementTemplateId;
 	private final int elementMasterTemplateId;
-
 	private final String externalIdentifier;
-
 	private final Logger logger = Logger.getRootLogger();
 
 	public CIdentification(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
@@ -65,6 +65,7 @@ public class CIdentification extends CBaseType {
 		return type;
 	}
 
+
 	@Override
 	public void print(final String prefix) {
 		String result = super.getPrintString(prefix) + sep();
@@ -74,7 +75,8 @@ public class CIdentification extends CBaseType {
 		// sep();
 		result += getExternalIdentifier() + sep();
 		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
-		result += "\"" + CIdentification_TyList.getInstances().getTypeAsString(getType()) + "\"" + sep();
+		// result += "\"" + CIdentification_TyList.getInstances().getTypeAsString(getType()) + "\""
+		// + sep();
 		logger.out(result);
 	}
 }
