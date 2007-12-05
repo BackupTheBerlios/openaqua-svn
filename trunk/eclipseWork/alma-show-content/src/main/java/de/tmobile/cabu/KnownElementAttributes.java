@@ -71,8 +71,10 @@ public class KnownElementAttributes {
 
 		try {
 			//try to fillup result list
-			for (final Integer integer : knownElementAttributes.get(elementType)) {
-				result.add(integer);
+			if (knownElementAttributes.containsKey(elementType)) {
+				for (final Integer integer : knownElementAttributes.get(elementType)) {
+					result.add(integer);
+				}
 			}
 		} finally {
 			elementReadLock.unlock();
@@ -103,8 +105,10 @@ public class KnownElementAttributes {
 
 		lock.lock();
 		try {
-			for (final Integer integer : knownTemplateAttributes.get(elementType)) {
-				result.add(integer);
+			if (knownTemplateAttributes.containsKey(elementType)) {
+				for (final Integer integer : knownTemplateAttributes.get(elementType)) {
+					result.add(integer);
+				}
 			}
 		} finally {
 			lock.unlock();

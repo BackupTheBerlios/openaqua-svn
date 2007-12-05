@@ -58,7 +58,9 @@ public class CElementTmpl extends CBaseType {
 
 	public void addAttribute(final int type, final String value) {
 		KnownElementAttributes.getInstances().setKnownTemplateAttributes(this.type, type);
-		attributes.put(type, value);
+		if (value != null) {
+			attributes.put(type, value.trim());
+		}
 	}
 
 	public int getAmcDescId() {
@@ -104,15 +106,32 @@ public class CElementTmpl extends CBaseType {
 	@Override
 	public void print(final String prefix) {
 		String result = super.getPrintString(prefix) + sep();
-		result += rootId + sep();
-		result += type + sep();
 		result += "\"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"" + sep();
-		result += subtype + sep();
-		result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
+		result += rootId + sep();
+		result += parentId + sep();
+		//result += type + sep();
+		//result += subtype + sep();
+		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
 		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		result += "\"" + value + "\"" + sep();
+		//result += "\"" + value + "\"" + sep();
+		result += printAttributes();
 		Logger.getRootLogger().out(result);
-		list.printElements("   " + prefix);
+		list.printElements(prefix);
+	}
+
+	private String printAttributes() {
+		String result = "";
+		for (final Integer i : KnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
+			if (attributes.containsKey(i)) {
+				result += "\"" + attributes.get(i) + "\"" + sep();
+				//result += i + "=" + "\"" + attributes.get(i) + "\"" + sep();
+			} else {
+				result += "\"\"" + sep();
+				//result += i + "=" + "\"\"" + sep();
+			}
+		}
+		return result;
+
 	}
 
 	public void setAmcDescId(final int amcDescId) {
