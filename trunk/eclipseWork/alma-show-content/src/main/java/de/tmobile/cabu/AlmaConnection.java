@@ -61,14 +61,14 @@ public class AlmaConnection {
 			// CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			//CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
+			CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
+			KnownElementAttributes.getInstances().dump();
 			// 
 
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			// CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
-			KnownElementAttributes.getInstances().dump();
 		}
 
 		if (whatToRun == 1) {

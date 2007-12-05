@@ -40,24 +40,25 @@ public class KnownElementAttributes {
 		super();
 	}
 
+
 	public void dump() {
 
 		//dump Template Elements / Attributes
 		for (final Integer i : getKnownTemplateElementTypes()) {
-			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i);
+			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i) + " has: ";
 			final List<Integer> list = getKnownTemplateAttributes(i);
 			for (final Integer j : list) {
-				result += CElementTypeList.getInstances().getTypeAsString(j) + " ";
+				result += j + "=" + CElementSubtypeList.getInstances().getTypeAsString(j) + " ";
 			}
 			Logger.getRootLogger().out(result);
 		}
 
 		//dump Element Elements / Attributes
 		for (final Integer i : getKnownElementElementTypes()) {
-			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i);
+			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i) + " has: ";
 			final List<Integer> list = getKnownElementAttributes(i);
 			for (final Integer j : list) {
-				result += CElementTypeList.getInstances().getTypeAsString(j) + " ";
+				result += j + "=" + CElementSubtypeList.getInstances().getTypeAsString(j) + " ";
 			}
 			Logger.getRootLogger().out(result);
 		}

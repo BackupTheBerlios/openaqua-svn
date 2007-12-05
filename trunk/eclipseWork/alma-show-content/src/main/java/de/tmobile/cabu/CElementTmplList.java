@@ -19,7 +19,7 @@ public class CElementTmplList extends CElementTmplPartList {
 	 * @param parentId
 	 */
 	public CElementTmplList(final int parentId) {
-		super(parentId);
+		super(parentId, null);
 	}
 
 }

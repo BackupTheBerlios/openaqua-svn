@@ -14,41 +14,29 @@ import java.sql.Timestamp;
  * 
  */
 public class CElementTmplPartList extends CBaseList {
-	int parentId;
+	final private int parentId;
+	final private CElementTmpl parent;
 
-	public CElementTmplPartList(final int parentId) {
+	public CElementTmplPartList(final int parentId, final CElementTmpl parent) {
 		this.parentId = parentId;
+		this.parent = parent;
 	}
 
 
-	/**
-	 * @return the parentId
-	 */
 	public int getParentId() {
 		return parentId;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
-	 */
 	@Override
 	public String getPrintDescription() {
-		// TODO Auto-generated method stub
 		return "unknown";
 	}
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.CBaseList#getPrintHeader(java.lang.String)
-	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		// TODO Auto-generated method stub
 		return "unknown";
 	}
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.CBaseList#getQueryString()
-	 */
 	@Override
 	protected String getQueryString() {
 		if (parentId == 0) {
@@ -65,9 +53,7 @@ public class CElementTmplPartList extends CBaseList {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.CBaseList#HandleQueryResult(java.sql.ResultSet)
-	 */
+
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
@@ -86,17 +72,14 @@ public class CElementTmplPartList extends CBaseList {
 			final Timestamp valid_to = rs.getTimestamp(13);
 			final CElementTmpl tmpl = new CElementTmpl(id, objVers, valid_from, valid_to, type, subtype, datatype, unittype, parentId, rootId,
 					amcDescId, constFlag, value);
+
 			store(tmpl);
 
+			if (parent != null) {
+				parent.addAttribute(subtype, value);
+			}
+
+
 		}
-	}
-
-
-	/**
-	 * @param parentId
-	 *           the parentId to set
-	 */
-	public void setParentId(final int parentId) {
-		this.parentId = parentId;
 	}
 }
