@@ -119,6 +119,7 @@ public class CElementTmpl extends CBaseType {
 	public void print(final String prefix) {
 		String result = super.getPrintString(prefix) + sep();
 		result += rootId + sep();
+		result += type + sep();
 		result += "\"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"" + sep();
 		result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
 		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();

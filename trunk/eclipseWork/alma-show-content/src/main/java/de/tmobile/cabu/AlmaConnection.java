@@ -4,8 +4,6 @@
 package de.tmobile.cabu;
 
 
-
-
 /**
  * @author behrenan
  * 
@@ -49,6 +47,7 @@ public class AlmaConnection {
 
 
 		// Build higher Objects
+		//BAccountList.getInstances().buildAccounts();
 		// CIdentificationList.getInstances().print("IDENT");
 		// BCustomerList.getInstances().buildCustomerList();
 
@@ -62,7 +61,7 @@ public class AlmaConnection {
 			// CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
+			//CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
 			// 
 
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");

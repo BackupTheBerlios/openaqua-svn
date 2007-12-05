@@ -3,8 +3,10 @@
  */
 package de.tmobile.cabu;
 
+
 import java.io.PrintWriter;
 import java.sql.DriverManager;
+
 
 /**
  * @author behrenan
@@ -131,10 +133,12 @@ public class Main {
 		try {
 			AlmaConnection alma;
 			if (isCSConn) {
+				Logger.getRootLogger().debug("Try Remote Connection");
 				alma = new AlmaConnection(CLIENT_DRIVER, CLIENT_CONNECT_PREFIX + dsnname);
 				alma.listTemplates(whatToRun);
 				alma.Disconnect();
 			} else {
+				Logger.getRootLogger().debug("Try Direct Connection");
 				alma = new AlmaConnection(DIRECT_DRIVER, DIRECT_CONNECT_PREFIX + dsnname);
 				alma.listTemplates(whatToRun);
 				alma.Disconnect();
