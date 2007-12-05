@@ -67,7 +67,6 @@ public abstract class CBaseType extends CListableObject {
 		return valid_to;
 	}
 
-	@Override
 	abstract public void print(String prefix);
 
 	/**

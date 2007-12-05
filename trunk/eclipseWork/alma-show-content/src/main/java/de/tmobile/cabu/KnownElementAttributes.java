@@ -5,7 +5,6 @@ package de.tmobile.cabu;
 
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -41,6 +40,29 @@ public class KnownElementAttributes {
 		super();
 	}
 
+	public void dump() {
+
+		//dump Template Elements / Attributes
+		for (final Integer i : getKnownTemplateElementTypes()) {
+			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i);
+			final List<Integer> list = getKnownTemplateAttributes(i);
+			for (final Integer j : list) {
+				result += CElementTypeList.getInstances().getTypeAsString(j) + " ";
+			}
+			Logger.getRootLogger().out(result);
+		}
+
+		//dump Element Elements / Attributes
+		for (final Integer i : getKnownElementElementTypes()) {
+			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i);
+			final List<Integer> list = getKnownElementAttributes(i);
+			for (final Integer j : list) {
+				result += CElementTypeList.getInstances().getTypeAsString(j) + " ";
+			}
+			Logger.getRootLogger().out(result);
+		}
+	}
+
 	public final List<Integer> getKnownElementAttributes(final int elementType) {
 
 		final List<Integer> result = new LinkedList<Integer>(); //default empty result 
@@ -48,11 +70,8 @@ public class KnownElementAttributes {
 
 		try {
 			//try to fillup result list
-			if (knownElementAttributes.containsKey(elementType)) {
-				final Iterator<Integer> iter = knownElementAttributes.get(elementType).iterator();
-				while (iter.hasNext()) {
-					result.add(iter.next());
-				}
+			for (final Integer integer : knownElementAttributes.get(elementType)) {
+				result.add(integer);
 			}
 		} finally {
 			elementReadLock.unlock();
@@ -61,26 +80,52 @@ public class KnownElementAttributes {
 		return result;
 	}
 
+	public final List<Integer> getKnownElementElementTypes() {
+		final List<Integer> result = new LinkedList<Integer>();
+
+		elementReadLock.lock();
+		try {
+			for (final Integer integer : knownElementAttributes.keySet()) {
+				result.add(integer);
+			}
+		} finally {
+			elementReadLock.unlock();
+		}
+		return result;
+
+	}
+
 	public final List<Integer> getKnownTemplateAttributes(final int elementType) {
 
 		final List<Integer> result = new LinkedList<Integer>(); //default empty result 
-		templateReadLock.lock();
+		final Lock lock = templateReadLock;
 
+		lock.lock();
 		try {
-			//try to fillup result list
-			if (knownTemplateAttributes.containsKey(elementType)) {
-				final Iterator<Integer> iter = knownTemplateAttributes.get(elementType).iterator();
-				while (iter.hasNext()) {
-					result.add(iter.next());
-				}
+			for (final Integer integer : knownTemplateAttributes.get(elementType)) {
+				result.add(integer);
 			}
 		} finally {
-			templateReadLock.unlock();
+			lock.unlock();
 		}
 
 		return result;
 	}
 
+	public final List<Integer> getKnownTemplateElementTypes() {
+		final List<Integer> result = new LinkedList<Integer>();
+		final Lock lock = templateReadLock;
+		lock.lock();
+		try {
+			for (final Integer integer : knownTemplateAttributes.keySet()) {
+				result.add(integer);
+			}
+		} finally {
+			lock.unlock();
+		}
+		return result;
+
+	}
 
 	public void setKnownElementAttributes(final int elementType, final int attributeType) {
 		elementWriteLock.lock();

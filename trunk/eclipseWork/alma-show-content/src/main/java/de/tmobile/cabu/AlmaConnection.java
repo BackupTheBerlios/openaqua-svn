@@ -68,6 +68,7 @@ public class AlmaConnection {
 			// CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
 			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			KnownElementAttributes.getInstances().dump();
 		}
 
 		if (whatToRun == 1) {

@@ -27,15 +27,8 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		mapElements.clear();
 	}
 
-	public CBaseType get(final int id) {
-		return get(new Integer(id));
-
-	}
-
-	public CBaseType get(final Integer id) {
-		final Object o = mapElements.get(id);
-		if (o == null) { return null; }
-		return (CBaseType) o;
+	final public CBaseType get(final int id) {
+		return mapElements.get(id);
 	}
 
 	abstract public String getPrintDescription();
@@ -46,12 +39,11 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
-	public Iterator<CBaseType> iterator() {
+	final public Iterator<CBaseType> iterator() {
 		return mapElements.values().iterator();
 	}
 
-	@Override
-	public void print(final String prefix) {
+	final public void print(final String prefix) {
 		Logger.getRootLogger().emptyLine();
 		Logger.getRootLogger().out(getPrintDescription());
 		Logger.getRootLogger().emptyLine();
@@ -59,15 +51,13 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 		printElements(prefix);
 	}
 
-	public void printElements(final String prefix) {
-		final Iterator<CBaseType> it = mapElements.values().iterator();
-		while (it.hasNext()) {
-			it.next().print(prefix);
+	final public void printElements(final String prefix) {
+		for (final CBaseType type : mapElements.values()) {
+			type.print(prefix);
 		}
-
 	}
 
-	protected void refreshList(final TTConnection connection) throws SQLException {
+	final protected void refreshList(final TTConnection connection) throws SQLException {
 		if (Configuration.getInstance().isError()) { return; }
 		if (getQueryString() == null) { return; }
 		clear();
@@ -99,7 +89,7 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 	 *           the error to set
 	 */
 
-	public void store(final CBaseType type) {
+	final public void store(final CBaseType type) {
 		mapElements.put(type.getId(), type);
 	}
 }

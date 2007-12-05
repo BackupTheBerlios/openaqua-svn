@@ -5,6 +5,8 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -16,16 +18,17 @@ public class CElementTmpl extends CBaseType {
 		return CBaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
 	}
 
-	int type;
-	int subtype;
-	int datatype;
-	int unittype;
-	int parentId;
-	int rootId;
-	int amcDescId;
-	int constFlag;
-	String value;
-	CElementTmplPartList list;
+	public final Map<Integer, String> attributes;
+	private int type;
+	private int subtype;
+	private int datatype;
+	private int unittype;
+	private int parentId;
+	private int rootId;
+	private int amcDescId;
+	private int constFlag;
+	private String value;
+	private final CElementTmplPartList list;
 
 	public CElementTmpl(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final int amcDescId,
@@ -44,6 +47,8 @@ public class CElementTmpl extends CBaseType {
 		} else {
 			this.value = value.trim();
 		}
+		attributes = new TreeMap<Integer, String>();
+
 		list = new CElementTmplPartList(id);
 		list.run();
 

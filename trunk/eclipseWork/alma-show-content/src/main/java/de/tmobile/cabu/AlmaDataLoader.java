@@ -6,7 +6,6 @@ package de.tmobile.cabu;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 
 /**
@@ -38,30 +37,27 @@ public class AlmaDataLoader {
 	}
 
 	public void join() {
-		ListIterator<Thread> iter;
 
 		//First run
-		iter = threadList.listIterator();
-		while (iter.hasNext()) {
+		for (final Thread thread : threadList) {
 			try {
-				iter.next().join();
+				thread.join();
 			} catch (final InterruptedException e) {
 				Logger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
 				e.printStackTrace();
 			}
+
 		}
 
-		//2nd run
-		iter = threadList.listIterator();
-		while (iter.hasNext()) {
+		//First run
+		for (final Thread thread : threadList) {
 			try {
-				iter.next().join();
+				thread.join();
 			} catch (final InterruptedException e) {
-				Configuration.getInstance().getConnection().Disconnect();
 				Logger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
 				e.printStackTrace();
-
 			}
+
 		}
 	}
 }
