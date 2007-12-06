@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CListableObject {
+public class BaseListableObject {
 	public static String sep() {
 		return "\t";
 	}

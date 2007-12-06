@@ -14,7 +14,7 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public abstract class CBaseList extends TreeMap<Integer, CBaseType> {
+public abstract class BaseList extends TreeMap<Integer, CBaseType> {
 
 	public CBaseList() {
 		super();
