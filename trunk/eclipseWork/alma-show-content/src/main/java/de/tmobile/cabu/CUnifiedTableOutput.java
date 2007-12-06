@@ -14,11 +14,11 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public class UnifiedTableOutput {
+public class CUnifiedTableOutput {
 
 	Map<Integer, List<String>> collection;
 
-	public UnifiedTableOutput() {
+	public CUnifiedTableOutput() {
 		super();
 		collection = new TreeMap<Integer, List<String>>();
 	}
@@ -38,7 +38,7 @@ public class UnifiedTableOutput {
 	final void print() {
 		for (final List<String> list : collection.values()) {
 			for (final String string : list) {
-				Logger.getRootLogger().out(string);
+				CLogger.getRootLogger().out(string);
 			}
 		}
 	}

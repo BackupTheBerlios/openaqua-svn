@@ -12,10 +12,10 @@ import java.sql.Timestamp;
  * 
  */
 
-public class CIdentification extends CBaseType {
+public class TIdentification extends BaseType {
 
 	public static String getPrintHeader(final String prefix) {
-		return CBaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "cv";
+		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "cv";
 	}
 
 	private final int type;
@@ -25,7 +25,7 @@ public class CIdentification extends CBaseType {
 	private final int elementMasterTemplateId;
 	private final String externalIdentifier;
 
-	public CIdentification(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
+	public TIdentification(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int cv, final int mandator, final int elementTemplateId, final int elementMasterTemplateId, final String externalIdentifier) {
 		super(id, obj_version, valid_from, valid_to);
 		this.type = type;
@@ -65,7 +65,7 @@ public class CIdentification extends CBaseType {
 	public String getPrintString(final String prefix) {
 		String result = super.getPrintPrefixString(prefix) + sep();
 		result += getExternalIdentifier() + sep();
-		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
+		result += "\"" + ListIdentification_Cv.getInstances().getTypeAsString(getCv()) + "\"" + sep();
 		return result;
 	}
 

@@ -11,15 +11,15 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public class CElementIdentAssoc extends CBaseType {
+public class TElementIdentAssoc extends BaseType {
 
 	public static String getPrintHeader(final String prefix) {
-		return CBaseType.getPrintHeader(prefix) + sep() + "elementId";
+		return BaseType.getPrintHeader(prefix) + sep() + "elementId";
 	}
 
 	long elementId;
 
-	public CElementIdentAssoc(final int id, final long elementId, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
+	public TElementIdentAssoc(final int id, final long elementId, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
 		super(id, obj_version, valid_from, valid_to);
 		this.elementId = elementId;
 		/*

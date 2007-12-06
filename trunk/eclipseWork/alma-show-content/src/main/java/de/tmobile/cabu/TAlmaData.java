@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CAlmaDataType extends CBaseType {
+public class TAlmaData extends BaseType {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -23,7 +23,7 @@ public class CAlmaDataType extends CBaseType {
 	int sorting;
 	int valid;
 
-	public CAlmaDataType(final int id, final int dId, final int sorting, final int valid) {
+	public TAlmaData(final int id, final int dId, final int sorting, final int valid) {
 		super(id, 0, null, null);
 		desriptionId = dId;
 		this.sorting = sorting;
@@ -31,9 +31,9 @@ public class CAlmaDataType extends CBaseType {
 	}
 
 	public final String getDescription() {
-		final CBaseType base = CDescriptionList.getInstances().get(getDesriptionId());
-		if (base instanceof CDescription) {
-			final CDescription desc = (CDescription) base;
+		final BaseType base = ListDescription.getInstances().get(getDesriptionId());
+		if (base instanceof TDescription) {
+			final TDescription desc = (TDescription) base;
 			return desc.getDescription();
 		} else {
 			return "unknownDescription";

@@ -3,19 +3,20 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  * 
  */
-public class Logger {
+public class CLogger {
 
-	private static Logger INSTANCE = new Logger();
+	private static CLogger INSTANCE = new CLogger();
 
-	static public Logger getRootLogger() {
+	static public CLogger getRootLogger() {
 		return INSTANCE;
 	}
 
-	private Logger() {
+	private CLogger() {
 		super();
 	}
 

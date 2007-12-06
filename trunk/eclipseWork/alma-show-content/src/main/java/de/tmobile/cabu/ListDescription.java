@@ -13,11 +13,11 @@ import java.sql.SQLException;
  * 
  */
 
-public class CDescriptionList extends CBaseList {
+public class ListDescription extends BaseList {
 	private static final long serialVersionUID = 1056598853660288340L;
-	private static CDescriptionList INSTANCE = new CDescriptionList();
+	private static ListDescription INSTANCE = new ListDescription();
 
-	public static CDescriptionList getInstances() {
+	public static ListDescription getInstances() {
 		return INSTANCE;
 	}
 
@@ -51,7 +51,7 @@ public class CDescriptionList extends CBaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new CDescription(rs.getInt(1), rs.getString(2)));
+			store(new TDescription(rs.getInt(1), rs.getString(2)));
 		}
 	}
 

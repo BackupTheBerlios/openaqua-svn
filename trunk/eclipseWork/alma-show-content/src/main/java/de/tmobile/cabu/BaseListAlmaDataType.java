@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * @author behrenan
  * 
  */
-public class CAlmaDataTypeBaseList extends CBaseList {
+public class BaseListAlmaDataType extends BaseList {
 	private static final long serialVersionUID = 1056598853660288341L;
 
 	/*
@@ -32,7 +32,7 @@ public class CAlmaDataTypeBaseList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return CAlmaDataType.getPrintHeader(prefix);
+		return TAlmaData.getPrintHeader(prefix);
 	}
 
 	/*
@@ -46,10 +46,9 @@ public class CAlmaDataTypeBaseList extends CBaseList {
 	}
 
 	public final String getTypeAsString(final int id) {
-		final CBaseType type = get(id);
-		if (type instanceof CAlmaDataType) {
-			final CAlmaDataType i = (CAlmaDataType) type;
-			return i.getDescription();
+		final BaseType type = get(id);
+		if (type instanceof TAlmaData) {
+			return ((TAlmaData) type).getDescription();
 		} else {
 			return "unkownType";
 		}
@@ -67,7 +66,7 @@ public class CAlmaDataTypeBaseList extends CBaseList {
 			final int descId = rs.getInt(2);
 			final int sorting = rs.getInt(3);
 			final int valid = rs.getInt(4);
-			store(new CAlmaDataType(id, descId, sorting, valid));
+			store(new TAlmaData(id, descId, sorting, valid));
 		}
 
 	}

@@ -8,11 +8,11 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CElementSubtypeList extends CAlmaDataTypeBaseList {
+public class ListElementSubtype extends BaseListAlmaDataType {
 	private static final long serialVersionUID = 1056598853660288339L;
-	private static CElementSubtypeList INSTANCE = new CElementSubtypeList();
+	private static ListElementSubtype INSTANCE = new ListElementSubtype();
 
-	public static CElementSubtypeList getInstances() {
+	public static ListElementSubtype getInstances() {
 		return INSTANCE;
 	}
 

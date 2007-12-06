@@ -15,7 +15,6 @@ import java.sql.DriverManager;
 public class Main {
 	static TTConnection mainConnection = null;
 
-	final private static Logger logger = Logger.getRootLogger();
 
 	/**
 	 * The name of the TimesTen JDBC Driver (direct connection)
@@ -131,20 +130,20 @@ public class Main {
 		}
 
 		try {
-			AlmaConnection alma;
+			CAlmaConnection alma;
 			if (isCSConn) {
-				Logger.getRootLogger().debug("Try Remote Connection");
-				alma = new AlmaConnection(CLIENT_DRIVER, CLIENT_CONNECT_PREFIX + dsnname);
+				CLogger.getRootLogger().debug("Try Remote Connection");
+				alma = new CAlmaConnection(CLIENT_DRIVER, CLIENT_CONNECT_PREFIX + dsnname);
 				alma.listTemplates(whatToRun);
 				alma.Disconnect();
 			} else {
-				Logger.getRootLogger().debug("Try Direct Connection");
-				alma = new AlmaConnection(DIRECT_DRIVER, DIRECT_CONNECT_PREFIX + dsnname);
+				CLogger.getRootLogger().debug("Try Direct Connection");
+				alma = new CAlmaConnection(DIRECT_DRIVER, DIRECT_CONNECT_PREFIX + dsnname);
 				alma.listTemplates(whatToRun);
 				alma.Disconnect();
 			}
 		} catch (final ClassNotFoundException e) {
-			logger.error("Class Not Found while loading driver ..");
+			CLogger.getRootLogger().error("Class Not Found while loading driver ..");
 			e.printStackTrace();
 		}
 	}

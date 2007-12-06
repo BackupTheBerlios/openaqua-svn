@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public abstract class CBaseType extends CListableObject {
+public abstract class BaseType extends BaseListableObject {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -26,7 +26,7 @@ public abstract class CBaseType extends CListableObject {
 	private Timestamp valid_from;
 	private Timestamp valid_to;
 
-	public CBaseType(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
+	public BaseType(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
 		super();
 		this.id = id;
 		this.obj_version = obj_version;

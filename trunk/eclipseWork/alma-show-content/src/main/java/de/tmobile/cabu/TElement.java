@@ -14,9 +14,9 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public class TElement extends CBaseType {
+public class TElement extends BaseType {
 	public static String getPrintHeader(final String prefix) {
-		return CBaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
+		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
 	}
 
 	private final Map<Integer, String> attributes;
@@ -29,7 +29,7 @@ public class TElement extends CBaseType {
 	private int amcDescId;
 	private int constFlag;
 	private String value;
-	private final CElementTmplPartList list;
+	private ListElementTmplPart list;
 
 	public TElement(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final int amcDescId,
@@ -52,27 +52,28 @@ public class TElement extends CBaseType {
 
 		attributes = new TreeMap<Integer, String>();
 
-		list = new CElementTmplPartList(id, this);
+
+		//list = new ListElementTmplPart(id, this);
 		try {
 			list.refreshList();
 		} catch (final SQLException e) {
-			Logger.getRootLogger().error(e.getMessage());
+			CLogger.getRootLogger().error(e.getMessage());
 			e.printStackTrace();
 		}
 
 	}
 
 	public void addAttribute(final int type, final String value) {
-		KnownElementAttributes.getInstances().setKnownTemplateAttributes(this.type, type);
+		CKnownElementAttributes.getInstances().setKnownTemplateAttributes(this.type, type);
 		if (value != null) {
 			attributes.put(type, value.trim());
 		}
 	}
 
-	public void buildUnifiedPrintList(final String prefix, final UnifiedTableOutput uto) {
+	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
 		if (attributes.size() > 0) {
 			uto.add(getType(), getPrintString(prefix));
-			for (final CBaseType base : list.values()) {
+			for (final BaseType base : list.values()) {
 				((TElement) base).buildUnifiedPrintList(prefix, uto);
 			}
 		}
@@ -135,7 +136,7 @@ public class TElement extends CBaseType {
 
 	private String printAttributes() {
 		String result = "";
-		for (final Integer i : KnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
+		for (final Integer i : CKnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
 			if (attributes.containsKey(i)) {
 				result += attributes.get(i) + sep();
 			} else {

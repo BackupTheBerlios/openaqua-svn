@@ -11,10 +11,10 @@ import java.sql.SQLException;
  * @author behrenan
  * 
  */
-public class AlmaListLoaderThread implements Runnable {
-	final CBaseList list;
+public class CAlmaListLoaderThread implements Runnable {
+	final BaseList list;
 
-	public AlmaListLoaderThread(final CBaseList list) {
+	public CAlmaListLoaderThread(final BaseList list) {
 		this.list = list;
 	}
 
@@ -23,12 +23,12 @@ public class AlmaListLoaderThread implements Runnable {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-		if (Configuration.getInstance().isError()) { return; }
+		if (CConfiguration.getInstance().isError()) { return; }
 		try {
 			list.refreshList();
 		} catch (final SQLException e) {
-			Configuration.getInstance().getConnection().reportSQLException(e);
-			Configuration.getInstance().getConnection().Disconnect();
+			CConfiguration.getInstance().getConnection().reportSQLException(e);
+			CConfiguration.getInstance().getConnection().Disconnect();
 		}
 
 	}

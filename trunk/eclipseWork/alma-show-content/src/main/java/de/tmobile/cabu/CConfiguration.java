@@ -3,26 +3,25 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  * 
  */
-final public class Configuration {
-	final private static Configuration INSTANCE = new Configuration();
+final public class CConfiguration {
+	final private static CConfiguration INSTANCE = new CConfiguration();
 
 	/*
 	 * @result returns a object reference to this singleton
 	 */
-	final public static Configuration getInstance() {
+	final public static CConfiguration getInstance() {
 		return INSTANCE;
 	}
 
-	final private int statMilliSeconds;
 	private TTConnection connection;
 
-	private Configuration() {
+	private CConfiguration() {
 		super();
-		statMilliSeconds = 10000; // stat stuff
 	}
 
 	/**
@@ -30,10 +29,6 @@ final public class Configuration {
 	 */
 	final public TTConnection getConnection() {
 		return connection;
-	}
-
-	final public int getStatsAllMilliseconds() {
-		return statMilliSeconds;
 	}
 
 	/**

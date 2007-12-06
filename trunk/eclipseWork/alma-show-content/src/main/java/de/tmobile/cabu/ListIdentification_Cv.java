@@ -8,11 +8,11 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CIdentification_CvList extends CAlmaDataTypeBaseList {
+public class ListIdentification_Cv extends BaseListAlmaDataType {
 	private static final long serialVersionUID = 3445018394910148226L;
-	private static CIdentification_CvList INSTANCE = new CIdentification_CvList();
+	private static ListIdentification_Cv INSTANCE = new ListIdentification_Cv();
 
-	public static CIdentification_CvList getInstances() {
+	public static ListIdentification_Cv getInstances() {
 		return INSTANCE;
 	}
 
@@ -39,8 +39,8 @@ public class CIdentification_CvList extends CAlmaDataTypeBaseList {
 
 	private int getTypeId(final String type) {
 		final String low = type.toLowerCase();
-		for (final CBaseType base : values()) {
-			final String desc = ((CAlmaDataType) base).getDescription().toLowerCase();
+		for (final BaseType base : values()) {
+			final String desc = ((TAlmaData) base).getDescription().toLowerCase();
 			if (desc.contains(low)) { return base.getId(); }
 		}
 		return 0;

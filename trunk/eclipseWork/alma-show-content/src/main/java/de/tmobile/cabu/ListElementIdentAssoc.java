@@ -14,11 +14,11 @@ import java.sql.Timestamp;
  * 
  */
 
-public class CElementIdentAssocList extends CBaseList {
+public class ListElementIdentAssoc extends BaseList {
 	private static final long serialVersionUID = 1815696993834737972L;
-	private static CElementIdentAssocList INSTANCE = new CElementIdentAssocList();
+	private static ListElementIdentAssoc INSTANCE = new ListElementIdentAssoc();
 
-	public static CElementIdentAssocList getInstances() {
+	public static ListElementIdentAssoc getInstances() {
 		return INSTANCE;
 	}
 
@@ -41,7 +41,7 @@ public class CElementIdentAssocList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return CElementIdentAssoc.getPrintHeader(prefix);
+		return TElementIdentAssoc.getPrintHeader(prefix);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class CElementIdentAssocList extends CBaseList {
 			final int obj = rs.getInt(3);
 			final Timestamp from = rs.getTimestamp(4);
 			final Timestamp to = rs.getTimestamp(5);
-			store(new CElementIdentAssoc(id, el, obj, from, to));
+			store(new TElementIdentAssoc(id, el, obj, from, to));
 		}
 	}
 

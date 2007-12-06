@@ -13,11 +13,11 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public class CIdentificationList extends CBaseList {
+public class ListIdentification extends BaseList {
 	private static final long serialVersionUID = 1056598853660288335L;
-	private static CIdentificationList INSTANCE = new CIdentificationList();
+	private static ListIdentification INSTANCE = new ListIdentification();
 
-	public static CIdentificationList getInstances() {
+	public static ListIdentification getInstances() {
 		return INSTANCE;
 	}
 
@@ -38,7 +38,7 @@ public class CIdentificationList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return CIdentification.getPrintHeader(prefix);
+		return TIdentification.getPrintHeader(prefix);
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class CIdentificationList extends CBaseList {
 			final Timestamp val_from = rs.getTimestamp(9);
 			final Timestamp val_to = rs.getTimestamp(10);
 
-			store(new CIdentification(id, objVer, val_from, val_to, ty, cv, mandator, elementTemplateId, elementMasterTemplateId,
+			store(new TIdentification(id, objVer, val_from, val_to, ty, cv, mandator, elementTemplateId, elementMasterTemplateId,
 					externalIdentifier));
 		}
 	}

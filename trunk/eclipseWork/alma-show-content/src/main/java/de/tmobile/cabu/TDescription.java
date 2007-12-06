@@ -8,9 +8,9 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CDescription extends CCareDescription {
+public class TDescription extends TCareDescription {
 
-	public CDescription(final int id, final String description) {
+	public TDescription(final int id, final String description) {
 		super(id, description);
 	}
 

@@ -13,14 +13,14 @@ import java.sql.SQLException;
  * 
  */
 
-public class CCareDescriptionList extends CBaseList {
+public class ListCareDescription extends BaseList {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5164937814421591528L;
-	private static CCareDescriptionList INSTANCE = new CCareDescriptionList();
+	private static ListCareDescription INSTANCE = new ListCareDescription();
 
-	public static CCareDescriptionList getInstances() {
+	public static ListCareDescription getInstances() {
 		return INSTANCE;
 	}
 
@@ -41,7 +41,7 @@ public class CCareDescriptionList extends CBaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return CCareDescription.getPrintHeader(prefix);
+		return TCareDescription.getPrintHeader(prefix);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class CCareDescriptionList extends CBaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new CCareDescription(rs.getInt(1), rs.getString(2)));
+			store(new TCareDescription(rs.getInt(1), rs.getString(2)));
 		}
 	}
 }

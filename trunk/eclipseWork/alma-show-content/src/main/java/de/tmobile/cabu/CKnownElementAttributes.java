@@ -17,10 +17,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author behrenan
  * 
  */
-public class KnownElementAttributes {
-	private final static KnownElementAttributes INSTANCE = new KnownElementAttributes();
+public class CKnownElementAttributes {
+	private final static CKnownElementAttributes INSTANCE = new CKnownElementAttributes();
 
-	public static KnownElementAttributes getInstances() {
+	public static CKnownElementAttributes getInstances() {
 		return INSTANCE;
 	}
 
@@ -36,7 +36,7 @@ public class KnownElementAttributes {
 	private final HashMap<Integer, TreeSet<Integer>> knownTemplateAttributes = new HashMap<Integer, TreeSet<Integer>>();
 	private final HashMap<Integer, TreeSet<Integer>> knownElementAttributes = new HashMap<Integer, TreeSet<Integer>>();
 
-	private KnownElementAttributes() {
+	private CKnownElementAttributes() {
 		super();
 	}
 
@@ -45,22 +45,22 @@ public class KnownElementAttributes {
 
 		//dump Template Elements / Attributes
 		for (final Integer i : getKnownTemplateElementTypes()) {
-			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i) + " has: ";
+			String result = "Template Type " + ListElementType.getInstances().getTypeAsString(i) + " has: ";
 			final List<Integer> list = getKnownTemplateAttributes(i);
 			for (final Integer j : list) {
-				result += j + "=" + CElementSubtypeList.getInstances().getTypeAsString(j) + " ";
+				result += j + "=" + ListElementSubtype.getInstances().getTypeAsString(j) + " ";
 			}
-			Logger.getRootLogger().out(result);
+			CLogger.getRootLogger().out(result);
 		}
 
 		//dump Element Elements / Attributes
 		for (final Integer i : getKnownElementElementTypes()) {
-			String result = "Template Type " + CElementTypeList.getInstances().getTypeAsString(i) + " has: ";
+			String result = "Template Type " + ListElementType.getInstances().getTypeAsString(i) + " has: ";
 			final List<Integer> list = getKnownElementAttributes(i);
 			for (final Integer j : list) {
-				result += j + "=" + CElementSubtypeList.getInstances().getTypeAsString(j) + " ";
+				result += j + "=" + ListElementSubtype.getInstances().getTypeAsString(j) + " ";
 			}
-			Logger.getRootLogger().out(result);
+			CLogger.getRootLogger().out(result);
 		}
 	}
 

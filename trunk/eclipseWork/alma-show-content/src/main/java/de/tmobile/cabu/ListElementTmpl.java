@@ -8,18 +8,18 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CElementTmplList extends CElementTmplPartList {
+public class ListElementTmpl extends ListElementTmplPart {
 	private static final long serialVersionUID = 1056598853660288338L;
-	private static CElementTmplList INSTANCE = new CElementTmplList(0);
+	private static ListElementTmpl INSTANCE = new ListElementTmpl(0);
 
-	public static CElementTmplList getInstances() {
+	public static ListElementTmpl getInstances() {
 		return INSTANCE;
 	}
 
 	/**
 	 * @param parentId
 	 */
-	public CElementTmplList(final int parentId) {
+	public ListElementTmpl(final int parentId) {
 		super(parentId, null);
 	}
 

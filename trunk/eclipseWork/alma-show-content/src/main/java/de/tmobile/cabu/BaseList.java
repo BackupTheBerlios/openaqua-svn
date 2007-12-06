@@ -14,9 +14,9 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public abstract class BaseList extends TreeMap<Integer, CBaseType> {
+public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
-	public CBaseList() {
+	public BaseList() {
 		super();
 	}
 
@@ -34,30 +34,30 @@ public abstract class BaseList extends TreeMap<Integer, CBaseType> {
 		final String head = getPrintHeader(prefix);
 
 		if (desc != null && desc.length() > 0) {
-			Logger.getRootLogger().emptyLine();
-			Logger.getRootLogger().out(desc);
+			CLogger.getRootLogger().emptyLine();
+			CLogger.getRootLogger().out(desc);
 		}
 
 		if (head != null && head.length() > 0) {
-			Logger.getRootLogger().emptyLine();
-			Logger.getRootLogger().out(head);
+			CLogger.getRootLogger().emptyLine();
+			CLogger.getRootLogger().out(head);
 		}
 		printElements(prefix);
 	}
 
 	final public void printElements(final String prefix) {
-		for (final CBaseType type : values()) {
-			Logger.getRootLogger().out(type.getPrintString(prefix));
+		for (final BaseType type : values()) {
+			CLogger.getRootLogger().out(type.getPrintString(prefix));
 		}
 	}
 
 	final protected void refreshList() throws SQLException {
-		if (Configuration.getInstance().isError()) { return; }
+		if (CConfiguration.getInstance().isError()) { return; }
 		if (getQueryString() == null) { return; }
 		clear();
 
 		// exec SQL command
-		final Statement stmt = Configuration.getInstance().getConnection().createStatement();
+		final Statement stmt = CConfiguration.getInstance().getConnection().createStatement();
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
 		rs.close();
@@ -70,7 +70,7 @@ public abstract class BaseList extends TreeMap<Integer, CBaseType> {
 	 *           the error to set
 	 */
 
-	final public void store(final CBaseType type) {
+	final public void store(final BaseType type) {
 		put(type.getId(), type);
 	}
 }

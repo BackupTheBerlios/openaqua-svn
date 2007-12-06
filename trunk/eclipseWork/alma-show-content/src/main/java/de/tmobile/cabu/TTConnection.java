@@ -68,8 +68,6 @@ public class TTConnection {
 	private boolean isConnected = false;
 	private Connection connection = null;
 
-	private final Logger logger = Logger.getRootLogger();
-
 	public TTConnection(final String driver) throws ClassNotFoundException {
 		super();
 		isDriverLoaded = false;
@@ -82,11 +80,11 @@ public class TTConnection {
 			reportSQLWarning(connection.getWarnings());
 			// connection.setAutoCommit (true);
 			isConnected = true;
-			Logger.getRootLogger().debug("Is connected to: " + dsn);
+			CLogger.getRootLogger().debug("Is connected to: " + dsn);
 			return true;
 		} catch (final SQLException e) {
 			isConnected = false;
-			logger.error("Cannot Connect to DSN: " + dsn);
+			CLogger.getRootLogger().error("Cannot Connect to DSN: " + dsn);
 			reportSQLException(e);
 			return false;
 		}

@@ -12,21 +12,21 @@ import java.util.List;
  * @author behrenan
  * 
  */
-public class AlmaDataLoader {
-	private static AlmaDataLoader INSTANCE = new AlmaDataLoader();
+public class CAlmaDataLoader {
+	private static CAlmaDataLoader INSTANCE = new CAlmaDataLoader();
 
-	public static AlmaDataLoader getInstances() {
+	public static CAlmaDataLoader getInstances() {
 		return INSTANCE;
 	}
 	final List<Thread> threadList = new LinkedList<Thread>();
 
-	public AlmaDataLoader() {
+	public CAlmaDataLoader() {
 		super();
 
 	}
 
-	public void addList(final CBaseList list) {
-		final Thread thread = new Thread(new AlmaListLoaderThread(list));
+	public void addList(final BaseList list) {
+		final Thread thread = new Thread(new CAlmaListLoaderThread(list));
 		thread.start();
 		threadList.add(thread);
 	}
@@ -43,7 +43,7 @@ public class AlmaDataLoader {
 			try {
 				thread.join();
 			} catch (final InterruptedException e) {
-				Logger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
+				CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
 				e.printStackTrace();
 			}
 
@@ -54,7 +54,7 @@ public class AlmaDataLoader {
 			try {
 				thread.join();
 			} catch (final InterruptedException e) {
-				Logger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
+				CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
 				e.printStackTrace();
 			}
 

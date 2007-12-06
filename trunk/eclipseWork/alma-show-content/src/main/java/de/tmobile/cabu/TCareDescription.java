@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CCareDescription extends CBaseType {
+public class TCareDescription extends BaseType {
 
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
@@ -19,7 +19,7 @@ public class CCareDescription extends CBaseType {
 
 	private String description;
 
-	public CCareDescription(final int id, final String description) {
+	public TCareDescription(final int id, final String description) {
 		super(id, 0, null, null);
 		this.description = description;
 	}

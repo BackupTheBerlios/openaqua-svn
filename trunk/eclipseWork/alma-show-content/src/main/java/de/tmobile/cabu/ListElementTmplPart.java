@@ -13,20 +13,20 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public class CElementTmplPartList extends CBaseList {
+public class ListElementTmplPart extends BaseList {
 	private static final long serialVersionUID = 5267117256784340276L;
 	final private int parentId;
-	final private CElementTmpl parent;
+	final private TElementTmpl parent;
 
-	public CElementTmplPartList(final int parentId, final CElementTmpl parent) {
+	public ListElementTmplPart(final int parentId, final TElementTmpl parent) {
 		this.parentId = parentId;
 		this.parent = parent;
 	}
 
 
-	public void buildUnifiedPrintList(final String prefix, final UnifiedTableOutput uto) {
-		for (final CBaseType base : values()) {
-			((CElementTmpl) base).buildUnifiedPrintList(prefix, uto);
+	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
+		for (final BaseType base : values()) {
+			((TElementTmpl) base).buildUnifiedPrintList(prefix, uto);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class CElementTmplPartList extends CBaseList {
 			final int objVers = rs.getInt(11);
 			final Timestamp valid_from = rs.getTimestamp(12);
 			final Timestamp valid_to = rs.getTimestamp(13);
-			final CElementTmpl tmpl = new CElementTmpl(id, objVers, valid_from, valid_to, type, subtype, datatype, unittype, parentId, rootId,
+			final TElementTmpl tmpl = new TElementTmpl(id, objVers, valid_from, valid_to, type, subtype, datatype, unittype, parentId, rootId,
 					amcDescId, constFlag, value);
 
 			store(tmpl);
