@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -12,76 +13,44 @@ import java.sql.Timestamp;
  * 
  */
 public class TElement extends BaseElement {
-	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
-	}
-
-	private final Timestamp insertTime;
 	private final int templId;
 	private final int templVers;
+	private final Timestamp insertTime;
 
-	public TElement(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
-			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final String value,
-			final Timestamp insertTime, final int templId, final int templVers) {
+	public TElement(final int id, final int type, final int subtype, final int datatype, final int unittype, final int parentId,
+			final int rootId, final String value, final Timestamp insertTime, final int templId, final int templVers) {
 
-		super(id, obj_version, valid_from, valid_to, type, subtype, datatype, unittype, parentId, rootId, value);
-		this.insertTime = insertTime;
+		super(id, 1, null, null, type, subtype, datatype, unittype, parentId, rootId, value);
 		this.templId = templId;
 		this.templVers = templVers;
+		this.insertTime = insertTime;
 
 	}
 
 
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.BaseElement#getElementList(int, de.tmobile.cabu.BaseElement)
-	 */
 	@Override
 	protected BaseListElement getElementList(final int id, final BaseElement parent) {
 		return new ListElementPart(id, parent);
 	}
 
 
-	/**
-	 * @return the insertTime
-	 */
-	public Timestamp getInsertTime() {
-		return insertTime;
+	@Override
+	protected List<Integer> getKnownAttributes(final int elementType) {
+		return CKnownElementAttributes.getInstances().getKnownElementAttributes(elementType);
 	}
-
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return "";
-		//do nothing if empty
-		//if (list.size() <= 0) { return ""; }
-
-		//String result = super.getPrintPrefixString(prefix + " \"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"") + sep();
-		//result += rootId + sep();
-		//result += parentId + sep();
-		//result += type + sep();
-		//result += subtype + sep();
-		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
-		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		//result += "\"" + value + "\"" + sep();
-		//result += printAttributes();
-		//return result;
-		//list.printElements(prefix);
+		String result = super.getPrintString(prefix);
+		result += templId + sep();
+		result += templVers + sep();
+		result += insertTime;
+		return result;
 	}
 
-
-	/**
-	 * @return the templId
-	 */
-	public int getTemplId() {
-		return templId;
-	}
-
-
-	/**
-	 * @return the templVers
-	 */
-	public int getTemplVers() {
-		return templVers;
+	@Override
+	public void storeAttributeType(final int typeAttribute) {
+		CKnownElementAttributes.getInstances().setKnownElementAttributes(getType(), typeAttribute);
 	}
 
 

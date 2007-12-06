@@ -13,6 +13,7 @@ public abstract class BaseListElement extends BaseList {
 	final private BaseElement parent;
 
 	public BaseListElement(final int parentId, final BaseElement parent) {
+		super();
 		this.parentId = parentId;
 		this.parent = parent;
 	}
@@ -20,7 +21,7 @@ public abstract class BaseListElement extends BaseList {
 
 	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
 		for (final BaseType base : values()) {
-			((TElementTmpl) base).buildUnifiedPrintList(prefix, uto);
+			((BaseElement) base).buildUnifiedPrintList(prefix, uto);
 		}
 	}
 

@@ -56,6 +56,8 @@ public class ListElementTmplPart extends BaseListElement {
 			final Timestamp valid_to = rs.getTimestamp(13);
 			final int tmplMasterId = rs.getInt(14);
 			final int tmplMasterVers = rs.getInt(15);
+
+
 			final TElementTmpl tmpl = new TElementTmpl(id, objVers, valid_from, valid_to, type, subtype, datatype, unittype, pareId, rootId,
 					amcDescId, constFlag, value, tmplMasterId, tmplMasterVers);
 

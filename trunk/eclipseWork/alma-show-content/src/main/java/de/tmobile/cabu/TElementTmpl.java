@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -12,12 +13,8 @@ import java.sql.Timestamp;
  * 
  */
 public class TElementTmpl extends BaseElement {
-	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
-	}
-
-	private final int masterTemplId;
-	private final int masterTemplVers;
+	public final int masterTemplId;
+	public final int masterTemplVers;
 	private final int acmDescId;
 	private final int constFlag;
 
@@ -33,61 +30,30 @@ public class TElementTmpl extends BaseElement {
 		this.masterTemplVers = masterTemplVers;
 	}
 
-	/**
-	 * @return the acmDescId
-	 */
-	public int getAcmDescId() {
-		return acmDescId;
-	}
 
-	/**
-	 * @return the constFlag
-	 */
-	public int getConstFlag() {
-		return constFlag;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.tmobile.cabu.BaseElement#getElementList(int, de.tmobile.cabu.BaseElement)
-	 */
 	@Override
 	protected BaseListElement getElementList(final int id, final BaseElement parent) {
 		return new ListElementTmplPart(id, parent);
 	}
 
-	/**
-	 * @return the masterTemplId
-	 */
-	public int getMasterTemplId() {
-		return masterTemplId;
-	}
 
-	/**
-	 * @return the masterTemplVers
-	 */
-	public int getMasterTemplVers() {
-		return masterTemplVers;
+	@Override
+	protected List<Integer> getKnownAttributes(final int elementType) {
+		return CKnownElementAttributes.getInstances().getKnownTemplateAttributes(elementType);
 	}
 
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return "";
-		//do nothing if empty
-		//if (list.size() <= 0) { return ""; }
-
-		//String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
-		//result += rootId + sep();
-		//result += parentId + sep();
-		//result += type + sep();
-		//result += subtype + sep();
-		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
-		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		//result += "\"" + value + "\"" + sep();
-		//result += printAttributes();
-		//return result;
-		//list.printElements(prefix);
+		String result = super.getPrintString(prefix);
+		result += acmDescId + sep();
+		result += constFlag + sep();
+		return result;
 	}
 
+	@Override
+	public void storeAttributeType(final int typeAttribute) {
+		CKnownElementAttributes.getInstances().setKnownTemplateAttributes(getType(), typeAttribute);
+	}
 
 }

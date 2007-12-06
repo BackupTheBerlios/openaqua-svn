@@ -28,23 +28,26 @@ public class CAlmaConnection {
 
 
 		//Register (and load from TT) new DataList
-		CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListIdentification.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListSubType.getInstances());
+		CLogger.getRootLogger().debug("Start Loading");
+		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListIdentification_Cv.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListIdentification_Ty.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListUnitType.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementType.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListIdentification_Cv.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListIdentification.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListIdentification_Ty.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListSubType.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListUnitType.getInstances());
+		CLogger.getRootLogger().debug("Loader Threads are running ...");
 
 		//Wait until they are finished
 		CAlmaDataLoader.getInstances().join();
 		CAlmaDataLoader.getInstances().clear();
+		CLogger.getRootLogger().debug("Load is done");
 
 
 		// Build higher Objects
@@ -65,11 +68,11 @@ public class CAlmaConnection {
 			//final CUnifiedTableOutput otu = new CUnifiedTableOutput();
 			//ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
 			//otu.print();
-			//CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
-			//CKnownElementAttributes.getInstances().dump();
 			// 
-			ListElement.getInstances().print("TA_ELEMENT");
 			ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
+			ListElement.getInstances().print("TA_ELEMENT");
+			CKnownElementAttributes.getInstances().dump();
+			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			//CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");

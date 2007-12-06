@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,19 +23,20 @@ public abstract class BaseElement extends BaseType {
 	private final Map<Integer, String> attributes;
 	private final BaseListElement list;
 
-	private int type;
-	private int subtype;
-	private int datatype;
-	private int unittype;
-	private int parentId;
-	private int rootId;
-	private String value;
+	private final int type;
+	private final int subtype;
+	private final int datatype;
+	private final int unittype;
+	private final int parentId;
+	private final int rootId;
+	private final String value;
 
 
 	public BaseElement(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final String value) {
 
 		super(id, obj_version, valid_from, valid_to);
+
 		this.type = type;
 		this.subtype = subtype;
 		this.datatype = datatype;
@@ -60,8 +62,8 @@ public abstract class BaseElement extends BaseType {
 
 	}
 
-	public void addAttribute(final int type, final String value) {
-		CKnownElementAttributes.getInstances().setKnownTemplateAttributes(this.type, type);
+	final public void addAttribute(final int type, final String value) {
+		storeAttributeType(type);
 		if (value != null) {
 			attributes.put(type, value.trim());
 		}
@@ -82,6 +84,8 @@ public abstract class BaseElement extends BaseType {
 
 	abstract protected BaseListElement getElementList(final int id, final BaseElement parent);
 
+	abstract protected List<Integer> getKnownAttributes(final int elementType);
+
 	public int getParentId() {
 		return parentId;
 	}
@@ -89,16 +93,10 @@ public abstract class BaseElement extends BaseType {
 	@Override
 	public String getPrintString(final String prefix) {
 		//do nothing if empty
-		if (list.size() <= 0) { return ""; }
-
+		//if (list.size() <= 0) { return ""; }
 		String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
 		result += rootId + sep();
 		result += parentId + sep();
-		result += type + sep();
-		result += subtype + sep();
-		result += "\"" + ListElementSubtype.getInstances().getTypeAsString(subtype) + "\"" + sep();
-		result += "\"" + ListDataType.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		result += "\"" + value + "\"" + sep();
 		result += printAttributes();
 		return result;
 	}
@@ -115,6 +113,7 @@ public abstract class BaseElement extends BaseType {
 		return type;
 	}
 
+
 	public int getUnittype() {
 		return unittype;
 	}
@@ -123,10 +122,9 @@ public abstract class BaseElement extends BaseType {
 		return value;
 	}
 
-
 	private String printAttributes() {
 		String result = "";
-		for (final Integer i : CKnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
+		for (final Integer i : getKnownAttributes(getType())) {
 			if (attributes.containsKey(i)) {
 				result += attributes.get(i) + sep();
 			} else {
@@ -138,33 +136,7 @@ public abstract class BaseElement extends BaseType {
 	}
 
 
-	public void setDatatype(final int datatype) {
-		this.datatype = datatype;
-	}
-
-	public void setParentId(final int parentId) {
-		this.parentId = parentId;
-	}
-
-	public void setRootId(final int rootId) {
-		this.rootId = rootId;
-	}
-
-	public void setSubtype(final int subtype) {
-		this.subtype = subtype;
-	}
-
-	public void setType(final int type) {
-		this.type = type;
-	}
-
-	public void setUnittype(final int unittype) {
-		this.unittype = unittype;
-	}
-
-	public void setValue(final String value) {
-		this.value = value;
-	}
+	abstract public void storeAttributeType(final int typeAttribute);
 
 
 }

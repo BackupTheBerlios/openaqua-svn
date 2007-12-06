@@ -16,7 +16,7 @@ import java.util.TreeMap;
  */
 public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
-	public BaseList() {
+	protected BaseList() {
 		super();
 	}
 
