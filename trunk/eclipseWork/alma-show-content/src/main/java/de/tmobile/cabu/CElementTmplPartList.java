@@ -14,6 +14,7 @@ import java.sql.Timestamp;
  * 
  */
 public class CElementTmplPartList extends CBaseList {
+	private static final long serialVersionUID = 5267117256784340276L;
 	final private int parentId;
 	final private CElementTmpl parent;
 
@@ -25,7 +26,7 @@ public class CElementTmplPartList extends CBaseList {
 
 	public void buildUnifiedPrintList(final String prefix, final UnifiedTableOutput uto) {
 		for (final CBaseType base : values()) {
-
+			((CElementTmpl) base).buildUnifiedPrintList(prefix, uto);
 		}
 	}
 
@@ -38,10 +39,12 @@ public class CElementTmplPartList extends CBaseList {
 		return null;
 	}
 
+
 	@Override
 	public String getPrintHeader(final String prefix) {
 		return null;
 	}
+
 
 	@Override
 	protected String getQueryString() {
@@ -53,11 +56,10 @@ public class CElementTmplPartList extends CBaseList {
 			final String result = "select element_template_id, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
 					+ " root_id, acm_description_id, const_flag, value, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_tmpl where parent_id="
 					+ parentId + " order by element_template_id";
-			//Logger.getRootLogger().debug("CMD=" + result);
 			return result;
-
 		}
 	}
+
 
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {

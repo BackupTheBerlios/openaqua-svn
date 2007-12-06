@@ -69,6 +69,15 @@ public class CElementTmpl extends CBaseType {
 		}
 	}
 
+	public void buildUnifiedPrintList(final String prefix, final UnifiedTableOutput uto) {
+		if (attributes.size() > 0) {
+			uto.add(getType(), getPrintString(prefix));
+			for (final CBaseType base : list.values()) {
+				((CElementTmpl) base).buildUnifiedPrintList(prefix, uto);
+			}
+		}
+	}
+
 	public int getAmcDescId() {
 		return amcDescId;
 	}
@@ -123,25 +132,14 @@ public class CElementTmpl extends CBaseType {
 		return value;
 	}
 
-	public void listAttribute() {
-	//final String result = "TEMPLATE"
-	}
-
-	public void prepareForPrinting() {
-		final UnifiedTableOutput output = new UnifiedTableOutput();
-
-
-	}
 
 	private String printAttributes() {
 		String result = "";
 		for (final Integer i : KnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
 			if (attributes.containsKey(i)) {
 				result += attributes.get(i) + sep();
-				//result += i + "=" + "\"" + attributes.get(i) + "\"" + sep();
 			} else {
-				result += sep();
-				//result += i + "=" + "\"\"" + sep();
+				result += "<NULL>" + sep();
 			}
 		}
 		return result;

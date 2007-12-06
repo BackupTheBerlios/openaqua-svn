@@ -16,19 +16,19 @@ import java.util.TreeMap;
  */
 public class UnifiedTableOutput {
 
-	Map<String, List<String>> collection;
+	Map<Integer, List<String>> collection;
 
 	public UnifiedTableOutput() {
 		super();
-		collection = new TreeMap<String, List<String>>();
+		collection = new TreeMap<Integer, List<String>>();
 	}
 
-	final public void add(final String type, final String line) {
+	final public void add(final Integer type, final String line) {
 		get(type).add(line);
 	}
 
 
-	final List<String> get(final String type) {
+	final List<String> get(final Integer type) {
 		if (!collection.containsKey(type)) {
 			collection.put(type, new LinkedList<String>());
 		}

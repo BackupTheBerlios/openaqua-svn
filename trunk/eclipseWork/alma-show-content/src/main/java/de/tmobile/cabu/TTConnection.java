@@ -3,12 +3,14 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
+
 
 /**
  * @author behrenan
@@ -59,6 +61,7 @@ public class TTConnection {
 		}
 	}
 
+
 	boolean hasReceivedSignal = false;
 	private boolean isDriverLoaded;
 	boolean shouldWait = false;
@@ -100,11 +103,13 @@ public class TTConnection {
 			}
 			isConnected = false;
 			return true;
+
 		} catch (final SQLException ex) {
 			reportSQLException(ex);
 			return false;
 		}
 	}
+
 
 	public boolean isConnected() {
 		return isConnected;
@@ -136,36 +141,4 @@ public class TTConnection {
 			errCount++;
 		}
 	}
-
-	/*
-	 * public CTemplate buildTemplateByRootId(Integer rootId) { CTemplate result =
-	 * new CTemplate(rootId); try { // exec SQL command Statement stmt; stmt =
-	 * connection.createStatement();
-	 * 
-	 * ResultSet rs = stmt .executeQuery("select ELEMENT_TEMPLATE_ID,
-	 * element_type_cv, element_subtype_cv, value from
-	 * acm_schema.acm$ta_element_tmpl where root_id = parent_id and root_id=" +
-	 * rootId);
-	 *  // parse the result while (rs.next()) { int id = rs.getInt(1); int type =
-	 * rs.getInt(2); int subtype = rs.getInt(3); String value = rs.getString(4);
-	 * CAttribute attribute = new CAttribute(id, type, mapSubTypes .get(subtype),
-	 * value); result.addAttribute(attribute); }
-	 *  // close statements rs.close(); stmt.close();
-	 *  } catch (SQLException e) { logger.error("Error while List Root ids for
-	 * templates:"); reportSQLException(e); } return result; }
-	 * 
-	 * 
-	 * public List<Integer> getTemplateIds() { List<Integer> result = new
-	 * LinkedList<Integer>(); if (isConnected == false) return result;
-	 * 
-	 * try { // exec SQL command Statement stmt; stmt =
-	 * connection.createStatement(); ResultSet rs = stmt .executeQuery("select
-	 * ELEMENT_TEMPLATE_ID from ACM_SCHEMA.ACM$TA_ELEMENT_TMPL where
-	 * element_template_id = root_id order by ELEMENT_TEMPLATE_ID ; ");
-	 *  // parse the result while (rs.next()) { int element_id = rs.getInt(1);
-	 * result.add(element_id); }
-	 *  // close statements rs.close(); stmt.close();
-	 *  } catch (SQLException e) { logger.error("Error while List Root ids for
-	 * templates:"); reportSQLException(e); } return result; }
-	 */
 }
