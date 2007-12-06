@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class TAlmaData extends BaseType {
+public class TDataType extends BaseType {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -23,7 +23,7 @@ public class TAlmaData extends BaseType {
 	int sorting;
 	int valid;
 
-	public TAlmaData(final int id, final int dId, final int sorting, final int valid) {
+	public TDataType(final int id, final int dId, final int sorting, final int valid) {
 		super(id, 0, null, null);
 		desriptionId = dId;
 		this.sorting = sorting;

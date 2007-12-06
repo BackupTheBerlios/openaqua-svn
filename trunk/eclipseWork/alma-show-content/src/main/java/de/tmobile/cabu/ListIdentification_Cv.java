@@ -40,7 +40,7 @@ public class ListIdentification_Cv extends BaseListAlmaDataType {
 	private int getTypeId(final String type) {
 		final String low = type.toLowerCase();
 		for (final BaseType base : values()) {
-			final String desc = ((TAlmaData) base).getDescription().toLowerCase();
+			final String desc = ((TDataType) base).getDescription().toLowerCase();
 			if (desc.contains(low)) { return base.getId(); }
 		}
 		return 0;

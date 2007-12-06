@@ -32,7 +32,7 @@ public class BaseListAlmaDataType extends BaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TAlmaData.getPrintHeader(prefix);
+		return TDataType.getPrintHeader(prefix);
 	}
 
 	/*
@@ -47,8 +47,8 @@ public class BaseListAlmaDataType extends BaseList {
 
 	public final String getTypeAsString(final int id) {
 		final BaseType type = get(id);
-		if (type instanceof TAlmaData) {
-			return ((TAlmaData) type).getDescription();
+		if (type instanceof TDataType) {
+			return ((TDataType) type).getDescription();
 		} else {
 			return "unkownType";
 		}
@@ -66,7 +66,7 @@ public class BaseListAlmaDataType extends BaseList {
 			final int descId = rs.getInt(2);
 			final int sorting = rs.getInt(3);
 			final int valid = rs.getInt(4);
-			store(new TAlmaData(id, descId, sorting, valid));
+			store(new TDataType(id, descId, sorting, valid));
 		}
 
 	}

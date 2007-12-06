@@ -4,183 +4,75 @@
 package de.tmobile.cabu;
 
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 /**
  * @author behrenan
  * 
  */
-public class TElement extends BaseType {
+public class TElement extends BaseElement {
 	public static String getPrintHeader(final String prefix) {
 		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
 	}
 
-	private final Map<Integer, String> attributes;
-	private int type;
-	private int subtype;
-	private int datatype;
-	private int unittype;
-	private int parentId;
-	private int rootId;
-	private int amcDescId;
-	private int constFlag;
-	private String value;
-	private ListElementTmplPart list;
+	private final Timestamp insertTime;
+	private final int templId;
+	private final int templVers;
 
 	public TElement(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
-			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final int amcDescId,
-			final int constFlag, final String value) {
+			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final String value,
+			final Timestamp insertTime, final int templId, final int templVers) {
 
-		super(id, obj_version, valid_from, valid_to);
-		this.type = type;
-		this.subtype = subtype;
-		this.datatype = datatype;
-		this.unittype = unittype;
-		this.parentId = parentId;
-		this.rootId = rootId;
-		this.amcDescId = amcDescId;
-		this.constFlag = constFlag;
-		if (value == null) {
-			this.value = "";
-		} else {
-			this.value = value.trim();
-		}
-
-		attributes = new TreeMap<Integer, String>();
-
-
-		//list = new ListElementTmplPart(id, this);
-		try {
-			list.refreshList();
-		} catch (final SQLException e) {
-			CLogger.getRootLogger().error(e.getMessage());
-			e.printStackTrace();
-		}
+		super(id, obj_version, valid_from, valid_to, type, subtype, datatype, unittype, parentId, rootId, value);
+		this.insertTime = insertTime;
+		this.templId = templId;
+		this.templVers = templVers;
 
 	}
 
-	public void addAttribute(final int type, final String value) {
-		CKnownElementAttributes.getInstances().setKnownTemplateAttributes(this.type, type);
-		if (value != null) {
-			attributes.put(type, value.trim());
-		}
+
+	/**
+	 * @return the insertTime
+	 */
+	public Timestamp getInsertTime() {
+		return insertTime;
 	}
 
-	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
-		if (attributes.size() > 0) {
-			uto.add(getType(), getPrintString(prefix));
-			for (final BaseType base : list.values()) {
-				((TElement) base).buildUnifiedPrintList(prefix, uto);
-			}
-		}
-	}
-
-	public int getAmcDescId() {
-		return amcDescId;
-	}
-
-	public int getConstFlag() {
-		return constFlag;
-	}
-
-	public int getDatatype() {
-		return datatype;
-	}
-
-	public int getParentId() {
-		return parentId;
-	}
 
 	@Override
 	public String getPrintString(final String prefix) {
+		return "";
 		//do nothing if empty
-		if (list.size() <= 0) { return ""; }
+		//if (list.size() <= 0) { return ""; }
 
-		String result = super.getPrintPrefixString(prefix + " \"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"") + sep();
-		result += rootId + sep();
-		result += parentId + sep();
+		//String result = super.getPrintPrefixString(prefix + " \"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"") + sep();
+		//result += rootId + sep();
+		//result += parentId + sep();
 		//result += type + sep();
 		//result += subtype + sep();
 		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
 		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
 		//result += "\"" + value + "\"" + sep();
-		result += printAttributes();
-		return result;
+		//result += printAttributes();
+		//return result;
 		//list.printElements(prefix);
 	}
 
-	public int getRootId() {
-		return rootId;
-	}
 
-	public int getSubtype() {
-		return subtype;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public int getUnittype() {
-		return unittype;
-	}
-
-	public String getValue() {
-		return value;
+	/**
+	 * @return the templId
+	 */
+	public int getTemplId() {
+		return templId;
 	}
 
 
-	private String printAttributes() {
-		String result = "";
-		for (final Integer i : CKnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
-			if (attributes.containsKey(i)) {
-				result += attributes.get(i) + sep();
-			} else {
-				result += "<NULL>" + sep();
-			}
-		}
-		return result;
-
-	}
-
-	public void setAmcDescId(final int amcDescId) {
-		this.amcDescId = amcDescId;
-	}
-
-	public void setConstFlag(final int constFlag) {
-		this.constFlag = constFlag;
-	}
-
-	public void setDatatype(final int datatype) {
-		this.datatype = datatype;
-	}
-
-	public void setParentId(final int parentId) {
-		this.parentId = parentId;
-	}
-
-	public void setRootId(final int rootId) {
-		this.rootId = rootId;
-	}
-
-	public void setSubtype(final int subtype) {
-		this.subtype = subtype;
-	}
-
-	public void setType(final int type) {
-		this.type = type;
-	}
-
-	public void setUnittype(final int unittype) {
-		this.unittype = unittype;
-	}
-
-	public void setValue(final String value) {
-		this.value = value;
+	/**
+	 * @return the templVers
+	 */
+	public int getTemplVers() {
+		return templVers;
 	}
 
 
