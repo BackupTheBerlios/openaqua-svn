@@ -9,9 +9,6 @@ package de.tmobile.cabu;
  * 
  */
 public class ListElement extends ListElementTmplPart {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8580341561632406783L;
 	private static ListElement INSTANCE = new ListElement(0);
 
@@ -19,9 +16,6 @@ public class ListElement extends ListElementTmplPart {
 		return INSTANCE;
 	}
 
-	/**
-	 * @param parentId
-	 */
 	public ListElement(final int parentId) {
 		super(parentId, null);
 	}

@@ -13,42 +13,18 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public class ListElementTmplPart extends BaseList {
-	private static final long serialVersionUID = 5267117256784340276L;
-	final private int parentId;
-	final private BaseElement parent;
+public class ListElementTmplPart extends BaseListElement {
+	private static final long serialVersionUID = 1774619855321319700L;
+
 
 	public ListElementTmplPart(final int parentId, final BaseElement parent) {
-		this.parentId = parentId;
-		this.parent = parent;
-	}
-
-
-	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
-		for (final BaseType base : values()) {
-			((TElementTmpl) base).buildUnifiedPrintList(prefix, uto);
-		}
-	}
-
-	public int getParentId() {
-		return parentId;
-	}
-
-	@Override
-	public String getPrintDescription() {
-		return null;
-	}
-
-
-	@Override
-	public String getPrintHeader(final String prefix) {
-		return null;
+		super(parentId, parent);
 	}
 
 
 	@Override
 	protected String getQueryString() {
-		if (parentId == 0) {
+		if (getParentId() == 0) {
 			return "select element_template_id, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
 					+ " root_id, acm_description_id, const_flag, value, obj_version, valid_from, valid_to, elem_mstr_tmpl_id, elem_mstr_tmpl_vers "
 					+ " from acm_schema.acm$ta_element_tmpl where parent_id is null and parent_id is null order by element_template_id";
@@ -56,7 +32,7 @@ public class ListElementTmplPart extends BaseList {
 		} else {
 			final String result = "select element_template_id, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
 					+ " root_id, acm_description_id, const_flag, value, obj_version, valid_from, valid_to, elem_mstr_tmpl_id, elem_mstr_tmpl_vers "
-					+ " from acm_schema.acm$ta_element_tmpl where parent_id=" + parentId + " order by element_template_id";
+					+ " from acm_schema.acm$ta_element_tmpl where parent_id=" + getParentId() + " order by element_template_id";
 			return result;
 		}
 	}
@@ -85,8 +61,8 @@ public class ListElementTmplPart extends BaseList {
 
 			store(tmpl);
 
-			if (parent != null) {
-				parent.addAttribute(subtype, value);
+			if (getParent() != null) {
+				getParent().addAttribute(subtype, value);
 			}
 
 

@@ -14,13 +14,13 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public class BaseElement extends BaseType {
+public abstract class BaseElement extends BaseType {
 	public static String getPrintHeader(final String prefix) {
 		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
 	}
 
 	private final Map<Integer, String> attributes;
-	private final ListElementTmplPart list;
+	private final BaseListElement list;
 
 	private int type;
 	private int subtype;
@@ -49,7 +49,7 @@ public class BaseElement extends BaseType {
 		}
 
 		attributes = new TreeMap<Integer, String>();
-		list = new ListElementTmplPart(id, this);
+		list = getElementList(id, this);
 
 		try {
 			list.refreshList();
@@ -80,27 +80,27 @@ public class BaseElement extends BaseType {
 		return datatype;
 	}
 
+	abstract protected BaseListElement getElementList(final int id, final BaseElement parent);
+
 	public int getParentId() {
 		return parentId;
 	}
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return "";
 		//do nothing if empty
-		//if (list.size() <= 0) { return ""; }
+		if (list.size() <= 0) { return ""; }
 
-		//String result = super.getPrintPrefixString(prefix + " \"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"") + sep();
-		//result += rootId + sep();
-		//result += parentId + sep();
-		//result += type + sep();
-		//result += subtype + sep();
-		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
-		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		//result += "\"" + value + "\"" + sep();
-		//result += printAttributes();
-		//return result;
-		//list.printElements(prefix);
+		String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
+		result += rootId + sep();
+		result += parentId + sep();
+		result += type + sep();
+		result += subtype + sep();
+		result += "\"" + ListElementSubtype.getInstances().getTypeAsString(subtype) + "\"" + sep();
+		result += "\"" + ListDataType.getInstances().getTypeAsString(datatype) + "\"" + sep();
+		result += "\"" + value + "\"" + sep();
+		result += printAttributes();
+		return result;
 	}
 
 	public int getRootId() {

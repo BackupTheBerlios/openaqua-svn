@@ -28,6 +28,8 @@ public class CAlmaConnection {
 
 
 		//Register (and load from TT) new DataList
+		CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListSubType.getInstances());
@@ -37,9 +39,8 @@ public class CAlmaConnection {
 		CAlmaDataLoader.getInstances().addList(ListIdentification_Cv.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification_Ty.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListUnitType.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementType.getInstances());
 
 		//Wait until they are finished
 		CAlmaDataLoader.getInstances().join();
@@ -61,13 +62,14 @@ public class CAlmaConnection {
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			//CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			final CUnifiedTableOutput otu = new CUnifiedTableOutput();
-			ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
-			otu.print();
+			//final CUnifiedTableOutput otu = new CUnifiedTableOutput();
+			//ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
+			//otu.print();
 			//CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
-			CKnownElementAttributes.getInstances().dump();
+			//CKnownElementAttributes.getInstances().dump();
 			// 
-
+			ListElement.getInstances().print("TA_ELEMENT");
+			ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			//CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");

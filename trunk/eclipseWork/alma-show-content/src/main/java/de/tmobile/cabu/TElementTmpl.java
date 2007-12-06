@@ -47,6 +47,14 @@ public class TElementTmpl extends BaseElement {
 		return constFlag;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.BaseElement#getElementList(int, de.tmobile.cabu.BaseElement)
+	 */
+	@Override
+	protected BaseListElement getElementList(final int id, final BaseElement parent) {
+		return new ListElementTmplPart(id, parent);
+	}
+
 	/**
 	 * @return the masterTemplId
 	 */
@@ -60,6 +68,7 @@ public class TElementTmpl extends BaseElement {
 	public int getMasterTemplVers() {
 		return masterTemplVers;
 	}
+
 
 	@Override
 	public String getPrintString(final String prefix) {

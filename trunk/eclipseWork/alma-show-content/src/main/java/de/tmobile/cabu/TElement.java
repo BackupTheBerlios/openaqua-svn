@@ -32,6 +32,15 @@ public class TElement extends BaseElement {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see de.tmobile.cabu.BaseElement#getElementList(int, de.tmobile.cabu.BaseElement)
+	 */
+	@Override
+	protected BaseListElement getElementList(final int id, final BaseElement parent) {
+		return new ListElementPart(id, parent);
+	}
+
+
 	/**
 	 * @return the insertTime
 	 */
