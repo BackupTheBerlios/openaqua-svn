@@ -53,16 +53,19 @@ public class AlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
-			// CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
-			// CDataTypeList.getInstances().print("ACM_TA_DATA_TYPE_CV");
+			//CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
+			//CDataTypeList.getInstances().print("ACM_TA_DATA_TYPE_CV");
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
-			// CElementTypeList.getInstances().print("TA_ELEMENT_TYPE_CV");
+			CElementTypeList.getInstances().print("TA_ELEMENT_TYPE_CV");
 			// CElementSubtypeList.getInstances().print("TA_ELEMENT_SUBTYPE_CV");
 			// CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
-			// CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
-			KnownElementAttributes.getInstances().dump();
+			//CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			//final UnifiedTableOutput otu = new UnifiedTableOutput();
+			//CElementTmplList.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
+			//otu.print();
+			//CElementTmplList.getInstances().print("TA_ELEMENT_TMPL");
+			//KnownElementAttributes.getInstances().dump();
 			// 
 
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");

@@ -26,7 +26,7 @@ public class AlmaDataLoader {
 	}
 
 	public void addList(final CBaseList list) {
-		final Thread thread = new Thread(list);
+		final Thread thread = new Thread(new AlmaListLoaderThread(list));
 		thread.start();
 		threadList.add(thread);
 	}

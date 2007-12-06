@@ -3,9 +3,11 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
@@ -13,6 +15,7 @@ import java.sql.Timestamp;
  */
 
 public class CElementIdentAssocList extends CBaseList {
+	private static final long serialVersionUID = 1815696993834737972L;
 	private static CElementIdentAssocList INSTANCE = new CElementIdentAssocList();
 
 	public static CElementIdentAssocList getInstances() {

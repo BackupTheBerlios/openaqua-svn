@@ -3,15 +3,18 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
  * 
  */
 public class CIdentificationList extends CBaseList {
+	private static final long serialVersionUID = 1056598853660288335L;
 	private static CIdentificationList INSTANCE = new CIdentificationList();
 
 	public static CIdentificationList getInstances() {

@@ -3,8 +3,10 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 /**
  * @author behrenan
@@ -12,6 +14,7 @@ import java.sql.SQLException;
  */
 
 public class CDescriptionList extends CBaseList {
+	private static final long serialVersionUID = 1056598853660288340L;
 	private static CDescriptionList INSTANCE = new CDescriptionList();
 
 	public static CDescriptionList getInstances() {

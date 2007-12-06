@@ -50,7 +50,7 @@ public abstract class CBaseType extends CListableObject {
 		return obj_version;
 	}
 
-	public final String getPrintString(final String prefix) {
+	public final String getPrintPrefixString(final String prefix) {
 		String result = prefix + sep();
 		result += id + sep();
 		result += obj_version + sep();
@@ -59,15 +59,17 @@ public abstract class CBaseType extends CListableObject {
 		return result;
 	}
 
+	public abstract String getPrintString(final String prefix);
+
 	public final Timestamp getValid_from() {
 		return valid_from;
 	}
+
 
 	public final Timestamp getValid_to() {
 		return valid_to;
 	}
 
-	abstract public void print(String prefix);
 
 	/**
 	 * @param id

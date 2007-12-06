@@ -3,11 +3,13 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  * 
  */
 public class CCareDescription extends CBaseType {
+
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -27,8 +29,8 @@ public class CCareDescription extends CBaseType {
 	}
 
 	@Override
-	public void print(final String prefix) {
-		Logger.getRootLogger().out(prefix + sep() + getId() + sep() + description);
+	public String getPrintString(final String prefix) {
+		return prefix + sep() + getId() + sep() + description;
 	}
 
 	public void setDescription(final String description) {

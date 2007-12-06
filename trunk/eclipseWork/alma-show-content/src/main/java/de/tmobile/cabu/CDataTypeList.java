@@ -3,12 +3,17 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  * 
  */
 public class CDataTypeList extends CAlmaDataTypeBaseList {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7728760585323339579L;
 	private static CDataTypeList INSTANCE = new CDataTypeList();
 
 	public static CDataTypeList getInstances() {

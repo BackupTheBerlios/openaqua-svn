@@ -4,14 +4,12 @@
 package de.tmobile.cabu;
 
 
-import java.util.Iterator;
-
-
 /**
  * @author behrenan
  * 
  */
 public class CIdentification_CvList extends CAlmaDataTypeBaseList {
+	private static final long serialVersionUID = 3445018394910148226L;
 	private static CIdentification_CvList INSTANCE = new CIdentification_CvList();
 
 	public static CIdentification_CvList getInstances() {
@@ -19,33 +17,15 @@ public class CIdentification_CvList extends CAlmaDataTypeBaseList {
 	}
 
 	public int getContractidTypeId() {
-		final Iterator<CBaseType> iter = iterator();
-		while (iter.hasNext()) {
-			final CAlmaDataType type = (CAlmaDataType) iter.next();
-			final String desc = type.getDescription().toLowerCase();
-			if (desc.contains("contract")) { return type.getId(); }
-		}
-		return 0;
+		return getTypeId("contract");
 	}
 
 	public int getMasterTemplateIdTypeId() {
-		final Iterator<CBaseType> iter = iterator();
-		while (iter.hasNext()) {
-			final CAlmaDataType type = (CAlmaDataType) iter.next();
-			final String desc = type.getDescription().toLowerCase();
-			if (desc.contains("master")) { return type.getId(); }
-		}
-		return 0;
+		return getTypeId("master");
 	}
 
 	public int getMsisdnTypeId() {
-		final Iterator<CBaseType> iter = iterator();
-		while (iter.hasNext()) {
-			final CAlmaDataType type = (CAlmaDataType) iter.next();
-			final String desc = type.getDescription().toLowerCase();
-			if (desc.contains("msisdn")) { return type.getId(); }
-		}
-		return 0;
+		return getTypeId("msisdn");
 	}
 
 	@Override
@@ -54,11 +34,14 @@ public class CIdentification_CvList extends CAlmaDataTypeBaseList {
 	}
 
 	public int getTemplateIdTypeId() {
-		final Iterator<CBaseType> iter = iterator();
-		while (iter.hasNext()) {
-			final CAlmaDataType type = (CAlmaDataType) iter.next();
-			final String desc = type.getDescription().toLowerCase();
-			if (desc.contains("template")) { return type.getId(); }
+		return getTypeId("template");
+	}
+
+	private int getTypeId(final String type) {
+		final String low = type.toLowerCase();
+		for (final CBaseType base : values()) {
+			final String desc = ((CAlmaDataType) base).getDescription().toLowerCase();
+			if (desc.contains(low)) { return base.getId(); }
 		}
 		return 0;
 	}

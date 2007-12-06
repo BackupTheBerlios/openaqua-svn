@@ -3,6 +3,7 @@
  */
 package de.tmobile.cabu;
 
+
 /**
  * @author behrenan
  * 
@@ -44,23 +45,24 @@ public class CAlmaDataType extends CBaseType {
 		return desriptionId;
 	}
 
-	public int getSorting() {
-		return sorting;
-	}
-
-	public int getValid() {
-		return valid;
-	}
-
 	@Override
-	public void print(final String prefix) {
+	public String getPrintString(final String prefix) {
 		String result = prefix + sep();
 		result += getId() + sep();
 		result += getSorting() + sep();
 		result += getValid() + sep();
 		result += getDesriptionId() + sep();
 		result += getDescription();
-		Logger.getRootLogger().out(result);
+		return result;
+	}
+
+
+	public int getSorting() {
+		return sorting;
+	}
+
+	public int getValid() {
+		return valid;
 	}
 
 	public void setDesriptionId(final int desription) {

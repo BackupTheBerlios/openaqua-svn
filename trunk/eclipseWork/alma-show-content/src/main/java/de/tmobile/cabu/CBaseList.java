@@ -7,8 +7,6 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.TreeMap;
 
 
@@ -16,19 +14,10 @@ import java.util.TreeMap;
  * @author behrenan
  * 
  */
-public abstract class CBaseList extends CListableObject implements Runnable {
-	private final Map<Integer, CBaseType> mapElements = new TreeMap<Integer, CBaseType>();
+public abstract class CBaseList extends TreeMap<Integer, CBaseType> {
 
 	public CBaseList() {
 		super();
-	}
-
-	public void clear() {
-		mapElements.clear();
-	}
-
-	final public CBaseType get(final int id) {
-		return mapElements.get(id);
 	}
 
 	abstract public String getPrintDescription();
@@ -39,50 +28,42 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
-	final public Iterator<CBaseType> iterator() {
-		return mapElements.values().iterator();
-	}
 
 	final public void print(final String prefix) {
-		Logger.getRootLogger().emptyLine();
-		Logger.getRootLogger().out(getPrintDescription());
-		Logger.getRootLogger().emptyLine();
-		Logger.getRootLogger().out(getPrintHeader(prefix));
+		final String desc = getPrintDescription();
+		final String head = getPrintHeader(prefix);
+
+		if (desc != null && desc.length() > 0) {
+			Logger.getRootLogger().emptyLine();
+			Logger.getRootLogger().out(desc);
+		}
+
+		if (head != null && head.length() > 0) {
+			Logger.getRootLogger().emptyLine();
+			Logger.getRootLogger().out(head);
+		}
 		printElements(prefix);
 	}
 
 	final public void printElements(final String prefix) {
-		for (final CBaseType type : mapElements.values()) {
-			type.print(prefix);
+		for (final CBaseType type : values()) {
+			Logger.getRootLogger().out(type.getPrintString(prefix));
 		}
 	}
 
-	final protected void refreshList(final TTConnection connection) throws SQLException {
+	final protected void refreshList() throws SQLException {
 		if (Configuration.getInstance().isError()) { return; }
 		if (getQueryString() == null) { return; }
 		clear();
 
-		///Logger.getRootLogger().debug("BEG refresh " + this.getClass().getName());
-
 		// exec SQL command
-		final Statement stmt = connection.createStatement();
+		final Statement stmt = Configuration.getInstance().getConnection().createStatement();
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
 		rs.close();
 		stmt.close();
-
-		//Logger.getRootLogger().debug("END refresh " + this.getClass().getName());
 	}
 
-	public void run() {
-		if (Configuration.getInstance().isError()) { return; }
-		try {
-			refreshList(Configuration.getInstance().getConnection());
-		} catch (final SQLException e) {
-			Configuration.getInstance().getConnection().reportSQLException(e);
-			Configuration.getInstance().getConnection().Disconnect();
-		}
-	}
 
 	/**
 	 * @param error
@@ -90,6 +71,6 @@ public abstract class CBaseList extends CListableObject implements Runnable {
 	 */
 
 	final public void store(final CBaseType type) {
-		mapElements.put(type.getId(), type);
+		put(type.getId(), type);
 	}
 }

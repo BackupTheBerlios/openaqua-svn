@@ -13,6 +13,7 @@ import java.sql.SQLException;
  * 
  */
 public class CAlmaDataTypeBaseList extends CBaseList {
+	private static final long serialVersionUID = 1056598853660288341L;
 
 	/*
 	 * (non-Javadoc)
@@ -21,8 +22,7 @@ public class CAlmaDataTypeBaseList extends CBaseList {
 	 */
 	@Override
 	public String getPrintDescription() {
-		final String result = "# Unklar";
-		return result;
+		return null;
 	}
 
 	/*

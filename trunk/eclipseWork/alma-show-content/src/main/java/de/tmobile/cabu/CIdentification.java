@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  */
 
 public class CIdentification extends CBaseType {
+
 	public static String getPrintHeader(final String prefix) {
 		return CBaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "cv";
 	}
@@ -23,7 +24,6 @@ public class CIdentification extends CBaseType {
 	private final int elementTemplateId;
 	private final int elementMasterTemplateId;
 	private final String externalIdentifier;
-	private final Logger logger = Logger.getRootLogger();
 
 	public CIdentification(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int cv, final int mandator, final int elementTemplateId, final int elementMasterTemplateId, final String externalIdentifier) {
@@ -61,22 +61,16 @@ public class CIdentification extends CBaseType {
 		return mandator;
 	}
 
-	public int getType() {
-		return type;
+	@Override
+	public String getPrintString(final String prefix) {
+		String result = super.getPrintPrefixString(prefix) + sep();
+		result += getExternalIdentifier() + sep();
+		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
+		return result;
 	}
 
 
-	@Override
-	public void print(final String prefix) {
-		String result = super.getPrintString(prefix) + sep();
-		// result += getType() + sep();
-		// result +=
-		// CIdentification_TyList.getInstances().getTypeAsString(getType()) +
-		// sep();
-		result += getExternalIdentifier() + sep();
-		result += "\"" + CIdentification_CvList.getInstances().getTypeAsString(getCv()) + "\"" + sep();
-		// result += "\"" + CIdentification_TyList.getInstances().getTypeAsString(getType()) + "\""
-		// + sep();
-		logger.out(result);
+	public int getType() {
+		return type;
 	}
 }

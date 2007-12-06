@@ -4,6 +4,7 @@
 package de.tmobile.cabu;
 
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.TreeMap;
@@ -52,7 +53,12 @@ public class CElementTmpl extends CBaseType {
 		attributes = new TreeMap<Integer, String>();
 
 		list = new CElementTmplPartList(id, this);
-		list.run();
+		try {
+			list.refreshList();
+		} catch (final SQLException e) {
+			Logger.getRootLogger().error(e.getMessage());
+			e.printStackTrace();
+		}
 
 	}
 
@@ -79,6 +85,24 @@ public class CElementTmpl extends CBaseType {
 		return parentId;
 	}
 
+	@Override
+	public String getPrintString(final String prefix) {
+		//do nothing if empty
+		if (list.size() <= 0) { return ""; }
+
+		String result = super.getPrintPrefixString(prefix + " \"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"") + sep();
+		result += rootId + sep();
+		result += parentId + sep();
+		//result += type + sep();
+		//result += subtype + sep();
+		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
+		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
+		//result += "\"" + value + "\"" + sep();
+		result += printAttributes();
+		return result;
+		//list.printElements(prefix);
+	}
+
 	public int getRootId() {
 		return rootId;
 	}
@@ -103,30 +127,20 @@ public class CElementTmpl extends CBaseType {
 	//final String result = "TEMPLATE"
 	}
 
-	@Override
-	public void print(final String prefix) {
-		String result = super.getPrintString(prefix) + sep();
-		result += "\"" + CElementTypeList.getInstances().getTypeAsString(type) + "\"" + sep();
-		result += rootId + sep();
-		result += parentId + sep();
-		//result += type + sep();
-		//result += subtype + sep();
-		//result += "\"" + CElementSubtypeList.getInstances().getTypeAsString(subtype) + "\"" + sep();
-		//result += "\"" + CDataTypeList.getInstances().getTypeAsString(datatype) + "\"" + sep();
-		//result += "\"" + value + "\"" + sep();
-		result += printAttributes();
-		Logger.getRootLogger().out(result);
-		list.printElements(prefix);
+	public void prepareForPrinting() {
+		final UnifiedTableOutput output = new UnifiedTableOutput();
+
+
 	}
 
 	private String printAttributes() {
 		String result = "";
 		for (final Integer i : KnownElementAttributes.getInstances().getKnownTemplateAttributes(getType())) {
 			if (attributes.containsKey(i)) {
-				result += "\"" + attributes.get(i) + "\"" + sep();
+				result += attributes.get(i) + sep();
 				//result += i + "=" + "\"" + attributes.get(i) + "\"" + sep();
 			} else {
-				result += "\"\"" + sep();
+				result += sep();
 				//result += i + "=" + "\"\"" + sep();
 			}
 		}

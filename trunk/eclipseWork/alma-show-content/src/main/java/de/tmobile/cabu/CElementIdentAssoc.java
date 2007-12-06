@@ -3,13 +3,16 @@
  */
 package de.tmobile.cabu;
 
+
 import java.sql.Timestamp;
+
 
 /**
  * @author behrenan
  * 
  */
 public class CElementIdentAssoc extends CBaseType {
+
 	public static String getPrintHeader(final String prefix) {
 		return CBaseType.getPrintHeader(prefix) + sep() + "elementId";
 	}
@@ -34,8 +37,8 @@ public class CElementIdentAssoc extends CBaseType {
 	}
 
 	@Override
-	public void print(final String prefix) {
-		Logger.getRootLogger().out(super.getPrintString(prefix) + sep() + elementId);
+	public String getPrintString(final String prefix) {
+		return super.getPrintPrefixString(prefix) + sep() + elementId;
 	}
 
 	/**

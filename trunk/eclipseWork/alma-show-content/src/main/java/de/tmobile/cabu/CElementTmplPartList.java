@@ -23,18 +23,24 @@ public class CElementTmplPartList extends CBaseList {
 	}
 
 
+	public void buildUnifiedPrintList(final String prefix, final UnifiedTableOutput uto) {
+		for (final CBaseType base : values()) {
+
+		}
+	}
+
 	public int getParentId() {
 		return parentId;
 	}
 
 	@Override
 	public String getPrintDescription() {
-		return "unknown";
+		return null;
 	}
 
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return "unknown";
+		return null;
 	}
 
 	@Override
@@ -52,7 +58,6 @@ public class CElementTmplPartList extends CBaseList {
 
 		}
 	}
-
 
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
