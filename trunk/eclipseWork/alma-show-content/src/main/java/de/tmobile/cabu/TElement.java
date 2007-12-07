@@ -30,7 +30,7 @@ public class TElement extends BaseElement {
 
 	@Override
 	protected BaseListElement getElementList(final int id, final BaseElement parent) {
-		return new ListElementPart(id, parent);
+		return null;
 	}
 
 

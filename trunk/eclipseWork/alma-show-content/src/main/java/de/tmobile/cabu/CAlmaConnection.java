@@ -29,6 +29,7 @@ public class CAlmaConnection {
 
 		//Register (and load from TT) new DataList
 		CLogger.getRootLogger().debug("Start Loading");
+		CAlmaDataLoader.getInstances().addList(ListElementParentIds.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
@@ -65,12 +66,13 @@ public class CAlmaConnection {
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			//CDescriptionList.getInstances().print("TA_DESCRIPTION");
+			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			//final CUnifiedTableOutput otu = new CUnifiedTableOutput();
 			//ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
 			//otu.print();
 			// 
-			ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
-			ListElement.getInstances().print("TA_ELEMENT");
+			//ListElement.getInstances().print("TA_ELEMENT");
+			//ListElementParentIds.getInstances().print("PARENT");
 			CKnownElementAttributes.getInstances().dump();
 			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");

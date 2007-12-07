@@ -62,6 +62,7 @@ public class ListElementTmplPart extends BaseListElement {
 					amcDescId, constFlag, value, tmplMasterId, tmplMasterVers);
 
 			store(tmpl);
+			CLogger.getRootLogger().debug(tmpl.getPrintString("PART"));
 
 			if (getParent() != null) {
 				getParent().addAttribute(subtype, value);

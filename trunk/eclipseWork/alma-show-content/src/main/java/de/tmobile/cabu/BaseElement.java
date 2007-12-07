@@ -54,7 +54,9 @@ public abstract class BaseElement extends BaseType {
 		list = getElementList(id, this);
 
 		try {
-			list.refreshList();
+			if (list != null) {
+				list.refreshList();
+			}
 		} catch (final SQLException e) {
 			CLogger.getRootLogger().error(e.getMessage());
 			e.printStackTrace();
@@ -95,9 +97,13 @@ public abstract class BaseElement extends BaseType {
 		//do nothing if empty
 		//if (list.size() <= 0) { return ""; }
 		String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
+		result += sep() + ":" + sep();
 		result += rootId + sep();
 		result += parentId + sep();
+		result += " type=" + type + " sub=" + subtype;
+		result += sep() + ":#" + sep();
 		result += printAttributes();
+		result += sep() + "#" + sep();
 		return result;
 	}
 

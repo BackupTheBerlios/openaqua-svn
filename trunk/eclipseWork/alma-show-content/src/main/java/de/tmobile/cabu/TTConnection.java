@@ -7,6 +7,7 @@ package de.tmobile.cabu;
 import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
@@ -88,6 +89,10 @@ public class TTConnection {
 			reportSQLException(e);
 			return false;
 		}
+	}
+
+	public PreparedStatement createPreparedStatement(final String cmd) throws SQLException {
+		return connection.prepareStatement(cmd);
 	}
 
 	public Statement createStatement() throws SQLException {

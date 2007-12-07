@@ -21,16 +21,16 @@ public class ListElementPart extends BaseListElement {
 
 	@Override
 	protected String getQueryString() {
-		if (getParentId() == 0) {
-			return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
-					+ " root_id, insert_time, value " + " from acm_schema.acm$ta_element where parent_id is null order by element_id";
-		} else {
-			return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
-					+ " root_id, insert_time, value "
-					+ " from acm_schema.acm$ta_element where parent_id="
-					+ getParentId()
-					+ " order by element_id";
-		}
+		return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
+				+ " root_id, insert_time, value from acm_schema.acm$ta_element";
+
+		//if (getParentId() == 0) {
+		//	return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
+		//			+ " root_id, insert_time, value " + " from acm_schema.acm$ta_element where parent_id is null";
+		//} else {
+		//	return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
+		//			+ " root_id, insert_time, value " + " from acm_schema.acm$ta_element where parent_id=" + getParentId();
+		//}
 	}
 
 
