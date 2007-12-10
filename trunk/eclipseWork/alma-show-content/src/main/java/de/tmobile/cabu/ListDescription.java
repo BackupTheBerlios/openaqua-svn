@@ -28,8 +28,7 @@ public class ListDescription extends BaseList {
 	 */
 	@Override
 	public String getPrintDescription() {
-		// TODO Auto-generated method stub
-		return "";
+		return null;
 	}
 
 	/*
@@ -39,8 +38,7 @@ public class ListDescription extends BaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		// TODO Auto-generated method stub
-		return "";
+		return null;
 	}
 
 	@Override
@@ -51,7 +49,7 @@ public class ListDescription extends BaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new TDescription(rs.getInt(1), rs.getString(2)));
+			put(rs.getInt(1), new TDescription(rs.getInt(1), rs.getString(2)));
 		}
 	}
 

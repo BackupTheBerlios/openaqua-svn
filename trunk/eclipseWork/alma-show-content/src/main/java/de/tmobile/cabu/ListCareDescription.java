@@ -52,7 +52,7 @@ public class ListCareDescription extends BaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new TCareDescription(rs.getInt(1), rs.getString(2)));
+			put(rs.getInt(1), new TCareDescription(rs.getInt(1), rs.getString(2)));
 		}
 	}
 }

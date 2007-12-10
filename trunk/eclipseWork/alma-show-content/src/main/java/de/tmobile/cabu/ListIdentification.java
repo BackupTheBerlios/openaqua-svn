@@ -75,7 +75,7 @@ public class ListIdentification extends BaseList {
 			final Timestamp val_from = rs.getTimestamp(9);
 			final Timestamp val_to = rs.getTimestamp(10);
 
-			store(new TIdentification(id, objVer, val_from, val_to, ty, cv, mandator, elementTemplateId, elementMasterTemplateId,
+			put(id, new TIdentification(id, objVer, val_from, val_to, ty, cv, mandator, elementTemplateId, elementMasterTemplateId,
 					externalIdentifier));
 		}
 	}

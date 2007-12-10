@@ -66,7 +66,7 @@ public class BaseListAlmaDataType extends BaseList {
 			final int descId = rs.getInt(2);
 			final int sorting = rs.getInt(3);
 			final int valid = rs.getInt(4);
-			store(new TDataType(id, descId, sorting, valid));
+			put(id, new TDataType(id, descId, sorting, valid));
 		}
 
 	}

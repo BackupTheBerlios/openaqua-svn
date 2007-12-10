@@ -42,7 +42,7 @@ public class ListElementParentIds extends BaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			store(new TParentId(rs.getInt(1)));
+			put(rs.getInt(1), new TParentId(rs.getInt(1)));
 		}
 	}
 

@@ -51,7 +51,7 @@ public class ListElementPart extends BaseListElement {
 
 			final TElement elem = new TElement(id, type, subtype, datatype, unittype, pareId, rootId, value, insert_time, tmplId, tmplVers);
 
-			store(elem);
+			put(id, elem);
 
 			if (getParent() != null) {
 				getParent().addAttribute(subtype, value);

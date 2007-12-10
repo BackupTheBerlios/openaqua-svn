@@ -58,7 +58,7 @@ public class ListElementIdentAssoc extends BaseList {
 			final int obj = rs.getInt(3);
 			final Timestamp from = rs.getTimestamp(4);
 			final Timestamp to = rs.getTimestamp(5);
-			store(new TElementIdentAssoc(id, el, obj, from, to));
+			put(id, new TElementIdentAssoc(id, el, obj, from, to));
 		}
 	}
 

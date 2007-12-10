@@ -61,8 +61,8 @@ public class ListElementTmplPart extends BaseListElement {
 			final TElementTmpl tmpl = new TElementTmpl(id, objVers, valid_from, valid_to, type, subtype, datatype, unittype, pareId, rootId,
 					amcDescId, constFlag, value, tmplMasterId, tmplMasterVers);
 
-			store(tmpl);
-			CLogger.getRootLogger().debug(tmpl.getPrintString("PART"));
+			put(id, tmpl);
+			//CLogger.getRootLogger().debug(tmpl.getPrintString("PART"));
 
 			if (getParent() != null) {
 				getParent().addAttribute(subtype, value);
