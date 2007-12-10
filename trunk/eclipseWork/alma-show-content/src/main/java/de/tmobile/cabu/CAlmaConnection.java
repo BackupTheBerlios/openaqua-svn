@@ -33,7 +33,7 @@ public class CAlmaConnection {
 		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
