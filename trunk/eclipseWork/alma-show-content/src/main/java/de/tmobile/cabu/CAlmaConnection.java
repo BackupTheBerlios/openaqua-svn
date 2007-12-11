@@ -29,14 +29,16 @@ public class CAlmaConnection {
 
 		//Register (and load from TT) new DataList
 		CLogger.getRootLogger().debug("Start Loading");
-		CAlmaDataLoader.getInstances().addList(ListElementParentIds.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListElementParentIds.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementRootIds.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
+		//Dont use this!
 		//CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification_Cv.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification.getInstances());
@@ -47,7 +49,9 @@ public class CAlmaConnection {
 
 		//Wait until they are finished
 		CAlmaDataLoader.getInstances().join();
-		CAlmaDataLoader.getInstances().clear();
+		CLogger.getRootLogger().debug("Load is done");
+		CLogger.getRootLogger().debug("Load Elements");
+		ListElement.getInstances().refreshList();
 		CLogger.getRootLogger().debug("Load is done");
 
 
@@ -78,7 +82,7 @@ public class CAlmaConnection {
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			//CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
-			// CElementIdentAssocList.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			//ListElementIdentAssoc.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 		}
 
 		if (whatToRun == 1) {

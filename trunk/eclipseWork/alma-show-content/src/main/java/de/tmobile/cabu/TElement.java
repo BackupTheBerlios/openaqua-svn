@@ -31,6 +31,7 @@ public class TElement extends BaseElement {
 	@Override
 	protected BaseListElement getElementList(final int id, final BaseElement parent) {
 		return null;
+		//return new ListElementPart(id, parent);
 	}
 
 
@@ -41,11 +42,14 @@ public class TElement extends BaseElement {
 
 	@Override
 	public String getPrintString(final String prefix) {
-		String result = super.getPrintString(prefix);
+		return super.getPrintString(prefix);
+		/*
+		final String result = super.getPrintString(prefix);
 		result += templId + sep();
 		result += templVers + sep();
 		result += insertTime;
 		return result;
+		*/
 	}
 
 	@Override

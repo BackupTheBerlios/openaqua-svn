@@ -4,6 +4,7 @@
 package de.tmobile.cabu;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -38,7 +39,7 @@ public class ListElement extends BaseList {
 	@Override
 	protected String getQueryString() {
 		return "select element_id, elem_tmpl_id, elem_tmpl_objvers, element_type_cv, element_subtype_cv, data_type_cv, unit_cv, parent_id, "
-				+ " root_id, insert_time, value from acm_schema.acm$ta_element where parent_id is null";
+				+ " root_id, insert_time, value from acm_schema.acm$ta_element where root_id = ?";
 	}
 
 	@Override
@@ -57,9 +58,30 @@ public class ListElement extends BaseList {
 			final String value = rs.getString(11);
 
 			final TElement elem = new TElement(id, type, subtype, datatype, unittype, pareId, rootId, value, insert_time, tmplId, tmplVers);
+			CLogger.getRootLogger().debug(elem.getPrintString("EL"));
 			put(id, elem);
 		}
 	}
 
+	@Override
+	protected void refreshList() {
+		if (CAlmaDataLoader.getInstances().isLoading()) {
+			CLogger.getRootLogger().error("CAlmaDataLoader is working!");
+			return;
+		}
+		try {
+			final PreparedStatement stmt = CConfiguration.getInstance().getConnection().createPreparedStatement(getQueryString());
+			for (final BaseType type : ListElementRootIds.getInstances().values()) {
+				stmt.setInt(1, type.getId());
+				stmt.executeQuery();
+				CLogger.getRootLogger().debug("EL -----------------------------BEGIN");
+				HandleQueryResult(stmt.getResultSet());
+				CLogger.getRootLogger().debug("EL -----------------------------END");
+			}
 
+		} catch (final SQLException e) {
+			CConfiguration.getInstance().getConnection().reportSQLException(e);
+		}
+
+	}
 }

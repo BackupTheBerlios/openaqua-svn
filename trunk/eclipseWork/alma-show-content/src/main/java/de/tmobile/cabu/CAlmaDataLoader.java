@@ -6,6 +6,7 @@ package de.tmobile.cabu;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -18,6 +19,8 @@ public class CAlmaDataLoader {
 	public static CAlmaDataLoader getInstances() {
 		return INSTANCE;
 	}
+	private final ReentrantLock lock = new ReentrantLock();
+
 	final List<Thread> threadList = new LinkedList<Thread>();
 
 	public CAlmaDataLoader() {
@@ -26,38 +29,56 @@ public class CAlmaDataLoader {
 	}
 
 	public void addList(final BaseList list) {
-		final Thread thread = new Thread(new CAlmaListLoaderThread(list));
-		thread.start();
-		threadList.add(thread);
+		lock.lock();
+		try {
+			final Thread thread = new Thread(new CAlmaListLoaderThread(list));
+			thread.start();
+			threadList.add(thread);
+		} finally {
+			lock.unlock();
+		}
 	}
 
-	public void clear() {
-		threadList.clear();
-
+	public boolean isLoading() {
+		lock.lock();
+		try {
+			return !threadList.isEmpty();
+		} finally {
+			lock.unlock();
+		}
 	}
+
 
 	public void join() {
+		lock.lock();
 
-		//First run
-		for (final Thread thread : threadList) {
-			try {
-				thread.join();
-			} catch (final InterruptedException e) {
-				CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
-				e.printStackTrace();
+		try {
+
+			//First run
+			for (final Thread thread : threadList) {
+				try {
+					thread.join();
+				} catch (final InterruptedException e) {
+					CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
+					e.printStackTrace();
+				}
+
 			}
 
-		}
-
-		//First run
-		for (final Thread thread : threadList) {
-			try {
-				thread.join();
-			} catch (final InterruptedException e) {
-				CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
-				e.printStackTrace();
+			//First run
+			for (final Thread thread : threadList) {
+				try {
+					thread.join();
+				} catch (final InterruptedException e) {
+					CLogger.getRootLogger().error("Got Exception while joining Loader threads: " + e.getMessage());
+					e.printStackTrace();
+				}
 			}
 
+			//clean up
+			threadList.clear();
+		} finally {
+			lock.unlock();
 		}
 	}
 }

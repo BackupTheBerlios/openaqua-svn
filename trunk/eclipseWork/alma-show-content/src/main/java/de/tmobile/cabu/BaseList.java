@@ -51,15 +51,20 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		}
 	}
 
-	final protected void refreshList() throws SQLException {
+	protected void refreshList() throws SQLException {
 		if (CConfiguration.getInstance().isError()) { return; }
 		if (getQueryString() == null) { return; }
-		clear(); //attention: makes a lock too!
+		clear();
 
 		// exec SQL command
 		final Statement stmt = CConfiguration.getInstance().getConnection().createStatement();
+		//stmt.setFetchSize(10);
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
+		while (stmt.getMoreResults()) {
+			HandleQueryResult(rs);
+		}
+
 		rs.close();
 		stmt.close();
 	}
