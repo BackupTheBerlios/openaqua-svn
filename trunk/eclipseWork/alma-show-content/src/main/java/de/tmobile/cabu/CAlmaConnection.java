@@ -30,7 +30,7 @@ public class CAlmaConnection {
 		//Register (and load from TT) new DataList
 		CLogger.getRootLogger().debug("Start Loading");
 		//CAlmaDataLoader.getInstances().addList(ListElementParentIds.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListElementRootIds.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListElementRootIds.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
@@ -38,7 +38,7 @@ public class CAlmaConnection {
 		//CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification_Cv.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListIdentification.getInstances());
@@ -62,6 +62,16 @@ public class CAlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
+
+			ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
+			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
+			//ListElementIdentAssoc.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			ListIdentification.getInstances().print("TA_IDENTIFICATION");
+
+			//ListElement.getInstances().print("TA_ELEMENT");
+			//ListElementParentIds.getInstances().print("PARENT");
+			//CKnownElementAttributes.getInstances().dump();
+
 			//CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
 			//CDataTypeList.getInstances().print("ACM_TA_DATA_TYPE_CV");
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
@@ -70,19 +80,10 @@ public class CAlmaConnection {
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
 			//CDescriptionList.getInstances().print("TA_DESCRIPTION");
-			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
-			//final CUnifiedTableOutput otu = new CUnifiedTableOutput();
-			//ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
-			//otu.print();
-			// 
-			//ListElement.getInstances().print("TA_ELEMENT");
-			//ListElementParentIds.getInstances().print("PARENT");
-			CKnownElementAttributes.getInstances().dump();
-			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			// CIdentification_TyList.getInstances().print("TA_IDENTIFICATION_TY");
 			//CIdentificationList.getInstances().print("TA_IDENTIFICATION");
 			// CIdentificationTemplatesList.getInstances().print("TA_IDENTIFICATION");
-			//ListElementIdentAssoc.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
+			//
 		}
 
 		if (whatToRun == 1) {

@@ -29,7 +29,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
-	final public void print(final String prefix) {
+	public void print(final String prefix) {
 		final String desc = getPrintDescription();
 		final String head = getPrintHeader(prefix);
 

@@ -15,7 +15,8 @@ import java.sql.Timestamp;
 public class TIdentification extends BaseType {
 
 	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "cv";
+		return BaseType.getPrintHeader(prefix) + "type" + sep() + sep() + "value" + sep() + sep() + "mandator" + sep() + "tmplId" + sep()
+				+ "masterTemplId";
 	}
 
 	private final int type;
@@ -64,11 +65,15 @@ public class TIdentification extends BaseType {
 	@Override
 	public String getPrintString(final String prefix) {
 		String result = super.getPrintPrefixString(prefix) + sep();
-		result += getExternalIdentifier() + sep();
+		//result += "\"" + getType() + "=\"" + sep();
+		//result += "\"" + ListIdentification_Ty.getInstances().getTypeAsString(getType()) + "\"" + sep();
 		result += "\"" + ListIdentification_Cv.getInstances().getTypeAsString(getCv()) + "\"" + sep();
+		result += getExternalIdentifier() + sep();
+		result += getMandator() + sep();
+		result += getElementTemplateId() + sep();
+		result += getElementMasterTemplateId();
 		return result;
 	}
-
 
 	public int getType() {
 		return type;

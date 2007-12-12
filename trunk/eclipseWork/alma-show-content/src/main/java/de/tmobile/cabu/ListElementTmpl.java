@@ -23,4 +23,11 @@ public class ListElementTmpl extends ListElementTmplPart {
 		super(parentId, null);
 	}
 
+	@Override
+	public void print(final String prefix) {
+		final CUnifiedTableOutput otu = new CUnifiedTableOutput();
+		ListElementTmpl.getInstances().buildUnifiedPrintList("TA_ELEMENT_TMPL", otu);
+		otu.print();
+	}
+
 }
