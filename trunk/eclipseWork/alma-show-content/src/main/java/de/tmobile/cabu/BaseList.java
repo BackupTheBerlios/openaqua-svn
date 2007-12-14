@@ -61,7 +61,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		stmt.setFetchSize(125);
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
-		Thread.yield();
+		//Thread.yield();
 
 		rs.close();
 		stmt.close();

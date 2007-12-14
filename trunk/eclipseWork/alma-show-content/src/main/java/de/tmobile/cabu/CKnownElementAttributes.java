@@ -108,25 +108,40 @@ public class CKnownElementAttributes {
 
 	}
 
-	private void setKnownAttributes(final Lock lock, final Map<Integer, Set<Integer>> map, final int elementType, final int attributeType) {
-		lock.lock();
+	private void setKnownAttributes(final Lock readLock, final Lock writeLock, final Map<Integer, Set<Integer>> map, final int elementType,
+			final int attributeType) {
+
+		//Test whether already exists
+		readLock.lock();
+		try {
+			final Set<Integer> set = map.get(elementType);
+			if (set != null) {
+				if (set.contains(attributeType)) { return; }
+			}
+		} finally {
+			readLock.unlock();
+		}
+
+
+		//otherwise write value
+		writeLock.lock();
 		try {
 			if (!map.containsKey(elementType)) {
 				map.put(elementType, new TreeSet<Integer>());
 			}
 			map.get(elementType).add(attributeType);
 		} finally {
-			lock.unlock();
+			writeLock.unlock();
 		}
 	}
 
 	public void setKnownElementAttributes(final int elementType, final int attributeType) {
 		//CLogger.getRootLogger().debug("ElemenType=" + elementType + " attrType=" + attributeType);
-		setKnownAttributes(elementWriteLock, knownElementAttributes, elementType, attributeType);
+		setKnownAttributes(elementReadLock, elementWriteLock, knownElementAttributes, elementType, attributeType);
 	}
 
 	public void setKnownTemplateAttributes(final int elementType, final int attributeType) {
-		setKnownAttributes(templateWriteLock, knownTemplateAttributes, elementType, attributeType);
+		setKnownAttributes(templateReadLock, templateWriteLock, knownTemplateAttributes, elementType, attributeType);
 	}
 
 }

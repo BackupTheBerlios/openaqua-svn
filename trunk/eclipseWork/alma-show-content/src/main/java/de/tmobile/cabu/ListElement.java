@@ -45,8 +45,8 @@ public abstract class ListElement extends BaseList {
 			final String value = rs.getString(11);
 
 			final TElement elem = new TElement(id, type, subtype, datatype, unittype, pareId, rootId, value, insert_time, tmplId, tmplVers);
-			//Thread.yield();
 			put(id, elem);
+			//Thread.yield();
 		}
 	}
 
@@ -64,8 +64,8 @@ public abstract class ListElement extends BaseList {
 		stmt.setFetchSize(20);
 
 		for (final BaseType type : values()) {
-			Thread.yield();
 			final TElement element = (TElement) type;
+
 			stmt.setInt(1, element.getId());
 			final ResultSet rs = stmt.executeQuery();
 			//CLogger.getRootLogger().debug(element.getPrintString("ELEMENT="));
@@ -75,6 +75,8 @@ public abstract class ListElement extends BaseList {
 			}
 			//CLogger.getRootLogger().debug(element.getPrintString("ELEMENT="));
 			rs.close();
+
+			Thread.yield();
 		}
 		stmt.close();
 	}

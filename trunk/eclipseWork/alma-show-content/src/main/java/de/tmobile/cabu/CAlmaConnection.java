@@ -44,8 +44,7 @@ public class CAlmaConnection {
 
 		//Wait until they are finished
 		CLogger.getRootLogger().debug("Loader Threads are running ...");
-		CAlmaDataLoader.getInstances().join();
-		CAlmaDataLoader.getInstances().clear();
+		CAlmaDataLoader.getInstances().waitForFinish();
 		CLogger.getRootLogger().debug("Base Load is done");
 
 
@@ -56,8 +55,7 @@ public class CAlmaConnection {
 
 		//Wait until finished
 		CLogger.getRootLogger().debug("Loader Threads are running ...");
-		CAlmaDataLoader.getInstances().join();
-		CAlmaDataLoader.getInstances().clear();
+		CAlmaDataLoader.getInstances().waitForFinish();
 		CLogger.getRootLogger().debug("Base Load is done");
 
 
