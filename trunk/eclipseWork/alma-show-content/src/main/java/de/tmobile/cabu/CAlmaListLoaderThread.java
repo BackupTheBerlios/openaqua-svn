@@ -15,13 +15,11 @@ public class CAlmaListLoaderThread implements Runnable {
 	final BaseList list;
 
 	public CAlmaListLoaderThread(final BaseList list) {
+		super();
 		this.list = list;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
 	public void run() {
 		if (CConfiguration.getInstance().isError()) { return; }
 		try {
