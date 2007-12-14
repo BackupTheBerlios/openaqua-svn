@@ -5,7 +5,6 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
-import java.util.List;
 
 
 /**
@@ -36,11 +35,6 @@ public class TElement extends BaseElement {
 
 
 	@Override
-	protected List<Integer> getKnownAttributes(final int elementType) {
-		return CKnownElementAttributes.getInstances().getKnownElementAttributes(elementType);
-	}
-
-	@Override
 	public String getPrintString(final String prefix) {
 		return super.getPrintString(prefix);
 		/*
@@ -51,11 +45,5 @@ public class TElement extends BaseElement {
 		return result;
 		*/
 	}
-
-	@Override
-	public void storeAttributeType(final int typeAttribute) {
-		CKnownElementAttributes.getInstances().setKnownElementAttributes(getType(), typeAttribute);
-	}
-
 
 }

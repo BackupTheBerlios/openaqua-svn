@@ -7,7 +7,9 @@ package de.tmobile.cabu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 /**
@@ -15,17 +17,23 @@ import java.util.TreeMap;
  * 
  */
 public abstract class BaseList extends TreeMap<Integer, BaseType> {
+	private final Set<Integer> knownAttributes = new TreeSet<Integer>();
+
 	protected BaseList() {
 		super();
 	}
 
 
+	public Set<Integer> getAttributeTypes() {
+		return knownAttributes;
+	}
+
 	abstract public String getPrintDescription();
 
 	abstract public String getPrintHeader(final String prefix);
 
-	abstract protected String getQueryString();
 
+	abstract protected String getQueryString();
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
@@ -66,4 +74,9 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		rs.close();
 		stmt.close();
 	}
+
+	public void storeAttributeType(final int typeAttribute) {
+		knownAttributes.add(typeAttribute);
+	}
+
 }

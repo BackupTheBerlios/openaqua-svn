@@ -6,7 +6,6 @@ package de.tmobile.cabu;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,7 +21,7 @@ public abstract class BaseElement extends BaseType {
 
 	private final Map<Integer, String> attributes;
 	private final BaseListElement list;
-
+	private BaseList ownerList;
 	private final int type;
 	private final int subtype;
 	private final int datatype;
@@ -64,8 +63,8 @@ public abstract class BaseElement extends BaseType {
 
 	}
 
-	final public void addAttribute(final int type, final String value) {
-		storeAttributeType(type);
+	final public void addAttribute(final BaseList list, final int type, final String value) {
+		list.storeAttributeType(type);
 		if (value != null) {
 			attributes.put(type, value.trim());
 		}
@@ -86,14 +85,12 @@ public abstract class BaseElement extends BaseType {
 
 	abstract protected BaseListElement getElementList(final int id, final BaseElement parent);
 
-	abstract protected List<Integer> getKnownAttributes(final int elementType);
-
 	public int getParentId() {
 		return parentId;
 	}
 
-	@Override
-	public String getPrintString(final String prefix) {
+
+	private String getPrintString(final BaseList list, final String prefix) {
 		//do nothing if empty
 		//if (list.size() <= 0) { return ""; }
 		String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
@@ -102,9 +99,14 @@ public abstract class BaseElement extends BaseType {
 		result += "parent=" + parentId + sep();
 		result += " type=" + type + " sub=" + subtype;
 		result += sep() + "#" + sep();
-		result += printAttributes();
+		result += printAttributes(list);
 		result += sep() + "#" + sep();
 		return result;
+	}
+
+	@Override
+	public String getPrintString(final String prefix) {
+		return getPrintString(ownerList, prefix);
 	}
 
 	public int getRootId() {
@@ -119,30 +121,32 @@ public abstract class BaseElement extends BaseType {
 		return type;
 	}
 
-
 	public int getUnittype() {
 		return unittype;
 	}
+
 
 	public String getValue() {
 		return value;
 	}
 
-	private String printAttributes() {
+	private String printAttributes(final BaseList list) {
 		String result = "";
-		for (final Integer i : getKnownAttributes(getType())) {
+		for (final Integer i : list.getAttributeTypes()) {
 			if (attributes.containsKey(i)) {
 				result += attributes.get(i) + sep();
 			} else {
 				result += "<NULL>" + sep();
 			}
 		}
+
 		return result;
 
 	}
 
-
-	abstract public void storeAttributeType(final int typeAttribute);
+	public void setOwnerList(final BaseList list) {
+		ownerList = list;
+	}
 
 
 }

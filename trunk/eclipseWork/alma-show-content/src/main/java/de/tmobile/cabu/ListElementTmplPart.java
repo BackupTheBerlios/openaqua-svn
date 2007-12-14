@@ -65,7 +65,7 @@ public class ListElementTmplPart extends BaseListElement {
 			//CLogger.getRootLogger().debug(tmpl.getPrintString("PART"));
 
 			if (getParent() != null) {
-				getParent().addAttribute(subtype, value);
+				getParent().addAttribute(this, subtype, value);
 			}
 
 

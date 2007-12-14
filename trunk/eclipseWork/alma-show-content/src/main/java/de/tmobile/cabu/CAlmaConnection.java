@@ -77,7 +77,6 @@ public class CAlmaConnection {
 			ListAccounts.getInstances().print("Accounts");
 			ListCounters.getInstances().print("Counters");
 			ListCounterSets.getInstances().print("CounterSets");
-			CKnownElementAttributes.getInstances().dump();
 
 			// CElementSubtypeList.getInstances().print("TA_ELEMENT_SUBTYPE_CV");
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
