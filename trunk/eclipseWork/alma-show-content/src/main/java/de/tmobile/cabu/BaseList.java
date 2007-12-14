@@ -68,5 +68,4 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		rs.close();
 		stmt.close();
 	}
-
 }

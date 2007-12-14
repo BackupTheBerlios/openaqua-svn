@@ -49,7 +49,8 @@ public class CAlmaConnection {
 
 		//Wait until they are finished
 		CAlmaDataLoader.getInstances().join();
-		CLogger.getRootLogger().debug("Load is done");
+		CAlmaDataLoader.getInstances().clear();
+		CLogger.getRootLogger().debug("Base Load is done");
 		CLogger.getRootLogger().debug("Load Elements");
 		ListElement.getInstances().refreshList();
 		CLogger.getRootLogger().debug("Load is done");

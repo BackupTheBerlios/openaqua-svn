@@ -39,6 +39,18 @@ public class CAlmaDataLoader {
 		}
 	}
 
+	public void clear() {
+		lock.lock();
+		//clean up
+		try {
+			threadList.clear();
+		} finally {
+			lock.unlock();
+		}
+
+	}
+
+
 	public boolean isLoading() {
 		lock.lock();
 		try {
@@ -47,7 +59,6 @@ public class CAlmaDataLoader {
 			lock.unlock();
 		}
 	}
-
 
 	public void join() {
 		lock.lock();
@@ -76,9 +87,9 @@ public class CAlmaDataLoader {
 			}
 
 			//clean up
-			threadList.clear();
 		} finally {
 			lock.unlock();
 		}
 	}
+
 }
