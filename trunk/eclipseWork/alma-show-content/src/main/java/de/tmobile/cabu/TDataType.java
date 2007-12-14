@@ -33,8 +33,7 @@ public class TDataType extends BaseType {
 	public final String getDescription() {
 		final BaseType base = ListDescription.getInstances().get(getDesriptionId());
 		if (base instanceof TDescription) {
-			final TDescription desc = (TDescription) base;
-			return desc.getDescription();
+			return ((TDescription) base).getDescription();
 		} else {
 			return "unknownDescription";
 		}

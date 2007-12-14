@@ -58,12 +58,10 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
 		// exec SQL command
 		final Statement stmt = CConfiguration.getInstance().getConnection().createStatement();
-		//stmt.setFetchSize(10);
+		stmt.setFetchSize(125);
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
-		while (stmt.getMoreResults()) {
-			HandleQueryResult(rs);
-		}
+		Thread.yield();
 
 		rs.close();
 		stmt.close();

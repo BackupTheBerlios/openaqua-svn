@@ -21,4 +21,11 @@ public class ListElementType extends BaseListAlmaDataType {
 		return "select element_type_cv, description_id, sorting, valid from acm_schema.acm$ta_element_type_cv";
 	}
 
+	public int getTypeId(final String type) {
+		for (final BaseType base : values()) {
+			final TDataType data = (TDataType) base;
+			if (data.getDescription().equals(type)) { return data.getId(); }
+		}
+		return 0;
+	}
 }

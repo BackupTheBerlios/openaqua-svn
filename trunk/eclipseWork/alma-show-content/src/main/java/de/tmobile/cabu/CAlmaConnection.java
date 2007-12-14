@@ -29,13 +29,9 @@ public class CAlmaConnection {
 
 		//Register (and load from TT) new DataList
 		CLogger.getRootLogger().debug("Start Loading");
-		//CAlmaDataLoader.getInstances().addList(ListElementParentIds.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListElementRootIds.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListCareDescription.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDataType.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListDescription.getInstances());
-		//Dont use this!
-		//CAlmaDataLoader.getInstances().addList(ListElement.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementIdentAssoc.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementSubtype.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListElementTmpl.getInstances());
@@ -51,32 +47,36 @@ public class CAlmaConnection {
 		CAlmaDataLoader.getInstances().join();
 		CAlmaDataLoader.getInstances().clear();
 		CLogger.getRootLogger().debug("Base Load is done");
-		CLogger.getRootLogger().debug("Load Elements");
-		ListElement.getInstances().refreshList();
-		CLogger.getRootLogger().debug("Load is done");
 
+		CLogger.getRootLogger().debug("Start Element Loading");
+		CAlmaDataLoader.getInstances().addList(ListAccounts.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCounters.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCounterSets.getInstances());
+		//Wait until finished
+		CAlmaDataLoader.getInstances().join();
+		CAlmaDataLoader.getInstances().clear();
+		CLogger.getRootLogger().debug("Element Load is done");
 
-		// Build higher Objects
-		//BAccountList.getInstances().buildAccounts();
-		// CIdentificationList.getInstances().print("IDENT");
-		// BCustomerList.getInstances().buildCustomerList();
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
 
-			ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
+			//ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
 			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			//ListElementIdentAssoc.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
-			ListIdentification.getInstances().print("TA_IDENTIFICATION");
+			//ListIdentification.getInstances().print("TA_IDENTIFICATION");
 
 			//ListElement.getInstances().print("TA_ELEMENT");
 			//ListElementParentIds.getInstances().print("PARENT");
 			//CKnownElementAttributes.getInstances().dump();
 
 			//CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
-			//CDataTypeList.getInstances().print("ACM_TA_DATA_TYPE_CV");
+			//ListDataType.getInstances().print("TA_DATA_TYPE_CV");
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
-			//CElementTypeList.getInstances().print("TA_ELEMENT_TYPE_CV");
+			ListElementType.getInstances().print("TA_ELEMENT_TYPE_CV");
+			ListAccounts.getInstances().print("Accounts");
+			ListCounters.getInstances().print("Counters");
+			ListCounterSets.getInstances().print("CounterSets");
 			// CElementSubtypeList.getInstances().print("TA_ELEMENT_SUBTYPE_CV");
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");
