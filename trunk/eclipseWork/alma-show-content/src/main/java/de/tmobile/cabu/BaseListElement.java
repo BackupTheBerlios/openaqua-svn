@@ -49,19 +49,28 @@ public abstract class BaseListElement extends BaseList {
 
 		final String cmd = "select element_subtype_cv, value from acm_schema.acm$ta_element where parent_id = ? and element_type_cv="
 				+ elemType;
+
 		final PreparedStatement stmt = connection.createPreparedStatement(cmd);
-		stmt.setFetchSize(10);
+		//stmt.setFetchSize(10);
+		final PerfMonitor monitor = new PerfMonitor();
 		for (final BaseType type : values()) {
 			final TElement element = (TElement) type;
+			monitor.begin();
 			stmt.setInt(1, element.getId());
+			monitor.endPrep();
 			final ResultSet rs = stmt.executeQuery();
+			monitor.endQuery();
+			//CLogger.getRootLogger().info(this.getClass().getCanonicalName() + " query: " + monitor.ouput());
 			while (rs.next()) {
 				setAttributeType(rs.getInt(1));
 				element.addAttribute(this, rs.getInt(1), rs.getString(2));
+				monitor.increase();
 			}
+			monitor.endResult();
+			CLogger.getRootLogger().info(this.getClass().getCanonicalName() + monitor.getConsumedTime());
 			rs.close();
 		}
 		stmt.close();
-	}
 
+	}
 }

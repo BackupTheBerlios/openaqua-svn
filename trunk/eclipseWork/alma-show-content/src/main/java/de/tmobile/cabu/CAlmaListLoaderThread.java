@@ -29,6 +29,7 @@ public class CAlmaListLoaderThread implements Runnable {
 			connection.Connect(CConfiguration.getInstance().getConnectionDsn());
 			if (!connection.isConnected()) { return; }
 			list.refreshList(connection);
+			//CLogger.getRootLogger().info(list.getClass().getCanonicalName() + " " + perf.ouput());
 			connection.Disconnect();
 
 		} catch (final ClassNotFoundException e1) {

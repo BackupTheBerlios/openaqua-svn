@@ -43,9 +43,9 @@ public class CAlmaConnection {
 
 
 		CLogger.getRootLogger().debug("Start Element Loading");
-		CAlmaDataLoader.getInstances().addList(ListAccountsTemplates.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListCounterSetTemplates.getInstances());
-		CAlmaDataLoader.getInstances().addList(ListCountersTemplates.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListAccountsTemplates.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListCounterSetTemplates.getInstances());
+		//CAlmaDataLoader.getInstances().addList(ListCountersTemplates.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListAccounts.getInstances());
 		//CAlmaDataLoader.getInstances().addList(ListCounters.getInstances());
 		//CAlmaDataLoader.getInstances().addList(ListCounterSets.getInstances());
@@ -72,12 +72,13 @@ public class CAlmaConnection {
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
 			//ListElementType.getInstances().print("TA_ELEMENT_TYPE_CV");
 			ListAccountsTemplates.getInstances().print("TMPL");
+			/*
 			ListCountersTemplates.getInstances().print("TMPL");
 			ListCounterSetTemplates.getInstances().print("TMPL");
 			ListAccounts.getInstances().print("Accounts");
 			ListCounters.getInstances().print("Counters");
 			ListCounterSets.getInstances().print("CounterSets");
-
+			*/
 			// CElementSubtypeList.getInstances().print("TA_ELEMENT_SUBTYPE_CV");
 			//CIdentification_CvList.getInstances().print("TA_IDENTIFICATION_CV");
 			// CCareDescriptionList.getInstances().print("TA_CARE_DESCRIPTION");

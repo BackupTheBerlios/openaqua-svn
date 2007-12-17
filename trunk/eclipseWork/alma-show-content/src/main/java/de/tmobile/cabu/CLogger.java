@@ -21,7 +21,7 @@ final public class CLogger {
 	}
 
 	final public void debug(final String text) {
-		System.out.println("DBG " + text);
+	//System.out.println("DBG " + text);
 	}
 
 	final public void emptyLine() {
@@ -29,7 +29,7 @@ final public class CLogger {
 	}
 
 	final public void error(final String text) {
-		System.out.println("ERR " + text);
+		System.err.println("ERR " + text);
 	}
 
 	final public void info(final String text) {

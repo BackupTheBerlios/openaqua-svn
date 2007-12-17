@@ -67,18 +67,27 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 	protected void refreshList(final TTConnection connection) throws SQLException {
 		if (!connection.isConnected()) { return; }
 		if (getQueryString() == null) { return; }
-
-
 		clear(); //remove old content
 
 		// exec SQL command
+		final PerfMonitor perfMonitor = new PerfMonitor();
+		perfMonitor.begin();
 		final Statement stmt = connection.createStatement();
+		perfMonitor.endPrep();
 		final ResultSet rs = stmt.executeQuery(getQueryString());
+		perfMonitor.endQuery();
 
+		//handle result
 		HandleQueryResult(rs);
+		perfMonitor.endResult();
+		perfMonitor.setCounter(size());
 
+		//clean up
 		rs.close();
 		stmt.close();
+
+		//print stat
+		CLogger.getRootLogger().info(getClass().getCanonicalName() + " " + perfMonitor.getConsumedTime());
 	}
 
 	public void setAttributeType(final int typeAttribute) {
