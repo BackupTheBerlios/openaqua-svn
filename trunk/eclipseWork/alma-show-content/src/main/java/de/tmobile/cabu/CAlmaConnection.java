@@ -43,12 +43,12 @@ public class CAlmaConnection {
 
 
 		CLogger.getRootLogger().debug("Start Element Loading");
-		//CAlmaDataLoader.getInstances().addList(ListAccountsTemplates.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListCounterSetTemplates.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListCountersTemplates.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListAccountsTemplates.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCounterSetTemplates.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCountersTemplates.getInstances());
 		CAlmaDataLoader.getInstances().addList(ListAccounts.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListCounters.getInstances());
-		//CAlmaDataLoader.getInstances().addList(ListCounterSets.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCounters.getInstances());
+		CAlmaDataLoader.getInstances().addList(ListCounterSets.getInstances());
 
 		//Wait until finished
 		CLogger.getRootLogger().debug("Loader Threads are running ...");

@@ -54,17 +54,20 @@ public abstract class BaseListTemplates extends BaseList {
 		final int elemType = ListElementType.getInstances().getTypeId("Attribute");
 		if (elemType == 0) { return; }
 
-		final String cmd = "select element_subtype_cv, value from acm_schema.acm$ta_element_tmpl where parent_id = ? and element_type_cv="
-				+ elemType;
+		//Das erste statement waere richtig, laesst sich aber nicht als prep-Statment aufrufen (genauer: Ist extrem langsam, da vermutlich nicht optimiert)
+		//final String cmd = "select element_subtype_cv, value,element_type_cv from acm_schema.acm$ta_element_tmpl where parent_id = ? and element_type_cv="
+		//	+ elemType;
+		final String cmd = "select element_subtype_cv, value,element_type_cv from acm_schema.acm$ta_element_tmpl where parent_id = ?";
 		final PreparedStatement stmt = connection.createPreparedStatement(cmd);
-		stmt.setFetchSize(20);
 		for (final BaseType type : values()) {
 			final TElementTmpl element = (TElementTmpl) type;
 			stmt.setInt(1, element.getId());
 			final ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				setAttributeType(rs.getInt(1));
-				element.addAttribute(this, rs.getInt(1), rs.getString(2));
+				if (rs.getInt(3) == elemType) {
+					setAttributeType(rs.getInt(1));
+					element.addAttribute(this, rs.getInt(1), rs.getString(2));
+				}
 			}
 			rs.close();
 		}
