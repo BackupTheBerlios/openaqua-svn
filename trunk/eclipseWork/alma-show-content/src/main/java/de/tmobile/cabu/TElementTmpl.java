@@ -31,12 +31,6 @@ public class TElementTmpl extends BaseElement {
 
 
 	@Override
-	protected BaseListElement getElementList(final int id, final BaseElement parent) {
-		return new ListElementTmplPart(id, parent);
-	}
-
-
-	@Override
 	public String getPrintString(final String prefix) {
 		String result = super.getPrintString(prefix);
 		result += acmDescId + sep();

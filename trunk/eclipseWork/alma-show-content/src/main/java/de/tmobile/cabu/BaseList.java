@@ -28,9 +28,14 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		return knownAttributes;
 	}
 
-	abstract public String getPrintDescription();
+	public String getPrintDescription() {
+		return null;
+	}
 
-	abstract public String getPrintHeader(final String prefix);
+
+	public String getPrintHeader(final String prefix) {
+		return null;
+	}
 
 
 	abstract protected String getQueryString();
@@ -64,12 +69,13 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		if (!connection.isConnected()) { return; }
 		if (getQueryString() == null) { return; }
 
-		clear();
+
+		clear(); //remove old content
 
 		// exec SQL command
 		final Statement stmt = connection.createStatement();
-		stmt.setFetchSize(125);
 		final ResultSet rs = stmt.executeQuery(getQueryString());
+
 		HandleQueryResult(rs);
 
 		rs.close();

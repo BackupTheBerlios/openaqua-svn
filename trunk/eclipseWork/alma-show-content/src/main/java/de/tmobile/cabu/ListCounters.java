@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class ListCounters extends ListElement {
+public class ListCounters extends BaseListElement {
 	private static final long serialVersionUID = -5885161573148650005L;
 	private static ListCounters INSTANCE = new ListCounters();
 

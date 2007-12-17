@@ -12,9 +12,9 @@ import java.sql.Timestamp;
  * 
  */
 public class TElement extends BaseElement {
-	private final int templId;
-	private final int templVers;
-	private final Timestamp insertTime;
+	public final int templId;
+	public final int templVers;
+	public final Timestamp insertTime;
 
 	public TElement(final int id, final int type, final int subtype, final int datatype, final int unittype, final int parentId,
 			final int rootId, final String value, final Timestamp insertTime, final int templId, final int templVers) {
@@ -24,13 +24,6 @@ public class TElement extends BaseElement {
 		this.templVers = templVers;
 		this.insertTime = insertTime;
 
-	}
-
-
-	@Override
-	protected BaseListElement getElementList(final int id, final BaseElement parent) {
-		return null;
-		//return new ListElementPart(id, parent);
 	}
 
 

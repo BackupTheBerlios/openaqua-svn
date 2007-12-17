@@ -8,7 +8,7 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class ListAccounts extends ListElement {
+public class ListAccounts extends BaseListElement {
 	private static final long serialVersionUID = 3445875992515527491L;
 	private static ListAccounts INSTANCE = new ListAccounts();
 
