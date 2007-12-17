@@ -125,6 +125,7 @@ public class TTConnection {
 
 
 	public boolean Disconnect() {
+		if (isConnected == false) { return true; }
 		try {
 			if (connection != null && connection.isClosed() == false) {
 				connection.close();

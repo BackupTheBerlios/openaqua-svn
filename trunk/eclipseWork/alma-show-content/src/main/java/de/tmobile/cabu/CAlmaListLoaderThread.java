@@ -22,13 +22,24 @@ public class CAlmaListLoaderThread implements Runnable {
 
 	public void run() {
 		CLogger.getRootLogger().debug("Begin RUN for " + list.getClass().getCanonicalName());
-		final TTConnection connection = CConfiguration.getInstance().getConnection(list);
-		if (!connection.isConnected()) { return; }
+		TTConnection connection = null;
+
 		try {
-			list.refreshList();
+			connection = new TTConnection(CConfiguration.getInstance().getConnectionDriver());
+			connection.Connect(CConfiguration.getInstance().getConnectionDsn());
+			if (!connection.isConnected()) { return; }
+			list.refreshList(connection);
+			connection.Disconnect();
+
+		} catch (final ClassNotFoundException e1) {
+			CLogger.getRootLogger().error(e1.getLocalizedMessage());
+			//			e1.printStackTrace();
+
 		} catch (final SQLException e) {
 			TTConnection.reportSQLException(e);
-			connection.Disconnect();
+			if (connection != null) {
+				connection.Disconnect();
+			}
 		}
 		CLogger.getRootLogger().debug("End   RUN for " + list.getClass().getCanonicalName());
 	}

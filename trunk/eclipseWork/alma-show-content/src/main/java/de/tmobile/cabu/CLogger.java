@@ -8,11 +8,11 @@ package de.tmobile.cabu;
  * @author behrenan
  * 
  */
-public class CLogger {
+final public class CLogger {
 
-	private static CLogger INSTANCE = new CLogger();
+	final private static CLogger INSTANCE = new CLogger();
 
-	static public CLogger getRootLogger() {
+	final static public CLogger getRootLogger() {
 		return INSTANCE;
 	}
 
@@ -20,27 +20,27 @@ public class CLogger {
 		super();
 	}
 
-	public void debug(final String text) {
+	final public void debug(final String text) {
 		System.out.println("DBG " + text);
 	}
 
-	public void emptyLine() {
+	final public void emptyLine() {
 		System.out.println("");
 	}
 
-	public void error(final String text) {
+	final public void error(final String text) {
 		System.out.println("ERR " + text);
 	}
 
-	public void info(final String text) {
+	final public void info(final String text) {
 		System.out.println("INF " + text);
 	}
 
-	public void out(final String text) {
+	final public void out(final String text) {
 		System.out.println(text);
 	}
 
-	public void warn(final String text) {
+	final public void warn(final String text) {
 		System.out.println("WRN " + text);
 	}
 }

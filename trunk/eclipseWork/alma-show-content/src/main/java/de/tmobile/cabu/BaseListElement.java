@@ -38,10 +38,10 @@ public abstract class BaseListElement extends BaseList {
 	}
 
 	@Override
-	protected void refreshList() throws SQLException {
+	protected void refreshList(final TTConnection connection) throws SQLException {
 
 		//Load all Elements itself
-		super.refreshList();
+		super.refreshList(connection);
 
 		//Load the attribute for each element
 		final int elemType = ListElementType.getInstances().getTypeId("Attribute");
@@ -49,13 +49,14 @@ public abstract class BaseListElement extends BaseList {
 
 		final String cmd = "select element_subtype_cv, value from acm_schema.acm$ta_element where parent_id = ? and element_type_cv="
 				+ elemType;
-		final PreparedStatement stmt = CConfiguration.getInstance().getConnection(this).createPreparedStatement(cmd);
+		final PreparedStatement stmt = connection.createPreparedStatement(cmd);
 		stmt.setFetchSize(10);
 		for (final BaseType type : values()) {
 			final TElement element = (TElement) type;
 			stmt.setInt(1, element.getId());
 			final ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
+				setAttributeType(rs.getInt(1));
 				element.addAttribute(this, rs.getInt(1), rs.getString(2));
 			}
 			rs.close();

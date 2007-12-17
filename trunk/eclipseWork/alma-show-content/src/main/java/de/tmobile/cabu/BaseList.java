@@ -64,8 +64,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		}
 	}
 
-	protected void refreshList() throws SQLException {
-		final TTConnection connection = CConfiguration.getInstance().getConnection(this);
+	protected void refreshList(final TTConnection connection) throws SQLException {
 		if (!connection.isConnected()) { return; }
 		if (getQueryString() == null) { return; }
 
@@ -82,8 +81,10 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		stmt.close();
 	}
 
-	public void storeAttributeType(final int typeAttribute) {
-		knownAttributes.add(typeAttribute);
+	public void setAttributeType(final int typeAttribute) {
+		if (!knownAttributes.contains(typeAttribute)) {
+			knownAttributes.add(typeAttribute);
+		}
 	}
 
 }
