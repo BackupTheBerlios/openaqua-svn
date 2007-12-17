@@ -4,7 +4,6 @@
 package de.tmobile.cabu;
 
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,17 +18,27 @@ public abstract class BaseElement extends BaseType {
 		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
 	}
 
+	private static String makeValue(final String value) {
+		if (value == null) {
+			return "";
+		} else {
+			final String myVal = value.trim();
+			if (myVal.equals("<NULL>")) {
+				return "";
+			} else {
+				return myVal;
+			}
+		}
+	}
 	private final Map<Integer, String> attributes;
-	private final BaseListElement list;
-	private BaseList ownerList;
 	private final int type;
 	private final int subtype;
 	private final int datatype;
 	private final int unittype;
 	private final int parentId;
 	private final int rootId;
-	private final String value;
 
+	private final String value;
 
 	public BaseElement(final int id, final int obj_version, final Timestamp valid_from, final Timestamp valid_to, final int type,
 			final int subtype, final int datatype, final int unittype, final int parentId, final int rootId, final String value) {
@@ -42,40 +51,27 @@ public abstract class BaseElement extends BaseType {
 		this.unittype = unittype;
 		this.parentId = parentId;
 		this.rootId = rootId;
-
-		if (value == null) {
-			this.value = "";
-		} else {
-			this.value = value.trim();
-		}
+		this.value = makeValue(value);
 
 		attributes = new TreeMap<Integer, String>();
-		list = getElementList(id, this);
-
-		try {
-			if (list != null) {
-				list.refreshList();
-			}
-		} catch (final SQLException e) {
-			CLogger.getRootLogger().error(e.getMessage());
-			e.printStackTrace();
-		}
 
 	}
 
 	final public void addAttribute(final BaseList list, final int type, final String value) {
-		list.storeAttributeType(type);
-		if (value != null) {
-			attributes.put(type, value.trim());
+		if (attributes.containsKey(type)) {
+			CLogger.getRootLogger().error("Pre Existing Key" + type);
+			CLogger.getRootLogger().error("Element = " + getPrintString("BaseElement"));
 		}
+		attributes.put(type, makeValue(value));
 	}
 
 	public void buildUnifiedPrintList(final String prefix, final CUnifiedTableOutput uto) {
 		if (attributes.size() > 0) {
 			uto.add(getType(), getPrintString(prefix));
-			for (final BaseType base : list.values()) {
+			/*for (final BaseType base : list.values()) {
 				((BaseElement) base).buildUnifiedPrintList(prefix, uto);
 			}
+			*/
 		}
 	}
 
@@ -106,7 +102,8 @@ public abstract class BaseElement extends BaseType {
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return getPrintString(ownerList, prefix);
+		//return getPrintString(ownerList, prefix);
+		return "";
 	}
 
 	public int getRootId() {
@@ -145,7 +142,7 @@ public abstract class BaseElement extends BaseType {
 	}
 
 	public void setOwnerList(final BaseList list) {
-		ownerList = list;
+	//ownerList = list;
 	}
 
 

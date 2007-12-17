@@ -9,23 +9,18 @@ package de.tmobile.cabu;
  * 
  */
 public class CAlmaConnection {
-	private final CLogger logger = CLogger.getRootLogger();
+	private final static CAlmaConnection INSTANCE = new CAlmaConnection();
 
-	CAlmaConnection(final String driver, final String dsn) throws ClassNotFoundException {
-		logger.info("Make Connection to: " + dsn);
-		CConfiguration.getInstance().setConnection(new TTConnection(driver));
-		CConfiguration.getInstance().getConnection().Connect(dsn);
+	public final static CAlmaConnection getInstances() {
+		return INSTANCE;
 	}
 
-	public void Disconnect() {
-		if (CConfiguration.getInstance().isError()) { return; }
-		CConfiguration.getInstance().getConnection().Disconnect();
-		logger.info("AlmaConnection: Disconnected");
+	private CAlmaConnection() {
+		super();
 	}
+
 
 	public void listTemplates(final int whatToRun) {
-		if (CConfiguration.getInstance().isError()) { return; }
-
 
 		//Register (and load from TT) new DataList
 		CLogger.getRootLogger().debug("Start Loading");

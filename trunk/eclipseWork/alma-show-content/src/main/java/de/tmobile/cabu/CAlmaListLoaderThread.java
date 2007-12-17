@@ -21,15 +21,15 @@ public class CAlmaListLoaderThread implements Runnable {
 
 
 	public void run() {
-		if (CConfiguration.getInstance().isError()) { return; }
+		CLogger.getRootLogger().debug("Begin RUN for " + list.getClass().getCanonicalName());
+		final TTConnection connection = CConfiguration.getInstance().getConnection(list);
+		if (!connection.isConnected()) { return; }
 		try {
 			list.refreshList();
 		} catch (final SQLException e) {
-			CConfiguration.getInstance().getConnection().reportSQLException(e);
-			CConfiguration.getInstance().getConnection().Disconnect();
+			TTConnection.reportSQLException(e);
+			connection.Disconnect();
 		}
-
+		CLogger.getRootLogger().debug("End   RUN for " + list.getClass().getCanonicalName());
 	}
-
-
 }

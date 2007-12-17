@@ -60,16 +60,17 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 	}
 
 	protected void refreshList() throws SQLException {
-		if (CConfiguration.getInstance().isError()) { return; }
+		final TTConnection connection = CConfiguration.getInstance().getConnection(this);
+		if (!connection.isConnected()) { return; }
 		if (getQueryString() == null) { return; }
+
 		clear();
 
 		// exec SQL command
-		final Statement stmt = CConfiguration.getInstance().getConnection().createStatement();
+		final Statement stmt = connection.createStatement();
 		stmt.setFetchSize(125);
 		final ResultSet rs = stmt.executeQuery(getQueryString());
 		HandleQueryResult(rs);
-		//Thread.yield();
 
 		rs.close();
 		stmt.close();

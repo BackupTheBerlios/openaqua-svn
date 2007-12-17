@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
@@ -19,6 +20,27 @@ import java.sql.Statement;
  */
 
 public class TTConnection {
+	public static void reportSQLException(SQLException ex) {
+		int errCount = 0;
+
+		while (ex != null) {
+			System.err.println("\n\t----- SQL Error -----");
+
+			System.err.println("\tError Message: " + ex.getMessage());
+			if (errCount == 0) {
+				ex.printStackTrace();
+			}
+
+			System.err.println("\tSQL State: " + ex.getSQLState());
+			System.err.println("\tNative Error Code: " + ex.getErrorCode());
+			System.err.println("");
+
+			ex = ex.getNextException();
+			errCount++;
+		}
+	}
+
+
 	/**
 	 * prints all attributes of a SQLWarning object to System.err and all chained
 	 * warnings
@@ -61,12 +83,11 @@ public class TTConnection {
 			warnCount++;
 		}
 	}
-
-
 	boolean hasReceivedSignal = false;
 	private boolean isDriverLoaded;
 	boolean shouldWait = false;
 	private boolean isConnected = false;
+
 	private Connection connection = null;
 
 	public TTConnection(final String driver) throws ClassNotFoundException {
@@ -79,7 +100,8 @@ public class TTConnection {
 		try {
 			connection = DriverManager.getConnection(dsn);
 			reportSQLWarning(connection.getWarnings());
-			// connection.setAutoCommit (true);
+			connection.setAutoCommit(false);
+			connection.setReadOnly(true);
 			isConnected = true;
 			CLogger.getRootLogger().debug("Is connected to: " + dsn);
 			return true;
@@ -92,12 +114,15 @@ public class TTConnection {
 	}
 
 	public PreparedStatement createPreparedStatement(final String cmd) throws SQLException {
-		return connection.prepareStatement(cmd);
+		final PreparedStatement stmt = connection.prepareStatement(cmd);
+		stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
+		return stmt;
 	}
 
 	public Statement createStatement() throws SQLException {
 		return connection.createStatement();
 	}
+
 
 	public boolean Disconnect() {
 		try {
@@ -108,11 +133,10 @@ public class TTConnection {
 			return true;
 
 		} catch (final SQLException ex) {
-			reportSQLException(ex);
+			TTConnection.reportSQLException(ex);
 			return false;
 		}
 	}
-
 
 	public boolean isConnected() {
 		return isConnected;
@@ -122,26 +146,6 @@ public class TTConnection {
 		if (!isDriverLoaded) {
 			Class.forName(driver);
 			isDriverLoaded = true;
-		}
-	}
-
-	public void reportSQLException(SQLException ex) {
-		int errCount = 0;
-
-		while (ex != null) {
-			System.err.println("\n\t----- SQL Error -----");
-
-			System.err.println("\tError Message: " + ex.getMessage());
-			if (errCount == 0) {
-				ex.printStackTrace();
-			}
-
-			System.err.println("\tSQL State: " + ex.getSQLState());
-			System.err.println("\tNative Error Code: " + ex.getErrorCode());
-			System.err.println("");
-
-			ex = ex.getNextException();
-			errCount++;
 		}
 	}
 }

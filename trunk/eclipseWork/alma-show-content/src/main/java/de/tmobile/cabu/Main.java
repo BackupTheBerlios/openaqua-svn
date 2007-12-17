@@ -129,23 +129,14 @@ public class Main {
 			DriverManager.setLogWriter(new PrintWriter(System.out, true));
 		}
 
-		try {
-			CAlmaConnection alma;
-			if (isCSConn) {
-				CLogger.getRootLogger().debug("Try Remote Connection");
-				alma = new CAlmaConnection(CLIENT_DRIVER, CLIENT_CONNECT_PREFIX + dsnname);
-				alma.listTemplates(whatToRun);
-				alma.Disconnect();
-			} else {
-				CLogger.getRootLogger().debug("Try Direct Connection");
-				alma = new CAlmaConnection(DIRECT_DRIVER, DIRECT_CONNECT_PREFIX + dsnname);
-				alma.listTemplates(whatToRun);
-				alma.Disconnect();
-			}
-		} catch (final ClassNotFoundException e) {
-			CLogger.getRootLogger().error("Class Not Found while loading driver ..");
-			e.printStackTrace();
+		if (isCSConn) {
+			CConfiguration.getInstance().setConnectionDsn(CLIENT_CONNECT_PREFIX + dsnname);
+			CConfiguration.getInstance().setConnectionDriver(CLIENT_DRIVER);
+		} else {
+			CConfiguration.getInstance().setConnectionDsn(DIRECT_CONNECT_PREFIX + dsnname);
+			CConfiguration.getInstance().setConnectionDriver(DIRECT_DRIVER);
 		}
+		CAlmaConnection.getInstances().listTemplates(whatToRun);
 	}
 
 	public static void usage() {
