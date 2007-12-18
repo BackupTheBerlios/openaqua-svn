@@ -66,6 +66,8 @@ public class CAlmaConnection {
 			CAlmaFileWriter.getInstances().addList("Counter.csv", ListCounters.getInstances());
 			CAlmaFileWriter.getInstances().addList("Indentifiers.csv", ListIdentification.getInstances());
 			CAlmaFileWriter.getInstances().addList("ElementIdentAssocs.csv", ListElementIdentAssoc.getInstances());
+			CLogger.getRootLogger().debug("File Write Threads are running ...");
+			CAlmaFileWriter.getInstances().waitForFinish();
 
 			//ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
 			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");

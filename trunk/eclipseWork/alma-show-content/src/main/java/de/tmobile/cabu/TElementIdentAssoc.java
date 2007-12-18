@@ -38,7 +38,7 @@ public class TElementIdentAssoc extends BaseType {
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return super.getPrintPrefixString(prefix) + sep() + elementId;
+		return super.getPrintString(prefix) + sep() + elementId;
 	}
 
 	/**

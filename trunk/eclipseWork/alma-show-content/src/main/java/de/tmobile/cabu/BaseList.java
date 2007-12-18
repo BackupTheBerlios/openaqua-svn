@@ -42,27 +42,6 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
 
-	public void print(final String prefix) {
-		final String desc = getPrintDescription();
-		final String head = getPrintHeader(prefix);
-
-		if (desc != null && desc.length() > 0) {
-			CLogger.getRootLogger().emptyLine();
-			CLogger.getRootLogger().out(desc);
-		}
-
-		if (head != null && head.length() > 0) {
-			CLogger.getRootLogger().emptyLine();
-			CLogger.getRootLogger().out(head);
-		}
-		printElements(prefix);
-	}
-
-	final public void printElements(final String prefix) {
-		for (final BaseType type : values()) {
-			CLogger.getRootLogger().out(type.getPrintString(prefix));
-		}
-	}
 
 	protected void refreshList(final TTConnection connection) throws SQLException {
 		if (!connection.isConnected()) { return; }

@@ -28,10 +28,21 @@ public class CAlmaFileWriterThread implements Runnable {
 		final PerfMonitor perfMonitor = new PerfMonitor();
 		perfMonitor.begin();
 		try {
+			//create a new file
 			fw = new FileWriter(name);
 			perfMonitor.endPrep();
+
+			//write file header
+			if (list.getPrintDescription() != null) {
+				fw.write(list.getPrintDescription());
+			}
+			if (list.getPrintHeader("") != null) {
+				fw.write(list.getPrintHeader(""));
+			}
 			perfMonitor.endQuery();
 
+
+			//write file content
 			for (final BaseType type : list.values()) {
 				fw.write(type.getPrintString("") + "\n");
 				perfMonitor.increase();

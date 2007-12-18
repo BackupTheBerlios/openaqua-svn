@@ -78,11 +78,12 @@ public abstract class BaseElement extends BaseType {
 	public String getPrintString(final String prefix) {
 		//do nothing if empty
 		//if (list.size() <= 0) { return ""; }
-		String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
+		String result = super.getPrintString(prefix) + sep();
+		//String result = super.getPrintPrefixString(prefix + " \"" + ListElementType.getInstances().getTypeAsString(type) + "\"") + sep();
 		result += sep() + ":" + sep();
 		result += "root=" + rootId + sep();
 		result += "parent=" + parentId + sep();
-		result += " type=" + type + " sub=" + subtype;
+		result += " type=" + type + " sub=" + subtype + sep();
 		result += sep() + "#" + sep();
 		//result += printAttributes(list);
 		result += sep() + "#" + sep();

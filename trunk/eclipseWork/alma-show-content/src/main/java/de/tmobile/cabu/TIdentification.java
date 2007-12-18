@@ -64,14 +64,12 @@ public class TIdentification extends BaseType {
 
 	@Override
 	public String getPrintString(final String prefix) {
-		String result = super.getPrintPrefixString(prefix) + sep();
-		//result += "\"" + getType() + "=\"" + sep();
-		//result += "\"" + ListIdentification_Ty.getInstances().getTypeAsString(getType()) + "\"" + sep();
+		String result = super.getPrintString(prefix) + sep();
 		result += "\"" + ListIdentification_Cv.getInstances().getTypeAsString(getCv()) + "\"" + sep();
 		result += getExternalIdentifier() + sep();
 		result += getMandator() + sep();
 		result += getElementTemplateId() + sep();
-		result += getElementMasterTemplateId();
+		result += getElementMasterTemplateId() + sep();
 		return result;
 	}
 

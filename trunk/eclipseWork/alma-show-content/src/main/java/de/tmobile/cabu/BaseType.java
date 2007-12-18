@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public abstract class BaseType extends BaseListableObject {
+public abstract class BaseType {
 	public static String getPrintHeader(final String prefix) {
 		String result = "prefix" + sep() + sep() + sep();
 		result += "id" + sep();
@@ -19,6 +19,10 @@ public abstract class BaseType extends BaseListableObject {
 		result += "valid_from" + sep();
 		result += "valid_to" + sep();
 		return result;
+	}
+
+	public static Character sep() {
+		return ',';
 	}
 
 	private int id;
@@ -50,7 +54,7 @@ public abstract class BaseType extends BaseListableObject {
 		return obj_version;
 	}
 
-	public final String getPrintPrefixString(final String prefix) {
+	public String getPrintString(final String prefix) {
 		String result = prefix + sep();
 		result += id + sep();
 		result += obj_version + sep();
@@ -58,8 +62,6 @@ public abstract class BaseType extends BaseListableObject {
 		result += valid_to.getTime() / 1000;
 		return result;
 	}
-
-	public abstract String getPrintString(final String prefix);
 
 	public final Timestamp getValid_from() {
 		return valid_from;
