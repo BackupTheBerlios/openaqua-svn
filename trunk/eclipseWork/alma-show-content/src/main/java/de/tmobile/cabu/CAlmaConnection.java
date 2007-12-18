@@ -58,6 +58,14 @@ public class CAlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
+			CAlmaFileWriter.getInstances().addList("AccountTemplates.csv", ListAccountsTemplates.getInstances());
+			CAlmaFileWriter.getInstances().addList("Accounts.csv", ListAccounts.getInstances());
+			CAlmaFileWriter.getInstances().addList("CounterSetTemplates.csv", ListCounterSetTemplates.getInstances());
+			CAlmaFileWriter.getInstances().addList("CounterSets.csv", ListCounterSets.getInstances());
+			CAlmaFileWriter.getInstances().addList("CounterTemplates.csv", ListCountersTemplates.getInstances());
+			CAlmaFileWriter.getInstances().addList("Counter.csv", ListCounters.getInstances());
+			CAlmaFileWriter.getInstances().addList("Indentifiers.csv", ListIdentification.getInstances());
+			CAlmaFileWriter.getInstances().addList("ElementIdentAssocs.csv", ListElementIdentAssoc.getInstances());
 
 			//ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
 			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
@@ -71,6 +79,8 @@ public class CAlmaConnection {
 			//ListDataType.getInstances().print("TA_DATA_TYPE_CV");
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
 			//ListElementType.getInstances().print("TA_ELEMENT_TYPE_CV");
+
+
 			/*
 			ListAccountsTemplates.getInstances().print("TMPL");
 			ListCountersTemplates.getInstances().print("TMPL");

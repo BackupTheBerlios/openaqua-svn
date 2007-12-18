@@ -21,19 +21,31 @@ public class CAlmaDataLoader {
 
 	final List<Thread> threadList = new LinkedList<Thread>();
 
-	public CAlmaDataLoader() {
+	protected CAlmaDataLoader() {
 		super();
 
 	}
 
-	public void addList(final BaseList list) {
-		final Thread thread = new Thread(new CAlmaListLoaderThread(list));
+	final public void addList(final BaseList list) {
+		final Thread thread = makeNewThread(null, list);
+		thread.start();
+		threadList.add(thread);
+	}
+
+	final public void addList(final String name, final BaseList list) {
+		final Thread thread = makeNewThread(name, list);
 		thread.start();
 		threadList.add(thread);
 	}
 
 
-	public void waitForFinish() {
+	public Thread makeNewThread(final String name, final BaseList list) {
+		//param name will be ignored
+		return new Thread(new CAlmaListLoaderThread(list));
+	}
+
+
+	final public void waitForFinish() {
 		//First run
 		for (final Thread thread : threadList) {
 			try {
