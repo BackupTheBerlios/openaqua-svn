@@ -4,7 +4,6 @@
 package de.tmobile.cabu;
 
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -14,7 +13,14 @@ import java.sql.Timestamp;
  * @author behrenan
  * 
  */
-public abstract class BaseListElement extends BaseList {
+public abstract class BaseListElement extends BaseList4Attributes {
+	private static final long serialVersionUID = 8713529300448497353L;
+
+
+	@Override
+	String getAttributeQueryString() {
+		return "select element_subtype_cv, value, element_type_cv from acm_schema.acm$ta_element where parent_id=?";
+	}
 
 
 	@Override
@@ -35,36 +41,5 @@ public abstract class BaseListElement extends BaseList {
 			final TElement elem = new TElement(id, type, subtype, datatype, unittype, pareId, rootId, value, insert_time, tmplId, tmplVers);
 			put(id, elem);
 		}
-	}
-
-	@Override
-	protected void refreshList(final TTConnection connection) throws SQLException {
-
-		//Load all Elements itself
-		super.refreshList(connection);
-
-		//Load the attribute for each element
-		final int elemType = ListElementType.getInstances().getTypeId("Attribute");
-		if (elemType == 0) { return; }
-
-		//Das erste statement waere richtig, laesst sich aber nicht als prep-Statment aufrufen (genauer: Ist extrem langsam, da vermutlich nicht optimiert)
-		//final String cmd = "select element_subtype_cv, value from acm_schema.acm$ta_element where parent_id=? and element_type_cv=?";
-		final String cmd = "select element_subtype_cv, value, element_type_cv from acm_schema.acm$ta_element where parent_id=?";
-
-		final PreparedStatement stmt = connection.createPreparedStatement(cmd);
-		for (final BaseType type : values()) {
-			final TElement element = (TElement) type;
-			stmt.setInt(1, element.getId());
-			final ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				if (rs.getInt(3) == elemType) {
-					setAttributeType(rs.getInt(1));
-					element.addAttribute(this, rs.getInt(1), rs.getString(2));
-				}
-			}
-			rs.close();
-		}
-		stmt.close();
-
 	}
 }

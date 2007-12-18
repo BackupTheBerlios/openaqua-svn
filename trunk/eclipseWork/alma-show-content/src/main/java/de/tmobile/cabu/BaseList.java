@@ -86,8 +86,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		rs.close();
 		stmt.close();
 
-		//print stat
-		CLogger.getRootLogger().info(getClass().getCanonicalName() + " " + perfMonitor.getConsumedTime());
+		CLogger.getRootLogger().info(perfMonitor.getStatisticPrintString(getClass().getCanonicalName()));
 	}
 
 	public void setAttributeType(final int typeAttribute) {
