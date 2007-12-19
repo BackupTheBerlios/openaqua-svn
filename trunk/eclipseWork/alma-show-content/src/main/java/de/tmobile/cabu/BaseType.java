@@ -107,7 +107,7 @@ public abstract class BaseType {
 			for (final Integer integer : attributList) {
 				if (attributes.containsKey(integer)) {
 					result += sep();
-					result += ListSubType.getInstances().getTypeAsString(integer) + '=';
+					//result += ListSubType.getInstances().getTypeAsString(integer) + '=';
 					result += attributes.get(integer);
 				} else {
 					result += sep();
