@@ -47,14 +47,17 @@ public class TDataType extends BaseType {
 	@Override
 	public String getPrintString(final String prefix) {
 		String result = prefix + sep();
-		result += getId() + sep();
-		result += getSorting() + sep();
-		result += getValid() + sep();
-		result += getDesriptionId() + sep();
+		result += getId();
+		result += sep();
+		result += getSorting();
+		result += sep();
+		result += getValid();
+		result += sep();
+		result += getDesriptionId();
+		result += sep();
 		result += getDescription();
 		return result;
 	}
-
 
 	public int getSorting() {
 		return sorting;

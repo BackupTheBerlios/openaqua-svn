@@ -14,9 +14,6 @@ import java.sql.SQLException;
  */
 
 public class ListCareDescription extends BaseList {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5164937814421591528L;
 	private static ListCareDescription INSTANCE = new ListCareDescription();
 
@@ -24,24 +21,14 @@ public class ListCareDescription extends BaseList {
 		return INSTANCE;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.tmobile.cabu.CBaseList#getPrintDescription()
-	 */
 	@Override
 	public String getPrintDescription() {
 		return "#Echtnamen von Bundles";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.tmobile.cabu.CBaseList#getPrintHeader()
-	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TCareDescription.getPrintHeader(prefix);
+		return TDescription.getPrintHeader(prefix);
 	}
 
 	@Override
@@ -52,7 +39,7 @@ public class ListCareDescription extends BaseList {
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			put(rs.getInt(1), new TCareDescription(rs.getInt(1), rs.getString(2)));
+			put(rs.getInt(1), new TDescription(rs.getInt(1), rs.getString(2)));
 		}
 	}
 }

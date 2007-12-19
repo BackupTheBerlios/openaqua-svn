@@ -29,14 +29,13 @@ public class TElement extends BaseElement {
 
 	@Override
 	public String getPrintString(final String prefix) {
-		return super.getPrintString(prefix);
-		/*
-		final String result = super.getPrintString(prefix);
-		result += templId + sep();
-		result += templVers + sep();
+		String result = super.getPrintString(prefix);
+		result += templId;
+		result += sep();
+		result += templVers;
+		result += sep();
 		result += insertTime;
 		return result;
-		*/
 	}
 
 }

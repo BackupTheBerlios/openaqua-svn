@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  */
 public abstract class BaseType {
 	public static String getPrintHeader(final String prefix) {
-		String result = "prefix" + sep() + sep() + sep();
+		String result = "prefix" + sep();
 		result += "id" + sep();
 		result += "objVers" + sep();
 		result += "valid_from" + sep();
@@ -56,9 +56,12 @@ public abstract class BaseType {
 
 	public String getPrintString(final String prefix) {
 		String result = prefix + sep();
-		result += id + sep();
-		result += obj_version + sep();
-		result += valid_from.getTime() / 1000 + sep();
+		result += id;
+		result += sep();
+		result += obj_version;
+		result += sep();
+		result += valid_from.getTime() / 1000;
+		result += sep();
 		result += valid_to.getTime() / 1000;
 		return result;
 	}

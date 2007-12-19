@@ -58,6 +58,7 @@ public class CAlmaConnection {
 
 		// whatToRun = 1;
 		if (whatToRun == 0) {
+			/*
 			CAlmaFileWriter.getInstances().addList("AccountTemplates.csv", ListAccountsTemplates.getInstances());
 			CAlmaFileWriter.getInstances().addList("Accounts.csv", ListAccounts.getInstances());
 			CAlmaFileWriter.getInstances().addList("CounterSetTemplates.csv", ListCounterSetTemplates.getInstances());
@@ -68,20 +69,20 @@ public class CAlmaConnection {
 			CAlmaFileWriter.getInstances().addList("ElementIdentAssocs.csv", ListElementIdentAssoc.getInstances());
 			CLogger.getRootLogger().debug("File Write Threads are running ...");
 			CAlmaFileWriter.getInstances().waitForFinish();
+			*/
+
+			ListAccountsTemplates.getInstances().print("AccTempl");
 
 			//ListIdentification_Ty.getInstances().print("TA_IDENTIFICATION_TY");
 			//ListElementTmpl.getInstances().print("TA_ELEMENT_TMPL");
 			//ListElementIdentAssoc.getInstances().print("TA_ELEMENT_IDENT_ASSOC");
 			//ListIdentification.getInstances().print("TA_IDENTIFICATION");
-
 			//ListElement.getInstances().print("TA_ELEMENT");
 			//ListElementParentIds.getInstances().print("PARENT");
-
 			//CSubTypeList.getInstances().print("TA_ELEMENT_SUBTYPE");
 			//ListDataType.getInstances().print("TA_DATA_TYPE_CV");
 			// CUnitTypeList.getInstances().print("ACM_TA_UNIT_TYPE_CV");
 			//ListElementType.getInstances().print("TA_ELEMENT_TYPE_CV");
-
 
 			/*
 			ListAccountsTemplates.getInstances().print("TMPL");

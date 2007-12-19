@@ -37,10 +37,16 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 		return null;
 	}
 
-
 	abstract protected String getQueryString();
 
+
 	abstract protected void HandleQueryResult(ResultSet rs) throws SQLException;
+
+	public void print(final String prefix) {
+		for (final BaseType base : values()) {
+			CLogger.getRootLogger().out(base.getPrintString(prefix));
+		}
+	}
 
 
 	protected void refreshList(final TTConnection connection) throws SQLException {

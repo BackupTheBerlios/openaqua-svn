@@ -33,8 +33,10 @@ public class TElementTmpl extends BaseElement {
 	@Override
 	public String getPrintString(final String prefix) {
 		String result = super.getPrintString(prefix);
-		result += acmDescId + sep();
-		result += constFlag + sep();
+		result += acmDescId;
+		result += sep();
+		result += constFlag;
+		result += sep();
 		return result;
 	}
 
