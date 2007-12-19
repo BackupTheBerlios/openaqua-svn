@@ -4,14 +4,19 @@
 package de.tmobile.cabu;
 
 
+import java.util.Set;
+
+
 /**
  * @author behrenan
  * 
  */
 public class TDescription extends BaseType {
-
-	public static String getPrintHeader(final String prefix) {
-		String result = "prefix" + sep() + sep() + sep();
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = "; ";
+		if (prefix != null && prefix.length() > 1) {
+			result += "prefix" + sep();
+		}
 		result += "id" + sep();
 		result += "description";
 		return result;
@@ -29,7 +34,7 @@ public class TDescription extends BaseType {
 	}
 
 	@Override
-	public String getPrintString(final String prefix) {
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
 		String result = prefix;
 		result += sep();
 		result += getId();

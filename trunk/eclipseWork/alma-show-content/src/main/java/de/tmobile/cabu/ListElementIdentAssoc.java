@@ -41,7 +41,7 @@ public class ListElementIdentAssoc extends BaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TElementIdentAssoc.getPrintHeader(prefix);
+		return TElementIdentAssoc.getPrintHeader(this, prefix);
 	}
 
 	@Override

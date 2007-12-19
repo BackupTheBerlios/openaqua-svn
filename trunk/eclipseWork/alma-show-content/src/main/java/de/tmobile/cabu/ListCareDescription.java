@@ -28,7 +28,7 @@ public class ListCareDescription extends BaseList {
 
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TDescription.getPrintHeader(prefix);
+		return TDescription.getPrintHeader(this, prefix);
 	}
 
 	@Override

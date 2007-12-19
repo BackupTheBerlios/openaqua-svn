@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -12,9 +13,18 @@ import java.sql.Timestamp;
  * 
  */
 public class TElementTmpl extends BaseElement {
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = BaseElement.getPrintHeader(list, prefix) + sep();
+		result += "acmDescId" + sep();
+		result += "constFlag" + sep();
+		result += "MasterTemplateId" + sep();
+		result += "MasterTemplVersion";
+		return result;
+	}
 	public final int masterTemplId;
 	public final int masterTemplVers;
 	private final int acmDescId;
+
 	private final int constFlag;
 
 
@@ -31,8 +41,8 @@ public class TElementTmpl extends BaseElement {
 
 
 	@Override
-	public String getPrintString(final String prefix) {
-		String result = super.getPrintString(prefix);
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
+		String result = super.getPrintString(attributList, prefix);
 		result += acmDescId;
 		result += sep();
 		result += constFlag;

@@ -24,6 +24,12 @@ public abstract class BaseListElement extends BaseList4Attributes {
 
 
 	@Override
+	public String getPrintHeader(final String prefix) {
+		return TElement.getPrintHeader(this, prefix);
+	}
+
+
+	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
 		while (rs.next()) {
 			final int id = rs.getInt(1);

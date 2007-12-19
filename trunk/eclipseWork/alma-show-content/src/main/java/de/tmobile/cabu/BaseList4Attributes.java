@@ -17,6 +17,7 @@ public abstract class BaseList4Attributes extends BaseList {
 
 	abstract String getAttributeQueryString();
 
+
 	@Override
 	protected void refreshList(final TTConnection connection) throws SQLException {
 
@@ -49,6 +50,6 @@ public abstract class BaseList4Attributes extends BaseList {
 		perfMonitor.endResult();
 		stmt.close();
 		CLogger.getRootLogger().info(perfMonitor.getStatisticPrintString(getClass().getCanonicalName() + " Attr"));
-
 	}
+
 }

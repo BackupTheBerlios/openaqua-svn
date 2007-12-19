@@ -86,7 +86,11 @@ public class PerfMonitor {
 		String result = String.format("%-45s", classname);
 		result += String.format("Records=%8s\t", NumberFormat.getIntegerInstance().format(counter));
 		result += String.format("Time=%6sms\t", NumberFormat.getIntegerInstance().format(time));
-		result += String.format("pRec=%5sµ\t", NumberFormat.getIntegerInstance().format(getMicros(getAll()) / counter));
+		if (counter == 0) {
+			result += String.format("pRec=%5sµ\t", NumberFormat.getIntegerInstance().format(0));
+		} else {
+			result += String.format("pRec=%5sµ\t", NumberFormat.getIntegerInstance().format(getMicros(getAll()) / counter));
+		}
 		//result += String.format(" Prep=%5s", NumberFormat.getIntegerInstance().format(getMicros(getPrep())));
 		//result += String.format(" Query=%8s", NumberFormat.getIntegerInstance().format(getMicros(getQuery())));
 		//result += String.format(" Load=%8s", NumberFormat.getIntegerInstance().format(getMicros(getResult())));

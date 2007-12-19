@@ -33,9 +33,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 	}
 
 
-	public String getPrintHeader(final String prefix) {
-		return null;
-	}
+	public abstract String getPrintHeader(final String prefix);
 
 	abstract protected String getQueryString();
 
@@ -44,7 +42,7 @@ public abstract class BaseList extends TreeMap<Integer, BaseType> {
 
 	public void print(final String prefix) {
 		for (final BaseType base : values()) {
-			CLogger.getRootLogger().out(base.getPrintString(prefix));
+			CLogger.getRootLogger().out(base.getPrintString(knownAttributes, prefix));
 		}
 	}
 

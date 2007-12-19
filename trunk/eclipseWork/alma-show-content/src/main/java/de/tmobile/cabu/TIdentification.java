@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -14,9 +15,14 @@ import java.sql.Timestamp;
 
 public class TIdentification extends BaseType {
 
-	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + "type" + sep() + sep() + "value" + sep() + sep() + "mandator" + sep() + "tmplId" + sep()
-				+ "masterTemplId";
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = BaseType.getPrintHeader(list, prefix) + sep();
+		result += "CV" + sep();
+		result += "ExternalIdentifier" + sep();
+		result += "Mandator" + sep();
+		result += "ElementTemplateId" + sep();
+		result += "ElementMasterTemplateId";
+		return result;
 	}
 
 	private final int type;
@@ -63,8 +69,8 @@ public class TIdentification extends BaseType {
 	}
 
 	@Override
-	public String getPrintString(final String prefix) {
-		String result = super.getPrintString(prefix) + sep();
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
+		String result = super.getPrintString(attributList, prefix) + sep();
 		result += "\"" + ListIdentification_Cv.getInstances().getTypeAsString(getCv()) + "\"" + sep();
 		result += getExternalIdentifier() + sep();
 		result += getMandator() + sep();

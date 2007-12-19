@@ -4,13 +4,19 @@
 package de.tmobile.cabu;
 
 
+import java.util.Set;
+
+
 /**
  * @author behrenan
  * 
  */
 public class TDataType extends BaseType {
-	public static String getPrintHeader(final String prefix) {
-		String result = "prefix" + sep() + sep() + sep();
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = "; ";
+		if (prefix != null && prefix.length() > 1) {
+			result += "prefix" + sep();
+		}
 		result += "id" + sep();
 		result += "sorting" + sep();
 		result += "valid" + sep();
@@ -45,7 +51,7 @@ public class TDataType extends BaseType {
 	}
 
 	@Override
-	public String getPrintString(final String prefix) {
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
 		String result = prefix + sep();
 		result += getId();
 		result += sep();

@@ -34,17 +34,17 @@ public class CAlmaFileWriterThread implements Runnable {
 
 			//write file header
 			if (list.getPrintDescription() != null) {
-				fw.write(list.getPrintDescription());
+				fw.write(list.getPrintDescription() + "\n");
 			}
 			if (list.getPrintHeader("") != null) {
-				fw.write(list.getPrintHeader(""));
+				fw.write(list.getPrintHeader("") + "\n");
 			}
 			perfMonitor.endQuery();
 
 
 			//write file content
 			for (final BaseType type : list.values()) {
-				fw.write(type.getPrintString("") + "\n");
+				fw.write(type.getPrintString(list.getAttributeTypes(), "") + "\n");
 				perfMonitor.increase();
 			}
 		} catch (final IOException e) {

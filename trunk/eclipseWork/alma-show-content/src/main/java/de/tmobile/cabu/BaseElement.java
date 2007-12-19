@@ -5,8 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Set;
 
 
 /**
@@ -14,23 +13,19 @@ import java.util.TreeMap;
  * 
  */
 public abstract class BaseElement extends BaseType {
-	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + sep() + "type" + sep() + "subtype" + sep() + "datatype";
+
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = BaseType.getPrintHeader(list, prefix) + sep();
+		result += "Type" + sep();
+		result += "SubType" + sep();
+		result += "DataType" + sep();
+		result += "UnitType" + sep();
+		result += "rootId" + sep();
+		result += "parentId";
+		return result;
 	}
 
-	private static String makeValue(final String value) {
-		if (value == null) {
-			return "";
-		} else {
-			final String myVal = value.trim();
-			if (myVal.equals("<NULL>")) {
-				return "";
-			} else {
-				return myVal;
-			}
-		}
-	}
-	private final Map<Integer, String> attributes;
+
 	private final int type;
 	private final int subtype;
 	private final int datatype;
@@ -53,17 +48,9 @@ public abstract class BaseElement extends BaseType {
 		this.rootId = rootId;
 		this.value = makeValue(value);
 
-		attributes = new TreeMap<Integer, String>();
 
 	}
 
-	final public void addAttribute(final BaseList list, final int type, final String value) {
-		if (attributes.containsKey(type)) {
-			CLogger.getRootLogger().error("Pre Existing Key" + type);
-			CLogger.getRootLogger().error("Element = " + getPrintString("BaseElement"));
-		}
-		attributes.put(type, makeValue(value));
-	}
 
 	public int getDatatype() {
 		return datatype;
@@ -75,8 +62,8 @@ public abstract class BaseElement extends BaseType {
 
 
 	@Override
-	public String getPrintString(final String prefix) {
-		String result = super.getPrintString(prefix) + sep();
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
+		String result = super.getPrintString(attributList, prefix) + sep();
 		result += ListElementType.getInstances().getTypeAsString(type) + sep();
 		result += ListSubType.getInstances().getTypeAsString(subtype) + sep();
 		result += ListDataType.getInstances().getTypeAsString(datatype) + sep();
@@ -85,7 +72,6 @@ public abstract class BaseElement extends BaseType {
 		result += sep();
 		result += parentId;
 		result += sep();
-		//result += printAttributes(attributes);
 		return result;
 	}
 

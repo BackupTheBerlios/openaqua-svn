@@ -38,7 +38,7 @@ public class ListIdentification extends BaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TIdentification.getPrintHeader(prefix);
+		return TIdentification.getPrintHeader(this, prefix);
 	}
 
 	/*

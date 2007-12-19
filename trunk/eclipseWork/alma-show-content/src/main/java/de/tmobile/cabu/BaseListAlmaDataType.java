@@ -32,7 +32,7 @@ public class BaseListAlmaDataType extends BaseList {
 	 */
 	@Override
 	public String getPrintHeader(final String prefix) {
-		return TDataType.getPrintHeader(prefix);
+		return TDataType.getPrintHeader(this, prefix);
 	}
 
 	/*

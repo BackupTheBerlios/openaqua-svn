@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -13,8 +14,8 @@ import java.sql.Timestamp;
  */
 public class TElementIdentAssoc extends BaseType {
 
-	public static String getPrintHeader(final String prefix) {
-		return BaseType.getPrintHeader(prefix) + sep() + "elementId";
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		return BaseType.getPrintHeader(list, prefix) + sep() + "elementId";
 	}
 
 	long elementId;
@@ -37,8 +38,11 @@ public class TElementIdentAssoc extends BaseType {
 	}
 
 	@Override
-	public String getPrintString(final String prefix) {
-		return super.getPrintString(prefix) + sep() + elementId;
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
+		String result = super.getPrintString(attributList, prefix);
+		result += sep();
+		result += elementId;
+		return result;
 	}
 
 	/**

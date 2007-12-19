@@ -21,6 +21,11 @@ public abstract class BaseListTemplates extends BaseList4Attributes {
 		return "select element_subtype_cv, value,element_type_cv from acm_schema.acm$ta_element_tmpl where parent_id = ?";
 	}
 
+	@Override
+	public String getPrintHeader(final String prefix) {
+		return TElementTmpl.getPrintHeader(this, prefix);
+	}
+
 
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {

@@ -5,6 +5,7 @@ package de.tmobile.cabu;
 
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -12,8 +13,16 @@ import java.sql.Timestamp;
  * 
  */
 public class TElement extends BaseElement {
+	public static String getPrintHeader(final BaseList list, final String prefix) {
+		String result = BaseElement.getPrintHeader(list, prefix) + sep();
+		result += "TemplateId" + sep();
+		result += "TemplateVersion" + sep();
+		result += "InsertionTime";
+		return result;
+	}
 	public final int templId;
 	public final int templVers;
+
 	public final Timestamp insertTime;
 
 	public TElement(final int id, final int type, final int subtype, final int datatype, final int unittype, final int parentId,
@@ -28,13 +37,13 @@ public class TElement extends BaseElement {
 
 
 	@Override
-	public String getPrintString(final String prefix) {
-		String result = super.getPrintString(prefix);
+	public String getPrintString(final Set<Integer> attributList, final String prefix) {
+		String result = super.getPrintString(attributList, prefix);
 		result += templId;
 		result += sep();
 		result += templVers;
 		result += sep();
-		result += insertTime;
+		result += insertTime.getTime() / 1000;
 		return result;
 	}
 
