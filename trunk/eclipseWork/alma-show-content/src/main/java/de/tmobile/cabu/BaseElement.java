@@ -20,8 +20,9 @@ public abstract class BaseElement extends BaseType {
 		result += "SubType" + sep();
 		result += "DataType" + sep();
 		result += "UnitType" + sep();
-		result += "rootId" + sep();
-		result += "parentId";
+		result += "RootId" + sep();
+		result += "ParentId" + sep();
+		result += "Value";
 		return result;
 	}
 
@@ -71,6 +72,8 @@ public abstract class BaseElement extends BaseType {
 		result += rootId;
 		result += sep();
 		result += parentId;
+		result += sep();
+		result += value;
 		result += sep();
 		return result;
 	}
