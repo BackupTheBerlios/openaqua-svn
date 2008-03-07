@@ -23,11 +23,6 @@ public class TElementIdentAssoc extends BaseType {
 	public TElementIdentAssoc(final int id, final long elementId, final int obj_version, final Timestamp valid_from, final Timestamp valid_to) {
 		super(id, obj_version, valid_from, valid_to);
 		this.elementId = elementId;
-		/*
-		 * if (obj_version != 1) { final Integer i = new Integer(id);
-		 * Logger.getRootLogger().error("obj version != 1 for id=" +
-		 * i.toString()); }
-		 */
 	}
 
 	/**

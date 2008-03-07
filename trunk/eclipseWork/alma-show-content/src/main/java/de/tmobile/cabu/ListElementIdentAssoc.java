@@ -46,19 +46,19 @@ public class ListElementIdentAssoc extends BaseList {
 
 	@Override
 	protected String getQueryString() {
-		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc order by identification_id";
+		return "select identification_id, element_id, obj_version, valid_from, valid_to from acm_schema.acm$ta_element_ident_assoc";
 	}
 
 	@Override
 	protected void HandleQueryResult(final ResultSet rs) throws SQLException {
-
+		int locId = 1;
 		while (rs.next()) {
 			final int id = rs.getInt(1);
 			final long el = rs.getLong(2);
 			final int obj = rs.getInt(3);
 			final Timestamp from = rs.getTimestamp(4);
 			final Timestamp to = rs.getTimestamp(5);
-			put(id, new TElementIdentAssoc(id, el, obj, from, to));
+			put(locId++, new TElementIdentAssoc(id, el, obj, from, to));
 		}
 	}
 
