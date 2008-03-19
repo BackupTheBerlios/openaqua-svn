@@ -145,8 +145,15 @@ public class TTConnection {
 
 	public void loadDriver(final String driver) throws ClassNotFoundException {
 		if (!isDriverLoaded) {
-			Class.forName(driver);
-			isDriverLoaded = true;
+			try {
+				Class.forName("com.timesten.jdbc.TimesTenDriver").newInstance();
+				//Class.forName(driver).newInstance();
+				isDriverLoaded = true;
+			} catch (final InstantiationException e) {
+				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

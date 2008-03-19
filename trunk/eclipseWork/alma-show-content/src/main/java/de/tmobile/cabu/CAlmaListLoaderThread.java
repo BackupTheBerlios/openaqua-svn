@@ -29,12 +29,12 @@ public class CAlmaListLoaderThread implements Runnable {
 			connection.Connect(CConfiguration.getInstance().getConnectionDsn());
 			if (!connection.isConnected()) { return; }
 			list.refreshList(connection);
-			//CLogger.getRootLogger().info(list.getClass().getCanonicalName() + " " + perf.ouput());
 			connection.Disconnect();
+			CLogger.getRootLogger().debug("End   RUN for " + list.getClass().getCanonicalName());
 
 		} catch (final ClassNotFoundException e1) {
-			CLogger.getRootLogger().error(e1.getLocalizedMessage());
-			//			e1.printStackTrace();
+			CLogger.getRootLogger().error("Cannot Load Database Driver: " + e1.getLocalizedMessage());
+			e1.printStackTrace();
 
 		} catch (final SQLException e) {
 			TTConnection.reportSQLException(e);
@@ -42,6 +42,5 @@ public class CAlmaListLoaderThread implements Runnable {
 				connection.Disconnect();
 			}
 		}
-		CLogger.getRootLogger().debug("End   RUN for " + list.getClass().getCanonicalName());
 	}
 }

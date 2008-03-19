@@ -33,6 +33,17 @@
 						<manifest>
 							<mainClass>de.tmobile.cabu.Main</mainClass>
 							<packageName>alma-show-content</packageName>
+							<!--
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addClasspath>true</addClasspath>
+
+							<classpathPrefix>./</classpathPrefix>
+
+							<manifestEntries>
+								<Class-Path>classes15.jar</Class-Path>
+							</manifestEntries>
+
+							-->
 						</manifest>
 					</archive>
 				</configuration>
