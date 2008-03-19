@@ -44,7 +44,7 @@ public abstract class BaseType {
 	}
 
 	public static Character sep() {
-		return ',';
+		return ';';
 	}
 
 	private final Map<Integer, String> attributes;

@@ -33,12 +33,14 @@ public class CAlmaFileWriterThread implements Runnable {
 			perfMonitor.endPrep();
 
 			//write file header
+			/*
 			if (list.getPrintDescription() != null) {
 				fw.write(list.getPrintDescription() + "\n");
 			}
 			if (list.getPrintHeader("") != null) {
 				fw.write(list.getPrintHeader("") + "\n");
 			}
+			*/
 			perfMonitor.endQuery();
 
 
