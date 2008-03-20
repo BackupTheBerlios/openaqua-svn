@@ -37,10 +37,10 @@ public class CAlmaFileWriterThread implements Runnable {
 			if (list.getPrintDescription() != null) {
 				fw.write(list.getPrintDescription() + "\n");
 			}
+			*/
 			if (list.getPrintHeader("") != null) {
 				fw.write(list.getPrintHeader("") + "\n");
 			}
-			*/
 			perfMonitor.endQuery();
 
 
