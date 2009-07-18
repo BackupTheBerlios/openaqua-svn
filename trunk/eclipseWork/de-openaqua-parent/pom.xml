@@ -18,12 +18,14 @@
 	</organization>
 
 	<modules>
-		<module>de-openaqua-takanuka</module>
+		<!--
+	<module>de-openaqua-takanuka</module>
    	<module>de-openaqua-connector</module>
    	<module>de-openaqua-icetest</module>
-<!--
-	<module>de.openaqua.reference</module>
 -->
+   	<module>de-openaqua-vwl-sim</module>
+   	<module>de-openaqua-vwl-lib</module>
+
 	</modules>
 
 	<!--handle deps version version-->
