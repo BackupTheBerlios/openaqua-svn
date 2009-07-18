@@ -19,10 +19,10 @@
 
 	<modules>
 		<!--
+			<module>de-openaqua-takanuka</module>
+	   		<module>de-openaqua-connector</module>
+	   		<module>de-openaqua-icetest</module>
 		-->
-		<module>de-openaqua-takanuka</module>
-   		<module>de-openaqua-connector</module>
-   		<module>de-openaqua-icetest</module>
    		<module>de-openaqua-vwl-lib</module>
    		<module>de-openaqua-vwl-sim</module>
    		<module>de-openaqua-vwl-simcore</module>
@@ -56,11 +56,13 @@
 				<artifactId>de-openaqua-vwl-lib</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
 				<artifactId>de-openaqua-vwl-simcore</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>de.openaqua.dev</groupId>
 				<artifactId>de-openaqua-vwl-sim</artifactId>

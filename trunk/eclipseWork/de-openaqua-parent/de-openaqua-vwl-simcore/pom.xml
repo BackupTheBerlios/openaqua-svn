@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.openaqua.dev</groupId>
 	<artifactId>de-openaqua-vwl-simcore</artifactId>
-	<name>VWL Simulator</name>
+	<name>VWL Simulator Core</name>
 	<description></description>
 	<packaging>jar</packaging>
 </project>

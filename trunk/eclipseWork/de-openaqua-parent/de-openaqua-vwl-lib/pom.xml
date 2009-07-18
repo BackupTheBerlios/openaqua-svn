@@ -12,6 +12,6 @@
 	<groupId>de.openaqua.dev</groupId>
 	<artifactId>de-openaqua-vwl-lib</artifactId>
 	<name>the VWL core lib</name>
-	<description></description>
+	<description>Lib for shared objects within the vwl project</description>
 	<packaging>jar</packaging>
 </project>
